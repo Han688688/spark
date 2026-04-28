@@ -1,0 +1,251 @@
+# 可扩展测试自动化框架配置
+
+version: "1.0.0"
+project_root: "."  # 项目根目录
+
+# 插件配置
+plugins:
+  # 内置插件（框架自带）
+  builtin:
+    - static_code_analyzer     # 静态代码分析
+    - llm_generator            # LLM测试生成
+  
+  # 自定义插件（hyx/plugins/目录下）
+  custom:
+    - config_dependency_analyzer   # 配置依赖分析
+    - api_doc_analyzer             # API文档分析
+    - data_driven_generator        # 数据驱动生成
+
+# 场景发现策略配置
+strategies:
+  # 交互场景识别策略
+  interaction:
+    - interaction_discoverer       # 基于调用链识别
+    - log_based_discoverer         # 基于日志识别
+  
+  # 异常场景识别策略
+  exception:
+    - bug_history_discoverer       # 历史缺陷分析
+  
+  # 性能场景识别策略
+  performance:
+    - performance_discoverer       # 性能场景识别
+  
+  # 安全场景识别策略（待扩展）
+  security: []
+  
+  # 业务场景识别策略（待扩展）
+  business: []
+
+# 工作流定义
+workflows:
+  # 默认工作流
+  default:
+    name: "默认工作流"
+    description: "基础分析+交互场景发现+测试生成"
+    steps:
+      - name: analyze_code
+        type: analyze
+        plugin: static_code_analyzer
+        continue_on_error: false
+      
+      - name: discover_interaction
+        type: discover
+        strategy_category: interaction
+        continue_on_error: false
+      
+      - name: generate_p0_tests
+        type: generate
+        plugin: llm_generator
+        priority: P0
+        limit: 20
+        continue_on_error: false
+  
+  # 完整工作流
+  full:
+    name: "完整工作流"
+    description: "多维度分析+多策略发现+多类型生成"
+    steps:
+      - name: analyze_code
+        type: analyze
+        plugin: static_code_analyzer
+      
+      - name: analyze_config
+        type: analyze
+        plugin: config_dependency_analyzer
+      
+      - name: analyze_api
+        type: analyze
+        plugin: api_doc_analyzer
+      
+      - name: discover_interaction
+        type: discover
+        strategy_category: interaction
+      
+      - name: discover_from_logs
+        type: discover
+        strategy_category: log
+      
+      - name: discover_from_bugs
+        type: discover
+        strategy_category: exception
+      
+      - name: discover_performance
+        type: discover
+        strategy_category: performance
+      
+      - name: generate_p0_tests
+        type: generate
+        plugin: llm_generator
+        priority: P0
+        limit: 30
+      
+      - name: generate_p1_tests
+        type: generate
+        plugin: llm_generator
+        priority: P1
+        limit: 50
+      
+      - name: generate_boundary_tests
+        type: generate
+        plugin: data_driven_generator
+        type: boundary
+        limit: 20
+  
+  # 交互场景专用工作流
+  interaction_focus:
+    name: "交互场景专用"
+    description: "重点识别组件交互场景"
+    steps:
+      - name: analyze_code
+        type: analyze
+        plugin: static_code_analyzer
+      
+      - name: discover_interaction
+        type: discover
+        strategy_category: interaction
+      
+      - name: discover_log_interaction
+        type: discover
+        strategy_category: log
+      
+      - name: generate_tests
+        type: generate
+        plugin: llm_generator
+        limit: 40
+  
+  # 快速工作流
+  quick:
+    name: "快速工作流"
+    description: "快速分析+核心场景生成"
+    steps:
+      - name: analyze_code
+        type: analyze
+        plugin: static_code_analyzer
+      
+      - name: discover_interaction
+        type: discover
+        strategy_category: interaction
+      
+      - name: generate_tests
+        type: generate
+        plugin: llm_generator
+        priority: P0
+        limit: 10
+
+# 分析器配置
+analyzer_config:
+  # 需要忽略的目录
+  ignore_dirs:
+    - .git
+    - node_modules
+    - __pycache__
+    - target
+    - build
+    - dist
+    - test
+    - tests
+  
+  # 需要忽略的文件
+  ignore_files:
+    - Test*.java
+    - "*Test.java"
+    - test_*.py
+  
+  # 配置文件模式
+  config_patterns:
+    - "*.yaml"
+    - "*.yml"
+    - "*.properties"
+    - "*.json"
+    - "*.conf"
+  
+  # API文档模式
+  api_doc_patterns:
+    - "*api*.md"
+    - "*接口*.md"
+    - "swagger*.yaml"
+    - "openapi*.yaml"
+
+# 生成器配置
+generator_config:
+  # 测试语言（auto/java/python）
+  test_language: auto
+  
+  # 测试输出目录
+  output_dir: hyx/generated_tests
+  
+  # LLM配置
+  llm:
+    provider: anthropic
+    model: claude-3-5-sonnet-20241022
+    max_tokens: 4096
+  
+  # 数据模板
+  data_templates:
+    boundary:
+      fields:
+        id:
+          type: number
+          values: [0, 1, -1, 999999999]
+        name:
+          type: string
+          values: ["", "normal", "very_long_string"]
+        amount:
+          type: number
+          values: [0, 0.01, 9999999.99]
+    
+    normal:
+      fields:
+        id:
+          type: number
+          values: [100, 200, 300]
+        name:
+          type: string
+          values: ["test1", "test2", "test3"]
+
+# 数据源配置
+data_sources:
+  # 日志文件
+  log_files: []
+  # 示例：
+  # - /var/log/app.log
+  # - logs/application.log
+  
+  # 历史缺陷文件
+  bug_history_files: []
+  # 示例：
+  # - data/bugs.json
+  # - reports/defects.json
+
+# 环境配置
+environment:
+  # 测试环境配置
+  test_env:
+    type: local
+    spark_master: local[*]
+    
+  # Mock配置
+  mock:
+    enabled: true
+    default_response: success
