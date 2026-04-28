@@ -1,358 +1,135 @@
 # Apache大数据组件Java API对比汇总
 
-> 代码仓API vs 官方文档API 差异对比
+> **代码仓实际API vs 官方文档描述** - 直接对比差异点
 
 ---
 
-## 对比概览
+## 一、稳定性争议差异（官方当公共API，代码仓说受限）
 
-| 项目 | 代码仓公共API | 官方Javadoc公共API | 主要差异 |
-|------|---------------|-------------------|----------|
-| **Spark** | 69个 | ~65个 | 新增TimeMode、Geometry/Geography空间类型 |
-| **Kafka** | 577个(不含internals) | 577个 | internals包381个内部类未公开 |
-| **Iceberg** | 139个(api模块) | 200+ | api模块仅接口，core模块含实现类 |
-| **HBase** | 343个 | 400+ | deprecated类16个将移除，新增ConnectionRegistry |
-| **Hadoop** | 902个@Public | ~800+ | DistributedFileSystem实际是LimitedPrivate |
-
----
-
-# 一、Spark Java API对比
-
-## 代码仓Java公共API数量：69个
-
-### Java函数接口（24个）
-
-| 接口名 | 模块 | 状态 | 说明 |
-|--------|------|------|------|
-| Function | common/utils-java | Stable ✓ | 基础函数 |
-| MapFunction | common/utils-java | Stable ✓ | map函数 |
-| FilterFunction | common/utils-java | Stable ✓ | filter函数 |
-| FlatMapFunction | common/utils-java | Stable ✓ | flatMap函数 |
-| MapPartitionsFunction | common/utils-java | Stable ✓ | 分区map函数 |
-| PairFunction | common/utils-java | Stable ✓ | 键值对函数 |
-| PairFlatMapFunction | common/utils-java | Stable ✓ | 键值对flatMap函数 |
-| ReduceFunction | common/utils-java | Stable ✓ | reduce函数 |
-| ForeachFunction | common/utils-java | Stable ✓ | foreach函数 |
-| ForeachPartitionFunction | common/utils-java | Stable ✓ | 分区foreach函数 |
-| FlatMapGroupsFunction | common/utils-java | Stable ✓ | 分组flatMap函数 |
-| MapGroupsFunction | common/utils-java | Stable ✓ | 分组map函数 |
-| **FlatMapGroupsWithStateFunction** | **sql/api** | **Evolving** | **带状态分组flatMap（流式专用）** |
-| **MapGroupsWithStateFunction** | **sql/api** | **Evolving** | **带状态分组map（流式专用）** |
-| DoubleFunction | common/utils-java | Stable ✓ | Double返回函数 |
-| DoubleFlatMapFunction | common/utils-java | Stable ✓ | Double返回flatMap |
-| Function0 | common/utils-java | Stable ✓ | 无参函数 |
-| Function2-4 | common/utils-java | Stable ✓ | 多参数函数 |
-| VoidFunction | common/utils-java | Stable ✓ | 无返回值函数 |
-| VoidFunction2 | common/utils-java | Stable ✓ | 双参数无返回值 |
-| CoGroupFunction | common/utils-java | Stable ✓ | 双Dataset分组合并 |
-| FlatMapFunction2 | common/utils-java | Stable ✓ | 双输入flatMap |
-
-### UDF接口（23个）
-
-| 接口名 | 状态 | 说明 |
-|--------|------|------|
-| UDF0 | Stable ✓ | 无参数UDF |
-| UDF1-UDF22 | Stable ✓ | 1-22参数UDF |
-
-### 新增API（代码仓有，官方文档未明确列出）
-
-| 包名 | 类名 | 标注 | 说明 |
-|------|------|------|------|
-| org.apache.spark.sql.streaming | **TimeMode** | @Evolving | transformWithState时间模式定义 |
-| org.apache.spark.sql.types | **Geometry** | @Unstable | 空间几何类型客户端类 |
-| org.apache.spark.sql.types | **Geography** | @Unstable | 空间地理类型客户端类 |
-| org.apache.spark.sql.connector.catalog | **Identifier** | @Evolving | Catalog对象标识接口 |
-| org.apache.spark.sql.connector.catalog | **IdentityColumnSpec** | @Evolving | 身份列规范类 |
-
-### Deprecated API（官方废弃，代码仓仍保留）
-
-| 包名 | 类名 | 废弃版本 | 替代方案 |
-|------|------|----------|----------|
-| org.apache.spark.sql.expressions.javalang | typed类 | 3.0.0 | 使用非类型化内置聚合函数 |
-| org.apache.spark.sql.streaming | Trigger.Once() | 3.4.0 | 使用Trigger.AvailableNow() |
-
-### Java特有API（Scala中没有）
-
-| 类名 | 说明 |
-|------|------|
-| RowFactory | 创建Row对象的工厂类 |
-| Optional | Java 8风格可选值包装（Scala用Option） |
-| StorageLevels | 存储级别常量类（Java友好） |
-| JavaFutureAction | Java风格Future动作接口 |
+| 项目 | API类名 | 官方文档描述 | 代码仓实际标注 | 差异影响 |
+|------|---------|--------------|---------------|----------|
+| **Hadoop** | DistributedFileSystem | 当作主要HDFS API广泛介绍 | @LimitedPrivate(MapReduce,HBase) + @Unstable | ❌ 普通用户不应依赖，仅对MapReduce/HBase项目有稳定性保证 |
+| **Hadoop** | Job类 | 当作MapReduce核心API介绍 | @Public + @Evolving（不是Stable） | ⚠️ API可能演进变化，不保证向后兼容 |
+| **Hadoop** | HDFS客户端API(34个类) | 当作稳定客户端API | 81%是@Evolving，仅7%是@Stable | ⚠️ 大部分HDFS API不保证稳定 |
+| **Hadoop** | YARN protocolrecords包 | 当作公共API介绍 | @Public + @Unstable | ⚠️ 协议结构可能变化 |
 
 ---
 
-# 二、Kafka API对比
+## 二、内部实现类暴露差异（代码仓存在但不应公开使用）
 
-## 代码仓公共类数量统计
+| 项目 | 包名 | 类数量 | 代码仓状态 | 官方Javadoc | 差异说明 |
+|------|------|--------|-----------|------------|----------|
+| **Kafka** | clients.*.internals | 221个 | 存在，无@Public标注 | ❌ 未列出 | ✅ 正确：内部实现不应公开 |
+| **Kafka** | streams.kstream.internals | 160个 | 存在，无@Public标注 | ❌ 未列出 | ✅ 正确：DSL内部实现 |
+| **Iceberg** | core模块实现类 | ~60个 | 存在，如BaseTable/BaseTransaction | ✓ 已列出 | ⚠️ 用户应使用api模块接口，不应直接用core实现类 |
+| **HBase** | client.*Impl类 | ~30个 | 存在，@Private标注 | ❌ 未列出或标注Internal | ✅ 正确：内部实现 |
+| **HBase** | shaded.protobuf | ProtobufUtil等 | 存在，@Private但Hive等外部使用 | ❌ 未列出 | ⚠️ 实际被外部依赖，但标注Private |
+| **Hadoop** | hdfs.server包 | 全部 | @Private标注 | ❌ 未列出 | ✅ 正确：NameNode/DataNode内部 |
 
-### Clients模块（不含internals）
+---
 
-| 包名 | 公共类 | internals内部类 |
-|------|--------|-----------------|
-| org.apache.kafka.clients.admin | 177 | 36 |
-| org.apache.kafka.clients.consumer | 33 | 167 |
-| org.apache.kafka.clients.producer | 12 | 18 |
-| **总计** | **222** | **221** |
+## 三、新增API差异（代码仓有新特性，官方文档可能滞后）
 
-### Connect模块
+| 项目 | API类名 | 代码仓状态 | 官方文档状态 | 差异说明 |
+|------|---------|-----------|--------------|----------|
+| **Spark** | TimeMode | @Evolving，sql/api模块存在 | ❌ Spark 3.5.6文档未明确列出 | 新增：transformWithState时间模式 |
+| **Spark** | Geometry/Geography | @Unstable，sql/api模块存在 | ❌ Spark 3.5.6文档未列出 | 新增：空间数据类型(Spark 4.1特性) |
+| **Spark** | Identifier/IdentityColumnSpec | @Evolving，connector.catalog包 | ❌ Spark 3.5.6文档未列出 | 新增：Catalog增强API |
+| **Kafka** | StreamsGroupDescription等10个类 | @Evolving，admin包存在 | ✓ 已列出 | 新增：Streams Group管理(KIP-919)，标注Evolving表示可能变化 |
+| **Kafka** | ShareConsumer/ShareConsumer | @Public存在 | ✓ 已列出 | 新增：Share Groups(KIP-932) |
+| **Kafka** | AddRaftVoterOptions等5个类 | @Stable，admin包存在 | ✓ 已列出 | 新增：Raft Voter管理(KIP-853)，已稳定 |
+| **Iceberg** | View系列(10个接口) | @Public，view包存在 | ✓ 已列出 | 新增：View功能 |
+| **Iceberg** | Variant系列(7个接口) | @Public，variants包存在 | ✓ 已列出 | 新增：Variant类型支持 |
+| **Iceberg** | PartitionStatistics系列 | @Public，api包存在 | ✓ 已列出 | 新增：分区统计功能 |
+| **Iceberg** | geospatial包 | @Public，新增包 | ⚠️ 可能未及时更新 | 新增：地理空间支持 |
+| **HBase** | ConnectionRegistry系列(4个类) | @Public存在 | ⚠️ HBase 4.0.0-alpha文档可能未完整 | 新增：替代ZK连接注册 |
+| **HBase** | TestingHBaseCluster | @Public存在 | ⚠️ 新测试框架 | 新增：替代HBaseTestingUtility |
+| **HBase** | CheckAndMutate类 | @Public存在 | ✓ 已列出 | 新增：替代Table.checkAndMutate方法 |
+| **HBase** | QueryMetrics | @Public存在 | ❌ 未列出 | 新增：查询指标 |
 
-| 包名 | 公共类 |
-|------|--------|
-| org.apache.kafka.connect.connector | 4 |
-| org.apache.kafka.connect.sink | 6 |
-| org.apache.kafka.connect.source | 8 |
-| org.apache.kafka.connect.data | 12 |
-| org.apache.kafka.connect.storage | 8 |
-| org.apache.kafka.connect.transforms | 2 |
-| **总计** | **40** |
+---
 
-### Streams模块
+## 四、Deprecated API差异（官方说废弃，代码仓仍保留）
 
-| 包名 | 公共类 | internals内部类 |
-|------|--------|-----------------|
-| org.apache.kafka.streams | 20 | 0 |
-| org.apache.kafka.streams.kstream | 56 | 160 |
-| org.apache.kafka.streams.processor | 23 | 0 |
-| org.apache.kafka.streams.state | 40 | 0 |
-| org.apache.kafka.streams.errors | 32 | 0 |
-| **总计** | **171** | **160** |
+| 项目 | API类/方法 | 官方文档说明 | 代码仓状态 | 替代方案 | 差异说明 |
+|------|------------|--------------|-----------|----------|----------|
+| **Spark** | Trigger.Once() | Spark 3.4.0废弃 | ⚠️ 仍存在 | Trigger.AvailableNow() | 应迁移，但代码仓未移除 |
+| **Spark** | typed聚合函数类 | Spark 3.0.0废弃 | ⚠️ 仍存在 | 非类型化内置聚合函数 | 整个类废弃但未移除 |
+| **HBase** | HBaseTestingUtility | HBase 3.0.0废弃 | ⚠️ 仍存在 | TestingHBaseCluster | 应迁移到新测试框架 |
+| **HBase** | MiniHBaseCluster | HBase 3.0.0废弃 | ⚠️ 仍存在 | TestingHBaseCluster | 应迁移 |
+| **HBase** | Table.checkAndMutate方法 | HBase 4.0.0移除 | ⚠️ 仍存在 | CheckAndMutate类 | 应使用新接口 |
+| **HBase** | CoprocessorRpcChannel | HBase 4.0.0移除 | ⚠️ 仍存在 | 不再支持低级别RPC | 即将移除 |
+| **HBase** | MasterRegistry | HBase 2.5.0废弃 | ⚠️ 仍存在 | RpcConnectionRegistry | ZK替代方案 |
+| **HBase** | QuotaRetriever | HBase 3.0.0废弃 | ⚠️ 仍存在 | Admin API | 应使用Admin获取配额 |
+| **Hadoop** | CommonConfigurationKeys | 文档未明确废弃 | ⚠️ @Private标注 | CommonConfigurationKeysPublic | 应使用Public版本 |
+| **Kafka** | 旧消费者API(KafkaConsumer旧构造) | 文档有说明 | 部分废弃 | 新配置方式 | 渐进迁移 |
 
-### internals包内部类（代码仓有但不应公开使用）
+---
 
-| 包名 | 类数量 | 说明 |
-|------|--------|------|
-| clients.admin.internals | 36 | Admin客户端内部实现 |
-| clients.consumer.internals | 167 | Consumer内部实现 |
-| clients.producer.internals | 18 | Producer内部实现 |
-| streams.kstream.internals | 160 | Streams DSL内部实现 |
-| **总计** | **381** | **不应在公共Javadoc中** |
+## 五、官方Javadoc范围差异（收录范围不一致）
 
-### 新增Evolving API（Kafka 4.x新特性）
+| 项目 | 官方Javadoc收录 | 代码仓实际范围 | 差异说明 |
+|------|----------------|---------------|----------|
+| **Iceberg** | 200+类(含core模块) | api模块139个接口 | ⚠️ Javadoc收录了实现类，用户应区分接口vs实现 |
+| **HBase** | 400+类 | 343个@Public类 | ⚠️ Javadoc可能收录了一些Internal类 |
+| **Hadoop** | ~800类 | 902个@Public类 | ✅ 基本一致 |
 
-| 包名 | 类名 | 说明 |
+---
+
+## 六、关键差异总结
+
+### ❌ 稳定性争议（影响使用决策）
+
+| 问题 | 影响 | 建议 |
 |------|------|------|
-| org.apache.kafka.clients.admin | **StreamsGroupDescription** | Streams Group描述（KIP-919） |
-| org.apache.kafka.clients.admin | **StreamsGroupMemberAssignment** | Streams Group成员分配 |
-| org.apache.kafka.clients.admin | **StreamsGroupMemberDescription** | Streams Group成员描述 |
-| org.apache.kafka.clients.admin | **ListStreamsGroupOffsetsOptions/Result** | Streams Group偏移量操作 |
-| org.apache.kafka.clients.admin | **DescribeStreamsGroupsOptions/Result** | Streams Group描述操作 |
-| org.apache.kafka.clients.admin | **DeleteStreamsGroupsOptions/Result** | Streams Group删除操作 |
-| org.apache.kafka.clients.admin | **AlterStreamsGroupOffsetsOptions/Result** | Streams Group偏移量修改 |
+| Hadoop DistributedFileSystem标注LimitedPrivate | 用户误用，稳定性无保证 | 使用FileSystem抽象，避免依赖DistributedFileSystem特定方法 |
+| Hadoop Job类是Evolving | MapReduce核心API可能变化 | 关注版本迁移指南 |
+| HDFS客户端81%是Evolving | 大部分HDFS API不稳定 | 仅依赖FileSystem核心方法(@Stable) |
 
-### Unstable API（实验性功能）
+### ⚠️ 新增API未及时更新文档
 
-| 包名 | 类/方法 | 说明 |
+| 项目 | 新增API | 建议 |
 |------|---------|------|
-| org.apache.kafka.clients.admin.Admin | **unregisterBroker()** | 取消注册Broker（实验性） |
-| org.apache.kafka.tools | **StreamsResetter** | Streams重置工具 |
+| Spark | TimeMode、Geometry/Geography | 关注Spark 4.x文档更新 |
+| HBase | ConnectionRegistry系列 | 替代ZK连接，提前迁移 |
+| Iceberg | View、Variant、geospatial | 查看最新Javadoc而非文档 |
 
-### 新增Stable API（Raft Voter管理）
+### ⚠️ Deprecated未移除（应迁移）
 
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.kafka.clients.admin | **AddRaftVoterOptions/Result** | Raft投票者添加（KIP-853） |
-| org.apache.kafka.clients.admin | **RemoveRaftVoterOptions/Result** | Raft投票者移除 |
-| org.apache.kafka.clients.admin | **RaftVoterEndpoint** | Raft投票者端点 |
-
-### Share Consumer API（KIP-932新功能）
-
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.kafka.clients.consumer | **ShareConsumer<K,V>** | Share消费者接口 |
-| org.apache.kafka.clients.consumer | **KafkaShareConsumer<K,V>** | Share消费者实现 |
-| org.apache.kafka.clients.consumer | **AcknowledgeType** | 确认类型枚举 |
-
----
-
-# 三、Iceberg API对比
-
-## 代码仓公共接口数量：139个（api模块）
-
-### api模块接口清单
-
-| 包名 | 接口数量 | 核心接口 |
+| 项目 | 应迁移API | 紧迫程度 |
 |------|----------|----------|
-| org.apache.iceberg | 52 | Table, Snapshot, Transaction, Scan, AppendFiles, DeleteFiles, OverwriteFiles, RewriteFiles |
-| org.apache.iceberg.catalog | 5 | Catalog, SessionCatalog, SupportsNamespaces, ViewCatalog |
-| org.apache.iceberg.actions | 16 | Action, ActionsProvider, RewriteDataFiles, ExpireSnapshots, DeleteOrphanFiles |
-| org.apache.iceberg.io | 15 | FileIO, InputFile, OutputFile, LocationProvider, SupportsBulkOperations |
-| org.apache.iceberg.expressions | 8 | Expression, Term, Literal, Reference |
-| org.apache.iceberg.metrics | 6 | MetricsReporter, MetricsContext, Counter, Timer |
-| org.apache.iceberg.encryption | 6 | EncryptionManager, EncryptedInputFile, KmsClient |
-| org.apache.iceberg.view | 10 | View, ViewVersion, ViewRepresentation, ViewBuilder |
-| org.apache.iceberg.variants | 7 | Variant, VariantArray, VariantObject, VariantPrimitive |
+| HBase | HBaseTestingUtility→TestingHBaseCluster | HBase 4.0将移除 |
+| HBase | Table.checkAndMutate→CheckAndMutate类 | HBase 4.0已移除方法 |
+| HBase | CoprocessorRpcChannel | HBase 4.0移除，不支持 |
+| Spark | Trigger.Once→AvailableNow | 已废弃，应迁移 |
+| Hadoop | CommonConfigurationKeys→Public版本 | Private不应使用 |
 
-### 新增API（代码仓新特性）
+### ✅ 正确设计（无需担心）
 
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.iceberg.view | **View系列** | View功能（新特性） |
-| org.apache.iceberg.variants | **Variant系列** | Variant类型支持（新特性） |
-| org.apache.iceberg | **PartitionStatistics** | 分区统计功能 |
-| org.apache.iceberg.actions | **ComputePartitionStats** | 分区统计计算 |
-| org.apache.iceberg.actions | **ConvertEqualityDeleteFiles** | 等式删除转换 |
-| org.apache.iceberg.actions | **RemoveDanglingDeleteFiles** | 悬空删除清理 |
-| org.apache.iceberg.actions | **RewriteTablePath** | 表路径重写 |
-| org.apache.iceberg.geospatial | **BoundingBox等** | 地理空间支持（新增） |
-
-### core模块实现类（官方Javadoc包含，用户不应直接使用）
-
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.iceberg | BaseTable | Table实现类 |
-| org.apache.iceberg | BaseTransaction | Transaction实现类 |
-| org.apache.iceberg | BaseMetastoreCatalog | Catalog实现类 |
-| org.apache.iceberg | CatalogUtil | Catalog工具类 |
-| org.apache.iceberg | AllDataFilesTable等 | 元数据表实现 |
-
----
-
-# 四、HBase API对比
-
-## 代码仓公共类数量：343个
-
-### 核心类状态
-
-| 类名 | 状态 | 说明 |
-|------|------|------|
-| Connection | Public ✓ | 核心连接接口 |
-| Table | Public ✓ | 核心表接口（有deprecated方法） |
-| Admin | Public ✓ | 管理接口（有deprecated方法） |
-| AsyncConnection | Public ✓ | 异步连接接口 |
-| AsyncTable | Public ✓ | 异步表接口 |
-| Get/Put/Delete/Scan | Public ✓ | 操作类 |
-| Result | Public ✓ | 结果对象 |
-| Increment/Append | Public ✓ | 增量/追加操作 |
-
-### 过滤器（46个，全部Public）
-
-| 类型 | 过滤器 |
-|------|--------|
-| 行过滤器 | RowFilter, PrefixFilter, PageFilter, FirstKeyOnlyFilter, FuzzyRowFilter, MultiRowRangeFilter |
-| 列过滤器 | QualifierFilter, FamilyFilter, ColumnPrefixFilter, ColumnRangeFilter, ColumnPaginationFilter |
-| 值过滤器 | ValueFilter, SingleColumnValueFilter, ColumnValueFilter, DependentColumnFilter |
-| 比较器 | BinaryComparator, RegexStringComparator, SubstringComparator, LongComparator |
-
-### 新增API（代码仓新特性）
-
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.hadoop.hbase.client | **ConnectionRegistry** | 连接注册器接口（替代ZK） |
-| org.apache.hadoop.hbase.client | **RpcConnectionRegistry** | RPC连接注册器实现 |
-| org.apache.hadoop.hbase.client | **TestingHBaseCluster** | 新测试集群框架 |
-| org.apache.hadoop.hbase.client | **CheckAndMutate** | 条件操作新接口 |
-| org.apache.hadoop.hbase.client | **QueryMetrics** | 查询指标类 |
-
-### Deprecated API（将移除）
-
-| 包名 | 类名 | 废弃版本 | 替代方案 |
-|------|------|----------|----------|
-| org.apache.hadoop.hbase.client | Table.checkAndMutate方法 | 4.0.0 | 使用CheckAndMutate类 |
-| org.apache.hadoop.hbase.client | **MasterRegistry** | 2.5.0 | RpcConnectionRegistry |
-| org.apache.hadoop.hbase.client | **HBaseTestingUtility** | 3.0.0 | TestingHBaseCluster |
-| org.apache.hadoop.hbase.client | **MiniHBaseCluster** | 3.0.0 | TestingHBaseCluster |
-| org.apache.hadoop.hbase.ipc | **CoprocessorRpcChannel** | 4.0.0 | 不再支持低级别RPC |
-| org.apache.hadoop.hbase.quotas | **QuotaRetriever** | 3.0.0 | Admin API |
-
-### 内部实现类（Private，不应使用）
-
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.hadoop.hbase.client | AsyncConnectionImpl | 内部实现 |
-| org.apache.hadoop.hbase.client | ConnectionOverAsyncConnection | 内部实现 |
-| org.apache.hadoop.hbase.client | TableOverAsyncTable | 内部实现 |
-| org.apache.hadoop.hbase.ipc | AbstractRpcClient | RPC客户端基类 |
-| org.apache.hadoop.hbase.shaded.protobuf | ProtobufUtil | Protobuf工具 |
-
----
-
-# 五、Hadoop API对比
-
-## 代码仓Public API数量：902个
-
-### 稳定性分布
-
-| 模块 | @Public+@Stable | @Public+@Evolving | @Public+@Unstable |
-|------|-----------------|-------------------|-------------------|
-| hadoop-common | 108 | 172 | 48 |
-| hadoop-hdfs-client | 3 | 34 | 3 |
-| hadoop-mapreduce-client-core | 233 | 54 | 7 |
-| hadoop-yarn-api | 0 | 8 | 36 |
-| hadoop-yarn-client | 6 | 0 | 0 |
-
-### @Stable核心API
-
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.hadoop.conf | **Configuration** | 核心配置类 |
-| org.apache.hadoop.fs | **FileSystem** | 文件系统抽象基类 |
-| org.apache.hadoop.fs | **Path** | 路径表示类 |
-| org.apache.hadoop.fs | **FSDataInputStream/OutputStream** | 文件流 |
-| org.apache.hadoop.io | **Writable, Text, IntWritable** | 序列化系列 |
-| org.apache.hadoop.mapreduce | **Mapper, Reducer** | MR核心类 |
-| org.apache.hadoop.mapreduce | **InputFormat, OutputFormat** | MR格式类 |
-| org.apache.hadoop.yarn.client.api | **YarnClient, AMRMClient, NMClient** | YARN客户端 |
-
-### 重要发现：DistributedFileSystem争议
-
-| 项目 | 发现 |
+| 项目 | 说明 |
 |------|------|
-| **官方文档** | 广泛介绍和使用DistributedFileSystem |
-| **代码仓标注** | @LimitedPrivate({MapReduce, HBase}) + @Unstable |
-| **实际影响** | 仅对MapReduce和HBase项目公开稳定性保证，普通用户不应依赖 |
-
-### @Evolving API（演进中）
-
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.hadoop.mapreduce | **Job** | 核心Job类（Evolving而非Stable） |
-| org.apache.hadoop.hdfs.client | **HdfsAdmin** | HDFS管理API |
-| org.apache.hadoop.hdfs.protocol | **CacheDirectiveInfo** | 缓存指令 |
-| org.apache.hadoop.hdfs.protocol | **EncryptionZone** | 加密区域 |
-
-### @LimitedPrivate API
-
-| 包名 | 类名 | 限制范围 |
-|------|------|----------|
-| org.apache.hadoop.hdfs | **DistributedFileSystem** | MapReduce, HBase |
-| org.apache.hadoop.yarn.ipc | **YarnRPC** | MapReduce, YARN |
-| org.apache.hadoop.yarn.util | **RackResolver** | YARN, MapReduce |
-
-### @Private API（不应使用）
-
-| 包名 | 类名 | 说明 |
-|------|------|------|
-| org.apache.hadoop.fs | CommonConfigurationKeys | 使用CommonConfigurationKeysPublic替代 |
-| org.apache.hadoop.hdfs.server | **所有server包** | NameNode/DataNode内部实现 |
-| org.apache.hadoop.yarn.server | **所有server包** | ResourceManager/NodeManager内部实现 |
+| Kafka internals包381类未公开 | 正确：内部实现隔离 |
+| Iceberg api模块仅接口 | 正确：接口与实现分离 |
+| Hadoop server包全部Private | 正确：服务端内部 |
 
 ---
 
-# 六、总结
+## 七、各项目API数量对比
 
-## API稳定性对比汇总
+| 项目 | 代码仓@Public类 | 官方Javadoc公共类 | 稳定@Stable | 演进@Evolving | 内部@Private |
+|------|----------------|-------------------|-------------|---------------|--------------|
+| **Spark** | 69个 | ~65个 | 46个 | 5个 | internal包 |
+| **Kafka** | 577个 | 577个 | ~100个 | ~15个 | 381个internals |
+| **Iceberg** | 139个接口 | 200+含实现 | 大部分stable | View/Variants | core实现类 |
+| **HBase** | 343个 | 400+ | 核心类stable | ConnectionRegistry | ~30个Impl |
+| **Hadoop** | 902个 | ~800+ | MapReduce核心233 | HDFS 34个 | server全部 |
 
-| 项目 | Stable API | Evolving API | Unstable API | 内部Private API |
-|------|------------|--------------|--------------|-----------------|
-| Spark | 46个 | 5个 | 2个 | internal包 |
-| Kafka | ~100个 | ~15个 | ~7个 | 381个internals |
-| Iceberg | 大部分stable | View/Variants | geospatial | core模块实现类 |
-| HBase | 核心类stable | ConnectionRegistry | deprecated类 | 实现类Private |
-| Hadoop | MapReduce核心 | Job类/HDFS | DistributedFileSystem | server包全部Private |
+---
 
-## 关键发现
+## 八、使用建议
 
-1. **Spark**：新增TimeMode、Geometry/Geography空间类型，Java特有API完整
-2. **Kafka**：internals包381个内部类设计良好，新增Streams Group/Share Consumer/Raft Voter API
-3. **Iceberg**：api模块仅接口，View和Variant是新特性，core实现类不应直接使用
-4. **HBase**：16个deprecated类将移除，ConnectionRegistry替代ZK，CheckAndMutate替代旧接口
-5. **Hadoop**：DistributedFileSystem实际是LimitedPrivate，Job类是Evolving，server包全部Private
-
-## 使用建议
-
-1. 优先使用@Stable标记的API
-2. 关注@Evolving API的变化趋势
-3. 避免依赖@Private/@LimitedPrivate API
-4. deprecated API应尽快迁移到替代方案
-5. internals包/internal包中的类不应直接使用
+1. **优先使用@Stable API**：Spark函数接口、Kafka核心客户端、Iceberg api模块、HBase核心操作类、Hadoop MapReduce核心
+2. **避免@LimitedPrivate/@Private API**：DistributedFileSystem、CommonConfigurationKeys、各项目Impl实现类
+3. **关注@Evolving API变化**：Kafka StreamsGroup、Spark TimeMode、Hadoop Job类
+4. **迁移deprecated API**：HBase测试框架、Spark Trigger.Once、HBase checkAndMutate方法
+5. **区分接口vs实现**：Iceberg api模块是接口，core模块是实现类不应直接使用
