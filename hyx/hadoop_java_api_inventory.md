@@ -1,6 +1,32 @@
 # Hadoop Java API 清单
 
-> 基于Hadoop代码仓分析生成
+> 基于Hadoop代码仓 + 官方文档生成
+
+## 官方文档参考
+
+| 文档类型 | URL |
+|---------|-----|
+| **官方文档** | https://hadoop.apache.org/docs/stable/ |
+| **单节点集群** | https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html |
+| **集群部署** | https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/ClusterSetup.html |
+| **HDFS用户指南** | https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html |
+| **MapReduce教程** | https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html |
+| **YARN** | https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/YARN.html |
+
+---
+
+## API稳定性标注
+
+Hadoop使用 `InterfaceAudience` 和 `InterfaceStability` 注解标注API稳定性：
+
+| 标注 | 描述 |
+|------|------|
+| `@InterfaceAudience.Public` | 公共API，稳定且向后兼容 |
+| `@InterfaceAudience.Limited` | 有限API，特定用途 |
+| `@InterfaceAudience.Private` | 私有API，不保证兼容性 |
+| `@InterfaceStability.Stable` | 稳定API，不会改变 |
+| `@InterfaceStability.Evolving` | 进化API，可能会改变 |
+| `@InterfaceStability.Unstable` | 不稳定API，无保证 |
 
 ---
 

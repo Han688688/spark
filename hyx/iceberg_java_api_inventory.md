@@ -1,6 +1,47 @@
 # Iceberg Java API 清单
 
-> 基于Iceberg代码仓分析生成
+> 基于Iceberg代码仓 + 官方Javadoc (Iceberg 1.10.1) + 官方文档生成
+
+## 官方文档参考
+
+| 文档类型 | URL |
+|---------|-----|
+| **官方Javadoc** | https://iceberg.apache.org/javadoc/latest/ |
+| **官方API文档** | https://iceberg.apache.org/docs/latest/api/ |
+| **Java Quickstart** | https://iceberg.apache.org/docs/latest/java-api-quickstart/ |
+| **Spark集成** | https://iceberg.apache.org/docs/latest/spark-getting-started/ |
+| **Flink集成** | https://iceberg.apache.org/docs/latest/flink/ |
+
+---
+
+## 官方包描述 (Iceberg Latest)
+
+根据官方Javadoc，Iceberg包含以下公共API包：
+
+| 包名 | 官方描述 |
+|------|---------|
+| `org.apache.iceberg` | Core Iceberg API |
+| `org.apache.iceberg.catalog` | Catalog interfaces |
+| `org.apache.iceberg.expressions` | Expression API for filtering |
+| `org.apache.iceberg.types` | Type definitions |
+| `org.apache.iceberg.io` | File I/O interfaces |
+| `org.apache.iceberg.encryption` | Encryption management |
+| `org.apache.iceberg.metrics` | Metrics reporting |
+| `org.apache.iceberg.actions` | Table maintenance actions |
+| `org.apache.iceberg.view` | View API |
+| `org.apache.iceberg.transforms` | Partition transforms |
+| `org.apache.iceberg.data` | Generic data API |
+| `org.apache.iceberg.spark` | Spark integration |
+| `org.apache.iceberg.flink` | Flink integration |
+| `org.apache.iceberg.hive` | Hive integration |
+| `org.apache.iceberg.aws` | AWS integration (S3, Glue, DynamoDB) |
+| `org.apache.iceberg.gcp` | GCP integration (GCS, BigQuery) |
+| `org.apache.iceberg.azure` | Azure integration (ADLS) |
+| `org.apache.iceberg.nessie` | Nessie integration |
+| `org.apache.iceberg.parquet` | Parquet support |
+| `org.apache.iceberg.orc` | ORC support |
+| `org.apache.iceberg.kafka-connect` | Kafka Connect sink |
+| `org.apache.iceberg.delta` | Delta Lake migration |
 
 ---
 

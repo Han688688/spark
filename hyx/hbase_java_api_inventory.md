@@ -1,6 +1,46 @@
 # HBase Java API 清单
 
-> 基于HBase代码仓分析生成
+> 基于HBase代码仓 + 官方Javadoc (HBase 4.0.0) + 官方文档生成
+
+## 官方文档参考
+
+| 文档类型 | URL |
+|---------|-----|
+| **官方Javadoc** | https://hbase.apache.org/apidocs/index.html |
+| **官方文档** | https://hbase.apache.org/book.html |
+| **客户端API文档** | https://hbase.apache.org/book.html#hbase_apis |
+| **MapReduce集成** | https://hbase.apache.org/book.html#mapreduce |
+| **Coprocessor** | https://hbase.apache.org/book.html#cp |
+
+---
+
+## 官方包描述 (HBase 4.0.0)
+
+根据官方Javadoc，HBase 4.0.0包含以下公共API包：
+
+| 包名 | 官方描述 |
+|------|---------|
+| `org.apache.hadoop.hbase.client` | **Provides HBase Client** - 核心客户端API |
+| `org.apache.hadoop.hbase.filter` | **Row-level filters** - 行级过滤器，应用于HRegion scan结果 |
+| `org.apache.hadoop.hbase` | Core HBase classes |
+| `org.apache.hadoop.hbase.backup` | Backup API |
+| `org.apache.hadoop.hbase.coprocessor` | Coprocessor API |
+| `org.apache.hadoop.hbase.mapreduce` | **MapReduce Input/OutputFormats** - MapReduce集成 |
+| `org.apache.hadoop.hbase.mapred` | MapReduce (old API) |
+| `org.apache.hadoop.hbase.replication` | **Multi Cluster Replication** - 多集群复制 |
+| `org.apache.hadoop.hbase.rest` | **HBase REST** - REST API |
+| `org.apache.hadoop.hbase.thrift` | **Thrift service** - Thrift服务 |
+| `org.apache.hadoop.hbase.quotas` | Quota API |
+| `org.apache.hadoop.hbase.security` | Security API |
+| `org.apache.hadoop.hbase.types` | **Extensible data type API** - 可扩展数据类型 |
+| `org.apache.hadoop.hbase.util` | Utility classes |
+| `org.apache.hadoop.hbase.io` | I/O classes |
+| `org.apache.hadoop.hbase.io.encoding` | Data block encoding |
+| `org.apache.hadoop.hbase.io.hfile` | **HFile and BlockCache** - HFile实现 |
+| `org.apache.hadoop.hbase.metrics` | **Metrics API** - 指标API |
+| `org.apache.hadoop.hbase.mob` | MOB (Medium-sized Objects) |
+| `org.apache.hadoop.hbase.snapshot` | Snapshot API |
+| `org.apache.hadoop.hbase.testing` | Testing utilities |
 
 ---
 

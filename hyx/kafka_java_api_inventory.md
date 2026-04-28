@@ -1,6 +1,51 @@
 # Kafka Java API 清单
 
-> 基于Kafka代码仓分析生成
+> 基于Kafka代码仓 + 官方Javadoc (Kafka 4.2.0) 生成
+
+## 官方文档参考
+
+| 文档类型 | URL |
+|---------|-----|
+| **官方Javadoc** | https://kafka.apache.org/42/javadoc |
+| **Producer API** | https://kafka.apache.org/42/javadoc/org/apache/kafka/clients/producer/package-summary.html |
+| **Consumer API** | https://kafka.apache.org/42/javadoc/org/apache/kafka/clients/consumer/package-summary.html |
+| **Admin API** | https://kafka.apache.org/42/javadoc/org/apache/kafka/clients/admin/package-summary.html |
+| **Connect API** | https://kafka.apache.org/42/javadoc/org/apache/kafka/connect/package-summary.html |
+| **Streams API** | https://kafka.apache.org/42/javadoc/org/apache/kafka/streams/package-summary.html |
+| **官方文档** | https://kafka.apache.org/documentation |
+
+---
+
+## 官方包描述 (Kafka 4.2.0)
+
+根据官方Javadoc，Kafka 4.2.0 包含以下公共API包：
+
+| 包名 | 官方描述 |
+|------|---------|
+| `org.apache.kafka.clients.admin` | Provides a Kafka client for performing administrative operations |
+| `org.apache.kafka.clients.consumer` | Provides a Kafka client for consuming records from topics |
+| `org.apache.kafka.clients.producer` | Provides a Kafka client for producing records to topics |
+| `org.apache.kafka.common` | Provides shared functionality for Kafka clients and servers |
+| `org.apache.kafka.common.acl` | Provides classes representing Access Control Lists |
+| `org.apache.kafka.common.config` | Provides mechanisms for defining, parsing, validating configuration |
+| `org.apache.kafka.common.errors` | Provides common exception classes |
+| `org.apache.kafka.common.header` | Provides API for application-defined metadata attached to records |
+| `org.apache.kafka.common.metrics` | Provides API for emitting metrics |
+| `org.apache.kafka.common.quota` | Provides mechanisms for enforcing resource quotas |
+| `org.apache.kafka.common.resource` | Provides client handles representing logical resources |
+| `org.apache.kafka.common.security.auth` | Provides pluggable interfaces for authentication mechanisms |
+| `org.apache.kafka.common.serialization` | Provides interface and implementations of serialization/deserialization |
+| `org.apache.kafka.connect.connector` | Provides interfaces for Connector and Task implementations |
+| `org.apache.kafka.connect.data` | Provides classes for representing data and schemas |
+| `org.apache.kafka.connect.sink` | Provides API for implementing sink connectors |
+| `org.apache.kafka.connect.source` | Provides API for implementing source connectors |
+| `org.apache.kafka.connect.storage` | Provides interfaces for (de)serializing data |
+| `org.apache.kafka.connect.transforms` | Provides interface for altering data by Connect |
+| `org.apache.kafka.streams` | Provides Kafka Streams library for streaming data applications |
+| `org.apache.kafka.streams.kstream` | Provides DSL for data flow computation over streams and tables |
+| `org.apache.kafka.streams.processor` | Provides Processor API for data flow computation |
+| `org.apache.kafka.streams.state` | Provides interfaces for managing intermediate state |
+| `org.apache.kafka.streams.query` | Provides query API over state stores |
 
 ---
 

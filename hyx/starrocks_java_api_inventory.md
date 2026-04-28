@@ -2,6 +2,30 @@
 
 > 基于StarRocks代码仓分析生成
 
+## 官方文档参考
+
+| 文档类型 | URL |
+|---------|-----|
+| **官方文档** | https://docs.starrocks.io |
+| **Java UDF开发** | https://docs.starrocks.io/docs/development/Java_UDF (需搜索) |
+
+---
+
+## StarRocks Java扩展模块
+
+StarRocks主要通过Java Extensions提供对外API，包括：
+
+| 模块 | 路径 | 描述 |
+|------|------|------|
+| `jni-connector` | java-extensions/jni-connector | JNI扫描器框架 |
+| `jdbc-bridge` | java-extensions/jdbc-bridge | JDBC数据源桥接 |
+| `udf-extensions` | java-extensions/udf-extensions | Java UDF运行时 |
+| `udf-examples` | java-extensions/udf-examples | UDF示例代码 |
+| `hive-reader` | java-extensions/hive-reader | Hive数据源读取 |
+| `hudi-reader` | java-extensions/hudi-reader | Hudi数据源读取 |
+| `iceberg-metadata-reader` | java-extensions/iceberg-metadata-reader | Iceberg元数据读取 |
+| `paimon-reader` | java-extensions/paimon-reader | Paimon数据源读取 |
+
 ---
 
 ## 1. JNI Connector API
