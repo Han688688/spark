@@ -15,6 +15,9 @@ plugins:
     - config_dependency_analyzer   # 配置依赖分析
     - api_doc_analyzer             # API文档分析
     - data_driven_generator        # 数据驱动生成
+    - api_coverage_analyzer        # API覆盖度分析
+    - api_coverage_discoverer      # API覆盖场景发现
+    - api_test_generator           # API测试生成
 
 # 场景发现策略配置
 strategies:
@@ -30,6 +33,10 @@ strategies:
   # 性能场景识别策略
   performance:
     - performance_discoverer       # 性能场景识别
+  
+  # API覆盖场景识别策略
+  api_coverage:
+    - api_coverage_discoverer      # API缺失场景发现
   
   # 安全场景识别策略（待扩展）
   security: []
@@ -152,6 +159,51 @@ workflows:
         plugin: llm_generator
         priority: P0
         limit: 10
+  
+  # API覆盖度检测工作流
+  api_coverage:
+    name: "API覆盖度检测"
+    description: "API清单解析+测试代码扫描+缺失API识别+测试生成"
+    steps:
+      - name: analyze_api_coverage
+        type: analyze
+        plugin: api_coverage_analyzer
+        config:
+          api_inventory_files:
+            - spark_java_api_complete_list.md
+            - kafka_java_api_complete_list.md
+            - hbase_java_api_complete_list.md
+            - hadoop_java_api_complete_list.md
+            - iceberg_java_api_complete_list.md
+      
+      - name: discover_missing_api
+        type: discover
+        strategy_category: api_coverage
+      
+      - name: generate_p0_api_tests
+        type: generate
+        plugin: api_test_generator
+        priority: P0
+        limit: 50
+      
+      - name: generate_p1_api_tests
+        type: generate
+        plugin: api_test_generator
+        priority: P1
+        limit: 100
+  
+  # API快速检查工作流
+  api_check:
+    name: "API快速检查"
+    description: "仅分析API覆盖度，不生成测试"
+    steps:
+      - name: analyze_api_coverage
+        type: analyze
+        plugin: api_coverage_analyzer
+        config:
+          api_inventory_files:
+            - spark_java_api_complete_list.md
+            - kafka_java_api_complete_list.md
 
 # 分析器配置
 analyzer_config:
@@ -237,6 +289,14 @@ data_sources:
   # 示例：
   # - data/bugs.json
   # - reports/defects.json
+  
+  # API清单文件（用于API覆盖度检测）
+  api_inventory_files:
+    - spark_java_api_complete_list.md
+    - kafka_java_api_complete_list.md
+    - hbase_java_api_complete_list.md
+    - hadoop_java_api_complete_list.md
+    - iceberg_java_api_complete_list.md
 
 # 环境配置
 environment:

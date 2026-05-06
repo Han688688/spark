@@ -76,10 +76,10 @@ class Scenario:
     type: str
     priority: str
     components: List[str]
-    interactions: List[str] = field(default_factory=list)  # 涉及的交互
     description: str
     test_steps: List[str]
     expected_result: str
+    interactions: List[str] = field(default_factory=list)  # 涉及的交互
     source_code_ref: str = ""
     discovery_strategy: str = ""  # 来源策略
     metadata: Dict = field(default_factory=dict)  # 扩展字段
