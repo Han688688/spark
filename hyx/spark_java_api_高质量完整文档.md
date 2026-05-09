@@ -29,39 +29,39 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cache` | 无 | `JavaDoubleRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
-| `coalesce` | numPartitions: Int | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
-| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
-| `distinct` | 无 | `JavaDoubleRDD` | 去重 |  |
-| `distinct` | numPartitions: Int | `JavaDoubleRDD` | 去重 |  |
-| `filter` | JFunction[JDouble: f | `JavaDoubleRDD` | 过滤行 |  |
-| `histogram` | bucketCount: Int | `Unit` | 计算直方图 |  |
-| `histogram` | Array[scala.Double]: buckets | `Array` | 计算直方图 |  |
-| `intersection` | JavaDoubleRDD: other | `JavaDoubleRDD` | 返回两个RDD的交集 |  |
-| `max` | 无 | `JDouble` | 最大值 |  |
-| `mean` | 无 | `JDouble` | 计算平均值 |  |
+| `cache` | 无 | `JavaDoubleRDD` | 缓存RDD到内存，默认MEMORY_ONLY | // cache：缓存RDD到内存<br>JavaRDD<String> rdd = sc.textFile("hdfs://large/file.txt");<br><br>// 缓存后，后续操作会直接从内存读取<br>rdd.cache();<br><br>// 多次使用RDD时缓存可提升性能<br>long count1 = rdd.count();  // 第一次计算，会缓存<br>long count2 = rdd.count();  // 第二次直接从内存读取 |
+| `coalesce` | numPartitions: Int | `JavaDoubleRDD` | 减少分区数，不触发shuffle | // coalesce：减少分区数（不shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 10);  // 10个分区<br><br>// 减少到2个分区（不触发shuffle，高效）<br>JavaRDD<String> coalesced = rdd.coalesce(2); |
+| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaDoubleRDD` | 减少分区数，不触发shuffle | // coalesce：减少分区数（不shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 10);  // 10个分区<br><br>// 减少到2个分区（不触发shuffle，高效）<br>JavaRDD<String> coalesced = rdd.coalesce(2); |
+| `distinct` | 无 | `JavaDoubleRDD` | 去重 | // distinct：去重<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 4, 3, 5));<br>JavaRDD<Integer> distinct = rdd.distinct();<br>// 结果: [1, 2, 3, 4, 5] |
+| `distinct` | numPartitions: Int | `JavaDoubleRDD` | 去重 | // distinct：去重<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 4, 3, 5));<br>JavaRDD<Integer> distinct = rdd.distinct();<br>// 结果: [1, 2, 3, 4, 5] |
+| `filter` | JFunction[JDouble: f | `JavaDoubleRDD` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `histogram` | bucketCount: Int | `Unit` | 计算直方图 | // histogram：计算直方图<br>List<Double> data = Arrays.asList(1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>// 指定桶数量<br>Tuple2<double[], long[]> hist = doubleRDD.histogram(3);<br>// hist._1 是桶边界，hist._2 是每个桶的数量 |
+| `histogram` | Array[scala.Double]: buckets | `Array` | 计算直方图 | // histogram：计算直方图<br>List<Double> data = Arrays.asList(1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>// 指定桶数量<br>Tuple2<double[], long[]> hist = doubleRDD.histogram(3);<br>// hist._1 是桶边界，hist._2 是每个桶的数量 |
+| `intersection` | JavaDoubleRDD: other | `JavaDoubleRDD` | 返回两个RDD的交集 | // intersection：取交集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> intersection = rdd1.intersection(rdd2);<br>// 结果: [3, 4] |
+| `max` | 无 | `JDouble` | 最大值 | // max：最大值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double max = doubleRDD.max();<br>// 结果: 30.0 |
+| `mean` | 无 | `JDouble` | 计算平均值 | // mean：计算平均值<br>List<Double> data = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>double avg = doubleRDD.mean();<br>// 结果: 3.0 |
 | `meanApprox` | timeout: Long, confidence: JDouble | `PartialResult` | 近似计算平均值 |  |
 | `meanApprox` | timeout: Long | `PartialResult` | 近似计算平均值 |  |
-| `min` | 无 | `JDouble` | 最小值 |  |
-| `persist` | StorageLevel: newLevel | `JavaDoubleRDD` | 持久化RDD到指定存储级别 |  |
-| `repartition` | numPartitions: Int | `JavaDoubleRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
-| `sample` | withReplacement: Boolean, fraction: JDouble | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
-| `sample` | withReplacement: Boolean, fraction: JDouble, seed: Long | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
+| `min` | 无 | `JDouble` | 最小值 | // min：最小值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double min = doubleRDD.min();<br>// 结果: 5.0 |
+| `persist` | StorageLevel: newLevel | `JavaDoubleRDD` | 持久化RDD到指定存储级别 | // persist：持久化到指定存储级别<br>JavaRDD<String> rdd = sc.textFile("hdfs://data/file.txt");<br><br>// 内存+磁盘持久化<br>rdd.persist(StorageLevel.MEMORY_AND_DISK());<br><br>// 序列化存储（节省空间）<br>rdd.persist(StorageLevel.MEMORY_ONLY_SER());<br><br>// 堆外内存存储<br>rdd.persist(StorageLevel.OFF_HEAP()); |
+| `repartition` | numPartitions: Int | `JavaDoubleRDD` | 重新分区，增加或减少分区数，触发shuffle | // repartition：重新分区（会shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 2);  // 2个分区<br><br>// 增加到10个分区（触发shuffle）<br>JavaRDD<String> repartitioned = rdd.repartition(10);<br><br>// 注意：repartition会shuffle，coalesce只减少分区不shuffle |
+| `sample` | withReplacement: Boolean, fraction: JDouble | `JavaDoubleRDD` | 随机采样指定比例的元素 | // sample：随机采样<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 不重复采样，采样比例50%<br>JavaRDD<Integer> sampled = rdd.sample(false, 0.5);<br><br>// 重复采样，采样比例200%（每个元素可能被选中多次）<br>JavaRDD<Integer> sampledWithReplacement = rdd.sample(true, 2.0); |
+| `sample` | withReplacement: Boolean, fraction: JDouble, seed: Long | `JavaDoubleRDD` | 随机采样指定比例的元素 | // sample：随机采样<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 不重复采样，采样比例50%<br>JavaRDD<Integer> sampled = rdd.sample(false, 0.5);<br><br>// 重复采样，采样比例200%（每个元素可能被选中多次）<br>JavaRDD<Integer> sampledWithReplacement = rdd.sample(true, 2.0); |
 | `sampleStdev` | 无 | `JDouble` | 计算样本标准差 |  |
 | `sampleVariance` | 无 | `JDouble` | 计算样本方差 |  |
 | `setName` | name: String | `JavaDoubleRDD` | 设置RDD名称 |  |
-| `stats` | 无 | `StatCounter` | 返回统计摘要(计数、均值、方差、最小、最大) |  |
-| `stdev` | 无 | `JDouble` | 计算标准差 |  |
-| `subtract` | JavaDoubleRDD: other | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaDoubleRDD: other, numPartitions: Int | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaDoubleRDD: other, Partitioner: p | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `sum` | 无 | `JDouble` | 求和 |  |
+| `stats` | 无 | `StatCounter` | 返回统计摘要(计数、均值、方差、最小、最大) | // stats：获取完整统计信息<br>List<Double> data = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>StatCounter stats = doubleRDD.stats();<br>System.out.println("Count: " + stats.count());      // 5<br>System.out.println("Mean: " + stats.mean());        // 3.0<br>System.out.println("Sum: " + stats.sum());          // 15.0<br>System.out.println("Min: " + stats.min());          // 1.0<br>System.out.println("Max: " + stats.max());          // 5.0<br>System.out.println("Stdev: " + stats.stdev());      // 1.41... |
+| `stdev` | 无 | `JDouble` | 计算标准差 | // stdev：计算标准差<br>List<Double> data = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>double stdev = doubleRDD.stdev();<br>// 标准差 = 方差的平方根 |
+| `subtract` | JavaDoubleRDD: other | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `subtract` | JavaDoubleRDD: other, numPartitions: Int | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `subtract` | JavaDoubleRDD: other, Partitioner: p | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `sum` | 无 | `JDouble` | 求和 | // sum：求和<br>List<Double> data = Arrays.asList(10.0, 20.0, 30.0, 40.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>double total = doubleRDD.sum();<br>// 结果: 100.0 |
 | `sumApprox` | timeout: Long, confidence: JDouble | `PartialResult` | 近似计算总和 |  |
 | `sumApprox` | timeout: Long | `PartialResult` | 近似计算总和 |  |
-| `union` | JavaDoubleRDD: other | `JavaDoubleRDD` | 合并DataFrame |  |
-| `unpersist` | 无 | `JavaDoubleRDD` | 取消RDD的持久化 |  |
-| `unpersist` | blocking: Boolean | `JavaDoubleRDD` | 取消RDD的持久化 |  |
-| `variance` | 无 | `JDouble` | 计算方差 |  |
+| `union` | JavaDoubleRDD: other | `JavaDoubleRDD` | 合并DataFrame | // 合并多个RDD<br>JavaRDD<String> rdd1 = sc.parallelize(Arrays.asList("a", "b"));<br>JavaRDD<String> rdd2 = sc.parallelize(Arrays.asList("c", "d"));<br>JavaRDD<String> rdd3 = sc.parallelize(Arrays.asList("e", "f"));<br><br>// 合并所有RDD<br>JavaRDD<String> unionRDD = sc.union(rdd1, rdd2, rdd3);<br>// 结果: ["a", "b", "c", "d", "e", "f"] |
+| `unpersist` | 无 | `JavaDoubleRDD` | 取消RDD的持久化 | // unpersist：取消持久化<br>JavaRDD<String> rdd = sc.textFile("hdfs://file.txt");<br>rdd.cache();  // 持久化<br><br>// 使用完后取消持久化，释放内存<br>rdd.unpersist(); |
+| `unpersist` | blocking: Boolean | `JavaDoubleRDD` | 取消RDD的持久化 | // unpersist：取消持久化<br>JavaRDD<String> rdd = sc.textFile("hdfs://file.txt");<br>rdd.cache();  // 持久化<br><br>// 使用完后取消持久化，释放内存<br>rdd.unpersist(); |
+| `variance` | 无 | `JDouble` | 计算方差 | // variance：计算方差<br>List<Double> data = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>double variance = doubleRDD.variance();<br>// 方差衡量数据的离散程度 |
 
 ### JavaPairRDD
 **包路径**: `org.apache.spark.api.java`
@@ -69,39 +69,39 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cache` | 无 | `JavaPairRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
-| `coalesce` | numPartitions: Int | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
-| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
-| `collectAsMap` | 无 | `java` | 收集RDD为Java Map |  |
+| `cache` | 无 | `JavaPairRDD` | 缓存RDD到内存，默认MEMORY_ONLY | // cache：缓存RDD到内存<br>JavaRDD<String> rdd = sc.textFile("hdfs://large/file.txt");<br><br>// 缓存后，后续操作会直接从内存读取<br>rdd.cache();<br><br>// 多次使用RDD时缓存可提升性能<br>long count1 = rdd.count();  // 第一次计算，会缓存<br>long count2 = rdd.count();  // 第二次直接从内存读取 |
+| `coalesce` | numPartitions: Int | `JavaPairRDD` | 减少分区数，不触发shuffle | // coalesce：减少分区数（不shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 10);  // 10个分区<br><br>// 减少到2个分区（不触发shuffle，高效）<br>JavaRDD<String> coalesced = rdd.coalesce(2); |
+| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaPairRDD` | 减少分区数，不触发shuffle | // coalesce：减少分区数（不shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 10);  // 10个分区<br><br>// 减少到2个分区（不触发shuffle，高效）<br>JavaRDD<String> coalesced = rdd.coalesce(2); |
+| `collectAsMap` | 无 | `java` | 收集RDD为Java Map | // collectAsMap：收集为Map<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("key1", 10),<br>    new Tuple2<>("key2", 20)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>Map<String, Integer> map = pairRDD.collectAsMap();<br>// 结果: {"key1": 10, "key2": 20}<br><br>// 注意：如果Key重复，只保留最后一个Value |
 | `countApproxDistinctByKey` | relativeSD: Double, Partitioner: partitioner | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
 | `countApproxDistinctByKey` | relativeSD: Double, numPartitions: Int | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
 | `countApproxDistinctByKey` | relativeSD: Double | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
-| `countByKey` | 无 | `java` | 统计每个Key的数量 |  |
+| `countByKey` | 无 | `java` | 统计每个Key的数量 | // countByKey：统计每个Key的数量<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("apple", 1),<br>    new Tuple2<>("banana", 2),<br>    new Tuple2<>("apple", 3),<br>    new Tuple2<>("apple", 4)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>Map<String, Long> counts = pairRDD.countByKey();<br>// 结果: {"apple": 3, "banana": 1} |
 | `countByKeyApprox` | timeout: Long | `PartialResult` | countByKeyApprox方法 |  |
 | `countByKeyApprox` | timeout: Long, 0.95: confidence | `PartialResult` | countByKeyApprox方法 |  |
-| `distinct` | 无 | `JavaPairRDD` | 去重 |  |
-| `distinct` | numPartitions: Int | `JavaPairRDD` | 去重 |  |
-| `filter` | JFunction[(K: f | `Unit` | 过滤行 |  |
+| `distinct` | 无 | `JavaPairRDD` | 去重 | // distinct：去重<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 4, 3, 5));<br>JavaRDD<Integer> distinct = rdd.distinct();<br>// 结果: [1, 2, 3, 4, 5] |
+| `distinct` | numPartitions: Int | `JavaPairRDD` | 去重 | // distinct：去重<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 4, 3, 5));<br>JavaRDD<Integer> distinct = rdd.distinct();<br>// 结果: [1, 2, 3, 4, 5] |
+| `filter` | JFunction[(K: f | `Unit` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `foldByKey` | V: zeroValue, Partitioner: partitioner, JFunction2[V: func | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
 | `foldByKey` | V: zeroValue, numPartitions: Int, JFunction2[V: func | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
 | `foldByKey` | V: zeroValue, JFunction2[V: func | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
-| `groupByKey` | Partitioner: partitioner | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
-| `groupByKey` | numPartitions: Int | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
-| `groupByKey` | 无 | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
-| `intersection` | JavaPairRDD[K: other | `JavaPairRDD` | 返回两个RDD的交集 |  |
-| `keys` | 无 | `JavaRDD` | 返回所有Key的RDD |  |
-| `lookup` | K: key | `JList` | 查找指定Key的所有Value |  |
+| `groupByKey` | Partitioner: partitioner | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) | // groupByKey：按Key分组<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("fruit", 1),<br>    new Tuple2<>("fruit", 2),<br>    new Tuple2<>("vegetable", 3)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 按Key分组Value<br>JavaPairRDD<String, Iterable<Integer>> grouped = pairRDD.groupByKey();<br>// 结果: [("fruit", [1, 2]), ("vegetable", [3])]<br><br>// 注意：groupByKey可能导致数据倾斜，建议用reduceByKey替代 |
+| `groupByKey` | numPartitions: Int | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) | // groupByKey：按Key分组<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("fruit", 1),<br>    new Tuple2<>("fruit", 2),<br>    new Tuple2<>("vegetable", 3)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 按Key分组Value<br>JavaPairRDD<String, Iterable<Integer>> grouped = pairRDD.groupByKey();<br>// 结果: [("fruit", [1, 2]), ("vegetable", [3])]<br><br>// 注意：groupByKey可能导致数据倾斜，建议用reduceByKey替代 |
+| `groupByKey` | 无 | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) | // groupByKey：按Key分组<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("fruit", 1),<br>    new Tuple2<>("fruit", 2),<br>    new Tuple2<>("vegetable", 3)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 按Key分组Value<br>JavaPairRDD<String, Iterable<Integer>> grouped = pairRDD.groupByKey();<br>// 结果: [("fruit", [1, 2]), ("vegetable", [3])]<br><br>// 注意：groupByKey可能导致数据倾斜，建议用reduceByKey替代 |
+| `intersection` | JavaPairRDD[K: other | `JavaPairRDD` | 返回两个RDD的交集 | // intersection：取交集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> intersection = rdd1.intersection(rdd2);<br>// 结果: [3, 4] |
+| `keys` | 无 | `JavaRDD` | 返回所有Key的RDD | // keys：获取所有Key<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(Arrays.asList(<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>));<br><br>JavaRDD<String> keysRDD = pairRDD.keys();<br>// 结果: ["a", "b"] |
+| `lookup` | K: key | `JList` | 查找指定Key的所有Value | // lookup：查找指定Key的所有Value<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("apple", 1),<br>    new Tuple2<>("apple", 2),<br>    new Tuple2<>("banana", 3)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>List<Integer> appleValues = pairRDD.lookup("apple");<br>// 结果: [1, 2] |
 | `partitionBy` | Partitioner: partitioner | `JavaPairRDD` | 使用指定分区器重新分区 |  |
-| `persist` | StorageLevel: newLevel | `JavaPairRDD` | 持久化RDD到指定存储级别 |  |
-| `reduceByKey` | Partitioner: partitioner, JFunction2[V: func | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
-| `reduceByKey` | JFunction2[V: func, numPartitions: Int | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
-| `reduceByKey` | JFunction2[V: func | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
+| `persist` | StorageLevel: newLevel | `JavaPairRDD` | 持久化RDD到指定存储级别 | // persist：持久化到指定存储级别<br>JavaRDD<String> rdd = sc.textFile("hdfs://data/file.txt");<br><br>// 内存+磁盘持久化<br>rdd.persist(StorageLevel.MEMORY_AND_DISK());<br><br>// 序列化存储（节省空间）<br>rdd.persist(StorageLevel.MEMORY_ONLY_SER());<br><br>// 堆外内存存储<br>rdd.persist(StorageLevel.OFF_HEAP()); |
+| `reduceByKey` | Partitioner: partitioner, JFunction2[V: func | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | // reduceByKey：按Key聚合Value<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("apple", 1),<br>    new Tuple2<>("banana", 2),<br>    new Tuple2<>("apple", 3),<br>    new Tuple2<>("banana", 4)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 按Key求和<br>JavaPairRDD<String, Integer> summed = pairRDD.reduceByKey((a, b) -> a + b);<br>// 结果: [("apple", 4), ("banana", 6)]<br><br>// 按Key取最大值<br>JavaPairRDD<String, Integer> maxByKey = pairRDD.reduceByKey((a, b) -> Math.max(a, b));<br>// 结果: [("apple", 3), ("banana", 4)] |
+| `reduceByKey` | JFunction2[V: func, numPartitions: Int | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | // reduceByKey：按Key聚合Value<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("apple", 1),<br>    new Tuple2<>("banana", 2),<br>    new Tuple2<>("apple", 3),<br>    new Tuple2<>("banana", 4)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 按Key求和<br>JavaPairRDD<String, Integer> summed = pairRDD.reduceByKey((a, b) -> a + b);<br>// 结果: [("apple", 4), ("banana", 6)]<br><br>// 按Key取最大值<br>JavaPairRDD<String, Integer> maxByKey = pairRDD.reduceByKey((a, b) -> Math.max(a, b));<br>// 结果: [("apple", 3), ("banana", 4)] |
+| `reduceByKey` | JFunction2[V: func | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | // reduceByKey：按Key聚合Value<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("apple", 1),<br>    new Tuple2<>("banana", 2),<br>    new Tuple2<>("apple", 3),<br>    new Tuple2<>("banana", 4)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 按Key求和<br>JavaPairRDD<String, Integer> summed = pairRDD.reduceByKey((a, b) -> a + b);<br>// 结果: [("apple", 4), ("banana", 6)]<br><br>// 按Key取最大值<br>JavaPairRDD<String, Integer> maxByKey = pairRDD.reduceByKey((a, b) -> Math.max(a, b));<br>// 结果: [("apple", 3), ("banana", 4)] |
 | `reduceByKeyLocally` | JFunction2[V: func | `java` | reduceByKeyLocally方法 |  |
-| `repartition` | numPartitions: Int | `JavaPairRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
+| `repartition` | numPartitions: Int | `JavaPairRDD` | 重新分区，增加或减少分区数，触发shuffle | // repartition：重新分区（会shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 2);  // 2个分区<br><br>// 增加到10个分区（触发shuffle）<br>JavaRDD<String> repartitioned = rdd.repartition(10);<br><br>// 注意：repartition会shuffle，coalesce只减少分区不shuffle |
 | `repartitionAndSortWithinPartitions` | Partitioner: partitioner | `JavaPairRDD` | 重新分区并在分区内排序 |  |
 | `repartitionAndSortWithinPartitions` | Partitioner: partitioner, Comparator[K]: comp | `JavaPairRDD` | 重新分区并在分区内排序 |  |
-| `sample` | withReplacement: Boolean, fraction: Double | `JavaPairRDD` | 随机采样指定比例的元素 |  |
-| `sample` | withReplacement: Boolean, fraction: Double, seed: Long | `JavaPairRDD` | 随机采样指定比例的元素 |  |
+| `sample` | withReplacement: Boolean, fraction: Double | `JavaPairRDD` | 随机采样指定比例的元素 | // sample：随机采样<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 不重复采样，采样比例50%<br>JavaRDD<Integer> sampled = rdd.sample(false, 0.5);<br><br>// 重复采样，采样比例200%（每个元素可能被选中多次）<br>JavaRDD<Integer> sampledWithReplacement = rdd.sample(true, 2.0); |
+| `sample` | withReplacement: Boolean, fraction: Double, seed: Long | `JavaPairRDD` | 随机采样指定比例的元素 | // sample：随机采样<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 不重复采样，采样比例50%<br>JavaRDD<Integer> sampled = rdd.sample(false, 0.5);<br><br>// 重复采样，采样比例200%（每个元素可能被选中多次）<br>JavaRDD<Integer> sampledWithReplacement = rdd.sample(true, 2.0); |
 | `sampleByKey` | withReplacement: Boolean, java.util.Map[K: fractions, seed: Long | `JavaPairRDD` | 按Key采样 |  |
 | `sampleByKey` | withReplacement: Boolean, java.util.Map[K: fractions | `JavaPairRDD` | 按Key采样 |  |
 | `sampleByKeyExact` | withReplacement: Boolean, java.util.Map[K: fractions, seed: Long | `JavaPairRDD` | 按Key精确采样 |  |
@@ -109,19 +109,19 @@
 | `saveAsHadoopDataset` | JobConf: conf | `Unit` | saveAsHadoopDataset方法 |  |
 | `saveAsNewAPIHadoopDataset` | Configuration: conf | `Unit` | saveAsNewAPIHadoopDataset方法 |  |
 | `setName` | name: String | `JavaPairRDD` | 设置RDD名称 |  |
-| `sortByKey` | 无 | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | ascending: Boolean | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | ascending: Boolean, numPartitions: Int | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Comparator[K]: comp | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Comparator[K]: comp, ascending: Boolean | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Comparator[K]: comp, ascending: Boolean, numPartitions: Int | `JavaPairRDD` | 按Key排序RDD |  |
-| `subtract` | JavaPairRDD[K: other | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaPairRDD[K: other, numPartitions: Int | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaPairRDD[K: other, Partitioner: p | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `union` | JavaPairRDD[K: other | `JavaPairRDD` | 合并DataFrame |  |
-| `unpersist` | 无 | `JavaPairRDD` | 取消RDD的持久化 |  |
-| `unpersist` | blocking: Boolean | `JavaPairRDD` | 取消RDD的持久化 |  |
-| `values` | 无 | `JavaRDD` | 返回所有Value的RDD |  |
+| `sortByKey` | 无 | `JavaPairRDD` | 按Key排序RDD | // sortByKey：按Key排序<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("c", 3),<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 升序排序<br>JavaPairRDD<String, Integer> sortedAsc = pairRDD.sortByKey();<br>// 结果: [("a", 1), ("b", 2), ("c", 3)]<br><br>// 降序排序<br>JavaPairRDD<String, Integer> sortedDesc = pairRDD.sortByKey(false);<br>// 结果: [("c", 3), ("b", 2), ("a", 1)] |
+| `sortByKey` | ascending: Boolean | `JavaPairRDD` | 按Key排序RDD | // sortByKey：按Key排序<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("c", 3),<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 升序排序<br>JavaPairRDD<String, Integer> sortedAsc = pairRDD.sortByKey();<br>// 结果: [("a", 1), ("b", 2), ("c", 3)]<br><br>// 降序排序<br>JavaPairRDD<String, Integer> sortedDesc = pairRDD.sortByKey(false);<br>// 结果: [("c", 3), ("b", 2), ("a", 1)] |
+| `sortByKey` | ascending: Boolean, numPartitions: Int | `JavaPairRDD` | 按Key排序RDD | // sortByKey：按Key排序<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("c", 3),<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 升序排序<br>JavaPairRDD<String, Integer> sortedAsc = pairRDD.sortByKey();<br>// 结果: [("a", 1), ("b", 2), ("c", 3)]<br><br>// 降序排序<br>JavaPairRDD<String, Integer> sortedDesc = pairRDD.sortByKey(false);<br>// 结果: [("c", 3), ("b", 2), ("a", 1)] |
+| `sortByKey` | Comparator[K]: comp | `JavaPairRDD` | 按Key排序RDD | // sortByKey：按Key排序<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("c", 3),<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 升序排序<br>JavaPairRDD<String, Integer> sortedAsc = pairRDD.sortByKey();<br>// 结果: [("a", 1), ("b", 2), ("c", 3)]<br><br>// 降序排序<br>JavaPairRDD<String, Integer> sortedDesc = pairRDD.sortByKey(false);<br>// 结果: [("c", 3), ("b", 2), ("a", 1)] |
+| `sortByKey` | Comparator[K]: comp, ascending: Boolean | `JavaPairRDD` | 按Key排序RDD | // sortByKey：按Key排序<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("c", 3),<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 升序排序<br>JavaPairRDD<String, Integer> sortedAsc = pairRDD.sortByKey();<br>// 结果: [("a", 1), ("b", 2), ("c", 3)]<br><br>// 降序排序<br>JavaPairRDD<String, Integer> sortedDesc = pairRDD.sortByKey(false);<br>// 结果: [("c", 3), ("b", 2), ("a", 1)] |
+| `sortByKey` | Comparator[K]: comp, ascending: Boolean, numPartitions: Int | `JavaPairRDD` | 按Key排序RDD | // sortByKey：按Key排序<br>List<Tuple2<String, Integer>> data = Arrays.asList(<br>    new Tuple2<>("c", 3),<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>);<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(data);<br><br>// 升序排序<br>JavaPairRDD<String, Integer> sortedAsc = pairRDD.sortByKey();<br>// 结果: [("a", 1), ("b", 2), ("c", 3)]<br><br>// 降序排序<br>JavaPairRDD<String, Integer> sortedDesc = pairRDD.sortByKey(false);<br>// 结果: [("c", 3), ("b", 2), ("a", 1)] |
+| `subtract` | JavaPairRDD[K: other | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `subtract` | JavaPairRDD[K: other, numPartitions: Int | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `subtract` | JavaPairRDD[K: other, Partitioner: p | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `union` | JavaPairRDD[K: other | `JavaPairRDD` | 合并DataFrame | // 合并多个RDD<br>JavaRDD<String> rdd1 = sc.parallelize(Arrays.asList("a", "b"));<br>JavaRDD<String> rdd2 = sc.parallelize(Arrays.asList("c", "d"));<br>JavaRDD<String> rdd3 = sc.parallelize(Arrays.asList("e", "f"));<br><br>// 合并所有RDD<br>JavaRDD<String> unionRDD = sc.union(rdd1, rdd2, rdd3);<br>// 结果: ["a", "b", "c", "d", "e", "f"] |
+| `unpersist` | 无 | `JavaPairRDD` | 取消RDD的持久化 | // unpersist：取消持久化<br>JavaRDD<String> rdd = sc.textFile("hdfs://file.txt");<br>rdd.cache();  // 持久化<br><br>// 使用完后取消持久化，释放内存<br>rdd.unpersist(); |
+| `unpersist` | blocking: Boolean | `JavaPairRDD` | 取消RDD的持久化 | // unpersist：取消持久化<br>JavaRDD<String> rdd = sc.textFile("hdfs://file.txt");<br>rdd.cache();  // 持久化<br><br>// 使用完后取消持久化，释放内存<br>rdd.unpersist(); |
+| `values` | 无 | `JavaRDD` | 返回所有Value的RDD | // values：获取所有Value<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(Arrays.asList(<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>));<br><br>JavaRDD<Integer> valuesRDD = pairRDD.values();<br>// 结果: [1, 2] |
 
 ### JavaRDD
 **包路径**: `org.apache.spark.api.java`
@@ -129,27 +129,27 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cache` | 无 | `JavaRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
-| `coalesce` | numPartitions: Int | `JavaRDD` | 减少分区数，不触发shuffle |  |
-| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaRDD` | 减少分区数，不触发shuffle |  |
-| `distinct` | 无 | `JavaRDD` | 去重 |  |
-| `distinct` | numPartitions: Int | `JavaRDD` | 去重 |  |
-| `filter` | JFunction[T: f | `JavaRDD` | 过滤行 | JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> filtered = rdd.filter(x -> x > 2); |
+| `cache` | 无 | `JavaRDD` | 缓存RDD到内存，默认MEMORY_ONLY | // cache：缓存RDD到内存<br>JavaRDD<String> rdd = sc.textFile("hdfs://large/file.txt");<br><br>// 缓存后，后续操作会直接从内存读取<br>rdd.cache();<br><br>// 多次使用RDD时缓存可提升性能<br>long count1 = rdd.count();  // 第一次计算，会缓存<br>long count2 = rdd.count();  // 第二次直接从内存读取 |
+| `coalesce` | numPartitions: Int | `JavaRDD` | 减少分区数，不触发shuffle | // coalesce：减少分区数（不shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 10);  // 10个分区<br><br>// 减少到2个分区（不触发shuffle，高效）<br>JavaRDD<String> coalesced = rdd.coalesce(2); |
+| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaRDD` | 减少分区数，不触发shuffle | // coalesce：减少分区数（不shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 10);  // 10个分区<br><br>// 减少到2个分区（不触发shuffle，高效）<br>JavaRDD<String> coalesced = rdd.coalesce(2); |
+| `distinct` | 无 | `JavaRDD` | 去重 | // distinct：去重<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 4, 3, 5));<br>JavaRDD<Integer> distinct = rdd.distinct();<br>// 结果: [1, 2, 3, 4, 5] |
+| `distinct` | numPartitions: Int | `JavaRDD` | 去重 | // distinct：去重<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 4, 3, 5));<br>JavaRDD<Integer> distinct = rdd.distinct();<br>// 结果: [1, 2, 3, 4, 5] |
+| `filter` | JFunction[T: f | `JavaRDD` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `getResourceProfile` | 无 | `ResourceProfile` | getResourceProfile方法 |  |
-| `intersection` | JavaRDD[T]: other | `JavaRDD` | 返回两个RDD的交集 |  |
-| `persist` | StorageLevel: newLevel | `JavaRDD` | 持久化RDD到指定存储级别 |  |
+| `intersection` | JavaRDD[T]: other | `JavaRDD` | 返回两个RDD的交集 | // intersection：取交集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> intersection = rdd1.intersection(rdd2);<br>// 结果: [3, 4] |
+| `persist` | StorageLevel: newLevel | `JavaRDD` | 持久化RDD到指定存储级别 | // persist：持久化到指定存储级别<br>JavaRDD<String> rdd = sc.textFile("hdfs://data/file.txt");<br><br>// 内存+磁盘持久化<br>rdd.persist(StorageLevel.MEMORY_AND_DISK());<br><br>// 序列化存储（节省空间）<br>rdd.persist(StorageLevel.MEMORY_ONLY_SER());<br><br>// 堆外内存存储<br>rdd.persist(StorageLevel.OFF_HEAP()); |
 | `randomSplit` | Array[Double]: weights | `Array` | 按权重随机分割RDD为多个RDD |  |
 | `randomSplit` | Array[Double]: weights, seed: Long | `Array` | 按权重随机分割RDD为多个RDD |  |
-| `repartition` | numPartitions: Int | `JavaRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
-| `sample` | withReplacement: Boolean, fraction: Double | `JavaRDD` | 随机采样指定比例的元素 |  |
-| `sample` | withReplacement: Boolean, fraction: Double, seed: Long | `JavaRDD` | 随机采样指定比例的元素 |  |
+| `repartition` | numPartitions: Int | `JavaRDD` | 重新分区，增加或减少分区数，触发shuffle | // repartition：重新分区（会shuffle）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"), 2);  // 2个分区<br><br>// 增加到10个分区（触发shuffle）<br>JavaRDD<String> repartitioned = rdd.repartition(10);<br><br>// 注意：repartition会shuffle，coalesce只减少分区不shuffle |
+| `sample` | withReplacement: Boolean, fraction: Double | `JavaRDD` | 随机采样指定比例的元素 | // sample：随机采样<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 不重复采样，采样比例50%<br>JavaRDD<Integer> sampled = rdd.sample(false, 0.5);<br><br>// 重复采样，采样比例200%（每个元素可能被选中多次）<br>JavaRDD<Integer> sampledWithReplacement = rdd.sample(true, 2.0); |
+| `sample` | withReplacement: Boolean, fraction: Double, seed: Long | `JavaRDD` | 随机采样指定比例的元素 | // sample：随机采样<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 不重复采样，采样比例50%<br>JavaRDD<Integer> sampled = rdd.sample(false, 0.5);<br><br>// 重复采样，采样比例200%（每个元素可能被选中多次）<br>JavaRDD<Integer> sampledWithReplacement = rdd.sample(true, 2.0); |
 | `setName` | name: String | `JavaRDD` | 设置RDD名称 |  |
-| `subtract` | JavaRDD[T]: other | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaRDD[T]: other, numPartitions: Int | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaRDD[T]: other, Partitioner: p | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `union` | JavaRDD[T]: other | `JavaRDD` | 合并DataFrame |  |
-| `unpersist` | 无 | `JavaRDD` | 取消RDD的持久化 |  |
-| `unpersist` | blocking: Boolean | `JavaRDD` | 取消RDD的持久化 |  |
+| `subtract` | JavaRDD[T]: other | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `subtract` | JavaRDD[T]: other, numPartitions: Int | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `subtract` | JavaRDD[T]: other, Partitioner: p | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 | // subtract：取差集<br>JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(3, 4, 5, 6));<br><br>JavaRDD<Integer> subtracted = rdd1.subtract(rdd2);<br>// 结果: [1, 2] (rdd1中不在rdd2的元素) |
+| `union` | JavaRDD[T]: other | `JavaRDD` | 合并DataFrame | // 合并多个RDD<br>JavaRDD<String> rdd1 = sc.parallelize(Arrays.asList("a", "b"));<br>JavaRDD<String> rdd2 = sc.parallelize(Arrays.asList("c", "d"));<br>JavaRDD<String> rdd3 = sc.parallelize(Arrays.asList("e", "f"));<br><br>// 合并所有RDD<br>JavaRDD<String> unionRDD = sc.union(rdd1, rdd2, rdd3);<br>// 结果: ["a", "b", "c", "d", "e", "f"] |
+| `unpersist` | 无 | `JavaRDD` | 取消RDD的持久化 | // unpersist：取消持久化<br>JavaRDD<String> rdd = sc.textFile("hdfs://file.txt");<br>rdd.cache();  // 持久化<br><br>// 使用完后取消持久化，释放内存<br>rdd.unpersist(); |
+| `unpersist` | blocking: Boolean | `JavaRDD` | 取消RDD的持久化 | // unpersist：取消持久化<br>JavaRDD<String> rdd = sc.textFile("hdfs://file.txt");<br>rdd.cache();  // 持久化<br><br>// 使用完后取消持久化，释放内存<br>rdd.unpersist(); |
 | `withResources` | ResourceProfile: rp | `JavaRDD` | withResources方法 |  |
 
 ### JavaSparkContext
@@ -158,12 +158,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addFile` | path: String | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
-| `addFile` | path: String, recursive: Boolean | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
-| `addJar` | path: String | `Unit` | 添加JAR包到Spark作业 |  |
+| `addFile` | path: String | `Unit` | 添加文件到Spark作业，所有Executor可访问 | // 添加文件到Spark作业<br>sc.addFile("hdfs://path/to/config.txt");<br>sc.addFile("s3://bucket/data.json");<br><br>// 在Executor中访问文件<br>String filePath = SparkFiles.get("config.txt"); |
+| `addFile` | path: String, recursive: Boolean | `Unit` | 添加文件到Spark作业，所有Executor可访问 | // 添加文件到Spark作业<br>sc.addFile("hdfs://path/to/config.txt");<br>sc.addFile("s3://bucket/data.json");<br><br>// 在Executor中访问文件<br>String filePath = SparkFiles.get("config.txt"); |
+| `addJar` | path: String | `Unit` | 添加JAR包到Spark作业 | // 添加依赖JAR包<br>sc.addJar("hdfs://path/to/dependency.jar");<br>sc.addJar("/local/path/to/lib.jar"); |
 | `addJobTag` | tag: String | `Unit` | addJobTag方法 |  |
-| `binaryFiles` | path: String, minPartitions: Int | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
-| `binaryFiles` | path: String | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
+| `binaryFiles` | path: String, minPartitions: Int | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) | // 读取二进制文件目录<br>JavaPairRDD<String, PortableDataStream> binaryRDD = sc.binaryFiles("hdfs://path/to/binary/dir/");<br><br>// 处理二进制数据<br>JavaRDD<byte[]> dataRDD = binaryRDD.map(tuple -> {<br>    PortableDataStream stream = tuple._2();<br>    return stream.toArray();<br>}); |
+| `binaryFiles` | path: String | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) | // 读取二进制文件目录<br>JavaPairRDD<String, PortableDataStream> binaryRDD = sc.binaryFiles("hdfs://path/to/binary/dir/");<br><br>// 处理二进制数据<br>JavaRDD<byte[]> dataRDD = binaryRDD.map(tuple -> {<br>    PortableDataStream stream = tuple._2();<br>    return stream.toArray();<br>}); |
 | `binaryRecords` | path: String, recordLength: Int | `JavaRDD` | 读取固定长度的二进制记录文件 |  |
 | `cancelAllJobs` | 无 | `Unit` | 取消所有正在运行的作业 |  |
 | `cancelJobGroup` | groupId: String, reason: String | `Unit` | 取消指定作业组的所有作业 |  |
@@ -179,11 +179,11 @@
 | `hadoopConfiguration` | 无 | `Configuration` | hadoopConfiguration方法 |  |
 | `jarOfClass` | Class[_]: cls | `Array` | jarOfClass方法 |  |
 | `jarOfObject` | AnyRef: obj | `Array` | jarOfObject方法 |  |
-| `parallelizeDoubles` | java.util.List[java.lang.Double]: list, numSlices: Int | `JavaDoubleRDD` | parallelizeDoubles方法 |  |
-| `parallelizeDoubles` | java.util.List[java.lang.Double]: list | `JavaDoubleRDD` | parallelizeDoubles方法 |  |
+| `parallelizeDoubles` | java.util.List[java.lang.Double]: list, numSlices: Int | `JavaDoubleRDD` | parallelizeDoubles方法 | // 创建DoubleRDD用于数值计算<br>List<Double> doubles = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(doubles);<br><br>// 可以进行数值统计<br>double mean = doubleRDD.mean();<br>double sum = doubleRDD.sum(); |
+| `parallelizeDoubles` | java.util.List[java.lang.Double]: list | `JavaDoubleRDD` | parallelizeDoubles方法 | // 创建DoubleRDD用于数值计算<br>List<Double> doubles = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(doubles);<br><br>// 可以进行数值统计<br>double mean = doubleRDD.mean();<br>double sum = doubleRDD.sum(); |
 | `removeJobTag` | tag: String | `Unit` | removeJobTag方法 |  |
 | `setCallSite` | site: String | `Unit` | setCallSite方法 |  |
-| `setCheckpointDir` | dir: String | `Unit` | 设置Checkpoint目录，用于RDD容错 |  |
+| `setCheckpointDir` | dir: String | `Unit` | 设置Checkpoint目录，用于RDD容错 | // 设置Checkpoint目录（用于容错）<br>sc.setCheckpointDir("hdfs://checkpoint/dir/");<br><br>// 对RDD进行checkpoint<br>JavaRDD<String> rdd = sc.textFile("hdfs://data/input.txt");<br>rdd.checkpoint(); // 保存到checkpoint目录 |
 | `setInterruptOnCancel` | interruptOnCancel: Boolean | `Unit` | setInterruptOnCancel方法 |  |
 | `setJobDescription` | value: String | `Unit` | setJobDescription方法 |  |
 | `setJobGroup` | groupId: String, description: String, interruptOnCancel: Boolean | `Unit` | 设置作业组，用于取消一组作业 |  |
@@ -192,8 +192,8 @@
 | `setLogLevel` | logLevel: String | `Unit` | 设置日志级别 |  |
 | `stop` | 无 | `Unit` | 停止SparkContext，释放资源 |  |
 | `stop` | exitCode: Int | `Unit` | 停止SparkContext，释放资源 |  |
-| `textFile` | path: String | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
-| `textFile` | path: String, minPartitions: Int | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
+| `textFile` | path: String | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | // 读取HDFS文本文件<br>JavaRDD<String> lines = sc.textFile("hdfs://namenode:9000/path/to/file.txt");<br><br>// 读取本地文件<br>JavaRDD<String> localLines = sc.textFile("/local/path/file.txt");<br><br>// 指定最小分区数<br>JavaRDD<String> lines10 = sc.textFile("hdfs://path/file.txt", 10); |
+| `textFile` | path: String, minPartitions: Int | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | // 读取HDFS文本文件<br>JavaRDD<String> lines = sc.textFile("hdfs://namenode:9000/path/to/file.txt");<br><br>// 读取本地文件<br>JavaRDD<String> localLines = sc.textFile("/local/path/file.txt");<br><br>// 指定最小分区数<br>JavaRDD<String> lines10 = sc.textFile("hdfs://path/file.txt", 10); |
 | `this` | 无 | `Unit` | this方法 |  |
 | `this` | SparkConf: conf | `Unit` | this方法 |  |
 | `this` | master: String, appName: String | `Unit` | this方法 |  |
@@ -201,8 +201,8 @@
 | `this` | master: String, appName: String, sparkHome: String, jarFile: String | `Unit` | this方法 |  |
 | `this` | master: String, appName: String, sparkHome: String, Array[String]: jars | `Unit` | this方法 |  |
 | `this` | master: String, appName: String, sparkHome: String, Array[String]: jars, JMap[String: environment | `Unit` | this方法 |  |
-| `wholeTextFiles` | path: String, minPartitions: Int | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
-| `wholeTextFiles` | path: String | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
+| `wholeTextFiles` | path: String, minPartitions: Int | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 | // 读取目录下所有文本文件<br>JavaPairRDD<String, String> filesRDD = sc.wholeTextFiles("hdfs://path/to/dir/");<br><br>// 每个元素是 (文件路径, 文件完整内容) 的键值对<br>// 可以遍历处理每个文件<br>filesRDD.foreach(tuple -> {<br>    String filename = tuple._1;<br>    String content = tuple._2;<br>    System.out.println("File: " + filename);<br>}); |
+| `wholeTextFiles` | path: String | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 | // 读取目录下所有文本文件<br>JavaPairRDD<String, String> filesRDD = sc.wholeTextFiles("hdfs://path/to/dir/");<br><br>// 每个元素是 (文件路径, 文件完整内容) 的键值对<br>// 可以遍历处理每个文件<br>filesRDD.foreach(tuple -> {<br>    String filename = tuple._1;<br>    String content = tuple._2;<br>    System.out.println("File: " + filename);<br>}); |
 
 ---
 
@@ -624,7 +624,7 @@
 | `putAll` | Map<? extends: String, m: ? extends String> | `void` | putAll方法 |  |
 | `remove` | key: Object | `String` | 删除元素 |  |
 | `size` | 无 | `int` | 计算大小 |  |
-| `values` | 无 | `Collection&lt;String&gt;` | 返回所有Value的RDD |  |
+| `values` | 无 | `Collection&lt;String&gt;` | 返回所有Value的RDD | // values：获取所有Value<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(Arrays.asList(<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>));<br><br>JavaRDD<Integer> valuesRDD = pairRDD.values();<br>// 结果: [1, 2] |
 
 ### Cast
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -1122,7 +1122,7 @@
 | `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `merge` | b1: Average, b2: Average | `Average` | merge方法 |  |
 | `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
-| `reduce` | buffer: Average, employee: Employee | `Average` | 聚合DStream每个RDD |  |
+| `reduce` | buffer: Average, employee: Employee | `Average` | 聚合DStream每个RDD | // reduce：聚合所有元素为单个结果<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br><br>// 求和<br>Integer sum = numbers.reduce((a, b) -> a + b);<br>// 结果: 15<br><br>// 求最大值<br>Integer max = numbers.reduce((a, b) -> Math.max(a, b));<br>// 结果: 5<br><br>// 字符串拼接<br>JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"));<br>String concatenated = words.reduce((a, b) -> a + b);<br>// 结果: "abc" |
 | `setCount` | count: long | `void` | setCount方法 |  |
 | `setName` | name: String | `void` | 设置RDD名称 |  |
 | `setSalary` | salary: long | `void` | setSalary方法 |  |
@@ -1142,7 +1142,7 @@
 | `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `merge` | b1: Average, b2: Average | `Average` | merge方法 |  |
 | `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
-| `reduce` | buffer: Average, data: Long | `Average` | 聚合DStream每个RDD |  |
+| `reduce` | buffer: Average, data: Long | `Average` | 聚合DStream每个RDD | // reduce：聚合所有元素为单个结果<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br><br>// 求和<br>Integer sum = numbers.reduce((a, b) -> a + b);<br>// 结果: 15<br><br>// 求最大值<br>Integer max = numbers.reduce((a, b) -> Math.max(a, b));<br>// 结果: 5<br><br>// 字符串拼接<br>JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"));<br>String concatenated = words.reduce((a, b) -> a + b);<br>// 结果: "abc" |
 | `setCount` | count: long | `void` | setCount方法 |  |
 | `setSum` | sum: long | `void` | setSum方法 |  |
 | `zero` | 无 | `Average` | zero方法 |  |
@@ -2235,8 +2235,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addAppArgs` | args: String... | `T` | addAppArgs方法 |  |
-| `addFile` | file: String | `T` | 添加文件到Spark作业，所有Executor可访问 |  |
-| `addJar` | jar: String | `T` | 添加JAR包到Spark作业 |  |
+| `addFile` | file: String | `T` | 添加文件到Spark作业，所有Executor可访问 | // 添加文件到Spark作业<br>sc.addFile("hdfs://path/to/config.txt");<br>sc.addFile("s3://bucket/data.json");<br><br>// 在Executor中访问文件<br>String filePath = SparkFiles.get("config.txt"); |
+| `addJar` | jar: String | `T` | 添加JAR包到Spark作业 | // 添加依赖JAR包<br>sc.addJar("hdfs://path/to/dependency.jar");<br>sc.addJar("/local/path/to/lib.jar"); |
 | `addPyFile` | file: String | `T` | addPyFile方法 |  |
 | `addSparkArg` | arg: String | `T` | addSparkArg方法 |  |
 | `addSparkArg` | name: String, value: String | `T` | addSparkArg方法 |  |
@@ -2798,7 +2798,7 @@
 | `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
 | `channelRead` | ctx: ChannelHandlerContext, data: Object | `void` | channelRead方法 |  |
 | `close` | ctx: ChannelHandlerContext, promise: ChannelPromise | `void` | close方法 |  |
-| `count` | 无 | `long` | 统计行数 |  |
+| `count` | 无 | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `getKeyId` | 无 | `String` | getKeyId方法 |  |
 | `handlerRemoved` | ctx: ChannelHandlerContext | `void` | handlerRemoved方法 |  |
 | `position` | 无 | `long` | position方法 |  |
@@ -3112,7 +3112,7 @@
 | `convertDurationsTo` | durationUnit: TimeUnit | `Builder` | convertDurationsTo方法 |  |
 | `convertRatesTo` | rateUnit: TimeUnit | `Builder` | convertRatesTo方法 |  |
 | `disabledMetricAttributes` | disabledMetricAttributes: Set<MetricAttribute> | `Builder` | disabledMetricAttributes方法 |  |
-| `filter` | filter: MetricFilter | `Builder` | 过滤行 |  |
+| `filter` | filter: MetricFilter | `Builder` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `forRegistry` | registry: MetricRegistry | `Builder` | forRegistry方法 |  |
 | `prefixedWith` | prefix: String | `Builder` | prefixedWith方法 |  |
 | `report` | gauges: Gauge>, counters: Counter>, histograms: Histogram>, meters: Meter>, timers: Timer> | `void` | report方法 |  |
@@ -3129,7 +3129,7 @@
 |--------|------|----------|------|------|
 | `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
 | `channelRead` | ctx: ChannelHandlerContext, ciphertextMessage: Object | `void` | channelRead方法 |  |
-| `count` | 无 | `long` | 统计行数 |  |
+| `count` | 无 | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `getKeyId` | 无 | `String` | getKeyId方法 |  |
 | `position` | 无 | `long` | position方法 |  |
 | `release` | decrement: int | `boolean` | release方法 |  |
@@ -3463,9 +3463,9 @@
 | `clear` | 无 | `void` | 清空集合 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `count` | type: Class<?> | `long` | 统计行数 |  |
-| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 |  |
-| `count` | 无 | `int` | 统计行数 |  |
+| `count` | type: Class<?> | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
+| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
+| `count` | 无 | `int` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
 | `delete` | key: Object | `boolean` | delete方法 |  |
 | `delete` | key: Object, value: T | `boolean` | delete方法 |  |
@@ -3980,7 +3980,7 @@
 | `digestToHexString` | algorithm: String, input: String | `String` | digestToHexString方法 |  |
 | `forceDeleteOnExit` | file: File | `void` | forceDeleteOnExit方法 |  |
 | `isTesting` | 无 | `boolean` | isTesting方法 |  |
-| `join` | arr: List<Object>, sep: String | `String` | 连接DataFrame |  |
+| `join` | arr: List<Object>, sep: String | `String` | 连接DataFrame | // join：内连接<br>List<Tuple2<String, Integer>> orders = Arrays.asList(<br>    new Tuple2<>("user1", 100),<br>    new Tuple2<>("user2", 200)<br>);<br>List<Tuple2<String, String>> users = Arrays.asList(<br>    new Tuple2<>("user1", "Alice"),<br>    new Tuple2<>("user2", "Bob")<br>);<br><br>JavaPairRDD<String, Integer> orderRDD = sc.parallelizePairs(orders);<br>JavaPairRDD<String, String> userRDD = sc.parallelizePairs(users);<br><br>// 内连接<br>JavaPairRDD<String, Tuple2<Integer, String>> joined = orderRDD.join(userRDD);<br>// 结果: [("user1", (100, "Alice")), ("user2", (200, "Bob"))] |
 | `listFiles` | dir: File | `Set&lt;File&gt;` | listFiles方法 |  |
 | `listPaths` | dir: File | `Set&lt;Path&gt;` | listPaths方法 |  |
 | `md5Hex` | input: byte&lt;&gt; | `String` | md5Hex方法 |  |
@@ -4070,10 +4070,10 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `closeableIterator` | 无 | `KVStoreIterator&lt;T&gt;` | closeableIterator方法 |  |
-| `first` | value: Object | `KVStoreView&lt;T&gt;` | 第一行 |  |
+| `first` | value: Object | `KVStoreView&lt;T&gt;` | 第一行 | // first：获取第一个元素<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(10, 20, 30));<br>Integer first = rdd.first();<br>// 结果: 10 |
 | `index` | name: String | `KVStoreView&lt;T&gt;` | index方法 |  |
 | `last` | value: Object | `KVStoreView&lt;T&gt;` | last方法 |  |
-| `max` | max: long | `KVStoreView&lt;T&gt;` | 最大值 |  |
+| `max` | max: long | `KVStoreView&lt;T&gt;` | 最大值 | // max：最大值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double max = doubleRDD.max();<br>// 结果: 30.0 |
 | `parent` | value: Object | `KVStoreView&lt;T&gt;` | parent方法 |  |
 | `reverse` | 无 | `KVStoreView&lt;T&gt;` | reverse方法 |  |
 | `skip` | n: long | `KVStoreView&lt;T&gt;` | skip方法 |  |
@@ -4108,8 +4108,8 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `count` | type: Class<?> | `long` | 统计行数 |  |
-| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 |  |
+| `count` | type: Class<?> | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
+| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `delete` | key: byte&lt;&gt; | `void` | delete方法 |  |
 | `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
 | `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
@@ -4216,20 +4216,20 @@
 |--------|------|----------|------|------|
 | `append` | event: LogEvent | `void` | 追加元素 |  |
 | `create` | operationManager: OperationManager, loggingMode: OperationLog.LoggingLevel | `LogDivertAppender` | create方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, objects: Object... | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object, o8: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object, o8: Object, o9: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, o: Object, throwable: Throwable | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, message: Message, throwable: Throwable | `Result` | 过滤行 |  |
-| `filter` | logEvent: LogEvent | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, objects: Object... | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object, o8: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object, o8: Object, o9: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, o: Object, throwable: Throwable | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, message: Message, throwable: Throwable | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
+| `filter` | logEvent: LogEvent | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `getOnMatch` | 无 | `Result` | getOnMatch方法 |  |
 | `getOnMismatch` | 无 | `Result` | getOnMismatch方法 |  |
 | `getState` | 无 | `State` | getState方法 |  |
@@ -4342,7 +4342,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `count` | 无 | `long` | 统计行数 |  |
+| `count` | 无 | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `position` | 无 | `long` | position方法 |  |
 | `release` | decrement: int | `boolean` | release方法 |  |
 | `retain` | increment: int | `MessageWithHeader` | retain方法 |  |
@@ -4822,8 +4822,8 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `count` | type: Class<?> | `long` | 统计行数 |  |
-| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 |  |
+| `count` | type: Class<?> | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
+| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `delete` | key: byte&lt;&gt; | `void` | delete方法 |  |
 | `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
 | `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
@@ -5145,8 +5145,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addAppArgs` | args: String... | `SparkLauncher` | addAppArgs方法 |  |
-| `addFile` | file: String | `SparkLauncher` | 添加文件到Spark作业，所有Executor可访问 |  |
-| `addJar` | jar: String | `SparkLauncher` | 添加JAR包到Spark作业 |  |
+| `addFile` | file: String | `SparkLauncher` | 添加文件到Spark作业，所有Executor可访问 | // 添加文件到Spark作业<br>sc.addFile("hdfs://path/to/config.txt");<br>sc.addFile("s3://bucket/data.json");<br><br>// 在Executor中访问文件<br>String filePath = SparkFiles.get("config.txt"); |
+| `addJar` | jar: String | `SparkLauncher` | 添加JAR包到Spark作业 | // 添加依赖JAR包<br>sc.addJar("hdfs://path/to/dependency.jar");<br>sc.addJar("/local/path/to/lib.jar"); |
 | `addPyFile` | file: String | `SparkLauncher` | addPyFile方法 |  |
 | `addSparkArg` | arg: String | `SparkLauncher` | addSparkArg方法 |  |
 | `addSparkArg` | name: String, value: String | `SparkLauncher` | addSparkArg方法 |  |
@@ -5903,10 +5903,10 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `checkpoint` | 无 | `Unit` | checkpoint DStream |  |
-| `collect` | 无 | `JList` | 收集所有行 |  |
+| `collect` | 无 | `JList` | 收集所有行 | // collect：将RDD收集到Driver端<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"));<br>List<String> list = rdd.collect();<br><br>// 注意：collect会将所有数据拉回Driver<br>// 数据量大时可能导致Driver内存溢出，慎用！ |
 | `collectAsync` | 无 | `JavaFutureAction` | collectAsync方法 |  |
 | `collectPartitions` | Array[Int]: partitionIds | `Array` | collectPartitions方法 |  |
-| `count` | 无 | `Long` | 统计行数 |  |
+| `count` | 无 | `Long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `countApprox` | timeout: Long, confidence: Double | `PartialResult` | countApprox方法 |  |
 | `countApprox` | timeout: Long | `PartialResult` | countApprox方法 |  |
 | `countApproxDistinct` | relativeSD: Double | `Long` | countApproxDistinct方法 |  |
@@ -5914,10 +5914,10 @@
 | `countByValue` | 无 | `JMap` | 统计每个批次每个值的出现次数 |  |
 | `countByValueApprox` | timeout: Long, confidence: Double | `PartialResult` | countByValueApprox方法 |  |
 | `countByValueApprox` | timeout: Long | `PartialResult` | countByValueApprox方法 |  |
-| `first` | 无 | `T` | 第一行 |  |
+| `first` | 无 | `T` | 第一行 | // first：获取第一个元素<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(10, 20, 30));<br>Integer first = rdd.first();<br>// 结果: 10 |
 | `flatMapToDouble` | DoubleFlatMapFunction[T]: f | `JavaDoubleRDD` | flatMapToDouble方法 |  |
 | `fold` | T: zeroValue | `Unit` | 使用零值和组合函数聚合RDD |  |
-| `foreach` | VoidFunction[T]: f | `Unit` | 对每个元素应用函数，用于副作用操作 |  |
+| `foreach` | VoidFunction[T]: f | `Unit` | 对每个元素应用函数，用于副作用操作 | // foreach：对每个元素执行操作（副作用）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"));<br><br>// 打印每个元素（在Executor上执行）<br>rdd.foreach(x -> System.out.println("Element: " + x));<br><br>// 写入外部系统<br>rdd.foreach(x -> {<br>    // 写入数据库、发送消息等<br>    database.insert(x);<br>}); |
 | `foreachAsync` | VoidFunction[T]: f | `JavaFutureAction` | foreachAsync方法 |  |
 | `foreachPartition` | VoidFunction[JIterator[T]]: f | `Unit` | 对每个分区应用函数 |  |
 | `foreachPartitionAsync` | VoidFunction[JIterator[T]]: f | `JavaFutureAction` | foreachPartitionAsync方法 |  |
@@ -5927,18 +5927,18 @@
 | `iterator` | Partition: split, TaskContext: taskContext | `JIterator` | 获取迭代器 |  |
 | `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
 | `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f, preservesPartitioning: Boolean | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
-| `max` | Comparator[T]: comp | `T` | 最大值 |  |
-| `min` | Comparator[T]: comp | `T` | 最小值 |  |
+| `max` | Comparator[T]: comp | `T` | 最大值 | // max：最大值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double max = doubleRDD.max();<br>// 结果: 30.0 |
+| `min` | Comparator[T]: comp | `T` | 最小值 | // min：最小值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double min = doubleRDD.min();<br>// 结果: 5.0 |
 | `pipe` | command: String | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command, JMap[String: env | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int, encoding: String | `JavaRDD` | pipe方法 |  |
-| `reduce` | JFunction2[T: f | `T` | 聚合DStream每个RDD |  |
+| `reduce` | JFunction2[T: f | `T` | 聚合DStream每个RDD | // reduce：聚合所有元素为单个结果<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br><br>// 求和<br>Integer sum = numbers.reduce((a, b) -> a + b);<br>// 结果: 15<br><br>// 求最大值<br>Integer max = numbers.reduce((a, b) -> Math.max(a, b));<br>// 结果: 5<br><br>// 字符串拼接<br>JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"));<br>String concatenated = words.reduce((a, b) -> a + b);<br>// 结果: "abc" |
 | `saveAsObjectFile` | path: String | `Unit` | 保存RDD为序列化对象文件 |  |
-| `saveAsTextFile` | path: String | `Unit` | 保存RDD为文本文件 |  |
-| `saveAsTextFile` | path: String, CompressionCodec]: codec | `Unit` | 保存RDD为文本文件 |  |
-| `take` | num: Int | `JList` | 取前n行 |  |
+| `saveAsTextFile` | path: String | `Unit` | 保存RDD为文本文件 | // saveAsTextFile：保存为文本文件<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("line1", "line2", "line3"));<br>rdd.saveAsTextFile("hdfs://output/path/");<br><br>// 输出目录下会有多个文件：part-00000, part-00001... |
+| `saveAsTextFile` | path: String, CompressionCodec]: codec | `Unit` | 保存RDD为文本文件 | // saveAsTextFile：保存为文本文件<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("line1", "line2", "line3"));<br>rdd.saveAsTextFile("hdfs://output/path/");<br><br>// 输出目录下会有多个文件：part-00000, part-00001... |
+| `take` | num: Int | `JList` | 取前n行 | // take：获取前n个元素<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br>List<Integer> top5 = rdd.take(5);<br>// 结果: [1, 2, 3, 4, 5] |
 | `takeAsync` | num: Int | `JavaFutureAction` | takeAsync方法 |  |
 | `takeOrdered` | num: Int, Comparator[T]: comp | `JList` | 返回排序后的前n个元素 |  |
 | `takeOrdered` | num: Int | `JList` | 返回排序后的前n个元素 |  |
