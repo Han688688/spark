@@ -29,39 +29,39 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cache` | 无 | `JavaDoubleRDD` | cache方法 |  |
-| `coalesce` | Int: numPartitions: | `JavaDoubleRDD` | coalesce方法 |  |
-| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaDoubleRDD` | coalesce方法 |  |
-| `distinct` | 无 | `JavaDoubleRDD` | distinct方法 |  |
-| `distinct` | Int: numPartitions: | `JavaDoubleRDD` | distinct方法 |  |
-| `filter` | JFunction[JDouble: f: | `JavaDoubleRDD` | filter方法 |  |
-| `histogram` | Int: bucketCount: | `Unit` | histogram方法 |  |
-| `histogram` | Array[scala.Double]: buckets: | `Array` | histogram方法 |  |
-| `intersection` | JavaDoubleRDD: other: | `JavaDoubleRDD` | intersection方法 |  |
-| `max` | 无 | `JDouble` | max方法 |  |
-| `mean` | 无 | `JDouble` | mean方法 |  |
-| `meanApprox` | Long: timeout:; JDouble: confidence: | `PartialResult` | meanApprox方法 |  |
-| `meanApprox` | Long: timeout: | `PartialResult` | meanApprox方法 |  |
-| `min` | 无 | `JDouble` | min方法 |  |
-| `persist` | StorageLevel: newLevel: | `JavaDoubleRDD` | persist方法 |  |
-| `repartition` | Int: numPartitions: | `JavaDoubleRDD` | repartition方法 |  |
-| `sample` | Boolean: withReplacement:; JDouble: fraction: | `JavaDoubleRDD` | sample方法 |  |
-| `sample` | Boolean: withReplacement:; JDouble: fraction:; Long: seed: | `JavaDoubleRDD` | sample方法 |  |
-| `sampleStdev` | 无 | `JDouble` | sampleStdev方法 |  |
-| `sampleVariance` | 无 | `JDouble` | sampleVariance方法 |  |
-| `setName` | String: name: | `JavaDoubleRDD` | setName方法 |  |
-| `stats` | 无 | `StatCounter` | stats方法 |  |
-| `stdev` | 无 | `JDouble` | stdev方法 |  |
-| `subtract` | JavaDoubleRDD: other: | `JavaDoubleRDD` | subtract方法 |  |
-| `subtract` | JavaDoubleRDD: other:; Int: numPartitions: | `JavaDoubleRDD` | subtract方法 |  |
-| `subtract` | JavaDoubleRDD: other:; Partitioner: p: | `JavaDoubleRDD` | subtract方法 |  |
-| `sum` | 无 | `JDouble` | sum方法 |  |
-| `sumApprox` | Long: timeout:; JDouble: confidence: | `PartialResult` | sumApprox方法 |  |
-| `sumApprox` | Long: timeout: | `PartialResult` | sumApprox方法 |  |
-| `union` | JavaDoubleRDD: other: | `JavaDoubleRDD` | union方法 |  |
-| `unpersist` | 无 | `JavaDoubleRDD` | unpersist方法 |  |
-| `unpersist` | Boolean: blocking: | `JavaDoubleRDD` | unpersist方法 |  |
-| `variance` | 无 | `JDouble` | variance方法 |  |
+| `cache` | 无 | `JavaDoubleRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
+| `coalesce` | Int: numPartitions: | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
+| `distinct` | 无 | `JavaDoubleRDD` | 去重 |  |
+| `distinct` | Int: numPartitions: | `JavaDoubleRDD` | 去重 |  |
+| `filter` | JFunction[JDouble: f: | `JavaDoubleRDD` | 过滤行 |  |
+| `histogram` | Int: bucketCount: | `Unit` | 计算直方图 |  |
+| `histogram` | Array[scala.Double]: buckets: | `Array` | 计算直方图 |  |
+| `intersection` | JavaDoubleRDD: other: | `JavaDoubleRDD` | 返回两个RDD的交集 |  |
+| `max` | 无 | `JDouble` | 最大值 |  |
+| `mean` | 无 | `JDouble` | 计算平均值 |  |
+| `meanApprox` | Long: timeout:; JDouble: confidence: | `PartialResult` | 近似计算平均值 |  |
+| `meanApprox` | Long: timeout: | `PartialResult` | 近似计算平均值 |  |
+| `min` | 无 | `JDouble` | 最小值 |  |
+| `persist` | StorageLevel: newLevel: | `JavaDoubleRDD` | 持久化RDD到指定存储级别 |  |
+| `repartition` | Int: numPartitions: | `JavaDoubleRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
+| `sample` | Boolean: withReplacement:; JDouble: fraction: | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
+| `sample` | Boolean: withReplacement:; JDouble: fraction:; Long: seed: | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
+| `sampleStdev` | 无 | `JDouble` | 计算样本标准差 |  |
+| `sampleVariance` | 无 | `JDouble` | 计算样本方差 |  |
+| `setName` | String: name: | `JavaDoubleRDD` | 设置RDD名称 |  |
+| `stats` | 无 | `StatCounter` | 返回统计摘要(计数、均值、方差、最小、最大) |  |
+| `stdev` | 无 | `JDouble` | 计算标准差 |  |
+| `subtract` | JavaDoubleRDD: other: | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaDoubleRDD: other:; Int: numPartitions: | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaDoubleRDD: other:; Partitioner: p: | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `sum` | 无 | `JDouble` | 求和 |  |
+| `sumApprox` | Long: timeout:; JDouble: confidence: | `PartialResult` | 近似计算总和 |  |
+| `sumApprox` | Long: timeout: | `PartialResult` | 近似计算总和 |  |
+| `union` | JavaDoubleRDD: other: | `JavaDoubleRDD` | 合并DataFrame |  |
+| `unpersist` | 无 | `JavaDoubleRDD` | 取消RDD的持久化 |  |
+| `unpersist` | Boolean: blocking: | `JavaDoubleRDD` | 取消RDD的持久化 |  |
+| `variance` | 无 | `JDouble` | 计算方差 |  |
 
 ### JavaPairRDD
 **包路径**: `org.apache.spark.api.java`
@@ -69,59 +69,59 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cache` | 无 | `JavaPairRDD` | cache方法 |  |
-| `coalesce` | Int: numPartitions: | `JavaPairRDD` | coalesce方法 |  |
-| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaPairRDD` | coalesce方法 |  |
-| `collectAsMap` | 无 | `java` | collectAsMap方法 |  |
-| `countApproxDistinctByKey` | Double: relativeSD:; Partitioner: partitioner: | `JavaPairRDD` | countApproxDistinctByKey方法 |  |
-| `countApproxDistinctByKey` | Double: relativeSD:; Int: numPartitions: | `JavaPairRDD` | countApproxDistinctByKey方法 |  |
-| `countApproxDistinctByKey` | Double: relativeSD: | `JavaPairRDD` | countApproxDistinctByKey方法 |  |
-| `countByKey` | 无 | `java` | countByKey方法 |  |
+| `cache` | 无 | `JavaPairRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
+| `coalesce` | Int: numPartitions: | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
+| `collectAsMap` | 无 | `java` | 收集RDD为Java Map |  |
+| `countApproxDistinctByKey` | Double: relativeSD:; Partitioner: partitioner: | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
+| `countApproxDistinctByKey` | Double: relativeSD:; Int: numPartitions: | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
+| `countApproxDistinctByKey` | Double: relativeSD: | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
+| `countByKey` | 无 | `java` | 统计每个Key的数量 |  |
 | `countByKeyApprox` | Long: timeout: | `PartialResult` | countByKeyApprox方法 |  |
 | `countByKeyApprox` | Long: timeout:; 0.95: confidence: Double = | `PartialResult` | countByKeyApprox方法 |  |
-| `distinct` | 无 | `JavaPairRDD` | distinct方法 |  |
-| `distinct` | Int: numPartitions: | `JavaPairRDD` | distinct方法 |  |
-| `filter` | JFunction[(K: f: | `Unit` | filter方法 |  |
-| `foldByKey` | V: zeroValue:; Partitioner: partitioner:; JFunction2[V: func: | `JavaPairRDD` | foldByKey方法 |  |
-| `foldByKey` | V: zeroValue:; Int: numPartitions:; JFunction2[V: func: | `JavaPairRDD` | foldByKey方法 |  |
-| `foldByKey` | V: zeroValue:; JFunction2[V: func: | `JavaPairRDD` | foldByKey方法 |  |
-| `groupByKey` | Partitioner: partitioner: | `JavaPairRDD` | groupByKey方法 |  |
-| `groupByKey` | Int: numPartitions: | `JavaPairRDD` | groupByKey方法 |  |
-| `groupByKey` | 无 | `JavaPairRDD` | groupByKey方法 |  |
-| `intersection` | JavaPairRDD[K: other: | `JavaPairRDD` | intersection方法 |  |
-| `keys` | 无 | `JavaRDD` | keys方法 |  |
-| `lookup` | K: key: | `JList` | lookup方法 |  |
-| `partitionBy` | Partitioner: partitioner: | `JavaPairRDD` | partitionBy方法 |  |
-| `persist` | StorageLevel: newLevel: | `JavaPairRDD` | persist方法 |  |
-| `reduceByKey` | Partitioner: partitioner:; JFunction2[V: func: | `JavaPairRDD` | reduceByKey方法 | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
-| `reduceByKey` | JFunction2[V: func:; Int: numPartitions: | `JavaPairRDD` | reduceByKey方法 | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
-| `reduceByKey` | JFunction2[V: func: | `JavaPairRDD` | reduceByKey方法 | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
+| `distinct` | 无 | `JavaPairRDD` | 去重 |  |
+| `distinct` | Int: numPartitions: | `JavaPairRDD` | 去重 |  |
+| `filter` | JFunction[(K: f: | `Unit` | 过滤行 |  |
+| `foldByKey` | V: zeroValue:; Partitioner: partitioner:; JFunction2[V: func: | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
+| `foldByKey` | V: zeroValue:; Int: numPartitions:; JFunction2[V: func: | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
+| `foldByKey` | V: zeroValue:; JFunction2[V: func: | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
+| `groupByKey` | Partitioner: partitioner: | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
+| `groupByKey` | Int: numPartitions: | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
+| `groupByKey` | 无 | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
+| `intersection` | JavaPairRDD[K: other: | `JavaPairRDD` | 返回两个RDD的交集 |  |
+| `keys` | 无 | `JavaRDD` | 返回所有Key的RDD |  |
+| `lookup` | K: key: | `JList` | 查找指定Key的所有Value |  |
+| `partitionBy` | Partitioner: partitioner: | `JavaPairRDD` | 使用指定分区器重新分区 |  |
+| `persist` | StorageLevel: newLevel: | `JavaPairRDD` | 持久化RDD到指定存储级别 |  |
+| `reduceByKey` | Partitioner: partitioner:; JFunction2[V: func: | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
+| `reduceByKey` | JFunction2[V: func:; Int: numPartitions: | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
+| `reduceByKey` | JFunction2[V: func: | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
 | `reduceByKeyLocally` | JFunction2[V: func: | `java` | reduceByKeyLocally方法 |  |
-| `repartition` | Int: numPartitions: | `JavaPairRDD` | repartition方法 |  |
-| `repartitionAndSortWithinPartitions` | Partitioner: partitioner: | `JavaPairRDD` | repartitionAndSortWithinPartitions方法 |  |
-| `repartitionAndSortWithinPartitions` | Partitioner: partitioner:; Comparator[K]: comp: | `JavaPairRDD` | repartitionAndSortWithinPartitions方法 |  |
-| `sample` | Boolean: withReplacement:; Double: fraction: | `JavaPairRDD` | sample方法 |  |
-| `sample` | Boolean: withReplacement:; Double: fraction:; Long: seed: | `JavaPairRDD` | sample方法 |  |
-| `sampleByKey` | Boolean: withReplacement:; java.util.Map[K: fractions:; Long: seed: | `JavaPairRDD` | sampleByKey方法 |  |
-| `sampleByKey` | Boolean: withReplacement:; java.util.Map[K: fractions: | `JavaPairRDD` | sampleByKey方法 |  |
-| `sampleByKeyExact` | Boolean: withReplacement:; java.util.Map[K: fractions:; Long: seed: | `JavaPairRDD` | sampleByKeyExact方法 |  |
-| `sampleByKeyExact` | Boolean: withReplacement:; java.util.Map[K: fractions: | `JavaPairRDD` | sampleByKeyExact方法 |  |
+| `repartition` | Int: numPartitions: | `JavaPairRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
+| `repartitionAndSortWithinPartitions` | Partitioner: partitioner: | `JavaPairRDD` | 重新分区并在分区内排序 |  |
+| `repartitionAndSortWithinPartitions` | Partitioner: partitioner:; Comparator[K]: comp: | `JavaPairRDD` | 重新分区并在分区内排序 |  |
+| `sample` | Boolean: withReplacement:; Double: fraction: | `JavaPairRDD` | 随机采样指定比例的元素 |  |
+| `sample` | Boolean: withReplacement:; Double: fraction:; Long: seed: | `JavaPairRDD` | 随机采样指定比例的元素 |  |
+| `sampleByKey` | Boolean: withReplacement:; java.util.Map[K: fractions:; Long: seed: | `JavaPairRDD` | 按Key采样 |  |
+| `sampleByKey` | Boolean: withReplacement:; java.util.Map[K: fractions: | `JavaPairRDD` | 按Key采样 |  |
+| `sampleByKeyExact` | Boolean: withReplacement:; java.util.Map[K: fractions:; Long: seed: | `JavaPairRDD` | 按Key精确采样 |  |
+| `sampleByKeyExact` | Boolean: withReplacement:; java.util.Map[K: fractions: | `JavaPairRDD` | 按Key精确采样 |  |
 | `saveAsHadoopDataset` | JobConf: conf: | `Unit` | saveAsHadoopDataset方法 |  |
 | `saveAsNewAPIHadoopDataset` | Configuration: conf: | `Unit` | saveAsNewAPIHadoopDataset方法 |  |
-| `setName` | String: name: | `JavaPairRDD` | setName方法 |  |
-| `sortByKey` | 无 | `JavaPairRDD` | sortByKey方法 |  |
-| `sortByKey` | Boolean: ascending: | `JavaPairRDD` | sortByKey方法 |  |
-| `sortByKey` | Boolean: ascending:; Int: numPartitions: | `JavaPairRDD` | sortByKey方法 |  |
-| `sortByKey` | Comparator[K]: comp: | `JavaPairRDD` | sortByKey方法 |  |
-| `sortByKey` | Comparator[K]: comp:; Boolean: ascending: | `JavaPairRDD` | sortByKey方法 |  |
-| `sortByKey` | Comparator[K]: comp:; Boolean: ascending:; Int: numPartitions: | `JavaPairRDD` | sortByKey方法 |  |
-| `subtract` | JavaPairRDD[K: other: | `JavaPairRDD` | subtract方法 |  |
-| `subtract` | JavaPairRDD[K: other:; Int: numPartitions: | `JavaPairRDD` | subtract方法 |  |
-| `subtract` | JavaPairRDD[K: other:; Partitioner: p: | `JavaPairRDD` | subtract方法 |  |
-| `union` | JavaPairRDD[K: other: | `JavaPairRDD` | union方法 |  |
-| `unpersist` | 无 | `JavaPairRDD` | unpersist方法 |  |
-| `unpersist` | Boolean: blocking: | `JavaPairRDD` | unpersist方法 |  |
-| `values` | 无 | `JavaRDD` | values方法 |  |
+| `setName` | String: name: | `JavaPairRDD` | 设置RDD名称 |  |
+| `sortByKey` | 无 | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Boolean: ascending: | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Boolean: ascending:; Int: numPartitions: | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Comparator[K]: comp: | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Comparator[K]: comp:; Boolean: ascending: | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Comparator[K]: comp:; Boolean: ascending:; Int: numPartitions: | `JavaPairRDD` | 按Key排序RDD |  |
+| `subtract` | JavaPairRDD[K: other: | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaPairRDD[K: other:; Int: numPartitions: | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaPairRDD[K: other:; Partitioner: p: | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `union` | JavaPairRDD[K: other: | `JavaPairRDD` | 合并DataFrame |  |
+| `unpersist` | 无 | `JavaPairRDD` | 取消RDD的持久化 |  |
+| `unpersist` | Boolean: blocking: | `JavaPairRDD` | 取消RDD的持久化 |  |
+| `values` | 无 | `JavaRDD` | 返回所有Value的RDD |  |
 
 ### JavaRDD
 **包路径**: `org.apache.spark.api.java`
@@ -129,27 +129,27 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cache` | 无 | `JavaRDD` | cache方法 |  |
-| `coalesce` | Int: numPartitions: | `JavaRDD` | coalesce方法 |  |
-| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaRDD` | coalesce方法 |  |
-| `distinct` | 无 | `JavaRDD` | distinct方法 |  |
-| `distinct` | Int: numPartitions: | `JavaRDD` | distinct方法 |  |
-| `filter` | JFunction[T: f: | `JavaRDD` | filter方法 | JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> filtered = rdd.filter(x -> x > 2); |
+| `cache` | 无 | `JavaRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
+| `coalesce` | Int: numPartitions: | `JavaRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaRDD` | 减少分区数，不触发shuffle |  |
+| `distinct` | 无 | `JavaRDD` | 去重 |  |
+| `distinct` | Int: numPartitions: | `JavaRDD` | 去重 |  |
+| `filter` | JFunction[T: f: | `JavaRDD` | 过滤行 | JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> filtered = rdd.filter(x -> x > 2); |
 | `getResourceProfile` | 无 | `ResourceProfile` | getResourceProfile方法 |  |
-| `intersection` | JavaRDD[T]: other: | `JavaRDD` | intersection方法 |  |
-| `persist` | StorageLevel: newLevel: | `JavaRDD` | persist方法 |  |
-| `randomSplit` | Array[Double]: weights: | `Array` | randomSplit方法 |  |
-| `randomSplit` | Array[Double]: weights:; Long: seed: | `Array` | randomSplit方法 |  |
-| `repartition` | Int: numPartitions: | `JavaRDD` | repartition方法 |  |
-| `sample` | Boolean: withReplacement:; Double: fraction: | `JavaRDD` | sample方法 |  |
-| `sample` | Boolean: withReplacement:; Double: fraction:; Long: seed: | `JavaRDD` | sample方法 |  |
-| `setName` | String: name: | `JavaRDD` | setName方法 |  |
-| `subtract` | JavaRDD[T]: other: | `JavaRDD` | subtract方法 |  |
-| `subtract` | JavaRDD[T]: other:; Int: numPartitions: | `JavaRDD` | subtract方法 |  |
-| `subtract` | JavaRDD[T]: other:; Partitioner: p: | `JavaRDD` | subtract方法 |  |
-| `union` | JavaRDD[T]: other: | `JavaRDD` | union方法 |  |
-| `unpersist` | 无 | `JavaRDD` | unpersist方法 |  |
-| `unpersist` | Boolean: blocking: | `JavaRDD` | unpersist方法 |  |
+| `intersection` | JavaRDD[T]: other: | `JavaRDD` | 返回两个RDD的交集 |  |
+| `persist` | StorageLevel: newLevel: | `JavaRDD` | 持久化RDD到指定存储级别 |  |
+| `randomSplit` | Array[Double]: weights: | `Array` | 按权重随机分割RDD为多个RDD |  |
+| `randomSplit` | Array[Double]: weights:; Long: seed: | `Array` | 按权重随机分割RDD为多个RDD |  |
+| `repartition` | Int: numPartitions: | `JavaRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
+| `sample` | Boolean: withReplacement:; Double: fraction: | `JavaRDD` | 随机采样指定比例的元素 |  |
+| `sample` | Boolean: withReplacement:; Double: fraction:; Long: seed: | `JavaRDD` | 随机采样指定比例的元素 |  |
+| `setName` | String: name: | `JavaRDD` | 设置RDD名称 |  |
+| `subtract` | JavaRDD[T]: other: | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaRDD[T]: other:; Int: numPartitions: | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaRDD[T]: other:; Partitioner: p: | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `union` | JavaRDD[T]: other: | `JavaRDD` | 合并DataFrame |  |
+| `unpersist` | 无 | `JavaRDD` | 取消RDD的持久化 |  |
+| `unpersist` | Boolean: blocking: | `JavaRDD` | 取消RDD的持久化 |  |
 | `withResources` | ResourceProfile: rp: | `JavaRDD` | withResources方法 |  |
 
 ### JavaSparkContext
@@ -158,16 +158,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addFile` | String: path: | `Unit` | addFile方法 |  |
-| `addFile` | String: path:; Boolean: recursive: | `Unit` | addFile方法 |  |
-| `addJar` | String: path: | `Unit` | addJar方法 |  |
+| `addFile` | String: path: | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
+| `addFile` | String: path:; Boolean: recursive: | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
+| `addJar` | String: path: | `Unit` | 添加JAR包到Spark作业 |  |
 | `addJobTag` | String: tag: | `Unit` | addJobTag方法 |  |
-| `binaryFiles` | String: path:; Int: minPartitions: | `JavaPairRDD` | binaryFiles方法 |  |
-| `binaryFiles` | String: path: | `JavaPairRDD` | binaryFiles方法 |  |
-| `binaryRecords` | String: path:; Int: recordLength: | `JavaRDD` | binaryRecords方法 |  |
-| `cancelAllJobs` | 无 | `Unit` | cancelAllJobs方法 |  |
-| `cancelJobGroup` | String: groupId:; String: reason: | `Unit` | cancelJobGroup方法 |  |
-| `cancelJobGroup` | String: groupId: | `Unit` | cancelJobGroup方法 |  |
+| `binaryFiles` | String: path:; Int: minPartitions: | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
+| `binaryFiles` | String: path: | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
+| `binaryRecords` | String: path:; Int: recordLength: | `JavaRDD` | 读取固定长度的二进制记录文件 |  |
+| `cancelAllJobs` | 无 | `Unit` | 取消所有正在运行的作业 |  |
+| `cancelJobGroup` | String: groupId:; String: reason: | `Unit` | 取消指定作业组的所有作业 |  |
+| `cancelJobGroup` | String: groupId: | `Unit` | 取消指定作业组的所有作业 |  |
 | `cancelJobsWithTag` | String: tag:; String: reason: | `Unit` | cancelJobsWithTag方法 |  |
 | `cancelJobsWithTag` | String: tag: | `Unit` | cancelJobsWithTag方法 |  |
 | `clearCallSite` | 无 | `Unit` | clearCallSite方法 |  |
@@ -183,17 +183,17 @@
 | `parallelizeDoubles` | java.util.List[java.lang.Double]: list: | `JavaDoubleRDD` | parallelizeDoubles方法 |  |
 | `removeJobTag` | String: tag: | `Unit` | removeJobTag方法 |  |
 | `setCallSite` | String: site: | `Unit` | setCallSite方法 |  |
-| `setCheckpointDir` | String: dir: | `Unit` | setCheckpointDir方法 |  |
+| `setCheckpointDir` | String: dir: | `Unit` | 设置Checkpoint目录，用于RDD容错 |  |
 | `setInterruptOnCancel` | Boolean: interruptOnCancel: | `Unit` | setInterruptOnCancel方法 |  |
 | `setJobDescription` | String: value: | `Unit` | setJobDescription方法 |  |
-| `setJobGroup` | String: groupId:; String: description:; Boolean: interruptOnCancel: | `Unit` | setJobGroup方法 |  |
-| `setJobGroup` | String: groupId:; String: description: | `Unit` | setJobGroup方法 |  |
+| `setJobGroup` | String: groupId:; String: description:; Boolean: interruptOnCancel: | `Unit` | 设置作业组，用于取消一组作业 |  |
+| `setJobGroup` | String: groupId:; String: description: | `Unit` | 设置作业组，用于取消一组作业 |  |
 | `setLocalProperty` | String: key:; String: value: | `Unit` | setLocalProperty方法 |  |
-| `setLogLevel` | String: logLevel: | `Unit` | setLogLevel方法 |  |
-| `stop` | 无 | `Unit` | stop方法 |  |
-| `stop` | Int: exitCode: | `Unit` | stop方法 |  |
-| `textFile` | String: path: | `JavaRDD` | textFile方法 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
-| `textFile` | String: path:; Int: minPartitions: | `JavaRDD` | textFile方法 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
+| `setLogLevel` | String: logLevel: | `Unit` | 设置日志级别 |  |
+| `stop` | 无 | `Unit` | 停止SparkContext，释放资源 |  |
+| `stop` | Int: exitCode: | `Unit` | 停止SparkContext，释放资源 |  |
+| `textFile` | String: path: | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
+| `textFile` | String: path:; Int: minPartitions: | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
 | `this` | 无 | `Unit` | this方法 |  |
 | `this` | SparkConf: conf: | `Unit` | this方法 |  |
 | `this` | String: master:; String: appName: | `Unit` | this方法 |  |
@@ -201,8 +201,8 @@
 | `this` | String: master:; String: appName:; String: sparkHome:; String: jarFile: | `Unit` | this方法 |  |
 | `this` | String: master:; String: appName:; String: sparkHome:; Array[String]: jars: | `Unit` | this方法 |  |
 | `this` | String: master:; String: appName:; String: sparkHome:; Array[String]: jars:; JMap[String: environment: | `Unit` | this方法 |  |
-| `wholeTextFiles` | String: path:; Int: minPartitions: | `JavaPairRDD` | wholeTextFiles方法 |  |
-| `wholeTextFiles` | String: path: | `JavaPairRDD` | wholeTextFiles方法 |  |
+| `wholeTextFiles` | String: path:; Int: minPartitions: | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
+| `wholeTextFiles` | String: path: | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
 
 ---
 
@@ -586,7 +586,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `append` | row: InternalRow | `void` | append方法 |  |
+| `append` | row: InternalRow | `void` | 追加元素 |  |
 | `durationMs` | 无 | `long` | durationMs方法 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
 | `incPeakExecutionMemory` | size: long | `void` | incPeakExecutionMemory方法 |  |
@@ -609,22 +609,22 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `asCaseSensitiveMap` | 无 | `Map&lt;String, String&gt;` | asCaseSensitiveMap方法 |  |
-| `clear` | 无 | `void` | clear方法 |  |
+| `clear` | 无 | `void` | 清空集合 |  |
 | `containsKey` | key: Object | `boolean` | containsKey方法 |  |
 | `containsValue` | value: Object | `boolean` | containsValue方法 |  |
 | `empty` | 无 | `CaseInsensitiveStringMap` | empty方法 |  |
-| `get` | key: Object | `String` | get方法 |  |
+| `get` | key: Object | `String` | 获取元素 |  |
 | `getBoolean` | key: String; defaultValue: boolean | `boolean` | getBoolean方法 |  |
 | `getDouble` | key: String; defaultValue: double | `double` | getDouble方法 |  |
 | `getInt` | key: String; defaultValue: int | `int` | getInt方法 |  |
 | `getLong` | key: String; defaultValue: long | `long` | getLong方法 |  |
-| `isEmpty` | 无 | `boolean` | isEmpty方法 |  |
+| `isEmpty` | 无 | `boolean` | 判断是否为空 |  |
 | `keySet` | 无 | `Set&lt;String&gt;` | keySet方法 |  |
-| `put` | key: String; value: String | `String` | put方法 |  |
+| `put` | key: String; value: String | `String` | 添加键值对 |  |
 | `putAll` | String: Map<? extends; m: ? extends String> | `void` | putAll方法 |  |
-| `remove` | key: Object | `String` | remove方法 |  |
-| `size` | 无 | `int` | size方法 |  |
-| `values` | 无 | `Collection&lt;String&gt;` | values方法 |  |
+| `remove` | key: Object | `String` | 删除元素 |  |
+| `size` | 无 | `int` | 计算大小 |  |
+| `values` | 无 | `Collection&lt;String&gt;` | 返回所有Value的RDD |  |
 
 ### Cast
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -700,7 +700,7 @@
 | `toUpperCase` | target: final UTF8String | `UTF8String` | toUpperCase方法 |  |
 | `toUpperCase` | target: final UTF8String; collationId: final int | `UTF8String` | toUpperCase方法 |  |
 | `translate` | input: final UTF8String; Map<String: final; dict: String>; collationId: final int | `UTF8String` | translate方法 |  |
-| `trim` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | trim方法 |  |
+| `trim` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | 去除空白 |  |
 | `trimLeft` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | trimLeft方法 |  |
 | `trimRight` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | trimRight方法 |  |
 
@@ -943,8 +943,8 @@
 | `hours` | column: String | `Transform` | hours方法 |  |
 | `identity` | column: String | `Transform` | identity方法 |  |
 | `months` | column: String | `Transform` | months方法 |  |
-| `sort` | expr: Expression; direction: SortDirection; nullOrder: NullOrdering | `SortOrder` | sort方法 |  |
-| `sort` | expr: Expression; direction: SortDirection | `SortOrder` | sort方法 |  |
+| `sort` | expr: Expression; direction: SortDirection; nullOrder: NullOrdering | `SortOrder` | 排序 |  |
+| `sort` | expr: Expression; direction: SortDirection | `SortOrder` | 排序 |  |
 | `years` | column: String | `Transform` | years方法 |  |
 
 ### Extract
@@ -1097,7 +1097,7 @@
 | `getName` | 无 | `String` | getName方法 |  |
 | `main` | args: String[] | `void` | main方法 |  |
 | `setAge` | age: long | `void` | setAge方法 |  |
-| `setName` | name: String | `void` | setName方法 |  |
+| `setName` | name: String | `void` | 设置RDD名称 |  |
 
 ### JavaUserDefinedScalar
 **包路径**: `org.apache.spark.examples.sql`
@@ -1122,9 +1122,9 @@
 | `main` | args: String[] | `void` | main方法 |  |
 | `merge` | b1: Average; b2: Average | `Average` | merge方法 |  |
 | `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
-| `reduce` | buffer: Average; employee: Employee | `Average` | reduce方法 |  |
+| `reduce` | buffer: Average; employee: Employee | `Average` | 聚合DStream每个RDD |  |
 | `setCount` | count: long | `void` | setCount方法 |  |
-| `setName` | name: String | `void` | setName方法 |  |
+| `setName` | name: String | `void` | 设置RDD名称 |  |
 | `setSalary` | salary: long | `void` | setSalary方法 |  |
 | `setSum` | sum: long | `void` | setSum方法 |  |
 | `zero` | 无 | `Average` | zero方法 |  |
@@ -1142,7 +1142,7 @@
 | `main` | args: String[] | `void` | main方法 |  |
 | `merge` | b1: Average; b2: Average | `Average` | merge方法 |  |
 | `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
-| `reduce` | buffer: Average; data: Long | `Average` | reduce方法 |  |
+| `reduce` | buffer: Average; data: Long | `Average` | 聚合DStream每个RDD |  |
 | `setCount` | count: long | `void` | setCount方法 |  |
 | `setSum` | sum: long | `void` | setSum方法 |  |
 | `zero` | 无 | `Average` | zero方法 |  |
@@ -1206,7 +1206,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `add` | v: double | `void` | add方法 |  |
+| `add` | v: double | `void` | 添加元素 |  |
 | `addBin` | x: double; y: double; b: int | `void` | addBin方法 |  |
 | `allocate` | num_bins: int | `void` | allocate方法 |  |
 | `compareTo` | other: Coord | `int` | compareTo方法 |  |
@@ -1260,8 +1260,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `add` | newChild: OrcColumnStatistics | `void` | add方法 |  |
-| `get` | ordinal: int | `OrcColumnStatistics` | get方法 |  |
+| `add` | newChild: OrcColumnStatistics | `void` | 添加元素 |  |
+| `get` | ordinal: int | `OrcColumnStatistics` | 获取元素 |  |
 | `getStatistics` | 无 | `ColumnStatistics` | getStatistics方法 |  |
 
 ### OrcColumnVector
@@ -1645,7 +1645,7 @@
 |--------|------|----------|------|------|
 | `build` | 无 | `TableInfo` | build方法 |  |
 | `properties` | 无 | `Map&lt;String, String&gt;` | properties方法 |  |
-| `schema` | 无 | `StructType` | schema方法 |  |
+| `schema` | 无 | `StructType` | 获取schema |  |
 | `withColumns` | columns: Column[] | `Builder` | withColumns方法 |  |
 | `withConstraints` | constraints: Constraint[] | `Builder` | withConstraints方法 |  |
 | `withPartitions` | partitions: Transform[] | `Builder` | withPartitions方法 |  |
@@ -1666,11 +1666,11 @@
 | `evalString` | xml: String; path: String | `String` | evalString方法 |  |
 | `mark` | readAheadLimit: int | `void` | mark方法 |  |
 | `markSupported` | 无 | `boolean` | markSupported方法 |  |
-| `read` | 无 | `int` | read方法 |  |
-| `read` | cbuf: char[]; off: int; len: int | `int` | read方法 |  |
+| `read` | 无 | `int` | 读取数据源创建DataFrame |  |
+| `read` | cbuf: char[]; off: int; len: int | `int` | 读取数据源创建DataFrame |  |
 | `ready` | 无 | `boolean` | ready方法 |  |
 | `reset` | 无 | `void` | reset方法 |  |
-| `set` | s: String | `void` | set方法 |  |
+| `set` | s: String | `void` | 设置元素 |  |
 | `skip` | ns: long | `long` | skip方法 |  |
 
 ### Unique
@@ -1702,16 +1702,16 @@
 | `reset` | 无 | `void` | reset方法 |  |
 | `setOffsetAndSizeFromPreviousCursor` | ordinal: int; previousCursor: int | `void` | setOffsetAndSizeFromPreviousCursor方法 |  |
 | `totalSize` | 无 | `int` | totalSize方法 |  |
-| `write` | ordinal: int; input: UTF8String | `void` | write方法 |  |
-| `write` | ordinal: int; input: GeographyVal | `void` | write方法 |  |
-| `write` | ordinal: int; input: GeometryVal | `void` | write方法 |  |
-| `write` | ordinal: int; input: byte[] | `void` | write方法 |  |
-| `write` | ordinal: int; input: byte[]; offset: int; numBytes: int | `void` | write方法 |  |
-| `write` | ordinal: int; input: CalendarInterval | `void` | write方法 |  |
-| `write` | ordinal: int; input: VariantVal | `void` | write方法 |  |
-| `write` | ordinal: int; row: UnsafeRow | `void` | write方法 |  |
-| `write` | ordinal: int; map: UnsafeMapData | `void` | write方法 |  |
-| `write` | array: UnsafeArrayData | `void` | write方法 |  |
+| `write` | ordinal: int; input: UTF8String | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; input: GeographyVal | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; input: GeometryVal | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; input: byte[] | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; input: byte[]; offset: int; numBytes: int | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; input: CalendarInterval | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; input: VariantVal | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; row: UnsafeRow | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int; map: UnsafeMapData | `void` | 写入DataFrame到数据源 |  |
+| `write` | array: UnsafeArrayData | `void` | 写入DataFrame到数据源 |  |
 
 ### UserDefinedAggregateFunc
 **包路径**: `org.apache.spark.sql.connector.expressions.aggregate`
@@ -1928,8 +1928,8 @@
 | `currentCatalog` | 无 | `String` | currentCatalog方法 |  |
 | `ident` | 无 | `Identifier` | ident方法 |  |
 | `properties` | 无 | `Map&lt;String, String&gt;` | properties方法 |  |
-| `schema` | 无 | `StructType` | schema方法 |  |
-| `sql` | 无 | `String` | sql方法 |  |
+| `schema` | 无 | `StructType` | 获取schema |  |
+| `sql` | 无 | `String` | 执行SQL查询 |  |
 
 ### WkbParseException
 **包路径**: `org.apache.spark.sql.catalyst.util.geo`
@@ -1946,8 +1946,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `read` | wkb: byte[] | `GeometryModel` | read方法 |  |
-| `read` | wkb: byte[]; srid: int | `GeometryModel` | read方法 |  |
+| `read` | wkb: byte[] | `GeometryModel` | 读取数据源创建DataFrame |  |
+| `read` | wkb: byte[]; srid: int | `GeometryModel` | 读取数据源创建DataFrame |  |
 
 ### WritableColumnVector
 **包路径**: `org.apache.spark.sql.execution.vectorized`
@@ -2235,8 +2235,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addAppArgs` | args: String... | `T` | addAppArgs方法 |  |
-| `addFile` | file: String | `T` | addFile方法 |  |
-| `addJar` | jar: String | `T` | addJar方法 |  |
+| `addFile` | file: String | `T` | 添加文件到Spark作业，所有Executor可访问 |  |
+| `addJar` | jar: String | `T` | 添加JAR包到Spark作业 |  |
 | `addPyFile` | file: String | `T` | addPyFile方法 |  |
 | `addSparkArg` | arg: String | `T` | addSparkArg方法 |  |
 | `addSparkArg` | name: String; value: String | `T` | addSparkArg方法 |  |
@@ -2438,7 +2438,7 @@
 | `setFailOnStart` | failOnStart: boolean | `void` | setFailOnStart方法 |  |
 | `setFailOnStop` | failOnStop: boolean | `void` | setFailOnStop方法 |  |
 | `start` | 无 | `void` | start方法 |  |
-| `stop` | 无 | `void` | stop方法 |  |
+| `stop` | 无 | `void` | 停止SparkContext，释放资源 |  |
 
 ### ByteArrayMethods
 **包路径**: `org.apache.spark.unsafe.array`
@@ -2447,13 +2447,13 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `arrayEquals` | leftBase: Object; leftOffset: long; rightBase: Object; rightOffset: long; length: final long | `boolean` | arrayEquals方法 |  |
-| `contains` | arr: byte[]; sub: byte[] | `boolean` | contains方法 |  |
-| `endsWith` | array: byte[]; target: byte[] | `boolean` | endsWith方法 |  |
+| `contains` | arr: byte[]; sub: byte[] | `boolean` | 判断是否包含 |  |
+| `endsWith` | array: byte[]; target: byte[] | `boolean` | 判断是否以指定字符串结尾 |  |
 | `matchAt` | arr: byte[]; sub: byte[]; pos: int | `boolean` | matchAt方法 |  |
 | `nextPowerOf2` | num: long | `long` | nextPowerOf2方法 |  |
 | `roundNumberOfBytesToNearestWord` | numBytes: int | `int` | roundNumberOfBytesToNearestWord方法 |  |
 | `roundNumberOfBytesToNearestWord` | numBytes: long | `long` | roundNumberOfBytesToNearestWord方法 |  |
-| `startsWith` | array: byte[]; target: byte[] | `boolean` | startsWith方法 |  |
+| `startsWith` | array: byte[]; target: byte[] | `boolean` | 判断是否以指定字符串开头 |  |
 
 ### ByteArrayReadableChannel
 **包路径**: `org.apache.spark.network.util`
@@ -2464,7 +2464,7 @@
 | `close` | 无 | `void` | close方法 |  |
 | `feedData` | buf: ByteBuf | `void` | feedData方法 |  |
 | `isOpen` | 无 | `boolean` | isOpen方法 |  |
-| `read` | dst: ByteBuffer | `int` | read方法 |  |
+| `read` | dst: ByteBuffer | `int` | 读取数据源创建DataFrame |  |
 
 ### ByteArrayWritableChannel
 **包路径**: `org.apache.spark.network.util`
@@ -2474,9 +2474,9 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `isOpen` | 无 | `boolean` | isOpen方法 |  |
-| `length` | 无 | `int` | length方法 |  |
+| `length` | 无 | `int` | 计算长度 |  |
 | `reset` | 无 | `void` | reset方法 |  |
-| `write` | src: ByteBuffer | `int` | write方法 |  |
+| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 |  |
 
 ### ByteBufferWriteableChannel
 **包路径**: `org.apache.spark.network.util`
@@ -2486,7 +2486,7 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `isOpen` | 无 | `boolean` | isOpen方法 |  |
-| `write` | src: ByteBuffer | `int` | write方法 |  |
+| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 |  |
 
 ### ByteUnit
 **包路径**: `org.apache.spark.network.util`
@@ -2601,17 +2601,17 @@
 | `blankString` | length: int | `UTF8String` | blankString方法 |  |
 | `bytePosToChar` | bytePos: int | `int` | bytePosToChar方法 |  |
 | `charPosToByte` | charPos: int | `int` | charPosToByte方法 |  |
-| `clone` | 无 | `UTF8String` | clone方法 |  |
+| `clone` | 无 | `UTF8String` | 克隆对象 |  |
 | `codePointFrom` | byteIndex: int | `int` | codePointFrom方法 |  |
 | `codePointIterator` | 无 | `Iterator&lt;Integer&gt;` | codePointIterator方法 |  |
 | `codePointIterator` | iteratorMode: CodePointIteratorType | `Iterator&lt;Integer&gt;` | codePointIterator方法 |  |
 | `compareTo` | other: @Nonnull final UTF8String | `int` | compareTo方法 |  |
-| `concat` | inputs: UTF8String... | `UTF8String` | concat方法 |  |
+| `concat` | inputs: UTF8String... | `UTF8String` | 拼接字符串 |  |
 | `concatWs` | separator: UTF8String; inputs: UTF8String... | `UTF8String` | concatWs方法 |  |
-| `contains` | substring: final UTF8String | `boolean` | contains方法 |  |
+| `contains` | substring: final UTF8String | `boolean` | 判断是否包含 |  |
 | `copy` | 无 | `UTF8String` | copy方法 |  |
 | `copyUTF8String` | start: int; end: int | `UTF8String` | copyUTF8String方法 |  |
-| `endsWith` | suffix: final UTF8String | `boolean` | endsWith方法 |  |
+| `endsWith` | suffix: final UTF8String | `boolean` | 判断是否以指定字符串结尾 |  |
 | `find` | str: UTF8String; start: int | `int` | find方法 |  |
 | `findInSet` | match: UTF8String | `int` | findInSet方法 |  |
 | `fromAddress` | base: Object; offset: long; numBytes: int | `UTF8String` | fromAddress方法 |  |
@@ -2641,7 +2641,7 @@
 | `numBytes` | 无 | `int` | numBytes方法 |  |
 | `numBytesForFirstByte` | b: final byte | `int` | numBytesForFirstByte方法 |  |
 | `numChars` | 无 | `int` | numChars方法 |  |
-| `read` | kryo: Kryo; in: Input | `void` | read方法 |  |
+| `read` | kryo: Kryo; in: Input | `void` | 读取数据源创建DataFrame |  |
 | `readExternal` | in: ObjectInput | `void` | readExternal方法 |  |
 | `repeat` | times: int | `UTF8String` | repeat方法 |  |
 | `replace` | search: UTF8String; replace: UTF8String | `UTF8String` | replace方法 |  |
@@ -2653,9 +2653,9 @@
 | `semanticCompare` | other: final UTF8String; collationId: int | `int` | semanticCompare方法 |  |
 | `semanticEquals` | other: final UTF8String; collationId: int | `boolean` | semanticEquals方法 |  |
 | `soundex` | 无 | `UTF8String` | soundex方法 |  |
-| `startsWith` | prefix: final UTF8String | `boolean` | startsWith方法 |  |
+| `startsWith` | prefix: final UTF8String | `boolean` | 判断是否以指定字符串开头 |  |
 | `subStringIndex` | delim: UTF8String; count: int | `UTF8String` | subStringIndex方法 |  |
-| `substring` | start: final int; until: final int | `UTF8String` | substring方法 |  |
+| `substring` | start: final int; until: final int | `UTF8String` | 截取子字符串 |  |
 | `substringSQL` | pos: int; length: int | `UTF8String` | substringSQL方法 |  |
 | `toBinaryString` | val: long | `UTF8String` | toBinaryString方法 |  |
 | `toByte` | intWrapper: IntWrapper | `boolean` | toByte方法 |  |
@@ -2674,15 +2674,15 @@
 | `toUpperCaseAscii` | 无 | `UTF8String` | toUpperCaseAscii方法 |  |
 | `toValidString` | 无 | `String` | toValidString方法 |  |
 | `translate` | dict: String> | `UTF8String` | translate方法 |  |
-| `trim` | 无 | `UTF8String` | trim方法 |  |
-| `trim` | trimString: UTF8String | `UTF8String` | trim方法 |  |
+| `trim` | 无 | `UTF8String` | 去除空白 |  |
+| `trim` | trimString: UTF8String | `UTF8String` | 去除空白 |  |
 | `trimAll` | 无 | `UTF8String` | trimAll方法 |  |
 | `trimLeft` | 无 | `UTF8String` | trimLeft方法 |  |
 | `trimLeft` | trimString: UTF8String | `UTF8String` | trimLeft方法 |  |
 | `trimRight` | 无 | `UTF8String` | trimRight方法 |  |
 | `trimRight` | trimString: UTF8String | `UTF8String` | trimRight方法 |  |
 | `trimTrailingSpaces` | numSpaces: int | `UTF8String` | trimTrailingSpaces方法 |  |
-| `write` | kryo: Kryo; out: Output | `void` | write方法 |  |
+| `write` | kryo: Kryo; out: Output | `void` | 写入DataFrame到数据源 |  |
 | `writeExternal` | out: ObjectOutput | `void` | writeExternal方法 |  |
 | `writeTo` | buffer: ByteBuffer | `void` | writeTo方法 |  |
 | `writeTo` | out: OutputStream | `void` | writeTo方法 |  |
@@ -2699,7 +2699,7 @@
 | `getColumns` | 无 | `List&lt;ColumnBuffer&gt;` | getColumns方法 |  |
 | `getStartOffset` | 无 | `long` | getStartOffset方法 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | iterator方法 |  |
+| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | 获取迭代器 |  |
 | `numColumns` | 无 | `int` | numColumns方法 |  |
 | `numRows` | 无 | `int` | numRows方法 |  |
 | `setStartOffset` | startOffset: long | `void` | setStartOffset方法 |  |
@@ -2745,7 +2745,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | name: String; defaultValue: String | `String` | get方法 |  |
+| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
 | `getBoolean` | name: String; defaultValue: boolean | `boolean` | getBoolean方法 |  |
 | `getDouble` | name: String; defaultValue: double | `double` | getDouble方法 |  |
 | `getInt` | name: String; defaultValue: int | `int` | getInt方法 |  |
@@ -2798,7 +2798,7 @@
 | `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
 | `channelRead` | ctx: ChannelHandlerContext; data: Object | `void` | channelRead方法 |  |
 | `close` | ctx: ChannelHandlerContext; promise: ChannelPromise | `void` | close方法 |  |
-| `count` | 无 | `long` | count方法 |  |
+| `count` | 无 | `long` | 统计行数 |  |
 | `getKeyId` | 无 | `String` | getKeyId方法 |  |
 | `handlerRemoved` | ctx: ChannelHandlerContext | `void` | handlerRemoved方法 |  |
 | `position` | 无 | `long` | position方法 |  |
@@ -2807,7 +2807,7 @@
 | `touch` | o: Object | `EncryptedMessage` | touch方法 |  |
 | `transferTo` | target: WritableByteChannel; position: long | `long` | transferTo方法 |  |
 | `transferred` | 无 | `long` | transferred方法 |  |
-| `write` | ctx: ChannelHandlerContext; msg: Object; promise: ChannelPromise | `void` | write方法 |  |
+| `write` | ctx: ChannelHandlerContext; msg: Object; promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
 
 ### CustomAuthenticationProviderImpl
 **包路径**: `org.apache.hive.service.auth`
@@ -2881,7 +2881,7 @@
 | `getRecordReader` | split: InputSplit; job: JobConf; reporter: Reporter | `RecordReader&lt;LongWritable, Text&gt;` | getRecordReader方法 |  |
 | `getTargetPath` | 无 | `Path` | getTargetPath方法 |  |
 | `readFields` | in: DataInput | `void` | readFields方法 |  |
-| `write` | out: DataOutput | `void` | write方法 |  |
+| `write` | out: DataOutput | `void` | 写入DataFrame到数据源 |  |
 
 ### DiagnoseCorruption
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2924,7 +2924,7 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `isEndOfInput` | 无 | `boolean` | isEndOfInput方法 |  |
-| `length` | 无 | `long` | length方法 |  |
+| `length` | 无 | `long` | 计算长度 |  |
 | `progress` | 无 | `long` | progress方法 |  |
 | `readChunk` | ctx: ChannelHandlerContext | `ByteBuf` | readChunk方法 |  |
 | `readChunk` | allocator: ByteBufAllocator | `ByteBuf` | readChunk方法 |  |
@@ -3088,7 +3088,7 @@
 | `init` | config: HiveConf | `void` | init方法 |  |
 | `register` | listener: ServiceStateChangeListener | `void` | register方法 |  |
 | `start` | 无 | `void` | start方法 |  |
-| `stop` | 无 | `void` | stop方法 |  |
+| `stop` | 无 | `void` | 停止SparkContext，释放资源 |  |
 | `unregister` | listener: ServiceStateChangeListener | `void` | unregister方法 |  |
 
 ### FinalizeShuffleMerge
@@ -3112,7 +3112,7 @@
 | `convertDurationsTo` | durationUnit: TimeUnit | `Builder` | convertDurationsTo方法 |  |
 | `convertRatesTo` | rateUnit: TimeUnit | `Builder` | convertRatesTo方法 |  |
 | `disabledMetricAttributes` | disabledMetricAttributes: Set<MetricAttribute> | `Builder` | disabledMetricAttributes方法 |  |
-| `filter` | filter: MetricFilter | `Builder` | filter方法 |  |
+| `filter` | filter: MetricFilter | `Builder` | 过滤行 |  |
 | `forRegistry` | registry: MetricRegistry | `Builder` | forRegistry方法 |  |
 | `prefixedWith` | prefix: String | `Builder` | prefixedWith方法 |  |
 | `report` | gauges: Gauge>; counters: Counter>; histograms: Histogram>; meters: Meter>; timers: Timer> | `void` | report方法 |  |
@@ -3129,7 +3129,7 @@
 |--------|------|----------|------|------|
 | `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
 | `channelRead` | ctx: ChannelHandlerContext; ciphertextMessage: Object | `void` | channelRead方法 |  |
-| `count` | 无 | `long` | count方法 |  |
+| `count` | 无 | `long` | 统计行数 |  |
 | `getKeyId` | 无 | `String` | getKeyId方法 |  |
 | `position` | 无 | `long` | position方法 |  |
 | `release` | decrement: int | `boolean` | release方法 |  |
@@ -3137,7 +3137,7 @@
 | `touch` | o: Object | `GcmEncryptedMessage` | touch方法 |  |
 | `transferTo` | target: WritableByteChannel; position: long | `long` | transferTo方法 |  |
 | `transferred` | 无 | `long` | transferred方法 |  |
-| `write` | ctx: ChannelHandlerContext; msg: Object; promise: ChannelPromise | `void` | write方法 |  |
+| `write` | ctx: ChannelHandlerContext; msg: Object; promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
 
 ### GetCatalogsOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3266,8 +3266,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | name: String | `String` | get方法 |  |
-| `get` | name: String; defaultValue: String | `String` | get方法 |  |
+| `get` | name: String | `String` | 获取元素 |  |
+| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
 
 ### Handle
 **包路径**: `org.apache.hive.service.cli`
@@ -3460,26 +3460,26 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `accept` | key: Comparable<Object>; value: T | `void` | accept方法 |  |
-| `clear` | 无 | `void` | clear方法 |  |
+| `clear` | 无 | `void` | 清空集合 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `count` | type: Class<?> | `long` | count方法 |  |
-| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | count方法 |  |
-| `count` | 无 | `int` | count方法 |  |
+| `count` | type: Class<?> | `long` | 统计行数 |  |
+| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | 统计行数 |  |
+| `count` | 无 | `int` | 统计行数 |  |
 | `delete` | type: Class<?>; naturalKey: Object | `void` | delete方法 |  |
 | `delete` | key: Object | `boolean` | delete方法 |  |
 | `delete` | key: Object; value: T | `boolean` | delete方法 |  |
-| `get` | key: Object | `T` | get方法 |  |
+| `get` | key: Object | `T` | 获取元素 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `iterator` | 无 | `Iterator&lt;T&gt;` | iterator方法 |  |
+| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
 | `next` | 无 | `T` | next方法 |  |
 | `next` | max: int | `List&lt;T&gt;` | next方法 |  |
-| `put` | value: T | `void` | put方法 |  |
+| `put` | value: T | `void` | 添加键值对 |  |
 | `setMetadata` | value: Object | `void` | setMetadata方法 |  |
-| `size` | 无 | `int` | size方法 |  |
+| `size` | 无 | `int` | 计算大小 |  |
 | `skip` | n: long | `boolean` | skip方法 |  |
 | `view` | 无 | `InMemoryView&lt;T&gt;` | view方法 |  |
-| `write` | value: Object | `void` | write方法 |  |
+| `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
 
 ### InProcessLauncher
 **包路径**: `org.apache.spark.launcher`
@@ -3980,7 +3980,7 @@
 | `digestToHexString` | algorithm: String; input: String | `String` | digestToHexString方法 |  |
 | `forceDeleteOnExit` | file: File | `void` | forceDeleteOnExit方法 |  |
 | `isTesting` | 无 | `boolean` | isTesting方法 |  |
-| `join` | arr: List<Object>; sep: String | `String` | join方法 |  |
+| `join` | arr: List<Object>; sep: String | `String` | 连接DataFrame |  |
 | `listFiles` | dir: File | `Set&lt;File&gt;` | listFiles方法 |  |
 | `listPaths` | dir: File | `Set&lt;Path&gt;` | listPaths方法 |  |
 | `md5Hex` | input: byte[] | `String` | md5Hex方法 |  |
@@ -4070,10 +4070,10 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `closeableIterator` | 无 | `KVStoreIterator&lt;T&gt;` | closeableIterator方法 |  |
-| `first` | value: Object | `KVStoreView&lt;T&gt;` | first方法 |  |
+| `first` | value: Object | `KVStoreView&lt;T&gt;` | 第一行 |  |
 | `index` | name: String | `KVStoreView&lt;T&gt;` | index方法 |  |
 | `last` | value: Object | `KVStoreView&lt;T&gt;` | last方法 |  |
-| `max` | max: long | `KVStoreView&lt;T&gt;` | max方法 |  |
+| `max` | max: long | `KVStoreView&lt;T&gt;` | 最大值 |  |
 | `parent` | value: Object | `KVStoreView&lt;T&gt;` | parent方法 |  |
 | `reverse` | 无 | `KVStoreView&lt;T&gt;` | reverse方法 |  |
 | `skip` | n: long | `KVStoreView&lt;T&gt;` | skip方法 |  |
@@ -4084,8 +4084,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | instance: Object | `Object` | get方法 |  |
-| `get` | instance: Object | `Object` | get方法 |  |
+| `get` | instance: Object | `Object` | 获取元素 |  |
+| `get` | instance: Object | `Object` | 获取元素 |  |
 | `getIndexValue` | indexName: String; instance: Object | `Object` | getIndexValue方法 |  |
 | `getType` | 无 | `Class&lt;?&gt;` | getType方法 |  |
 | `getType` | 无 | `Class&lt;?&gt;` | getType方法 |  |
@@ -4108,15 +4108,15 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `count` | type: Class<?> | `long` | count方法 |  |
-| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | count方法 |  |
+| `count` | type: Class<?> | `long` | 统计行数 |  |
+| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | 统计行数 |  |
 | `delete` | key: byte[] | `void` | delete方法 |  |
 | `delete` | type: Class<?>; naturalKey: Object | `void` | delete方法 |  |
-| `iterator` | 无 | `DBIterator` | iterator方法 |  |
-| `iterator` | 无 | `Iterator&lt;T&gt;` | iterator方法 |  |
-| `put` | key: byte[]; value: byte[] | `void` | put方法 |  |
+| `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
+| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
+| `put` | key: byte[]; value: byte[] | `void` | 添加键值对 |  |
 | `setMetadata` | value: Object | `void` | setMetadata方法 |  |
-| `write` | value: Object | `void` | write方法 |  |
+| `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
 | `writeAll` | values: List<?> | `void` | writeAll方法 |  |
 
 ### LevelDBIterator
@@ -4197,8 +4197,8 @@
 | `getPartitionWriter` | reducePartitionId: int | `ShufflePartitionWriter` | getPartitionWriter方法 |  |
 | `openChannelWrapper` | 无 | `Optional&lt;WritableByteChannelWrapper&gt;` | openChannelWrapper方法 |  |
 | `openStream` | 无 | `OutputStream` | openStream方法 |  |
-| `write` | b: int | `void` | write方法 |  |
-| `write` | buf: byte[]; pos: int; length: int | `void` | write方法 |  |
+| `write` | b: int | `void` | 写入DataFrame到数据源 |  |
+| `write` | buf: byte[]; pos: int; length: int | `void` | 写入DataFrame到数据源 |  |
 
 ### LocalDiskSingleSpillMapOutputWriter
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4214,22 +4214,22 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `append` | event: LogEvent | `void` | append方法 |  |
+| `append` | event: LogEvent | `void` | 追加元素 |  |
 | `create` | operationManager: OperationManager; loggingMode: OperationLog.LoggingLevel | `LogDivertAppender` | create方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; objects: Object... | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object; o8: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object; o8: Object; o9: Object | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; o: Object; throwable: Throwable | `Result` | filter方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; message: Message; throwable: Throwable | `Result` | filter方法 |  |
-| `filter` | logEvent: LogEvent | `Result` | filter方法 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; objects: Object... | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object; o8: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object; o8: Object; o9: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; o: Object; throwable: Throwable | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; message: Message; throwable: Throwable | `Result` | 过滤行 |  |
+| `filter` | logEvent: LogEvent | `Result` | 过滤行 |  |
 | `getOnMatch` | 无 | `Result` | getOnMatch方法 |  |
 | `getOnMismatch` | 无 | `Result` | getOnMismatch方法 |  |
 | `getState` | 无 | `State` | getState方法 |  |
@@ -4237,7 +4237,7 @@
 | `isStarted` | 无 | `boolean` | isStarted方法 |  |
 | `isStopped` | 无 | `boolean` | isStopped方法 |  |
 | `start` | 无 | `void` | start方法 |  |
-| `stop` | 无 | `void` | stop方法 |  |
+| `stop` | 无 | `void` | 停止SparkContext，释放资源 |  |
 
 ### MapConfigProvider
 **包路径**: `org.apache.spark.network.util`
@@ -4245,8 +4245,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | name: String | `String` | get方法 |  |
-| `get` | name: String; defaultValue: String | `String` | get方法 |  |
+| `get` | name: String | `String` | 获取元素 |  |
+| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
 
 ### MemoryBlock
 **包路径**: `org.apache.spark.unsafe.memory`
@@ -4256,7 +4256,7 @@
 |--------|------|----------|------|------|
 | `fill` | value: byte | `void` | fill方法 |  |
 | `fromLongArray` | array: final long[] | `MemoryBlock` | fromLongArray方法 |  |
-| `size` | 无 | `long` | size方法 |  |
+| `size` | 无 | `long` | 计算大小 |  |
 
 ### MemoryConsumer
 **包路径**: `org.apache.spark.memory`
@@ -4342,7 +4342,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `count` | 无 | `long` | count方法 |  |
+| `count` | 无 | `long` | 统计行数 |  |
 | `position` | 无 | `long` | position方法 |  |
 | `release` | decrement: int | `boolean` | release方法 |  |
 | `retain` | increment: int | `MessageWithHeader` | retain方法 |  |
@@ -4395,7 +4395,7 @@
 | `nioByteBuffer` | 无 | `ByteBuffer` | nioByteBuffer方法 |  |
 | `release` | 无 | `ManagedBuffer` | release方法 |  |
 | `retain` | 无 | `ManagedBuffer` | retain方法 |  |
-| `size` | 无 | `long` | size方法 |  |
+| `size` | 无 | `long` | 计算大小 |  |
 
 ### NettyMemoryMetrics
 **包路径**: `org.apache.spark.network.util`
@@ -4434,7 +4434,7 @@
 | `nioByteBuffer` | 无 | `ByteBuffer` | nioByteBuffer方法 |  |
 | `release` | 无 | `ManagedBuffer` | release方法 |  |
 | `retain` | 无 | `ManagedBuffer` | retain方法 |  |
-| `size` | 无 | `long` | size方法 |  |
+| `size` | 无 | `long` | 计算大小 |  |
 
 ### NoOpMergedShuffleFileManager
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4711,7 +4711,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `sort` | array: LongArray; numRecords: long; startByteIndex: int; endByteIndex: int; desc: boolean; signed: boolean | `int` | sort方法 |  |
+| `sort` | array: LongArray; numRecords: long; startByteIndex: int; endByteIndex: int; desc: boolean; signed: boolean | `int` | 排序 |  |
 | `sortKeyPrefixArray` | array: LongArray; startIndex: long; numRecords: long; startByteIndex: int; endByteIndex: int; desc: boolean; signed: boolean | `int` | sortKeyPrefixArray方法 |  |
 
 ### ReadAheadInputStream
@@ -4722,8 +4722,8 @@
 |--------|------|----------|------|------|
 | `available` | 无 | `int` | available方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `read` | 无 | `int` | read方法 |  |
-| `read` | b: byte[]; offset: int; len: int | `int` | read方法 |  |
+| `read` | 无 | `int` | 读取数据源创建DataFrame |  |
+| `read` | b: byte[]; offset: int; len: int | `int` | 读取数据源创建DataFrame |  |
 | `skip` | n: long | `long` | skip方法 |  |
 
 ### RegisterExecutor
@@ -4822,15 +4822,15 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `count` | type: Class<?> | `long` | count方法 |  |
-| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | count方法 |  |
+| `count` | type: Class<?> | `long` | 统计行数 |  |
+| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | 统计行数 |  |
 | `delete` | key: byte[] | `void` | delete方法 |  |
 | `delete` | type: Class<?>; naturalKey: Object | `void` | delete方法 |  |
-| `iterator` | 无 | `DBIterator` | iterator方法 |  |
-| `iterator` | 无 | `Iterator&lt;T&gt;` | iterator方法 |  |
-| `put` | key: byte[]; value: byte[] | `void` | put方法 |  |
+| `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
+| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
+| `put` | key: byte[]; value: byte[] | `void` | 添加键值对 |  |
 | `setMetadata` | value: Object | `void` | setMetadata方法 |  |
-| `write` | value: Object | `void` | write方法 |  |
+| `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
 | `writeAll` | values: List<?> | `void` | writeAll方法 |  |
 
 ### RocksDBIterator
@@ -4864,10 +4864,10 @@
 | `getSize` | 无 | `int` | getSize方法 |  |
 | `getStartOffset` | 无 | `long` | getStartOffset方法 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | iterator方法 |  |
+| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | 获取迭代器 |  |
 | `numColumns` | 无 | `int` | numColumns方法 |  |
 | `numRows` | 无 | `int` | numRows方法 |  |
-| `remove` | 无 | `void` | remove方法 |  |
+| `remove` | 无 | `void` | 删除元素 |  |
 | `removeRange` | fromIndex: int; toIndex: int | `void` | removeRange方法 |  |
 | `setStartOffset` | startOffset: long | `void` | setStartOffset方法 |  |
 | `toTRowSet` | 无 | `TRowSet` | toTRowSet方法 |  |
@@ -5057,7 +5057,7 @@
 | `isOpen` | 无 | `boolean` | isOpen方法 |  |
 | `openForWriting` | 无 | `DownloadFileWritableChannel` | openForWriting方法 |  |
 | `path` | 无 | `String` | path方法 |  |
-| `write` | src: ByteBuffer | `int` | write方法 |  |
+| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 |  |
 
 ### SparkAppHandle
 **包路径**: `org.apache.spark.launcher`
@@ -5145,8 +5145,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addAppArgs` | args: String... | `SparkLauncher` | addAppArgs方法 |  |
-| `addFile` | file: String | `SparkLauncher` | addFile方法 |  |
-| `addJar` | jar: String | `SparkLauncher` | addJar方法 |  |
+| `addFile` | file: String | `SparkLauncher` | 添加文件到Spark作业，所有Executor可访问 |  |
+| `addJar` | jar: String | `SparkLauncher` | 添加JAR包到Spark作业 |  |
 | `addPyFile` | file: String | `SparkLauncher` | addPyFile方法 |  |
 | `addSparkArg` | arg: String | `SparkLauncher` | addSparkArg方法 |  |
 | `addSparkArg` | name: String; value: String | `SparkLauncher` | addSparkArg方法 |  |
@@ -5305,7 +5305,7 @@
 |--------|------|----------|------|------|
 | `addPrimitiveColumn` | columnName: String; columnType: Type; columnComment: String | `TableSchema` | addPrimitiveColumn方法 |  |
 | `addStringColumn` | columnName: String; columnComment: String | `TableSchema` | addStringColumn方法 |  |
-| `clear` | 无 | `void` | clear方法 |  |
+| `clear` | 无 | `void` | 清空集合 |  |
 | `getColumnDescriptorAt` | pos: int | `ColumnDescriptor` | getColumnDescriptorAt方法 |  |
 | `getColumnDescriptors` | 无 | `List&lt;ColumnDescriptor&gt;` | getColumnDescriptors方法 |  |
 | `getSize` | 无 | `int` | getSize方法 |  |
@@ -5490,7 +5490,7 @@
 | `getSnapshot` | 无 | `Snapshot` | getSnapshot方法 |  |
 | `getStdDev` | 无 | `double` | getStdDev方法 |  |
 | `getValue` | v: double | `double` | getValue方法 |  |
-| `size` | 无 | `int` | size方法 |  |
+| `size` | 无 | `int` | 计算大小 |  |
 
 ### TransientBestEffortLazyVal
 **包路径**: `org.apache.spark.util`
@@ -5577,7 +5577,7 @@
 | `enableTcpKeepAlive` | 无 | `boolean` | enableTcpKeepAlive方法 |  |
 | `encryptionEnabled` | 无 | `boolean` | encryptionEnabled方法 |  |
 | `finalizeShuffleMergeHandlerThreads` | 无 | `int` | finalizeShuffleMergeHandlerThreads方法 |  |
-| `get` | name: String; defaultValue: String | `String` | get方法 |  |
+| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
 | `getInt` | name: String; defaultValue: int | `int` | getInt方法 |  |
 | `getModuleName` | 无 | `String` | getModuleName方法 |  |
 | `ioExceptionsThresholdDuringMerge` | 无 | `int` | ioExceptionsThresholdDuringMerge方法 |  |
@@ -5744,8 +5744,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `append` | value: UTF8String | `void` | append方法 |  |
-| `append` | value: String | `void` | append方法 |  |
+| `append` | value: UTF8String | `void` | 追加元素 |  |
+| `append` | value: String | `void` | 追加元素 |  |
 | `appendBytes` | base: Object; offset: long; length: int | `void` | appendBytes方法 |  |
 | `appendCodePoint` | codePoint: int | `void` | appendCodePoint方法 |  |
 | `build` | 无 | `UTF8String` | build方法 |  |
@@ -5779,9 +5779,9 @@
 | `channel` | 无 | `WritableByteChannel` | channel方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `getPeakMemoryUsedBytes` | 无 | `long` | getPeakMemoryUsedBytes方法 |  |
-| `stop` | success: boolean | `Option&lt;MapStatus&gt;` | stop方法 |  |
-| `write` | records: V>> | `void` | write方法 |  |
-| `write` | records: V>> | `void` | write方法 |  |
+| `stop` | success: boolean | `Option&lt;MapStatus&gt;` | 停止SparkContext，释放资源 |  |
+| `write` | records: V>> | `void` | 写入DataFrame到数据源 |  |
+| `write` | records: V>> | `void` | 写入DataFrame到数据源 |  |
 
 ### UploadBlock
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -5902,50 +5902,50 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkpoint` | 无 | `Unit` | checkpoint方法 |  |
-| `collect` | 无 | `JList` | collect方法 |  |
+| `checkpoint` | 无 | `Unit` | checkpoint DStream |  |
+| `collect` | 无 | `JList` | 收集所有行 |  |
 | `collectAsync` | 无 | `JavaFutureAction` | collectAsync方法 |  |
 | `collectPartitions` | Array[Int]: partitionIds: | `Array` | collectPartitions方法 |  |
-| `count` | 无 | `Long` | count方法 |  |
+| `count` | 无 | `Long` | 统计行数 |  |
 | `countApprox` | Long: timeout:; Double: confidence: | `PartialResult` | countApprox方法 |  |
 | `countApprox` | Long: timeout: | `PartialResult` | countApprox方法 |  |
 | `countApproxDistinct` | Double: relativeSD: | `Long` | countApproxDistinct方法 |  |
 | `countAsync` | 无 | `JavaFutureAction` | countAsync方法 |  |
-| `countByValue` | 无 | `JMap` | countByValue方法 |  |
+| `countByValue` | 无 | `JMap` | 统计每个批次每个值的出现次数 |  |
 | `countByValueApprox` | Long: timeout:; Double: confidence: | `PartialResult` | countByValueApprox方法 |  |
 | `countByValueApprox` | Long: timeout: | `PartialResult` | countByValueApprox方法 |  |
-| `first` | 无 | `T` | first方法 |  |
+| `first` | 无 | `T` | 第一行 |  |
 | `flatMapToDouble` | DoubleFlatMapFunction[T]: f: | `JavaDoubleRDD` | flatMapToDouble方法 |  |
-| `fold` | T: zeroValue: | `Unit` | fold方法 |  |
-| `foreach` | VoidFunction[T]: f: | `Unit` | foreach方法 |  |
+| `fold` | T: zeroValue: | `Unit` | 使用零值和组合函数聚合RDD |  |
+| `foreach` | VoidFunction[T]: f: | `Unit` | 对每个元素应用函数，用于副作用操作 |  |
 | `foreachAsync` | VoidFunction[T]: f: | `JavaFutureAction` | foreachAsync方法 |  |
-| `foreachPartition` | VoidFunction[JIterator[T]]: f: | `Unit` | foreachPartition方法 |  |
+| `foreachPartition` | VoidFunction[JIterator[T]]: f: | `Unit` | 对每个分区应用函数 |  |
 | `foreachPartitionAsync` | VoidFunction[JIterator[T]]: f: | `JavaFutureAction` | foreachPartitionAsync方法 |  |
 | `getCheckpointFile` | 无 | `Optional` | getCheckpointFile方法 |  |
 | `glom` | 无 | `JavaRDD` | glom方法 |  |
-| `isEmpty` | 无 | `Boolean` | isEmpty方法 |  |
-| `iterator` | Partition: split:; TaskContext: taskContext: | `JIterator` | iterator方法 |  |
+| `isEmpty` | 无 | `Boolean` | 判断是否为空 |  |
+| `iterator` | Partition: split:; TaskContext: taskContext: | `JIterator` | 获取迭代器 |  |
 | `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f: | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
 | `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f:; Boolean: preservesPartitioning: | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
-| `max` | Comparator[T]: comp: | `T` | max方法 |  |
-| `min` | Comparator[T]: comp: | `T` | min方法 |  |
+| `max` | Comparator[T]: comp: | `T` | 最大值 |  |
+| `min` | Comparator[T]: comp: | `T` | 最小值 |  |
 | `pipe` | String: command: | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command: | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command:; JMap[String: env: | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command:; JMap[String: env:; Boolean: separateWorkingDir:; Int: bufferSize: | `JavaRDD` | pipe方法 |  |
 | `pipe` | JList[String]: command:; JMap[String: env:; Boolean: separateWorkingDir:; Int: bufferSize:; String: encoding: | `JavaRDD` | pipe方法 |  |
-| `reduce` | JFunction2[T: f: | `T` | reduce方法 |  |
-| `saveAsObjectFile` | String: path: | `Unit` | saveAsObjectFile方法 |  |
-| `saveAsTextFile` | String: path: | `Unit` | saveAsTextFile方法 |  |
-| `saveAsTextFile` | String: path:; CompressionCodec]: codec: Class[_ <: | `Unit` | saveAsTextFile方法 |  |
-| `take` | Int: num: | `JList` | take方法 |  |
+| `reduce` | JFunction2[T: f: | `T` | 聚合DStream每个RDD |  |
+| `saveAsObjectFile` | String: path: | `Unit` | 保存RDD为序列化对象文件 |  |
+| `saveAsTextFile` | String: path: | `Unit` | 保存RDD为文本文件 |  |
+| `saveAsTextFile` | String: path:; CompressionCodec]: codec: Class[_ <: | `Unit` | 保存RDD为文本文件 |  |
+| `take` | Int: num: | `JList` | 取前n行 |  |
 | `takeAsync` | Int: num: | `JavaFutureAction` | takeAsync方法 |  |
-| `takeOrdered` | Int: num:; Comparator[T]: comp: | `JList` | takeOrdered方法 |  |
-| `takeOrdered` | Int: num: | `JList` | takeOrdered方法 |  |
+| `takeOrdered` | Int: num:; Comparator[T]: comp: | `JList` | 返回排序后的前n个元素 |  |
+| `takeOrdered` | Int: num: | `JList` | 返回排序后的前n个元素 |  |
 | `toDebugString` | 无 | `String` | toDebugString方法 |  |
 | `toLocalIterator` | 无 | `JIterator` | toLocalIterator方法 |  |
-| `top` | Int: num:; Comparator[T]: comp: | `JList` | top方法 |  |
-| `top` | Int: num: | `JList` | top方法 |  |
+| `top` | Int: num:; Comparator[T]: comp: | `JList` | 返回最大的n个元素 |  |
+| `top` | Int: num: | `JList` | 返回最大的n个元素 |  |
 | `treeReduce` | JFunction2[T: f:; Int: depth: | `T` | treeReduce方法 |  |
 | `treeReduce` | JFunction2[T: f: | `T` | treeReduce方法 |  |
 | `zipWithIndex` | 无 | `JavaPairRDD` | zipWithIndex方法 |  |
