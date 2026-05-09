@@ -30,37 +30,37 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `cache` | 无 | `JavaDoubleRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
-| `coalesce` | Int: numPartitions: | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
-| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | numPartitions: Int | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaDoubleRDD` | 减少分区数，不触发shuffle |  |
 | `distinct` | 无 | `JavaDoubleRDD` | 去重 |  |
-| `distinct` | Int: numPartitions: | `JavaDoubleRDD` | 去重 |  |
-| `filter` | JFunction[JDouble: f: | `JavaDoubleRDD` | 过滤行 |  |
-| `histogram` | Int: bucketCount: | `Unit` | 计算直方图 |  |
-| `histogram` | Array[scala.Double]: buckets: | `Array` | 计算直方图 |  |
-| `intersection` | JavaDoubleRDD: other: | `JavaDoubleRDD` | 返回两个RDD的交集 |  |
+| `distinct` | numPartitions: Int | `JavaDoubleRDD` | 去重 |  |
+| `filter` | JFunction[JDouble: f | `JavaDoubleRDD` | 过滤行 |  |
+| `histogram` | bucketCount: Int | `Unit` | 计算直方图 |  |
+| `histogram` | Array[scala.Double]: buckets | `Array` | 计算直方图 |  |
+| `intersection` | JavaDoubleRDD: other | `JavaDoubleRDD` | 返回两个RDD的交集 |  |
 | `max` | 无 | `JDouble` | 最大值 |  |
 | `mean` | 无 | `JDouble` | 计算平均值 |  |
-| `meanApprox` | Long: timeout:; JDouble: confidence: | `PartialResult` | 近似计算平均值 |  |
-| `meanApprox` | Long: timeout: | `PartialResult` | 近似计算平均值 |  |
+| `meanApprox` | timeout: Long, confidence: JDouble | `PartialResult` | 近似计算平均值 |  |
+| `meanApprox` | timeout: Long | `PartialResult` | 近似计算平均值 |  |
 | `min` | 无 | `JDouble` | 最小值 |  |
-| `persist` | StorageLevel: newLevel: | `JavaDoubleRDD` | 持久化RDD到指定存储级别 |  |
-| `repartition` | Int: numPartitions: | `JavaDoubleRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
-| `sample` | Boolean: withReplacement:; JDouble: fraction: | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
-| `sample` | Boolean: withReplacement:; JDouble: fraction:; Long: seed: | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
+| `persist` | StorageLevel: newLevel | `JavaDoubleRDD` | 持久化RDD到指定存储级别 |  |
+| `repartition` | numPartitions: Int | `JavaDoubleRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
+| `sample` | withReplacement: Boolean, fraction: JDouble | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
+| `sample` | withReplacement: Boolean, fraction: JDouble, seed: Long | `JavaDoubleRDD` | 随机采样指定比例的元素 |  |
 | `sampleStdev` | 无 | `JDouble` | 计算样本标准差 |  |
 | `sampleVariance` | 无 | `JDouble` | 计算样本方差 |  |
-| `setName` | String: name: | `JavaDoubleRDD` | 设置RDD名称 |  |
+| `setName` | name: String | `JavaDoubleRDD` | 设置RDD名称 |  |
 | `stats` | 无 | `StatCounter` | 返回统计摘要(计数、均值、方差、最小、最大) |  |
 | `stdev` | 无 | `JDouble` | 计算标准差 |  |
-| `subtract` | JavaDoubleRDD: other: | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaDoubleRDD: other:; Int: numPartitions: | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaDoubleRDD: other:; Partitioner: p: | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaDoubleRDD: other | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaDoubleRDD: other, numPartitions: Int | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaDoubleRDD: other, Partitioner: p | `JavaDoubleRDD` | 返回当前RDD减去另一个RDD的差集 |  |
 | `sum` | 无 | `JDouble` | 求和 |  |
-| `sumApprox` | Long: timeout:; JDouble: confidence: | `PartialResult` | 近似计算总和 |  |
-| `sumApprox` | Long: timeout: | `PartialResult` | 近似计算总和 |  |
-| `union` | JavaDoubleRDD: other: | `JavaDoubleRDD` | 合并DataFrame |  |
+| `sumApprox` | timeout: Long, confidence: JDouble | `PartialResult` | 近似计算总和 |  |
+| `sumApprox` | timeout: Long | `PartialResult` | 近似计算总和 |  |
+| `union` | JavaDoubleRDD: other | `JavaDoubleRDD` | 合并DataFrame |  |
 | `unpersist` | 无 | `JavaDoubleRDD` | 取消RDD的持久化 |  |
-| `unpersist` | Boolean: blocking: | `JavaDoubleRDD` | 取消RDD的持久化 |  |
+| `unpersist` | blocking: Boolean | `JavaDoubleRDD` | 取消RDD的持久化 |  |
 | `variance` | 无 | `JDouble` | 计算方差 |  |
 
 ### JavaPairRDD
@@ -70,57 +70,57 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `cache` | 无 | `JavaPairRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
-| `coalesce` | Int: numPartitions: | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
-| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | numPartitions: Int | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaPairRDD` | 减少分区数，不触发shuffle |  |
 | `collectAsMap` | 无 | `java` | 收集RDD为Java Map |  |
-| `countApproxDistinctByKey` | Double: relativeSD:; Partitioner: partitioner: | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
-| `countApproxDistinctByKey` | Double: relativeSD:; Int: numPartitions: | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
-| `countApproxDistinctByKey` | Double: relativeSD: | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
+| `countApproxDistinctByKey` | relativeSD: Double, Partitioner: partitioner | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
+| `countApproxDistinctByKey` | relativeSD: Double, numPartitions: Int | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
+| `countApproxDistinctByKey` | relativeSD: Double | `JavaPairRDD` | 近似统计每个Key的唯一Value数量 |  |
 | `countByKey` | 无 | `java` | 统计每个Key的数量 |  |
-| `countByKeyApprox` | Long: timeout: | `PartialResult` | countByKeyApprox方法 |  |
-| `countByKeyApprox` | Long: timeout:; 0.95: confidence: Double = | `PartialResult` | countByKeyApprox方法 |  |
+| `countByKeyApprox` | timeout: Long | `PartialResult` | countByKeyApprox方法 |  |
+| `countByKeyApprox` | timeout: Long, 0.95: confidence | `PartialResult` | countByKeyApprox方法 |  |
 | `distinct` | 无 | `JavaPairRDD` | 去重 |  |
-| `distinct` | Int: numPartitions: | `JavaPairRDD` | 去重 |  |
-| `filter` | JFunction[(K: f: | `Unit` | 过滤行 |  |
-| `foldByKey` | V: zeroValue:; Partitioner: partitioner:; JFunction2[V: func: | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
-| `foldByKey` | V: zeroValue:; Int: numPartitions:; JFunction2[V: func: | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
-| `foldByKey` | V: zeroValue:; JFunction2[V: func: | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
-| `groupByKey` | Partitioner: partitioner: | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
-| `groupByKey` | Int: numPartitions: | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
+| `distinct` | numPartitions: Int | `JavaPairRDD` | 去重 |  |
+| `filter` | JFunction[(K: f | `Unit` | 过滤行 |  |
+| `foldByKey` | V: zeroValue, Partitioner: partitioner, JFunction2[V: func | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
+| `foldByKey` | V: zeroValue, numPartitions: Int, JFunction2[V: func | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
+| `foldByKey` | V: zeroValue, JFunction2[V: func | `JavaPairRDD` | 按Key使用零值和组合函数聚合 |  |
+| `groupByKey` | Partitioner: partitioner | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
+| `groupByKey` | numPartitions: Int | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
 | `groupByKey` | 无 | `JavaPairRDD` | 按Key分组，返回(K, Iterable<V>) |  |
-| `intersection` | JavaPairRDD[K: other: | `JavaPairRDD` | 返回两个RDD的交集 |  |
+| `intersection` | JavaPairRDD[K: other | `JavaPairRDD` | 返回两个RDD的交集 |  |
 | `keys` | 无 | `JavaRDD` | 返回所有Key的RDD |  |
-| `lookup` | K: key: | `JList` | 查找指定Key的所有Value |  |
-| `partitionBy` | Partitioner: partitioner: | `JavaPairRDD` | 使用指定分区器重新分区 |  |
-| `persist` | StorageLevel: newLevel: | `JavaPairRDD` | 持久化RDD到指定存储级别 |  |
-| `reduceByKey` | Partitioner: partitioner:; JFunction2[V: func: | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
-| `reduceByKey` | JFunction2[V: func:; Int: numPartitions: | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
-| `reduceByKey` | JFunction2[V: func: | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
-| `reduceByKeyLocally` | JFunction2[V: func: | `java` | reduceByKeyLocally方法 |  |
-| `repartition` | Int: numPartitions: | `JavaPairRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
-| `repartitionAndSortWithinPartitions` | Partitioner: partitioner: | `JavaPairRDD` | 重新分区并在分区内排序 |  |
-| `repartitionAndSortWithinPartitions` | Partitioner: partitioner:; Comparator[K]: comp: | `JavaPairRDD` | 重新分区并在分区内排序 |  |
-| `sample` | Boolean: withReplacement:; Double: fraction: | `JavaPairRDD` | 随机采样指定比例的元素 |  |
-| `sample` | Boolean: withReplacement:; Double: fraction:; Long: seed: | `JavaPairRDD` | 随机采样指定比例的元素 |  |
-| `sampleByKey` | Boolean: withReplacement:; java.util.Map[K: fractions:; Long: seed: | `JavaPairRDD` | 按Key采样 |  |
-| `sampleByKey` | Boolean: withReplacement:; java.util.Map[K: fractions: | `JavaPairRDD` | 按Key采样 |  |
-| `sampleByKeyExact` | Boolean: withReplacement:; java.util.Map[K: fractions:; Long: seed: | `JavaPairRDD` | 按Key精确采样 |  |
-| `sampleByKeyExact` | Boolean: withReplacement:; java.util.Map[K: fractions: | `JavaPairRDD` | 按Key精确采样 |  |
-| `saveAsHadoopDataset` | JobConf: conf: | `Unit` | saveAsHadoopDataset方法 |  |
-| `saveAsNewAPIHadoopDataset` | Configuration: conf: | `Unit` | saveAsNewAPIHadoopDataset方法 |  |
-| `setName` | String: name: | `JavaPairRDD` | 设置RDD名称 |  |
+| `lookup` | K: key | `JList` | 查找指定Key的所有Value |  |
+| `partitionBy` | Partitioner: partitioner | `JavaPairRDD` | 使用指定分区器重新分区 |  |
+| `persist` | StorageLevel: newLevel | `JavaPairRDD` | 持久化RDD到指定存储级别 |  |
+| `reduceByKey` | Partitioner: partitioner, JFunction2[V: func | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
+| `reduceByKey` | JFunction2[V: func, numPartitions: Int | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
+| `reduceByKey` | JFunction2[V: func | `JavaPairRDD` | 按Key聚合Value，使用reduce函数合并同Key的Value | JavaPairRDD<String, Integer> reduced = pairRDD.reduceByKey((a, b) -> a + b); |
+| `reduceByKeyLocally` | JFunction2[V: func | `java` | reduceByKeyLocally方法 |  |
+| `repartition` | numPartitions: Int | `JavaPairRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
+| `repartitionAndSortWithinPartitions` | Partitioner: partitioner | `JavaPairRDD` | 重新分区并在分区内排序 |  |
+| `repartitionAndSortWithinPartitions` | Partitioner: partitioner, Comparator[K]: comp | `JavaPairRDD` | 重新分区并在分区内排序 |  |
+| `sample` | withReplacement: Boolean, fraction: Double | `JavaPairRDD` | 随机采样指定比例的元素 |  |
+| `sample` | withReplacement: Boolean, fraction: Double, seed: Long | `JavaPairRDD` | 随机采样指定比例的元素 |  |
+| `sampleByKey` | withReplacement: Boolean, java.util.Map[K: fractions, seed: Long | `JavaPairRDD` | 按Key采样 |  |
+| `sampleByKey` | withReplacement: Boolean, java.util.Map[K: fractions | `JavaPairRDD` | 按Key采样 |  |
+| `sampleByKeyExact` | withReplacement: Boolean, java.util.Map[K: fractions, seed: Long | `JavaPairRDD` | 按Key精确采样 |  |
+| `sampleByKeyExact` | withReplacement: Boolean, java.util.Map[K: fractions | `JavaPairRDD` | 按Key精确采样 |  |
+| `saveAsHadoopDataset` | JobConf: conf | `Unit` | saveAsHadoopDataset方法 |  |
+| `saveAsNewAPIHadoopDataset` | Configuration: conf | `Unit` | saveAsNewAPIHadoopDataset方法 |  |
+| `setName` | name: String | `JavaPairRDD` | 设置RDD名称 |  |
 | `sortByKey` | 无 | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Boolean: ascending: | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Boolean: ascending:; Int: numPartitions: | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Comparator[K]: comp: | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Comparator[K]: comp:; Boolean: ascending: | `JavaPairRDD` | 按Key排序RDD |  |
-| `sortByKey` | Comparator[K]: comp:; Boolean: ascending:; Int: numPartitions: | `JavaPairRDD` | 按Key排序RDD |  |
-| `subtract` | JavaPairRDD[K: other: | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaPairRDD[K: other:; Int: numPartitions: | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaPairRDD[K: other:; Partitioner: p: | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `union` | JavaPairRDD[K: other: | `JavaPairRDD` | 合并DataFrame |  |
+| `sortByKey` | ascending: Boolean | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | ascending: Boolean, numPartitions: Int | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Comparator[K]: comp | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Comparator[K]: comp, ascending: Boolean | `JavaPairRDD` | 按Key排序RDD |  |
+| `sortByKey` | Comparator[K]: comp, ascending: Boolean, numPartitions: Int | `JavaPairRDD` | 按Key排序RDD |  |
+| `subtract` | JavaPairRDD[K: other | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaPairRDD[K: other, numPartitions: Int | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaPairRDD[K: other, Partitioner: p | `JavaPairRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `union` | JavaPairRDD[K: other | `JavaPairRDD` | 合并DataFrame |  |
 | `unpersist` | 无 | `JavaPairRDD` | 取消RDD的持久化 |  |
-| `unpersist` | Boolean: blocking: | `JavaPairRDD` | 取消RDD的持久化 |  |
+| `unpersist` | blocking: Boolean | `JavaPairRDD` | 取消RDD的持久化 |  |
 | `values` | 无 | `JavaRDD` | 返回所有Value的RDD |  |
 
 ### JavaRDD
@@ -130,27 +130,27 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `cache` | 无 | `JavaRDD` | 缓存RDD到内存，默认MEMORY_ONLY |  |
-| `coalesce` | Int: numPartitions: | `JavaRDD` | 减少分区数，不触发shuffle |  |
-| `coalesce` | Int: numPartitions:; Boolean: shuffle: | `JavaRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | numPartitions: Int | `JavaRDD` | 减少分区数，不触发shuffle |  |
+| `coalesce` | numPartitions: Int, shuffle: Boolean | `JavaRDD` | 减少分区数，不触发shuffle |  |
 | `distinct` | 无 | `JavaRDD` | 去重 |  |
-| `distinct` | Int: numPartitions: | `JavaRDD` | 去重 |  |
-| `filter` | JFunction[T: f: | `JavaRDD` | 过滤行 | JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> filtered = rdd.filter(x -> x > 2); |
+| `distinct` | numPartitions: Int | `JavaRDD` | 去重 |  |
+| `filter` | JFunction[T: f | `JavaRDD` | 过滤行 | JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>JavaRDD<Integer> filtered = rdd.filter(x -> x > 2); |
 | `getResourceProfile` | 无 | `ResourceProfile` | getResourceProfile方法 |  |
-| `intersection` | JavaRDD[T]: other: | `JavaRDD` | 返回两个RDD的交集 |  |
-| `persist` | StorageLevel: newLevel: | `JavaRDD` | 持久化RDD到指定存储级别 |  |
-| `randomSplit` | Array[Double]: weights: | `Array` | 按权重随机分割RDD为多个RDD |  |
-| `randomSplit` | Array[Double]: weights:; Long: seed: | `Array` | 按权重随机分割RDD为多个RDD |  |
-| `repartition` | Int: numPartitions: | `JavaRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
-| `sample` | Boolean: withReplacement:; Double: fraction: | `JavaRDD` | 随机采样指定比例的元素 |  |
-| `sample` | Boolean: withReplacement:; Double: fraction:; Long: seed: | `JavaRDD` | 随机采样指定比例的元素 |  |
-| `setName` | String: name: | `JavaRDD` | 设置RDD名称 |  |
-| `subtract` | JavaRDD[T]: other: | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaRDD[T]: other:; Int: numPartitions: | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `subtract` | JavaRDD[T]: other:; Partitioner: p: | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
-| `union` | JavaRDD[T]: other: | `JavaRDD` | 合并DataFrame |  |
+| `intersection` | JavaRDD[T]: other | `JavaRDD` | 返回两个RDD的交集 |  |
+| `persist` | StorageLevel: newLevel | `JavaRDD` | 持久化RDD到指定存储级别 |  |
+| `randomSplit` | Array[Double]: weights | `Array` | 按权重随机分割RDD为多个RDD |  |
+| `randomSplit` | Array[Double]: weights, seed: Long | `Array` | 按权重随机分割RDD为多个RDD |  |
+| `repartition` | numPartitions: Int | `JavaRDD` | 重新分区，增加或减少分区数，触发shuffle |  |
+| `sample` | withReplacement: Boolean, fraction: Double | `JavaRDD` | 随机采样指定比例的元素 |  |
+| `sample` | withReplacement: Boolean, fraction: Double, seed: Long | `JavaRDD` | 随机采样指定比例的元素 |  |
+| `setName` | name: String | `JavaRDD` | 设置RDD名称 |  |
+| `subtract` | JavaRDD[T]: other | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaRDD[T]: other, numPartitions: Int | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `subtract` | JavaRDD[T]: other, Partitioner: p | `JavaRDD` | 返回当前RDD减去另一个RDD的差集 |  |
+| `union` | JavaRDD[T]: other | `JavaRDD` | 合并DataFrame |  |
 | `unpersist` | 无 | `JavaRDD` | 取消RDD的持久化 |  |
-| `unpersist` | Boolean: blocking: | `JavaRDD` | 取消RDD的持久化 |  |
-| `withResources` | ResourceProfile: rp: | `JavaRDD` | withResources方法 |  |
+| `unpersist` | blocking: Boolean | `JavaRDD` | 取消RDD的持久化 |  |
+| `withResources` | ResourceProfile: rp | `JavaRDD` | withResources方法 |  |
 
 ### JavaSparkContext
 **包路径**: `org.apache.spark.api.java`
@@ -158,51 +158,51 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addFile` | String: path: | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
-| `addFile` | String: path:; Boolean: recursive: | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
-| `addJar` | String: path: | `Unit` | 添加JAR包到Spark作业 |  |
-| `addJobTag` | String: tag: | `Unit` | addJobTag方法 |  |
-| `binaryFiles` | String: path:; Int: minPartitions: | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
-| `binaryFiles` | String: path: | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
-| `binaryRecords` | String: path:; Int: recordLength: | `JavaRDD` | 读取固定长度的二进制记录文件 |  |
+| `addFile` | path: String | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
+| `addFile` | path: String, recursive: Boolean | `Unit` | 添加文件到Spark作业，所有Executor可访问 |  |
+| `addJar` | path: String | `Unit` | 添加JAR包到Spark作业 |  |
+| `addJobTag` | tag: String | `Unit` | addJobTag方法 |  |
+| `binaryFiles` | path: String, minPartitions: Int | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
+| `binaryFiles` | path: String | `JavaPairRDD` | 读取二进制文件目录，返回(文件路径,PortableDataStream) |  |
+| `binaryRecords` | path: String, recordLength: Int | `JavaRDD` | 读取固定长度的二进制记录文件 |  |
 | `cancelAllJobs` | 无 | `Unit` | 取消所有正在运行的作业 |  |
-| `cancelJobGroup` | String: groupId:; String: reason: | `Unit` | 取消指定作业组的所有作业 |  |
-| `cancelJobGroup` | String: groupId: | `Unit` | 取消指定作业组的所有作业 |  |
-| `cancelJobsWithTag` | String: tag:; String: reason: | `Unit` | cancelJobsWithTag方法 |  |
-| `cancelJobsWithTag` | String: tag: | `Unit` | cancelJobsWithTag方法 |  |
+| `cancelJobGroup` | groupId: String, reason: String | `Unit` | 取消指定作业组的所有作业 |  |
+| `cancelJobGroup` | groupId: String | `Unit` | 取消指定作业组的所有作业 |  |
+| `cancelJobsWithTag` | tag: String, reason: String | `Unit` | cancelJobsWithTag方法 |  |
+| `cancelJobsWithTag` | tag: String | `Unit` | cancelJobsWithTag方法 |  |
 | `clearCallSite` | 无 | `Unit` | clearCallSite方法 |  |
 | `clearJobGroup` | 无 | `Unit` | clearJobGroup方法 |  |
 | `clearJobTags` | 无 | `Unit` | clearJobTags方法 |  |
 | `getJobTags` | 无 | `util` | getJobTags方法 |  |
-| `getLocalProperty` | String: key: | `String` | getLocalProperty方法 |  |
+| `getLocalProperty` | key: String | `String` | getLocalProperty方法 |  |
 | `getSparkHome` | 无 | `Optional` | getSparkHome方法 |  |
 | `hadoopConfiguration` | 无 | `Configuration` | hadoopConfiguration方法 |  |
-| `jarOfClass` | Class[_]: cls: | `Array` | jarOfClass方法 |  |
-| `jarOfObject` | AnyRef: obj: | `Array` | jarOfObject方法 |  |
-| `parallelizeDoubles` | java.util.List[java.lang.Double]: list:; Int: numSlices: | `JavaDoubleRDD` | parallelizeDoubles方法 |  |
-| `parallelizeDoubles` | java.util.List[java.lang.Double]: list: | `JavaDoubleRDD` | parallelizeDoubles方法 |  |
-| `removeJobTag` | String: tag: | `Unit` | removeJobTag方法 |  |
-| `setCallSite` | String: site: | `Unit` | setCallSite方法 |  |
-| `setCheckpointDir` | String: dir: | `Unit` | 设置Checkpoint目录，用于RDD容错 |  |
-| `setInterruptOnCancel` | Boolean: interruptOnCancel: | `Unit` | setInterruptOnCancel方法 |  |
-| `setJobDescription` | String: value: | `Unit` | setJobDescription方法 |  |
-| `setJobGroup` | String: groupId:; String: description:; Boolean: interruptOnCancel: | `Unit` | 设置作业组，用于取消一组作业 |  |
-| `setJobGroup` | String: groupId:; String: description: | `Unit` | 设置作业组，用于取消一组作业 |  |
-| `setLocalProperty` | String: key:; String: value: | `Unit` | setLocalProperty方法 |  |
-| `setLogLevel` | String: logLevel: | `Unit` | 设置日志级别 |  |
+| `jarOfClass` | Class[_]: cls | `Array` | jarOfClass方法 |  |
+| `jarOfObject` | AnyRef: obj | `Array` | jarOfObject方法 |  |
+| `parallelizeDoubles` | java.util.List[java.lang.Double]: list, numSlices: Int | `JavaDoubleRDD` | parallelizeDoubles方法 |  |
+| `parallelizeDoubles` | java.util.List[java.lang.Double]: list | `JavaDoubleRDD` | parallelizeDoubles方法 |  |
+| `removeJobTag` | tag: String | `Unit` | removeJobTag方法 |  |
+| `setCallSite` | site: String | `Unit` | setCallSite方法 |  |
+| `setCheckpointDir` | dir: String | `Unit` | 设置Checkpoint目录，用于RDD容错 |  |
+| `setInterruptOnCancel` | interruptOnCancel: Boolean | `Unit` | setInterruptOnCancel方法 |  |
+| `setJobDescription` | value: String | `Unit` | setJobDescription方法 |  |
+| `setJobGroup` | groupId: String, description: String, interruptOnCancel: Boolean | `Unit` | 设置作业组，用于取消一组作业 |  |
+| `setJobGroup` | groupId: String, description: String | `Unit` | 设置作业组，用于取消一组作业 |  |
+| `setLocalProperty` | key: String, value: String | `Unit` | setLocalProperty方法 |  |
+| `setLogLevel` | logLevel: String | `Unit` | 设置日志级别 |  |
 | `stop` | 无 | `Unit` | 停止SparkContext，释放资源 |  |
-| `stop` | Int: exitCode: | `Unit` | 停止SparkContext，释放资源 |  |
-| `textFile` | String: path: | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
-| `textFile` | String: path:; Int: minPartitions: | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
+| `stop` | exitCode: Int | `Unit` | 停止SparkContext，释放资源 |  |
+| `textFile` | path: String | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
+| `textFile` | path: String, minPartitions: Int | `JavaRDD` | 从文件系统读取文本文件，每行作为一条记录 | JavaRDD<String> lines = sc.textFile("hdfs://path/file.txt"); |
 | `this` | 无 | `Unit` | this方法 |  |
-| `this` | SparkConf: conf: | `Unit` | this方法 |  |
-| `this` | String: master:; String: appName: | `Unit` | this方法 |  |
-| `this` | String: master:; String: appName:; SparkConf: conf: | `Unit` | this方法 |  |
-| `this` | String: master:; String: appName:; String: sparkHome:; String: jarFile: | `Unit` | this方法 |  |
-| `this` | String: master:; String: appName:; String: sparkHome:; Array[String]: jars: | `Unit` | this方法 |  |
-| `this` | String: master:; String: appName:; String: sparkHome:; Array[String]: jars:; JMap[String: environment: | `Unit` | this方法 |  |
-| `wholeTextFiles` | String: path:; Int: minPartitions: | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
-| `wholeTextFiles` | String: path: | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
+| `this` | SparkConf: conf | `Unit` | this方法 |  |
+| `this` | master: String, appName: String | `Unit` | this方法 |  |
+| `this` | master: String, appName: String, SparkConf: conf | `Unit` | this方法 |  |
+| `this` | master: String, appName: String, sparkHome: String, jarFile: String | `Unit` | this方法 |  |
+| `this` | master: String, appName: String, sparkHome: String, Array[String]: jars | `Unit` | this方法 |  |
+| `this` | master: String, appName: String, sparkHome: String, Array[String]: jars, JMap[String: environment | `Unit` | this方法 |  |
+| `wholeTextFiles` | path: String, minPartitions: Int | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
+| `wholeTextFiles` | path: String | `JavaPairRDD` | 读取目录下所有文本文件，返回(文件路径,文件内容)键值对 |  |
 
 ---
 
@@ -214,7 +214,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaBinaryClassificationMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -222,7 +222,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaBisectingKMeansExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -230,8 +230,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaChiSqSelectorExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -239,8 +239,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaCorrelationsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -248,7 +248,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaElementwiseProductExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -256,8 +256,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaGaussianMixtureExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -265,8 +265,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaGradientBoostingClassificationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -274,7 +274,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaGradientBoostingRegressionExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -282,7 +282,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaHypothesisTestingExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -290,7 +290,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaHypothesisTestingKolmogorovSmirnovTestExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -298,7 +298,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaIsotonicRegressionExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -306,8 +306,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaKMeansExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -315,8 +315,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaKernelDensityEstimationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -324,7 +324,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLBFGSExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -332,7 +332,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLatentDirichletAllocationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -340,7 +340,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLogisticRegressionWithLBFGSExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -348,7 +348,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaMultiLabelClassificationMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -356,7 +356,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaMulticlassClassificationMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -364,7 +364,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaNaiveBayesExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -372,8 +372,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaPCAExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -381,8 +381,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaPowerIterationClusteringExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -390,8 +390,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaPrefixSpanExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -399,8 +399,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRandomForestClassificationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -408,7 +408,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRandomForestRegressionExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -416,7 +416,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRankingMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -424,7 +424,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRecommendationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -432,7 +432,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaSVDExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -440,7 +440,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaSVMWithSGDExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -448,7 +448,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaSimpleFPGrowth
 **包路径**: `org.apache.spark.examples.mllib`
@@ -456,7 +456,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaStratifiedSamplingExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -464,7 +464,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaStreamingTestExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -472,7 +472,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaSummaryStatisticsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -480,7 +480,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ---
 
@@ -501,21 +501,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `binarySearch` | data: boolean[]; value: boolean | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Boolean[]; value: Boolean | `int` | binarySearch方法 |  |
-| `binarySearch` | data: byte[]; value: byte | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Byte[]; value: Byte | `int` | binarySearch方法 |  |
-| `binarySearch` | data: short[]; value: short | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Short[]; value: Short | `int` | binarySearch方法 |  |
-| `binarySearch` | data: int[]; value: int | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Integer[]; value: Integer | `int` | binarySearch方法 |  |
-| `binarySearch` | data: long[]; value: long | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Long[]; value: Long | `int` | binarySearch方法 |  |
-| `binarySearch` | data: float[]; value: float | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Float[]; value: Float | `int` | binarySearch方法 |  |
-| `binarySearch` | data: double[]; value: double | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Double[]; value: Double | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Object[]; value: Object; comp: Comparator<Object> | `int` | binarySearch方法 |  |
+| `binarySearch` | data: boolean&lt;&gt;, value: boolean | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Boolean&lt;&gt;, value: Boolean | `int` | binarySearch方法 |  |
+| `binarySearch` | data: byte&lt;&gt;, value: byte | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Byte&lt;&gt;, value: Byte | `int` | binarySearch方法 |  |
+| `binarySearch` | data: short&lt;&gt;, value: short | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Short&lt;&gt;, value: Short | `int` | binarySearch方法 |  |
+| `binarySearch` | data: int&lt;&gt;, value: int | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Integer&lt;&gt;, value: Integer | `int` | binarySearch方法 |  |
+| `binarySearch` | data: long&lt;&gt;, value: long | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Long&lt;&gt;, value: Long | `int` | binarySearch方法 |  |
+| `binarySearch` | data: float&lt;&gt;, value: float | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Float&lt;&gt;, value: Float | `int` | binarySearch方法 |  |
+| `binarySearch` | data: double&lt;&gt;, value: double | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Double&lt;&gt;, value: Double | `int` | binarySearch方法 |  |
+| `binarySearch` | data: Object&lt;&gt;, value: Object, comp: Comparator<Object> | `int` | binarySearch方法 |  |
 
 ### ArrayOfDecimalsSerDe
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -526,9 +526,9 @@
 | `getClassOfT` | 无 | `Class&lt;Decimal&gt;` | getClassOfT方法 |  |
 | `getClassOfT` | 无 | `Class&lt;Decimal&gt;` | getClassOfT方法 |  |
 | `sizeOf` | item: Decimal | `int` | sizeOf方法 |  |
-| `sizeOf` | mem: Memory; offsetBytes: long; numItems: int | `int` | sizeOf方法 |  |
+| `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | sizeOf方法 |  |
 | `sizeOf` | item: Decimal | `int` | sizeOf方法 |  |
-| `sizeOf` | mem: Memory; offsetBytes: long; numItems: int | `int` | sizeOf方法 |  |
+| `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | sizeOf方法 |  |
 
 ### ArrowColumnVector
 **包路径**: `org.apache.spark.sql.vectorized`
@@ -541,7 +541,7 @@
 | `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
 | `getByte` | rowId: int | `byte` | getByte方法 |  |
 | `getChild` | ordinal: int | `ArrowColumnVector` | getChild方法 |  |
-| `getDecimal` | rowId: int; precision: int; scale: int | `Decimal` | getDecimal方法 |  |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
 | `getDouble` | rowId: int | `double` | getDouble方法 |  |
 | `getFloat` | rowId: int | `float` | getFloat方法 |  |
 | `getGeography` | rowId: int | `GeographyVal` | getGeography方法 |  |
@@ -574,11 +574,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `bitmapAndMerge` | bitmap1: byte[]; bitmap2: byte[] | `void` | bitmapAndMerge方法 |  |
+| `bitmapAndMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | bitmapAndMerge方法 |  |
 | `bitmapBitPosition` | value: long | `long` | bitmapBitPosition方法 |  |
 | `bitmapBucketNumber` | value: long | `long` | bitmapBucketNumber方法 |  |
-| `bitmapCount` | bitmap: byte[] | `long` | bitmapCount方法 |  |
-| `bitmapMerge` | bitmap1: byte[]; bitmap2: byte[] | `void` | bitmapMerge方法 |  |
+| `bitmapCount` | bitmap: byte&lt;&gt; | `long` | bitmapCount方法 |  |
+| `bitmapMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | bitmapMerge方法 |  |
 
 ### BufferedRowIterator
 **包路径**: `org.apache.spark.sql.execution`
@@ -614,14 +614,14 @@
 | `containsValue` | value: Object | `boolean` | containsValue方法 |  |
 | `empty` | 无 | `CaseInsensitiveStringMap` | empty方法 |  |
 | `get` | key: Object | `String` | 获取元素 |  |
-| `getBoolean` | key: String; defaultValue: boolean | `boolean` | getBoolean方法 |  |
-| `getDouble` | key: String; defaultValue: double | `double` | getDouble方法 |  |
-| `getInt` | key: String; defaultValue: int | `int` | getInt方法 |  |
-| `getLong` | key: String; defaultValue: long | `long` | getLong方法 |  |
+| `getBoolean` | key: String, defaultValue: boolean | `boolean` | getBoolean方法 |  |
+| `getDouble` | key: String, defaultValue: double | `double` | getDouble方法 |  |
+| `getInt` | key: String, defaultValue: int | `int` | getInt方法 |  |
+| `getLong` | key: String, defaultValue: long | `long` | getLong方法 |  |
 | `isEmpty` | 无 | `boolean` | 判断是否为空 |  |
 | `keySet` | 无 | `Set&lt;String&gt;` | keySet方法 |  |
-| `put` | key: String; value: String | `String` | 添加键值对 |  |
-| `putAll` | String: Map<? extends; m: ? extends String> | `void` | putAll方法 |  |
+| `put` | key: String, value: String | `String` | 添加键值对 |  |
+| `putAll` | Map<? extends: String, m: ? extends String> | `void` | putAll方法 |  |
 | `remove` | key: Object | `String` | 删除元素 |  |
 | `size` | 无 | `int` | 计算大小 |  |
 | `values` | 无 | `Collection&lt;String&gt;` | 返回所有Value的RDD |  |
@@ -652,9 +652,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `charTypeWriteSideCheck` | inputStr: UTF8String; limit: int | `UTF8String` | charTypeWriteSideCheck方法 |  |
-| `readSidePadding` | inputStr: UTF8String; limit: int | `UTF8String` | readSidePadding方法 |  |
-| `varcharTypeWriteSideCheck` | inputStr: UTF8String; limit: int | `UTF8String` | varcharTypeWriteSideCheck方法 |  |
+| `charTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | charTypeWriteSideCheck方法 |  |
+| `readSidePadding` | inputStr: UTF8String, limit: int | `UTF8String` | readSidePadding方法 |  |
+| `varcharTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | varcharTypeWriteSideCheck方法 |  |
 
 ### Check
 **包路径**: `org.apache.spark.sql.connector.catalog.constraints`
@@ -674,35 +674,35 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `binaryTrim` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | binaryTrim方法 |  |
-| `binaryTrimRight` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | binaryTrimRight方法 |  |
-| `compareLowerCase` | left: final UTF8String; right: final UTF8String | `int` | compareLowerCase方法 |  |
-| `findInSet` | match: final UTF8String; set: final UTF8String; collationId: int | `int` | findInSet方法 |  |
-| `indexOf` | target: final UTF8String; pattern: final UTF8String; start: final int; collationId: final int | `int` | indexOf方法 |  |
+| `binaryTrim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | binaryTrim方法 |  |
+| `binaryTrimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | binaryTrimRight方法 |  |
+| `compareLowerCase` | left: final UTF8String, right: final UTF8String | `int` | compareLowerCase方法 |  |
+| `findInSet` | match: final UTF8String, set: final UTF8String, collationId: int | `int` | findInSet方法 |  |
+| `indexOf` | target: final UTF8String, pattern: final UTF8String, start: final int, collationId: final int | `int` | indexOf方法 |  |
 | `lowerCaseCodePoints` | target: final UTF8String | `UTF8String` | lowerCaseCodePoints方法 |  |
-| `lowercaseContains` | target: final UTF8String; pattern: final UTF8String | `boolean` | lowercaseContains方法 |  |
-| `lowercaseEndsWith` | target: final UTF8String; pattern: final UTF8String | `boolean` | lowercaseEndsWith方法 |  |
-| `lowercaseIndexOf` | target: final UTF8String; pattern: final UTF8String; start: final int | `int` | lowercaseIndexOf方法 |  |
-| `lowercaseReplace` | target: final UTF8String; search: final UTF8String; replace: final UTF8String | `UTF8String` | lowercaseReplace方法 |  |
-| `lowercaseStartsWith` | target: final UTF8String; pattern: final UTF8String | `boolean` | lowercaseStartsWith方法 |  |
-| `lowercaseSubStringIndex` | string: final UTF8String; delimiter: final UTF8String; count: int | `UTF8String` | lowercaseSubStringIndex方法 |  |
-| `lowercaseTranslate` | input: final UTF8String; Map<String: final; dict: String> | `UTF8String` | lowercaseTranslate方法 |  |
-| `lowercaseTrim` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | lowercaseTrim方法 |  |
-| `lowercaseTrimLeft` | srcString: final UTF8String; trimString: final UTF8String | `UTF8String` | lowercaseTrimLeft方法 |  |
-| `lowercaseTrimRight` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | lowercaseTrimRight方法 |  |
-| `replace` | target: final UTF8String; search: final UTF8String; replace: final UTF8String; collationId: final int | `UTF8String` | replace方法 |  |
-| `subStringIndex` | string: final UTF8String; delimiter: final UTF8String; count: int; collationId: final int | `UTF8String` | subStringIndex方法 |  |
+| `lowercaseContains` | target: final UTF8String, pattern: final UTF8String | `boolean` | lowercaseContains方法 |  |
+| `lowercaseEndsWith` | target: final UTF8String, pattern: final UTF8String | `boolean` | lowercaseEndsWith方法 |  |
+| `lowercaseIndexOf` | target: final UTF8String, pattern: final UTF8String, start: final int | `int` | lowercaseIndexOf方法 |  |
+| `lowercaseReplace` | target: final UTF8String, search: final UTF8String, replace: final UTF8String | `UTF8String` | lowercaseReplace方法 |  |
+| `lowercaseStartsWith` | target: final UTF8String, pattern: final UTF8String | `boolean` | lowercaseStartsWith方法 |  |
+| `lowercaseSubStringIndex` | string: final UTF8String, delimiter: final UTF8String, count: int | `UTF8String` | lowercaseSubStringIndex方法 |  |
+| `lowercaseTranslate` | input: final UTF8String, Map<String: final, dict: String> | `UTF8String` | lowercaseTranslate方法 |  |
+| `lowercaseTrim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | lowercaseTrim方法 |  |
+| `lowercaseTrimLeft` | srcString: final UTF8String, trimString: final UTF8String | `UTF8String` | lowercaseTrimLeft方法 |  |
+| `lowercaseTrimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | lowercaseTrimRight方法 |  |
+| `replace` | target: final UTF8String, search: final UTF8String, replace: final UTF8String, collationId: final int | `UTF8String` | replace方法 |  |
+| `subStringIndex` | string: final UTF8String, delimiter: final UTF8String, count: int, collationId: final int | `UTF8String` | subStringIndex方法 |  |
 | `toLowerCase` | target: final UTF8String | `UTF8String` | toLowerCase方法 |  |
-| `toLowerCase` | target: final UTF8String; collationId: final int | `UTF8String` | toLowerCase方法 |  |
+| `toLowerCase` | target: final UTF8String, collationId: final int | `UTF8String` | toLowerCase方法 |  |
 | `toTitleCase` | target: final UTF8String | `UTF8String` | toTitleCase方法 |  |
-| `toTitleCase` | target: final UTF8String; collationId: final int | `UTF8String` | toTitleCase方法 |  |
+| `toTitleCase` | target: final UTF8String, collationId: final int | `UTF8String` | toTitleCase方法 |  |
 | `toTitleCaseICU` | source: UTF8String | `UTF8String` | toTitleCaseICU方法 |  |
 | `toUpperCase` | target: final UTF8String | `UTF8String` | toUpperCase方法 |  |
-| `toUpperCase` | target: final UTF8String; collationId: final int | `UTF8String` | toUpperCase方法 |  |
-| `translate` | input: final UTF8String; Map<String: final; dict: String>; collationId: final int | `UTF8String` | translate方法 |  |
-| `trim` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | 去除空白 |  |
-| `trimLeft` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | trimLeft方法 |  |
-| `trimRight` | srcString: final UTF8String; trimString: final UTF8String; collationId: final int | `UTF8String` | trimRight方法 |  |
+| `toUpperCase` | target: final UTF8String, collationId: final int | `UTF8String` | toUpperCase方法 |  |
+| `translate` | input: final UTF8String, Map<String: final, dict: String>, collationId: final int | `UTF8String` | translate方法 |  |
+| `trim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 去除空白 |  |
+| `trimLeft` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | trimLeft方法 |  |
+| `trimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | trimRight方法 |  |
 
 ### ColumnDefaultValue
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -734,8 +734,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `populate` | col: ConstantColumnVector; row: InternalRow; fieldIdx: int | `void` | populate方法 |  |
-| `toBatch` | schema: StructType; memMode: MemoryMode; row: Iterator<Row> | `ColumnarBatch` | toBatch方法 |  |
+| `populate` | col: ConstantColumnVector, row: InternalRow, fieldIdx: int | `void` | populate方法 |  |
+| `toBatch` | schema: StructType, memMode: MemoryMode, row: Iterator<Row> | `ColumnarBatch` | toBatch方法 |  |
 | `toJavaIntMap` | map: ColumnarMap | `Map&lt;Integer, Integer&gt;` | toJavaIntMap方法 |  |
 
 ### ColumnarBatch
@@ -767,7 +767,7 @@
 | `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
 | `getByte` | rowId: int | `byte` | getByte方法 |  |
 | `getChild` | ordinal: int | `ColumnVector` | getChild方法 |  |
-| `getDecimal` | rowId: int; precision: int; scale: int | `Decimal` | getDecimal方法 |  |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
 | `getDouble` | rowId: int | `double` | getDouble方法 |  |
 | `getFloat` | rowId: int | `float` | getFloat方法 |  |
 | `getInt` | rowId: int | `int` | getInt方法 |  |
@@ -779,12 +779,12 @@
 | `isNullAt` | rowId: int | `boolean` | isNullAt方法 |  |
 | `numNulls` | 无 | `int` | numNulls方法 |  |
 | `setArray` | value: ColumnarArray | `void` | setArray方法 |  |
-| `setBinary` | value: byte[] | `void` | setBinary方法 |  |
+| `setBinary` | value: byte&lt;&gt; | `void` | setBinary方法 |  |
 | `setBoolean` | value: boolean | `void` | setBoolean方法 |  |
 | `setByte` | value: byte | `void` | setByte方法 |  |
 | `setCalendarInterval` | value: CalendarInterval | `void` | setCalendarInterval方法 |  |
-| `setChild` | ordinal: int; value: ConstantColumnVector | `void` | setChild方法 |  |
-| `setDecimal` | value: Decimal; precision: int | `void` | setDecimal方法 |  |
+| `setChild` | ordinal: int, value: ConstantColumnVector | `void` | setChild方法 |  |
+| `setDecimal` | value: Decimal, precision: int | `void` | setDecimal方法 |  |
 | `setDouble` | value: double | `void` | setDouble方法 |  |
 | `setFloat` | value: float | `void` | setFloat方法 |  |
 | `setInt` | value: int | `void` | setInt方法 |  |
@@ -802,7 +802,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `aggregateTaskMetrics` | taskMetrics: long[] | `String` | aggregateTaskMetrics方法 |  |
+| `aggregateTaskMetrics` | taskMetrics: long&lt;&gt; | `String` | aggregateTaskMetrics方法 |  |
 
 ### CustomSumMetric
 **包路径**: `org.apache.spark.sql.connector.metric`
@@ -810,7 +810,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `aggregateTaskMetrics` | taskMetrics: long[] | `String` | aggregateTaskMetrics方法 |  |
+| `aggregateTaskMetrics` | taskMetrics: long&lt;&gt; | `String` | aggregateTaskMetrics方法 |  |
 
 ### CustomTaskMetric
 **包路径**: `org.apache.spark.sql.connector.metric`
@@ -828,24 +828,24 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `createArrayType` | elementType: DataType | `ArrayType` | createArrayType方法 |  |
-| `createArrayType` | elementType: DataType; containsNull: boolean | `ArrayType` | createArrayType方法 |  |
+| `createArrayType` | elementType: DataType, containsNull: boolean | `ArrayType` | createArrayType方法 |  |
 | `createCharType` | length: int | `CharType` | createCharType方法 |  |
-| `createDayTimeIntervalType` | startField: byte; endField: byte | `DayTimeIntervalType` | createDayTimeIntervalType方法 |  |
+| `createDayTimeIntervalType` | startField: byte, endField: byte | `DayTimeIntervalType` | createDayTimeIntervalType方法 |  |
 | `createDayTimeIntervalType` | 无 | `DayTimeIntervalType` | createDayTimeIntervalType方法 |  |
-| `createDecimalType` | precision: int; scale: int | `DecimalType` | createDecimalType方法 |  |
+| `createDecimalType` | precision: int, scale: int | `DecimalType` | createDecimalType方法 |  |
 | `createDecimalType` | 无 | `DecimalType` | createDecimalType方法 |  |
 | `createGeographyType` | srid: int | `GeographyType` | createGeographyType方法 |  |
 | `createGeographyType` | crs: String | `GeographyType` | createGeographyType方法 |  |
 | `createGeometryType` | srid: int | `GeometryType` | createGeometryType方法 |  |
 | `createGeometryType` | crs: String | `GeometryType` | createGeometryType方法 |  |
-| `createMapType` | keyType: DataType; valueType: DataType | `MapType` | createMapType方法 |  |
-| `createMapType` | keyType: DataType; valueType: DataType; valueContainsNull: boolean | `MapType` | createMapType方法 |  |
-| `createStructField` | name: String; dataType: DataType; nullable: boolean; metadata: Metadata | `StructField` | createStructField方法 |  |
-| `createStructField` | name: String; dataType: DataType; nullable: boolean | `StructField` | createStructField方法 |  |
+| `createMapType` | keyType: DataType, valueType: DataType | `MapType` | createMapType方法 |  |
+| `createMapType` | keyType: DataType, valueType: DataType, valueContainsNull: boolean | `MapType` | createMapType方法 |  |
+| `createStructField` | name: String, dataType: DataType, nullable: boolean, metadata: Metadata | `StructField` | createStructField方法 |  |
+| `createStructField` | name: String, dataType: DataType, nullable: boolean | `StructField` | createStructField方法 |  |
 | `createStructType` | fields: List<StructField> | `StructType` | createStructType方法 |  |
-| `createStructType` | fields: StructField[] | `StructType` | createStructType方法 |  |
+| `createStructType` | fields: StructField&lt;&gt; | `StructType` | createStructType方法 |  |
 | `createVarcharType` | length: int | `VarcharType` | createVarcharType方法 |  |
-| `createYearMonthIntervalType` | startField: byte; endField: byte | `YearMonthIntervalType` | createYearMonthIntervalType方法 |  |
+| `createYearMonthIntervalType` | startField: byte, endField: byte | `YearMonthIntervalType` | createYearMonthIntervalType方法 |  |
 | `createYearMonthIntervalType` | 无 | `YearMonthIntervalType` | createYearMonthIntervalType方法 |  |
 
 ### DefaultValue
@@ -863,26 +863,26 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `alterNamespace` | namespace: String[]; changes: NamespaceChange... | `void` | alterNamespace方法 |  |
-| `alterTable` | ident: Identifier; changes: TableChange... | `Table` | alterTable方法 |  |
+| `alterNamespace` | namespace: String&lt;&gt;, changes: NamespaceChange... | `void` | alterNamespace方法 |  |
+| `alterTable` | ident: Identifier, changes: TableChange... | `Table` | alterTable方法 |  |
 | `capabilities` | 无 | `Set&lt;TableCatalogCapability&gt;` | capabilities方法 |  |
-| `createNamespace` | namespace: String[]; metadata: String> | `void` | createNamespace方法 |  |
-| `createTable` | ident: Identifier; schema: StructType; partitions: Transform[]; properties: String> | `Table` | createTable方法 |  |
-| `createTable` | ident: Identifier; columns: Column[]; partitions: Transform[]; properties: String> | `Table` | createTable方法 |  |
-| `dropNamespace` | namespace: String[]; cascade: boolean | `boolean` | dropNamespace方法 |  |
+| `createNamespace` | namespace: String&lt;&gt;, metadata: String> | `void` | createNamespace方法 |  |
+| `createTable` | ident: Identifier, schema: StructType, partitions: Transform&lt;&gt;, properties: String> | `Table` | createTable方法 |  |
+| `createTable` | ident: Identifier, columns: Column&lt;&gt;, partitions: Transform&lt;&gt;, properties: String> | `Table` | createTable方法 |  |
+| `dropNamespace` | namespace: String&lt;&gt;, cascade: boolean | `boolean` | dropNamespace方法 |  |
 | `dropTable` | ident: Identifier | `boolean` | dropTable方法 |  |
 | `functionExists` | ident: Identifier | `boolean` | functionExists方法 |  |
-| `initialize` | name: String; options: CaseInsensitiveStringMap | `void` | initialize方法 |  |
+| `initialize` | name: String, options: CaseInsensitiveStringMap | `void` | initialize方法 |  |
 | `invalidateTable` | ident: Identifier | `void` | invalidateTable方法 |  |
 | `loadFunction` | ident: Identifier | `UnboundFunction` | loadFunction方法 |  |
-| `loadNamespaceMetadata` | namespace: String[] | `Map&lt;String, String&gt;` | loadNamespaceMetadata方法 |  |
+| `loadNamespaceMetadata` | namespace: String&lt;&gt; | `Map&lt;String, String&gt;` | loadNamespaceMetadata方法 |  |
 | `loadTable` | ident: Identifier | `Table` | loadTable方法 |  |
-| `loadTable` | ident: Identifier; timestamp: long | `Table` | loadTable方法 |  |
-| `loadTable` | ident: Identifier; version: String | `Table` | loadTable方法 |  |
+| `loadTable` | ident: Identifier, timestamp: long | `Table` | loadTable方法 |  |
+| `loadTable` | ident: Identifier, version: String | `Table` | loadTable方法 |  |
 | `name` | 无 | `String` | name方法 |  |
-| `namespaceExists` | namespace: String[] | `boolean` | namespaceExists方法 |  |
+| `namespaceExists` | namespace: String&lt;&gt; | `boolean` | namespaceExists方法 |  |
 | `purgeTable` | ident: Identifier | `boolean` | purgeTable方法 |  |
-| `renameTable` | oldIdent: Identifier; newIdent: Identifier | `void` | renameTable方法 |  |
+| `renameTable` | oldIdent: Identifier, newIdent: Identifier | `void` | renameTable方法 |  |
 | `setDelegateCatalog` | delegate: CatalogPlugin | `void` | setDelegateCatalog方法 |  |
 | `tableExists` | ident: Identifier | `boolean` | tableExists方法 |  |
 
@@ -892,8 +892,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `clustered` | clustering: Expression[] | `ClusteredDistribution` | clustered方法 |  |
-| `ordered` | ordering: SortOrder[] | `OrderedDistribution` | ordered方法 |  |
+| `clustered` | clustering: Expression&lt;&gt; | `ClusteredDistribution` | clustered方法 |  |
+| `ordered` | ordering: SortOrder&lt;&gt; | `OrderedDistribution` | ordered方法 |  |
 | `unspecified` | 无 | `UnspecifiedDistribution` | unspecified方法 |  |
 
 ### ExpressionImplUtils
@@ -902,11 +902,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSentences` | str: UTF8String; language: UTF8String; country: UTF8String | `ArrayData` | getSentences方法 |  |
+| `getSentences` | str: UTF8String, language: UTF8String, country: UTF8String | `ArrayData` | getSentences方法 |  |
 | `getSparkVersion` | 无 | `UTF8String` | getSparkVersion方法 |  |
 | `isLuhnNumber` | numberString: UTF8String | `boolean` | isLuhnNumber方法 |  |
 | `quote` | str: UTF8String | `UTF8String` | quote方法 |  |
-| `randStr` | rng: XORShiftRandom; length: int | `UTF8String` | randStr方法 |  |
+| `randStr` | rng: XORShiftRandom, length: int | `UTF8String` | randStr方法 |  |
 | `tryValidateUTF8String` | utf8String: UTF8String | `UTF8String` | tryValidateUTF8String方法 |  |
 | `validateUTF8String` | utf8String: UTF8String | `UTF8String` | validateUTF8String方法 |  |
 
@@ -936,15 +936,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `apply` | name: String; args: Expression... | `Transform` | apply方法 |  |
-| `bucket` | numBuckets: int; columns: String... | `Transform` | bucket方法 |  |
+| `apply` | name: String, args: Expression... | `Transform` | apply方法 |  |
+| `bucket` | numBuckets: int, columns: String... | `Transform` | bucket方法 |  |
 | `column` | name: String | `NamedReference` | column方法 |  |
 | `days` | column: String | `Transform` | days方法 |  |
 | `hours` | column: String | `Transform` | hours方法 |  |
 | `identity` | column: String | `Transform` | identity方法 |  |
 | `months` | column: String | `Transform` | months方法 |  |
-| `sort` | expr: Expression; direction: SortDirection; nullOrder: NullOrdering | `SortOrder` | 排序 |  |
-| `sort` | expr: Expression; direction: SortDirection | `SortOrder` | 排序 |  |
+| `sort` | expr: Expression, direction: SortDirection, nullOrder: NullOrdering | `SortOrder` | 排序 |  |
+| `sort` | expr: Expression, direction: SortDirection | `SortOrder` | 排序 |  |
 | `years` | column: String | `Transform` | years方法 |  |
 
 ### Extract
@@ -1018,7 +1018,7 @@
 | `getCurrentKey` | 无 | `LongWritable` | getCurrentKey方法 |  |
 | `getCurrentValue` | 无 | `Text` | getCurrentValue方法 |  |
 | `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initialize` | genericSplit: InputSplit; context: TaskAttemptContext | `void` | initialize方法 |  |
+| `initialize` | genericSplit: InputSplit, context: TaskAttemptContext | `void` | initialize方法 |  |
 | `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
 
 ### HiveHasher
@@ -1029,7 +1029,7 @@
 |--------|------|----------|------|------|
 | `hashInt` | input: int | `int` | hashInt方法 |  |
 | `hashLong` | input: long | `int` | hashLong方法 |  |
-| `hashUnsafeBytes` | base: Object; offset: long; lengthInBytes: int | `int` | hashUnsafeBytes方法 |  |
+| `hashUnsafeBytes` | base: Object, offset: long, lengthInBytes: int | `int` | hashUnsafeBytes方法 |  |
 
 ### IdentityColumnSpec
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -1047,8 +1047,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `invoke` | left: int; right: int | `int` | invoke方法 |  |
-| `invoke` | left: int; right: int | `int` | invoke方法 |  |
+| `invoke` | left: int, right: int | `int` | invoke方法 |  |
+| `invoke` | left: int, right: int | `int` | invoke方法 |  |
 | `produceResult` | input: InternalRow | `Integer` | produceResult方法 |  |
 
 ### JavaSQLDataSourceExample
@@ -1061,7 +1061,7 @@
 | `getSquare` | 无 | `int` | getSquare方法 |  |
 | `getValue` | 无 | `int` | getValue方法 |  |
 | `getValue` | 无 | `int` | getValue方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `setCube` | cube: int | `void` | setCube方法 |  |
 | `setSquare` | square: int | `void` | setSquare方法 |  |
 | `setValue` | value: int | `void` | setValue方法 |  |
@@ -1075,7 +1075,7 @@
 |--------|------|----------|------|------|
 | `getKey` | 无 | `int` | getKey方法 |  |
 | `getValue` | 无 | `String` | getValue方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `setKey` | key: int | `void` | setKey方法 |  |
 | `setValue` | value: String | `void` | setValue方法 |  |
 
@@ -1085,7 +1085,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaSparkSQLExample
 **包路径**: `org.apache.spark.examples.sql`
@@ -1095,7 +1095,7 @@
 |--------|------|----------|------|------|
 | `getAge` | 无 | `long` | getAge方法 |  |
 | `getName` | 无 | `String` | getName方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `setAge` | age: long | `void` | setAge方法 |  |
 | `setName` | name: String | `void` | 设置RDD名称 |  |
 
@@ -1105,7 +1105,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaUserDefinedTypedAggregation
 **包路径**: `org.apache.spark.examples.sql`
@@ -1119,10 +1119,10 @@
 | `getName` | 无 | `String` | getName方法 |  |
 | `getSalary` | 无 | `long` | getSalary方法 |  |
 | `getSum` | 无 | `long` | getSum方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
-| `merge` | b1: Average; b2: Average | `Average` | merge方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `merge` | b1: Average, b2: Average | `Average` | merge方法 |  |
 | `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
-| `reduce` | buffer: Average; employee: Employee | `Average` | 聚合DStream每个RDD |  |
+| `reduce` | buffer: Average, employee: Employee | `Average` | 聚合DStream每个RDD |  |
 | `setCount` | count: long | `void` | setCount方法 |  |
 | `setName` | name: String | `void` | 设置RDD名称 |  |
 | `setSalary` | salary: long | `void` | setSalary方法 |  |
@@ -1139,10 +1139,10 @@
 | `finish` | reduction: Average | `Double` | finish方法 |  |
 | `getCount` | 无 | `long` | getCount方法 |  |
 | `getSum` | 无 | `long` | getSum方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
-| `merge` | b1: Average; b2: Average | `Average` | merge方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `merge` | b1: Average, b2: Average | `Average` | merge方法 |  |
 | `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
-| `reduce` | buffer: Average; data: Long | `Average` | 聚合DStream每个RDD |  |
+| `reduce` | buffer: Average, data: Long | `Average` | 聚合DStream每个RDD |  |
 | `setCount` | count: long | `void` | setCount方法 |  |
 | `setSum` | sum: long | `void` | setSum方法 |  |
 | `zero` | 无 | `Average` | zero方法 |  |
@@ -1164,12 +1164,12 @@
 |--------|------|----------|------|------|
 | `cleanupResources` | 无 | `void` | cleanupResources方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `compare` | baseObj1: Object; baseOff1: long; baseLen1: int; baseObj2: Object; baseOff2: long; baseLen2: int | `int` | compare方法 |  |
+| `compare` | baseObj1: Object, baseOff1: long, baseLen1: int, baseObj2: Object, baseOff2: long, baseLen2: int | `int` | compare方法 |  |
 | `getKey` | 无 | `UnsafeRow` | getKey方法 |  |
 | `getPeakMemoryUsedBytes` | 无 | `long` | getPeakMemoryUsedBytes方法 |  |
 | `getSpillSize` | 无 | `long` | getSpillSize方法 |  |
 | `getValue` | 无 | `UnsafeRow` | getValue方法 |  |
-| `insertKV` | key: UnsafeRow; value: UnsafeRow | `void` | insertKV方法 |  |
+| `insertKV` | key: UnsafeRow, value: UnsafeRow | `void` | insertKV方法 |  |
 | `merge` | other: UnsafeKVExternalSorter | `void` | merge方法 |  |
 | `next` | 无 | `boolean` | next方法 |  |
 | `sortedIterator` | 无 | `KVSorterIterator` | sortedIterator方法 |  |
@@ -1207,7 +1207,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `add` | v: double | `void` | 添加元素 |  |
-| `addBin` | x: double; y: double; b: int | `void` | addBin方法 |  |
+| `addBin` | x: double, y: double, b: int | `void` | addBin方法 |  |
 | `allocate` | num_bins: int | `void` | allocate方法 |  |
 | `compareTo` | other: Coord | `int` | compareTo方法 |  |
 | `getBin` | b: int | `Coord` | getBin方法 |  |
@@ -1227,7 +1227,7 @@
 | `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
 | `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
 | `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int; precision: int; scale: int | `Decimal` | getDecimal方法 |  |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
 | `getDouble` | rowId: int | `double` | getDouble方法 |  |
 | `getFloat` | rowId: int | `float` | getFloat方法 |  |
 | `getInt` | rowId: int | `int` | getInt方法 |  |
@@ -1245,7 +1245,7 @@
 | `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
 | `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
 | `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int; precision: int; scale: int | `Decimal` | getDecimal方法 |  |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
 | `getDouble` | rowId: int | `double` | getDouble方法 |  |
 | `getFloat` | rowId: int | `float` | getFloat方法 |  |
 | `getInt` | rowId: int | `int` | getInt方法 |  |
@@ -1286,9 +1286,9 @@
 | `getCurrentKey` | 无 | `Void` | getCurrentKey方法 |  |
 | `getCurrentValue` | 无 | `ColumnarBatch` | getCurrentValue方法 |  |
 | `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initBatch` | orcSchema: TypeDescription; requiredFields: StructField[]; requestedDataColIds: int[]; requestedPartitionColIds: int[]; partitionValues: InternalRow | `void` | initBatch方法 |  |
-| `initialize` | inputSplit: InputSplit; taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
-| `initialize` | inputSplit: InputSplit; taskAttemptContext: TaskAttemptContext; orcTail: OrcTail | `void` | initialize方法 |  |
+| `initBatch` | orcSchema: TypeDescription, requiredFields: StructField&lt;&gt;, requestedDataColIds: int&lt;&gt;, requestedPartitionColIds: int&lt;&gt;, partitionValues: InternalRow | `void` | initBatch方法 |  |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, orcTail: OrcTail | `void` | initialize方法 |  |
 | `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
 
 ### OrcCompressionCodec
@@ -1317,7 +1317,7 @@
 | `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
 | `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
 | `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int; precision: int; scale: int | `Decimal` | getDecimal方法 |  |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
 | `getDouble` | rowId: int | `double` | getDouble方法 |  |
 | `getFloat` | rowId: int | `float` | getFloat方法 |  |
 | `getInt` | rowId: int | `int` | getInt方法 |  |
@@ -1335,7 +1335,7 @@
 | `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
 | `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
 | `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int; precision: int; scale: int | `Decimal` | getDecimal方法 |  |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
 | `getDouble` | rowId: int | `double` | getDouble方法 |  |
 | `getFloat` | rowId: int | `float` | getFloat方法 |  |
 | `getInt` | rowId: int | `int` | getInt方法 |  |
@@ -1360,8 +1360,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `openFileAndReadFooter` | hadoopConf: Configuration; file: PartitionedFile; keepInputStreamOpen: boolean | `OpenedParquetFooter` | openFileAndReadFooter方法 |  |
-| `readFooter` | inputFile: HadoopInputFile; filter: ParquetMetadataConverter.MetadataFilter | `ParquetMetadata` | readFooter方法 |  |
+| `openFileAndReadFooter` | hadoopConf: Configuration, file: PartitionedFile, keepInputStreamOpen: boolean | `OpenedParquetFooter` | openFileAndReadFooter方法 |  |
+| `readFooter` | inputFile: HadoopInputFile, filter: ParquetMetadataConverter.MetadataFilter | `ParquetMetadata` | readFooter方法 |  |
 
 ### ParquetVectorUpdaterFactory
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1369,152 +1369,152 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int; values: WritableColumnVector; dictionaryIds: WritableColumnVector; dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `getUpdater` | descriptor: ColumnDescriptor; sparkType: DataType | `ParquetVectorUpdater` | getUpdater方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int; offset: int; values: WritableColumnVector; valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int; valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
+| `getUpdater` | descriptor: ColumnDescriptor, sparkType: DataType | `ParquetVectorUpdater` | getUpdater方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
 
 ### PrimaryKey
 **包路径**: `org.apache.spark.sql.connector.catalog.constraints`
@@ -1542,12 +1542,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `allocate` | keySchema: StructType; valueSchema: StructType; manager: TaskMemoryManager | `RowBasedKeyValueBatch` | allocate方法 |  |
-| `allocate` | keySchema: StructType; valueSchema: StructType; manager: TaskMemoryManager; maxRows: int | `RowBasedKeyValueBatch` | allocate方法 |  |
+| `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager | `RowBasedKeyValueBatch` | allocate方法 |  |
+| `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager, maxRows: int | `RowBasedKeyValueBatch` | allocate方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `getValueRow` | rowId: int | `UnsafeRow` | getValueRow方法 |  |
 | `numRows` | 无 | `int` | numRows方法 |  |
-| `spill` | size: long; trigger: MemoryConsumer | `long` | spill方法 |  |
+| `spill` | size: long, trigger: MemoryConsumer | `long` | spill方法 |  |
 
 ### RowFactory
 **包路径**: `org.apache.spark.sql`
@@ -1596,8 +1596,8 @@
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `getCurrentKey` | 无 | `Void` | getCurrentKey方法 |  |
-| `initialize` | inputSplit: InputSplit; taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
-| `initialize` | inputSplit: InputSplit; taskAttemptContext: TaskAttemptContext; inputFile: Option<HadoopInputFile>; inputStream: Option<SeekableInputStream>; fileFooter: Option<ParquetMetadata> | `void` | initialize方法 |  |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, inputFile: Option<HadoopInputFile>, inputStream: Option<SeekableInputStream>, fileFooter: Option<ParquetMetadata> | `void` | initialize方法 |  |
 | `readNextRowGroup` | 无 | `PageReadStore` | readNextRowGroup方法 |  |
 
 ### SupportsPushDownJoin
@@ -1646,9 +1646,9 @@
 | `build` | 无 | `TableInfo` | build方法 |  |
 | `properties` | 无 | `Map&lt;String, String&gt;` | properties方法 |  |
 | `schema` | 无 | `StructType` | 获取schema |  |
-| `withColumns` | columns: Column[] | `Builder` | withColumns方法 |  |
-| `withConstraints` | constraints: Constraint[] | `Builder` | withConstraints方法 |  |
-| `withPartitions` | partitions: Transform[] | `Builder` | withPartitions方法 |  |
+| `withColumns` | columns: Column&lt;&gt; | `Builder` | withColumns方法 |  |
+| `withConstraints` | constraints: Constraint&lt;&gt; | `Builder` | withConstraints方法 |  |
+| `withPartitions` | partitions: Transform&lt;&gt; | `Builder` | withPartitions方法 |  |
 | `withProperties` | properties: String> | `Builder` | withProperties方法 |  |
 
 ### UDFXPathUtil
@@ -1658,16 +1658,16 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
-| `eval` | xml: String; path: String; qname: QName | `Object` | eval方法 |  |
-| `evalBoolean` | xml: String; path: String | `Boolean` | evalBoolean方法 |  |
-| `evalNode` | xml: String; path: String | `Node` | evalNode方法 |  |
-| `evalNodeList` | xml: String; path: String | `NodeList` | evalNodeList方法 |  |
-| `evalNumber` | xml: String; path: String | `Double` | evalNumber方法 |  |
-| `evalString` | xml: String; path: String | `String` | evalString方法 |  |
+| `eval` | xml: String, path: String, qname: QName | `Object` | eval方法 |  |
+| `evalBoolean` | xml: String, path: String | `Boolean` | evalBoolean方法 |  |
+| `evalNode` | xml: String, path: String | `Node` | evalNode方法 |  |
+| `evalNodeList` | xml: String, path: String | `NodeList` | evalNodeList方法 |  |
+| `evalNumber` | xml: String, path: String | `Double` | evalNumber方法 |  |
+| `evalString` | xml: String, path: String | `String` | evalString方法 |  |
 | `mark` | readAheadLimit: int | `void` | mark方法 |  |
 | `markSupported` | 无 | `boolean` | markSupported方法 |  |
 | `read` | 无 | `int` | 读取数据源创建DataFrame |  |
-| `read` | cbuf: char[]; off: int; len: int | `int` | 读取数据源创建DataFrame |  |
+| `read` | cbuf: char&lt;&gt;, off: int, len: int | `int` | 读取数据源创建DataFrame |  |
 | `ready` | 无 | `boolean` | ready方法 |  |
 | `reset` | 无 | `void` | reset方法 |  |
 | `set` | s: String | `void` | 设置元素 |  |
@@ -1700,17 +1700,17 @@
 | `grow` | neededSize: int | `void` | grow方法 |  |
 | `increaseCursor` | val: int | `void` | increaseCursor方法 |  |
 | `reset` | 无 | `void` | reset方法 |  |
-| `setOffsetAndSizeFromPreviousCursor` | ordinal: int; previousCursor: int | `void` | setOffsetAndSizeFromPreviousCursor方法 |  |
+| `setOffsetAndSizeFromPreviousCursor` | ordinal: int, previousCursor: int | `void` | setOffsetAndSizeFromPreviousCursor方法 |  |
 | `totalSize` | 无 | `int` | totalSize方法 |  |
-| `write` | ordinal: int; input: UTF8String | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; input: GeographyVal | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; input: GeometryVal | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; input: byte[] | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; input: byte[]; offset: int; numBytes: int | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; input: CalendarInterval | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; input: VariantVal | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; row: UnsafeRow | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int; map: UnsafeMapData | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, input: UTF8String | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, input: GeographyVal | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, input: GeometryVal | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, input: byte&lt;&gt; | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, input: byte&lt;&gt;, offset: int, numBytes: int | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, input: CalendarInterval | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, input: VariantVal | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, row: UnsafeRow | `void` | 写入DataFrame到数据源 |  |
+| `write` | ordinal: int, map: UnsafeMapData | `void` | 写入DataFrame到数据源 |  |
 | `write` | array: UnsafeArrayData | `void` | 写入DataFrame到数据源 |  |
 
 ### UserDefinedAggregateFunc
@@ -1746,15 +1746,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `vectorCosineSimilarity` | left: ArrayData; right: ArrayData; funcName: UTF8String | `Float` | vectorCosineSimilarity方法 |  |
+| `vectorCosineSimilarity` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorCosineSimilarity方法 |  |
 | `vectorInfNorm` | vec: ArrayData | `Float` | vectorInfNorm方法 |  |
-| `vectorInnerProduct` | left: ArrayData; right: ArrayData; funcName: UTF8String | `Float` | vectorInnerProduct方法 |  |
+| `vectorInnerProduct` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorInnerProduct方法 |  |
 | `vectorL1Norm` | vec: ArrayData | `Float` | vectorL1Norm方法 |  |
-| `vectorL2Distance` | left: ArrayData; right: ArrayData; funcName: UTF8String | `Float` | vectorL2Distance方法 |  |
+| `vectorL2Distance` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorL2Distance方法 |  |
 | `vectorL2Norm` | vec: ArrayData | `Float` | vectorL2Norm方法 |  |
-| `vectorNorm` | vec: ArrayData; degree: float; funcName: UTF8String | `Float` | vectorNorm方法 |  |
-| `vectorNormalize` | vec: ArrayData; degree: float; funcName: UTF8String | `ArrayData` | vectorNormalize方法 |  |
-| `vectorNormalizeWithNorm` | vec: ArrayData; norm: float | `ArrayData` | vectorNormalizeWithNorm方法 |  |
+| `vectorNorm` | vec: ArrayData, degree: float, funcName: UTF8String | `Float` | vectorNorm方法 |  |
+| `vectorNormalize` | vec: ArrayData, degree: float, funcName: UTF8String | `ArrayData` | vectorNormalize方法 |  |
+| `vectorNormalizeWithNorm` | vec: ArrayData, norm: float | `ArrayData` | vectorNormalizeWithNorm方法 |  |
 
 ### VectorizedColumnReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1771,19 +1771,19 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initFromPage` | valueCount: int; in: ByteBufferInputStream | `void` | initFromPage方法 |  |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
 | `readByte` | 无 | `byte` | readByte方法 |  |
-| `readBytes` | total: int; c: WritableColumnVector; rowId: int | `void` | readBytes方法 |  |
+| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | readBytes方法 |  |
 | `readInteger` | 无 | `int` | readInteger方法 |  |
-| `readIntegers` | total: int; c: WritableColumnVector; rowId: int | `void` | readIntegers方法 |  |
-| `readIntegersWithRebase` | total: int; c: WritableColumnVector; rowId: int; failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
+| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readIntegers方法 |  |
+| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
 | `readLong` | 无 | `long` | readLong方法 |  |
-| `readLongs` | total: int; c: WritableColumnVector; rowId: int | `void` | readLongs方法 |  |
-| `readLongsWithRebase` | total: int; c: WritableColumnVector; rowId: int; failIfRebase: boolean; timeZone: String | `void` | readLongsWithRebase方法 |  |
+| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readLongs方法 |  |
+| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | readLongsWithRebase方法 |  |
 | `readShort` | 无 | `short` | readShort方法 |  |
-| `readShorts` | total: int; c: WritableColumnVector; rowId: int | `void` | readShorts方法 |  |
-| `readUnsignedIntegers` | total: int; c: WritableColumnVector; rowId: int | `void` | readUnsignedIntegers方法 |  |
-| `readUnsignedLongs` | total: int; c: WritableColumnVector; rowId: int | `void` | readUnsignedLongs方法 |  |
+| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | readShorts方法 |  |
+| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedIntegers方法 |  |
+| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedLongs方法 |  |
 | `skipBytes` | total: int | `void` | skipBytes方法 |  |
 | `skipIntegers` | total: int | `void` | skipIntegers方法 |  |
 | `skipLongs` | total: int | `void` | skipLongs方法 |  |
@@ -1795,11 +1795,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initFromPage` | valueCount: int; in: ByteBufferInputStream | `void` | initFromPage方法 |  |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
 | `readBinary` | len: int | `Binary` | readBinary方法 |  |
-| `readBinary` | total: int; c: WritableColumnVector; rowId: int | `void` | readBinary方法 |  |
-| `readGeography` | total: int; c: WritableColumnVector; rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int; c: WritableColumnVector; rowId: int | `void` | readGeometry方法 |  |
+| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
+| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
+| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
 | `setPreviousReader` | reader: ValuesReader | `void` | setPreviousReader方法 |  |
 | `skipBinary` | total: int | `void` | skipBinary方法 |  |
 
@@ -1810,10 +1810,10 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `getBytes` | rowId: int | `ByteBuffer` | getBytes方法 |  |
-| `initFromPage` | valueCount: int; in: ByteBufferInputStream | `void` | initFromPage方法 |  |
-| `readBinary` | total: int; c: WritableColumnVector; rowId: int | `void` | readBinary方法 |  |
-| `readGeography` | total: int; c: WritableColumnVector; rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int; c: WritableColumnVector; rowId: int | `void` | readGeometry方法 |  |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
+| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
+| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
+| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
 | `skipBinary` | total: int | `void` | skipBinary方法 |  |
 
 ### VectorizedParquetRecordReader
@@ -1826,11 +1826,11 @@
 | `enableReturningBatches` | 无 | `void` | enableReturningBatches方法 |  |
 | `getCurrentValue` | 无 | `Object` | getCurrentValue方法 |  |
 | `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initBatch` | partitionColumns: StructType; partitionValues: InternalRow | `void` | initBatch方法 |  |
-| `initialize` | inputSplit: InputSplit; taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
-| `initialize` | inputSplit: InputSplit; taskAttemptContext: TaskAttemptContext; inputFile: Option<HadoopInputFile>; inputStream: Option<SeekableInputStream>; fileFooter: Option<ParquetMetadata> | `void` | initialize方法 |  |
-| `initialize` | path: String; columns: List<String> | `void` | initialize方法 |  |
-| `initialize` | fileSchema: MessageType; requestedSchema: MessageType; rowGroupReader: ParquetRowGroupReader; totalRowCount: int | `void` | initialize方法 |  |
+| `initBatch` | partitionColumns: StructType, partitionValues: InternalRow | `void` | initBatch方法 |  |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, inputFile: Option<HadoopInputFile>, inputStream: Option<SeekableInputStream>, fileFooter: Option<ParquetMetadata> | `void` | initialize方法 |  |
+| `initialize` | path: String, columns: List<String> | `void` | initialize方法 |  |
+| `initialize` | fileSchema: MessageType, requestedSchema: MessageType, rowGroupReader: ParquetRowGroupReader, totalRowCount: int | `void` | initialize方法 |  |
 | `nextBatch` | 无 | `boolean` | nextBatch方法 |  |
 | `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
 | `resultBatch` | 无 | `ColumnarBatch` | resultBatch方法 |  |
@@ -1841,35 +1841,35 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initFromPage` | valueCount: int; in: ByteBufferInputStream | `void` | initFromPage方法 |  |
-| `readBinary` | total: int; v: WritableColumnVector; rowId: int | `void` | readBinary方法 |  |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
+| `readBinary` | total: int, v: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
 | `readBinary` | len: int | `Binary` | readBinary方法 |  |
 | `readBoolean` | 无 | `boolean` | readBoolean方法 |  |
-| `readBooleans` | total: int; c: WritableColumnVector; rowId: int | `void` | readBooleans方法 |  |
+| `readBooleans` | total: int, c: WritableColumnVector, rowId: int | `void` | readBooleans方法 |  |
 | `readByte` | 无 | `byte` | readByte方法 |  |
-| `readBytes` | total: int; c: WritableColumnVector; rowId: int | `void` | readBytes方法 |  |
+| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | readBytes方法 |  |
 | `readDouble` | 无 | `double` | readDouble方法 |  |
-| `readDoubles` | total: int; c: WritableColumnVector; rowId: int | `void` | readDoubles方法 |  |
+| `readDoubles` | total: int, c: WritableColumnVector, rowId: int | `void` | readDoubles方法 |  |
 | `readFloat` | 无 | `float` | readFloat方法 |  |
-| `readFloats` | total: int; c: WritableColumnVector; rowId: int | `void` | readFloats方法 |  |
-| `readGeography` | total: int; v: WritableColumnVector; rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int; v: WritableColumnVector; rowId: int | `void` | readGeometry方法 |  |
+| `readFloats` | total: int, c: WritableColumnVector, rowId: int | `void` | readFloats方法 |  |
+| `readGeography` | total: int, v: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
+| `readGeometry` | total: int, v: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
 | `readInteger` | 无 | `int` | readInteger方法 |  |
-| `readIntegers` | total: int; c: WritableColumnVector; rowId: int | `void` | readIntegers方法 |  |
-| `readIntegersWithRebase` | total: int; c: WritableColumnVector; rowId: int; failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
+| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readIntegers方法 |  |
+| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
 | `readLong` | 无 | `long` | readLong方法 |  |
-| `readLongs` | total: int; c: WritableColumnVector; rowId: int | `void` | readLongs方法 |  |
-| `readLongsWithRebase` | total: int; c: WritableColumnVector; rowId: int; failIfRebase: boolean; timeZone: String | `void` | readLongsWithRebase方法 |  |
+| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readLongs方法 |  |
+| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | readLongsWithRebase方法 |  |
 | `readShort` | 无 | `short` | readShort方法 |  |
-| `readShorts` | total: int; c: WritableColumnVector; rowId: int | `void` | readShorts方法 |  |
-| `readUnsignedIntegers` | total: int; c: WritableColumnVector; rowId: int | `void` | readUnsignedIntegers方法 |  |
-| `readUnsignedLongs` | total: int; c: WritableColumnVector; rowId: int | `void` | readUnsignedLongs方法 |  |
+| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | readShorts方法 |  |
+| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedIntegers方法 |  |
+| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedLongs方法 |  |
 | `skip` | 无 | `void` | skip方法 |  |
 | `skipBinary` | total: int | `void` | skipBinary方法 |  |
 | `skipBooleans` | total: int | `void` | skipBooleans方法 |  |
 | `skipBytes` | total: int | `void` | skipBytes方法 |  |
 | `skipDoubles` | total: int | `void` | skipDoubles方法 |  |
-| `skipFixedLenByteArray` | total: int; len: int | `void` | skipFixedLenByteArray方法 |  |
+| `skipFixedLenByteArray` | total: int, len: int | `void` | skipFixedLenByteArray方法 |  |
 | `skipFloats` | total: int | `void` | skipFloats方法 |  |
 | `skipIntegers` | total: int | `void` | skipIntegers方法 |  |
 | `skipLongs` | total: int | `void` | skipLongs方法 |  |
@@ -1882,28 +1882,28 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `readBinary` | len: int | `Binary` | readBinary方法 |  |
-| `readBinary` | total: int; c: WritableColumnVector; rowId: int | `void` | readBinary方法 |  |
-| `readBooleans` | total: int; c: WritableColumnVector; rowId: int | `void` | readBooleans方法 |  |
+| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
+| `readBooleans` | total: int, c: WritableColumnVector, rowId: int | `void` | readBooleans方法 |  |
 | `readByte` | 无 | `byte` | readByte方法 |  |
-| `readBytes` | total: int; c: WritableColumnVector; rowId: int | `void` | readBytes方法 |  |
-| `readDoubles` | total: int; c: WritableColumnVector; rowId: int | `void` | readDoubles方法 |  |
-| `readFloats` | total: int; c: WritableColumnVector; rowId: int | `void` | readFloats方法 |  |
-| `readGeography` | total: int; c: WritableColumnVector; rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int; c: WritableColumnVector; rowId: int | `void` | readGeometry方法 |  |
-| `readIntegers` | total: int; c: WritableColumnVector; rowId: int | `void` | readIntegers方法 |  |
-| `readIntegersWithRebase` | total: int; c: WritableColumnVector; rowId: int; failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
-| `readLongs` | total: int; c: WritableColumnVector; rowId: int | `void` | readLongs方法 |  |
-| `readLongsWithRebase` | total: int; c: WritableColumnVector; rowId: int; failIfRebase: boolean; timeZone: String | `void` | readLongsWithRebase方法 |  |
+| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | readBytes方法 |  |
+| `readDoubles` | total: int, c: WritableColumnVector, rowId: int | `void` | readDoubles方法 |  |
+| `readFloats` | total: int, c: WritableColumnVector, rowId: int | `void` | readFloats方法 |  |
+| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
+| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
+| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readIntegers方法 |  |
+| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
+| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readLongs方法 |  |
+| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | readLongsWithRebase方法 |  |
 | `readShort` | 无 | `short` | readShort方法 |  |
-| `readShorts` | total: int; c: WritableColumnVector; rowId: int | `void` | readShorts方法 |  |
-| `readUnsignedIntegers` | total: int; c: WritableColumnVector; rowId: int | `void` | readUnsignedIntegers方法 |  |
-| `readUnsignedLongs` | total: int; c: WritableColumnVector; rowId: int | `void` | readUnsignedLongs方法 |  |
+| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | readShorts方法 |  |
+| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedIntegers方法 |  |
+| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedLongs方法 |  |
 | `skip` | 无 | `void` | skip方法 |  |
 | `skipBinary` | total: int | `void` | skipBinary方法 |  |
 | `skipBooleans` | total: int | `void` | skipBooleans方法 |  |
 | `skipBytes` | total: int | `void` | skipBytes方法 |  |
 | `skipDoubles` | total: int | `void` | skipDoubles方法 |  |
-| `skipFixedLenByteArray` | total: int; len: int | `void` | skipFixedLenByteArray方法 |  |
+| `skipFixedLenByteArray` | total: int, len: int | `void` | skipFixedLenByteArray方法 |  |
 | `skipFloats` | total: int | `void` | skipFloats方法 |  |
 | `skipIntegers` | total: int | `void` | skipIntegers方法 |  |
 | `skipLongs` | total: int | `void` | skipLongs方法 |  |
@@ -1946,8 +1946,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `read` | wkb: byte[] | `GeometryModel` | 读取数据源创建DataFrame |  |
-| `read` | wkb: byte[]; srid: int | `GeometryModel` | 读取数据源创建DataFrame |  |
+| `read` | wkb: byte&lt;&gt; | `GeometryModel` | 读取数据源创建DataFrame |  |
+| `read` | wkb: byte&lt;&gt;, srid: int | `GeometryModel` | 读取数据源创建DataFrame |  |
 
 ### WritableColumnVector
 **包路径**: `org.apache.spark.sql.execution.vectorized`
@@ -1958,39 +1958,39 @@
 | `addElementsAppended` | num: int | `void` | addElementsAppended方法 |  |
 | `appendArray` | length: int | `int` | appendArray方法 |  |
 | `appendBoolean` | v: boolean | `int` | appendBoolean方法 |  |
-| `appendBooleans` | count: int; v: boolean | `int` | appendBooleans方法 |  |
-| `appendBooleans` | count: int; src: byte; offset: int | `int` | appendBooleans方法 |  |
+| `appendBooleans` | count: int, v: boolean | `int` | appendBooleans方法 |  |
+| `appendBooleans` | count: int, src: byte, offset: int | `int` | appendBooleans方法 |  |
 | `appendByte` | v: byte | `int` | appendByte方法 |  |
-| `appendByteArray` | value: byte[]; offset: int; length: int | `int` | appendByteArray方法 |  |
-| `appendBytes` | count: int; v: byte | `int` | appendBytes方法 |  |
-| `appendBytes` | length: int; src: byte[]; offset: int | `int` | appendBytes方法 |  |
+| `appendByteArray` | value: byte&lt;&gt;, offset: int, length: int | `int` | appendByteArray方法 |  |
+| `appendBytes` | count: int, v: byte | `int` | appendBytes方法 |  |
+| `appendBytes` | length: int, src: byte&lt;&gt;, offset: int | `int` | appendBytes方法 |  |
 | `appendDouble` | v: double | `int` | appendDouble方法 |  |
-| `appendDoubles` | count: int; v: double | `int` | appendDoubles方法 |  |
-| `appendDoubles` | length: int; src: double[]; offset: int | `int` | appendDoubles方法 |  |
+| `appendDoubles` | count: int, v: double | `int` | appendDoubles方法 |  |
+| `appendDoubles` | length: int, src: double&lt;&gt;, offset: int | `int` | appendDoubles方法 |  |
 | `appendFloat` | v: float | `int` | appendFloat方法 |  |
-| `appendFloats` | count: int; v: float | `int` | appendFloats方法 |  |
-| `appendFloats` | length: int; src: float[]; offset: int | `int` | appendFloats方法 |  |
+| `appendFloats` | count: int, v: float | `int` | appendFloats方法 |  |
+| `appendFloats` | length: int, src: float&lt;&gt;, offset: int | `int` | appendFloats方法 |  |
 | `appendInt` | v: int | `int` | appendInt方法 |  |
-| `appendInts` | count: int; v: int | `int` | appendInts方法 |  |
-| `appendInts` | length: int; src: int[]; offset: int | `int` | appendInts方法 |  |
+| `appendInts` | count: int, v: int | `int` | appendInts方法 |  |
+| `appendInts` | length: int, src: int&lt;&gt;, offset: int | `int` | appendInts方法 |  |
 | `appendLong` | v: long | `int` | appendLong方法 |  |
-| `appendLongs` | count: int; v: long | `int` | appendLongs方法 |  |
-| `appendLongs` | length: int; src: long[]; offset: int | `int` | appendLongs方法 |  |
+| `appendLongs` | count: int, v: long | `int` | appendLongs方法 |  |
+| `appendLongs` | length: int, src: long&lt;&gt;, offset: int | `int` | appendLongs方法 |  |
 | `appendNotNull` | 无 | `int` | appendNotNull方法 |  |
 | `appendNotNulls` | count: int | `int` | appendNotNulls方法 |  |
 | `appendNull` | 无 | `int` | appendNull方法 |  |
 | `appendNulls` | count: int | `int` | appendNulls方法 |  |
-| `appendObjects` | length: int; value: Object | `Optional&lt;Integer&gt;` | appendObjects方法 |  |
+| `appendObjects` | length: int, value: Object | `Optional&lt;Integer&gt;` | appendObjects方法 |  |
 | `appendShort` | v: short | `int` | appendShort方法 |  |
-| `appendShorts` | count: int; v: short | `int` | appendShorts方法 |  |
-| `appendShorts` | length: int; src: short[]; offset: int | `int` | appendShorts方法 |  |
+| `appendShorts` | count: int, v: short | `int` | appendShorts方法 |  |
+| `appendShorts` | length: int, src: short&lt;&gt;, offset: int | `int` | appendShorts方法 |  |
 | `appendStruct` | isNull: boolean | `int` | appendStruct方法 |  |
 | `arrayData` | 无 | `WritableColumnVector` | arrayData方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `closeIfFreeable` | 无 | `void` | closeIfFreeable方法 |  |
 | `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
 | `getChild` | ordinal: int | `WritableColumnVector` | getChild方法 |  |
-| `getDecimal` | rowId: int; precision: int; scale: int | `Decimal` | getDecimal方法 |  |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
 | `getDictionaryIds` | 无 | `WritableColumnVector` | getDictionaryIds方法 |  |
 | `getElementsAppended` | 无 | `int` | getElementsAppended方法 |  |
 | `getMap` | rowId: int | `ColumnarMap` | getMap方法 |  |
@@ -2001,11 +2001,11 @@
 | `isAllNull` | 无 | `boolean` | isAllNull方法 |  |
 | `isMissing` | 无 | `boolean` | isMissing方法 |  |
 | `numNulls` | 无 | `int` | numNulls方法 |  |
-| `putBooleans` | rowId: int; count: int; src: byte; srcIndex: int | `void` | putBooleans方法 |  |
-| `putByteArray` | rowId: int; value: byte[] | `int` | putByteArray方法 |  |
-| `putByteArray` | rowId: int; src: ByteBuffer; srcPosition: int; length: int | `int` | putByteArray方法 |  |
-| `putDecimal` | rowId: int; value: Decimal; precision: int | `void` | putDecimal方法 |  |
-| `putInterval` | rowId: int; value: CalendarInterval | `void` | putInterval方法 |  |
+| `putBooleans` | rowId: int, count: int, src: byte, srcIndex: int | `void` | putBooleans方法 |  |
+| `putByteArray` | rowId: int, value: byte&lt;&gt; | `int` | putByteArray方法 |  |
+| `putByteArray` | rowId: int, src: ByteBuffer, srcPosition: int, length: int | `int` | putByteArray方法 |  |
+| `putDecimal` | rowId: int, value: Decimal, precision: int | `void` | putDecimal方法 |  |
+| `putInterval` | rowId: int, value: CalendarInterval | `void` | putInterval方法 |  |
 | `reserve` | requiredCapacity: int | `void` | reserve方法 |  |
 | `reserveAdditional` | additionalCapacity: int | `void` | reserveAdditional方法 |  |
 | `reserveDictionaryIds` | capacity: int | `WritableColumnVector` | reserveDictionaryIds方法 |  |
@@ -2041,7 +2041,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `call` | userId: String; events: Iterator<Row>; state: GroupState<Sessions> | `Iterator&lt;Session&gt;` | call方法 |  |
+| `call` | userId: String, events: Iterator<Row>, state: GroupState<Sessions> | `Iterator&lt;Session&gt;` | call方法 |  |
 | `endTime` | 无 | `Timestamp` | endTime方法 |  |
 | `getDuration` | 无 | `long` | getDuration方法 |  |
 | `getEndTimestamp` | 无 | `Timestamp` | getEndTimestamp方法 |  |
@@ -2052,12 +2052,12 @@
 | `getSessions` | 无 | `List&lt;SessionAcc&gt;` | getSessions方法 |  |
 | `getStartTimestamp` | 无 | `Timestamp` | getStartTimestamp方法 |  |
 | `getUserId` | 无 | `String` | getUserId方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `newInstance` | sessions: List<SessionAcc> | `Sessions` | newInstance方法 |  |
-| `newInstance` | userId: String; eventTypeStr: String; startTimestamp: Timestamp; gapDuration: long | `SessionEvent` | newInstance方法 |  |
+| `newInstance` | userId: String, eventTypeStr: String, startTimestamp: Timestamp, gapDuration: long | `SessionEvent` | newInstance方法 |  |
 | `newInstance` | event: SessionEvent | `SessionAcc` | newInstance方法 |  |
 | `newInstance` | events: List<SessionEvent> | `SessionAcc` | newInstance方法 |  |
-| `newInstance` | id: String; duration: long; numEvents: int | `Session` | newInstance方法 |  |
+| `newInstance` | id: String, duration: long, numEvents: int | `Session` | newInstance方法 |  |
 | `setDuration` | duration: long | `void` | setDuration方法 |  |
 | `setEndTimestamp` | endTimestamp: Timestamp | `void` | setEndTimestamp方法 |  |
 | `setEventType` | eventType: EventTypes | `void` | setEventType方法 |  |
@@ -2085,7 +2085,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `onStart` | 无 | `void` | onStart方法 |  |
 | `onStop` | 无 | `void` | onStop方法 |  |
 
@@ -2104,7 +2104,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### KinesisInitialPositions
 **包路径**: `org.apache.spark.streaming.kinesis`
@@ -2173,16 +2173,16 @@
 |--------|------|----------|------|------|
 | `AvailableNow` | 无 | `Trigger` | AvailableNow方法 |  |
 | `Continuous` | intervalMs: long | `Trigger` | Continuous方法 |  |
-| `Continuous` | interval: long; timeUnit: TimeUnit | `Trigger` | Continuous方法 |  |
+| `Continuous` | interval: long, timeUnit: TimeUnit | `Trigger` | Continuous方法 |  |
 | `Continuous` | interval: Duration | `Trigger` | Continuous方法 |  |
 | `Continuous` | interval: String | `Trigger` | Continuous方法 |  |
 | `Once` | 无 | `Trigger` | Once方法 |  |
 | `ProcessingTime` | intervalMs: long | `Trigger` | ProcessingTime方法 |  |
-| `ProcessingTime` | interval: long; timeUnit: TimeUnit | `Trigger` | ProcessingTime方法 |  |
+| `ProcessingTime` | interval: long, timeUnit: TimeUnit | `Trigger` | ProcessingTime方法 |  |
 | `ProcessingTime` | interval: Duration | `Trigger` | ProcessingTime方法 |  |
 | `ProcessingTime` | interval: String | `Trigger` | ProcessingTime方法 |  |
 | `RealTime` | batchDurationMs: long | `Trigger` | RealTime方法 |  |
-| `RealTime` | batchDuration: long; timeUnit: TimeUnit | `Trigger` | RealTime方法 |  |
+| `RealTime` | batchDuration: long, timeUnit: TimeUnit | `Trigger` | RealTime方法 |  |
 | `RealTime` | batchDuration: Duration | `Trigger` | RealTime方法 |  |
 | `RealTime` | batchDuration: String | `Trigger` | RealTime方法 |  |
 | `RealTime` | 无 | `Trigger` | RealTime方法 |  |
@@ -2199,13 +2199,13 @@
 |--------|------|----------|------|------|
 | `channelActive` | client: TransportClient | `void` | channelActive方法 |  |
 | `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
-| `exceptionCaught` | cause: Throwable; client: TransportClient | `void` | exceptionCaught方法 |  |
+| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught方法 |  |
 | `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | getMergedBlockMetaReqHandler方法 |  |
 | `getStreamManager` | 无 | `StreamManager` | getStreamManager方法 |  |
 | `isAuthenticated` | 无 | `boolean` | isAuthenticated方法 |  |
-| `receive` | client: TransportClient; message: ByteBuffer; callback: RpcResponseCallback | `void` | receive方法 |  |
-| `receive` | client: TransportClient; message: ByteBuffer | `void` | receive方法 |  |
-| `receiveStream` | client: TransportClient; message: ByteBuffer; callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
+| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | receive方法 |  |
+| `receive` | client: TransportClient, message: ByteBuffer | `void` | receive方法 |  |
+| `receiveStream` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
 
 ### AbstractFetchShuffleBlocks
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2239,10 +2239,10 @@
 | `addJar` | jar: String | `T` | 添加JAR包到Spark作业 |  |
 | `addPyFile` | file: String | `T` | addPyFile方法 |  |
 | `addSparkArg` | arg: String | `T` | addSparkArg方法 |  |
-| `addSparkArg` | name: String; value: String | `T` | addSparkArg方法 |  |
+| `addSparkArg` | name: String, value: String | `T` | addSparkArg方法 |  |
 | `setAppName` | appName: String | `T` | setAppName方法 |  |
 | `setAppResource` | resource: String | `T` | setAppResource方法 |  |
-| `setConf` | key: String; value: String | `T` | setConf方法 |  |
+| `setConf` | key: String, value: String | `T` | setConf方法 |  |
 | `setDeployMode` | mode: String | `T` | setDeployMode方法 |  |
 | `setMainClass` | mainClass: String | `T` | setMainClass方法 |  |
 | `setMaster` | master: String | `T` | setMaster方法 |  |
@@ -2275,7 +2275,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `destroy` | 无 | `void` | destroy方法 |  |
-| `doFilter` | req: ServletRequest; resp: ServletResponse; chain: FilterChain | `void` | doFilter方法 |  |
+| `doFilter` | req: ServletRequest, resp: ServletResponse, chain: FilterChain | `void` | doFilter方法 |  |
 | `findRedirectUrl` | 无 | `String` | findRedirectUrl方法 |  |
 | `init` | conf: FilterConfig | `void` | init方法 |  |
 | `isValidUrl` | url: String | `boolean` | isValidUrl方法 |  |
@@ -2304,7 +2304,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String; password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
 
 ### ApplicationStatus
 **包路径**: `org.apache.spark.status.api.v1`
@@ -2320,7 +2320,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | client: TransportClient; channel: Channel | `void` | doBootstrap方法 |  |
+| `doBootstrap` | client: TransportClient, channel: Channel | `void` | doBootstrap方法 |  |
 
 ### AuthMethods
 **包路径**: `org.apache.hive.service.auth`
@@ -2338,7 +2338,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | channel: Channel; rpcHandler: RpcHandler | `RpcHandler` | doBootstrap方法 |  |
+| `doBootstrap` | channel: Channel, rpcHandler: RpcHandler | `RpcHandler` | doBootstrap方法 |  |
 
 ### BestEffortLazyVal
 **包路径**: `org.apache.spark.util`
@@ -2354,7 +2354,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getErrorMsg` | blockId: String; errorCode: ReturnCode | `String` | getErrorMsg方法 |  |
+| `getErrorMsg` | blockId: String, errorCode: ReturnCode | `String` | getErrorMsg方法 |  |
 | `getResponse` | 无 | `ByteBuffer` | getResponse方法 |  |
 | `getReturnCode` | 无 | `ReturnCode` | getReturnCode方法 |  |
 | `getReturnCode` | id: byte | `ReturnCode` | getReturnCode方法 |  |
@@ -2377,15 +2377,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `diagnoseCorruption` | host: String; port: int; execId: String; shuffleId: int; mapId: long; reduceId: int; checksum: long; algorithm: String | `Cause` | diagnoseCorruption方法 |  |
-| `finalizeShuffleMerge` | host: String; port: int; shuffleId: int; shuffleMergeId: int; listener: MergeFinalizerListener | `void` | finalizeShuffleMerge方法 |  |
+| `diagnoseCorruption` | host: String, port: int, execId: String, shuffleId: int, mapId: long, reduceId: int, checksum: long, algorithm: String | `Cause` | diagnoseCorruption方法 |  |
+| `finalizeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int, listener: MergeFinalizerListener | `void` | finalizeShuffleMerge方法 |  |
 | `getAppAttemptId` | 无 | `String` | getAppAttemptId方法 |  |
-| `getHostLocalDirs` | host: String; port: int; execIds: String[]; hostLocalDirsCompletable: String[]>> | `void` | getHostLocalDirs方法 |  |
-| `getMergedBlockMeta` | host: String; port: int; shuffleId: int; shuffleMergeId: int; reduceId: int; listener: MergedBlocksMetaListener | `void` | getMergedBlockMeta方法 |  |
+| `getHostLocalDirs` | host: String, port: int, execIds: String&lt;&gt;, hostLocalDirsCompletable: String&lt;&gt;>> | `void` | getHostLocalDirs方法 |  |
+| `getMergedBlockMeta` | host: String, port: int, shuffleId: int, shuffleMergeId: int, reduceId: int, listener: MergedBlocksMetaListener | `void` | getMergedBlockMeta方法 |  |
 | `onFailure` | t: Throwable | `void` | onFailure方法 |  |
 | `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `pushBlocks` | host: String; port: int; blockIds: String[]; buffers: ManagedBuffer[]; listener: BlockPushingListener | `void` | pushBlocks方法 |  |
-| `removeShuffleMerge` | host: String; port: int; shuffleId: int; shuffleMergeId: int | `boolean` | removeShuffleMerge方法 |  |
+| `pushBlocks` | host: String, port: int, blockIds: String&lt;&gt;, buffers: ManagedBuffer&lt;&gt;, listener: BlockPushingListener | `void` | pushBlocks方法 |  |
+| `removeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int | `boolean` | removeShuffleMerge方法 |  |
 | `setAppAttemptId` | appAttemptId: String | `void` | setAppAttemptId方法 |  |
 | `shuffleMetrics` | 无 | `MetricSet` | shuffleMetrics方法 |  |
 
@@ -2417,14 +2417,14 @@
 |--------|------|----------|------|------|
 | `cardinality` | 无 | `long` | cardinality方法 |  |
 | `create` | expectedNumItems: long | `BloomFilter` | create方法 |  |
-| `create` | expectedNumItems: long; fpp: double | `BloomFilter` | create方法 |  |
-| `create` | expectedNumItems: long; numBits: long | `BloomFilter` | create方法 |  |
-| `create` | expectedNumItems: long; numBits: long; seed: int | `BloomFilter` | create方法 |  |
-| `create` | version: Version; expectedNumItems: long; numBits: long; seed: int | `BloomFilter` | create方法 |  |
-| `optimalNumOfBits` | n: long; p: double | `long` | optimalNumOfBits方法 |  |
-| `optimalNumOfBits` | expectedNumItems: long; maxNumItems: long; maxNumOfBits: long | `long` | optimalNumOfBits方法 |  |
+| `create` | expectedNumItems: long, fpp: double | `BloomFilter` | create方法 |  |
+| `create` | expectedNumItems: long, numBits: long | `BloomFilter` | create方法 |  |
+| `create` | expectedNumItems: long, numBits: long, seed: int | `BloomFilter` | create方法 |  |
+| `create` | version: Version, expectedNumItems: long, numBits: long, seed: int | `BloomFilter` | create方法 |  |
+| `optimalNumOfBits` | n: long, p: double | `long` | optimalNumOfBits方法 |  |
+| `optimalNumOfBits` | expectedNumItems: long, maxNumItems: long, maxNumOfBits: long | `long` | optimalNumOfBits方法 |  |
 | `readFrom` | in: InputStream | `BloomFilter` | readFrom方法 |  |
-| `readFrom` | bytes: byte[] | `BloomFilter` | readFrom方法 |  |
+| `readFrom` | bytes: byte&lt;&gt; | `BloomFilter` | readFrom方法 |  |
 
 ### BreakableService
 **包路径**: `org.apache.hive.service`
@@ -2446,14 +2446,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `arrayEquals` | leftBase: Object; leftOffset: long; rightBase: Object; rightOffset: long; length: final long | `boolean` | arrayEquals方法 |  |
-| `contains` | arr: byte[]; sub: byte[] | `boolean` | 判断是否包含 |  |
-| `endsWith` | array: byte[]; target: byte[] | `boolean` | 判断是否以指定字符串结尾 |  |
-| `matchAt` | arr: byte[]; sub: byte[]; pos: int | `boolean` | matchAt方法 |  |
+| `arrayEquals` | leftBase: Object, leftOffset: long, rightBase: Object, rightOffset: long, length: final long | `boolean` | arrayEquals方法 |  |
+| `contains` | arr: byte&lt;&gt;, sub: byte&lt;&gt; | `boolean` | 判断是否包含 |  |
+| `endsWith` | array: byte&lt;&gt;, target: byte&lt;&gt; | `boolean` | 判断是否以指定字符串结尾 |  |
+| `matchAt` | arr: byte&lt;&gt;, sub: byte&lt;&gt;, pos: int | `boolean` | matchAt方法 |  |
 | `nextPowerOf2` | num: long | `long` | nextPowerOf2方法 |  |
 | `roundNumberOfBytesToNearestWord` | numBytes: int | `int` | roundNumberOfBytesToNearestWord方法 |  |
 | `roundNumberOfBytesToNearestWord` | numBytes: long | `long` | roundNumberOfBytesToNearestWord方法 |  |
-| `startsWith` | array: byte[]; target: byte[] | `boolean` | 判断是否以指定字符串开头 |  |
+| `startsWith` | array: byte&lt;&gt;, target: byte&lt;&gt; | `boolean` | 判断是否以指定字符串开头 |  |
 
 ### ByteArrayReadableChannel
 **包路径**: `org.apache.spark.network.util`
@@ -2494,8 +2494,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `convertFrom` | d: long; u: ByteUnit | `long` | convertFrom方法 |  |
-| `convertTo` | d: long; u: ByteUnit | `long` | convertTo方法 |  |
+| `convertFrom` | d: long, u: ByteUnit | `long` | convertFrom方法 |  |
+| `convertTo` | d: long, u: ByteUnit | `long` | convertTo方法 |  |
 | `toBytes` | d: long | `long` | toBytes方法 |  |
 | `toGiB` | d: long | `long` | toGiB方法 |  |
 | `toKiB` | d: long | `long` | toKiB方法 |  |
@@ -2509,41 +2509,41 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | sessionHandle: SessionHandle; authFactory: HiveAuthFactory; tokenStr: String | `void` | cancelDelegationToken方法 |  |
+| `cancelDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
 | `cancelOperation` | opHandle: OperationHandle | `void` | cancelOperation方法 |  |
 | `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
 | `closeSession` | sessionHandle: SessionHandle | `void` | closeSession方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle; statement: String; confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle; statement: String; confOverlay: String>; queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle; statement: String; confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle; statement: String; confOverlay: String>; queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
 | `fetchResults` | opHandle: OperationHandle | `TRowSet` | fetchResults方法 |  |
-| `fetchResults` | opHandle: OperationHandle; orientation: FetchOrientation; maxRows: long; fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
+| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
 | `getCatalogs` | sessionHandle: SessionHandle | `OperationHandle` | getCatalogs方法 |  |
-| `getColumns` | sessionHandle: SessionHandle; catalogName: String; schemaName: String; tableName: String; columnName: String | `OperationHandle` | getColumns方法 |  |
-| `getCrossReference` | sessionHandle: SessionHandle; primaryCatalog: String; primarySchema: String; primaryTable: String; foreignCatalog: String; foreignSchema: String; foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
-| `getDelegationToken` | sessionHandle: SessionHandle; authFactory: HiveAuthFactory; owner: String; renewer: String | `String` | getDelegationToken方法 |  |
-| `getFunctions` | sessionHandle: SessionHandle; catalogName: String; schemaName: String; functionName: String | `OperationHandle` | getFunctions方法 |  |
+| `getColumns` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | getColumns方法 |  |
+| `getCrossReference` | sessionHandle: SessionHandle, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
+| `getDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
+| `getFunctions` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, functionName: String | `OperationHandle` | getFunctions方法 |  |
 | `getHttpUGI` | 无 | `UserGroupInformation` | getHttpUGI方法 |  |
-| `getInfo` | sessionHandle: SessionHandle; getInfoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
+| `getInfo` | sessionHandle: SessionHandle, getInfoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
 | `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | getOperationStatus方法 |  |
-| `getPrimaryKeys` | sessionHandle: SessionHandle; catalog: String; schema: String; table: String | `OperationHandle` | getPrimaryKeys方法 |  |
+| `getPrimaryKeys` | sessionHandle: SessionHandle, catalog: String, schema: String, table: String | `OperationHandle` | getPrimaryKeys方法 |  |
 | `getQueryId` | opHandle: TOperationHandle | `String` | getQueryId方法 |  |
 | `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | getResultSetMetadata方法 |  |
-| `getSchemas` | sessionHandle: SessionHandle; catalogName: String; schemaName: String | `OperationHandle` | getSchemas方法 |  |
+| `getSchemas` | sessionHandle: SessionHandle, catalogName: String, schemaName: String | `OperationHandle` | getSchemas方法 |  |
 | `getServiceUGI` | 无 | `UserGroupInformation` | getServiceUGI方法 |  |
 | `getSessionConf` | sessionHandle: SessionHandle | `HiveConf` | getSessionConf方法 |  |
 | `getSessionManager` | 无 | `SessionManager` | getSessionManager方法 |  |
 | `getTableTypes` | sessionHandle: SessionHandle | `OperationHandle` | getTableTypes方法 |  |
-| `getTables` | sessionHandle: SessionHandle; catalogName: String; schemaName: String; tableName: String; tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
+| `getTables` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
 | `getTypeInfo` | sessionHandle: SessionHandle | `OperationHandle` | getTypeInfo方法 |  |
-| `openSession` | protocol: TProtocolVersion; username: String; password: String; configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSession` | protocol: TProtocolVersion; username: String; password: String; ipAddress: String; configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSession` | username: String; password: String; configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSessionWithImpersonation` | protocol: TProtocolVersion; username: String; password: String; configuration: String>; delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `openSessionWithImpersonation` | protocol: TProtocolVersion; username: String; password: String; ipAddress: String; configuration: String>; delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `openSessionWithImpersonation` | username: String; password: String; configuration: String>; delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `renewDelegationToken` | sessionHandle: SessionHandle; authFactory: HiveAuthFactory; tokenStr: String | `void` | renewDelegationToken方法 |  |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, configuration: String> | `SessionHandle` | openSession方法 |  |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, configuration: String> | `SessionHandle` | openSession方法 |  |
+| `openSession` | username: String, password: String, configuration: String> | `SessionHandle` | openSession方法 |  |
+| `openSessionWithImpersonation` | protocol: TProtocolVersion, username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
+| `openSessionWithImpersonation` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
+| `openSessionWithImpersonation` | username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
+| `renewDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
 
 ### CLIServiceClient
 **包路径**: `org.apache.hive.service.cli`
@@ -2552,7 +2552,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `fetchResults` | opHandle: OperationHandle | `TRowSet` | fetchResults方法 |  |
-| `openSession` | username: String; password: String | `SessionHandle` | openSession方法 |  |
+| `openSession` | username: String, password: String | `SessionHandle` | openSession方法 |  |
 
 ### CLIServiceUtils
 **包路径**: `org.apache.hive.service.cli`
@@ -2570,7 +2570,7 @@
 |--------|------|----------|------|------|
 | `getResource` | name: String | `URL` | getResource方法 |  |
 | `getResources` | name: String | `Enumeration&lt;URL&gt;` | getResources方法 |  |
-| `loadClass` | name: String; resolve: boolean | `Class&lt;?&gt;` | loadClass方法 |  |
+| `loadClass` | name: String, resolve: boolean | `Class&lt;?&gt;` | loadClass方法 |  |
 
 ### ChunkFetchRequestHandler
 **包路径**: `org.apache.spark.network.server`
@@ -2578,8 +2578,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `exceptionCaught` | ctx: ChannelHandlerContext; cause: Throwable | `void` | exceptionCaught方法 |  |
-| `processFetchRequest` | channel: final Channel; msg: final ChunkFetchRequest | `void` | processFetchRequest方法 |  |
+| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught方法 |  |
+| `processFetchRequest` | channel: final Channel, msg: final ChunkFetchRequest | `void` | processFetchRequest方法 |  |
 
 ### ClassicTableTypeMapping
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -2607,16 +2607,16 @@
 | `codePointIterator` | iteratorMode: CodePointIteratorType | `Iterator&lt;Integer&gt;` | codePointIterator方法 |  |
 | `compareTo` | other: @Nonnull final UTF8String | `int` | compareTo方法 |  |
 | `concat` | inputs: UTF8String... | `UTF8String` | 拼接字符串 |  |
-| `concatWs` | separator: UTF8String; inputs: UTF8String... | `UTF8String` | concatWs方法 |  |
+| `concatWs` | separator: UTF8String, inputs: UTF8String... | `UTF8String` | concatWs方法 |  |
 | `contains` | substring: final UTF8String | `boolean` | 判断是否包含 |  |
 | `copy` | 无 | `UTF8String` | copy方法 |  |
-| `copyUTF8String` | start: int; end: int | `UTF8String` | copyUTF8String方法 |  |
+| `copyUTF8String` | start: int, end: int | `UTF8String` | copyUTF8String方法 |  |
 | `endsWith` | suffix: final UTF8String | `boolean` | 判断是否以指定字符串结尾 |  |
-| `find` | str: UTF8String; start: int | `int` | find方法 |  |
+| `find` | str: UTF8String, start: int | `int` | find方法 |  |
 | `findInSet` | match: UTF8String | `int` | findInSet方法 |  |
-| `fromAddress` | base: Object; offset: long; numBytes: int | `UTF8String` | fromAddress方法 |  |
-| `fromBytes` | bytes: byte[] | `UTF8String` | fromBytes方法 |  |
-| `fromBytes` | bytes: byte[]; offset: int; numBytes: int | `UTF8String` | fromBytes方法 |  |
+| `fromAddress` | base: Object, offset: long, numBytes: int | `UTF8String` | fromAddress方法 |  |
+| `fromBytes` | bytes: byte&lt;&gt; | `UTF8String` | fromBytes方法 |  |
+| `fromBytes` | bytes: byte&lt;&gt;, offset: int, numBytes: int | `UTF8String` | fromBytes方法 |  |
 | `fromString` | str: String | `UTF8String` | fromString方法 |  |
 | `getBaseObject` | 无 | `Object` | getBaseObject方法 |  |
 | `getBaseOffset` | 无 | `long` | getBaseOffset方法 |  |
@@ -2626,37 +2626,37 @@
 | `getPrefix` | 无 | `long` | getPrefix方法 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `indexOf` | v: UTF8String; start: int | `int` | indexOf方法 |  |
+| `indexOf` | v: UTF8String, start: int | `int` | indexOf方法 |  |
 | `indexOfEmpty` | start: int | `int` | indexOfEmpty方法 |  |
 | `isFullAscii` | 无 | `boolean` | isFullAscii方法 |  |
 | `isValid` | 无 | `boolean` | isValid方法 |  |
 | `isWhitespaceOrISOControl` | codePoint: int | `boolean` | isWhitespaceOrISOControl方法 |  |
 | `levenshteinDistance` | other: UTF8String | `int` | levenshteinDistance方法 |  |
-| `levenshteinDistance` | other: UTF8String; threshold: int | `int` | levenshteinDistance方法 |  |
-| `lpad` | len: int; pad: UTF8String | `UTF8String` | lpad方法 |  |
+| `levenshteinDistance` | other: UTF8String, threshold: int | `int` | levenshteinDistance方法 |  |
+| `lpad` | len: int, pad: UTF8String | `UTF8String` | lpad方法 |  |
 | `makeValid` | 无 | `UTF8String` | makeValid方法 |  |
-| `matchAt` | s: final UTF8String; pos: int | `boolean` | matchAt方法 |  |
+| `matchAt` | s: final UTF8String, pos: int | `boolean` | matchAt方法 |  |
 | `next` | 无 | `Integer` | next方法 |  |
 | `next` | 无 | `Integer` | next方法 |  |
 | `numBytes` | 无 | `int` | numBytes方法 |  |
 | `numBytesForFirstByte` | b: final byte | `int` | numBytesForFirstByte方法 |  |
 | `numChars` | 无 | `int` | numChars方法 |  |
-| `read` | kryo: Kryo; in: Input | `void` | 读取数据源创建DataFrame |  |
+| `read` | kryo: Kryo, in: Input | `void` | 读取数据源创建DataFrame |  |
 | `readExternal` | in: ObjectInput | `void` | readExternal方法 |  |
 | `repeat` | times: int | `UTF8String` | repeat方法 |  |
-| `replace` | search: UTF8String; replace: UTF8String | `UTF8String` | replace方法 |  |
+| `replace` | search: UTF8String, replace: UTF8String | `UTF8String` | replace方法 |  |
 | `reverse` | 无 | `UTF8String` | reverse方法 |  |
 | `reverseCodePointIterator` | 无 | `Iterator&lt;Integer&gt;` | reverseCodePointIterator方法 |  |
 | `reverseCodePointIterator` | iteratorMode: CodePointIteratorType | `Iterator&lt;Integer&gt;` | reverseCodePointIterator方法 |  |
-| `rfind` | str: UTF8String; start: int | `int` | rfind方法 |  |
-| `rpad` | len: int; pad: UTF8String | `UTF8String` | rpad方法 |  |
-| `semanticCompare` | other: final UTF8String; collationId: int | `int` | semanticCompare方法 |  |
-| `semanticEquals` | other: final UTF8String; collationId: int | `boolean` | semanticEquals方法 |  |
+| `rfind` | str: UTF8String, start: int | `int` | rfind方法 |  |
+| `rpad` | len: int, pad: UTF8String | `UTF8String` | rpad方法 |  |
+| `semanticCompare` | other: final UTF8String, collationId: int | `int` | semanticCompare方法 |  |
+| `semanticEquals` | other: final UTF8String, collationId: int | `boolean` | semanticEquals方法 |  |
 | `soundex` | 无 | `UTF8String` | soundex方法 |  |
 | `startsWith` | prefix: final UTF8String | `boolean` | 判断是否以指定字符串开头 |  |
-| `subStringIndex` | delim: UTF8String; count: int | `UTF8String` | subStringIndex方法 |  |
-| `substring` | start: final int; until: final int | `UTF8String` | 截取子字符串 |  |
-| `substringSQL` | pos: int; length: int | `UTF8String` | substringSQL方法 |  |
+| `subStringIndex` | delim: UTF8String, count: int | `UTF8String` | subStringIndex方法 |  |
+| `substring` | start: final int, until: final int | `UTF8String` | 截取子字符串 |  |
+| `substringSQL` | pos: int, length: int | `UTF8String` | substringSQL方法 |  |
 | `toBinaryString` | val: long | `UTF8String` | toBinaryString方法 |  |
 | `toByte` | intWrapper: IntWrapper | `boolean` | toByte方法 |  |
 | `toByteExact` | 无 | `byte` | toByteExact方法 |  |
@@ -2682,11 +2682,11 @@
 | `trimRight` | 无 | `UTF8String` | trimRight方法 |  |
 | `trimRight` | trimString: UTF8String | `UTF8String` | trimRight方法 |  |
 | `trimTrailingSpaces` | numSpaces: int | `UTF8String` | trimTrailingSpaces方法 |  |
-| `write` | kryo: Kryo; out: Output | `void` | 写入DataFrame到数据源 |  |
+| `write` | kryo: Kryo, out: Output | `void` | 写入DataFrame到数据源 |  |
 | `writeExternal` | out: ObjectOutput | `void` | writeExternal方法 |  |
 | `writeTo` | buffer: ByteBuffer | `void` | writeTo方法 |  |
 | `writeTo` | out: OutputStream | `void` | writeTo方法 |  |
-| `writeToMemory` | target: Object; targetOffset: long | `void` | writeToMemory方法 |  |
+| `writeToMemory` | target: Object, targetOffset: long | `void` | writeToMemory方法 |  |
 
 ### ColumnBasedSet
 **包路径**: `org.apache.hive.service.cli`
@@ -2694,7 +2694,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addRow` | fields: Object[] | `ColumnBasedSet` | addRow方法 |  |
+| `addRow` | fields: Object&lt;&gt; | `ColumnBasedSet` | addRow方法 |  |
 | `extractSubset` | maxRows: int | `ColumnBasedSet` | extractSubset方法 |  |
 | `getColumns` | 无 | `List&lt;ColumnBuffer&gt;` | getColumns方法 |  |
 | `getStartOffset` | 无 | `long` | getStartOffset方法 |  |
@@ -2718,7 +2718,7 @@
 | `getTypeDescriptor` | 无 | `TypeDescriptor` | getTypeDescriptor方法 |  |
 | `getTypeName` | 无 | `String` | getTypeName方法 |  |
 | `isPrimitive` | 无 | `boolean` | isPrimitive方法 |  |
-| `newPrimitiveColumnDescriptor` | name: String; comment: String; type: Type; position: int | `ColumnDescriptor` | newPrimitiveColumnDescriptor方法 |  |
+| `newPrimitiveColumnDescriptor` | name: String, comment: String, type: Type, position: int | `ColumnDescriptor` | newPrimitiveColumnDescriptor方法 |  |
 | `toTColumnDesc` | 无 | `TColumnDesc` | toTColumnDesc方法 |  |
 
 ### ColumnValue
@@ -2728,7 +2728,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `toColumnValue` | value: TColumnValue | `Object` | toColumnValue方法 |  |
-| `toTColumnValue` | typeDescriptor: TypeDescriptor; value: Object | `TColumnValue` | toTColumnValue方法 |  |
+| `toTColumnValue` | typeDescriptor: TypeDescriptor, value: Object | `TColumnValue` | toTColumnValue方法 |  |
 
 ### CompositeService
 **包路径**: `org.apache.hive.service`
@@ -2745,11 +2745,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
-| `getBoolean` | name: String; defaultValue: boolean | `boolean` | getBoolean方法 |  |
-| `getDouble` | name: String; defaultValue: double | `double` | getDouble方法 |  |
-| `getInt` | name: String; defaultValue: int | `int` | getInt方法 |  |
-| `getLong` | name: String; defaultValue: long | `long` | getLong方法 |  |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
+| `getBoolean` | name: String, defaultValue: boolean | `boolean` | getBoolean方法 |  |
+| `getDouble` | name: String, defaultValue: double | `double` | getDouble方法 |  |
+| `getInt` | name: String, defaultValue: int | `int` | getInt方法 |  |
+| `getLong` | name: String, defaultValue: long | `long` | getLong方法 |  |
 
 ### CookieSigner
 **包路径**: `org.apache.hive.service`
@@ -2776,10 +2776,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `create` | depth: int; width: int; seed: int | `CountMinSketch` | create方法 |  |
-| `create` | eps: double; confidence: double; seed: int | `CountMinSketch` | create方法 |  |
+| `create` | depth: int, width: int, seed: int | `CountMinSketch` | create方法 |  |
+| `create` | eps: double, confidence: double, seed: int | `CountMinSketch` | create方法 |  |
 | `readFrom` | in: InputStream | `CountMinSketch` | readFrom方法 |  |
-| `readFrom` | bytes: byte[] | `CountMinSketch` | readFrom方法 |  |
+| `readFrom` | bytes: byte&lt;&gt; | `CountMinSketch` | readFrom方法 |  |
 
 ### CryptoUtils
 **包路径**: `org.apache.spark.network.util`
@@ -2787,7 +2787,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `toCryptoConf` | prefix: String; conf: String>> | `Properties` | toCryptoConf方法 |  |
+| `toCryptoConf` | prefix: String, conf: String>> | `Properties` | toCryptoConf方法 |  |
 
 ### CtrTransportCipher
 **包路径**: `org.apache.spark.network.crypto`
@@ -2796,8 +2796,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
-| `channelRead` | ctx: ChannelHandlerContext; data: Object | `void` | channelRead方法 |  |
-| `close` | ctx: ChannelHandlerContext; promise: ChannelPromise | `void` | close方法 |  |
+| `channelRead` | ctx: ChannelHandlerContext, data: Object | `void` | channelRead方法 |  |
+| `close` | ctx: ChannelHandlerContext, promise: ChannelPromise | `void` | close方法 |  |
 | `count` | 无 | `long` | 统计行数 |  |
 | `getKeyId` | 无 | `String` | getKeyId方法 |  |
 | `handlerRemoved` | ctx: ChannelHandlerContext | `void` | handlerRemoved方法 |  |
@@ -2805,9 +2805,9 @@
 | `release` | decrement: int | `boolean` | release方法 |  |
 | `retain` | increment: int | `EncryptedMessage` | retain方法 |  |
 | `touch` | o: Object | `EncryptedMessage` | touch方法 |  |
-| `transferTo` | target: WritableByteChannel; position: long | `long` | transferTo方法 |  |
+| `transferTo` | target: WritableByteChannel, position: long | `long` | transferTo方法 |  |
 | `transferred` | 无 | `long` | transferred方法 |  |
-| `write` | ctx: ChannelHandlerContext; msg: Object; promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
+| `write` | ctx: ChannelHandlerContext, msg: Object, promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
 
 ### CustomAuthenticationProviderImpl
 **包路径**: `org.apache.hive.service.auth`
@@ -2815,7 +2815,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String; password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
 
 ### CustomLogKeys
 **包路径**: `org.apache.spark.internal`
@@ -2824,33 +2824,33 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `debug` | msg: String | `void` | debug方法 |  |
-| `debug` | format: String; arg: Object | `void` | debug方法 |  |
-| `debug` | format: String; arg1: Object; arg2: Object | `void` | debug方法 |  |
-| `debug` | format: String; arguments: Object... | `void` | debug方法 |  |
-| `debug` | msg: String; throwable: Throwable | `void` | debug方法 |  |
+| `debug` | format: String, arg: Object | `void` | debug方法 |  |
+| `debug` | format: String, arg1: Object, arg2: Object | `void` | debug方法 |  |
+| `debug` | format: String, arguments: Object... | `void` | debug方法 |  |
+| `debug` | msg: String, throwable: Throwable | `void` | debug方法 |  |
 | `error` | msg: String | `void` | error方法 |  |
-| `error` | msg: String; throwable: Throwable | `void` | error方法 |  |
-| `error` | msg: String; mdcs: MDC... | `void` | error方法 |  |
-| `error` | msg: String; throwable: Throwable; mdcs: MDC... | `void` | error方法 |  |
+| `error` | msg: String, throwable: Throwable | `void` | error方法 |  |
+| `error` | msg: String, mdcs: MDC... | `void` | error方法 |  |
+| `error` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | error方法 |  |
 | `getSlf4jLogger` | 无 | `Logger` | getSlf4jLogger方法 |  |
 | `info` | msg: String | `void` | info方法 |  |
-| `info` | msg: String; throwable: Throwable | `void` | info方法 |  |
-| `info` | msg: String; mdcs: MDC... | `void` | info方法 |  |
-| `info` | msg: String; throwable: Throwable; mdcs: MDC... | `void` | info方法 |  |
+| `info` | msg: String, throwable: Throwable | `void` | info方法 |  |
+| `info` | msg: String, mdcs: MDC... | `void` | info方法 |  |
+| `info` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | info方法 |  |
 | `isDebugEnabled` | 无 | `boolean` | isDebugEnabled方法 |  |
 | `isErrorEnabled` | 无 | `boolean` | isErrorEnabled方法 |  |
 | `isInfoEnabled` | 无 | `boolean` | isInfoEnabled方法 |  |
 | `isTraceEnabled` | 无 | `boolean` | isTraceEnabled方法 |  |
 | `isWarnEnabled` | 无 | `boolean` | isWarnEnabled方法 |  |
 | `trace` | msg: String | `void` | trace方法 |  |
-| `trace` | format: String; arg: Object | `void` | trace方法 |  |
-| `trace` | format: String; arg1: Object; arg2: Object | `void` | trace方法 |  |
-| `trace` | format: String; arguments: Object... | `void` | trace方法 |  |
-| `trace` | msg: String; throwable: Throwable | `void` | trace方法 |  |
+| `trace` | format: String, arg: Object | `void` | trace方法 |  |
+| `trace` | format: String, arg1: Object, arg2: Object | `void` | trace方法 |  |
+| `trace` | format: String, arguments: Object... | `void` | trace方法 |  |
+| `trace` | msg: String, throwable: Throwable | `void` | trace方法 |  |
 | `warn` | msg: String | `void` | warn方法 |  |
-| `warn` | msg: String; throwable: Throwable | `void` | warn方法 |  |
-| `warn` | msg: String; mdcs: MDC... | `void` | warn方法 |  |
-| `warn` | msg: String; throwable: Throwable; mdcs: MDC... | `void` | warn方法 |  |
+| `warn` | msg: String, throwable: Throwable | `void` | warn方法 |  |
+| `warn` | msg: String, mdcs: MDC... | `void` | warn方法 |  |
+| `warn` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | warn方法 |  |
 
 ### DBBackend
 **包路径**: `org.apache.spark.network.shuffledb`
@@ -2867,8 +2867,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initDB` | dbBackend: DBBackend; dbFile: File; version: StoreVersion; mapper: ObjectMapper | `DB` | initDB方法 |  |
-| `initDB` | dbBackend: DBBackend; file: File | `DB` | initDB方法 |  |
+| `initDB` | dbBackend: DBBackend, dbFile: File, version: StoreVersion, mapper: ObjectMapper | `DB` | initDB方法 |  |
+| `initDB` | dbBackend: DBBackend, file: File | `DB` | initDB方法 |  |
 
 ### DelegateSymlinkTextInputFormat
 **包路径**: `org.apache.hadoop.hive.ql.io`
@@ -2877,8 +2877,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `configure` | job: JobConf | `void` | configure方法 |  |
-| `getContentSummary` | p: Path; job: JobConf | `ContentSummary` | getContentSummary方法 |  |
-| `getRecordReader` | split: InputSplit; job: JobConf; reporter: Reporter | `RecordReader&lt;LongWritable, Text&gt;` | getRecordReader方法 |  |
+| `getContentSummary` | p: Path, job: JobConf | `ContentSummary` | getContentSummary方法 |  |
+| `getRecordReader` | split: InputSplit, job: JobConf, reporter: Reporter | `RecordReader&lt;LongWritable, Text&gt;` | getRecordReader方法 |  |
 | `getTargetPath` | 无 | `Path` | getTargetPath方法 |  |
 | `readFields` | in: DataInput | `void` | readFields方法 |  |
 | `write` | out: DataOutput | `void` | 写入DataFrame到数据源 |  |
@@ -2901,20 +2901,20 @@
 |--------|------|----------|------|------|
 | `decode` | buf: ByteBuf | `String` | decode方法 |  |
 | `decode` | buf: ByteBuf | `RoaringBitmap` | decode方法 |  |
-| `encode` | buf: ByteBuf; s: String | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf; b: RoaringBitmap | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf; arr: byte[] | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf; strings: String[] | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf; ints: int[] | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf; longs: long[] | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf; bitmaps: RoaringBitmap[] | `void` | encode方法 |  |
+| `encode` | buf: ByteBuf, s: String | `void` | encode方法 |  |
+| `encode` | buf: ByteBuf, b: RoaringBitmap | `void` | encode方法 |  |
+| `encode` | buf: ByteBuf, arr: byte&lt;&gt; | `void` | encode方法 |  |
+| `encode` | buf: ByteBuf, strings: String&lt;&gt; | `void` | encode方法 |  |
+| `encode` | buf: ByteBuf, ints: int&lt;&gt; | `void` | encode方法 |  |
+| `encode` | buf: ByteBuf, longs: long&lt;&gt; | `void` | encode方法 |  |
+| `encode` | buf: ByteBuf, bitmaps: RoaringBitmap&lt;&gt; | `void` | encode方法 |  |
 | `encodedLength` | s: String | `int` | encodedLength方法 |  |
 | `encodedLength` | b: RoaringBitmap | `int` | encodedLength方法 |  |
-| `encodedLength` | arr: byte[] | `int` | encodedLength方法 |  |
-| `encodedLength` | strings: String[] | `int` | encodedLength方法 |  |
-| `encodedLength` | ints: int[] | `int` | encodedLength方法 |  |
-| `encodedLength` | longs: long[] | `int` | encodedLength方法 |  |
-| `encodedLength` | bitmaps: RoaringBitmap[] | `int` | encodedLength方法 |  |
+| `encodedLength` | arr: byte&lt;&gt; | `int` | encodedLength方法 |  |
+| `encodedLength` | strings: String&lt;&gt; | `int` | encodedLength方法 |  |
+| `encodedLength` | ints: int&lt;&gt; | `int` | encodedLength方法 |  |
+| `encodedLength` | longs: long&lt;&gt; | `int` | encodedLength方法 |  |
+| `encodedLength` | bitmaps: RoaringBitmap&lt;&gt; | `int` | encodedLength方法 |  |
 
 ### EncryptedMessageWithHeader
 **包路径**: `org.apache.spark.network.protocol`
@@ -2954,7 +2954,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getFilePath` | localDirs: String[]; subDirsPerLocalDir: int; filename: String | `String` | getFilePath方法 |  |
+| `getFilePath` | localDirs: String&lt;&gt;, subDirsPerLocalDir: int, filename: String | `String` | getFilePath方法 |  |
 
 ### ExecutorShuffleInfo
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2972,12 +2972,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String; cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
 | `channelActive` | client: TransportClient | `void` | channelActive方法 |  |
 | `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `exceptionCaught` | cause: Throwable; client: TransportClient | `void` | exceptionCaught方法 |  |
-| `executorRemoved` | executorId: String; appId: String | `void` | executorRemoved方法 |  |
+| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught方法 |  |
+| `executorRemoved` | executorId: String, appId: String | `void` | executorRemoved方法 |  |
 | `getAllMetrics` | 无 | `MetricSet` | getAllMetrics方法 |  |
 | `getBlockResolver` | 无 | `ExternalShuffleBlockResolver` | getBlockResolver方法 |  |
 | `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | getMergedBlockMetaReqHandler方法 |  |
@@ -2989,9 +2989,9 @@
 | `next` | 无 | `ManagedBuffer` | next方法 |  |
 | `next` | 无 | `ManagedBuffer` | next方法 |  |
 | `next` | 无 | `ManagedBuffer` | next方法 |  |
-| `receive` | client: TransportClient; message: ByteBuffer; callback: RpcResponseCallback | `void` | receive方法 |  |
-| `receiveMergeBlockMetaReq` | client: TransportClient; metaRequest: MergedBlockMetaRequest; callback: MergedBlockMetaResponseCallback | `void` | receiveMergeBlockMetaReq方法 |  |
-| `receiveStream` | client: TransportClient; messageHeader: ByteBuffer; callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
+| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | receive方法 |  |
+| `receiveMergeBlockMetaReq` | client: TransportClient, metaRequest: MergedBlockMetaRequest, callback: MergedBlockMetaResponseCallback | `void` | receiveMergeBlockMetaReq方法 |  |
+| `receiveStream` | client: TransportClient, messageHeader: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
 
 ### ExternalBlockStoreClient
 **包路径**: `org.apache.spark.network.shuffle`
@@ -3000,20 +3000,20 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
-| `fetchBlocks` | host: String; port: int; execId: String; blockIds: String[]; listener: BlockFetchingListener; downloadFileManager: DownloadFileManager | `void` | fetchBlocks方法 |  |
-| `finalizeShuffleMerge` | host: String; port: int; shuffleId: int; shuffleMergeId: int; listener: MergeFinalizerListener | `void` | finalizeShuffleMerge方法 |  |
-| `getMergedBlockMeta` | host: String; port: int; shuffleId: int; shuffleMergeId: int; reduceId: int; listener: MergedBlocksMetaListener | `void` | getMergedBlockMeta方法 |  |
+| `fetchBlocks` | host: String, port: int, execId: String, blockIds: String&lt;&gt;, listener: BlockFetchingListener, downloadFileManager: DownloadFileManager | `void` | fetchBlocks方法 |  |
+| `finalizeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int, listener: MergeFinalizerListener | `void` | finalizeShuffleMerge方法 |  |
+| `getMergedBlockMeta` | host: String, port: int, shuffleId: int, shuffleMergeId: int, reduceId: int, listener: MergedBlocksMetaListener | `void` | getMergedBlockMeta方法 |  |
 | `init` | appId: String | `void` | init方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
 | `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `onSuccess` | numChunks: int; buffer: ManagedBuffer | `void` | onSuccess方法 |  |
+| `onSuccess` | numChunks: int, buffer: ManagedBuffer | `void` | onSuccess方法 |  |
 | `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `pushBlocks` | host: String; port: int; blockIds: String[]; buffers: ManagedBuffer[]; listener: BlockPushingListener | `void` | pushBlocks方法 |  |
-| `registerWithShuffleServer` | host: String; port: int; execId: String; executorInfo: ExecutorShuffleInfo | `void` | registerWithShuffleServer方法 |  |
-| `removeBlocks` | host: String; port: int; execId: String; blockIds: String[] | `Future&lt;Integer&gt;` | removeBlocks方法 |  |
-| `removeShuffleMerge` | host: String; port: int; shuffleId: int; shuffleMergeId: int | `boolean` | removeShuffleMerge方法 |  |
+| `pushBlocks` | host: String, port: int, blockIds: String&lt;&gt;, buffers: ManagedBuffer&lt;&gt;, listener: BlockPushingListener | `void` | pushBlocks方法 |  |
+| `registerWithShuffleServer` | host: String, port: int, execId: String, executorInfo: ExecutorShuffleInfo | `void` | registerWithShuffleServer方法 |  |
+| `removeBlocks` | host: String, port: int, execId: String, blockIds: String&lt;&gt; | `Future&lt;Integer&gt;` | removeBlocks方法 |  |
+| `removeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int | `boolean` | removeShuffleMerge方法 |  |
 | `setAppAttemptId` | appAttemptId: String | `void` | setAppAttemptId方法 |  |
 | `shuffleMetrics` | 无 | `MetricSet` | shuffleMetrics方法 |  |
 
@@ -3023,18 +3023,18 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String; cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
-| `diagnoseShuffleBlockCorruption` | appId: String; execId: String; shuffleId: int; mapId: long; reduceId: int; checksumByReader: long; algorithm: String | `Cause` | diagnoseShuffleBlockCorruption方法 |  |
-| `executorRemoved` | executorId: String; appId: String | `void` | executorRemoved方法 |  |
-| `getBlockData` | appId: String; execId: String; shuffleId: int; mapId: long; reduceId: int | `ManagedBuffer` | getBlockData方法 |  |
-| `getContinuousBlocksData` | appId: String; execId: String; shuffleId: int; mapId: long; startReduceId: int; endReduceId: int | `ManagedBuffer` | getContinuousBlocksData方法 |  |
-| `getDiskPersistedRddBlockData` | executor: ExecutorShuffleInfo; rddId: int; splitIndex: int | `ManagedBuffer` | getDiskPersistedRddBlockData方法 |  |
-| `getLocalDirs` | appId: String; execIds: Set<String> | `Map&lt;String, String[]&gt;` | getLocalDirs方法 |  |
-| `getRddBlockData` | appId: String; execId: String; rddId: int; splitIndex: int | `ManagedBuffer` | getRddBlockData方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
+| `diagnoseShuffleBlockCorruption` | appId: String, execId: String, shuffleId: int, mapId: long, reduceId: int, checksumByReader: long, algorithm: String | `Cause` | diagnoseShuffleBlockCorruption方法 |  |
+| `executorRemoved` | executorId: String, appId: String | `void` | executorRemoved方法 |  |
+| `getBlockData` | appId: String, execId: String, shuffleId: int, mapId: long, reduceId: int | `ManagedBuffer` | getBlockData方法 |  |
+| `getContinuousBlocksData` | appId: String, execId: String, shuffleId: int, mapId: long, startReduceId: int, endReduceId: int | `ManagedBuffer` | getContinuousBlocksData方法 |  |
+| `getDiskPersistedRddBlockData` | executor: ExecutorShuffleInfo, rddId: int, splitIndex: int | `ManagedBuffer` | getDiskPersistedRddBlockData方法 |  |
+| `getLocalDirs` | appId: String, execIds: Set<String> | `Map&lt;String, String[]&gt;` | getLocalDirs方法 |  |
+| `getRddBlockData` | appId: String, execId: String, rddId: int, splitIndex: int | `ManagedBuffer` | getRddBlockData方法 |  |
 | `getRegisteredExecutorsSize` | 无 | `int` | getRegisteredExecutorsSize方法 |  |
 | `load` | filePath: String | `ShuffleIndexInformation` | load方法 |  |
-| `registerExecutor` | appId: String; execId: String; executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
-| `removeBlocks` | appId: String; execId: String; blockIds: String[] | `int` | removeBlocks方法 |  |
+| `registerExecutor` | appId: String, execId: String, executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
+| `removeBlocks` | appId: String, execId: String, blockIds: String&lt;&gt; | `int` | removeBlocks方法 |  |
 
 ### FetchOrientation
 **包路径**: `org.apache.hive.service.cli`
@@ -3115,7 +3115,7 @@
 | `filter` | filter: MetricFilter | `Builder` | 过滤行 |  |
 | `forRegistry` | registry: MetricRegistry | `Builder` | forRegistry方法 |  |
 | `prefixedWith` | prefix: String | `Builder` | prefixedWith方法 |  |
-| `report` | gauges: Gauge>; counters: Counter>; histograms: Histogram>; meters: Meter>; timers: Timer> | `void` | report方法 |  |
+| `report` | gauges: Gauge>, counters: Counter>, histograms: Histogram>, meters: Meter>, timers: Timer> | `void` | report方法 |  |
 | `scheduleOn` | executor: ScheduledExecutorService | `Builder` | scheduleOn方法 |  |
 | `shutdownExecutorOnStop` | shutdownExecutorOnStop: boolean | `Builder` | shutdownExecutorOnStop方法 |  |
 | `withDMax` | dMax: int | `Builder` | withDMax方法 |  |
@@ -3128,16 +3128,16 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
-| `channelRead` | ctx: ChannelHandlerContext; ciphertextMessage: Object | `void` | channelRead方法 |  |
+| `channelRead` | ctx: ChannelHandlerContext, ciphertextMessage: Object | `void` | channelRead方法 |  |
 | `count` | 无 | `long` | 统计行数 |  |
 | `getKeyId` | 无 | `String` | getKeyId方法 |  |
 | `position` | 无 | `long` | position方法 |  |
 | `release` | decrement: int | `boolean` | release方法 |  |
 | `retain` | increment: int | `GcmEncryptedMessage` | retain方法 |  |
 | `touch` | o: Object | `GcmEncryptedMessage` | touch方法 |  |
-| `transferTo` | target: WritableByteChannel; position: long | `long` | transferTo方法 |  |
+| `transferTo` | target: WritableByteChannel, position: long | `long` | transferTo方法 |  |
 | `transferred` | 无 | `long` | transferred方法 |  |
-| `write` | ctx: ChannelHandlerContext; msg: Object; promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
+| `write` | ctx: ChannelHandlerContext, msg: Object, promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
 
 ### GetCatalogsOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3145,7 +3145,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3155,7 +3155,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3165,7 +3165,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3175,7 +3175,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3216,7 +3216,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3226,7 +3226,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3236,7 +3236,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3246,7 +3246,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3256,7 +3256,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation; maxRows: long | `TRowSet` | getNextRowSet方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
 | `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
 | `runInternal` | 无 | `void` | runInternal方法 |  |
 
@@ -3267,7 +3267,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `get` | name: String | `String` | 获取元素 |  |
-| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
 
 ### Handle
 **包路径**: `org.apache.hive.service.cli`
@@ -3314,17 +3314,17 @@
 | `getAuthName` | 无 | `String` | getAuthName方法 |  |
 | `getAuthProcFactory` | service: ThriftCLIService | `TProcessorFactory` | getAuthProcFactory方法 |  |
 | `getAuthTransFactory` | 无 | `TTransportFactory` | getAuthTransFactory方法 |  |
-| `getDelegationToken` | owner: String; renewer: String; remoteAddr: String | `String` | getDelegationToken方法 |  |
+| `getDelegationToken` | owner: String, renewer: String, remoteAddr: String | `String` | getDelegationToken方法 |  |
 | `getIpAddress` | 无 | `String` | getIpAddress方法 |  |
 | `getRemoteUser` | 无 | `String` | getRemoteUser方法 |  |
 | `getSaslProperties` | 无 | `Map&lt;String, String&gt;` | getSaslProperties方法 |  |
 | `getUserFromToken` | delegationToken: String | `String` | getUserFromToken方法 |  |
 | `loginFromKeytab` | hiveConf: HiveConf | `void` | loginFromKeytab方法 |  |
 | `loginFromSpnegoKeytabAndReturnUGI` | hiveConf: HiveConf | `UserGroupInformation` | loginFromSpnegoKeytabAndReturnUGI方法 |  |
-| `needUgiLogin` | ugi: UserGroupInformation; principal: String; keytab: String | `boolean` | needUgiLogin方法 |  |
+| `needUgiLogin` | ugi: UserGroupInformation, principal: String, keytab: String | `boolean` | needUgiLogin方法 |  |
 | `renewDelegationToken` | delegationToken: String | `void` | renewDelegationToken方法 |  |
 | `verifyDelegationToken` | delegationToken: String | `String` | verifyDelegationToken方法 |  |
-| `verifyProxyAccess` | realUser: String; proxyUser: String; ipAddress: String; hiveConf: HiveConf | `void` | verifyProxyAccess方法 |  |
+| `verifyProxyAccess` | realUser: String, proxyUser: String, ipAddress: String, hiveConf: HiveConf | `void` | verifyProxyAccess方法 |  |
 
 ### HiveFunctionRegistryUtils
 **包路径**: `org.apache.hadoop.hive.ql.exec`
@@ -3332,9 +3332,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getMethodInternal` | udfClass: Class<?>; mlist: List<Method>; exact: boolean; argumentsPassed: List<TypeInfo> | `Method` | getMethodInternal方法 |  |
-| `invoke` | m: Method; thisObject: Object; arguments: Object... | `Object` | invoke方法 |  |
-| `matchCost` | argumentPassed: TypeInfo; argumentAccepted: TypeInfo; exact: boolean | `int` | matchCost方法 |  |
+| `getMethodInternal` | udfClass: Class<?>, mlist: List<Method>, exact: boolean, argumentsPassed: List<TypeInfo> | `Method` | getMethodInternal方法 |  |
+| `invoke` | m: Method, thisObject: Object, arguments: Object... | `Object` | invoke方法 |  |
+| `matchCost` | argumentPassed: TypeInfo, argumentAccepted: TypeInfo, exact: boolean | `int` | matchCost方法 |  |
 
 ### HiveSQLException
 **包路径**: `org.apache.hive.service.cli`
@@ -3356,8 +3356,8 @@
 | `execute` | 无 | `void` | execute方法 |  |
 | `execute` | 无 | `void` | execute方法 |  |
 | `isHTTPTransportMode` | hiveConf: HiveConf | `boolean` | isHTTPTransportMode方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
-| `parse` | argv: String[] | `ServerOptionsProcessorResponse` | parse方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `parse` | argv: String&lt;&gt; | `ServerOptionsProcessorResponse` | parse方法 |  |
 
 ### HiveSessionHookContextImpl
 **包路径**: `org.apache.hive.service.cli.session`
@@ -3375,21 +3375,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | authFactory: HiveAuthFactory; tokenStr: String | `void` | cancelDelegationToken方法 |  |
+| `cancelDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
 | `cancelOperation` | opHandle: OperationHandle | `void` | cancelOperation方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `closeExpiredOperations` | 无 | `void` | closeExpiredOperations方法 |  |
 | `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
-| `executeStatement` | statement: String; confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
-| `executeStatement` | statement: String; confOverlay: String>; queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
-| `executeStatementAsync` | statement: String; confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
-| `executeStatementAsync` | statement: String; confOverlay: String>; queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
-| `fetchResults` | opHandle: OperationHandle; orientation: FetchOrientation; maxRows: long; fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
+| `executeStatement` | statement: String, confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
+| `executeStatement` | statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
+| `executeStatementAsync` | statement: String, confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
+| `executeStatementAsync` | statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
+| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
 | `getCatalogs` | 无 | `OperationHandle` | getCatalogs方法 |  |
-| `getColumns` | catalogName: String; schemaName: String; tableName: String; columnName: String | `OperationHandle` | getColumns方法 |  |
-| `getCrossReference` | primaryCatalog: String; primarySchema: String; primaryTable: String; foreignCatalog: String; foreignSchema: String; foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
-| `getDelegationToken` | authFactory: HiveAuthFactory; owner: String; renewer: String | `String` | getDelegationToken方法 |  |
-| `getFunctions` | catalogName: String; schemaName: String; functionName: String | `OperationHandle` | getFunctions方法 |  |
+| `getColumns` | catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | getColumns方法 |  |
+| `getCrossReference` | primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
+| `getDelegationToken` | authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
+| `getFunctions` | catalogName: String, schemaName: String, functionName: String | `OperationHandle` | getFunctions方法 |  |
 | `getHiveConf` | 无 | `HiveConf` | getHiveConf方法 |  |
 | `getInfo` | getInfoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
 | `getIpAddress` | 无 | `String` | getIpAddress方法 |  |
@@ -3398,27 +3398,27 @@
 | `getNoOperationTime` | 无 | `long` | getNoOperationTime方法 |  |
 | `getOperationLogSessionDir` | 无 | `File` | getOperationLogSessionDir方法 |  |
 | `getPassword` | 无 | `String` | getPassword方法 |  |
-| `getPrimaryKeys` | catalog: String; schema: String; table: String | `OperationHandle` | getPrimaryKeys方法 |  |
+| `getPrimaryKeys` | catalog: String, schema: String, table: String | `OperationHandle` | getPrimaryKeys方法 |  |
 | `getProtocolVersion` | 无 | `TProtocolVersion` | getProtocolVersion方法 |  |
 | `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | getResultSetMetadata方法 |  |
-| `getSchemas` | catalogName: String; schemaName: String | `OperationHandle` | getSchemas方法 |  |
+| `getSchemas` | catalogName: String, schemaName: String | `OperationHandle` | getSchemas方法 |  |
 | `getSessionHandle` | 无 | `SessionHandle` | getSessionHandle方法 |  |
 | `getSessionManager` | 无 | `SessionManager` | getSessionManager方法 |  |
 | `getSessionState` | 无 | `SessionState` | getSessionState方法 |  |
 | `getTableTypes` | 无 | `OperationHandle` | getTableTypes方法 |  |
-| `getTables` | catalogName: String; schemaName: String; tableName: String; tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
+| `getTables` | catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
 | `getTypeInfo` | 无 | `OperationHandle` | getTypeInfo方法 |  |
 | `getUserName` | 无 | `String` | getUserName方法 |  |
 | `getUsername` | 无 | `String` | getUsername方法 |  |
 | `isOperationLogEnabled` | 无 | `boolean` | isOperationLogEnabled方法 |  |
 | `open` | sessionConfMap: String> | `void` | open方法 |  |
-| `renewDelegationToken` | authFactory: HiveAuthFactory; tokenStr: String | `void` | renewDelegationToken方法 |  |
+| `renewDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
 | `setIpAddress` | ipAddress: String | `void` | setIpAddress方法 |  |
 | `setOperationLogSessionDir` | operationLogRootDir: File | `void` | setOperationLogSessionDir方法 |  |
 | `setOperationManager` | operationManager: OperationManager | `void` | setOperationManager方法 |  |
 | `setSessionManager` | sessionManager: SessionManager | `void` | setSessionManager方法 |  |
 | `setUserName` | userName: String | `void` | setUserName方法 |  |
-| `setVariable` | varname: String; varvalue: String | `int` | setVariable方法 |  |
+| `setVariable` | varname: String, varvalue: String | `int` | setVariable方法 |  |
 
 ### HiveSessionImplwithUGI
 **包路径**: `org.apache.hive.service.cli.session`
@@ -3426,12 +3426,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | authFactory: HiveAuthFactory; tokenStr: String | `void` | cancelDelegationToken方法 |  |
+| `cancelDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `getDelegationToken` | 无 | `String` | getDelegationToken方法 |  |
-| `getDelegationToken` | authFactory: HiveAuthFactory; owner: String; renewer: String | `String` | getDelegationToken方法 |  |
+| `getDelegationToken` | authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
 | `getSessionUgi` | 无 | `UserGroupInformation` | getSessionUgi方法 |  |
-| `renewDelegationToken` | authFactory: HiveAuthFactory; tokenStr: String | `void` | renewDelegationToken方法 |  |
+| `renewDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
 | `setProxySession` | proxySession: HiveSession | `void` | setProxySession方法 |  |
 | `setSessionUGI` | owner: String | `void` | setSessionUGI方法 |  |
 
@@ -3441,8 +3441,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getProxy` | hiveSession: HiveSession; ugi: UserGroupInformation | `HiveSession` | getProxy方法 |  |
-| `invoke` | arg0: Object; method: final Method; args: final Object[] | `Object` | invoke方法 |  |
+| `getProxy` | hiveSession: HiveSession, ugi: UserGroupInformation | `HiveSession` | getProxy方法 |  |
+| `invoke` | arg0: Object, method: final Method, args: final Object&lt;&gt; | `Object` | invoke方法 |  |
 
 ### HiveTableTypeMapping
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3459,16 +3459,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `accept` | key: Comparable<Object>; value: T | `void` | accept方法 |  |
+| `accept` | key: Comparable<Object>, value: T | `void` | accept方法 |  |
 | `clear` | 无 | `void` | 清空集合 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `count` | type: Class<?> | `long` | 统计行数 |  |
-| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | 统计行数 |  |
+| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 |  |
 | `count` | 无 | `int` | 统计行数 |  |
-| `delete` | type: Class<?>; naturalKey: Object | `void` | delete方法 |  |
+| `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
 | `delete` | key: Object | `boolean` | delete方法 |  |
-| `delete` | key: Object; value: T | `boolean` | delete方法 |  |
+| `delete` | key: Object, value: T | `boolean` | delete方法 |  |
 | `get` | key: Object | `T` | 获取元素 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
 | `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
@@ -3495,7 +3495,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaALSExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3507,7 +3507,7 @@
 | `getRating` | 无 | `float` | getRating方法 |  |
 | `getTimestamp` | 无 | `long` | getTimestamp方法 |  |
 | `getUserId` | 无 | `int` | getUserId方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 | `parseRating` | str: String | `Rating` | parseRating方法 |  |
 
 ### JavaBinarizerExample
@@ -3516,7 +3516,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaBucketedRandomProjectionLSHExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3524,7 +3524,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaBucketizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3532,7 +3532,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaChiSquareTestExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3540,7 +3540,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaCorrelationExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3548,7 +3548,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaCountVectorizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3556,7 +3556,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaDCTExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3564,7 +3564,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaDecisionTreeClassificationExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3572,7 +3572,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaDecisionTreeRegressionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3580,7 +3580,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaDocument
 **包路径**: `org.apache.spark.examples.ml`
@@ -3597,7 +3597,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaFMClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3605,7 +3605,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaFMRegressorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3613,7 +3613,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaFPGrowthExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3621,7 +3621,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaFeatureHasherExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3629,7 +3629,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaGeneralizedLinearRegressionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3637,7 +3637,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaGradientBoostedTreeClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3645,7 +3645,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaGradientBoostedTreeRegressorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3653,7 +3653,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaImputerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3661,7 +3661,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaIndexToStringExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3669,7 +3669,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaInteractionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3677,7 +3677,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLDAExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3685,7 +3685,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLabeledDocument
 **包路径**: `org.apache.spark.examples.ml`
@@ -3701,7 +3701,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLinearSVCExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3709,7 +3709,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLogisticRegressionSummaryExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3717,7 +3717,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaLogisticRegressionWithElasticNetExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3725,7 +3725,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaMaxAbsScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3733,7 +3733,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaMinHashLSHExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3741,7 +3741,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaMinMaxScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3749,7 +3749,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaModelSelectionViaCrossValidationExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3757,7 +3757,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaModelSelectionViaTrainValidationSplitExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3765,7 +3765,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaModuleOptions
 **包路径**: `org.apache.spark.launcher`
@@ -3781,7 +3781,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaMultilayerPerceptronClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3789,7 +3789,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaNGramExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3797,7 +3797,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaNormalizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3805,7 +3805,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaOneHotEncoderExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3813,7 +3813,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaOneVsRestExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3821,7 +3821,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaPipelineExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3829,7 +3829,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaPolynomialExpansionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3837,7 +3837,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaQuantileDiscretizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3845,7 +3845,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRFormulaExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3853,7 +3853,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRandomForestClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3861,7 +3861,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRandomForestRegressorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3869,7 +3869,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaRobustScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3877,7 +3877,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaSQLTransformerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3885,7 +3885,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaStandardScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3893,7 +3893,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaStopWordsRemoverExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3901,7 +3901,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaStringIndexerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3909,7 +3909,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaSummarizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3917,7 +3917,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaTargetEncoderExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3925,7 +3925,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaTfIdfExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3933,7 +3933,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaTokenizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3941,7 +3941,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaUnivariateFeatureSelectorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3949,7 +3949,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaUtils
 **包路径**: `org.apache.spark.network.util`
@@ -3957,55 +3957,55 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `byteStringAs` | str: String; unit: ByteUnit | `long` | byteStringAs方法 |  |
+| `byteStringAs` | str: String, unit: ByteUnit | `long` | byteStringAs方法 |  |
 | `byteStringAsBytes` | str: String | `long` | byteStringAsBytes方法 |  |
 | `byteStringAsGb` | str: String | `long` | byteStringAsGb方法 |  |
 | `byteStringAsKb` | str: String | `long` | byteStringAsKb方法 |  |
 | `byteStringAsMb` | str: String | `long` | byteStringAsMb方法 |  |
 | `bytesToString` | b: ByteBuffer | `String` | bytesToString方法 |  |
-| `checkArgument` | check: boolean; msg: String; args: Object... | `void` | checkArgument方法 |  |
-| `checkState` | check: boolean; msg: String; args: Object... | `void` | checkState方法 |  |
+| `checkArgument` | check: boolean, msg: String, args: Object... | `void` | checkArgument方法 |  |
+| `checkState` | check: boolean, msg: String, args: Object... | `void` | checkState方法 |  |
 | `checkedCast` | value: long | `int` | checkedCast方法 |  |
 | `cleanDirectory` | dir: File | `void` | cleanDirectory方法 |  |
 | `closeQuietly` | closeable: Closeable | `void` | closeQuietly方法 |  |
-| `contentEquals` | file1: File; file2: File | `boolean` | contentEquals方法 |  |
-| `copyDirectory` | src: File; dst: File | `void` | copyDirectory方法 |  |
-| `copyURLToFile` | url: URL; file: File | `void` | copyURLToFile方法 |  |
+| `contentEquals` | file1: File, file2: File | `boolean` | contentEquals方法 |  |
+| `copyDirectory` | src: File, dst: File | `void` | copyDirectory方法 |  |
+| `copyURLToFile` | url: URL, file: File | `void` | copyURLToFile方法 |  |
 | `createDirectory` | root: String | `File` | createDirectory方法 |  |
-| `createDirectory` | root: String; namePrefix: String | `File` | createDirectory方法 |  |
+| `createDirectory` | root: String, namePrefix: String | `File` | createDirectory方法 |  |
 | `deleteQuietly` | file: File | `void` | deleteQuietly方法 |  |
 | `deleteRecursively` | file: File | `void` | deleteRecursively方法 |  |
-| `deleteRecursively` | file: File; filter: FilenameFilter | `void` | deleteRecursively方法 |  |
-| `digestToHexString` | algorithm: String; input: byte[] | `String` | digestToHexString方法 |  |
-| `digestToHexString` | algorithm: String; input: String | `String` | digestToHexString方法 |  |
+| `deleteRecursively` | file: File, filter: FilenameFilter | `void` | deleteRecursively方法 |  |
+| `digestToHexString` | algorithm: String, input: byte&lt;&gt; | `String` | digestToHexString方法 |  |
+| `digestToHexString` | algorithm: String, input: String | `String` | digestToHexString方法 |  |
 | `forceDeleteOnExit` | file: File | `void` | forceDeleteOnExit方法 |  |
 | `isTesting` | 无 | `boolean` | isTesting方法 |  |
-| `join` | arr: List<Object>; sep: String | `String` | 连接DataFrame |  |
+| `join` | arr: List<Object>, sep: String | `String` | 连接DataFrame |  |
 | `listFiles` | dir: File | `Set&lt;File&gt;` | listFiles方法 |  |
 | `listPaths` | dir: File | `Set&lt;Path&gt;` | listPaths方法 |  |
-| `md5Hex` | input: byte[] | `String` | md5Hex方法 |  |
+| `md5Hex` | input: byte&lt;&gt; | `String` | md5Hex方法 |  |
 | `md5Hex` | input: String | `String` | md5Hex方法 |  |
-| `moveDirectory` | src: File; dst: File | `void` | moveDirectory方法 |  |
-| `moveFile` | src: File; dst: File | `void` | moveFile方法 |  |
+| `moveDirectory` | src: File, dst: File | `void` | moveDirectory方法 |  |
+| `moveFile` | src: File, dst: File | `void` | moveFile方法 |  |
 | `nonNegativeHash` | obj: Object | `int` | nonNegativeHash方法 |  |
-| `postVisitDirectory` | dir: Path; e: IOException | `FileVisitResult` | postVisitDirectory方法 |  |
-| `preVisitDirectory` | p: Path; a: BasicFileAttributes | `FileVisitResult` | preVisitDirectory方法 |  |
-| `preVisitDirectory` | dir: Path; attrs: BasicFileAttributes | `FileVisitResult` | preVisitDirectory方法 |  |
-| `readFully` | channel: ReadableByteChannel; dst: ByteBuffer | `void` | readFully方法 |  |
-| `readFully` | in: InputStream; arr: byte[]; off: int; len: int | `void` | readFully方法 |  |
-| `sha256Hex` | input: byte[] | `String` | sha256Hex方法 |  |
+| `postVisitDirectory` | dir: Path, e: IOException | `FileVisitResult` | postVisitDirectory方法 |  |
+| `preVisitDirectory` | p: Path, a: BasicFileAttributes | `FileVisitResult` | preVisitDirectory方法 |  |
+| `preVisitDirectory` | dir: Path, attrs: BasicFileAttributes | `FileVisitResult` | preVisitDirectory方法 |  |
+| `readFully` | channel: ReadableByteChannel, dst: ByteBuffer | `void` | readFully方法 |  |
+| `readFully` | in: InputStream, arr: byte&lt;&gt;, off: int, len: int | `void` | readFully方法 |  |
+| `sha256Hex` | input: byte&lt;&gt; | `String` | sha256Hex方法 |  |
 | `sha256Hex` | input: String | `String` | sha256Hex方法 |  |
 | `sizeOf` | file: File | `long` | sizeOf方法 |  |
 | `sizeOf` | dirPath: Path | `long` | sizeOf方法 |  |
 | `stackTraceToString` | t: Throwable | `String` | stackTraceToString方法 |  |
 | `stringToBytes` | s: String | `ByteBuffer` | stringToBytes方法 |  |
-| `timeStringAs` | str: String; unit: TimeUnit | `long` | timeStringAs方法 |  |
+| `timeStringAs` | str: String, unit: TimeUnit | `long` | timeStringAs方法 |  |
 | `timeStringAsMs` | str: String | `long` | timeStringAsMs方法 |  |
 | `timeStringAsSec` | str: String | `long` | timeStringAsSec方法 |  |
-| `visitFile` | p: Path; a: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
-| `visitFile` | file: Path; attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
-| `visitFile` | file: Path; attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
-| `visitFile` | file: Path; attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
+| `visitFile` | p: Path, a: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
+| `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
+| `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
+| `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
 
 ### JavaVarianceThresholdSelectorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4013,7 +4013,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaVectorAssemblerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4021,7 +4021,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaVectorIndexerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4029,7 +4029,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaVectorSizeHintExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4037,7 +4037,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaVectorSlicerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4045,7 +4045,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JavaWord2VecExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4053,7 +4053,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### JobExecutionStatus
 **包路径**: `org.apache.spark`
@@ -4086,7 +4086,7 @@
 |--------|------|----------|------|------|
 | `get` | instance: Object | `Object` | 获取元素 |  |
 | `get` | instance: Object | `Object` | 获取元素 |  |
-| `getIndexValue` | indexName: String; instance: Object | `Object` | getIndexValue方法 |  |
+| `getIndexValue` | indexName: String, instance: Object | `Object` | getIndexValue方法 |  |
 | `getType` | 无 | `Class&lt;?&gt;` | getType方法 |  |
 | `getType` | 无 | `Class&lt;?&gt;` | getType方法 |  |
 | `indices` | 无 | `Stream&lt;KVIndex&gt;` | indices方法 |  |
@@ -4098,7 +4098,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String; password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
 
 ### LevelDB
 **包路径**: `org.apache.spark.network.shuffledb`
@@ -4109,12 +4109,12 @@
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `count` | type: Class<?> | `long` | 统计行数 |  |
-| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | 统计行数 |  |
-| `delete` | key: byte[] | `void` | delete方法 |  |
-| `delete` | type: Class<?>; naturalKey: Object | `void` | delete方法 |  |
+| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 |  |
+| `delete` | key: byte&lt;&gt; | `void` | delete方法 |  |
+| `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
 | `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
 | `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
-| `put` | key: byte[]; value: byte[] | `void` | 添加键值对 |  |
+| `put` | key: byte&lt;&gt;, value: byte&lt;&gt; | `void` | 添加键值对 |  |
 | `setMetadata` | value: Object | `void` | setMetadata方法 |  |
 | `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
 | `writeAll` | values: List<?> | `void` | writeAll方法 |  |
@@ -4127,7 +4127,7 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `seek` | key: byte[] | `void` | seek方法 |  |
+| `seek` | key: byte&lt;&gt; | `void` | seek方法 |  |
 
 ### LevelDBProvider
 **包路径**: `org.apache.spark.network.util`
@@ -4135,10 +4135,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkVersion` | db: DB; newversion: StoreVersion; mapper: ObjectMapper | `void` | checkVersion方法 |  |
-| `initLevelDB` | dbFile: File; version: StoreVersion; mapper: ObjectMapper | `DB` | initLevelDB方法 |  |
+| `checkVersion` | db: DB, newversion: StoreVersion, mapper: ObjectMapper | `void` | checkVersion方法 |  |
+| `initLevelDB` | dbFile: File, version: StoreVersion, mapper: ObjectMapper | `DB` | initLevelDB方法 |  |
 | `log` | message: String | `void` | log方法 |  |
-| `storeVersion` | db: DB; version: StoreVersion; mapper: ObjectMapper | `void` | storeVersion方法 |  |
+| `storeVersion` | db: DB, version: StoreVersion, mapper: ObjectMapper | `void` | storeVersion方法 |  |
 
 ### LocalDirsForExecutors
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4168,7 +4168,7 @@
 |--------|------|----------|------|------|
 | `cleanupApplication` | 无 | `void` | cleanupApplication方法 |  |
 | `initializeApplication` | 无 | `Map&lt;String, String&gt;` | initializeApplication方法 |  |
-| `removeShuffle` | shuffleId: int; blocking: boolean | `void` | removeShuffle方法 |  |
+| `removeShuffle` | shuffleId: int, blocking: boolean | `void` | removeShuffle方法 |  |
 
 ### LocalDiskShuffleExecutorComponents
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4176,9 +4176,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createMapOutputWriter` | shuffleId: int; mapTaskId: long; numPartitions: int | `ShuffleMapOutputWriter` | createMapOutputWriter方法 |  |
-| `createSingleFileMapOutputWriter` | shuffleId: int; mapId: long | `Optional&lt;SingleSpillShuffleMapOutputWriter&gt;` | createSingleFileMapOutputWriter方法 |  |
-| `initializeExecutor` | appId: String; execId: String; extraConfigs: String> | `void` | initializeExecutor方法 |  |
+| `createMapOutputWriter` | shuffleId: int, mapTaskId: long, numPartitions: int | `ShuffleMapOutputWriter` | createMapOutputWriter方法 |  |
+| `createSingleFileMapOutputWriter` | shuffleId: int, mapId: long | `Optional&lt;SingleSpillShuffleMapOutputWriter&gt;` | createSingleFileMapOutputWriter方法 |  |
+| `initializeExecutor` | appId: String, execId: String, extraConfigs: String> | `void` | initializeExecutor方法 |  |
 
 ### LocalDiskShuffleMapOutputWriter
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4190,7 +4190,7 @@
 | `channel` | 无 | `WritableByteChannel` | channel方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
-| `commitAllPartitions` | checksums: long[] | `MapOutputCommitMessage` | commitAllPartitions方法 |  |
+| `commitAllPartitions` | checksums: long&lt;&gt; | `MapOutputCommitMessage` | commitAllPartitions方法 |  |
 | `getCount` | 无 | `long` | getCount方法 |  |
 | `getCount` | 无 | `long` | getCount方法 |  |
 | `getNumBytesWritten` | 无 | `long` | getNumBytesWritten方法 |  |
@@ -4198,7 +4198,7 @@
 | `openChannelWrapper` | 无 | `Optional&lt;WritableByteChannelWrapper&gt;` | openChannelWrapper方法 |  |
 | `openStream` | 无 | `OutputStream` | openStream方法 |  |
 | `write` | b: int | `void` | 写入DataFrame到数据源 |  |
-| `write` | buf: byte[]; pos: int; length: int | `void` | 写入DataFrame到数据源 |  |
+| `write` | buf: byte&lt;&gt;, pos: int, length: int | `void` | 写入DataFrame到数据源 |  |
 
 ### LocalDiskSingleSpillMapOutputWriter
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4206,7 +4206,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `transferMapSpillFile` | mapSpillFile: File; partitionLengths: long[]; checksums: long[] | `void` | transferMapSpillFile方法 |  |
+| `transferMapSpillFile` | mapSpillFile: File, partitionLengths: long&lt;&gt;, checksums: long&lt;&gt; | `void` | transferMapSpillFile方法 |  |
 
 ### LogDivertAppender
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -4215,20 +4215,20 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `append` | event: LogEvent | `void` | 追加元素 |  |
-| `create` | operationManager: OperationManager; loggingMode: OperationLog.LoggingLevel | `LogDivertAppender` | create方法 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; objects: Object... | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object; o8: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; s: String; o: Object; o1: Object; o2: Object; o3: Object; o4: Object; o5: Object; o6: Object; o7: Object; o8: Object; o9: Object | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; o: Object; throwable: Throwable | `Result` | 过滤行 |  |
-| `filter` | logger: org.apache.logging.log4j.core.Logger; level: Level; marker: Marker; message: Message; throwable: Throwable | `Result` | 过滤行 |  |
+| `create` | operationManager: OperationManager, loggingMode: OperationLog.LoggingLevel | `LogDivertAppender` | create方法 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, objects: Object... | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object, o8: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object, o2: Object, o3: Object, o4: Object, o5: Object, o6: Object, o7: Object, o8: Object, o9: Object | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, o: Object, throwable: Throwable | `Result` | 过滤行 |  |
+| `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, message: Message, throwable: Throwable | `Result` | 过滤行 |  |
 | `filter` | logEvent: LogEvent | `Result` | 过滤行 |  |
 | `getOnMatch` | 无 | `Result` | getOnMatch方法 |  |
 | `getOnMismatch` | 无 | `Result` | getOnMismatch方法 |  |
@@ -4246,7 +4246,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `get` | name: String | `String` | 获取元素 |  |
-| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
 
 ### MemoryBlock
 **包路径**: `org.apache.spark.unsafe.memory`
@@ -4255,7 +4255,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `fill` | value: byte | `void` | fill方法 |  |
-| `fromLongArray` | array: final long[] | `MemoryBlock` | fromLongArray方法 |  |
+| `fromLongArray` | array: final long&lt;&gt; | `MemoryBlock` | fromLongArray方法 |  |
 | `size` | 无 | `long` | 计算大小 |  |
 
 ### MemoryConsumer
@@ -4280,7 +4280,7 @@
 |--------|------|----------|------|------|
 | `getBaseObject` | 无 | `Object` | getBaseObject方法 |  |
 | `getBaseOffset` | 无 | `long` | getBaseOffset方法 |  |
-| `setObjAndOffset` | newObj: Object; newOffset: long | `void` | setObjAndOffset方法 |  |
+| `setObjAndOffset` | newObj: Object, newOffset: long | `void` | setObjAndOffset方法 |  |
 
 ### MergeStatuses
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4347,7 +4347,7 @@
 | `release` | decrement: int | `boolean` | release方法 |  |
 | `retain` | increment: int | `MessageWithHeader` | retain方法 |  |
 | `touch` | o: Object | `MessageWithHeader` | touch方法 |  |
-| `transferTo` | target: final WritableByteChannel; position: final long | `long` | transferTo方法 |  |
+| `transferTo` | target: final WritableByteChannel, position: final long | `long` | transferTo方法 |  |
 | `transferred` | 无 | `long` | transferred方法 |  |
 
 ### MetadataOperation
@@ -4372,8 +4372,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String[] | `void` | main方法 |  |
-| `main` | args: String[] | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | main方法 |  |
 
 ### NettyLogger
 **包路径**: `org.apache.spark.network.util`
@@ -4411,9 +4411,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createEventLoop` | mode: IOMode; numThreads: int; threadPrefix: String | `EventLoopGroup` | createEventLoop方法 |  |
+| `createEventLoop` | mode: IOMode, numThreads: int, threadPrefix: String | `EventLoopGroup` | createEventLoop方法 |  |
 | `createFrameDecoder` | 无 | `TransportFrameDecoder` | createFrameDecoder方法 |  |
-| `createPooledByteBufAllocator` | allowDirectBufs: boolean; allowCache: boolean; numCores: int | `PooledByteBufAllocator` | createPooledByteBufAllocator方法 |  |
+| `createPooledByteBufAllocator` | allowDirectBufs: boolean, allowCache: boolean, numCores: int | `PooledByteBufAllocator` | createPooledByteBufAllocator方法 |  |
 | `createThreadFactory` | threadPoolPrefix: String | `ThreadFactory` | createThreadFactory方法 |  |
 | `defaultNumThreads` | numUsableCores: int | `int` | defaultNumThreads方法 |  |
 | `freeDirectMemory` | 无 | `long` | freeDirectMemory方法 |  |
@@ -4442,12 +4442,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String; cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
 | `finalizeShuffleMerge` | msg: FinalizeShuffleMerge | `MergeStatuses` | finalizeShuffleMerge方法 |  |
-| `getMergedBlockData` | appId: String; shuffleId: int; shuffleMergeId: int; reduceId: int; chunkId: int | `ManagedBuffer` | getMergedBlockData方法 |  |
-| `getMergedBlockMeta` | appId: String; shuffleId: int; shuffleMergeId: int; reduceId: int | `MergedBlockMeta` | getMergedBlockMeta方法 |  |
+| `getMergedBlockData` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, chunkId: int | `ManagedBuffer` | getMergedBlockData方法 |  |
+| `getMergedBlockMeta` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int | `MergedBlockMeta` | getMergedBlockMeta方法 |  |
 | `receiveBlockDataAsStream` | msg: PushBlockStream | `StreamCallbackWithID` | receiveBlockDataAsStream方法 |  |
-| `registerExecutor` | appId: String; executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
+| `registerExecutor` | appId: String, executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
 | `removeShuffleMerge` | removeShuffleMerge: RemoveShuffleMerge | `void` | removeShuffleMerge方法 |  |
 
 ### NoOpRpcHandler
@@ -4457,7 +4457,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `getStreamManager` | 无 | `StreamManager` | getStreamManager方法 |  |
-| `receive` | client: TransportClient; message: ByteBuffer; callback: RpcResponseCallback | `void` | receive方法 |  |
+| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | receive方法 |  |
 
 ### OneForOneBlockFetcher
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4466,11 +4466,11 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `onComplete` | streamId: String | `void` | onComplete方法 |  |
-| `onData` | streamId: String; buf: ByteBuffer | `void` | onData方法 |  |
-| `onFailure` | chunkIndex: int; e: Throwable | `void` | onFailure方法 |  |
+| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
+| `onFailure` | chunkIndex: int, e: Throwable | `void` | onFailure方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | streamId: String; cause: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | chunkIndex: int; buffer: ManagedBuffer | `void` | onSuccess方法 |  |
+| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure方法 |  |
+| `onSuccess` | chunkIndex: int, buffer: ManagedBuffer | `void` | onSuccess方法 |  |
 | `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
 | `start` | 无 | `void` | start方法 |  |
 
@@ -4490,18 +4490,18 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkAuthorization` | client: TransportClient; streamId: long | `void` | checkAuthorization方法 |  |
+| `checkAuthorization` | client: TransportClient, streamId: long | `void` | checkAuthorization方法 |  |
 | `chunkBeingSent` | streamId: long | `void` | chunkBeingSent方法 |  |
 | `chunkSent` | streamId: long | `void` | chunkSent方法 |  |
 | `chunksBeingTransferred` | 无 | `long` | chunksBeingTransferred方法 |  |
 | `connectionTerminated` | channel: Channel | `void` | connectionTerminated方法 |  |
-| `genStreamChunkId` | streamId: long; chunkId: int | `String` | genStreamChunkId方法 |  |
-| `getChunk` | streamId: long; chunkIndex: int | `ManagedBuffer` | getChunk方法 |  |
+| `genStreamChunkId` | streamId: long, chunkId: int | `String` | genStreamChunkId方法 |  |
+| `getChunk` | streamId: long, chunkIndex: int | `ManagedBuffer` | getChunk方法 |  |
 | `numStreamStates` | 无 | `int` | numStreamStates方法 |  |
 | `openStream` | streamChunkId: String | `ManagedBuffer` | openStream方法 |  |
 | `parseStreamChunkId` | streamChunkId: String | `Pair&lt;Long, Integer&gt;` | parseStreamChunkId方法 |  |
-| `registerStream` | appId: String; buffers: Iterator<ManagedBuffer>; channel: Channel; isBufferMaterializedOnNext: boolean | `long` | registerStream方法 |  |
-| `registerStream` | appId: String; buffers: Iterator<ManagedBuffer>; channel: Channel | `long` | registerStream方法 |  |
+| `registerStream` | appId: String, buffers: Iterator<ManagedBuffer>, channel: Channel, isBufferMaterializedOnNext: boolean | `long` | registerStream方法 |  |
+| `registerStream` | appId: String, buffers: Iterator<ManagedBuffer>, channel: Channel | `long` | registerStream方法 |  |
 | `streamBeingSent` | streamId: String | `void` | streamBeingSent方法 |  |
 | `streamSent` | streamId: String | `void` | streamSent方法 |  |
 
@@ -4566,21 +4566,21 @@
 | `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
 | `getOperation` | operationHandle: OperationHandle | `Operation` | getOperation方法 |  |
 | `getOperationLogByThread` | 无 | `OperationLog` | getOperationLogByThread方法 |  |
-| `getOperationLogRowSet` | opHandle: OperationHandle; orientation: FetchOrientation; maxRows: long | `TRowSet` | getOperationLogRowSet方法 |  |
-| `getOperationNextRowSet` | opHandle: OperationHandle; orientation: FetchOrientation; maxRows: long | `TRowSet` | getOperationNextRowSet方法 |  |
+| `getOperationLogRowSet` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long | `TRowSet` | getOperationLogRowSet方法 |  |
+| `getOperationNextRowSet` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long | `TRowSet` | getOperationNextRowSet方法 |  |
 | `getOperationResultSetSchema` | opHandle: OperationHandle | `TTableSchema` | getOperationResultSetSchema方法 |  |
 | `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | getOperationStatus方法 |  |
-| `newExecuteStatementOperation` | parentSession: HiveSession; statement: String; confOverlay: String>; runAsync: boolean; queryTimeout: long | `ExecuteStatementOperation` | newExecuteStatementOperation方法 |  |
+| `newExecuteStatementOperation` | parentSession: HiveSession, statement: String, confOverlay: String>, runAsync: boolean, queryTimeout: long | `ExecuteStatementOperation` | newExecuteStatementOperation方法 |  |
 | `newGetCatalogsOperation` | parentSession: HiveSession | `GetCatalogsOperation` | newGetCatalogsOperation方法 |  |
-| `newGetColumnsOperation` | parentSession: HiveSession; catalogName: String; schemaName: String; tableName: String; columnName: String | `GetColumnsOperation` | newGetColumnsOperation方法 |  |
-| `newGetCrossReferenceOperation` | session: HiveSession; primaryCatalog: String; primarySchema: String; primaryTable: String; foreignCatalog: String; foreignSchema: String; foreignTable: String | `GetCrossReferenceOperation` | newGetCrossReferenceOperation方法 |  |
-| `newGetFunctionsOperation` | parentSession: HiveSession; catalogName: String; schemaName: String; functionName: String | `GetFunctionsOperation` | newGetFunctionsOperation方法 |  |
-| `newGetPrimaryKeysOperation` | parentSession: HiveSession; catalogName: String; schemaName: String; tableName: String | `GetPrimaryKeysOperation` | newGetPrimaryKeysOperation方法 |  |
-| `newGetSchemasOperation` | parentSession: HiveSession; catalogName: String; schemaName: String | `GetSchemasOperation` | newGetSchemasOperation方法 |  |
+| `newGetColumnsOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String, columnName: String | `GetColumnsOperation` | newGetColumnsOperation方法 |  |
+| `newGetCrossReferenceOperation` | session: HiveSession, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `GetCrossReferenceOperation` | newGetCrossReferenceOperation方法 |  |
+| `newGetFunctionsOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, functionName: String | `GetFunctionsOperation` | newGetFunctionsOperation方法 |  |
+| `newGetPrimaryKeysOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String | `GetPrimaryKeysOperation` | newGetPrimaryKeysOperation方法 |  |
+| `newGetSchemasOperation` | parentSession: HiveSession, catalogName: String, schemaName: String | `GetSchemasOperation` | newGetSchemasOperation方法 |  |
 | `newGetTableTypesOperation` | parentSession: HiveSession | `GetTableTypesOperation` | newGetTableTypesOperation方法 |  |
-| `newGetTablesOperation` | parentSession: HiveSession; catalogName: String; schemaName: String; tableName: String; tableTypes: List<String> | `MetadataOperation` | newGetTablesOperation方法 |  |
+| `newGetTablesOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `MetadataOperation` | newGetTablesOperation方法 |  |
 | `newGetTypeInfoOperation` | parentSession: HiveSession | `GetTypeInfoOperation` | newGetTypeInfoOperation方法 |  |
-| `removeExpiredOperations` | handles: OperationHandle[] | `List&lt;Operation&gt;` | removeExpiredOperations方法 |  |
+| `removeExpiredOperations` | handles: OperationHandle&lt;&gt; | `List&lt;Operation&gt;` | removeExpiredOperations方法 |  |
 
 ### OperationState
 **包路径**: `org.apache.hive.service.cli`
@@ -4591,7 +4591,7 @@
 | `getOperationState` | tOperationState: TOperationState | `OperationState` | getOperationState方法 |  |
 | `isTerminal` | 无 | `boolean` | isTerminal方法 |  |
 | `toTOperationState` | 无 | `TOperationState` | toTOperationState方法 |  |
-| `validateTransition` | oldState: OperationState; newState: OperationState | `void` | validateTransition方法 |  |
+| `validateTransition` | oldState: OperationState, newState: OperationState | `void` | validateTransition方法 |  |
 | `validateTransition` | newState: OperationState | `void` | validateTransition方法 |  |
 
 ### OperationStatus
@@ -4618,7 +4618,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String; password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
 
 ### ParentClassLoader
 **包路径**: `org.apache.spark.util`
@@ -4627,7 +4627,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `findClass` | name: String | `Class&lt;?&gt;` | findClass方法 |  |
-| `loadClass` | name: String; resolve: boolean | `Class&lt;?&gt;` | loadClass方法 |  |
+| `loadClass` | name: String, resolve: boolean | `Class&lt;?&gt;` | loadClass方法 |  |
 
 ### PlainSaslServer
 **包路径**: `org.apache.hive.service.auth`
@@ -4635,7 +4635,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createSaslServer` | mechanism: String; protocol: String; serverName: String; props: ?>; cbh: CallbackHandler | `SaslServer` | createSaslServer方法 |  |
+| `createSaslServer` | mechanism: String, protocol: String, serverName: String, props: ?>, cbh: CallbackHandler | `SaslServer` | createSaslServer方法 |  |
 | `dispose` | 无 | `void` | dispose方法 |  |
 | `getAuthorizationID` | 无 | `String` | getAuthorizationID方法 |  |
 | `getMechanismName` | 无 | `String` | getMechanismName方法 |  |
@@ -4648,16 +4648,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `compare` | aPrefix: long; bPrefix: long | `int` | compare方法 |  |
-| `compare` | aPrefix: long; bPrefix: long | `int` | compare方法 |  |
-| `compare` | bPrefix: long; aPrefix: long | `int` | compare方法 |  |
-| `compare` | bPrefix: long; aPrefix: long | `int` | compare方法 |  |
-| `compare` | a: long; b: long | `int` | compare方法 |  |
-| `compare` | a: long; b: long | `int` | compare方法 |  |
-| `compare` | b: long; a: long | `int` | compare方法 |  |
-| `compare` | b: long; a: long | `int` | compare方法 |  |
+| `compare` | aPrefix: long, bPrefix: long | `int` | compare方法 |  |
+| `compare` | aPrefix: long, bPrefix: long | `int` | compare方法 |  |
+| `compare` | bPrefix: long, aPrefix: long | `int` | compare方法 |  |
+| `compare` | bPrefix: long, aPrefix: long | `int` | compare方法 |  |
+| `compare` | a: long, b: long | `int` | compare方法 |  |
+| `compare` | a: long, b: long | `int` | compare方法 |  |
+| `compare` | b: long, a: long | `int` | compare方法 |  |
+| `compare` | b: long, a: long | `int` | compare方法 |  |
 | `computePrefix` | value: UTF8String | `long` | computePrefix方法 |  |
-| `computePrefix` | bytes: byte[] | `long` | computePrefix方法 |  |
+| `computePrefix` | bytes: byte&lt;&gt; | `long` | computePrefix方法 |  |
 | `computePrefix` | value: double | `long` | computePrefix方法 |  |
 | `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
 | `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
@@ -4691,9 +4691,9 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `html` | 无 | `HTML&lt;ProxyUtils.__&gt;` | html方法 |  |
-| `notFound` | resp: HttpServletResponse; message: String | `void` | notFound方法 |  |
+| `notFound` | resp: HttpServletResponse, message: String | `void` | notFound方法 |  |
 | `rejectNonHttpRequests` | req: ServletRequest | `void` | rejectNonHttpRequests方法 |  |
-| `sendRedirect` | request: HttpServletRequest; response: HttpServletResponse; target: String | `void` | sendRedirect方法 |  |
+| `sendRedirect` | request: HttpServletRequest, response: HttpServletResponse, target: String | `void` | sendRedirect方法 |  |
 
 ### PushBlockStream
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4711,8 +4711,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `sort` | array: LongArray; numRecords: long; startByteIndex: int; endByteIndex: int; desc: boolean; signed: boolean | `int` | 排序 |  |
-| `sortKeyPrefixArray` | array: LongArray; startIndex: long; numRecords: long; startByteIndex: int; endByteIndex: int; desc: boolean; signed: boolean | `int` | sortKeyPrefixArray方法 |  |
+| `sort` | array: LongArray, numRecords: long, startByteIndex: int, endByteIndex: int, desc: boolean, signed: boolean | `int` | 排序 |  |
+| `sortKeyPrefixArray` | array: LongArray, startIndex: long, numRecords: long, startByteIndex: int, endByteIndex: int, desc: boolean, signed: boolean | `int` | sortKeyPrefixArray方法 |  |
 
 ### ReadAheadInputStream
 **包路径**: `org.apache.spark.io`
@@ -4723,7 +4723,7 @@
 | `available` | 无 | `int` | available方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `read` | 无 | `int` | 读取数据源创建DataFrame |  |
-| `read` | b: byte[]; offset: int; len: int | `int` | 读取数据源创建DataFrame |  |
+| `read` | b: byte&lt;&gt;, offset: int, len: int | `int` | 读取数据源创建DataFrame |  |
 | `skip` | n: long | `long` | skip方法 |  |
 
 ### RegisterExecutor
@@ -4742,7 +4742,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String; cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `finalizeShuffleMerge` | msg: FinalizeShuffleMerge | `MergeStatuses` | finalizeShuffleMerge方法 |  |
 | `getAppPathsInfo` | 无 | `AppPathsInfo` | getAppPathsInfo方法 |  |
@@ -4753,11 +4753,11 @@
 | `getID` | 无 | `String` | getID方法 |  |
 | `getID` | 无 | `String` | getID方法 |  |
 | `getMapTracker` | 无 | `RoaringBitmap` | getMapTracker方法 |  |
-| `getMergedBlockData` | appId: String; shuffleId: int; shuffleMergeId: int; reduceId: int; chunkId: int | `ManagedBuffer` | getMergedBlockData方法 |  |
-| `getMergedBlockMeta` | appId: String; shuffleId: int; shuffleMergeId: int; reduceId: int | `MergedBlockMeta` | getMergedBlockMeta方法 |  |
-| `getMergedShuffleDataFile` | shuffleId: int; shuffleMergeId: int; reduceId: int | `File` | getMergedShuffleDataFile方法 |  |
-| `getMergedShuffleIndexFilePath` | shuffleId: int; shuffleMergeId: int; reduceId: int | `String` | getMergedShuffleIndexFilePath方法 |  |
-| `getMergedShuffleMetaFile` | shuffleId: int; shuffleMergeId: int; reduceId: int | `File` | getMergedShuffleMetaFile方法 |  |
+| `getMergedBlockData` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, chunkId: int | `ManagedBuffer` | getMergedBlockData方法 |  |
+| `getMergedBlockMeta` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int | `MergedBlockMeta` | getMergedBlockMeta方法 |  |
+| `getMergedShuffleDataFile` | shuffleId: int, shuffleMergeId: int, reduceId: int | `File` | getMergedShuffleDataFile方法 |  |
+| `getMergedShuffleIndexFilePath` | shuffleId: int, shuffleMergeId: int, reduceId: int | `String` | getMergedShuffleIndexFilePath方法 |  |
+| `getMergedShuffleMetaFile` | shuffleId: int, shuffleMergeId: int, reduceId: int | `File` | getMergedShuffleMetaFile方法 |  |
 | `getMetrics` | 无 | `MetricSet` | getMetrics方法 |  |
 | `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | getMetrics方法 |  |
 | `getShuffleMergePartitions` | 无 | `Map&lt;Integer, AppShufflePartitionInfo&gt;` | getShuffleMergePartitions方法 |  |
@@ -4766,16 +4766,16 @@
 | `load` | filePath: String | `ShuffleIndexInformation` | load方法 |  |
 | `onComplete` | streamId: String | `void` | onComplete方法 |  |
 | `onComplete` | streamId: String | `void` | onComplete方法 |  |
-| `onData` | streamId: String; buf: ByteBuffer | `void` | onData方法 |  |
-| `onData` | streamId: String; buf: ByteBuffer | `void` | onData方法 |  |
-| `onFailure` | streamId: String; cause: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | streamId: String; throwable: Throwable | `void` | onFailure方法 |  |
+| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
+| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
+| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure方法 |  |
+| `onFailure` | streamId: String, throwable: Throwable | `void` | onFailure方法 |  |
 | `receiveBlockDataAsStream` | msg: PushBlockStream | `StreamCallbackWithID` | receiveBlockDataAsStream方法 |  |
-| `registerExecutor` | appId: String; executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
+| `registerExecutor` | appId: String, executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
 | `removeShuffleMerge` | msg: RemoveShuffleMerge | `void` | removeShuffleMerge方法 |  |
 | `run` | 无 | `void` | run方法 |  |
 | `setDataFilePos` | dataFilePos: long | `void` | setDataFilePos方法 |  |
-| `setReduceIds` | reduceIds: int[] | `void` | setReduceIds方法 |  |
+| `setReduceIds` | reduceIds: int&lt;&gt; | `void` | setReduceIds方法 |  |
 | `shouldLogError` | t: Throwable | `boolean` | shouldLogError方法 |  |
 
 ### RemoveBlocks
@@ -4806,12 +4806,12 @@
 |--------|------|----------|------|------|
 | `getRetryCount` | 无 | `int` | getRetryCount方法 |  |
 | `getTransferType` | 无 | `String` | getTransferType方法 |  |
-| `onBlockFetchFailure` | blockId: String; exception: Throwable | `void` | onBlockFetchFailure方法 |  |
-| `onBlockFetchSuccess` | blockId: String; data: ManagedBuffer | `void` | onBlockFetchSuccess方法 |  |
-| `onBlockPushFailure` | blockId: String; exception: Throwable | `void` | onBlockPushFailure方法 |  |
-| `onBlockPushSuccess` | blockId: String; data: ManagedBuffer | `void` | onBlockPushSuccess方法 |  |
-| `onBlockTransferFailure` | blockId: String; exception: Throwable | `void` | onBlockTransferFailure方法 |  |
-| `onBlockTransferSuccess` | blockId: String; data: ManagedBuffer | `void` | onBlockTransferSuccess方法 |  |
+| `onBlockFetchFailure` | blockId: String, exception: Throwable | `void` | onBlockFetchFailure方法 |  |
+| `onBlockFetchSuccess` | blockId: String, data: ManagedBuffer | `void` | onBlockFetchSuccess方法 |  |
+| `onBlockPushFailure` | blockId: String, exception: Throwable | `void` | onBlockPushFailure方法 |  |
+| `onBlockPushSuccess` | blockId: String, data: ManagedBuffer | `void` | onBlockPushSuccess方法 |  |
+| `onBlockTransferFailure` | blockId: String, exception: Throwable | `void` | onBlockTransferFailure方法 |  |
+| `onBlockTransferSuccess` | blockId: String, data: ManagedBuffer | `void` | onBlockTransferSuccess方法 |  |
 | `start` | 无 | `void` | start方法 |  |
 
 ### RocksDB
@@ -4823,12 +4823,12 @@
 | `close` | 无 | `void` | close方法 |  |
 | `close` | 无 | `void` | close方法 |  |
 | `count` | type: Class<?> | `long` | 统计行数 |  |
-| `count` | type: Class<?>; index: String; indexedValue: Object | `long` | 统计行数 |  |
-| `delete` | key: byte[] | `void` | delete方法 |  |
-| `delete` | type: Class<?>; naturalKey: Object | `void` | delete方法 |  |
+| `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 |  |
+| `delete` | key: byte&lt;&gt; | `void` | delete方法 |  |
+| `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
 | `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
 | `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
-| `put` | key: byte[]; value: byte[] | `void` | 添加键值对 |  |
+| `put` | key: byte&lt;&gt;, value: byte&lt;&gt; | `void` | 添加键值对 |  |
 | `setMetadata` | value: Object | `void` | setMetadata方法 |  |
 | `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
 | `writeAll` | values: List<?> | `void` | writeAll方法 |  |
@@ -4841,7 +4841,7 @@
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
 | `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `seek` | key: byte[] | `void` | seek方法 |  |
+| `seek` | key: byte&lt;&gt; | `void` | seek方法 |  |
 
 ### RocksDBProvider
 **包路径**: `org.apache.spark.network.util`
@@ -4849,9 +4849,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkVersion` | db: RocksDB; newversion: StoreVersion; mapper: ObjectMapper | `void` | checkVersion方法 |  |
-| `initRockDB` | dbFile: File; version: StoreVersion; mapper: ObjectMapper | `RocksDB` | initRockDB方法 |  |
-| `storeVersion` | db: RocksDB; version: StoreVersion; mapper: ObjectMapper | `void` | storeVersion方法 |  |
+| `checkVersion` | db: RocksDB, newversion: StoreVersion, mapper: ObjectMapper | `void` | checkVersion方法 |  |
+| `initRockDB` | dbFile: File, version: StoreVersion, mapper: ObjectMapper | `RocksDB` | initRockDB方法 |  |
+| `storeVersion` | db: RocksDB, version: StoreVersion, mapper: ObjectMapper | `void` | storeVersion方法 |  |
 
 ### RowBasedSet
 **包路径**: `org.apache.hive.service.cli`
@@ -4859,7 +4859,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addRow` | fields: Object[] | `RowBasedSet` | addRow方法 |  |
+| `addRow` | fields: Object&lt;&gt; | `RowBasedSet` | addRow方法 |  |
 | `extractSubset` | maxRows: int | `RowBasedSet` | extractSubset方法 |  |
 | `getSize` | 无 | `int` | getSize方法 |  |
 | `getStartOffset` | 无 | `long` | getStartOffset方法 |  |
@@ -4868,7 +4868,7 @@
 | `numColumns` | 无 | `int` | numColumns方法 |  |
 | `numRows` | 无 | `int` | numRows方法 |  |
 | `remove` | 无 | `void` | 删除元素 |  |
-| `removeRange` | fromIndex: int; toIndex: int | `void` | removeRange方法 |  |
+| `removeRange` | fromIndex: int, toIndex: int | `void` | removeRange方法 |  |
 | `setStartOffset` | startOffset: long | `void` | setStartOffset方法 |  |
 | `toTRowSet` | 无 | `TRowSet` | toTRowSet方法 |  |
 
@@ -4878,8 +4878,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `create` | schema: TableSchema; version: TProtocolVersion; isBlobBased: boolean | `RowSet` | create方法 |  |
-| `create` | results: TRowSet; version: TProtocolVersion | `RowSet` | create方法 |  |
+| `create` | schema: TableSchema, version: TProtocolVersion, isBlobBased: boolean | `RowSet` | create方法 |  |
+| `create` | results: TRowSet, version: TProtocolVersion | `RowSet` | create方法 |  |
 
 ### RpcHandler
 **包路径**: `org.apache.spark.network.server`
@@ -4889,13 +4889,13 @@
 |--------|------|----------|------|------|
 | `channelActive` | client: TransportClient | `void` | channelActive方法 |  |
 | `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
-| `exceptionCaught` | cause: Throwable; client: TransportClient | `void` | exceptionCaught方法 |  |
+| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught方法 |  |
 | `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | getMergedBlockMetaReqHandler方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
 | `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `receive` | client: TransportClient; message: ByteBuffer | `void` | receive方法 |  |
-| `receiveMergeBlockMetaReq` | client: TransportClient; mergedBlockMetaRequest: MergedBlockMetaRequest; callback: MergedBlockMetaResponseCallback | `void` | receiveMergeBlockMetaReq方法 |  |
-| `receiveStream` | client: TransportClient; messageHeader: ByteBuffer; callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
+| `receive` | client: TransportClient, message: ByteBuffer | `void` | receive方法 |  |
+| `receiveMergeBlockMetaReq` | client: TransportClient, mergedBlockMetaRequest: MergedBlockMetaRequest, callback: MergedBlockMetaResponseCallback | `void` | receiveMergeBlockMetaReq方法 |  |
+| `receiveStream` | client: TransportClient, messageHeader: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
 
 ### SSLFactory
 **包路径**: `org.apache.spark.network.ssl`
@@ -4905,18 +4905,18 @@
 |--------|------|----------|------|------|
 | `build` | 无 | `SSLFactory` | build方法 |  |
 | `certChain` | certChain: File | `Builder` | certChain方法 |  |
-| `checkClientTrusted` | x509Certificates: X509Certificate[]; s: String | `void` | checkClientTrusted方法 |  |
-| `checkServerTrusted` | x509Certificates: X509Certificate[]; s: String | `void` | checkServerTrusted方法 |  |
-| `createSSLEngine` | isClient: boolean; allocator: ByteBufAllocator | `SSLEngine` | createSSLEngine方法 |  |
+| `checkClientTrusted` | x509Certificates: X509Certificate&lt;&gt;, s: String | `void` | checkClientTrusted方法 |  |
+| `checkServerTrusted` | x509Certificates: X509Certificate&lt;&gt;, s: String | `void` | checkServerTrusted方法 |  |
+| `createSSLEngine` | isClient: boolean, allocator: ByteBufAllocator | `SSLEngine` | createSSLEngine方法 |  |
 | `destroy` | 无 | `void` | destroy方法 |  |
 | `keyPassword` | keyPassword: String | `Builder` | keyPassword方法 |  |
-| `keyStore` | keyStore: File; keyStorePassword: String | `Builder` | keyStore方法 |  |
+| `keyStore` | keyStore: File, keyStorePassword: String | `Builder` | keyStore方法 |  |
 | `openSslEnabled` | enabled: boolean | `Builder` | openSslEnabled方法 |  |
 | `privateKey` | privateKey: File | `Builder` | privateKey方法 |  |
 | `privateKeyPassword` | privateKeyPassword: String | `Builder` | privateKeyPassword方法 |  |
-| `requestedCiphers` | requestedCiphers: String[] | `Builder` | requestedCiphers方法 |  |
+| `requestedCiphers` | requestedCiphers: String&lt;&gt; | `Builder` | requestedCiphers方法 |  |
 | `requestedProtocol` | requestedProtocol: String | `Builder` | requestedProtocol方法 |  |
-| `trustStore` | trustStore: File; trustStorePassword: String; trustStoreReloadingEnabled: boolean; trustStoreReloadIntervalMs: int | `Builder` | trustStore方法 |  |
+| `trustStore` | trustStore: File, trustStorePassword: String, trustStoreReloadingEnabled: boolean, trustStoreReloadIntervalMs: int | `Builder` | trustStore方法 |  |
 
 ### SaslClientBootstrap
 **包路径**: `org.apache.spark.network.sasl`
@@ -4924,7 +4924,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | client: TransportClient; channel: Channel | `void` | doBootstrap方法 |  |
+| `doBootstrap` | client: TransportClient, channel: Channel | `void` | doBootstrap方法 |  |
 
 ### SaslQOP
 **包路径**: `org.apache.hive.service.auth`
@@ -4941,7 +4941,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
-| `doAuthChallenge` | client: TransportClient; message: ByteBuffer; callback: RpcResponseCallback | `boolean` | doAuthChallenge方法 |  |
+| `doAuthChallenge` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `boolean` | doAuthChallenge方法 |  |
 
 ### SaslServerBootstrap
 **包路径**: `org.apache.spark.network.sasl`
@@ -4949,7 +4949,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | channel: Channel; rpcHandler: RpcHandler | `RpcHandler` | doBootstrap方法 |  |
+| `doBootstrap` | channel: Channel, rpcHandler: RpcHandler | `RpcHandler` | doBootstrap方法 |  |
 
 ### ServiceUtils
 **包路径**: `org.apache.hive.service`
@@ -4957,7 +4957,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cleanup` | log: SparkLogger; closeables: java.io.Closeable... | `void` | cleanup方法 |  |
+| `cleanup` | log: SparkLogger, closeables: java.io.Closeable... | `void` | cleanup方法 |  |
 | `indexOfDomainMatch` | userName: String | `int` | indexOfDomainMatch方法 |  |
 
 ### SessionHandle
@@ -4986,8 +4986,8 @@
 | `getProxyUserName` | 无 | `String` | getProxyUserName方法 |  |
 | `getSession` | sessionHandle: SessionHandle | `HiveSession` | getSession方法 |  |
 | `getUserName` | 无 | `String` | getUserName方法 |  |
-| `openSession` | protocol: TProtocolVersion; username: String; password: String; ipAddress: String; sessionConf: String> | `SessionHandle` | openSession方法 |  |
-| `openSession` | protocol: TProtocolVersion; username: String; password: String; ipAddress: String; sessionConf: String>; withImpersonation: boolean; delegationToken: String | `SessionHandle` | openSession方法 |  |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, sessionConf: String> | `SessionHandle` | openSession方法 |  |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, sessionConf: String>, withImpersonation: boolean, delegationToken: String | `SessionHandle` | openSession方法 |  |
 | `run` | 无 | `void` | run方法 |  |
 | `setIpAddress` | ipAddress: String | `void` | setIpAddress方法 |  |
 | `setProxyUserName` | userName: String | `void` | setProxyUserName方法 |  |
@@ -5000,8 +5000,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `rebuild` | row: ShreddedRow; schema: VariantSchema | `Variant` | rebuild方法 |  |
-| `rebuild` | row: ShreddedRow; metadata: byte[]; schema: VariantSchema; builder: VariantBuilder | `void` | rebuild方法 |  |
+| `rebuild` | row: ShreddedRow, schema: VariantSchema | `Variant` | rebuild方法 |  |
+| `rebuild` | row: ShreddedRow, metadata: byte&lt;&gt;, schema: VariantSchema, builder: VariantBuilder | `void` | rebuild方法 |  |
 
 ### ShuffleChecksumHelper
 **包路径**: `org.apache.spark.network.shuffle.checksum`
@@ -5009,9 +5009,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `diagnoseCorruption` | algorithm: String; checksumFile: File; reduceId: int; partitionData: ManagedBuffer; checksumByReader: long | `Cause` | diagnoseCorruption方法 |  |
+| `diagnoseCorruption` | algorithm: String, checksumFile: File, reduceId: int, partitionData: ManagedBuffer, checksumByReader: long | `Cause` | diagnoseCorruption方法 |  |
 | `getChecksumByAlgorithm` | algorithm: String | `Checksum` | getChecksumByAlgorithm方法 |  |
-| `getChecksumFileName` | blockName: String; algorithm: String | `String` | getChecksumFileName方法 |  |
+| `getChecksumFileName` | blockName: String, algorithm: String | `String` | getChecksumFileName方法 |  |
 
 ### ShuffleIndexInformation
 **包路径**: `org.apache.spark.network.shuffle`
@@ -5020,7 +5020,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `getIndex` | reduceId: int | `ShuffleIndexRecord` | getIndex方法 |  |
-| `getIndex` | startReduceId: int; endReduceId: int | `ShuffleIndexRecord` | getIndex方法 |  |
+| `getIndex` | startReduceId: int, endReduceId: int | `ShuffleIndexRecord` | getIndex方法 |  |
 | `getRetainedMemorySize` | 无 | `int` | getRetainedMemorySize方法 |  |
 
 ### ShuffleSecretManager
@@ -5031,8 +5031,8 @@
 |--------|------|----------|------|------|
 | `getSaslUser` | appId: String | `String` | getSaslUser方法 |  |
 | `getSecretKey` | appId: String | `String` | getSecretKey方法 |  |
-| `registerApp` | appId: String; shuffleSecret: String | `void` | registerApp方法 |  |
-| `registerApp` | appId: String; shuffleSecret: ByteBuffer | `void` | registerApp方法 |  |
+| `registerApp` | appId: String, shuffleSecret: String | `void` | registerApp方法 |  |
+| `registerApp` | appId: String, shuffleSecret: ByteBuffer | `void` | registerApp方法 |  |
 | `unregisterApp` | appId: String | `void` | unregisterApp方法 |  |
 
 ### ShuffleTransportContext
@@ -5042,8 +5042,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `acceptInboundMessage` | msg: Object | `boolean` | acceptInboundMessage方法 |  |
-| `initializePipeline` | channel: SocketChannel; isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
-| `initializePipeline` | channel: SocketChannel; channelRpcHandler: RpcHandler; isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
+| `initializePipeline` | channel: SocketChannel, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
+| `initializePipeline` | channel: SocketChannel, channelRpcHandler: RpcHandler, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
 
 ### SimpleDownloadFile
 **包路径**: `org.apache.spark.network.shuffle`
@@ -5132,9 +5132,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getEvaluator` | parameters: TypeInfo[] | `GenericUDAFEvaluator` | getEvaluator方法 |  |
-| `iterate` | agg: AggregationBuffer; parameters: Object[] | `void` | iterate方法 |  |
-| `merge` | agg: AggregationBuffer; partial: Object | `void` | merge方法 |  |
+| `getEvaluator` | parameters: TypeInfo&lt;&gt; | `GenericUDAFEvaluator` | getEvaluator方法 |  |
+| `iterate` | agg: AggregationBuffer, parameters: Object&lt;&gt; | `void` | iterate方法 |  |
+| `merge` | agg: AggregationBuffer, partial: Object | `void` | merge方法 |  |
 | `terminate` | agg: AggregationBuffer | `Object` | terminate方法 |  |
 | `terminatePartial` | agg: AggregationBuffer | `Object` | terminatePartial方法 |  |
 
@@ -5149,7 +5149,7 @@
 | `addJar` | jar: String | `SparkLauncher` | 添加JAR包到Spark作业 |  |
 | `addPyFile` | file: String | `SparkLauncher` | addPyFile方法 |  |
 | `addSparkArg` | arg: String | `SparkLauncher` | addSparkArg方法 |  |
-| `addSparkArg` | name: String; value: String | `SparkLauncher` | addSparkArg方法 |  |
+| `addSparkArg` | name: String, value: String | `SparkLauncher` | addSparkArg方法 |  |
 | `directory` | dir: File | `SparkLauncher` | directory方法 |  |
 | `launch` | 无 | `Process` | launch方法 |  |
 | `redirectError` | 无 | `SparkLauncher` | redirectError方法 |  |
@@ -5160,8 +5160,8 @@
 | `redirectToLog` | loggerName: String | `SparkLauncher` | redirectToLog方法 |  |
 | `setAppName` | appName: String | `SparkLauncher` | setAppName方法 |  |
 | `setAppResource` | resource: String | `SparkLauncher` | setAppResource方法 |  |
-| `setConf` | key: String; value: String | `SparkLauncher` | setConf方法 |  |
-| `setConfig` | name: String; value: String | `void` | setConfig方法 |  |
+| `setConf` | key: String, value: String | `SparkLauncher` | setConf方法 |  |
+| `setConfig` | name: String, value: String | `void` | setConfig方法 |  |
 | `setDeployMode` | mode: String | `SparkLauncher` | setDeployMode方法 |  |
 | `setJavaHome` | javaHome: String | `SparkLauncher` | setJavaHome方法 |  |
 | `setMainClass` | mainClass: String | `SparkLauncher` | setMainClass方法 |  |
@@ -5194,7 +5194,7 @@
 | `getCurrentValue` | 无 | `OrcStruct` | getCurrentValue方法 |  |
 | `getObjectInspector` | 无 | `ObjectInspector` | getObjectInspector方法 |  |
 | `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initialize` | split: InputSplit; context: TaskAttemptContext | `void` | initialize方法 |  |
+| `initialize` | split: InputSplit, context: TaskAttemptContext | `void` | initialize方法 |  |
 | `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
 
 ### SparkSaslClient
@@ -5204,7 +5204,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `getNegotiatedProperty` | name: String | `Object` | getNegotiatedProperty方法 |  |
-| `handle` | callbacks: Callback[] | `void` | handle方法 |  |
+| `handle` | callbacks: Callback&lt;&gt; | `void` | handle方法 |  |
 
 ### SparkSaslServer
 **包路径**: `org.apache.spark.network.sasl`
@@ -5214,7 +5214,7 @@
 |--------|------|----------|------|------|
 | `encodeIdentifier` | identifier: String | `String` | encodeIdentifier方法 |  |
 | `getNegotiatedProperty` | name: String | `Object` | getNegotiatedProperty方法 |  |
-| `handle` | callbacks: Callback[] | `void` | handle方法 |  |
+| `handle` | callbacks: Callback&lt;&gt; | `void` | handle方法 |  |
 
 ### StageStatus
 **包路径**: `org.apache.spark.status.api.v1`
@@ -5230,7 +5230,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `create` | useDisk: boolean; useMemory: boolean; useOffHeap: boolean; deserialized: boolean; replication: int | `StorageLevel` | create方法 |  |
+| `create` | useDisk: boolean, useMemory: boolean, useOffHeap: boolean, deserialized: boolean, replication: int | `StorageLevel` | create方法 |  |
 
 ### StreamHandle
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -5258,7 +5258,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkAuthorization` | client: TransportClient; streamId: long | `void` | checkAuthorization方法 |  |
+| `checkAuthorization` | client: TransportClient, streamId: long | `void` | checkAuthorization方法 |  |
 | `chunkBeingSent` | streamId: long | `void` | chunkBeingSent方法 |  |
 | `chunkSent` | streamId: long | `void` | chunkSent方法 |  |
 | `chunksBeingTransferred` | 无 | `long` | chunksBeingTransferred方法 |  |
@@ -5273,7 +5273,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addCustomHeader` | key: final String; value: final String | `void` | addCustomHeader方法 |  |
+| `addCustomHeader` | key: final String, value: final String | `void` | addCustomHeader方法 |  |
 | `getKey` | 无 | `String` | getKey方法 |  |
 | `getValue` | 无 | `String` | getValue方法 |  |
 | `setCustomHeaders` | headers: String>> | `void` | setCustomHeaders方法 |  |
@@ -5287,7 +5287,7 @@
 |--------|------|----------|------|------|
 | `getUserIpAddress` | 无 | `String` | getUserIpAddress方法 |  |
 | `getUserName` | 无 | `String` | getUserName方法 |  |
-| `process` | in: final TProtocol; out: final TProtocol | `void` | process方法 |  |
+| `process` | in: final TProtocol, out: final TProtocol | `void` | process方法 |  |
 
 ### TSubjectAssumingTransport
 **包路径**: `org.apache.hive.service.auth`
@@ -5303,8 +5303,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addPrimitiveColumn` | columnName: String; columnType: Type; columnComment: String | `TableSchema` | addPrimitiveColumn方法 |  |
-| `addStringColumn` | columnName: String; columnComment: String | `TableSchema` | addStringColumn方法 |  |
+| `addPrimitiveColumn` | columnName: String, columnType: Type, columnComment: String | `TableSchema` | addPrimitiveColumn方法 |  |
+| `addStringColumn` | columnName: String, columnComment: String | `TableSchema` | addStringColumn方法 |  |
 | `clear` | 无 | `void` | 清空集合 |  |
 | `getColumnDescriptorAt` | pos: int | `ColumnDescriptor` | getColumnDescriptorAt方法 |  |
 | `getColumnDescriptors` | 无 | `List&lt;ColumnDescriptor&gt;` | getColumnDescriptors方法 |  |
@@ -5325,13 +5325,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `acquireExecutionMemory` | required: long; requestingConsumer: MemoryConsumer | `long` | acquireExecutionMemory方法 |  |
-| `allocatePage` | size: long; consumer: MemoryConsumer | `MemoryBlock` | allocatePage方法 |  |
+| `acquireExecutionMemory` | required: long, requestingConsumer: MemoryConsumer | `long` | acquireExecutionMemory方法 |  |
+| `allocatePage` | size: long, consumer: MemoryConsumer | `MemoryBlock` | allocatePage方法 |  |
 | `cleanUpAllAllocatedMemory` | 无 | `long` | cleanUpAllAllocatedMemory方法 |  |
 | `decodePageNumber` | pagePlusOffsetAddress: long | `int` | decodePageNumber方法 |  |
-| `encodePageNumberAndOffset` | page: MemoryBlock; offsetInPage: long | `long` | encodePageNumberAndOffset方法 |  |
-| `encodePageNumberAndOffset` | pageNumber: int; offsetInPage: long | `long` | encodePageNumberAndOffset方法 |  |
-| `freePage` | page: MemoryBlock; consumer: MemoryConsumer | `void` | freePage方法 |  |
+| `encodePageNumberAndOffset` | page: MemoryBlock, offsetInPage: long | `long` | encodePageNumberAndOffset方法 |  |
+| `encodePageNumberAndOffset` | pageNumber: int, offsetInPage: long | `long` | encodePageNumberAndOffset方法 |  |
+| `freePage` | page: MemoryBlock, consumer: MemoryConsumer | `void` | freePage方法 |  |
 | `getMemoryConsumptionForThisTask` | 无 | `long` | getMemoryConsumptionForThisTask方法 |  |
 | `getOffsetInPage` | pagePlusOffsetAddress: long | `long` | getOffsetInPage方法 |  |
 | `getPage` | pagePlusOffsetAddress: long | `Object` | getPage方法 |  |
@@ -5339,7 +5339,7 @@
 | `getPeakOnHeapExecutionMemory` | 无 | `long` | getPeakOnHeapExecutionMemory方法 |  |
 | `getTungstenMemoryMode` | 无 | `MemoryMode` | getTungstenMemoryMode方法 |  |
 | `pageSizeBytes` | 无 | `long` | pageSizeBytes方法 |  |
-| `releaseExecutionMemory` | size: long; consumer: MemoryConsumer | `void` | releaseExecutionMemory方法 |  |
+| `releaseExecutionMemory` | size: long, consumer: MemoryConsumer | `void` | releaseExecutionMemory方法 |  |
 | `showMemoryUsage` | 无 | `void` | showMemoryUsage方法 |  |
 
 ### TaskSorting
@@ -5416,14 +5416,14 @@
 | `RenewDelegationToken` | req: TRenewDelegationTokenReq | `TRenewDelegationTokenResp` | RenewDelegationToken方法 |  |
 | `SetClientInfo` | req: TSetClientInfoReq | `TSetClientInfoResp` | SetClientInfo方法 |  |
 | `UploadData` | req: TUploadDataReq | `TUploadDataResp` | UploadData方法 |  |
-| `createContext` | input: TProtocol; output: TProtocol | `ServerContext` | createContext方法 |  |
-| `deleteContext` | serverContext: ServerContext; input: TProtocol; output: TProtocol | `void` | deleteContext方法 |  |
+| `createContext` | input: TProtocol, output: TProtocol | `ServerContext` | createContext方法 |  |
+| `deleteContext` | serverContext: ServerContext, input: TProtocol, output: TProtocol | `void` | deleteContext方法 |  |
 | `getPortNumber` | 无 | `int` | getPortNumber方法 |  |
 | `getServerIPAddress` | 无 | `InetAddress` | getServerIPAddress方法 |  |
 | `getSessionHandle` | 无 | `SessionHandle` | getSessionHandle方法 |  |
 | `isWrapperFor` | aClass: Class<?> | `boolean` | isWrapperFor方法 |  |
 | `preServe` | 无 | `void` | preServe方法 |  |
-| `processContext` | serverContext: ServerContext; input: TTransport; output: TTransport | `void` | processContext方法 |  |
+| `processContext` | serverContext: ServerContext, input: TTransport, output: TTransport | `void` | processContext方法 |  |
 | `setSessionHandle` | sessionHandle: SessionHandle | `void` | setSessionHandle方法 |  |
 
 ### ThriftCLIServiceClient
@@ -5432,34 +5432,34 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | sessionHandle: SessionHandle; authFactory: HiveAuthFactory; tokenStr: String | `void` | cancelDelegationToken方法 |  |
+| `cancelDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
 | `cancelOperation` | opHandle: OperationHandle | `void` | cancelOperation方法 |  |
 | `checkStatus` | status: TStatus | `void` | checkStatus方法 |  |
 | `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
 | `closeSession` | sessionHandle: SessionHandle | `void` | closeSession方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle; statement: String; confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle; statement: String; confOverlay: String>; queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle; statement: String; confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle; statement: String; confOverlay: String>; queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
-| `fetchResults` | opHandle: OperationHandle; orientation: FetchOrientation; maxRows: long; fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
+| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
 | `fetchResults` | opHandle: OperationHandle | `TRowSet` | fetchResults方法 |  |
 | `getCatalogs` | sessionHandle: SessionHandle | `OperationHandle` | getCatalogs方法 |  |
-| `getColumns` | sessionHandle: SessionHandle; catalogName: String; schemaName: String; tableName: String; columnName: String | `OperationHandle` | getColumns方法 |  |
-| `getCrossReference` | sessionHandle: SessionHandle; primaryCatalog: String; primarySchema: String; primaryTable: String; foreignCatalog: String; foreignSchema: String; foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
-| `getDelegationToken` | sessionHandle: SessionHandle; authFactory: HiveAuthFactory; owner: String; renewer: String | `String` | getDelegationToken方法 |  |
-| `getFunctions` | sessionHandle: SessionHandle; catalogName: String; schemaName: String; functionName: String | `OperationHandle` | getFunctions方法 |  |
-| `getInfo` | sessionHandle: SessionHandle; infoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
+| `getColumns` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | getColumns方法 |  |
+| `getCrossReference` | sessionHandle: SessionHandle, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
+| `getDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
+| `getFunctions` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, functionName: String | `OperationHandle` | getFunctions方法 |  |
+| `getInfo` | sessionHandle: SessionHandle, infoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
 | `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | getOperationStatus方法 |  |
-| `getPrimaryKeys` | sessionHandle: SessionHandle; catalog: String; schema: String; table: String | `OperationHandle` | getPrimaryKeys方法 |  |
+| `getPrimaryKeys` | sessionHandle: SessionHandle, catalog: String, schema: String, table: String | `OperationHandle` | getPrimaryKeys方法 |  |
 | `getQueryId` | operationHandle: TOperationHandle | `String` | getQueryId方法 |  |
 | `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | getResultSetMetadata方法 |  |
-| `getSchemas` | sessionHandle: SessionHandle; catalogName: String; schemaName: String | `OperationHandle` | getSchemas方法 |  |
+| `getSchemas` | sessionHandle: SessionHandle, catalogName: String, schemaName: String | `OperationHandle` | getSchemas方法 |  |
 | `getTableTypes` | sessionHandle: SessionHandle | `OperationHandle` | getTableTypes方法 |  |
-| `getTables` | sessionHandle: SessionHandle; catalogName: String; schemaName: String; tableName: String; tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
+| `getTables` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
 | `getTypeInfo` | sessionHandle: SessionHandle | `OperationHandle` | getTypeInfo方法 |  |
-| `openSession` | username: String; password: String; configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSessionWithImpersonation` | username: String; password: String; configuration: String>; delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `renewDelegationToken` | sessionHandle: SessionHandle; authFactory: HiveAuthFactory; tokenStr: String | `void` | renewDelegationToken方法 |  |
+| `openSession` | username: String, password: String, configuration: String> | `SessionHandle` | openSession方法 |  |
+| `openSessionWithImpersonation` | username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
+| `renewDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
 
 ### ThriftHttpCLIService
 **包路径**: `org.apache.hive.service.cli.thrift`
@@ -5509,14 +5509,14 @@
 | `acceptInboundMessage` | msg: Object | `boolean` | acceptInboundMessage方法 |  |
 | `channelActive` | ctx: ChannelHandlerContext | `void` | channelActive方法 |  |
 | `channelInactive` | ctx: ChannelHandlerContext | `void` | channelInactive方法 |  |
-| `channelRead0` | ctx: ChannelHandlerContext; request: Message | `void` | channelRead0方法 |  |
+| `channelRead0` | ctx: ChannelHandlerContext, request: Message | `void` | channelRead0方法 |  |
 | `channelRegistered` | ctx: ChannelHandlerContext | `void` | channelRegistered方法 |  |
 | `channelUnregistered` | ctx: ChannelHandlerContext | `void` | channelUnregistered方法 |  |
-| `exceptionCaught` | ctx: ChannelHandlerContext; cause: Throwable | `void` | exceptionCaught方法 |  |
+| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught方法 |  |
 | `getClient` | 无 | `TransportClient` | getClient方法 |  |
 | `getRequestHandler` | 无 | `TransportRequestHandler` | getRequestHandler方法 |  |
 | `getResponseHandler` | 无 | `TransportResponseHandler` | getResponseHandler方法 |  |
-| `userEventTriggered` | ctx: ChannelHandlerContext; evt: Object | `void` | userEventTriggered方法 |  |
+| `userEventTriggered` | ctx: ChannelHandlerContext, evt: Object | `void` | userEventTriggered方法 |  |
 
 ### TransportClient
 **包路径**: `org.apache.spark.network.client`
@@ -5525,7 +5525,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
-| `fetchChunk` | streamId: long; chunkIndex: int; callback: ChunkReceivedCallback | `void` | fetchChunk方法 |  |
+| `fetchChunk` | streamId: long, chunkIndex: int, callback: ChunkReceivedCallback | `void` | fetchChunk方法 |  |
 | `getChannel` | 无 | `Channel` | getChannel方法 |  |
 | `getClientId` | 无 | `String` | getClientId方法 |  |
 | `getHandler` | 无 | `TransportResponseHandler` | getHandler方法 |  |
@@ -5536,13 +5536,13 @@
 | `operationComplete` | future: Future<? super Void> | `void` | operationComplete方法 |  |
 | `removeRpcRequest` | requestId: long | `void` | removeRpcRequest方法 |  |
 | `send` | message: ByteBuffer | `void` | send方法 |  |
-| `sendMergedBlockMetaReq` | appId: String; shuffleId: int; shuffleMergeId: int; reduceId: int; callback: MergedBlockMetaResponseCallback | `void` | sendMergedBlockMetaReq方法 |  |
-| `sendRpc` | message: ByteBuffer; callback: RpcResponseCallback | `long` | sendRpc方法 |  |
-| `sendRpcSync` | message: ByteBuffer; timeoutMs: long | `ByteBuffer` | sendRpcSync方法 |  |
+| `sendMergedBlockMetaReq` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, callback: MergedBlockMetaResponseCallback | `void` | sendMergedBlockMetaReq方法 |  |
+| `sendRpc` | message: ByteBuffer, callback: RpcResponseCallback | `long` | sendRpc方法 |  |
+| `sendRpcSync` | message: ByteBuffer, timeoutMs: long | `ByteBuffer` | sendRpcSync方法 |  |
 | `setClientId` | id: String | `void` | setClientId方法 |  |
-| `stream` | streamId: String; callback: StreamCallback | `void` | stream方法 |  |
+| `stream` | streamId: String, callback: StreamCallback | `void` | stream方法 |  |
 | `timeOut` | 无 | `void` | timeOut方法 |  |
-| `uploadStream` | meta: ManagedBuffer; data: ManagedBuffer; callback: RpcResponseCallback | `long` | uploadStream方法 |  |
+| `uploadStream` | meta: ManagedBuffer, data: ManagedBuffer, callback: RpcResponseCallback | `long` | uploadStream方法 |  |
 
 ### TransportClientFactory
 **包路径**: `org.apache.spark.network.client`
@@ -5551,9 +5551,9 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `close` | 无 | `void` | close方法 |  |
-| `createClient` | remoteHost: String; remotePort: int; fastFail: boolean | `TransportClient` | createClient方法 |  |
-| `createClient` | remoteHost: String; remotePort: int | `TransportClient` | createClient方法 |  |
-| `createUnmanagedClient` | remoteHost: String; remotePort: int | `TransportClient` | createUnmanagedClient方法 |  |
+| `createClient` | remoteHost: String, remotePort: int, fastFail: boolean | `TransportClient` | createClient方法 |  |
+| `createClient` | remoteHost: String, remotePort: int | `TransportClient` | createClient方法 |  |
+| `createUnmanagedClient` | remoteHost: String, remotePort: int | `TransportClient` | createUnmanagedClient方法 |  |
 | `getAllMetrics` | 无 | `MetricSet` | getAllMetrics方法 |  |
 | `initChannel` | ch: SocketChannel | `void` | initChannel方法 |  |
 | `operationComplete` | handshakeFuture: final Future<Channel> | `void` | operationComplete方法 |  |
@@ -5577,8 +5577,8 @@
 | `enableTcpKeepAlive` | 无 | `boolean` | enableTcpKeepAlive方法 |  |
 | `encryptionEnabled` | 无 | `boolean` | encryptionEnabled方法 |  |
 | `finalizeShuffleMergeHandlerThreads` | 无 | `int` | finalizeShuffleMergeHandlerThreads方法 |  |
-| `get` | name: String; defaultValue: String | `String` | 获取元素 |  |
-| `getInt` | name: String; defaultValue: int | `int` | getInt方法 |  |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
+| `getInt` | name: String, defaultValue: int | `int` | getInt方法 |  |
 | `getModuleName` | 无 | `String` | getModuleName方法 |  |
 | `ioExceptionsThresholdDuringMerge` | 无 | `int` | ioExceptionsThresholdDuringMerge方法 |  |
 | `ioMode` | 无 | `String` | ioMode方法 |  |
@@ -5632,14 +5632,14 @@
 | `close` | 无 | `void` | close方法 |  |
 | `createClientFactory` | bootstraps: List<TransportClientBootstrap> | `TransportClientFactory` | createClientFactory方法 |  |
 | `createClientFactory` | 无 | `TransportClientFactory` | createClientFactory方法 |  |
-| `createServer` | port: int; bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
-| `createServer` | host: String; port: int; bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
+| `createServer` | port: int, bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
+| `createServer` | host: String, port: int, bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
 | `createServer` | bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
 | `createServer` | 无 | `TransportServer` | createServer方法 |  |
 | `getConf` | 无 | `TransportConf` | getConf方法 |  |
 | `getRegisteredConnections` | 无 | `Counter` | getRegisteredConnections方法 |  |
-| `initializePipeline` | channel: SocketChannel; isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
-| `initializePipeline` | channel: SocketChannel; channelRpcHandler: RpcHandler; isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
+| `initializePipeline` | channel: SocketChannel, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
+| `initializePipeline` | channel: SocketChannel, channelRpcHandler: RpcHandler, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
 | `sslEncryptionEnabled` | 无 | `boolean` | sslEncryptionEnabled方法 |  |
 
 ### TransportFrameDecoder
@@ -5649,8 +5649,8 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `channelInactive` | ctx: ChannelHandlerContext | `void` | channelInactive方法 |  |
-| `channelRead` | ctx: ChannelHandlerContext; data: Object | `void` | channelRead方法 |  |
-| `exceptionCaught` | ctx: ChannelHandlerContext; cause: Throwable | `void` | exceptionCaught方法 |  |
+| `channelRead` | ctx: ChannelHandlerContext, data: Object | `void` | channelRead方法 |  |
+| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught方法 |  |
 | `handlerRemoved` | ctx: ChannelHandlerContext | `void` | handlerRemoved方法 |  |
 | `setInterceptor` | interceptor: Interceptor | `void` | setInterceptor方法 |  |
 
@@ -5666,14 +5666,14 @@
 | `getID` | 无 | `String` | getID方法 |  |
 | `handle` | request: RequestMessage | `void` | handle方法 |  |
 | `onComplete` | streamId: String | `void` | onComplete方法 |  |
-| `onData` | streamId: String; buf: ByteBuffer | `void` | onData方法 |  |
+| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | streamId: String; cause: Throwable | `void` | onFailure方法 |  |
+| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure方法 |  |
 | `onFailure` | e: Throwable | `void` | onFailure方法 |  |
 | `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
 | `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `onSuccess` | numChunks: int; buffer: ManagedBuffer | `void` | onSuccess方法 |  |
+| `onSuccess` | numChunks: int, buffer: ManagedBuffer | `void` | onSuccess方法 |  |
 
 ### TransportResponseHandler
 **包路径**: `org.apache.spark.network.client`
@@ -5681,9 +5681,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addFetchRequest` | streamChunkId: StreamChunkId; callback: ChunkReceivedCallback | `void` | addFetchRequest方法 |  |
-| `addRpcRequest` | requestId: long; callback: BaseResponseCallback | `void` | addRpcRequest方法 |  |
-| `addStreamCallback` | streamId: String; callback: StreamCallback | `void` | addStreamCallback方法 |  |
+| `addFetchRequest` | streamChunkId: StreamChunkId, callback: ChunkReceivedCallback | `void` | addFetchRequest方法 |  |
+| `addRpcRequest` | requestId: long, callback: BaseResponseCallback | `void` | addRpcRequest方法 |  |
+| `addStreamCallback` | streamId: String, callback: StreamCallback | `void` | addStreamCallback方法 |  |
 | `channelActive` | 无 | `void` | channelActive方法 |  |
 | `channelInactive` | 无 | `void` | channelInactive方法 |  |
 | `deactivateStream` | 无 | `void` | deactivateStream方法 |  |
@@ -5746,7 +5746,7 @@
 |--------|------|----------|------|------|
 | `append` | value: UTF8String | `void` | 追加元素 |  |
 | `append` | value: String | `void` | 追加元素 |  |
-| `appendBytes` | base: Object; offset: long; length: int | `void` | appendBytes方法 |  |
+| `appendBytes` | base: Object, offset: long, length: int | `void` | appendBytes方法 |  |
 | `appendCodePoint` | codePoint: int | `void` | appendCodePoint方法 |  |
 | `build` | 无 | `UTF8String` | build方法 |  |
 
@@ -5756,9 +5756,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSize` | object: Object; offset: long | `int` | getSize方法 |  |
+| `getSize` | object: Object, offset: long | `int` | getSize方法 |  |
 | `getUaoSize` | 无 | `int` | getUaoSize方法 |  |
-| `putSize` | object: Object; offset: long; value: int | `void` | putSize方法 |  |
+| `putSize` | object: Object, offset: long, value: int | `void` | putSize方法 |  |
 | `setUaoSize` | size: int | `void` | setUaoSize方法 |  |
 
 ### UnsafeMemoryAllocator
@@ -5810,7 +5810,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addKey` | key: String | `int` | addKey方法 |  |
-| `appendBinary` | binary: byte[] | `void` | appendBinary方法 |  |
+| `appendBinary` | binary: byte&lt;&gt; | `void` | appendBinary方法 |  |
 | `appendBoolean` | b: boolean | `void` | appendBoolean方法 |  |
 | `appendDate` | daysSinceEpoch: int | `void` | appendDate方法 |  |
 | `appendDecimal` | d: BigDecimal | `void` | appendDecimal方法 |  |
@@ -5824,11 +5824,11 @@
 | `appendUuid` | uuid: UUID | `void` | appendUuid方法 |  |
 | `appendVariant` | v: Variant | `void` | appendVariant方法 |  |
 | `compareTo` | other: FieldEntry | `int` | compareTo方法 |  |
-| `finishWritingArray` | start: int; offsets: ArrayList<Integer> | `void` | finishWritingArray方法 |  |
-| `finishWritingObject` | start: int; fields: ArrayList<FieldEntry> | `void` | finishWritingObject方法 |  |
+| `finishWritingArray` | start: int, offsets: ArrayList<Integer> | `void` | finishWritingArray方法 |  |
+| `finishWritingObject` | start: int, fields: ArrayList<FieldEntry> | `void` | finishWritingObject方法 |  |
 | `getWritePos` | 无 | `int` | getWritePos方法 |  |
-| `parseJson` | json: String; allowDuplicateKeys: boolean | `Variant` | parseJson方法 |  |
-| `parseJson` | parser: JsonParser; allowDuplicateKeys: boolean | `Variant` | parseJson方法 |  |
+| `parseJson` | json: String, allowDuplicateKeys: boolean | `Variant` | parseJson方法 |  |
+| `parseJson` | parser: JsonParser, allowDuplicateKeys: boolean | `Variant` | parseJson方法 |  |
 | `result` | 无 | `Variant` | result方法 |  |
 | `shallowAppendVariant` | v: Variant | `void` | shallowAppendVariant方法 |  |
 
@@ -5846,7 +5846,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `castShredded` | v: Variant; schema: VariantSchema; builder: ShreddedResultBuilder | `ShreddedResult` | castShredded方法 |  |
+| `castShredded` | v: Variant, schema: VariantSchema, builder: ShreddedResultBuilder | `ShreddedResult` | castShredded方法 |  |
 
 ### VariantUtil
 **包路径**: `org.apache.spark.types.variant`
@@ -5854,24 +5854,24 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `arrayHeader` | largeSize: boolean; offsetSize: int | `byte` | arrayHeader方法 |  |
-| `getBoolean` | value: byte[]; pos: int | `boolean` | getBoolean方法 |  |
-| `getDecimal` | value: byte[]; pos: int | `BigDecimal` | getDecimal方法 |  |
-| `getDecimalWithOriginalScale` | value: byte[]; pos: int | `BigDecimal` | getDecimalWithOriginalScale方法 |  |
-| `getDouble` | value: byte[]; pos: int | `double` | getDouble方法 |  |
-| `getFloat` | value: byte[]; pos: int | `float` | getFloat方法 |  |
-| `getLong` | value: byte[]; pos: int | `long` | getLong方法 |  |
-| `getMetadataKey` | metadata: byte[]; id: int | `String` | getMetadataKey方法 |  |
-| `getString` | value: byte[]; pos: int | `String` | getString方法 |  |
-| `getType` | value: byte[]; pos: int | `Type` | getType方法 |  |
-| `getTypeInfo` | value: byte[]; pos: int | `int` | getTypeInfo方法 |  |
-| `getUuid` | value: byte[]; pos: int | `UUID` | getUuid方法 |  |
-| `objectHeader` | largeSize: boolean; idSize: int; offsetSize: int | `byte` | objectHeader方法 |  |
+| `arrayHeader` | largeSize: boolean, offsetSize: int | `byte` | arrayHeader方法 |  |
+| `getBoolean` | value: byte&lt;&gt;, pos: int | `boolean` | getBoolean方法 |  |
+| `getDecimal` | value: byte&lt;&gt;, pos: int | `BigDecimal` | getDecimal方法 |  |
+| `getDecimalWithOriginalScale` | value: byte&lt;&gt;, pos: int | `BigDecimal` | getDecimalWithOriginalScale方法 |  |
+| `getDouble` | value: byte&lt;&gt;, pos: int | `double` | getDouble方法 |  |
+| `getFloat` | value: byte&lt;&gt;, pos: int | `float` | getFloat方法 |  |
+| `getLong` | value: byte&lt;&gt;, pos: int | `long` | getLong方法 |  |
+| `getMetadataKey` | metadata: byte&lt;&gt;, id: int | `String` | getMetadataKey方法 |  |
+| `getString` | value: byte&lt;&gt;, pos: int | `String` | getString方法 |  |
+| `getType` | value: byte&lt;&gt;, pos: int | `Type` | getType方法 |  |
+| `getTypeInfo` | value: byte&lt;&gt;, pos: int | `int` | getTypeInfo方法 |  |
+| `getUuid` | value: byte&lt;&gt;, pos: int | `UUID` | getUuid方法 |  |
+| `objectHeader` | largeSize: boolean, idSize: int, offsetSize: int | `byte` | objectHeader方法 |  |
 | `primitiveHeader` | type: int | `byte` | primitiveHeader方法 |  |
-| `readUnsigned` | bytes: byte[]; pos: int; numBytes: int | `int` | readUnsigned方法 |  |
+| `readUnsigned` | bytes: byte&lt;&gt;, pos: int, numBytes: int | `int` | readUnsigned方法 |  |
 | `shortStrHeader` | size: int | `byte` | shortStrHeader方法 |  |
-| `valueSize` | value: byte[]; pos: int | `int` | valueSize方法 |  |
-| `writeLong` | bytes: byte[]; pos: int; value: long; numBytes: int | `void` | writeLong方法 |  |
+| `valueSize` | value: byte&lt;&gt;, pos: int | `int` | valueSize方法 |  |
+| `writeLong` | bytes: byte&lt;&gt;, pos: int, value: long, numBytes: int | `void` | writeLong方法 |  |
 
 ### VariantVal
 **包路径**: `org.apache.spark.unsafe.types`
@@ -5880,7 +5880,7 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `debugString` | 无 | `String` | debugString方法 |  |
-| `readFromUnsafeRow` | offsetAndSize: long; baseObject: Object; baseOffset: long | `VariantVal` | readFromUnsafeRow方法 |  |
+| `readFromUnsafeRow` | offsetAndSize: long, baseObject: Object, baseOffset: long | `VariantVal` | readFromUnsafeRow方法 |  |
 | `toJson` | zoneId: ZoneId | `String` | toJson方法 |  |
 
 ### YarnShuffleService
@@ -5905,49 +5905,49 @@
 | `checkpoint` | 无 | `Unit` | checkpoint DStream |  |
 | `collect` | 无 | `JList` | 收集所有行 |  |
 | `collectAsync` | 无 | `JavaFutureAction` | collectAsync方法 |  |
-| `collectPartitions` | Array[Int]: partitionIds: | `Array` | collectPartitions方法 |  |
+| `collectPartitions` | Array[Int]: partitionIds | `Array` | collectPartitions方法 |  |
 | `count` | 无 | `Long` | 统计行数 |  |
-| `countApprox` | Long: timeout:; Double: confidence: | `PartialResult` | countApprox方法 |  |
-| `countApprox` | Long: timeout: | `PartialResult` | countApprox方法 |  |
-| `countApproxDistinct` | Double: relativeSD: | `Long` | countApproxDistinct方法 |  |
+| `countApprox` | timeout: Long, confidence: Double | `PartialResult` | countApprox方法 |  |
+| `countApprox` | timeout: Long | `PartialResult` | countApprox方法 |  |
+| `countApproxDistinct` | relativeSD: Double | `Long` | countApproxDistinct方法 |  |
 | `countAsync` | 无 | `JavaFutureAction` | countAsync方法 |  |
 | `countByValue` | 无 | `JMap` | 统计每个批次每个值的出现次数 |  |
-| `countByValueApprox` | Long: timeout:; Double: confidence: | `PartialResult` | countByValueApprox方法 |  |
-| `countByValueApprox` | Long: timeout: | `PartialResult` | countByValueApprox方法 |  |
+| `countByValueApprox` | timeout: Long, confidence: Double | `PartialResult` | countByValueApprox方法 |  |
+| `countByValueApprox` | timeout: Long | `PartialResult` | countByValueApprox方法 |  |
 | `first` | 无 | `T` | 第一行 |  |
-| `flatMapToDouble` | DoubleFlatMapFunction[T]: f: | `JavaDoubleRDD` | flatMapToDouble方法 |  |
-| `fold` | T: zeroValue: | `Unit` | 使用零值和组合函数聚合RDD |  |
-| `foreach` | VoidFunction[T]: f: | `Unit` | 对每个元素应用函数，用于副作用操作 |  |
-| `foreachAsync` | VoidFunction[T]: f: | `JavaFutureAction` | foreachAsync方法 |  |
-| `foreachPartition` | VoidFunction[JIterator[T]]: f: | `Unit` | 对每个分区应用函数 |  |
-| `foreachPartitionAsync` | VoidFunction[JIterator[T]]: f: | `JavaFutureAction` | foreachPartitionAsync方法 |  |
+| `flatMapToDouble` | DoubleFlatMapFunction[T]: f | `JavaDoubleRDD` | flatMapToDouble方法 |  |
+| `fold` | T: zeroValue | `Unit` | 使用零值和组合函数聚合RDD |  |
+| `foreach` | VoidFunction[T]: f | `Unit` | 对每个元素应用函数，用于副作用操作 |  |
+| `foreachAsync` | VoidFunction[T]: f | `JavaFutureAction` | foreachAsync方法 |  |
+| `foreachPartition` | VoidFunction[JIterator[T]]: f | `Unit` | 对每个分区应用函数 |  |
+| `foreachPartitionAsync` | VoidFunction[JIterator[T]]: f | `JavaFutureAction` | foreachPartitionAsync方法 |  |
 | `getCheckpointFile` | 无 | `Optional` | getCheckpointFile方法 |  |
 | `glom` | 无 | `JavaRDD` | glom方法 |  |
 | `isEmpty` | 无 | `Boolean` | 判断是否为空 |  |
-| `iterator` | Partition: split:; TaskContext: taskContext: | `JIterator` | 获取迭代器 |  |
-| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f: | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
-| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f:; Boolean: preservesPartitioning: | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
-| `max` | Comparator[T]: comp: | `T` | 最大值 |  |
-| `min` | Comparator[T]: comp: | `T` | 最小值 |  |
-| `pipe` | String: command: | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command: | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command:; JMap[String: env: | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command:; JMap[String: env:; Boolean: separateWorkingDir:; Int: bufferSize: | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command:; JMap[String: env:; Boolean: separateWorkingDir:; Int: bufferSize:; String: encoding: | `JavaRDD` | pipe方法 |  |
-| `reduce` | JFunction2[T: f: | `T` | 聚合DStream每个RDD |  |
-| `saveAsObjectFile` | String: path: | `Unit` | 保存RDD为序列化对象文件 |  |
-| `saveAsTextFile` | String: path: | `Unit` | 保存RDD为文本文件 |  |
-| `saveAsTextFile` | String: path:; CompressionCodec]: codec: Class[_ <: | `Unit` | 保存RDD为文本文件 |  |
-| `take` | Int: num: | `JList` | 取前n行 |  |
-| `takeAsync` | Int: num: | `JavaFutureAction` | takeAsync方法 |  |
-| `takeOrdered` | Int: num:; Comparator[T]: comp: | `JList` | 返回排序后的前n个元素 |  |
-| `takeOrdered` | Int: num: | `JList` | 返回排序后的前n个元素 |  |
+| `iterator` | Partition: split, TaskContext: taskContext | `JIterator` | 获取迭代器 |  |
+| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
+| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f, preservesPartitioning: Boolean | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
+| `max` | Comparator[T]: comp | `T` | 最大值 |  |
+| `min` | Comparator[T]: comp | `T` | 最小值 |  |
+| `pipe` | command: String | `JavaRDD` | pipe方法 |  |
+| `pipe` | JList[String]: command | `JavaRDD` | pipe方法 |  |
+| `pipe` | JList[String]: command, JMap[String: env | `JavaRDD` | pipe方法 |  |
+| `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int | `JavaRDD` | pipe方法 |  |
+| `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int, encoding: String | `JavaRDD` | pipe方法 |  |
+| `reduce` | JFunction2[T: f | `T` | 聚合DStream每个RDD |  |
+| `saveAsObjectFile` | path: String | `Unit` | 保存RDD为序列化对象文件 |  |
+| `saveAsTextFile` | path: String | `Unit` | 保存RDD为文本文件 |  |
+| `saveAsTextFile` | path: String, CompressionCodec]: codec | `Unit` | 保存RDD为文本文件 |  |
+| `take` | num: Int | `JList` | 取前n行 |  |
+| `takeAsync` | num: Int | `JavaFutureAction` | takeAsync方法 |  |
+| `takeOrdered` | num: Int, Comparator[T]: comp | `JList` | 返回排序后的前n个元素 |  |
+| `takeOrdered` | num: Int | `JList` | 返回排序后的前n个元素 |  |
 | `toDebugString` | 无 | `String` | toDebugString方法 |  |
 | `toLocalIterator` | 无 | `JIterator` | toLocalIterator方法 |  |
-| `top` | Int: num:; Comparator[T]: comp: | `JList` | 返回最大的n个元素 |  |
-| `top` | Int: num: | `JList` | 返回最大的n个元素 |  |
-| `treeReduce` | JFunction2[T: f:; Int: depth: | `T` | treeReduce方法 |  |
-| `treeReduce` | JFunction2[T: f: | `T` | treeReduce方法 |  |
+| `top` | num: Int, Comparator[T]: comp | `JList` | 返回最大的n个元素 |  |
+| `top` | num: Int | `JList` | 返回最大的n个元素 |  |
+| `treeReduce` | JFunction2[T: f, depth: Int | `T` | treeReduce方法 |  |
+| `treeReduce` | JFunction2[T: f | `T` | treeReduce方法 |  |
 | `zipWithIndex` | 无 | `JavaPairRDD` | zipWithIndex方法 |  |
 | `zipWithUniqueId` | 无 | `JavaPairRDD` | zipWithUniqueId方法 |  |
 
