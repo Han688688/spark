@@ -569,3 +569,328 @@ public class KafkaStreamsExample {
 
 ---
 
+
+---
+
+## 六、Connect API (org.apache.kafka.connect)
+
+### Connector
+**包路径**: `org.apache.kafka.connect.connector`
+**说明**: Connector接口，所有Connector的基类。
+**稳定性**: 稳定
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `start` | Map<String,String> props | `void` | 启动Connector | `connector.start(props);` |
+| `stop` | 无 | `void` | 停止Connector | `connector.stop();` |
+| `taskClass` | Class<? extends Task> | `Class<? extends Task>` | 获取Task类 | `Class<? extends Task> taskClass = connector.taskClass();` |
+| `taskConfigs` | int maxTasks | `List<Map<String,String>>` | 获取Task配置 | `List<Map<String, String>> configs = connector.taskConfigs(maxTasks);` |
+| `version` | 无 | `String` | 获取版本 | `String version = connector.version();` |
+| `context` | 无 | `ConnectorContext` | 获取上下文 | `ConnectorContext context = connector.context();` |
+
+---
+
+### SourceConnector
+**包路径**: `org.apache.kafka.connect.source`
+**说明**: Source Connector基类，从外部系统读取数据到Kafka。
+**稳定性**: 稳定
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `taskClass` | 无 | `Class<? extends SourceTask>` | 获取SourceTask类 | `Class<? extends SourceTask> clazz = connector.taskClass();` |
+| `taskConfigs` | int maxTasks | `List<Map<String,String>>` | 获取Task配置列表 | `List<Map<String, String>> configs = connector.taskConfigs(10);` |
+
+---
+
+### SinkConnector
+**包路径**: `org.apache.kafka.connect.sink`
+**说明**: Sink Connector基类，从Kafka写入数据到外部系统。
+**稳定性**: 稳定
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `taskClass` | 无 | `Class<? extends SinkTask>` | 获取SinkTask类 | `Class<? extends SinkTask> clazz = connector.taskClass();` |
+| `taskConfigs` | int maxTasks | `List<Map<String,String>>` | 获取Task配置列表 | `List<Map<String, String>> configs = connector.taskConfigs(10);` |
+
+---
+
+### SourceTask
+**包路径**: `org.apache.kafka.connect.source`
+**说明**: Source Task，从外部系统读取数据。
+**稳定性**: 稳定
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `start` | Map<String,String> props | `void` | 启动Task | `task.start(props);` |
+| `stop` | 无 | `void` | 停止Task | `task.stop();` |
+| `poll` | 无 | `List<SourceRecord>` | 读取数据 | `List<SourceRecord> records = task.poll();` |
+| `commit` | 无 | `void` | 提交记录 | `task.commit();` |
+| `commitRecord` | SourceRecord record, RecordMetadata metadata | `void` | 提交单条记录 | `task.commitRecord(record, metadata);` |
+
+---
+
+### SinkTask
+**包路径**: `org.apache.kafka.connect.sink`
+**说明**: Sink Task，写入数据到外部系统。
+**稳定性**: 稳定
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `start` | Map<String,String> props | `void` | 启动Task | `task.start(props);` |
+| `stop` | 无 | `void` | 停止Task | `task.stop();` |
+| `put` | Collection<SinkRecord> records | `void` | 写入数据 | `task.put(records);` |
+| `flush` | Map<TopicPartition,OffsetAndMetadata> offsets | `void` | 刷新数据 | `task.flush(offsets);` |
+| `preCommit` | Map<TopicPartition,OffsetAndMetadata> offsets | `Map<TopicPartition,OffsetAndMetadata>` | 预提交 | `Map<TopicPartition, OffsetAndMetadata> newOffsets = task.preCommit(offsets);` |
+
+---
+
+### SourceRecord
+**包路径**: `org.apache.kafka.connect.source`
+**说明**: Source记录，从外部系统读取的数据。
+**稳定性**: 稳定
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `SourceRecord` | Map<String,?> sourcePartition, Map<String,?> sourceOffset, String topic, Schema valueSchema, Object value | 构造方法 | 创建记录 | `SourceRecord record = new SourceRecord(sourcePartition, sourceOffset, "topic", null, value);` |
+| `topic` | 无 | `String` | 获取Topic | `String topic = record.topic();` |
+| `kafkaPartition` | 无 | `Integer` | 获取Kafka分区 | `Integer partition = record.kafkaPartition();` |
+| `key` | 无 | `Object` | 获取Key | `Object key = record.key();` |
+| `value` | 无 | `Object` | 获取Value | `Object value = record.value();` |
+| `sourcePartition` | 无 | `Map<String,?>` | 获取源分区 | `Map<String, ?> partition = record.sourcePartition();` |
+| `sourceOffset` | 无 | `Map<String,?>` | 获取源偏移量 | `Map<String, ?> offset = record.sourceOffset();` |
+
+---
+
+### SinkRecord
+**包路径**: `org.apache.kafka.connect.sink`
+**说明**: Sink记录，要写入外部系统的数据。
+**稳定性**: 稳定
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `topic` | 无 | `String` | 获取Topic | `String topic = record.topic();` |
+| `kafkaPartition` | 无 | `int` | 获取Kafka分区 | `int partition = record.kafkaPartition();` |
+| `key` | 无 | `Object` | 获取Key | `Object key = record.key();` |
+| `value` | 无 | `Object` | 获取Value | `Object value = record.value();` |
+| `timestamp` | 无 | `Long` | 获取时间戳 | `Long timestamp = record.timestamp();` |
+| `offset` | 无 | `long` | 获取偏移量 | `long offset = record.offset();` |
+
+---
+
+## 七、补充API
+
+### Producer<K,V> (Interface)
+**包路径**: `org.apache.kafka.clients.producer`
+**说明**: 生产者接口，定义通用操作。KafkaProducer实现此接口。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `send` | ProducerRecord<K,V> record | `Future<RecordMetadata>` | 发送消息 | 同KafkaProducer |
+| `flush` | 无 | `void` | 刷新缓冲区 | 同KafkaProducer |
+| `close` | 无 | `void` | 关闭 | 同KafkaProducer |
+| `initTransactions` | 无 | `void` | 初始化事务 | 同KafkaProducer |
+
+---
+
+### ConsumerGroupMetadata
+**包路径**: `org.apache.kafka.clients.consumer`
+**说明**: Consumer组元数据，用于事务提交。
+**稳定性**: 稳定
+**方法数量**: 4
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `groupId` | 无 | `String` | 获取组ID | `String groupId = metadata.groupId();` |
+| `generationId` | 无 | `int` | 获取Generation ID | `int genId = metadata.generationId();` |
+| `memberId` | 无 | `String` | 获取成员ID | `String memberId = metadata.memberId();` |
+| `groupInstanceId` | 无 | `Optional<String>` | 获取实例ID | `Optional<String> instanceId = metadata.groupInstanceId();` |
+
+---
+
+### Admin (Interface)
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: Admin接口，定义所有管理操作。AdminClient实现此接口。
+**稳定性**: 稳定
+**方法数量**: 100+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `createTopics` | Collection<NewTopic> topics | `CreateTopicsResult` | 创建Topic | 同AdminClient |
+| `deleteTopics` | Collection<String> topicNames | `DeleteTopicsResult` | 删除Topic | 同AdminClient |
+| `listTopics` | 无 | `ListTopicsResult` | 列出Topic | 同AdminClient |
+| `describeTopics` | Collection<String> topicNames | `DescribeTopicsResult` | 描述Topic | 同AdminClient |
+| `createPartitions` | Map<String,NewPartitions> newPartitions | `CreatePartitionsResult` | 增加分区 | 同AdminClient |
+| `describeCluster` | 无 | `DescribeClusterResult` | 描述集群 | 同AdminClient |
+| `describeConfigs` | Collection<ConfigResource> resources | `DescribeConfigsResult` | 描述配置 | 同AdminClient |
+| `alterConfigs` | Map<ConfigResource,Config> configs | `AlterConfigsResult` | 修改配置 | 同AdminClient |
+| `createAcls` | Collection<AclBinding> acls | `CreateAclsResult` | 创建ACL | 同AdminClient |
+| `deleteAcls` | Collection<AclBindingFilter> filters | `DeleteAclsResult` | 删除ACL | 同AdminClient |
+
+---
+
+### Node
+**包路径**: `org.apache.kafka.common`
+**说明**: Kafka节点信息，表示Broker节点。
+**稳定性**: 稳定
+**方法数量**: 7
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `id` | 无 | `int` | 获取节点ID | `int nodeId = node.id();` |
+| `host` | 无 | `String` | 获取主机名 | `String host = node.host();` |
+| `port` | 无 | `int` | 获取端口 | `int port = node.port();` |
+| `rack` | 无 | `Optional<String>` | 获取机架信息 | `Optional<String> rack = node.rack();` |
+| `isEmpty` | 无 | `boolean` | 是否为空节点 | `boolean empty = node.isEmpty();` |
+
+---
+
+### Cluster
+**包路径**: `org.apache.kafka.common`
+**说明**: Kafka集群信息，包含所有节点和Topic信息。
+**稳定性**: 稳定
+**方法数量**: 11
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `nodes` | 无 | `Collection<Node>` | 获取所有节点 | `Collection<Node> nodes = cluster.nodes();` |
+| `partitionsForTopic` | String topic | `List<PartitionInfo>` | 获取Topic分区 | `List<PartitionInfo> partitions = cluster.partitionsForTopic("topic");` |
+| `availablePartitionsForTopic` | String topic | `List<PartitionInfo>` | 获取可用分区 | `List<PartitionInfo> available = cluster.availablePartitionsForTopic("topic");` |
+| `topics` | 无 | `Set<String>` | 获取所有Topic | `Set<String> topics = cluster.topics();` |
+| `leaderFor` | TopicPartition tp | `Node` | 获取分区Leader | `Node leader = cluster.leaderFor(partition);` |
+
+---
+
+### Topology
+**包路径**: `org.apache.kafka.streams`
+**说明**: Streams拓扑，描述流处理拓扑结构。
+**稳定性**: 稳定
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `describe` | 无 | `TopologyDescription` | 描述拓扑 | `TopologyDescription desc = topology.describe();` |
+| `addSource` | Topology.AutoOffsetReset offsetReset, String name, String... topics | `Topology` | 添加Source | `topology.addSource(Topology.AutoOffsetReset.EARLIEST, "source", "topic");` |
+| `addProcessor` | String name, ProcessorSupplier supplier, String... parentNames | `Topology` | 添加Processor | `topology.addProcessor("processor", supplier, "source");` |
+| `addSink` | String name, String topic, String... parentNames | `Topology` | 添加Sink | `topology.addSink("sink", "output-topic", "processor");` |
+
+---
+
+### GlobalKTable<K,V>
+**包路径**: `org.apache.kafka.streams.kstream`
+**说明**: GlobalKTable，全局表，所有实例共享。
+**稳定性**: 稳定
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `filter` | Predicate<K,V> predicate | `GlobalKTable<K,V>` | 过滤 | `GlobalKTable<String, String> filtered = table.filter((k, v) -> v.length() > 5);` |
+| `mapValues` | ValueMapper<V,VR> mapper | `GlobalKTable<K,VR>` | 映射Value | `GlobalKTable<String, String> mapped = table.mapValues(v -> v.toUpperCase());` |
+| `toStream` | 无 | `KStream<K,V>` | 转为KStream | `KStream<String, String> stream = table.toStream();` |
+
+---
+
+### 时间窗口类
+
+#### TimeWindows
+**包路径**: `org.apache.kafka.streams.kstream`
+**说明**: 时间窗口定义。
+**方法数量**: 5
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `of` | Duration size | `TimeWindows` | 创建固定大小窗口 | `TimeWindows windows = TimeWindows.of(Duration.ofMinutes(5));` |
+| `grace` | Duration gracePeriod | `TimeWindows` | 设置宽限期 | `TimeWindows windows = TimeWindows.of(Duration.ofMinutes(5)).grace(Duration.ofMinutes(1));` |
+| `advanceBy` | Duration advanceInterval | `TimeWindows` | 设置滑动间隔 | `TimeWindows windows = TimeWindows.of(Duration.ofMinutes(5)).advanceBy(Duration.ofMinutes(1));` |
+
+#### JoinWindows
+**包路径**: `org.apache.kafka.streams.kstream`
+**说明**: Join窗口定义。
+**方法数量**: 5
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `of` | Duration timeDifference | `JoinWindows` | 创建Join窗口 | `JoinWindows windows = JoinWindows.of(Duration.ofMinutes(5));` |
+| `before` | Duration timeDifference | `JoinWindows` | 设置向前时间 | `JoinWindows windows = JoinWindows.of(Duration.ofMinutes(5)).before(Duration.ofMinutes(1));` |
+| `after` | Duration timeDifference | `JoinWindows` | 设置向后时间 | `JoinWindows windows = JoinWindows.of(Duration.ofMinutes(5)).after(Duration.ofMinutes(1));` |
+
+---
+
+### 序列化器扩展
+
+#### ByteArraySerializer
+**包路径**: `org.apache.kafka.common.serialization`
+**说明**: byte[]序列化器。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `serialize` | String topic, byte[] data | `byte[]` | 序列化byte[] | `byte[] bytes = serializer.serialize("topic", data);` |
+
+#### ByteBufferSerializer
+**包路径**: `org.apache.kafka.common.serialization`
+**说明**: ByteBuffer序列化器。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `serialize` | String topic, ByteBuffer data | `byte[]` | 序列化ByteBuffer | `byte[] bytes = serializer.serialize("topic", buffer);` |
+
+#### DoubleSerializer
+**包路径**: `org.apache.kafka.common.serialization`
+**说明**: Double序列化器。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `serialize` | String topic, Double data | `byte[]` | 序列化Double | `byte[] bytes = serializer.serialize("topic", 3.14);` |
+
+#### LongSerializer
+**包路径**: `org.apache.kafka.common.serialization`
+**说明**: Long序列化器。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `serialize` | String topic, Long data | `byte[]` | 序列化Long | `byte[] bytes = serializer.serialize("topic", 100L);` |
+
+---
+
+### 反序列化器扩展
+
+#### ByteArrayDeserializer
+**包路径**: `org.apache.kafka.common.serialization`
+**说明**: byte[]反序列化器。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `deserialize` | String topic, byte[] data | `byte[]` | 反序列化byte[] | `byte[] data = deserializer.deserialize("topic", bytes);` |
+
+#### DoubleDeserializer
+**包路径**: `org.apache.kafka.common.serialization`
+**说明**: Double反序列化器。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `deserialize` | String topic, byte[] data | `Double` | 反序列化Double | `Double value = deserializer.deserialize("topic", bytes);` |
+
+#### LongDeserializer
+**包路径**: `org.apache.kafka.common.serialization`
+**说明**: Long反序列化器。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `deserialize` | String topic, byte[] data | `Long` | 反序列化Long | `Long value = deserializer.deserialize("topic", bytes);` |
+
+---
+
