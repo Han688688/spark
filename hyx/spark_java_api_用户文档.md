@@ -364,6 +364,23 @@ import org.apache.spark.util.LongAccumulator;
 **包路径**: `org.apache.spark.api.java`
 **方法数量**: 45
 
+**补充说明**: 以下属性getter方法很重要但常被忽略：
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `defaultMinPartitions` | 无 | `Integer` | 默认最小分区数 | `int min = sc.defaultMinPartitions();` |
+| `defaultParallelism` | 无 | `Integer` | 默认并行度 | `int para = sc.defaultParallelism();` |
+| `emptyRDD` | 无 | `JavaRDD[T]` | 创建空RDD | `JavaRDD<String> empty = sc.emptyRDD();` |
+| `getCheckpointDir` | 无 | `Optional<String>` | checkpoint目录 | `Optional<String> dir = sc.getCheckpointDir();` |
+| `getPersistentRDDs` | 无 | `Map<Integer, JavaRDD<?>>` | 持久化RDD列表 | `Map<Integer, JavaRDD<?>> rdds = sc.getPersistentRDDs();` |
+| `getReadOnlyConf` | 无 | `ReadOnlySparkConf` | 只读配置 | `ReadOnlySparkConf conf = sc.getReadOnlyConf();` |
+| `isLocal` | 无 | `Boolean` | 是否本地模式 | `boolean local = sc.isLocal();` |
+| `jars` | 无 | `List<String>` | JAR包列表 | `List<String> jars = sc.jars();` |
+| `resources` | 无 | `Map<String, ResourceInformation>` | 资源配置 | `Map<String, ResourceInformation> res = sc.resources();` |
+| `sparkUser` | 无 | `String` | Spark用户名 | `String user = sc.sparkUser();` |
+| `statusTracker` | 无 | `JavaSparkStatusTracker` | 状态追踪器 | `JavaSparkStatusTracker tracker = sc.statusTracker();` |
+
+
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `addFile` | path: String | `Unit` | 添加文件到Spark作业，所有Executor可访问 | // 添加文件到Spark作业<br>sc.addFile("hdfs://path/to/config.txt");<br>sc.addFile("s3://bucket/data.json");<br><br>// 在Executor中访问文件<br>String filePath = SparkFiles.get("config.txt"); |
@@ -2432,6 +2449,10 @@ import org.apache.spark.util.LongAccumulator;
 | `close` | 无 | `Unit` | 关闭（Java友好） | `jssc.close();` |
 | `sparkContext` | 无 | `JavaSparkContext` | 获取底层JavaSparkContext | `JavaSparkContext sc = jssc.sparkContext();` |
 | `ssc` | 无 | `StreamingContext` | 获取底层Scala StreamingContext | `StreamingContext ssc = jssc.ssc();` |
+| `remember` | Duration duration | `Unit` | 设置DStream数据保留时间 | `jssc.remember(Durations.minutes(30));  // 保留30分钟数据用于状态更新` |
+| `addStreamingListener` | StreamingListener listener | `Unit` | 添加流处理监听器，监控批次事件 | `jssc.addStreamingListener(new MyStreamingListener());  // 监听批次开始、完成、错误` |
+| `binaryRecordsStream` | String directory, int recordLength | `JavaDStream[byte[]]` | 监控目录中的固定长度二进制文件流 | `JavaDStream<byte[]> stream = jssc.binaryRecordsStream("hdfs://data/", 100);  // 每条记录100字节` |
+| `receiverStream` | JavaReceiverInputDStream[T] receiver | `JavaDStream[T]` | 使用自定义Receiver创建DStream | `JavaDStream<String> customStream = jssc.receiverStream(new MyCustomReceiver());  // 自定义数据源` |
 
 ### JavaDStream[T]
 **包路径**: `org.apache.spark.streaming.api.java`
