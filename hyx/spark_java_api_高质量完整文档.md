@@ -5002,6 +5002,88 @@
 | `interruptAll` | 无 | `Seq[String]` | 中断所有操作 | `spark.interruptAll();` |
 
 
+
+### UDF0[R]
+**包路径**: `org.apache.spark.sql.api.java`
+**说明**: 无参数用户自定义函数接口。
+**方法数量**: 1+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `call` | 无 | `R` | 调用函数 | `public String call() { return "constant"; }` |
+
+---
+
+### UDF1[T, R]
+**包路径**: `org.apache.spark.sql.api.java`
+**说明**: 单参数用户自定义函数接口。
+**方法数量**: 1+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `call` | T t | `R` | 调用函数 | `public Integer call(String s) { return s.length(); }` |
+
+---
+
+### UDF2[T1, T2, R]
+**包路径**: `org.apache.spark.sql.api.java`
+**说明**: 双参数用户自定义函数接口。
+**方法数量**: 1+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `call` | T1 t1, T2 t2 | `R` | 调用函数 | `public String call(String a, String b) { return a + b; }` |
+
+---
+
+### UDF3[T1, T2, T3, R]
+**包路径**: `org.apache.spark.sql.api.java`
+**说明**: 三参数用户自定义函数接口。
+**方法数量**: 1+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `call` | T1 t1, T2 t2, T3 t3 | `R` | 调用函数 | `public Double call(Double a, Double b, Double c) { return a + b + c; }` |
+
+---
+
+### UDF4[T1, T2, T3, T4, R]
+**包路径**: `org.apache.spark.sql.api.java`
+**说明**: 四参数用户自定义函数接口。
+**方法数量**: 1+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `call` | T1 t1, T2 t2, T3 t3, T4 t4 | `R` | 调用函数 | - |
+
+---
+
+### UDF5[T1, T2, T3, T4, T5, R]
+**包路径**: `org.apache.spark.sql.api.java`
+**说明**: 五参数用户自定义函数接口（最大支持）。
+**方法数量**: 1+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `call` | T1 t1, T2 t2, T3 t3, T4 t4, T5 t5 | `R` | 调用函数 | - |
+
+---
+
+### UDAF1[I, O]
+**包路径**: `org.apache.spark.sql.api.java`
+**说明**: 单输入用户自定义聚合函数接口（需要继承Aggregator）。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `zero` | 无 | `O` | 初始化聚合缓冲区 | `public Buffer zero() { return new Buffer(0, 0); }` |
+| `reduce` | Buffer b, I i | `Buffer` | 减少输入到缓冲区 | `public Buffer reduce(Buffer b, Integer i) { b.sum += i; b.count++; return b; }` |
+| `merge` | Buffer b1, Buffer b2 | `Buffer` | 合并两个缓冲区 | `public Buffer merge(Buffer b1, Buffer b2) { b1.sum += b2.sum; b1.count += b2.count; return b1; }` |
+| `finish` | Buffer b | `Double` | 输出最终结果 | `public Double finish(Buffer b) { return b.sum / b.count; }` |
+
+---
+
+
 ### Dataset[T]（类型安全数据集）
 **包路径**: `org.apache.spark.sql`
 **说明**: Spark 2.0+的核心数据处理API，提供类型安全的数据操作。DataFrame是Dataset[Row]的特例。
@@ -5812,6 +5894,88 @@
 | `intercept` | 无 | `Double` | 获取截距 | `double intercept = model.intercept();` |
 | `clearThreshold` | 无 | `LogisticRegressionModel` | 清除阈值，返回概率 | `model.clearThreshold();` |
 | `setThreshold` | double threshold | `LogisticRegressionModel` | 设置分类阈值 | `model.setThreshold(0.5);` |
+
+
+### RandomForestClassifier
+**包路径**: `org.apache.spark.ml.classification`
+**说明**: 随机森林分类器，集成多个决策树进行分类。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `RandomForestClassifier` | 无 | 构造方法 | 创建随机森林分类器 | `RandomForestClassifier rf = new RandomForestClassifier();` |
+| `setLabelCol` | String value | `RandomForestClassifier` | 设置标签列名 | `rf.setLabelCol("label");` |
+| `setFeaturesCol` | String value | `RandomForestClassifier` | 设置特征列名 | `rf.setFeaturesCol("features");` |
+| `setNumTrees` | int value | `RandomForestClassifier` | 设置树数量（默认20） | `rf.setNumTrees(50);` |
+| `setMaxDepth` | int value | `RandomForestClassifier` | 设置最大深度（默认5） | `rf.setMaxDepth(10);` |
+| `setMaxBins` | int value | `RandomForestClassifier` | 设置最大分箱数（默认32） | `rf.setMaxBins(64);` |
+| `setImpurity` | String value | `RandomForestClassifier` | 设置不纯度度量 | `rf.setImpurity("gini");` |
+| `setFeatureSubsetStrategy` | String value | `RandomForestClassifier` | 设置特征子集策略 | `rf.setFeatureSubsetStrategy("auto");` |
+| `fit` | Dataset<?> dataset | `RandomForestClassificationModel` | 训练模型 | `RandomForestClassificationModel model = rf.fit(trainingData);` |
+| `setSeed` | long value | `RandomForestClassifier` | 设置随机种子 | `rf.setSeed(12345L);` |
+
+---
+
+### GBTClassifier
+**包路径**: `org.apache.spark.ml.classification`
+**说明**: 梯度提升树分类器（Gradient-Boosted Trees），通过迭代训练决策树。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `GBTClassifier` | 无 | 构造方法 | 创建GBT分类器 | `GBTClassifier gbt = new GBTClassifier();` |
+| `setLabelCol` | String value | `GBTClassifier` | 设置标签列名 | `gbt.setLabelCol("label");` |
+| `setFeaturesCol` | String value | `GBTClassifier` | 设置特征列名 | `gbt.setFeaturesCol("features");` |
+| `setMaxIter` | int value | `GBTClassifier` | 设置迭代次数（默认20） | `gbt.setMaxIter(50);` |
+| `setMaxDepth` | int value | `GBTClassifier` | 设置最大深度（默认5） | `gbt.setMaxDepth(10);` |
+| `setMaxBins` | int value | `GBTClassifier` | 设置最大分箱数（默认32） | `gbt.setMaxBins(64);` |
+| `setLearningRate` | double value | `GBTClassifier` | 设置学习率（默认0.1） | `gbt.setLearningRate(0.05);` |
+| `setStepSize` | double value | `GBTClassifier` | 设置步长 | `gbt.setStepSize(0.1);` |
+| `fit` | Dataset<?> dataset | `GBTClassificationModel` | 训练模型 | `GBTClassificationModel model = gbt.fit(trainingData);` |
+| `setValidationTol` | double value | `GBTClassifier` | 设置验证容忍度 | `gbt.setValidationTol(0.01);` |
+
+---
+
+### RandomForestRegressor
+**包路径**: `org.apache.spark.ml.regression`
+**说明**: 随机森林回归器。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `RandomForestRegressor` | 无 | 构造方法 | 创建随机森林回归器 | `RandomForestRegressor rf = new RandomForestRegressor();` |
+| `setLabelCol` | String value | `RandomForestRegressor` | 设置标签列名 | `rf.setLabelCol("label");` |
+| `setFeaturesCol` | String value | `RandomForestRegressor` | 设置特征列名 | `rf.setFeaturesCol("features");` |
+| `setNumTrees` | int value | `RandomForestRegressor` | 设置树数量（默认20） | `rf.setNumTrees(50);` |
+| `setMaxDepth` | int value | `RandomForestRegressor` | 设置最大深度（默认5） | `rf.setMaxDepth(10);` |
+| `setMaxBins` | int value | `RandomForestRegressor` | 设置最大分箱数（默认32） | `rf.setMaxBins(64);` |
+| `setImpurity` | String value | `RandomForestRegressor` | 设置不纯度度量 | `rf.setImpurity("variance");` |
+| `setFeatureSubsetStrategy` | String value | `RandomForestRegressor` | 设置特征子集策略 | `rf.setFeatureSubsetStrategy("auto");` |
+| `fit` | Dataset<?> dataset | `RandomForestRegressionModel` | 训练模型 | `RandomForestRegressionModel model = rf.fit(trainingData);` |
+| `setSeed` | long value | `RandomForestRegressor` | 设置随机种子 | `rf.setSeed(12345L);` |
+
+---
+
+### GBTRegressor
+**包路径**: `org.apache.spark.ml.regression`
+**说明**: 梯度提升树回归器。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `GBTRegressor` | 无 | 构造方法 | 创建GBT回归器 | `GBTRegressor gbt = new GBTRegressor();` |
+| `setLabelCol` | String value | `GBTRegressor` | 设置标签列名 | `gbt.setLabelCol("label");` |
+| `setFeaturesCol` | String value | `GBTRegressor` | 设置特征列名 | `gbt.setFeaturesCol("features");` |
+| `setMaxIter` | int value | `GBTRegressor` | 设置迭代次数（默认20） | `gbt.setMaxIter(50);` |
+| `setMaxDepth` | int value | `GBTRegressor` | 设置最大深度（默认5） | `gbt.setMaxDepth(10);` |
+| `setMaxBins` | int value | `GBTRegressor` | 设置最大分箱数（默认32） | `gbt.setMaxBins(64);` |
+| `setLearningRate` | double value | `GBTRegressor` | 设置学习率（默认0.1） | `gbt.setLearningRate(0.05);` |
+| `setStepSize` | double value | `GBTRegressor` | 设置步长 | `gbt.setStepSize(0.1);` |
+| `fit` | Dataset<?> dataset | `GBTRegressionModel` | 训练模型 | `GBTRegressionModel model = gbt.fit(trainingData);` |
+| `setValidationTol` | double value | `GBTRegressor` | 设置验证容忍度 | `gbt.setValidationTol(0.01);` |
+
+---
+
 
 ### SVMModel / SVMWithSGD
 **包路径**: `org.apache.spark.mllib.classification`
