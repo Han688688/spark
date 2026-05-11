@@ -5052,3 +5052,765 @@
 | `explain` | boolean extended | `Unit` | 打印详细执行计划 | `df.explain(true);  // 显示物理计划和逻辑计划` |
 | `explain` | String mode | `Unit` | 打印执行计划（指定模式） | `df.explain("extended");<br>// mode: simple, extended, codegen, cost, formatted` |
 
+---
+
+## SparkConf（配置）
+
+### SparkConf
+**包路径**: `org.apache.spark`
+**说明**: Spark配置类，用于设置各种Spark参数。
+**方法数量**: 15+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `set` | String key, String value | `SparkConf` | 设置配置项 | `SparkConf conf = new SparkConf().set("spark.executor.memory", "4g");` |
+| `setMaster` | String master | `SparkConf` | 设置运行模式 | `conf.setMaster("local[4]");` |
+| `setAppName` | String name | `SparkConf` | 设置应用名称 | `conf.setAppName("My Spark App");` |
+| `setSparkHome` | String home | `SparkConf` | 设置Spark安装目录 | `conf.setSparkHome("/opt/spark");` |
+| `setExecutorEnv` | String key, String value | `SparkConf` | 设置Executor环境变量 | `conf.setExecutorEnv("JAVA_HOME", "/usr/lib/jvm/java-11");` |
+| `setJars` | String... jars | `SparkConf` | 设置依赖JAR包 | `conf.setJars("hdfs://libs/my-lib.jar");` |
+| `setAll` | Map[String, String] settings | `SparkConf` | 批量设置配置 | `Map<String, String> settings = new HashMap<>();<br>settings.put("spark.executor.cores", "2");<br>conf.setAll(settings);` |
+| `get` | String key | `String` | 获取配置值 | `String value = conf.get("spark.executor.memory");` |
+| `get` | String key, String defaultValue | `String` | 获取配置值，带默认值 | `String value = conf.get("spark.executor.memory", "2g");` |
+| `getAll` | 无 | `Array[Tuple2[String, String]]` | 获取所有配置 | `Tuple2<String, String>[] all = conf.getAll();` |
+| `contains` | String key | `Boolean` | 检查配置是否存在 | `boolean exists = conf.contains("spark.executor.memory");` |
+| `remove` | String key | `SparkConf` | 移除配置项 | `conf.remove("spark.executor.memory");` |
+| `clone` | 无 | `SparkConf` | 克隆配置 | `SparkConf cloned = conf.clone();` |
+
+---
+
+## Broadcast & Accumulator（共享变量）
+
+### Broadcast[T]
+**包路径**: `org.apache.spark.broadcast`
+**说明**: 广播变量，将数据高效分发到所有Executor。
+**方法数量**: 4
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `value` | 无 | `T` | 获取广播变量的值 | `Broadcast<Map<String, String>> config = sc.broadcast(configMap);<br>Map<String, String> map = config.value();` |
+| `unpersist` | 无 | `Unit` | 从Executor释放广播变量 | `config.unpersist();` |
+| `unpersist` | Boolean blocking | `Unit` | 从Executor释放，指定阻塞 | `config.unpersist(true);  // 阻塞等待释放` |
+| `destroy` | 无 | `Unit` | 完全销毁广播变量 | `config.destroy();  // Driver和Executor都释放` |
+
+### Accumulator[T]
+**包路径**: `org.apache.spark`
+**说明**: 累加器，用于聚合Worker端数据到Driver。仅支持累加操作。
+**方法数量**: 6
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `add` | T term | `Unit` | 累加值（只能在Worker端调用） | `Accumulator<Integer> acc = sc.accumulator(0);<br>rdd.foreach(x -> acc.add(x));` |
+| `value` | 无 | `T` | 获取累加结果（只能在Driver端调用） | `int total = acc.value();` |
+| `setValue` | T newValue | `Unit` | 设置值（只能在Driver端调用） | `acc.setValue(100);` |
+| `isZero` | 无 | `Boolean` | 检查是否为零值 | `boolean zero = acc.isZero();` |
+| `reset` | 无 | `Unit` | 重置为零值 | `acc.reset();` |
+| `name` | 无 | `String` | 获取累加器名称 | `String name = acc.name();` |
+
+### LongAccumulator / DoubleAccumulator / CollectionAccumulator
+**包路径**: `org.apache.spark.util`
+**说明**: 特化累加器，支持特定类型的累加。
+**方法数量**: 5
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `add` | Long/Double/T term | `Unit` | 累加值 | `LongAccumulator longAcc = sc.sc().longAccumulator("counter");<br>longAcc.add(10);` |
+| `value` | 无 | `Long/Double/List[T]` | 获取累加结果 | `long sum = longAcc.value();` |
+| `count` | 无 | `Long` | 获取计数（LongAccumulator） | `long count = longAcc.count();` |
+| `avg` | 无 | `Double` | 获取平均值（LongAccumulator/DoubleAccumulator） | `double avg = longAcc.avg();` |
+| `sum` | 无 | `Long/Double` | 获取总和 | `long sum = longAcc.sum();` |
+
+---
+
+## SQL辅助类
+
+### Column
+**包路径**: `org.apache.spark.sql`
+**说明**: DataFrame列引用，用于构建SQL表达式。
+**方法数量**: 40+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `col` | String colName | `Column` | 创建列引用（静态方法） | `Column c = col("age");` |
+| `equalTo` | Object other | `Column` | 等于条件 | `df.filter(col("id").equalTo(100));` |
+| `notEqual` | Object other | `Column` | 不等于条件 | `df.filter(col("status").notEqual("deleted"));` |
+| `gt` | Object other | `Column` | 大于条件 | `df.filter(col("age").gt(18));` |
+| `lt` | Object other | `Column` | 小于条件 | `df.filter(col("price").lt(1000));` |
+| `geq` | Object other | `Column` | 大于等于条件 | `df.filter(col("score").geq(60));` |
+| `leq` | Object other | `Column` | 小于等于条件 | `df.filter(col("qty").leq(10));` |
+| `isNull` | 无 | `Column` | 判断是否为null | `df.filter(col("email").isNull());` |
+| `isNotNull` | 无 | `Column` | 判断是否非null | `df.filter(col("email").isNotNull());` |
+| `and` | Column other | `Column` | 逻辑与 | `df.filter(col("age").gt(18).and(col("status").equalTo("active")));` |
+| `or` | Column other | `Column` | 逻辑或 | `df.filter(col("type").equalTo("A").or(col("type").equalTo("B")));` |
+| `plus` | Object other | `Column` | 加法 | `df.withColumn("total", col("price").plus(col("tax")));` |
+| `minus` | Object other | `Column` | 减法 | `df.withColumn("diff", col("end").minus(col("start")));` |
+| `multiply` | Object other | `Column` | 乘法 | `df.withColumn("double", col("value").multiply(2));` |
+| `divide` | Object other | `Column` | 除法 | `df.withColumn("avg", col("total").divide(col("count")));` |
+| `mod` | Object other | `Column` | 取模 | `df.filter(col("id").mod(2).equalTo(0));  // 奇数` |
+| `like` | String literal | `Column` | LIKE匹配 | `df.filter(col("name").like("%John%"));` |
+| `rlike` | String regex | `Column` | 正则匹配 | `df.filter(col("email").rlike("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"));` |
+| `contains` | String other | `Column` | 包含字符串 | `df.filter(col("content").contains("error"));` |
+| `startsWith` | String prefix | `Column` | 以...开始 | `df.filter(col("name").startsWith("John"));` |
+| `endsWith` | String suffix | `Column` | 以...结束 | `df.filter(col("filename").endsWith(".csv"));` |
+| `alias` | String alias | `Column` | 设置别名 | `df.select(col("id").alias("user_id"));` |
+| `as` | String alias | `Column` | 设置别名（同alias） | `df.select(col("id").as("user_id"));` |
+| `cast` | DataType to | `Column` | 类型转换 | `df.withColumn("id_str", col("id").cast(DataTypes.StringType));` |
+| `asc` | 无 | `Column` | 升序排序 | `df.orderBy(col("id").asc());` |
+| `desc` | 无 | `Column` | 降序排序 | `df.orderBy(col("id").desc());` |
+| `asc_nulls_first` | 无 | `Column` | 升序，null排前 | `df.orderBy(col("value").asc_nulls_first());` |
+| `asc_nulls_last` | 无 | `Column` | 升序，null排后 | `df.orderBy(col("value").asc_nulls_last());` |
+| `desc_nulls_first` | 无 | `Column` | 降序，null排前 | `df.orderBy(col("value").desc_nulls_first());` |
+| `desc_nulls_last` | 无 | `Column` | 降序，null排后 | `df.orderBy(col("value").desc_nulls_last());` |
+| `between` | Object lowerBound, Object upperBound | `Column` | 范围条件 | `df.filter(col("age").between(18, 65));` |
+| `when` | Column condition, Object value | `Column` | CASE WHEN条件 | `df.withColumn("category", when(col("age").lt(18), "child")<br>    .when(col("age").lt(60), "adult")<br>    .otherwise("senior"));` |
+| `otherwise` | Object value | `Column` | CASE WHEN默认值 | `when(col("score").geq(90), "A").otherwise("B");` |
+| `over` | Window window | `Column` | 窗口函数 | `col("value").sum().over(Window.partitionBy("group"));` |
+| `isNull` | 无 | `Column` | 判断null | `df.filter(col("name").isNull());` |
+| `isNotNull` | 无 | `Column` | 判断非null | `df.filter(col("name").isNotNull());` |
+| `isin` | Object... values | `Column` | IN条件 | `df.filter(col("status").isin("active", "pending", "running"));` |
+| `in` | Column list | `Column` | IN子查询 | `df.filter(col("id").in(otherDf.select(col("user_id"))));` |
+| `substr` | int startPos, int len | `Column` | 截取子串 | `df.withColumn("first3", col("name").substr(0, 3));` |
+| `upper` | 无 | `Column` | 转大写 | `df.withColumn("upper_name", col("name").upper());` |
+| `lower` | 无 | `Column` | 转小写 | `df.withColumn("lower_name", col("name").lower());` |
+
+### functions（内置函数）
+**包路径**: `org.apache.spark.sql.functions`
+**说明**: Spark SQL内置函数集合，提供聚合、字符串、数学、日期等函数。
+**方法数量**: 100+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `count` | Column e | `Column` | 计数 | `df.agg(count(col("id")));` |
+| `countDistinct` | Column e, Column... es | `Column` | 唯一值计数 | `df.agg(countDistinct(col("user_id")));` |
+| `sum` | Column e | `Column` | 求和 | `df.agg(sum(col("amount")));` |
+| `sumDistinct` | Column e | `Column` | 唯一值求和 | `df.agg(sumDistinct(col("price")));` |
+| `avg` | Column e | `Column` | 平均值 | `df.agg(avg(col("score")));` |
+| `mean` | Column e | `Column` | 平均值（同avg） | `df.agg(mean(col("score")));` |
+| `max` | Column e | `Column` | 最大值 | `df.agg(max(col("price")));` |
+| `min` | Column e | `Column` | 最小值 | `df.agg(min(col("price")));` |
+| `first` | Column e | `Column` | 第一个值 | `df.agg(first(col("name")));` |
+| `first` | Column e, boolean ignoreNulls | `Column` | 第一个非null值 | `df.agg(first(col("name"), true));` |
+| `last` | Column e | `Column` | 最后一个值 | `df.agg(last(col("name")));` |
+| `last` | Column e, boolean ignoreNulls | `Column` | 最后一个非null值 | `df.agg(last(col("name"), true));` |
+| `collect_list` | Column e | `Column` | 收集为数组（保留重复） | `df.groupBy("group").agg(collect_list(col("value")));` |
+| `collect_set` | Column e | `Column` | 收集为数组（去重） | `df.groupBy("group").agg(collect_set(col("value")));` |
+| `approx_count_distinct` | Column e | `Column` | 近似唯一值计数 | `df.agg(approx_count_distinct(col("user_id")));` |
+| `approx_count_distinct` | Column e, double rsd | `Column` | 近似计数，指定误差率 | `df.agg(approx_count_distinct(col("user_id"), 0.05));` |
+| `variance` | Column e | `Column` | 方差 | `df.agg(variance(col("value")));` |
+| `var_samp` | Column e | `Column` | 样本方差 | `df.agg(var_samp(col("value")));` |
+| `var_pop` | Column e | `Column` | 总体方差 | `df.agg(var_pop(col("value")));` |
+| `stddev` | Column e | `Column` | 标准差 | `df.agg(stddev(col("value")));` |
+| `stddev_samp` | Column e | `Column` | 样本标准差 | `df.agg(stddev_samp(col("value")));` |
+| `stddev_pop` | Column e | `Column` | 总体标准差 | `df.agg(stddev_pop(col("value")));` |
+| `skewness` | Column e | `Column` | 偏度 | `df.agg(skewness(col("value")));` |
+| `kurtosis` | Column e | `Column` | 峰度 | `df.agg(kurtosis(col("value")));` |
+| `corr` | Column col1, Column col2 | `Column` | Pearson相关系数 | `df.agg(corr(col("price"), col("rating")));` |
+| `covar_pop` | Column col1, Column col2 | `Column` | 总体协方差 | `df.agg(covar_pop(col("x"), col("y")));` |
+| `covar_samp` | Column col1, Column col2 | `Column` | 样本协方差 | `df.agg(covar_samp(col("x"), col("y")));` |
+| `lit` | Object literal | `Column` | 创建常量列 | `df.withColumn("constant", lit(100));` |
+| `col` | String colName | `Column` | 创建列引用 | `df.select(col("name"));` |
+| `column` | String colName | `Column` | 创建列引用（同col） | `df.select(column("name"));` |
+| `when` | Column condition, Object value | `Column` | CASE WHEN | `when(col("age").lt(18), "child").otherwise("adult");` |
+| `concat` | Column... exprs | `Column` | 连接字符串 | `df.withColumn("full_name", concat(col("first"), lit(" "), col("last")));` |
+| `concat_ws` | String sep, Column... exprs | `Column` | 用分隔符连接字符串 | `df.withColumn("tags", concat_ws(",", col("tag1"), col("tag2")));` |
+| `split` | Column str, String pattern | `Column` | 分割字符串为数组 | `df.withColumn("words", split(col("sentence"), " "));` |
+| `substring` | Column str, int pos, int len | `Column` | 截取子串 | `df.withColumn("abbr", substring(col("name"), 0, 3));` |
+| `length` | Column e | `Column` | 字符串长度 | `df.withColumn("name_len", length(col("name")));` |
+| `trim` | Column e | `Column` | 去除两端空白 | `df.withColumn("clean_name", trim(col("name")));` |
+| `ltrim` | Column e | `Column` | 去除左侧空白 | `df.withColumn("clean", ltrim(col("name")));` |
+| `rtrim` | Column e | `Column` | 去除右侧空白 | `df.withColumn("clean", rtrim(col("name")));` |
+| `upper` | Column e | `Column` | 转大写 | `df.withColumn("upper_name", upper(col("name")));` |
+| `lower` | Column e | `Column` | 转小写 | `df.withColumn("lower_name", lower(col("name")));` |
+| `initcap` | Column e | `Column` | 首字母大写 | `df.withColumn("capitalized", initcap(col("name")));` |
+| `regexp_replace` | Column e, String pattern, String replacement | `Column` | 正则替换 | `df.withColumn("clean", regexp_replace(col("text"), "[0-9]+", ""));` |
+| `regexp_extract` | Column e, String pattern, int idx | `Column` | 正则提取 | `df.withColumn("domain", regexp_extract(col("url"), "https?://([^/]+)", 1));` |
+| `instr` | Column str, String substring | `Column` | 查找子串位置 | `df.filter(instr(col("name"), "John") > 0);` |
+| `locate` | String substr, Column str | `Column` | 查找子串位置 | `df.filter(locate("John", col("name")) > 0);` |
+| `replace` | Column src, Column search, Column replace | `Column` | 字符替换 | `df.withColumn("clean", replace(col("text"), lit("old"), lit("new")));` |
+| `abs` | Column e | `Column` | 绝对值 | `df.withColumn("abs_value", abs(col("value")));` |
+| `ceil` | Column e | `Column` | 向上取整 | `df.withColumn("rounded", ceil(col("value")));` |
+| `floor` | Column e | `Column` | 向下取整 | `df.withColumn("rounded", floor(col("value")));` |
+| `round` | Column e | `Column` | 四舍五入 | `df.withColumn("rounded", round(col("value")));` |
+| `round` | Column e, int scale | `Column` | 四舍五入到指定小数位 | `df.withColumn("rounded", round(col("value"), 2));` |
+| `bround` | Column e | `Column` | 银行家舍入 | `df.withColumn("rounded", bround(col("value")));` |
+| `exp` | Column e | `Column` | e指数 | `df.withColumn("exp_val", exp(col("log_value")));` |
+| `log` | Column e | `Column` | 自然对数 | `df.withColumn("log_val", log(col("value")));` |
+| `log10` | Column e | `Column` | 10为底对数 | `df.withColumn("log10_val", log10(col("value")));` |
+| `log2` | Column e | `Column` | 2为底对数 | `df.withColumn("log2_val", log2(col("value")));` |
+| `pow` | Column l, Column r | `Column` | 幂运算 | `df.withColumn("squared", pow(col("value"), lit(2)));` |
+| `sqrt` | Column e | `Column` | 平方根 | `df.withColumn("sqrt_val", sqrt(col("value")));` |
+| `sin` | Column e | `Column` | 正弦 | `df.withColumn("sin_val", sin(col("angle")));` |
+| `cos` | Column e | `Column` | 余弦 | `df.withColumn("cos_val", cos(col("angle")));` |
+| `tan` | Column e | `Column` | 正切 | `df.withColumn("tan_val", tan(col("angle")));` |
+| `asin` | Column e | `Column` | 反正弦 | `df.withColumn("asin_val", asin(col("value")));` |
+| `acos` | Column e | `Column` | 反余弦 | `df.withColumn("acos_val", acos(col("value")));` |
+| `atan` | Column e | `Column` | 反正切 | `df.withColumn("atan_val", atan(col("value")));` |
+| `rand` | 无 | `Column` | 随机数（0-1） | `df.withColumn("random", rand());` |
+| `randn` | 无 | `Column` | 正态分布随机数 | `df.withColumn("normal", randn());` |
+| `current_date` | 无 | `Column` | 当前日期 | `df.withColumn("today", current_date());` |
+| `current_timestamp` | 无 | `Column` | 当前时间戳 | `df.withColumn("now", current_timestamp());` |
+| `date_add` | Column start, int days | `Column` | 日期加天数 | `df.withColumn("future", date_add(col("date"), 30));` |
+| `date_sub` | Column start, int days | `Column` | 日期减天数 | `df.withColumn("past", date_sub(col("date"), 30));` |
+| `datediff` | Column end, Column start | `Column` | 日期差（天数） | `df.withColumn("days_diff", datediff(col("end_date"), col("start_date")));` |
+| `add_months` | Column startDate, int numMonths | `Column` | 加月份 | `df.withColumn("future", add_months(col("date"), 12));` |
+| `months_between` | Column end, Column start | `Column` | 月份差 | `df.withColumn("months", months_between(col("end_date"), col("start_date")));` |
+| `year` | Column e | `Column` | 提取年份 | `df.withColumn("year", year(col("date")));` |
+| `month` | Column e | `Column` | 提取月份 | `df.withColumn("month", month(col("date")));` |
+| `dayofmonth` | Column e | `Column` | 提取日 | `df.withColumn("day", dayofmonth(col("date")));` |
+| `dayofweek` | Column e | `Column` | 提取星期几（1=周日） | `df.withColumn("weekday", dayofweek(col("date")));` |
+| `dayofyear` | Column e | `Column` | 提取年中第几天 | `df.withColumn("daynum", dayofyear(col("date")));` |
+| `weekofyear` | Column e | `Column` | 提取年中第几周 | `df.withColumn("week", weekofyear(col("date")));` |
+| `hour` | Column e | `Column` | 提取小时 | `df.withColumn("hour", hour(col("timestamp")));` |
+| `minute` | Column e | `Column` | 提取分钟 | `df.withColumn("minute", minute(col("timestamp")));` |
+| `second` | Column e | `Column` | 提取秒 | `df.withColumn("second", second(col("timestamp")));` |
+| `to_date` | Column e | `Column` | 转为日期 | `df.withColumn("date", to_date(col("date_str")));` |
+| `to_date` | Column e, String fmt | `Column` | 指定格式转日期 | `df.withColumn("date", to_date(col("date_str"), "yyyy-MM-dd"));` |
+| `to_timestamp` | Column e | `Column` | 转为时间戳 | `df.withColumn("ts", to_timestamp(col("ts_str")));` |
+| `to_timestamp` | Column e, String fmt | `Column` | 指定格式转时间戳 | `df.withColumn("ts", to_timestamp(col("ts_str"), "yyyy-MM-dd HH:mm:ss"));` |
+| `date_format` | Column dateExpr, String format | `Column` | 格式化日期 | `df.withColumn("formatted", date_format(col("date"), "yyyy年MM月dd日"));` |
+| `from_unixtime` | Column ut | `Column` | Unix时间戳转字符串 | `df.withColumn("time_str", from_unixtime(col("unix_ts")));` |
+| `unix_timestamp` | 无 | `Column` | 当前Unix时间戳 | `df.withColumn("ts", unix_timestamp());` |
+| `unix_timestamp` | Column time | `Column` | 转为Unix时间戳 | `df.withColumn("unix", unix_timestamp(col("timestamp")));` |
+| `unix_timestamp` | Column time, String fmt | `Column` | 指定格式转Unix时间戳 | `df.withColumn("unix", unix_timestamp(col("time_str"), "yyyy-MM-dd"));` |
+| `array` | Column... cols | `Column` | 创建数组 | `df.withColumn("arr", array(col("a"), col("b")));` |
+| `map` | Column... cols | `Column` | 创建Map | `df.withColumn("kv", map(col("key"), col("value")));` |
+| `struct` | Column... cols | `Column` | 创建Struct | `df.withColumn("info", struct(col("name"), col("age")));` |
+| `explode` | Column e | `Column` | 展开数组/Map为多行 | `df.select(col("id"), explode(col("tags")));` |
+| `explode_outer` | Column e | `Column` | 展开数组/Map（保留null） | `df.select(col("id"), explode_outer(col("tags")));` |
+| `posexplode` | Column e | `Column` | 展开数组并带位置 | `df.select(col("id"), posexplode(col("items")));` |
+| `posexplode_outer` | Column e | `Column` | 展开数组带位置（保留null） | `df.select(col("id"), posexplode_outer(col("items")));` |
+| `size` | Column e | `Column` | 数组/Map大小 | `df.withColumn("num_tags", size(col("tags")));` |
+| `array_contains` | Column col, Object value | `Column` | 数组是否包含元素 | `df.filter(array_contains(col("tags"), "spark"));` |
+| `sort_array` | Column e | `Column` | 数组排序（升序） | `df.withColumn("sorted", sort_array(col("arr")));` |
+| `sort_array` | Column e, boolean asc | `Column` | 数组排序 | `df.withColumn("sorted", sort_array(col("arr"), false));` |
+| `array_distinct` | Column e | `Column` | 数组去重 | `df.withColumn("unique", array_distinct(col("arr")));` |
+| `array_intersect` | Column a1, Column a2 | `Column` | 数组交集 | `df.withColumn("common", array_intersect(col("arr1"), col("arr2")));` |
+| `array_union` | Column a1, Column a2 | `Column` | 数组并集 | `df.withColumn("combined", array_union(col("arr1"), col("arr2")));` |
+| `array_except` | Column a1, Column a2 | `Column` | 数组差集 | `df.withColumn("diff", array_except(col("arr1"), col("arr2")));` |
+| `array_remove` | Column col, Object element | `Column` | 移除数组元素 | `df.withColumn("cleaned", array_remove(col("tags"), "old"));` |
+| `array_position` | Column col, Object value | `Column` | 元素位置 | `df.withColumn("pos", array_position(col("arr"), "target"));` |
+| `element_at` | Column col, Object extraction | `Column` | 获取数组/Map元素 | `df.withColumn("first", element_at(col("arr"), 1));` |
+| `get_json_object` | Column e, String path | `Column` | 提取JSON字段 | `df.withColumn("name", get_json_object(col("json"), "$.name"));` |
+| `json_tuple` | Column json, String... fields | `Column` | 提取多个JSON字段 | `df.select(json_tuple(col("json"), "name", "age"));` |
+| `from_json` | Column col, Column schema | `Column` | JSON字符串转Struct | `df.withColumn("parsed", from_json(col("json_str"), schema));` |
+| `to_json` | Column col | `Column` | Struct转JSON字符串 | `df.withColumn("json", to_json(col("struct_col")));` |
+| `sha1` | Column e | `Column` | SHA1哈希 | `df.withColumn("hash", sha1(col("password")));` |
+| `sha2` | Column e, int numBits | `Column` | SHA2哈希 | `df.withColumn("hash", sha2(col("password"), 256));` |
+| `md5` | Column e | `Column` | MD5哈希 | `df.withColumn("hash", md5(col("content")));` |
+| `crc32` | Column e | `Column` | CRC32哈希 | `df.withColumn("checksum", crc32(col("data")));` |
+| `hash` | Column... cols | `Column` | 混合哈希 | `df.withColumn("hash", hash(col("id"), col("name")));` |
+| `xxhash64` | Column... cols | `Column` | xxhash64哈希 | `df.withColumn("hash", xxhash64(col("id"), col("name")));` |
+| `base64` | Column col | `Column` | Base64编码 | `df.withColumn("encoded", base64(col("data")));` |
+| `unbase64` | Column col | `Column` | Base64解码 | `df.withColumn("decoded", unbase64(col("encoded")));` |
+| `encode` | Column col, String charset | `Column` | 字符编码 | `df.withColumn("bytes", encode(col("text"), "UTF-8"));` |
+| `decode` | Column col, String charset | `Column` | 字符解码 | `df.withColumn("text", decode(col("bytes"), "UTF-8"));` |
+| `coalesce` | Column... e | `Column` | 返回第一个非null值 | `df.withColumn("name", coalesce(col("nickname"), col("fullname"), lit("N/A")));` |
+| `ifnull` | Column col1, Column col2 | `Column` | 如果null返回第二个 | `df.withColumn("name", ifnull(col("name"), lit("Unknown")));` |
+| `nullif` | Column col1, Column col2 | `Column` | 如果相等返回null | `df.withColumn("diff", nullif(col("a"), col("b")));` |
+| `nvl` | Column col1, Column col2 | `Column` | NVL函数 | `df.withColumn("value", nvl(col("value"), lit(0)));` |
+| `isnan` | Column e | `Column` | 判断是否NaN | `df.filter(isnan(col("score")));` |
+| `nanvl` | Column col1, Column col2 | `Column` | 如果NaN返回第二个 | `df.withColumn("score", nanvl(col("score"), lit(0)));` |
+| `monotonically_increasing_id` | 无 | `Column` | 生成单调递增ID | `df.withColumn("row_id", monotonically_increasing_id());` |
+| `row_number` | 无 | `Column` | 行号（窗口函数） | `df.withColumn("row_num", row_number().over(Window.orderBy(col("id"))));` |
+| `rank` | 无 | `Column` | 排名（有间隙） | `df.withColumn("rank", rank().over(Window.orderBy(col("score").desc())));` |
+| `dense_rank` | 无 | `Column` | 排名（无间隙） | `df.withColumn("dense_rank", dense_rank().over(Window.orderBy(col("score").desc())));` |
+| `percent_rank` | 无 | `Column` | 百分比排名 | `df.withColumn("pct", percent_rank().over(Window.orderBy(col("score"))));` |
+| `lead` | Column e, int offset | `Column` | 向前N行 | `df.withColumn("next", lead(col("value"), 1).over(Window.orderBy(col("id"))));` |
+| `lag` | Column e, int offset | `Column` | 向后N行 | `df.withColumn("prev", lag(col("value"), 1).over(Window.orderBy(col("id"))));` |
+| `ntile` | int n | `Column` | 分桶 | `df.withColumn("bucket", ntile(4).over(Window.orderBy(col("score"))));` |
+| `first_value` | Column e | `Column` | 窗口第一个值 | `df.withColumn("first", first_value(col("value")).over(Window.partitionBy("group")));` |
+| `last_value` | Column e | `Column` | 窗口最后一个值 | `df.withColumn("last", last_value(col("value")).over(Window.partitionBy("group")));` |
+
+### DataFrameReader
+**包路径**: `org.apache.spark.sql`
+**说明**: DataFrame读取器，用于从各种数据源读取数据。
+**方法数量**: 15+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `format` | String source | `DataFrameReader` | 指定数据源格式 | `spark.read().format("json").load("data.json");` |
+| `option` | String key, String value | `DataFrameReader` | 设置选项（字符串） | `spark.read().option("header", "true").csv("data.csv");` |
+| `option` | String key, boolean value | `DataFrameReader` | 设置选项（布尔） | `spark.read().option("multiline", true).json("data.json");` |
+| `option` | String key, long value | `DataFrameReader` | 设置选项（长整数） | `spark.read().option("maxRowsPerFile", 10000L).format("csv");` |
+| `options` | Map[String, String] options | `DataFrameReader` | 批量设置选项 | `Map<String, String> opts = new HashMap<>();<br>opts.put("header", "true");<br>spark.read().options(opts).csv("data.csv");` |
+| `schema` | StructType schema | `DataFrameReader` | 指定schema | `StructType schema = DataTypes.createStructType(Arrays.asList(<br>    DataTypes.createStructField("id", DataTypes.IntegerType, true),<br>    DataTypes.createStructField("name", DataTypes.StringType, true)));<br>spark.read().schema(schema).csv("data.csv");` |
+| `load` | 无 | `DataFrame` | 加载数据（用format指定格式） | `DataFrame df = spark.read().format("parquet").load("data.parquet");` |
+| `load` | String path | `DataFrame` | 加载指定路径数据 | `DataFrame df = spark.read().format("json").load("data/*.json");` |
+| `load` | String... paths | `DataFrame` | 加载多个路径数据 | `DataFrame df = spark.read().parquet("data1.parquet", "data2.parquet");` |
+| `json` | String path | `DataFrame` | 读取JSON文件 | `DataFrame df = spark.read().json("data.json");` |
+| `json` | Dataset[String] jsonDataset | `DataFrame` | 从Dataset读取JSON | `Dataset<String> jsonStrings = spark.createDataset(Arrays.asList("{"id":1}"), Encoders.STRING());<br>DataFrame df = spark.read().json(jsonStrings);` |
+| `csv` | String path | `DataFrame` | 读取CSV文件 | `DataFrame df = spark.read().option("header", "true").csv("data.csv");` |
+| `parquet` | String path | `DataFrame` | 读取Parquet文件 | `DataFrame df = spark.read().parquet("data.parquet");` |
+| `orc` | String path | `DataFrame` | 读取ORC文件 | `DataFrame df = spark.read().orc("data.orc");` |
+| `avro` | String path | `DataFrame` | 读取Avro文件 | `DataFrame df = spark.read().format("avro").load("data.avro");` |
+| `text` | String path | `DataFrame` | 读取文本文件（每行一条记录） | `DataFrame df = spark.read().text("data.txt");` |
+| `table` | String tableName | `DataFrame` | 从表读取数据 | `DataFrame df = spark.read().table("my_table");` |
+| `jdbc` | String url, String table, Properties properties | `DataFrame` | 从JDBC读取数据 | `Properties props = new Properties();<br>props.put("user", "root");<br>props.put("password", "pwd");<br>DataFrame df = spark.read().jdbc("jdbc:mysql://localhost/db", "users", props);` |
+
+### DataFrameWriter[T]
+**包路径**: `org.apache.spark.sql`
+**说明**: DataFrame写入器，用于将数据写入各种数据源。
+**方法数量**: 20+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `format` | String source | `DataFrameWriter[T]` | 指定输出格式 | `df.write().format("parquet").save("output");` |
+| `option` | String key, String value | `DataFrameWriter[T]` | 设置选项（字符串） | `df.write().option("header", "true").csv("output");` |
+| `option` | String key, boolean value | `DataFrameWriter[T]` | 设置选项（布尔） | `df.write().option("compression", "snappy").parquet("output");` |
+| `options` | Map[String, String] options | `DataFrameWriter[T]` | 批量设置选项 | `Map<String, String> opts = new HashMap<>();<br>opts.put("header", "true");<br>df.write().options(opts).csv("output");` |
+| `mode` | SaveMode mode | `DataFrameWriter[T]` | 设置写入模式 | `df.write().mode(SaveMode.Append).parquet("output");` |
+| `mode` | String mode | `DataFrameWriter[T]` | 设置写入模式字符串 | `df.write().mode("overwrite").parquet("output");  // overwrite/append/ignore/errorIfExists` |
+| `partitionBy` | String... colNames | `DataFrameWriter[T]` | 按列分区存储 | `df.write().partitionBy("year", "month").parquet("output");` |
+| `bucketBy` | int numBuckets, String colName, String... colNames | `DataFrameWriter[T]` | 分桶存储 | `df.write().bucketBy(100, "id").sortBy("timestamp").saveAsTable("bucketed_table");` |
+| `sortBy` | String... colNames | `DataFrameWriter[T]` | 分桶内排序 | `df.write().bucketBy(100, "id").sortBy("name").saveAsTable("sorted_table");` |
+| `save` | 无 | `Unit` | 保存数据（用format指定格式） | `df.write().format("parquet").save();` |
+| `save` | String path | `Unit` | 保存到指定路径 | `df.write().parquet("output/data.parquet");` |
+| `saveAsTable` | String tableName | `Unit` | 保存为表 | `df.write().saveAsTable("my_table");` |
+| `insertInto` | String tableName | `Unit` | 插入到表（不创建新表） | `df.write().insertInto("existing_table");` |
+| `json` | String path | `Unit` | 写入JSON文件 | `df.write().json("output/data.json");` |
+| `csv` | String path | `Unit` | 写入CSV文件 | `df.write().option("header", "true").csv("output/data.csv");` |
+| `parquet` | String path | `Unit` | 写入Parquet文件 | `df.write().parquet("output/data.parquet");` |
+| `orc` | String path | `Unit` | 写入ORC文件 | `df.write().orc("output/data.orc");` |
+| `avro` | String path | `Unit` | 写入Avro文件 | `df.write().format("avro").save("output/data.avro");` |
+| `text` | String path | `Unit` | 写入文本文件 | `df.select(col("text_col")).write().text("output/data.txt");` |
+| `jdbc` | String url, String table, Properties connectionProperties | `Unit` | 写入JDBC表 | `Properties props = new Properties();<br>props.put("user", "root");<br>props.put("password", "pwd");<br>df.write().jdbc("jdbc:mysql://localhost/db", "users", props);` |
+
+### Catalog
+**包路径**: `org.apache.spark.sql.catalog`
+**说明**: Spark Catalog接口，用于管理数据库、表、函数等元数据。
+**方法数量**: 20+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `currentDatabase` | 无 | `String` | 获取当前数据库 | `String db = spark.catalog().currentDatabase();` |
+| `setCurrentDatabase` | String db | `Unit` | 设置当前数据库 | `spark.catalog().setCurrentDatabase("my_db");` |
+| `listDatabases` | 无 | `Dataset[Database]` | 列出所有数据库 | `spark.catalog().listDatabases().show();` |
+| `listTables` | 无 | `Dataset[Table]` | 列出当前数据库的所有表 | `spark.catalog().listTables().show();` |
+| `listTables` | String dbName | `Dataset[Table]` | 列出指定数据库的所有表 | `spark.catalog().listTables("my_db").show();` |
+| `listFunctions` | 无 | `Dataset[Function]` | 列出所有函数 | `spark.catalog().listFunctions().show();` |
+| `listFunctions` | String dbName | `Dataset[Function]` | 列出指定数据库的函数 | `spark.catalog().listFunctions("my_db").show();` |
+| `listColumns` | String tableName | `Dataset[Column]` | 列出表的所有列 | `spark.catalog().listColumns("my_table").show();` |
+| `listColumns` | String dbName, String tableName | `Dataset[Column]` | 列出指定数据库表的列 | `spark.catalog().listColumns("my_db", "my_table").show();` |
+| `getTable` | String dbName, String tableName | `Table` | 获取表详情 | `Table table = spark.catalog().getTable("my_db", "my_table");` |
+| `getTable` | String tableName | `Table` | 获取当前数据库的表 | `Table table = spark.catalog().getTable("my_table");` |
+| `databaseExists` | String dbName | `Boolean` | 检查数据库是否存在 | `boolean exists = spark.catalog().databaseExists("my_db");` |
+| `tableExists` | String tableName | `Boolean` | 检查表是否存在（当前库） | `boolean exists = spark.catalog().tableExists("my_table");` |
+| `tableExists` | String dbName, String tableName | `Boolean` | 检查指定库表是否存在 | `boolean exists = spark.catalog().tableExists("my_db", "my_table");` |
+| `functionExists` | String functionName | `Boolean` | 检查函数是否存在 | `boolean exists = spark.catalog().functionExists("my_func");` |
+| `functionExists` | String dbName, String functionName | `Boolean` | 检查指定库函数是否存在 | `boolean exists = spark.catalog().functionExists("my_db", "my_func");` |
+| `createDatabase` | String dbName, boolean ignoreIfExists | `Unit` | 创建数据库 | `spark.catalog().createDatabase("new_db", true);` |
+| `createDatabase` | String dbName, boolean ignoreIfExists, String comment | `Unit` | 创建数据库（带注释） | `spark.catalog().createDatabase("new_db", false, "My test database");` |
+| `dropDatabase` | String dbName, boolean ignoreIfNotExists, boolean cascade | `Unit` | 删除数据库 | `spark.catalog().dropDatabase("old_db", true, false);` |
+| `createTable` | String tableName, String path | `Unit` | 创建表（指定路径） | `spark.catalog().createTable("new_table", "hdfs://data/path");` |
+| `createTable` | String tableName, String path, String source | `Unit` | 创建表（指定格式） | `spark.catalog().createTable("new_table", "hdfs://data", "parquet");` |
+| `createExternalTable` | String tableName, String path | `DataFrame` | 创建外部表 | `DataFrame df = spark.catalog().createExternalTable("ext_table", "hdfs://data");` |
+| `createExternalTable` | String tableName, String path, String source | `DataFrame` | 创建外部表（指定格式） | `DataFrame df = spark.catalog().createExternalTable("ext_table", "hdfs://data", "parquet");` |
+| `dropTable` | String dbName, String tableName, boolean ignoreIfNotExists, boolean purge | `Unit` | 删除表 | `spark.catalog().dropTable("my_db", "old_table", true, false);` |
+| `dropTable` | String tableName, boolean ignoreIfNotExists, boolean purge | `Unit` | 删除当前库表 | `spark.catalog().dropTable("old_table", true, false);` |
+| `dropTempView` | String viewName | `Unit` | 删除临时视图 | `spark.catalog().dropTempView("temp_view");` |
+| `dropGlobalTempView` | String viewName | `Unit` | 删除全局临时视图 | `spark.catalog().dropGlobalTempView("global_view");` |
+| `recoverPartitions` | String tableName | `Unit` | 恢复分区信息 | `spark.catalog().recoverPartitions("partitioned_table");` |
+| `refreshTable` | String tableName | `Unit` | 刷新表缓存 | `spark.catalog().refreshTable("my_table");` |
+| `refreshByPath` | String path | `Unit` | 刷新指定路径缓存 | `spark.catalog().refreshByPath("hdfs://data/table");` |
+| `clearCache` | 无 | `Unit` | 清除所有缓存 | `spark.catalog().clearCache();` |
+| `isCached` | String tableName | `Boolean` | 检查表是否被缓存 | `boolean cached = spark.catalog().isCached("my_table");` |
+| `cacheTable` | String tableName | `Unit` | 缓存表 | `spark.catalog().cacheTable("my_table");` |
+| `uncacheTable` | String tableName | `Unit` | 取消缓存表 | `spark.catalog().uncacheTable("my_table");` |
+
+### UDFRegistration
+**包路径**: `org.apache.spark.sql`
+**说明**: UDF注册接口，用于注册用户自定义函数。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `register` | String name, UDF1[T1, R] f, DataType returnType | `void` | 注册UDF（1个参数） | `spark.udf().register("myUpper", (String s) -> s.toUpperCase(), DataTypes.StringType);` |
+| `register` | String name, UDF2[T1, T2, R] f, DataType returnType | `void` | 注册UDF（2个参数） | `spark.udf().register("concat2", (String a, String b) -> a + b, DataTypes.StringType);` |
+| `register` | String name, UDF3[T1, T2, T3, R] f, DataType returnType | `void` | 注册UDF（3个参数） | `spark.udf().register("combine3", (String a, String b, String c) -> a+b+c, DataTypes.StringType);` |
+| `register` | String name, UDF4[T1, T2, T3, T4, R] f, DataType returnType | `void` | 注册UDF（4个参数） | - |
+| `register` | String name, UDF5... | `void` | 注册UDF（5+参数） | - |
+| `register` | String name, UDAF udaf | `void` | 注册聚合UDF | `spark.udf().register("mySum", new MySumUDAF());` |
+| `register` | String name, UserDefinedAggregateFunction udaf | `void` | 注册聚合UDF（旧API） | - |
+| `registerJava` | String name, String className, DataType returnType | `void` | 注册Java UDF类 | `spark.udf().registerJava("myFunc", "com.example.MyUDF", DataTypes.StringType);` |
+| `registerPython` | String name, String command, DataType returnType | `void` | 注册Python UDF | - |
+| `callUDF` | String udfName, Column... cols | `Column` | 调用已注册的UDF | `df.select(callUDF("myUpper", col("name")));` |
+
+---
+
+## Streaming流处理API
+
+### JavaStreamingContext
+**包路径**: `org.apache.spark.streaming.api.java`
+**说明**: Spark Streaming的Java入口，用于创建DStream和处理实时数据流。
+**方法数量**: 25+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `JavaStreamingContext` | SparkConf conf, Duration batchDuration | 构造方法 | 创建StreamingContext | `SparkConf conf = new SparkConf().setAppName("Streaming");<br>JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(5));` |
+| `JavaStreamingContext` | JavaSparkContext sparkContext, Duration batchDuration | 构造方法 | 从JavaSparkContext创建 | `JavaStreamingContext jssc = new JavaStreamingContext(sc, Durations.seconds(1));` |
+| `textFileStream` | String directory | `JavaDStream[String]` | 监控目录中的新文本文件 | `JavaDStream<String> lines = jssc.textFileStream("hdfs://logs/");` |
+| `fileStream` | String directory, Class[K] keyClass, Class[V] valueClass, Class[F] inputFormatClass | `JavaPairDStream[K, V]` | 监控目录中的新文件（指定格式） | `JavaPairDStream<Text, IntWritable> files = jssc.fileStream("hdfs://input/", Text.class, IntWritable.class, TextInputFormat.class);` |
+| `socketTextStream` | String hostname, int port | `JavaDStream[String]` | 从TCP socket读取文本流 | `JavaDStream<String> socketStream = jssc.socketTextStream("localhost", 9999);` |
+| `socketStream` | String hostname, int port, StorageLevel storageLevel | `JavaReceiverInputDStream[String]` | 从socket读取，指定存储级别 | `JavaReceiverInputDStream<String> stream = jssc.socketStream("localhost", 9999, StorageLevel.MEMORY_ONLY());` |
+| `rawSocketStream` | String hostname, int port, StorageLevel storageLevel | `JavaReceiverInputDStream[String]` | 原始socket流 | - |
+| `kafkaStream` | Map[String, String] kafkaParams, Map[String, Integer] topics | `JavaPairDStream[String, String]` | 从Kafka读取流 | `Map<String, String> kafkaParams = new HashMap<>();<br>kafkaParams.put("bootstrap.servers", "localhost:9092");<br>Map<String, Integer> topics = new HashMap<>();<br>topics.put("my_topic", 1);<br>JavaPairDStream<String, String> kafkaStream = jssc.kafkaStream(kafkaParams, topics);` |
+| `flumeStream` | String hostname, int port, StorageLevel storageLevel | `JavaReceiverInputDStream[SparkFlumeEvent]` | 从Flume读取流 | `JavaReceiverInputDStream<SparkFlumeEvent> flumeStream = jssc.flumeStream("localhost", 41414, StorageLevel.MEMORY_ONLY());` |
+| `queueStream` | Queue[JavaRDD[T]] rdds | `JavaInputDStream[T]` | 从RDD队列创建测试流 | `Queue<JavaRDD<String>> queue = new LinkedList<>();<br>queue.add(sc.parallelize(Arrays.asList("a", "b")));<br>JavaInputDStream<String> testStream = jssc.queueStream(queue);` |
+| `queueStream` | Queue[JavaRDD[T]] rdds, boolean oneAtATime | `JavaInputDStream[T]` | 逐个RDD处理 | `JavaInputDStream<String> stream = jssc.queueStream(queue, true);` |
+| `union` | JavaDStream[T]... streams | `JavaDStream[T]` | 合合多个DStream | `JavaDStream<String> combined = jssc.union(stream1, stream2);` |
+| `transform` | JavaDStream[T] dstream, JFunction[JavaRDD[T], JavaRDD[U]] transformFunc | `JavaDStream[U]` | 对DStream每个RDD应用变换 | `JavaDStream<String> transformed = dstream.transform(rdd -> rdd.filter(s -> s.length() > 3));` |
+| `transformWith` | JavaDStream[T] dstream1, JavaDStream[W] dstream2, JFunction2[JavaRDD[T], JavaRDD[W], JavaRDD[U]] transformFunc | `JavaDStream[U]` | 对两个DStream每个RDD应用变换 | - |
+| `checkpoint` | String directory | `Unit` | 设置checkpoint目录 | `jssc.checkpoint("hdfs://checkpoint/streaming/");` |
+| `start` | 无 | `Unit` | 启动Streaming | `jssc.start();` |
+| `awaitTermination` | 无 | `Unit` | 阻塞等待终止 | `jssc.awaitTermination();` |
+| `awaitTerminationOrTimeout` | long timeout | `Unit` | 阻塞等待终止或超时 | `jssc.awaitTerminationOrTimeout(60000L);  // 最多等待60秒` |
+| `stop` | 无 | `Unit` | 停止Streaming | `jssc.stop();` |
+| `stop` | boolean stopSparkContext | `Unit` | 停止Streaming，控制是否停SparkContext | `jssc.stop(false);  // 停止Streaming但保留SparkContext` |
+| `stop` | boolean stopSparkContext, boolean stopGracefully | `Unit` | 停止Streaming，控制优雅停止 | `jssc.stop(true, true);  // 优雅停止处理中的数据` |
+| `close` | 无 | `Unit` | 关闭（Java友好） | `jssc.close();` |
+| `sparkContext` | 无 | `JavaSparkContext` | 获取底层JavaSparkContext | `JavaSparkContext sc = jssc.sparkContext();` |
+| `ssc` | 无 | `StreamingContext` | 获取底层Scala StreamingContext | `StreamingContext ssc = jssc.ssc();` |
+
+### JavaDStream[T]
+**包路径**: `org.apache.spark.streaming.api.java`
+**说明**: Java版本的DStream（离散化流），代表连续的RDD序列。
+**方法数量**: 30+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `map` | JFunction[T, U] f | `JavaDStream[U]` | 对每个元素映射 | `JavaDStream<Integer> lengths = lines.map(s -> s.length());` |
+| `flatMap` | FlatMapFunction[T, U] f | `JavaDStream[U]` | 对每个元素映射为多个输出 | `JavaDStream<String> words = lines.flatMap(line -> Arrays.asList(line.split(" ")).iterator());` |
+| `filter` | JFunction[T, Boolean] f | `JavaDStream[T]` | 过滤元素 | `JavaDStream<String> filtered = lines.filter(s -> s.length() > 3);` |
+| `mapToPair` | PairFunction[T, K, V] f | `JavaPairDStream[K, V]` | 映射为键值对 | `JavaPairDStream<String, Integer> pairs = words.mapToPair(w -> new Tuple2<>(w, 1));` |
+| `reduce` | JFunction2[T, T, T] f | `JavaDStream[T]` | 对每个RDD内元素聚合 | `JavaDStream<Integer> sums = numbers.reduce((a, b) -> a + b);` |
+| `count` | 无 | `JavaDStream[Long]` | 对每个RDD计数 | `JavaDStream<Long> counts = dstream.count();` |
+| `countByValue` | 无 | `JavaPairDStream[T, Long]` | 对每个RDD统计每个值的出现次数 | `JavaPairDStream<String, Long> wordCounts = words.countByValue();` |
+| `reduceByKey` | JFunction2[V, V, V] func | `JavaPairDStream[K, V]` | 按Key聚合 | `JavaPairDStream<String, Integer> counts = pairs.reduceByKey((a, b) -> a + b);` |
+| `groupByKey` | 无 | `JavaPairDStream[K, JIterable[V]]` | 按Key分组 | `JavaPairDStream<String, Iterable<Integer>> grouped = pairs.groupByKey();` |
+| `mapValues` | JFunction[V, U] f | `JavaPairDStream[K, U]` | 对Value映射 | `JavaPairDStream<String, String> transformed = pairs.mapValues(v -> "value:" + v);` |
+| `flatMapValues` | FlatMapFunction[V, U] f | `JavaPairDStream[K, U]` | 对Value扁平映射 | - |
+| `foreachRDD` | VoidFunction[JavaRDD[T]] foreachFunc | `Unit` | 对每个RDD执行操作 | `wordCounts.foreachRDD(rdd -> {<br>    rdd.foreach(pair -> System.out.println(pair._1() + ": " + pair._2()));<br>});` |
+| `transform` | JFunction[JavaRDD[T], JavaRDD[U]] transformFunc | `JavaDStream[U]` | 对每个RDD变换 | `JavaDStream<String> transformed = dstream.transform(rdd -> rdd.distinct());` |
+| `transformToPair` | JFunction[JavaRDD[T], JavaPairRDD[K, V]] transformFunc | `JavaPairDStream[K, V]` | 对每个RDD变换为PairRDD | - |
+| `union` | JavaDStream[T] other | `JavaDStream[T]` | 合合DStream | `JavaDStream<String> merged = stream1.union(stream2);` |
+| `glom` | 无 | `JavaDStream[JList[T]]` | 将每个RDD分区合并为List | - |
+| `slice` | Duration fromTime, Duration toTime | `List[JavaRDD[T]]` | 获取时间范围内的RDD列表 | `List<JavaRDD<String>> rdds = dstream.slice(Durations.seconds(10), Durations.seconds(20));` |
+| `window` | Duration windowDuration | `JavaDStream[T]` | 窗口操作 | `JavaDStream<String> windowed = dstream.window(Durations.seconds(30));  // 30秒窗口` |
+| `window` | Duration windowDuration, Duration slideDuration | `JavaDStream[T]` | 窗口操作，指定滑动间隔 | `JavaDStream<String> windowed = dstream.window(Durations.seconds(30), Durations.seconds(10));  // 30秒窗口，每10秒滑动` |
+| `reduceByWindow` | JFunction2[T, T, T] reduceFunc, Duration windowDuration, Duration slideDuration | `JavaDStream[T]` | 窗口聚合 | `JavaDStream<Integer> windowSum = numbers.reduceByWindow((a, b) -> a + b, Durations.seconds(30), Durations.seconds(10));` |
+| `reduceByKeyAndWindow` | JFunction2[V, V, V] reduceFunc, Duration windowDuration | `JavaPairDStream[K, V]` | 窗口内按Key聚合 | `JavaPairDStream<String, Integer> windowCounts = pairs.reduceByKeyAndWindow((a, b) -> a + b, Durations.seconds(30));` |
+| `reduceByKeyAndWindow` | JFunction2[V, V, V] reduceFunc, Duration windowDuration, Duration slideDuration | `JavaPairDStream[K, V]` | 窗口内按Key聚合，指定滑动 | - |
+| `reduceByKeyAndWindow` | JFunction2[V, V, V] reduceFunc, JFunction2[V, V, V] invReduceFunc, Duration windowDuration, Duration slideDuration | `JavaPairDStream[K, V]` | 窗口内按Key聚合（带逆函数，高效） | `JavaPairDStream<String, Integer> counts = pairs.reduceByKeyAndWindow(<br>    (a, b) -> a + b,  // 加新数据<br>    (a, b) -> a - b,  // 减旧数据（高效计算）<br>    Durations.seconds(30), Durations.seconds(10));` |
+| `countByWindow` | Duration windowDuration, Duration slideDuration | `JavaDStream[Long]` | 窗口内计数 | `JavaDStream<Long> counts = dstream.countByWindow(Durations.seconds(30), Durations.seconds(10));` |
+| `countByValueAndWindow` | Duration windowDuration, Duration slideDuration | `JavaPairDStream[T, Long]` | 窗口内按值计数 | - |
+| `checkpoint` | 无 | `JavaDStream[T]` | 启用checkpoint | `dstream.checkpoint();` |
+| `persist` | StorageLevel level | `JavaDStream[T]` | 持久化DStream | `dstream.persist(StorageLevel.MEMORY_ONLY());` |
+| `cache` | 无 | `JavaDStream[T]` | 缓存DStream | `dstream.cache();` |
+| `print` | 无 | `Unit` | 打印每个RDD的前10元素 | `dstream.print();` |
+| `saveAsTextFiles` | String prefix, String suffix | `Unit` | 保存为文本文件序列 | `dstream.saveAsTextFiles("output/stream", "txt");  // 生成output/stream-TIME.txt` |
+| `saveAsObjectFiles` | String prefix, String suffix | `Unit` | 保存为对象文件序列 | `dstream.saveAsObjectFiles("output/stream", "obj");` |
+
+### JavaPairDStream[K, V]
+**包路径**: `org.apache.spark.streaming.api.java`
+**说明**: 键值对版本的DStream，继承JavaDStream并添加键值对操作。
+**方法数量**: 15+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `keys` | 无 | `JavaDStream[K]` | 获取所有Key的DStream | `JavaDStream<String> keys = pairs.keys();` |
+| `values` | 无 | `JavaDStream[V]` | 获取所有Value的DStream | `JavaDStream<Integer> values = pairs.values();` |
+| `join` | JavaPairDStream[K, W] other | `JavaPairDStream[K, Tuple2[V, W]]` | 内连接 | `JavaPairDStream<String, Tuple2<Integer, String>> joined = pairs.join(otherPairs);` |
+| `join` | JavaPairDStream[K, W] other, Duration windowDuration | `JavaPairDStream[K, Tuple2[V, W]]` | 窗口内连接 | `JavaPairDStream<String, Tuple2<Integer, String>> joined = pairs.join(otherPairs, Durations.seconds(30));` |
+| `leftOuterJoin` | JavaPairDStream[K, W] other | `JavaPairDStream[K, Tuple2[V, Optional[W]]]` | 左外连接 | `JavaPairDStream<String, Tuple2<Integer, Optional<String>>> joined = pairs.leftOuterJoin(otherPairs);` |
+| `rightOuterJoin` | JavaPairDStream[K, W] other | `JavaPairDStream[K, Tuple2[Optional[V], W]]` | 右外连接 | `JavaPairDStream<String, Tuple2<Optional<Integer>, String>> joined = pairs.rightOuterJoin(otherPairs);` |
+| `fullOuterJoin` | JavaPairDStream[K, W] other | `JavaPairDStream[K, Tuple2[Optional[V], Optional[W]]]` | 全外连接 | - |
+| `cogroup` | JavaPairDStream[K, W] other | `JavaPairDStream[K, Tuple2[JIterable[V], JIterable[W]]]` | 共同分组 | - |
+| `updateStateByKey` | JFunction2[JList[V], Optional[S], Optional[S]] updateFunc | `JavaPairDStream[K, S]` | 更新状态（带状态计算） | `JavaPairDStream<String, Integer> stateCounts = wordCounts.updateStateByKey((values, state) -> {<br>    int sum = state.orElse(0);<br>    for (int v : values) sum += v;<br>    return Optional.of(sum);<br>});` |
+| `mapWithState` | StateSpec[K, V, S, M] spec | `JavaMapWithStateDStream[K, V, S, M]` | 高效状态更新 | - |
+
+---
+
+## MLlib机器学习算法API
+
+### KMeans / KMeansModel
+**包路径**: `org.apache.spark.mllib.clustering`
+**说明**: K-Means聚类算法和模型。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `KMeans.train` | JavaRDD[Vector] data, int k, int maxIterations | `KMeansModel` | 训练K-Means模型 | `JavaRDD<Vector> data = vectorsRDD;<br>KMeansModel model = KMeans.train(data.rdd(), 3, 20);  // 3个簇，20次迭代` |
+| `KMeans.train` | JavaRDD[Vector] data, int k, int maxIterations, int runs | `KMeansModel` | 训练模型，多次运行 | - |
+| `KMeans.train` | JavaRDD[Vector] data, int k, int maxIterations, int runs, String initializationMode | `KMeansModel` | 指定初始化模式 | `KMeansModel model = KMeans.train(data.rdd(), 3, 20, 1, "k-means||");` |
+| `predict` | Vector point | `Int` | 预测单个点的簇归属 | `int cluster = model.predict(vector);` |
+| `predict` | JavaRDD[Vector] points | `JavaRDD[Integer]` | 预测多个点的簇归属 | `JavaRDD<Integer> predictions = model.predict(data);` |
+| `clusterCenters` | 无 | `Vector[]` | 获取所有簇中心 | `Vector[] centers = model.clusterCenters();` |
+| `k` | 无 | `Int` | 获取簇数量 | `int k = model.k();` |
+| `computeCost` | JavaRDD[Vector] data | `Double` | 计算聚类成本（误差平方和） | `double cost = model.computeCost(data.rdd());` |
+
+### BisectingKMeans / BisectingKMeansModel
+**包路径**: `org.apache.spark.mllib.clustering`
+**说明**: 二分K-Means聚类，层次聚类算法。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `setK` | int k | `BisectingKMeans` | 设置目标簇数量 | `BisectingKMeans bkm = new BisectingKMeans().setK(3);` |
+| `setMaxIterations` | int maxIterations | `BisectingKMeans` | 设置最大迭代次数 | `bkm.setMaxIterations(20);` |
+| `setMinDivisibleClusterSize` | double minDivisibleClusterSize | `BisectingKMeans` | 设置最小可分簇大小 | `bkm.setMinDivisibleClusterSize(1.0);` |
+| `run` | JavaRDD[Vector] data | `BisectingKMeansModel` | 运行聚类 | `BisectingKMeansModel model = bkm.run(data.rdd());` |
+| `predict` | Vector point | `Int` | 预测簇归属 | `int cluster = model.predict(vector);` |
+| `predict` | JavaRDD[Vector] points | `JavaRDD[Integer]` | 批量预测 | `JavaRDD<Integer> predictions = model.predict(data);` |
+| `clusterCenters` | 无 | `Vector[]` | 获取簇中心 | `Vector[] centers = model.clusterCenters();` |
+| `computeCost` | JavaRDD[Vector] data | `Double` | 计算成本 | `double cost = model.computeCost(data.rdd());` |
+
+### LogisticRegressionModel / LogisticRegressionWithSGD
+**包路径**: `org.apache.spark.mllib.classification`
+**说明**: 逻辑回归分类模型。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `LogisticRegressionWithSGD.train` | JavaRDD[LabeledPoint] data, int numIterations | `LogisticRegressionModel` | SGD训练逻辑回归 | `JavaRDD<LabeledPoint> training = labeledRDD;<br>LogisticRegressionModel model = LogisticRegressionWithSGD.train(training.rdd(), 100);` |
+| `LogisticRegressionWithSGD.train` | JavaRDD[LabeledPoint] data, int numIterations, double stepSize | `LogisticRegressionModel` | 指定步长 | `LogisticRegressionModel model = LogisticRegressionWithSGD.train(training.rdd(), 100, 1.0);` |
+| `LogisticRegressionWithSGD.train` | ... int regParam, int miniBatchFraction | `LogisticRegressionModel` | 指定正则化和批次比例 | - |
+| `predict` | Vector point | `Double` | 预测类别（0或1） | `double label = model.predict(features);` |
+| `predict` | JavaRDD[Vector] points | `JavaRDD[Double]` | 批量预测 | `JavaRDD<Double> predictions = model.predict(testData);` |
+| `predictProbabilities` | JavaRDD[Vector] points | `JavaRDD[Vector]` | 预测概率 | `JavaRDD<Vector> probs = model.predictProbabilities(testData);` |
+| `weights` | 无 | `Vector` | 获取模型权重 | `Vector weights = model.weights();` |
+| `intercept` | 无 | `Double` | 获取截距 | `double intercept = model.intercept();` |
+| `clearThreshold` | 无 | `LogisticRegressionModel` | 清除阈值，返回概率 | `model.clearThreshold();` |
+| `setThreshold` | double threshold | `LogisticRegressionModel` | 设置分类阈值 | `model.setThreshold(0.5);` |
+
+### SVMModel / SVMWithSGD
+**包路径**: `org.apache.spark.mllib.classification`
+**说明**: SVM支持向量机分类模型。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `SVMWithSGD.train` | JavaRDD[LabeledPoint] data, int numIterations | `SVMModel` | SGD训练SVM | `SVMModel model = SVMWithSGD.train(training.rdd(), 100);` |
+| `SVMWithSGD.train` | JavaRDD[LabeledPoint] data, int numIterations, double stepSize, double regParam | `SVMModel` | 指定步长和正则化 | `SVMModel model = SVMWithSGD.train(training.rdd(), 100, 1.0, 0.01);` |
+| `predict` | Vector point | `Double` | 预测类别 | `double label = model.predict(features);` |
+| `predict` | JavaRDD[Vector] points | `JavaRDD[Double]` | 批量预测 | `JavaRDD<Double> predictions = model.predict(testData);` |
+| `weights` | 无 | `Vector` | 获取权重 | `Vector weights = model.weights();` |
+| `intercept` | 无 | `Double` | 获取截距 | `double intercept = model.intercept();` |
+| `clearThreshold` | 无 | `SVMModel` | 清除阈值 | `model.clearThreshold();` |
+| `setThreshold` | double threshold | `SVMModel` | 设置阈值 | `model.setThreshold(0.0);` |
+
+### NaiveBayes / NaiveBayesModel
+**包路径**: `org.apache.spark.mllib.classification`
+**说明**: 朴素贝叶斯分类模型。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `NaiveBayes.train` | JavaRDD[LabeledPoint] data, double lambda | `NaiveBayesModel` | 训练朴素贝叶斯模型 | `NaiveBayesModel model = NaiveBayes.train(training.rdd(), 1.0);` |
+| `predict` | Vector point | `Double` | 预测类别 | `double label = model.predict(features);` |
+| `predict` | JavaRDD[Vector] points | `JavaRDD[Double]` | 批量预测 | `JavaRDD<Double> predictions = model.predict(testData);` |
+| `predictProbabilities` | JavaRDD[Vector] points | `JavaRDD[Vector]` | 预测概率分布 | `JavaRDD<Vector> probs = model.predictProbabilities(testData);` |
+| `labels` | 无 | `Double[]` | 获取所有类别标签 | `double[] labels = model.labels();` |
+| `pi` | 无 | `Vector` | 获取类别先验概率 | `Vector pi = model.pi();` |
+
+### LinearRegressionModel / LinearRegressionWithSGD
+**包路径**: `org.apache.spark.mllib.regression`
+**说明**: 线性回归模型。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `LinearRegressionWithSGD.train` | JavaRDD[LabeledPoint] data, int numIterations | `LinearRegressionModel` | SGD训练线性回归 | `LinearRegressionModel model = LinearRegressionWithSGD.train(training.rdd(), 100);` |
+| `LinearRegressionWithSGD.train` | JavaRDD[LabeledPoint] data, int numIterations, double stepSize | `LinearRegressionModel` | 指定步长 | `LinearRegressionModel model = LinearRegressionWithSGD.train(training.rdd(), 100, 0.1);` |
+| `predict` | Vector point | `Double` | 预测值 | `double value = model.predict(features);` |
+| `predict` | JavaRDD[Vector] points | `JavaRDD[Double]` | 批量预测 | `JavaRDD<Double> predictions = model.predict(testData);` |
+| `weights` | 无 | `Vector` | 获取权重 | `Vector weights = model.weights();` |
+| `intercept` | 无 | `Double` | 获取截距 | `double intercept = model.intercept();` |
+
+### ALS / MatrixFactorizationModel
+**包路径**: `org.apache.spark.mllib.recommendation`
+**说明**: ALS协同过滤推荐算法。
+**方法数量**: 12+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `setRank` | int rank | `ALS` | 设置隐藏因子数量 | `ALS als = new ALS().setRank(10);` |
+| `setIterations` | int iterations | `ALS` | 设置迭代次数 | `als.setIterations(20);` |
+| `setLambda` | double lambda | `ALS` | 设置正则化参数 | `als.setLambda(0.01);` |
+| `setBlocks` | int blocks | `ALS` | 设置分块数 | `als.setBlocks(-1);  // 自动设置` |
+| `setAlpha` | double alpha | `ALS` | 设置置信度参数（隐式反馈） | `als.setAlpha(1.0);` |
+| `setImplicitPrefs` | boolean implicitPrefs | `ALS` | 设置是否隐式反馈 | `als.setImplicitPrefs(true);  // 隐式反馈模式` |
+| `run` | JavaRDD[Rating] ratings | `MatrixFactorizationModel` | 运行ALS | `MatrixFactorizationModel model = als.run(ratingsRDD.rdd());` |
+| `ALS.train` | JavaRDD[Rating] ratings, int rank, int iterations | `MatrixFactorizationModel` | 快速训练 | `MatrixFactorizationModel model = ALS.train(ratingsRDD.rdd(), 10, 20);` |
+| `ALS.trainImplicit` | JavaRDD[Rating] ratings, int rank, int iterations | `MatrixFactorizationModel` | 隐式反馈训练 | `MatrixFactorizationModel model = ALS.trainImplicit(ratingsRDD.rdd(), 10, 20, 0.01, -1);` |
+| `predict` | JavaRDD[Tuple2[Int, Int]] usersProducts | `JavaRDD[Rating]` | 预测评分 | `JavaRDD<Rating> predictions = model.predict(userItemRDD);` |
+| `predictAll` | JavaRDD[Tuple2[Int, Int]] usersProducts | `JavaRDD[Rating]` | 预测所有（同predict） | - |
+| `recommendProducts` | int user, int num | `Rating[]` | 为用户推荐产品 | `Rating[] top5 = model.recommendProducts(userId, 5);` |
+| `recommendUsers` | int product, int num | `Rating[]` | 为产品推荐用户 | `Rating[] top5Users = model.recommendUsers(productId, 5);` |
+| `productFeatures` | 无 | `JavaPairRDD[Int, Vector]` | 获取产品特征矩阵 | `JavaPairRDD<Integer, Vector> features = model.productFeatures();` |
+| `userFeatures` | 无 | `JavaPairRDD[Int, Vector]` | 获取用户特征矩阵 | `JavaPairRDD<Integer, Vector> features = model.userFeatures();` |
+| `rank` | 无 | `Int` | 获取隐藏因子数量 | `int rank = model.rank();` |
+
+### PCA
+**包路径**: `org.apache.spark.mllib.feature`
+**说明**: PCA主成分分析降维。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `PCA` | int k | 构造方法 | 创建PCA变换器 | `PCA pca = new PCA(3);  // 降到3维` |
+| `fit` | JavaRDD[Vector] data | `PCAModel` | 训练PCA模型 | `PCAModel model = pca.fit(data.rdd());` |
+| `transform` | Vector vector | `Vector` | 转换向量 | `Vector reduced = model.transform(originalVector);` |
+| `transform` | JavaRDD[Vector] data | `JavaRDD[Vector]` | 批量转换 | `JavaRDD<Vector> reduced = model.transform(data);` |
+| `pc` | 无 | `Matrix` | 获取主成分矩阵 | `Matrix principalComponents = model.pc();` |
+| `explainedVariance` | 无 | `Vector` | 获取解释方差比例 | `Vector variance = model.explainedVariance();` |
+
+### StandardScaler / StandardScalerModel
+**包路径**: `org.apache.spark.mllib.feature`
+**说明**: 标准化变换器，将特征标准化到均值0、方差1。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `StandardScaler` | boolean withMean, boolean withStd | 构造方法 | 创建标准化变换器 | `StandardScaler scaler = new StandardScaler(true, true);  // 均值和方差标准化` |
+| `fit` | JavaRDD[Vector] data | `StandardScalerModel` | 训练标准化模型 | `StandardScalerModel model = scaler.fit(data.rdd());` |
+| `transform` | Vector vector | `Vector` | 转换向量 | `Vector scaled = model.transform(originalVector);` |
+| `transform` | JavaRDD[Vector] data | `JavaRDD[Vector]` | 批量转换 | `JavaRDD<Vector> scaled = model.transform(data);` |
+| `mean` | 无 | `Vector` | 获取均值 | `Vector mean = model.mean();` |
+| `std` | 无 | `Vector` | 获取标准差 | `Vector std = model.std();` |
+
+### Normalizer
+**包路径**: `org.apache.spark.mllib.feature`
+**说明**: 归一化变换器，将向量归一化到单位长度。
+**方法数量**: 3+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Normalizer` | double p | 构造方法 | 创建归一化器 | `Normalizer normalizer = new Normalizer(2.0);  // L2归一化` |
+| `transform` | Vector vector | `Vector` | 归一化向量 | `Vector normalized = normalizer.transform(originalVector);` |
+| `transform` | JavaRDD[Vector] data | `JavaRDD[Vector]` | 批量归一化 | `JavaRDD<Vector> normalized = normalizer.transform(data);` |
+
+### Word2Vec / Word2VecModel
+**包路径**: `org.apache.spark.mllib.feature`
+**说明**: Word2Vec词向量训练。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `setVectorSize` | int vectorSize | `Word2Vec` | 设置向量维度 | `Word2Vec w2v = new Word2Vec().setVectorSize(100);` |
+| `setWindowSize` | int windowSize | `Word2Vec` | 设置窗口大小 | `w2v.setWindowSize(5);` |
+| `setMinCount` | int minCount | `Word2Vec` | 设置最小词频 | `w2v.setMinCount(10);  // 出现少于10次的词被忽略` |
+| `setNumIterations` | int numIterations | `Word2Vec` | 设置迭代次数 | `w2v.setNumIterations(10);` |
+| `setLearningRate` | double learningRate | `Word2Vec` | 设置学习率 | `w2v.setLearningRate(0.025);` |
+| `setNumPartitions` | int numPartitions | `Word2Vec` | 设置分区数 | `w2v.setNumPartitions(4);` |
+| `fit` | JavaRDD[String] data | `Word2VecModel` | 训练词向量 | `JavaRDD<String> documents = sc.parallelize(Arrays.asList("hello world", "spark java"));<br>Word2VecModel model = w2v.fit(documents);` |
+| `transform` | String word | `Vector` | 获取词向量 | `Vector vec = model.transform("spark");` |
+| `findSynonyms` | String word, int num | `Tuple2[String, Double][]` | 查找相似词 | `Tuple2<String, Double>[] synonyms = model.findSynonyms("spark", 5);` |
+| `findSynonyms` | Vector vector, int num | `Tuple2[String, Double][]` | 查找与向量相似的词 | `Tuple2<String, Double>[] similar = model.findSynonyms(vector, 10);` |
+| `getVectors` | 无 | `Map[String, Vector]` | 获取所有词向量 | `Map<String, Vector> vectors = model.getVectors();` |
+
+### FPGrowth / FPGrowthModel
+**包路径**: `org.apache.spark.mllib.fpm`
+**说明**: FP-Growth频繁项集挖掘算法。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `setMinSupport` | double minSupport | `FPGrowth` | 设置最小支持度 | `FPGrowth fpg = new FPGrowth().setMinSupport(0.3);  // 30%支持度` |
+| `setNumPartitions` | int numPartitions | `FPGrowth` | 设置分区数 | `fpg.setNumPartitions(10);` |
+| `run` | JavaRDD[String[]] data | `FPGrowthModel` | 运行FP-Growth | `JavaRDD<String[]> transactions = sc.parallelize(Arrays.asList(<br>    new String[]{"a", "b", "c"},<br>    new String[]{"a", "b"}));<br>FPGrowthModel model = fpg.run(transitions.rdd());` |
+| `freqItemsets` | 无 | `JavaRDD[FreqItemset]` | 获取频繁项集 | `JavaRDD<FreqItemset> itemsets = model.freqItemsets();<br>itemsets.foreach(item -> System.out.println(item.items() + ": " + item.freq()));` |
+
+### AssociationRules
+**包路径**: `org.apache.spark.mllib.fpm`
+**说明**: 关联规则生成。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `AssociationRules` | 无 | 构造方法 | 创建关联规则生成器 | `AssociationRules ar = new AssociationRules();` |
+| `setMinConfidence` | double minConfidence | `AssociationRules` | 设置最小置信度 | `ar.setMinConfidence(0.5);  // 50%置信度` |
+| `run` | JavaRDD[FreqItemset] freqItemsets | `JavaRDD[Rule]` | 生成关联规则 | `JavaRDD<Rule> rules = ar.run(fpgModel.freqItemsets().toJavaRDD());<br>rules.foreach(rule -> System.out.println(<br>    rule.antecedent() + " => " + rule.consequent() +<br>    ": confidence=" + rule.confidence()));` |
+
+### BinaryClassificationMetrics
+**包路径**: `org.apache.spark.mllib.evaluation`
+**说明**: 二分类评估指标。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `BinaryClassificationMetrics` | JavaPairRDD[Double, Double] predictionAndLabels | 构造方法 | 创建评估器 | `JavaPairRDD<Double, Double> predictions = predictedLabelsRDD;<br>BinaryClassificationMetrics metrics = new BinaryClassificationMetrics(predictions.rdd());` |
+| `areaUnderPR` | 无 | `Double` | PR曲线下面积 | `double aupr = metrics.areaUnderPR();` |
+| `areaUnderROC` | 无 | `Double` | ROC曲线下面积（AUC） | `double auc = metrics.areaUnderROC();` |
+| `pr` | 无 | `JavaRDD[Tuple2[Double, Double]]` | PR曲线数据点 | `JavaRDD<Tuple2<Double, Double>> prCurve = metrics.pr().toJavaRDD();` |
+| `roc` | 无 | `JavaRDD[Tuple2[Double, Double]]` | ROC曲线数据点 | `JavaRDD<Tuple2<Double, Double>> rocCurve = metrics.roc().toJavaRDD();` |
+| `precisionByThreshold` | 无 | `JavaRDD[Tuple2[Double, Double]]` | 各阈值的精确率 | - |
+| `recallByThreshold` | 无 | `JavaRDD[Tuple2[Double, Double]]` | 各阈值的召回率 | - |
+| `fMeasureByThreshold` | double beta | `JavaRDD[Tuple2[Double, Double]]` | 各阈值的F值 | - |
+
+### MulticlassMetrics
+**包路径**: `org.apache.spark.mllib.evaluation`
+**说明**: 多分类评估指标。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `MulticlassMetrics` | JavaPairRDD[Double, Double] predictionAndLabels | 构造方法 | 创建评估器 | `MulticlassMetrics metrics = new MulticlassMetrics(predictions.rdd());` |
+| `accuracy` | 无 | `Double` | 准确率 | `double acc = metrics.accuracy();` |
+| `confusionMatrix` | 无 | `Matrix` | 混淆矩阵 | `Matrix cm = metrics.confusionMatrix();` |
+| `precision` | 无 | `Double` | 平均精确率 | `double prec = metrics.precision();` |
+| `recall` | 无 | `Double` | 平均召回率 | `double rec = metrics.recall();` |
+| `fMeasure` | 无 | `Double` | 平均F1值 | `double f1 = metrics.fMeasure();` |
+
+### RegressionMetrics
+**包路径**: `org.apache.spark.mllib.evaluation`
+**说明**: 回归评估指标。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `RegressionMetrics` | JavaPairRDD[Double, Double] predictionAndLabels | 构造方法 | 创建评估器 | `RegressionMetrics metrics = new RegressionMetrics(predictions.rdd());` |
+| `meanAbsoluteError` | 无 | `Double` | 平均绝对误差（MAE） | `double mae = metrics.meanAbsoluteError();` |
+| `meanSquaredError` | 无 | `Double` | 平均平方误差（MSE） | `double mse = metrics.meanSquaredError();` |
+| `rootMeanSquaredError` | 无 | `Double` | 根均方误差（RMSE） | `double rmse = metrics.rootMeanSquaredError();` |
+| `r2` | 无 | `Double` | R平方（决定系数） | `double r2 = metrics.r2();` |
+| `explainedVariance` | 无 | `Double` | 解释方差 | `double ev = metrics.explainedVariance();` |
+
+### LDA / LDAModel
+**包路径**: `org.apache.spark.mllib.clustering`
+**说明**: LDA主题模型（Latent Dirichlet Allocation）。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `setK` | int k | `LDA` | 设置主题数量 | `LDA lda = new LDA().setK(10);` |
+| `setMaxIterations` | int maxIterations | `LDA` | 设置最大迭代次数 | `lda.setMaxIterations(50);` |
+| `setDocConcentration` | double docConcentration | `LDA` | 设置文档主题分布参数 | `lda.setDocConcentration(-1);  // 自动设置` |
+| `setTopicConcentration` | double topicConcentration | `LDA` | 设置主题词分布参数 | `lda.setTopicConcentration(-1);` |
+| `run` | JavaRDD[Vector] data | `LDAModel` | 运行LDA | `LDAModel model = lda.run(documents.rdd());` |
+| `topicsMatrix` | 无 | `Matrix` | 获取主题-词矩阵 | `Matrix topics = model.topicsMatrix();` |
+| `describeTopics` | int maxTermsPerTopic | `Tuple2[Int, Tuple2[Int, Double][]][]` | 描述主题（Top词） | `model.describeTopics(10);  // 每个主题的Top10词` |
+| `topicDistributions` | 无 | `JavaPairRDD[Long, Vector]` | 获取文档主题分布 | `JavaPairRDD<Long, Vector> docTopics = model.topicDistributions().toJavaRDD();` |
+
+### Vectors / Matrices
+**包路径**: `org.apache.spark.mllib.linalg`
+**说明**: 向量和矩阵工具类。
+**方法数量**: 15+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Vectors.dense` | double... values | `Vector` | 创建密集向量 | `Vector denseVec = Vectors.dense(1.0, 2.0, 3.0);` |
+| `Vectors.dense` | double[] values | `Vector` | 创建密集向量（数组） | `double[] arr = {1.0, 2.0, 3.0};<br>Vector vec = Vectors.dense(arr);` |
+| `Vectors.sparse` | int size, int[] indices, double[] values | `Vector` | 创建稀疏向量 | `Vector sparseVec = Vectors.sparse(10, new int[]{0, 5}, new double[]{1.0, 2.0});  // 10维，位置0和5有值` |
+| `Vectors.sparse` | int size, Iterable[Tuple2[Int, Double]] entries | `Vector` | 创建稀疏向量（迭代器） | - |
+| `Vectors.zeros` | int size | `Vector` | 创建零向量 | `Vector zero = Vectors.zeros(10);` |
+| `Vectors.norm` | Vector v, double p | `Double` | 计算向量范数 | `double norm = Vectors.norm(vec, 2.0);  // L2范数` |
+| `Vectors.sqdist` | Vector v1, Vector v2 | `Double` | 计算向量平方距离 | `double sqDist = Vectors.sqdist(vec1, vec2);` |
+| `Matrices.dense` | int numRows, int numCols, double[] values | `Matrix` | 创建密集矩阵 | `Matrix denseMat = Matrices.dense(2, 3, new double[]{1,2,3,4,5,6});` |
+| `Matrices.sparse` | int numRows, int numCols, int[] colPtrs, int[] rowIndices, double[] values | `Matrix` | 创建稀疏矩阵（CSC格式） | - |
+| `Matrices.zeros` | int numRows, int numCols | `Matrix` | 创建零矩阵 | `Matrix zeroMat = Matrices.zeros(3, 3);` |
+| `Matrices.eye` | int n | `Matrix` | 创建单位矩阵 | `Matrix identity = Matrices.eye(3);` |
+| `Matrices.rand` | int numRows, int numCols | `Matrix` | 创建随机矩阵 | `Matrix randMat = Matrices.rand(3, 4);` |
+| `size` | 无 | `Int` | 向量维度 | `int dim = vec.size();` |
+| `toArray` | 无 | `double[]` | 转为数组 | `double[] arr = vec.toArray();` |
+| `dot` | Vector other | `Double` | 向量点积 | `double dot = vec1.dot(vec2);` |
+
