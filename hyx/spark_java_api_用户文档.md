@@ -273,6 +273,18 @@ import org.apache.spark.util.LongAccumulator;
 | `unpersist` | blocking: Boolean | `JavaPairRDD` | 取消PairRDD持久化，可阻塞等待 | // unpersist(blocking)<br>pairRDD.unpersist(true);  // 阻塞等待完成 |
 | `values` | 无 | `JavaRDD` | 返回所有Value的RDD | // values：获取所有Value<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(Arrays.asList(<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>));<br><br>JavaRDD<Integer> valuesRDD = pairRDD.values();<br>// 结果: [1, 2] |
 
+| `aggregateByKey` | U zeroValue, JFunction2[U, V, U] seqFunc, JFunction2[U, U, U] combFunc | `JavaPairRDD[K, U]` | 按Key聚合，支持不同类型 | `JavaPairRDD<String, Integer> result = pairRdd.aggregateByKey(0, (a, b) -> a + b, (a, b) -> a + b);` |
+| `combineByKey` | JFunction[V, C] createCombiner, JFunction2[C, V, C] mergeValue, JFunction2[C, C, C] mergeCombiners | `JavaPairRDD[K, C]` | 通用组合函数 | `JavaPairRDD<String, Integer> combined = pairRdd.combineByKey(v -> v, (a, b) -> a + b, (a, b) -> a + b);` |
+| `combineByKeyWithClassTag` | JFunction[V, C] createCombiner, JFunction2[C, V, C] mergeValue, JFunction2[C, C, C] mergeCombiners, ClassTag[C] ct | `JavaPairRDD[K, C]` | 带ClassTag的组合函数 | `JavaPairRDD<String, Integer> combined = pairRdd.combineByKeyWithClassTag(v -> v, (a, b) -> a + b, (a, b) -> a + b, ClassTag.apply(Integer.class));` |
+| `subtractByKey` | JavaPairRDD[K, W] other | `JavaPairRDD[K, V]` | 减去other中存在的key | `JavaPairRDD<String, Integer> result = pairRdd.subtractByKey(otherRdd);` |
+| `sampleStdevByKey` | K key | `double` | 按key采样标准差 | `double stdev = pairRdd.sampleStdevByKey("key1");` |
+| `sampleVarianceByKey` | K key | `double` | 按key采样方差 | `double variance = pairRdd.sampleVarianceByKey("key1");` |
+| `stdevByKey` | K key | `double` | 按key标准差 | `double stdev = pairRdd.stdevByKey("key1");` |
+| `varianceByKey` | K key | `double` | 按key方差 | `double variance = pairRdd.varianceByKey("key1");` |
+| `mapPartitionsByKey` | JFunction[Iterator[T], Iterator[U]] f | `JavaPairRDD[K, U]` | 按分区处理 | - |
+| `flatMapValuesWithKey` | FlatMapFunction[K, V, U] f | `JavaPairRDD[K, U]` | 带key的flatMapValues | - |
+
+
 ### JavaRDD
 **包路径**: `org.apache.spark.api.java`
 **方法数量**: 22
@@ -359,6 +371,10 @@ import org.apache.spark.util.LongAccumulator;
 | `collectAsync` | 无 | `JavaFutureAction[JList[T]]` | 异步collect | `JavaFutureAction<List<Integer>> future = nums.collectAsync();<br>List<Integer> result = future.get();` |
 | `takeAsync` | num: Int | `JavaFutureAction[JList[T]]` | 异步take | `JavaFutureAction<List<Integer>> future = nums.takeAsync(5);<br>List<Integer> first5 = future.get();` |
 | `foreachAsync` | VoidFunction[T] f | `JavaFutureAction[Void]` | 异步foreach | `JavaFutureAction<Void> future = nums.foreachAsync(x -> System.out.println(x));<br>future.get();  // 等待完成` |
+
+| `mapPartitionsToPair` | FlatMapFunction[T, K, V] f | `JavaPairRDD[K, V]` | 对每个分区映射为键值对 | `JavaPairRDD<String, Integer> pairs = rdd.mapPartitionsToPair(iter -> {...});` |
+| `wrapRDD` | RDD[T] rdd | `JavaRDD[T]` | 将Scala RDD包装为Java RDD | `JavaRDD<String> javaRdd = JavaRDD.fromRDD(scalaRdd);` |
+
 
 ### JavaSparkContext
 **包路径**: `org.apache.spark.api.java`
@@ -579,6 +595,25 @@ import org.apache.spark.util.LongAccumulator;
 | `numNulls` | 无 | `int` | 返回列向量中null值的总数量 | `int nullCount = vector.numNulls();<br>System.out.println("Null values: " + nullCount);` |
 
 
+### JavaSparkStatusTracker
+**包路径**: `org.apache.spark.api.java`
+**说明**: 作业状态追踪器，用于监控Spark作业的执行状态。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `getActiveJobsIds` | 无 | `int[]` | 获取活动作业ID列表 | `int[] activeJobs = tracker.getActiveJobsIds();` |
+| `getActiveStageIds` | 无 | `int[]` | 获取活动Stage ID列表 | `int[] activeStages = tracker.getActiveStageIds();` |
+| `getPendingJobsIds` | 无 | `int[]` | 获取等待中作业ID列表 | `int[] pendingJobs = tracker.getPendingJobsIds();` |
+| `getPendingStageIds` | 无 | `int[]` | 获取等待中Stage ID列表 | `int[] pendingStages = tracker.getPendingStageIds();` |
+| `getActiveJobIds` | 无 | `int[]` | 获取活动作业ID列表（别名） | `int[] active = tracker.getActiveJobIds();` |
+| `getActiveStageIds` | 无 | `int[]` | 获取活动Stage ID列表（别名） | `int[] active = tracker.getActiveStageIds();` |
+| `getPendingJobIds` | 无 | `int[]` | 获取等待作业ID列表（别名） | `int[] pending = tracker.getPendingJobIds();` |
+| `getPendingStageIds` | 无 | `int[]` | 获取等待Stage ID列表（别名） | `int[] pending = tracker.getPendingStageIds();` |
+
+---
+
+
 --------|------|----------|------|------|
 | `bitmapAndMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | 对两个位图执行AND合并操作 | 对两个位图执行AND操作，返回交集位图 |
 | `bitmapBitPosition` | value: long | `long` | 计算位图中指定值的位位置 | 计算值在桶内的位位置（0-63） |
@@ -654,6 +689,9 @@ import org.apache.spark.util.LongAccumulator;
 | `populate` | col: ConstantColumnVector, row: InternalRow, fieldIdx: int | `void` | 填充常量列向量数据 | 填充常量列向量数据 |
 | `toBatch` | schema: StructType, memMode: MemoryMode, row: Iterator<Row> | `ColumnarBatch` | 将行迭代器转换为列式批处理 | 将行迭代器转为列式批处理 |
 | `toJavaIntMap` | map: ColumnarMap | `Map&lt;Integer, Integer&gt;` | 将ColumnarMap转换为Java Map | 将ColumnarMap转为Java整数Map |
+
+| `isNaN` | 无 | `Column` | 判断是否NaN | `Column isNan = col("value").isNaN();` |
+| `regexp` | String pattern | `Column` | 正则匹配（rlike别名） | `Column matched = col("name").regexp("^[A-Z]");` |
 
 
 --------|------|----------|------|------|
@@ -2031,9 +2069,83 @@ import org.apache.spark.util.LongAccumulator;
 | `explain` | boolean extended | `Unit` | 打印详细执行计划 | `df.explain(true);  // 显示物理计划和逻辑计划` |
 | `explain` | String mode | `Unit` | 打印执行计划（指定模式） | `df.explain("extended");<br>// mode: simple, extended, codegen, cost, formatted` |
 
+| `groupByCube` | Column... cols | `RelationalGroupedDataset` | 立方体分组（所有维度组合） | `RelationalGroupedDataset cube = ds.groupByCube("year", "month", "day");` |
+| `groupByRollup` | Column... cols | `RelationalGroupedDataset` | 上卷分组（层级聚合） | `RelationalGroupedDataset rollup = ds.groupByRollup("year", "month");` |
+| `unionAll` | Dataset[T] other | `Dataset[T]` | 联合所有（保留重复） | `Dataset<Row> union = ds1.unionAll(ds2);` |
+| `dropDuplicatesWithinWatermark` | String... cols | `Dataset[T]` | 在watermark内去重 | `Dataset<Row> dedup = ds.dropDuplicatesWithinWatermark("id");` |
+| `withColumnsRenamed` | Map<String, String> cols | `Dataset[T]` | 批量重命名列 | `Dataset<Row> renamed = ds.withColumnsRenamed(Map.of("old1", "new1", "old2", "new2"));` |
+| `withWatermark` | String eventTime, String delayThreshold | `Dataset[T]` | 设置watermark用于流处理 | `Dataset<Row> withWm = ds.withWatermark("timestamp", "10 minutes");` |
+| `hint` | String name, Object... params | `Dataset[T]` | 添加查询提示 | `Dataset<Row> hinted = ds.hint("broadcast");` |
+| `writeToMetadata` | String tableName | `DataFrameWriter[T]` | 写入元数据表 | - |
+| `saveAsParquetFile` | String path | `Unit` | 保存为Parquet（旧API） | `ds.saveAsParquetFile("hdfs://path/");` |
+| `observe` | String name, Column expr, Column... exprs | `Dataset[T]` | 观察聚合指标 | `Dataset<Row> observed = ds.observe("metric", count("*").as("cnt"));` |
+| `queryExecution` | 无 | `QueryExecution` | 获取查询执行计划 | `QueryExecution qe = ds.queryExecution();` |
+| `isStreaming` | 无 | `boolean` | 是否流Dataset | `boolean streaming = ds.isStreaming();` |
+| `toJavaRDD` | 无 | `JavaRDD[T]` | 转为Java RDD | `JavaRDD<Row> javaRdd = ds.toJavaRDD();` |
+| `storageLevel` | 无 | `StorageLevel` | 获取存储级别 | `StorageLevel level = ds.storageLevel();` |
+| `createOrReplaceGlobalTempView` | String viewName | `Unit` | 创建或替换全局临时视图 | `ds.createOrReplaceGlobalTempView("global_view");` |
+| `toLocalIteratorAsList` | 无 | `List[T]` | 转为本地迭代器List | `List<Row> list = ds.toLocalIteratorAsList();` |
+| `reduceAgg` | Column e | `Row` | 聚合reduce | - |
+| `aggByAddr` | Column... exprs | `Dataset[Row]` | 按地址聚合 | - |
+
+
 ---
 
 ## SparkConf（配置）
+
+
+### RelationalGroupedDataset
+**包路径**: `org.apache.spark.sql`
+**说明**: 分组后的Dataset，用于聚合操作。由Dataset.groupBy()返回。
+**方法数量**: 20+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `agg` | Column... exprs | `Dataset[Row]` | 聚合操作 | `Dataset<Row> result = grouped.agg(count("id").as("cnt"), sum("value").as("total"));` |
+| `agg` | Map<String, Column> exprs | `Dataset[Row]` | 聚合操作（Map形式） | `Dataset<Row> result = grouped.agg(Map.of("cnt", count("id"), "avg", avg("value")));` |
+| `count` | 无 | `Dataset[Row]` | 计数 | `Dataset<Row> counts = grouped.count();` |
+| `mean` | String... cols | `Dataset[Row]` | 平均值 | `Dataset<Row> means = grouped.mean("value", "score");` |
+| `avg` | String... cols | `Dataset[Row]` | 平均值（别名） | `Dataset<Row> avg = grouped.avg("value");` |
+| `max` | String... cols | `Dataset[Row]` | 最大值 | `Dataset<Row> maxes = grouped.max("value");` |
+| `min` | String... cols | `Dataset[Row]` | 最小值 | `Dataset<Row> mins = grouped.min("value");` |
+| `sum` | String... cols | `Dataset[Row]` | 求和 | `Dataset<Row> sums = grouped.sum("value");` |
+| `pivot` | String pivotColumn | `RelationalGroupedDataset` | 透视转换（自动发现值） | `RelationalGroupedDataset pivoted = grouped.pivot("month");` |
+| `pivot` | String pivotColumn, Object... values | `RelationalGroupedDataset` | 透视转换（指定值） | `RelationalGroupedDataset pivoted = grouped.pivot("month", "Jan", "Feb", "Mar");` |
+| `pivot` | String pivotColumn, List<Object> values | `RelationalGroupedDataset` | 透视转换（List形式） | `RelationalGroupedDataset pivoted = grouped.pivot("month", Arrays.asList("Jan", "Feb"));` |
+| `as` | String alias | `RelationalGroupedDataset` | 别名 | `RelationalGroupedDataset aliased = grouped.as("my_group");` |
+| `alias` | String alias | `RelationalGroupedDataset` | 别名 | `RelationalGroupedDataset aliased = grouped.alias("my_group");` |
+| `cogroup` | Dataset[U] other, MapFunction[T, K] thisFunc, MapFunction[U, K] otherFunc, Encoder[K] encoder | `KeyValueGroupedDataset[K, Tuple[T, U]]` | 协同分组 | `KeyValueGroupedDataset<String, Tuple2<Row, Row>> cogrouped = grouped.cogroup(otherDs, func1, func2, encoder);` |
+| `flatMapGroups` | FlatMapGroupsFunction[K, V, R] f | `Dataset[R]` | 扁平映射分组 | `Dataset<Row> result = grouped.flatMapGroups((key, iter) -> {...});` |
+| `mapGroups` | MapGroupsFunction[K, V, R] f | `Dataset[R]` | 映射分组 | `Dataset<Row> result = grouped.mapGroups((key, iter) -> {...});` |
+| `mapGroupsWithState` | MapGroupsWithStateFunction[K, V, S, R] func, OutputMode outputMode, Encoder[S] stateEncoder, Encoder[R] outputEncoder | `Dataset[R]` | 带状态的分组映射 | `Dataset<Row> result = grouped.mapGroupsWithState(stateFunc, OutputMode.Update(), stateEnc, outputEnc);` |
+| `flatMapGroupsWithState` | FlatMapGroupsWithStateFunction[K, V, S, R] func, OutputMode outputMode, Encoder[S] stateEncoder, Encoder[R] outputEncoder | `Dataset[R]` | 带状态的扁平映射分组 | `Dataset<Row> result = grouped.flatMapGroupsWithState(stateFunc, OutputMode.Append(), stateEnc, outputEnc);` |
+| `flatMapGroupsInPandas` | FlatMapGroupsInPandasFunction[K, V, R] f | `Dataset[R]` | Pandas扁平映射分组 | `Dataset<Row> result = grouped.flatMapGroupsInPandas(pandasFunc);` |
+| `applyInPandas` | ApplyInPandasFunction[K, V, R] f | `Dataset[R]` | Pandas apply函数 | `Dataset<Row> result = grouped.applyInPandas(pandasFunc);` |
+
+---
+
+### KeyValueGroupedDataset[K, V]
+**包路径**: `org.apache.spark.sql`
+**说明**: 按键分组后的Dataset，由Dataset.groupByKey()返回。支持更灵活的分组操作。
+**方法数量**: 15+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `agg` | Aggregator[V, S, R] aggregator | `Dataset[R]` | 使用Aggregator聚合 | `Dataset<Row> result = grouped.agg(new MyAggregator());` |
+| `reduceGroups` | ReduceFunction[V] f | `Dataset[Tuple2[K, V]]` | 按组reduce | `Dataset<Tuple2<String, Integer>> reduced = grouped.reduceGroups((a, b) -> a + b);` |
+| `mapGroups` | MapGroupsFunction[K, V, U] f, Encoder[U] encoder | `Dataset[U]` | 映射每组数据 | `Dataset<String> mapped = grouped.mapGroups((key, iter) -> key + ":" + iter.size(), Encoders.STRING());` |
+| `flatMapGroups` | FlatMapGroupsFunction[K, V, U] f, Encoder[U] encoder | `Dataset[U]` | 扁平映射每组数据 | `Dataset<String> flatMapped = grouped.flatMapGroups((key, iter) -> {...}, Encoders.STRING());` |
+| `mapGroupsWithState` | MapGroupsWithStateFunction[K, V, S, U] func, Encoder[S] stateEncoder, Encoder[U] outputEncoder | `Dataset[U]` | 带状态的分组映射 | `Dataset<Row> result = grouped.mapGroupsWithState(stateFunc, stateEnc, outputEnc);` |
+| `flatMapGroupsWithState` | FlatMapGroupsWithStateFunction[K, V, S, U] func, OutputMode outputMode, Encoder[S] stateEncoder, Encoder[U] outputEncoder | `Dataset[U]` | 带状态的扁平映射分组 | `Dataset<Row> result = grouped.flatMapGroupsWithState(stateFunc, OutputMode.Update(), stateEnc, outputEnc);` |
+| `keys` | 无 | `Dataset[K]` | 获取所有键 | `Dataset<String> keys = grouped.keys();` |
+| `keyAs` | Encoder[K] encoder | `KeyValueGroupedDataset[K, V]` | 指定键编码器 | `KeyValueGroupedDataset<String, Row> newGrouped = grouped.keyAs(Encoders.STRING());` |
+| `mapValues` | MapFunction[V, U] f, Encoder[U] encoder | `KeyValueGroupedDataset[K, U]` | 映射值 | `KeyValueGroupedDataset<String, String> mapped = grouped.mapValues(v -> v.toString(), Encoders.STRING());` |
+| `flatMapValues` | FlatMapFunction[V, U] f, Encoder[U] encoder | `KeyValueGroupedDataset[K, U]` | 扁平映射值 | `KeyValueGroupedDataset<String, String> flatMapped = grouped.flatMapValues(v -> {...}, Encoders.STRING());` |
+| `cogroup` | KeyValueGroupedDataset[K, W] other | `KeyValueGroupedDataset[K, Tuple2[V, W]]` | 协同分组 | `KeyValueGroupedDataset<String, Tuple2<Row, Row>> cogrouped = grouped.cogroup(otherGrouped);` |
+| `cogroup` | KeyValueGroupedDataset[K, W] other, CoGroupFunction[K, V, W, U] f, Encoder[U] encoder | `Dataset[U]` | 协同分组并处理 | `Dataset<Row> result = grouped.cogroup(otherGrouped, coGroupFunc, Encoders.bean(Row.class));` |
+
+---
+
 
 ### SparkConf
 **包路径**: `org.apache.spark`
@@ -2353,6 +2465,9 @@ import org.apache.spark.util.LongAccumulator;
 | `avro` | String path | `Unit` | 写入Avro文件 | `df.write().format("avro").save("output/data.avro");` |
 | `text` | String path | `Unit` | 写入文本文件 | `df.select(col("text_col")).write().text("output/data.txt");` |
 | `jdbc` | String url, String table, Properties connectionProperties | `Unit` | 写入JDBC表 | `Properties props = new Properties();<br>props.put("user", "root");<br>props.put("password", "pwd");<br>df.write().jdbc("jdbc:mysql://localhost/db", "users", props);` |
+
+| `clusterBy` | String... colNames | `DataFrameWriter[T]` | 按列聚类（Delta Lake） | `DataFrameWriter<Row> writer = df.write().clusterBy("id", "date");` |
+
 
 ### Catalog
 **包路径**: `org.apache.spark.sql.catalog`
