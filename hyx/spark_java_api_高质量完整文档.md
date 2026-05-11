@@ -5165,6 +5165,14 @@
 | `as` | Encoder[U] encoder | `Dataset[U]` | 类型转换 | `Dataset<MyClass> ds = df.as(Encoders.bean(MyClass.class));` |
 | `na` | 无 | `DataFrameNaFunctions` | 获取null值处理工具 | `DataFrameNaFunctions naFuncs = df.na();<br>DataFrame cleaned = df.na().drop();  // 删除含null的行` |
 | `stat` | 无 | `DataFrameStatFunctions` | 获取统计工具 | `DataFrameStatFunctions statFuncs = df.stat();<br>double corr = df.stat().corr("col1", "col2");` |
+
+| `freqItems` | String[] cols, double support | `Dataset[Row]` | 频繁项集挖掘 | `Dataset<Row> freq = df.stat().freqItems(new String[]{"category"}, 0.3);` |
+| `freqItems` | String[] cols | `Dataset[Row]` | 频繁项集挖掘（默认support） | `Dataset<Row> freq = df.stat().freqItems(new String[]{"category"});` |
+| `sampleBy` | String col, Map<K, Double> fractions, long seed | `Dataset[Row]` | 按列分层采样 | `Dataset<Row> sampled = df.stat().sampleBy("category", fractions, seed);` |
+| `crosstab` | String col1, String col2 | `Dataset[Row]` | 交叉表 | `Dataset<Row> cross = df.stat().crosstab("category", "region");` |
+| `cov` | String col1, String col2 | `double` | 协方差 | `double cov = df.stat().cov("x", "y");` |
+| `approxQuantile` | String col, double[] probabilities, double relativeError | `double[]` | 近似分位数 | `double[] quantiles = df.stat().approxQuantile("value", new double[]{0.25, 0.5, 0.75}, 0.01);` |
+
 | `describe` | String... cols | `DataFrame` | 计算统计描述 | `DataFrame stats = df.describe("age", "salary");<br>stats.show();  // 显示count, mean, stddev, min, max` |
 | `summary` | String... statistics | `DataFrame` | 计算指定统计量 | `DataFrame stats = df.summary("count", "mean", "max");` |
 | `sample` | double fraction | `Dataset[T]` | 随机采样 | `DataFrame sample = df.sample(0.1);  // 10%采样` |
@@ -5341,6 +5349,52 @@
 ---
 
 ## SQL辅助类
+
+
+### AccumulatorV2[T]
+**包路径**: `org.apache.spark.util`
+**说明**: 累加器V2版本，用于分布式计数和聚合。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `add` | T v | `Unit` | 添加值 | `accumulator.add(1L);` |
+| `value` | 无 | `T` | 获取值 | `long value = accumulator.value();` |
+| `copy` | 无 | `AccumulatorV2[T]` | 复制累加器 | `AccumulatorV2<Long> copy = accumulator.copy();` |
+| `isZero` | 无 | `boolean` | 是否为零 | `boolean isZero = accumulator.isZero();` |
+| `reset` | 无 | `Unit` | 重置为零 | `accumulator.reset();` |
+| `merge` | AccumulatorV2[T] other | `Unit` | 合并另一个累加器 | `accumulator.merge(otherAccumulator);` |
+
+---
+
+### DoubleAccumulator
+**包路径**: `org.apache.spark.util`
+**说明**: 双精度浮点数累加器。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `add` | double v | `Unit` | 添加值 | `doubleAccumulator.add(3.14);` |
+| `value` | 无 | `double` | 获取值 | `double value = doubleAccumulator.value();` |
+| `reset` | 无 | `Unit` | 重置为零 | `doubleAccumulator.reset();` |
+| `isZero` | 无 | `boolean` | 是否为零 | `boolean isZero = doubleAccumulator.isZero();` |
+
+---
+
+### CollectionAccumulator[T]
+**包路径**: `org.apache.spark.util`
+**说明**: 集合累加器，收集所有添加的元素。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `add` | T v | `Unit` | 添加元素 | `collectionAccumulator.add("element");` |
+| `value` | 无 | `java.util.List[T]` | 获取所有元素 | `List<String> elements = collectionAccumulator.value();` |
+| `reset` | 无 | `Unit` | 重置为空 | `collectionAccumulator.reset();` |
+| `isZero` | 无 | `boolean` | 是否为空 | `boolean isZero = collectionAccumulator.isZero();` |
+
+---
+
 
 ### Column
 **包路径**: `org.apache.spark.sql`
@@ -5577,6 +5631,75 @@
 | `shiftright` | Column col, int numBits | `Column` | 右移位 | `Column shifted = shiftright(col("num"), 2);` |
 | `shiftRightUnsigned` | Column col, int numBits | `Column` | 无符号右移位 | `Column shifted = shiftRightUnsigned(col("num"), 2);` |
 
+| `sequence` | Column start, Column end | `Column` | 生成序列数组 | `Column seq = sequence(lit(1), lit(10));` |
+| `sequence` | Column start, Column end, Column step | `Column` | 生成序列数组（指定步长） | `Column seq = sequence(lit(1), lit(10), lit(2));` |
+| `array_prepend` | Column array, Column element | `Column` | 数组前面添加元素 | `Column arr = array_prepend(col("items"), lit("first"));` |
+| `array_append` | Column array, Column element | `Column` | 数组后面添加元素 | `Column arr = array_append(col("items"), lit("last"));` |
+| `arrays_overlap` | Column a1, Column a2 | `Column` | 数组是否有重叠元素 | `Column overlap = arrays_overlap(col("a"), col("b"));` |
+| `shuffle` | Column array | `Column` | 随机打乱数组 | `Column shuffled = shuffle(col("items"));` |
+| `character_length` | Column str | `Column` | 字符串字符数（别名） | `Column len = character_length(col("text"));` |
+| `char_length` | Column str | `Column` | 字符串字符数（别名） | `Column len = char_length(col("text"));` |
+| `octet_length` | Column str | `Column` | 字符串字节长度 | `Column len = octet_length(col("text"));` |
+| `bit_length` | Column str | `Column` | 字符串位长度 | `Column len = bit_length(col("text"));` |
+| `bit_get` | Column col, int pos | `Column` | 获取指定位置的位值 | `Column bit = bit_get(col("value"), 0);` |
+| `bit_count` | Column col | `Column` | 计算位的数量 | `Column count = bit_count(col("value"));` |
+| `levenshtein` | Column left, Column right | `Column` | 计算编辑距离 | `Column dist = levenshtein(col("str1"), col("str2"));` |
+| `substring_index` | Column str, String delim, int count | `Column` | 子字符串索引 | `Column sub = substring_index(col("url"), ".", 2);` |
+| `left` | Column str, int len | `Column` | 取左边N个字符 | `Column leftStr = left(col("text"), 5);` |
+| `right` | Column str, int len | `Column` | 取右边N个字符 | `Column rightStr = right(col("text"), 5);` |
+| `btrim` | Column str | `Column` | 去除两端空白（别名） | `Column trimmed = btrim(col("text"));` |
+| `conv` | Column num, int fromBase, int toBase | `Column` | 进制转换 | `Column hex = conv(col("num"), 10, 16);` |
+| `typeof` | Column col | `Column` | 返回类型字符串 | `Column type = typeof(col("value"));` |
+| `stack` | int n, Column... cols | `Column` | 将多列堆叠为多行 | `Column stacked = stack(3, col("a"), col("b"), col("c"));` |
+| `assert_true` | Column condition | `Column` | 断言条件为真 | `assert_true(col("value").gt(0));` |
+| `raise_error` | String message | `Column` | 抛出错误 | `raise_error("Custom error message");` |
+
+| `repeat` | Column str, int n | `Column` | 重复字符串N次 | `Column repeated = repeat(col("text"), 3);` |
+| `reverse` | Column str | `Column` | 反转字符串 | `Column reversed = reverse(col("text"));` |
+| `element_at` | Column array, Column index | `Column` | 获取数组元素 | `Column elem = element_at(col("items"), lit(0));` |
+| `array_except` | Column a1, Column a2 | `Column` | 数组差集 | `Column except = array_except(col("a"), col("b"));` |
+| `array_intersect` | Column a1, Column a2 | `Column` | 数组交集 | `Column intersect = array_intersect(col("a"), col("b"));` |
+| `array_union` | Column a1, Column a2 | `Column` | 数组并集 | `Column union = array_union(col("a"), col("b"));` |
+| `array_remove` | Column array, Column element | `Column` | 移除数组元素 | `Column removed = array_remove(col("items"), lit("value"));` |
+
+
+
+
+
+
+### Window
+**包路径**: `org.apache.spark.sql.expressions`
+**说明**: 窗口函数定义工具类，用于创建WindowSpec。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `partitionBy` | Column... columns | `WindowSpec` | 按列分区 | `WindowSpec window = Window.partitionBy(col("category"));` |
+| `partitionBy` | String... colNames | `WindowSpec` | 按列名分区 | `WindowSpec window = Window.partitionBy("category", "region");` |
+| `orderBy` | Column... columns | `WindowSpec` | 按列排序 | `WindowSpec window = Window.orderBy(col("date"));` |
+| `orderBy` | String... colNames | `WindowSpec` | 按列名排序 | `WindowSpec window = Window.orderBy("date", "time");` |
+| `rangeBetween` | long start, long end | `WindowSpec` | 范围窗口（基于值） | `WindowSpec window = Window.orderBy("value").rangeBetween(-10, 10);` |
+| `rowsBetween` | long start, long end | `WindowSpec` | 行窗口（基于行数） | `WindowSpec window = Window.orderBy("value").rowsBetween(-3, 3);` |
+| `unboundedPreceding` | 无 | `long` | 无界起始 | `Window.rowsBetween(Window.unboundedPreceding(), Window.currentRow());` |
+| `unboundedFollowing` | 无 | `long` | 无界结束 | `Window.rowsBetween(Window.currentRow(), Window.unboundedFollowing());` |
+
+---
+
+### WindowSpec
+**包路径**: `org.apache.spark.sql.expressions`
+**说明**: 窗口规范，定义窗口函数的计算范围。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `partitionBy` | Column... columns | `WindowSpec` | 按列分区 | `WindowSpec window = Window.partitionBy("category").orderBy("date");` |
+| `partitionBy` | String... colNames | `WindowSpec` | 按列名分区 | `WindowSpec window = spec.partitionBy("region");` |
+| `orderBy` | Column... columns | `WindowSpec` | 按列排序 | `WindowSpec window = spec.orderBy(col("value"));` |
+| `orderBy` | String... colNames | `WindowSpec` | 按列名排序 | `WindowSpec window = spec.orderBy("value");` |
+| `rangeBetween` | long start, long end | `WindowSpec` | 范围窗口 | `WindowSpec window = spec.rangeBetween(-100, 100);` |
+| `rowsBetween` | long start, long end | `WindowSpec` | 行窗口 | `WindowSpec window = spec.rowsBetween(-5, 5);` |
+
+---
 
 
 ### DataFrameReader
@@ -5634,6 +5757,72 @@
 | `jdbc` | String url, String table, Properties connectionProperties | `Unit` | 写入JDBC表 | `Properties props = new Properties();<br>props.put("user", "root");<br>props.put("password", "pwd");<br>df.write().jdbc("jdbc:mysql://localhost/db", "users", props);` |
 
 | `clusterBy` | String... colNames | `DataFrameWriter[T]` | 按列聚类（Delta Lake） | `DataFrameWriter<Row> writer = df.write().clusterBy("id", "date");` |
+
+
+
+### DataStreamReader
+**包路径**: `org.apache.spark.sql.streaming`
+**说明**: Structured Streaming数据流读取器，从SparkSession.readStream()获取。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `format` | String source | `DataStreamReader` | 设置数据源格式 | `reader.format("kafka");` |
+| `option` | String key, String value | `DataStreamReader` | 设置选项 | `reader.option("kafka.bootstrap.servers", "localhost:9092");` |
+| `option` | String key, boolean value | `DataStreamReader` | 设置布尔选项 | `reader.option("startingOffsets", "earliest");` |
+| `options` | Map<String, String> options | `DataStreamReader` | 设置多个选项 | `reader.options(kafkaParams);` |
+| `schema` | StructType schema | `DataStreamReader` | 设置schema（自定义格式） | `reader.schema(schema);` |
+| `load` | 无 | `Dataset[Row]` | 加载流数据 | `Dataset<Row> kafkaStream = reader.load();` |
+| `load` | String path | `Dataset[Row]` | 加载流数据（指定路径） | `Dataset<Row> jsonStream = reader.load("hdfs://stream/");` |
+| `table` | String tableName | `Dataset[Row]` | 从表读取流数据 | `Dataset<Row> tableStream = reader.table("stream_table");` |
+| `json` | String path | `Dataset[Row]` | JSON格式流数据 | `Dataset<Row> jsonStream = spark.readStream().json("hdfs://stream/");` |
+| `csv` | String path | `Dataset[Row]` | CSV格式流数据 | `Dataset<Row> csvStream = spark.readStream().csv("hdfs://stream/");` |
+
+---
+
+### DataStreamWriter[T]
+**包路径**: `org.apache.spark.sql.streaming`
+**说明**: Structured Streaming数据流写入器，从Dataset.writeStream()获取。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `format` | String source | `DataStreamWriter[T]` | 设置输出格式 | `writer.format("console");` |
+| `outputMode` | String outputMode | `DataStreamWriter[T]` | 设置输出模式 | `writer.outputMode("append");` |
+| `option` | String key, String value | `DataStreamWriter[T]` | 设置选项 | `writer.option("checkpointLocation", "hdfs://checkpoint/");` |
+| `option` | String key, boolean value | `DataStreamWriter[T]` | 设置布尔选项 | `writer.option("truncate", false);` |
+| `options` | Map<String, String> options | `DataStreamWriter[T]` | 设置多个选项 | `writer.options(outputParams);` |
+| `partitionBy` | String... colNames | `DataStreamWriter[T]` | 按列分区 | `writer.partitionBy("date");` |
+| `foreach` | ForeachWriter[T] writer | `DataStreamWriter[T]` | 自定义foreach输出 | `writer.foreach(new MyForeachWriter());` |
+| `foreachBatch` | VoidFunction2[Dataset[T], Long] function | `DataStreamWriter[T]` | 批次处理函数 | `writer.foreachBatch((batch, batchId) -> { batch.write().parquet("hdfs://output/" + batchId); });` |
+| `trigger` | Trigger trigger | `DataStreamWriter[T]` | 设置触发器 | `writer.trigger(Trigger.ProcessingTime("5 seconds"));` |
+| `start` | 无 | `StreamingQuery` | 启动流查询 | `StreamingQuery query = writer.start();` |
+
+---
+
+### StreamingQuery
+**包路径**: `org.apache.spark.sql.streaming`
+**说明**: Structured Streaming查询对象，用于监控和管理流查询。
+**方法数量**: 15+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `name` | 无 | `String` | 获取查询名称 | `String name = query.name();` |
+| `id` | 无 | `long` | 获取查询ID | `long id = query.id();` |
+| `runId` | 无 | `long` | 获取运行ID | `long runId = query.runId();` |
+| `isActive` | 无 | `boolean` | 是否活跃 | `boolean active = query.isActive();` |
+| `status` | 无 | `StreamingQueryStatus` | 获取状态 | `StreamingQueryStatus status = query.status();` |
+| `lastProgress` | 无 | `StreamingQueryProgress` | 获取最新进度 | `StreamingQueryProgress progress = query.lastProgress();` |
+| `recentProgress` | 无 | `StreamingQueryProgress[]` | 获取最近进度列表 | `StreamingQueryProgress[] progress = query.recentProgress();` |
+| `awaitTermination` | 无 | `Unit` | 等待终止 | `query.awaitTermination();` |
+| `awaitTermination` | long timeoutMs | `boolean` | 等待终止或超时 | `boolean terminated = query.awaitTermination(60000);` |
+| `stop` | 无 | `Unit` | 停止查询 | `query.stop();` |
+| `exception` | 无 | `Option[StreamingQueryException]` | 获取异常 | `Optional<StreamingQueryException> ex = query.exception();` |
+| `explain` | boolean extended | `String` | 解释执行计划 | `String plan = query.explain(true);` |
+| `sinkStatus` | 无 | `SinkStatus` | 获取sink状态 | `SinkStatus sink = query.sinkStatus();` |
+| `sourceStatus` | int index | `SourceStatus` | 获取source状态 | `SourceStatus source = query.sourceStatus(0);` |
+
+---
 
 
 ### Catalog
@@ -5877,6 +6066,26 @@
 | `clusterCenters` | 无 | `Vector[]` | 获取簇中心 | `Vector[] centers = model.clusterCenters();` |
 | `computeCost` | JavaRDD[Vector] data | `Double` | 计算成本 | `double cost = model.computeCost(data.rdd());` |
 
+
+### GaussianMixture
+**包路径**: `org.apache.spark.ml.clustering`
+**说明**: 高斯混合模型聚类，假设数据由多个高斯分布组成。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `GaussianMixture` | 无 | 构造方法 | 创建高斯混合模型 | `GaussianMixture gm = new GaussianMixture();` |
+| `setK` | int value | `GaussianMixture` | 设置聚类数（默认2） | `gm.setK(3);` |
+| `setMaxIter` | int value | `GaussianMixture` | 设置最大迭代次数（默认100） | `gm.setMaxIter(50);` |
+| `setTol` | double value | `GaussianMixture` | 设置收敛容忍度（默认0.01） | `gm.setTol(0.001);` |
+| `setFeaturesCol` | String value | `GaussianMixture` | 设置特征列名 | `gm.setFeaturesCol("features");` |
+| `setSeed` | long value | `GaussianMixture` | 设置随机种子 | `gm.setSeed(12345L);` |
+| `fit` | Dataset<?> dataset | `GaussianMixtureModel` | 训练模型 | `GaussianMixtureModel model = gm.fit(data);` |
+| `setAggregationDepth` | int value | `GaussianMixture` | 设置聚合深度 | `gm.setAggregationDepth(10);` |
+
+---
+
+
 ### LogisticRegressionModel / LogisticRegressionWithSGD
 **包路径**: `org.apache.spark.mllib.classification`
 **说明**: 逻辑回归分类模型。
@@ -6007,6 +6216,66 @@
 | `labels` | 无 | `Double[]` | 获取所有类别标签 | `double[] labels = model.labels();` |
 | `pi` | 无 | `Vector` | 获取类别先验概率 | `Vector pi = model.pi();` |
 
+
+### MultilayerPerceptronClassifier
+**包路径**: `org.apache.spark.ml.classification`
+**说明**: 多层感知机分类器（神经网络），用于复杂分类任务。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `MultilayerPerceptronClassifier` | 无 | 构造方法 | 创建多层感知机分类器 | `MultilayerPerceptronClassifier mlp = new MultilayerPerceptronClassifier();` |
+| `setLayers` | int[] layers | `MultilayerPerceptronClassifier` | 设置网络结构 | `mlp.setLayers(new int[]{4, 5, 4, 2});` |
+| `setMaxIter` | int value | `MultilayerPerceptronClassifier` | 设置最大迭代次数（默认100） | `mlp.setMaxIter(100);` |
+| `setBlockSize` | int value | `MultilayerPerceptronClassifier` | 设置块大小（默认128） | `mlp.setBlockSize(128);` |
+| `setSeed` | long value | `MultilayerPerceptronClassifier` | 设置随机种子 | `mlp.setSeed(12345L);` |
+| `setFeaturesCol` | String value | `MultilayerPerceptronClassifier` | 设置特征列名 | `mlp.setFeaturesCol("features");` |
+| `setLabelCol` | String value | `MultilayerPerceptronClassifier` | 设置标签列名 | `mlp.setLabelCol("label");` |
+| `setSolver` | String value | `MultilayerPerceptronClassifier` | 设置求解器 | `mlp.setSolver("l-bfgs");` |
+| `setStepSize` | double value | `MultilayerPerceptronClassifier` | 设置步长 | `mlp.setStepSize(0.03);` |
+| `fit` | Dataset<?> dataset | `MultilayerPerceptronClassificationModel` | 训练模型 | `MultilayerPerceptronClassificationModel model = mlp.fit(trainingData);` |
+
+---
+
+### LinearSVC
+**包路径**: `org.apache.spark.ml.classification`
+**说明**: 线性支持向量分类器，用于二分类任务。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `LinearSVC` | 无 | 构造方法 | 创建线性SVC | `LinearSVC svc = new LinearSVC();` |
+| `setMaxIter` | int value | `LinearSVC` | 设置最大迭代次数（默认100） | `svc.setMaxIter(100);` |
+| `setRegParam` | double value | `LinearSVC` | 设置正则化参数（默认0） | `svc.setRegParam(0.01);` |
+| `setStandardization` | boolean value | `LinearSVC` | 是否标准化特征（默认true） | `svc.setStandardization(true);` |
+| `setThreshold` | double value | `LinearSVC` | 设置阈值（默认0） | `svc.setThreshold(0.0);` |
+| `setAggregationDepth` | int value | `LinearSVC` | 设置聚合深度（默认2） | `svc.setAggregationDepth(2);` |
+| `setFeaturesCol` | String value | `LinearSVC` | 设置特征列名 | `svc.setFeaturesCol("features");` |
+| `setLabelCol` | String value | `LinearSVC` | 设置标签列名 | `svc.setLabelCol("label");` |
+| `fit` | Dataset<?> dataset | `LinearSVCModel` | 训练模型 | `LinearSVCModel model = svc.fit(trainingData);` |
+| `setWeightCol` | String value | `LinearSVC` | 设置权重列名 | `svc.setWeightCol("weight");` |
+
+---
+
+### OneVsRest
+**包路径**: `org.apache.spark.ml.classification`
+**说明**: 一对多分类器，将二分类器转换为多分类器。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `OneVsRest` | 无 | 构造方法 | 创建一对多分类器 | `OneVsRest ovr = new OneVsRest();` |
+| `setClassifier` | Classifier classifier | `OneVsRest` | 设置二分类器 | `ovr.setClassifier(new LogisticRegression());` |
+| `setLabelCol` | String value | `OneVsRest` | 设置标签列名 | `ovr.setLabelCol("label");` |
+| `setFeaturesCol` | String value | `OneVsRest` | 设置特征列名 | `ovr.setFeaturesCol("features");` |
+| `setPredictionCol` | String value | `OneVsRest` | 设置预测列名 | `ovr.setPredictionCol("prediction");` |
+| `fit` | Dataset<?> dataset | `OneVsRestModel` | 训练模型 | `OneVsRestModel model = ovr.fit(trainingData);` |
+| `setParallelism` | int value | `OneVsRest` | 设置并行度 | `ovr.setParallelism(2);` |
+| `copy` | ParamMap extra | `OneVsRest` | 复制分类器 | `OneVsRest copied = ovr.copy(new ParamMap());` |
+
+---
+
+
 ### LinearRegressionModel / LinearRegressionWithSGD
 **包路径**: `org.apache.spark.mllib.regression`
 **说明**: 线性回归模型。
@@ -6020,6 +6289,46 @@
 | `predict` | JavaRDD[Vector] points | `JavaRDD[Double]` | 批量预测 | `JavaRDD<Double> predictions = model.predict(testData);` |
 | `weights` | 无 | `Vector` | 获取权重 | `Vector weights = model.weights();` |
 | `intercept` | 无 | `Double` | 获取截距 | `double intercept = model.intercept();` |
+
+
+### DecisionTreeRegressor
+**包路径**: `org.apache.spark.ml.regression`
+**说明**: 决策树回归器。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `DecisionTreeRegressor` | 无 | 构造方法 | 创建决策树回归器 | `DecisionTreeRegressor dt = new DecisionTreeRegressor();` |
+| `setMaxDepth` | int value | `DecisionTreeRegressor` | 设置最大深度（默认5） | `dt.setMaxDepth(10);` |
+| `setMaxBins` | int value | `DecisionTreeRegressor` | 设置最大分箱数（默认32） | `dt.setMaxBins(64);` |
+| `setMinInstancesPerNode` | int value | `DecisionTreeRegressor` | 设置每个节点最小实例数 | `dt.setMinInstancesPerNode(1);` |
+| `setMinInfoGain` | double value | `DecisionTreeRegressor` | 设置最小信息增益 | `dt.setMinInfoGain(0.0);` |
+| `setFeaturesCol` | String value | `DecisionTreeRegressor` | 设置特征列名 | `dt.setFeaturesCol("features");` |
+| `setLabelCol` | String value | `DecisionTreeRegressor` | 设置标签列名 | `dt.setLabelCol("label");` |
+| `fit` | Dataset<?> dataset | `DecisionTreeRegressionModel` | 训练模型 | `DecisionTreeRegressionModel model = dt.fit(trainingData);` |
+
+---
+
+### GeneralizedLinearRegression
+**包路径**: `org.apache.spark.ml.regression`
+**说明**: 广义线性回归，支持多种分布族和链接函数。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `GeneralizedLinearRegression` | 无 | 构造方法 | 创建广义线性回归 | `GeneralizedLinearRegression glr = new GeneralizedLinearRegression();` |
+| `setFamily` | String value | `GeneralizedLinearRegression` | 设置分布族 | `glr.setFamily("gaussian");` |
+| `setLink` | String value | `GeneralizedLinearRegression` | 设置链接函数 | `glr.setLink("identity");` |
+| `setMaxIter` | int value | `GeneralizedLinearRegression` | 设置最大迭代次数（默认25） | `glr.setMaxIter(100);` |
+| `setRegParam` | double value | `GeneralizedLinearRegression` | 设置正则化参数 | `glr.setRegParam(0.0);` |
+| `setTol` | double value | `GeneralizedLinearRegression` | 设置收敛容忍度 | `glr.setTol(1e-6);` |
+| `setFeaturesCol` | String value | `GeneralizedLinearRegression` | 设置特征列名 | `glr.setFeaturesCol("features");` |
+| `setLabelCol` | String value | `GeneralizedLinearRegression` | 设置标签列名 | `glr.setLabelCol("label");` |
+| `fit` | Dataset<?> dataset | `GeneralizedLinearRegressionModel` | 训练模型 | `GeneralizedLinearRegressionModel model = glr.fit(trainingData);` |
+| `setWeightCol` | String value | `GeneralizedLinearRegression` | 设置权重列名 | `glr.setWeightCol("weight");` |
+
+---
+
 
 ### ALS / MatrixFactorizationModel
 **包路径**: `org.apache.spark.mllib.recommendation`
@@ -6044,6 +6353,24 @@
 | `productFeatures` | 无 | `JavaPairRDD[Int, Vector]` | 获取产品特征矩阵 | `JavaPairRDD<Integer, Vector> features = model.productFeatures();` |
 | `userFeatures` | 无 | `JavaPairRDD[Int, Vector]` | 获取用户特征矩阵 | `JavaPairRDD<Integer, Vector> features = model.userFeatures();` |
 | `rank` | 无 | `Int` | 获取隐藏因子数量 | `int rank = model.rank();` |
+
+
+### ALSModel
+**包路径**: `org.apache.spark.ml.recommendation`
+**说明**: ALS训练后的模型，用于推荐预测。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 执行预测 | `Dataset<Row> predictions = model.transform(testData);` |
+| `recommendForAllUsers` | int numItems | `Dataset[Row]` | 为所有用户推荐物品 | `Dataset<Row> userRecs = model.recommendForAllUsers(10);` |
+| `recommendForAllItems` | int numUsers | `Dataset[Row]` | 为所有物品推荐用户 | `Dataset<Row> itemRecs = model.recommendForAllItems(10);` |
+| `recommendForUserSubset` | Dataset<?> users, int numItems | `Dataset[Row]` | 为指定用户推荐 | `Dataset<Row> userRecs = model.recommendForUserSubset(userSubset, 10);` |
+| `recommendForItemSubset` | Dataset<?> items, int numUsers | `Dataset[Row]` | 为指定物品推荐 | `Dataset<Row> itemRecs = model.recommendForItemSubset(itemSubset, 10);` |
+| `write` | 无 | `MLWriter` | 保存模型 | `model.write().overwrite().save("hdfs://model/als");` |
+
+---
+
 
 ### PCA
 **包路径**: `org.apache.spark.mllib.feature`
