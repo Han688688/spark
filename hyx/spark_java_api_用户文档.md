@@ -791,6 +791,47 @@ import org.apache.spark.util.LongAccumulator;
 | `tableExists` | ident: Identifier | `boolean` | 检查表是否存在 | 检查表是否存在 |
 
 
+### StructType
+**包路径**: `org.apache.spark.sql.types`
+**说明**: DataFrame结构定义，包含多个StructField。
+**方法数量**: 12+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `StructType` | 无 | 构造方法 | 创建空结构 | `StructType schema = new StructType();` |
+| `add` | StructField field | `StructType` | 添加字段 | `schema.add(new StructField("name", DataTypes.StringType, false, Metadata.empty()));` |
+| `add` | String name, DataType dataType | `StructType` | 添加字段（简化） | `schema.add("age", DataTypes.IntegerType);` |
+| `add` | String name, DataType dataType, boolean nullable | `StructType` | 添加字段（指定nullable） | `schema.add("id", DataTypes.LongType, false);` |
+| `fields` | 无 | `StructField[]` | 获取所有字段 | `StructField[] fields = schema.fields();` |
+| `fieldNames` | 无 | `String[]` | 获取所有字段名 | `String[] names = schema.fieldNames();` |
+| `apply` | String name | `StructField` | 获取指定字段 | `StructField field = schema.apply("name");` |
+| `apply` | int index | `StructField` | 获取指定位置字段 | `StructField field = schema.apply(0);` |
+| `length` | 无 | `int` | 获取字段数量 | `int len = schema.length();` |
+| `toDDL` | 无 | `String` | DDL格式字符串 | `String ddl = schema.toDDL();` |
+| `json` | 无 | `String` | 转为JSON | `String json = schema.json();` |
+| `prettyJson` | 无 | `String` | 转为格式化JSON | `String pretty = schema.prettyJson();` |
+
+---
+
+### StructField
+**包路径**: `org.apache.spark.sql.types`
+**说明**: 单个列结构定义，包含名称、类型、nullable等。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `StructField` | String name, DataType dataType, boolean nullable, Metadata metadata | 构造方法 | 创建字段 | `StructField field = new StructField("name", DataTypes.StringType, true, Metadata.empty());` |
+| `name` | 无 | `String` | 获取字段名 | `String name = field.name();` |
+| `dataType` | 无 | `DataType` | 获取数据类型 | `DataType type = field.dataType();` |
+| `nullable` | 无 | `boolean` | 是否可空 | `boolean nullable = field.nullable();` |
+| `metadata` | 无 | `Metadata` | 获取元数据 | `Metadata meta = field.metadata();` |
+| `getComment` | 无 | `String` | 获取注释 | `String comment = field.getComment();` |
+| `withComment` | String comment | `StructField` | 添加注释 | `StructField newField = field.withComment("用户名");` |
+| `toDDL` | 无 | `String` | DDL格式 | `String ddl = field.toDDL();` |
+
+---
+
+
 --------|------|----------|------|------|
 | `getSentences` | str: UTF8String, language: UTF8String, country: UTF8String | `ArrayData` | 将文本分割为句子数组 | 传入参数执行将文本分割为句子数组 |
 | `getSparkVersion` | 无 | `UTF8String` | 获取Spark版本字符串 | 调用该方法执行获取Spark版本字符串 |
@@ -1962,6 +2003,23 @@ import org.apache.spark.util.LongAccumulator;
 | `interruptAll` | 无 | `Seq[String]` | 中断所有操作 | `spark.interruptAll();` |
 
 
+### RuntimeConfig
+**包路径**: `org.apache.spark.sql`
+**说明**: Spark运行时配置，从SparkSession.conf()获取。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `get` | String key | `String` | 获取配置值 | `String value = spark.conf().get("spark.sql.shuffle.partitions");` |
+| `get` | String key, String default | `String` | 获取配置值（带默认值） | `String value = spark.conf().get("spark.sql.autoBroadcastJoinThreshold", "10MB");` |
+| `getAll` | 无 | `Map[String, String]` | 获取所有配置 | `Map<String, String> all = spark.conf().getAll();` |
+| `set` | String key, String value | `RuntimeConfig` | 设置配置值 | `spark.conf().set("spark.sql.shuffle.partitions", "200");` |
+| `unset` | String key | `RuntimeConfig` | 取消设置 | `spark.conf().unset("spark.sql.shuffle.partitions");` |
+| `isModifiable` | String key | `boolean` | 是否可修改 | `boolean modifiable = spark.conf().isModifiable("spark.sql.shuffle.partitions");` |
+
+---
+
+
 ### UDF0[R]
 **包路径**: `org.apache.spark.sql.api.java`
 **说明**: 无参数用户自定义函数接口。
@@ -2621,6 +2679,30 @@ import org.apache.spark.util.LongAccumulator;
 | `array_union` | Column a1, Column a2 | `Column` | 数组并集 | `Column union = array_union(col("a"), col("b"));` |
 | `array_remove` | Column array, Column element | `Column` | 移除数组元素 | `Column removed = array_remove(col("items"), lit("value"));` |
 
+| `broadcast` | Column col | `Column` | 广播提示，优化join | `Dataset<Row> result = smallDF.join(bigDF, broadcast(smallDF.col("id")));` |
+| `cbrt` | Column col | `Column` | 立方根 | `Column result = cbrt(col("value"));` |
+| `ceiling` | Column col | `Column` | 向上取整（ceil别名） | `Column result = ceiling(col("value"));` |
+| `chr` | int n | `Column` | ASCII码转字符 | `Column result = chr(65);  // 返回'A'` |
+| `cosh` | Column col | `Column` | 双曲余弦 | `Column result = cosh(col("angle"));` |
+| `cot` | Column col | `Column` | 余切 | `Column result = cot(col("angle"));` |
+| `count_if` | Column condition | `Column` | 条件计数 | `Column count = count_if(col("value").gt(100));` |
+| `convert_timezone` | String fromTz, String toTz, Column timestamp | `Column` | 时区转换 | `Column converted = convert_timezone("UTC", "Asia/Shanghai", col("timestamp"));` |
+| `bitmap_construct_agg` | Column col | `Column` | 位图聚合 | `Column bitmap = bitmap_construct_agg(col("id"));` |
+| `bitmap_count` | Column bitmap | `Column` | 位图计数 | `Column count = bitmap_count(col("bitmap"));` |
+| `cardinality` | Column col | `Column` | 数组/Map大小 | `Column size = cardinality(col("items"));` |
+| `covar_pop` | Column col1, Column col2 | `Column` | 总体协方差 | `Column cov = covar_pop(col("x"), col("y"));` |
+| `covar_samp` | Column col1, Column col2 | `Column` | 样本协方差 | `Column cov = covar_samp(col("x"), col("y"));` |
+
+| `call_udf` | String udfName, Column... cols | `Column` | 调用注册的UDF | `Column result = call_udf("my_udf", col("value"));` |
+| `call_function` | String functionName, Column... cols | `Column` | 调用注册的函数 | `Column result = call_function("my_func", col("arg1"), col("arg2"));` |
+| `forall` | Column array, Column predicate | `Column` | 判断数组所有元素是否满足条件 | `Column allPositive = forall(col("values"), x -> x.gt(0));` |
+| `exists` | Column array, Column predicate | `Column` | 判断数组是否存在满足条件的元素 | `Column hasNegative = exists(col("values"), x -> x.lt(0));` |
+| `zip_with` | Column left, Column right, BiFunction[Column, Column, Column] f | `Column` | 合并两个数组 | `Column zipped = zip_with(col("a"), col("b"), (x, y) -> x.plus(y));` |
+| `inline` | Column array | `Column` | 展开数组中的struct为多列 | `df.select(inline(col("structs")));` |
+| `inline_outer` | Column array | `Column` | 展开数组中的struct（含null） | `df.select(inline_outer(col("structs")));` |
+| `array_min` | Column array | `Column` | 数组最小值 | `Column minVal = array_min(col("values"));` |
+| `array_max` | Column array | `Column` | 数组最大值 | `Column maxVal = array_max(col("values"));` |
+
 
 ### Window
 **包路径**: `org.apache.spark.sql.expressions`
@@ -2775,6 +2857,50 @@ import org.apache.spark.util.LongAccumulator;
 | `explain` | boolean extended | `String` | 解释执行计划 | `String plan = query.explain(true);` |
 | `sinkStatus` | 无 | `SinkStatus` | 获取sink状态 | `SinkStatus sink = query.sinkStatus();` |
 | `sourceStatus` | int index | `SourceStatus` | 获取source状态 | `SourceStatus source = query.sourceStatus(0);` |
+
+---
+
+
+### StreamingQueryListener
+**包路径**: `org.apache.spark.sql.streaming`
+**说明**: Structured Streaming查询监听器，监控查询生命周期事件。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `onQueryStarted` | QueryStartedEvent event | `void` | 查询启动事件 | `public void onQueryStarted(QueryStartedEvent event) { System.out.println("Query started: " + event.id()); }` |
+| `onQueryProgress` | QueryProgressEvent event | `void` | 查询进度事件 | `public void onQueryProgress(QueryProgressEvent event) { System.out.println("Progress: " + event.progress().numInputRows()); }` |
+| `onQueryIdle` | QueryIdleEvent event | `void` | 查询空闲事件 | `public void onQueryIdle(QueryIdleEvent event) { System.out.println("Query idle"); }` |
+| `onQueryTerminated` | QueryTerminatedEvent event | `void` | 查询终止事件 | `public void onQueryTerminated(QueryTerminatedEvent event) { System.out.println("Query terminated: " + event.id()); }` |
+| `onQueryFailure` | QueryFailureEvent event | `void` | 查询失败事件 | `public void onQueryFailure(QueryFailureEvent event) { System.out.println("Query failed: " + event.exception()); }` |
+
+---
+
+### StreamingQueryStatus
+**包路径**: `org.apache.spark.sql.streaming`
+**说明**: Structured Streaming查询状态信息。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `name` | 无 | `String` | 查询名称 | `String name = status.name();` |
+| `isDataAvailable` | 无 | `boolean` | 是否有数据可用 | `boolean hasData = status.isDataAvailable();` |
+| `isTriggerActive` | 无 | `boolean` | 触发器是否活跃 | `boolean active = status.isTriggerActive();` |
+| `timestamp` | 无 | `long` | 时间戳 | `long ts = status.timestamp();` |
+| `json` | 无 | `String` | JSON表示 | `String json = status.json();` |
+
+---
+
+### ForeachWriter[T]
+**包路径**: `org.apache.spark.sql`
+**说明**: Structured Streaming自定义输出写入器。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `open` | long partitionId, long epochId | `boolean` | 打开写入器，返回false则跳过 | `public boolean open(long partitionId, long epochId) { connection = createConnection(); return true; }` |
+| `process` | T value | `void` | 处理单条数据 | `public void process(String value) { connection.write(value); }` |
+| `close` | Throwable errorOrNull | `void` | 关闭写入器 | `public void close(Throwable error) { connection.close(); }` |
 
 ---
 
@@ -3284,6 +3410,63 @@ import org.apache.spark.util.LongAccumulator;
 ---
 
 
+### AFTSurvivalRegression
+**包路径**: `org.apache.spark.ml.regression`
+**说明**: 加速失效时间生存分析回归，用于生存时间预测。
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `AFTSurvivalRegression` | 无 | 构造方法 | 创建AFT生存回归 | `AFTSurvivalRegression aft = new AFTSurvivalRegression();` |
+| `setFeaturesCol` | String value | `AFTSurvivalRegression` | 设置特征列名 | `aft.setFeaturesCol("features");` |
+| `setLabelCol` | String value | `AFTSurvivalRegression` | 设置标签列名（生存时间） | `aft.setLabelCol("time");` |
+| `setCensorCol` | String value | `AFTSurvivalRegression` | 设置截尾列名 | `aft.setCensorCol("censor");` |
+| `setMaxIter` | int value | `AFTSurvivalRegression` | 设置最大迭代次数（默认100） | `aft.setMaxIter(100);` |
+| `setTol` | double value | `AFTSurvivalRegression` | 设置收敛容忍度（默认1E-6） | `aft.setTol(1e-6);` |
+| `setAggregationDepth` | int value | `AFTSurvivalRegression` | 设置聚合深度 | `aft.setAggregationDepth(2);` |
+| `setQuantileProbabilities` | double[] value | `AFTSurvivalRegression` | 设置分位数概率 | `aft.setQuantileProbabilities(new double[]{0.1, 0.5, 0.9});` |
+| `setQuantilesCol` | String value | `AFTSurvivalRegression` | 设置分位数输出列名 | `aft.setQuantilesCol("quantiles");` |
+| `fit` | Dataset<?> dataset | `AFTSurvivalRegressionModel` | 训练模型 | `AFTSurvivalRegressionModel model = aft.fit(data);` |
+
+---
+
+### FMRegressor
+**包路径**: `org.apache.spark.ml.regression`
+**说明**: 因子分解机回归器，用于推荐系统特征交叉建模。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `FMRegressor` | 无 | 构造方法 | 创建FM回归器 | `FMRegressor fm = new FMRegressor();` |
+| `setFactorSize` | int value | `FMRegressor` | 设置因子维度（默认8） | `fm.setFactorSize(8);` |
+| `setFitLinear` | boolean value | `FMRegressor` | 是否拟合线性项（默认true） | `fm.setFitLinear(true);` |
+| `setRegParam` | double value | `FMRegressor` | 设置正则化参数（默认0） | `fm.setRegParam(0.01);` |
+| `setMiniBatchFraction` | double value | `FMRegressor` | 设置小批量比例（默认1.0） | `fm.setMiniBatchFraction(0.5);` |
+| `setInitStd` | double value | `FMRegressor` | 设置初始化标准差（默认0.01） | `fm.setInitStd(0.01);` |
+| `setMaxIter` | int value | `FMRegressor` | 设置最大迭代次数 | `fm.setMaxIter(100);` |
+| `fit` | Dataset<?> dataset | `FMRegressionModel` | 训练模型 | `FMRegressionModel model = fm.fit(data);` |
+
+---
+
+### FMClassifier
+**包路径**: `org.apache.spark.ml.classification`
+**说明**: 因子分解机分类器，用于推荐系统特征交叉建模分类。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `FMClassifier` | 无 | 构造方法 | 创建FM分类器 | `FMClassifier fm = new FMClassifier();` |
+| `setFactorSize` | int value | `FMClassifier` | 设置因子维度（默认8） | `fm.setFactorSize(8);` |
+| `setFitLinear` | boolean value | `FMClassifier` | 是否拟合线性项（默认true） | `fm.setFitLinear(true);` |
+| `setRegParam` | double value | `FMClassifier` | 设置正则化参数（默认0） | `fm.setRegParam(0.01);` |
+| `setMiniBatchFraction` | double value | `FMClassifier` | 设置小批量比例（默认1.0） | `fm.setMiniBatchFraction(0.5);` |
+| `setInitStd` | double value | `FMClassifier` | 设置初始化标准差（默认0.01） | `fm.setInitStd(0.01);` |
+| `setMaxIter` | int value | `FMClassifier` | 设置最大迭代次数 | `fm.setMaxIter(100);` |
+| `fit` | Dataset<?> dataset | `FMClassificationModel` | 训练模型 | `FMClassificationModel model = fm.fit(data);` |
+
+---
+
+
 ### ALS / MatrixFactorizationModel
 **包路径**: `org.apache.spark.mllib.recommendation`
 **说明**: ALS协同过滤推荐算法。
@@ -3679,6 +3862,57 @@ import org.apache.spark.util.LongAccumulator;
 | `build` | 无 | `ParamMap[]` | 构建参数网格 | `ParamMap[] paramMaps = gridBuilder.build();` |
 
 ---
+
+
+### ParamMap
+**包路径**: `org.apache.spark.ml.param`
+**说明**: 参数映射，用于设置算法参数。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `ParamMap` | 无 | 构造方法 | 创建空参数映射 | `ParamMap params = new ParamMap();` |
+| `put` | Param[T] param, T value | `ParamMap` | 设置参数 | `params.put(lr.regParam(), 0.1);` |
+| `put` | Pair[Param[T], T]... pairs | `ParamMap` | 设置多个参数 | `params.put(lr.regParam().w(0.1), lr.maxIter().w(100));` |
+| `get` | Param[T] param | `T` | 获取参数值 | `double regParam = params.get(lr.regParam());` |
+| `getOrDefault` | Param[T] param | `T` | 获取参数值或默认值 | `double value = params.getOrDefault(lr.regParam());` |
+| `copy` | 无 | `ParamMap` | 复制参数映射 | `ParamMap copied = params.copy();` |
+| `clear` | Param[T] param | `ParamMap` | 清除参数 | `params.clear(lr.regParam());` |
+| `contains` | Param[T] param | `boolean` | 判断是否包含参数 | `boolean has = params.contains(lr.regParam());` |
+
+---
+
+### MLWriter
+**包路径**: `org.apache.spark.ml.util`
+**说明**: ML模型写入器，用于保存MLlib模型。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `save` | String path | `Unit` | 保存模型 | `model.write().save("hdfs://model/path");` |
+| `overwrite` | 无 | `MLWriter` | 覆盖写入 | `model.write().overwrite().save("hdfs://model/path");` |
+| `option` | String key, String value | `MLWriter` | 设置选项 | `model.write().option("compression", "gzip").save("path");` |
+| `option` | String key, boolean value | `MLWriter` | 设置布尔选项 | `model.write().option("skipValidations", true).save("path");` |
+| `session` | SparkSession session | `MLWriter` | 设置SparkSession | `model.write().session(spark).save("path");` |
+| `context` | SparkContext context | `MLWriter` | 设置SparkContext | `model.write().context(spark.sparkContext()).save("path");` |
+
+---
+
+### MLReader[T]
+**包路径**: `org.apache.spark.ml.util`
+**说明**: ML模型读取器，用于加载MLlib模型。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `load` | String path | `T` | 加载模型 | `LogisticRegressionModel model = LogisticRegressionModel.load("hdfs://model/path");` |
+| `option` | String key, String value | `MLReader[T]` | 设置选项 | `model.read().option("skipValidations", "true").load("path");` |
+| `session` | SparkSession session | `MLReader[T]` | 设置SparkSession | `model.read().session(spark).load("path");` |
+| `context` | SparkContext context | `MLReader[T]` | 设置SparkContext | `model.read().context(spark.sparkContext()).load("path");` |
+| `isFileSystemLoaded` | 无 | `boolean` | 是否从文件系统加载 | `boolean loaded = reader.isFileSystemLoaded();` |
+
+---
+
 
 ### CrossValidator
 **包路径**: `org.apache.spark.ml.tuning`
