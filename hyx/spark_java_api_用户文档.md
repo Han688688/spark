@@ -213,6 +213,11 @@ import org.apache.spark.util.LongAccumulator;
 | `unpersist` | blocking: Boolean | `JavaDoubleRDD` | 取消RDD持久化，可控制是否阻塞等待释放完成 | // unpersist(blocking)：可阻塞释放缓存<br>JavaRDD<String> rdd = sc.textFile("hdfs://file.txt");<br>rdd.cache();<br>rdd.count();<br>// blocking=true：等待释放完成后再返回<br>rdd.unpersist(true);<br>// blocking=false：非阻塞立即返回（默认）<br>rdd.unpersist(false); |
 | `variance` | 无 | `JDouble` | 计算方差 | // variance：计算方差<br>List<Double> data = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(data);<br><br>double variance = doubleRDD.variance();<br>// 方差衡量数据的离散程度 |
 
+| `fromRDD` | RDD[Double] rdd | `JavaDoubleRDD` | 从Scala RDD创建JavaDoubleRDD | `JavaDoubleRDD doubleRdd = JavaDoubleRDD.fromRDD(scalaRdd);` |
+| `popStdev` | 无 | `double` | 总体标准差 | `double stdev = doubleRdd.popStdev();` |
+| `popVariance` | 无 | `double` | 总体方差 | `double variance = doubleRdd.popVariance();` |
+
+
 ### JavaPairRDD
 **包路径**: `org.apache.spark.api.java`
 **方法数量**: 53
@@ -2412,6 +2417,45 @@ import org.apache.spark.util.LongAccumulator;
 | `first_value` | Column e | `Column` | 窗口第一个值 | `df.withColumn("first", first_value(col("value")).over(Window.partitionBy("group")));` |
 | `last_value` | Column e | `Column` | 窗口最后一个值 | `df.withColumn("last", last_value(col("value")).over(Window.partitionBy("group")));` |
 
+| `count_distinct` | Column... cols | `Column` | 唯一值计数（别名） | `long count = df.select(count_distinct(col("id"))).first().getLong(0);` |
+| `array_size` | Column array | `Column` | 数组大小（别名） | `Column size = array_size(col("items"));` |
+| `array_sort` | Column array | `Column` | 数组排序 | `Column sorted = array_sort(col("items"));` |
+| `map_contains_key` | Column map, Column key | `Column` | 判断Map是否包含key | `Column contains = map_contains_key(col("data"), lit("key1"));` |
+| `map_keys` | Column map | `Column` | 获取Map的所有key | `Column keys = map_keys(col("data"));` |
+| `map_values` | Column map | `Column` | 获取Map的所有value | `Column values = map_values(col("data"));` |
+| `typedLit` | T value, Encoder[T] encoder | `Column` | 类型化字面值 | `Column typed = typedLit(Arrays.asList(1, 2, 3), Encoders.INT());` |
+| `spark_partition_id` | 无 | `Column` | 获取分区ID | `df.select(spark_partition_id().as("partition")).show();` |
+| `input_file_name` | 无 | `Column` | 获取输入文件名 | `df.select(input_file_name().as("file")).show();` |
+| `input_file_block_start` | 无 | `Column` | 获取文件块起始位置 | `df.select(input_file_block_start().as("start")).show();` |
+| `input_file_block_length` | 无 | `Column` | 获取文件块长度 | `df.select(input_file_block_length().as("length")).show();` |
+| `trunc` | Column date, String format | `Column` | 截断日期 | `Column truncated = trunc(col("date"), "month");` |
+| `date_trunc` | String format, Column timestamp | `Column` | 截断时间戳 | `Column truncated = date_trunc("hour", col("timestamp"));` |
+| `expr` | String str | `Column` | 解析SQL表达式 | `Column result = expr("col1 + col2 * 10");` |
+| `format_number` | Column x, int d | `Column` | 格式化数字 | `Column formatted = format_number(col("value"), 2);` |
+| `format_string` | String format, Column... cols | `Column` | 格式化字符串 | `Column formatted = format_string("%s: %d", col("name"), col("value"));` |
+| `regexp_count` | Column str, Column regexp | `Column` | 正则匹配计数 | `Column count = regexp_count(col("text"), lit("[0-9]+"));` |
+| `regexp_instr` | Column str, Column regexp | `Column` | 正则匹配位置 | `Column pos = regexp_instr(col("text"), lit("[0-9]+"));` |
+| `regexp_like` | Column str, Column regexp | `Column` | 正则判断是否匹配 | `Column matched = regexp_like(col("text"), lit("^[A-Z]"));` |
+| `isnull` | Column col | `Column` | 判断是否null | `Column isNull = isnull(col("value"));` |
+| `isnotnull` | Column col | `Column` | 判断是否非null | `Column notNull = isnotnull(col("value"));` |
+| `nvl2` | Column col1, Column col2, Column col3 | `Column` | NVL2函数 | `Column result = nvl2(col("a"), col("b"), col("c"));` |
+| `greatest` | Column... cols | `Column` | 取最大值 | `Column max = greatest(col("a"), col("b"), col("c"));` |
+| `least` | Column... cols | `Column` | 取最小值 | `Column min = least(col("a"), col("b"), col("c"));` |
+| `case_when` | Column... branches | `Column` | CASE WHEN表达式 | `Column result = case_when(col("a").equalTo(1), lit("one"), col("a").equalTo(2), lit("two"), lit("other"));` |
+
+| `signum` | Column col | `Column` | 符号函数 | `Column sign = signum(col("value"));` |
+| `atan2` | Column y, Column x | `Column` | 双参数反正切 | `Column angle = atan2(col("y"), col("x"));` |
+| `bin` | Column col | `Column` | 转为二进制字符串 | `Column binary = bin(col("num"));` |
+| `hex` | Column col | `Column` | 转为十六进制字符串 | `Column hexStr = hex(col("num"));` |
+| `unhex` | Column col | `Column` | 解析十六进制字符串 | `Column bytes = unhex(col("hex_str"));` |
+| `degrees` | Column col | `Column` | 弧度转角度 | `Column deg = degrees(col("radians"));` |
+| `radians` | Column col | `Column` | 角度转弧度 | `Column rad = radians(col("degrees"));` |
+| `pmod` | Column a, Column b | `Column` | 正模运算（总是正数） | `Column mod = pmod(col("a"), col("b"));` |
+| `shiftleft` | Column col, int numBits | `Column` | 左移位 | `Column shifted = shiftleft(col("num"), 2);` |
+| `shiftright` | Column col, int numBits | `Column` | 右移位 | `Column shifted = shiftright(col("num"), 2);` |
+| `shiftRightUnsigned` | Column col, int numBits | `Column` | 无符号右移位 | `Column shifted = shiftRightUnsigned(col("num"), 2);` |
+
+
 ### DataFrameReader
 **包路径**: `org.apache.spark.sql`
 **说明**: DataFrame读取器，用于从各种数据源读取数据。
@@ -2569,6 +2613,10 @@ import org.apache.spark.util.LongAccumulator;
 | `binaryRecordsStream` | String directory, int recordLength | `JavaDStream[byte[]]` | 监控目录中的固定长度二进制文件流 | `JavaDStream<byte[]> stream = jssc.binaryRecordsStream("hdfs://data/", 100);  // 每条记录100字节` |
 | `receiverStream` | JavaReceiverInputDStream[T] receiver | `JavaDStream[T]` | 使用自定义Receiver创建DStream | `JavaDStream<String> customStream = jssc.receiverStream(new MyCustomReceiver());  // 自定义数据源` |
 
+| `removeStreamingListener` | StreamingListener listener | `Unit` | 移除流处理监听器 | `jssc.removeStreamingListener(listener);` |
+| `getActiveContexts` | 无 | `List[StreamingContext]` | 获取所有活动的StreamingContext | `List<StreamingContext> contexts = StreamingContext.getActiveContexts();` |
+
+
 ### JavaDStream[T]
 **包路径**: `org.apache.spark.streaming.api.java`
 **说明**: Java版本的DStream（离散化流），代表连续的RDD序列。
@@ -2608,6 +2656,41 @@ import org.apache.spark.util.LongAccumulator;
 | `saveAsTextFiles` | String prefix, String suffix | `Unit` | 保存为文本文件序列 | `dstream.saveAsTextFiles("output/stream", "txt");  // 生成output/stream-TIME.txt` |
 | `saveAsObjectFiles` | String prefix, String suffix | `Unit` | 保存为对象文件序列 | `dstream.saveAsObjectFiles("output/stream", "obj");` |
 
+
+### JavaInputDStream[T]
+**包路径**: `org.apache.spark.streaming.api.java`
+**说明**: Java版本的InputDStream，是JavaReceiverInputDStream的父类。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `start` | 无 | `Unit` | 启动接收器 | `inputDStream.start();` |
+| `stop` | 无 | `Unit` | 停止接收器 | `inputDStream.stop();` |
+| `compute` | Time validTime | `Option[RDD[T]]` | 计算指定时间的RDD | `Option<JavaRDD<String>> rdd = inputDStream.compute(time);` |
+| `isInitialized` | 无 | `boolean` | 是否已初始化 | `boolean init = inputDStream.isInitialized();` |
+| `slideDuration` | 无 | `Duration` | 获取滑动间隔 | `Duration duration = inputDStream.slideDuration();` |
+
+---
+
+### JavaReceiverInputDStream[T]
+**包路径**: `org.apache.spark.streaming.api.java`
+**说明**: Java版本的ReceiverInputDStream，用于自定义数据接收器。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `start` | 无 | `Unit` | 启动接收器 | `receiverInputDStream.start();` |
+| `stop` | 无 | `Unit` | 停止接收器 | `receiverInputDStream.stop();` |
+| `receiver` | 无 | `Receiver[T]` | 获取底层Receiver | `Receiver<String> receiver = receiverInputDStream.receiver();` |
+| `compute` | Time validTime | `Option[RDD[T]]` | 计算指定时间的RDD | `Option<JavaRDD<String>> rdd = receiverInputDStream.compute(time);` |
+| `isInitialized` | 无 | `boolean` | 是否已初始化 | `boolean init = receiverInputDStream.isInitialized();` |
+| `slideDuration` | 无 | `Duration` | 获取滑动间隔 | `Duration duration = receiverInputDStream.slideDuration();` |
+| `storageLevel` | 无 | `StorageLevel` | 获取存储级别 | `StorageLevel level = receiverInputDStream.storageLevel();` |
+| `repartition` | int numPartitions | `JavaDStream[T]` | 重新分区 | `JavaDStream<String> repartitioned = receiverInputDStream.repartition(4);` |
+
+---
+
+
 ### JavaPairDStream[K, V]
 **包路径**: `org.apache.spark.streaming.api.java`
 **说明**: 键值对版本的DStream，继承JavaDStream并添加键值对操作。
@@ -2625,6 +2708,15 @@ import org.apache.spark.util.LongAccumulator;
 | `cogroup` | JavaPairDStream[K, W] other | `JavaPairDStream[K, Tuple2[JIterable[V], JIterable[W]]]` | 共同分组 | - |
 | `updateStateByKey` | JFunction2[JList[V], Optional[S], Optional[S]] updateFunc | `JavaPairDStream[K, S]` | 更新状态（带状态计算） | `JavaPairDStream<String, Integer> stateCounts = wordCounts.updateStateByKey((values, state) -> {<br>    int sum = state.orElse(0);<br>    for (int v : values) sum += v;<br>    return Optional.of(sum);<br>});` |
 | `mapWithState` | StateSpec[K, V, S, M] spec | `JavaMapWithStateDStream[K, V, S, M]` | 高效状态更新 | - |
+
+| `compute` | Time time | `Option[RDD[(K, V)]]` | 计算指定时间的RDD | `Option<RDD<Tuple2<String, Integer>>> rdd = pairDStream.compute(time);` |
+| `fromJavaDStream` | JavaDStream[(K, V)] dstream | `JavaPairDStream[K, V]` | 从JavaDStream创建 | `JavaPairDStream<String, Integer> pair = JavaPairDStream.fromJavaDStream(dstream);` |
+| `groupByKeyAndWindow` | Duration windowDuration | `JavaPairDStream[K, JIterable[V]]` | 按窗口分组 | `JavaPairDStream<String, Iterable<Integer>> grouped = pairDStream.groupByKeyAndWindow(Durations.seconds(10));` |
+| `groupByKeyAndWindow` | Duration windowDuration, Duration slideDuration | `JavaPairDStream[K, JIterable[V]]` | 按窗口分组（指定滑动间隔） | `JavaPairDStream<String, Iterable<Integer>> grouped = pairDStream.groupByKeyAndWindow(Durations.seconds(10), Durations.seconds(2));` |
+| `saveAsHadoopFiles` | String prefix, String suffix | `Unit` | 保存为Hadoop文件 | `pairDStream.saveAsHadoopFiles("hdfs://output/", "txt");` |
+| `saveAsNewAPIHadoopFiles` | String prefix, String suffix | `Unit` | 保存为新API Hadoop文件 | `pairDStream.saveAsNewAPIHadoopFiles("hdfs://output/", "txt");` |
+| `toJavaDStream` | 无 | `JavaDStream[(K, V)]` | 转为JavaDStream | `JavaDStream<Tuple2<String, Integer>> dstream = pairDStream.toJavaDStream();` |
+
 
 ---
 
@@ -2762,6 +2854,269 @@ import org.apache.spark.util.LongAccumulator;
 | `pc` | 无 | `Matrix` | 获取主成分矩阵 | `Matrix principalComponents = model.pc();` |
 | `explainedVariance` | 无 | `Vector` | 获取解释方差比例 | `Vector variance = model.explainedVariance();` |
 
+
+### HashingTF
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将文本词转换为固定大小的向量，使用哈希技巧。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `HashingTF` | 无 | 构造方法 | 创建HashingTF | `HashingTF hashingTF = new HashingTF();` |
+| `setInputCol` | String value | `HashingTF` | 设置输入列名 | `hashingTF.setInputCol("words");` |
+| `setOutputCol` | String value | `HashingTF` | 设置输出列名 | `hashingTF.setOutputCol("features");` |
+| `setNumFeatures` | int value | `HashingTF` | 设置特征数量（默认2^18） | `hashingTF.setNumFeatures(10000);` |
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 执行转换 | `Dataset<Row> result = hashingTF.transform(sentences);` |
+
+---
+
+### Tokenizer
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将文本分割为单词列表。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Tokenizer` | 无 | 构造方法 | 创建Tokenizer | `Tokenizer tokenizer = new Tokenizer();` |
+| `setInputCol` | String value | `Tokenizer` | 设置输入列名 | `tokenizer.setInputCol("text");` |
+| `setOutputCol` | String value | `Tokenizer` | 设置输出列名 | `tokenizer.setOutputCol("words");` |
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 执行转换 | `Dataset<Row> words = tokenizer.transform(texts);` |
+
+---
+
+### StopWordsRemover
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 移除停用词（如"a", "the"等）。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `StopWordsRemover` | 无 | 构造方法 | 创建StopWordsRemover | `StopWordsRemover remover = new StopWordsRemover();` |
+| `setInputCol` | String value | `StopWordsRemover` | 设置输入列名 | `remover.setInputCol("words");` |
+| `setOutputCol` | String value | `StopWordsRemover` | 设置输出列名 | `remover.setOutputCol("filtered");` |
+| `setStopWords` | String[] stopWords | `StopWordsRemover` | 设置停用词列表 | `remover.setStopWords(new String[]{"a", "the", "is"});` |
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 执行转换 | `Dataset<Row> filtered = remover.transform(words);` |
+
+---
+
+### IDF
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 计算词频-逆文档频率，衡量词的重要性。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `IDF` | 无 | 构造方法 | 创建IDF | `IDF idf = new IDF();` |
+| `setInputCol` | String value | `IDF` | 设置输入列名 | `idf.setInputCol("features");` |
+| `setOutputCol` | String value | `IDF` | 设置输出列名 | `idf.setOutputCol("idf_features");` |
+| `fit` | Dataset<?> dataset | `IDFModel` | 训练IDF模型 | `IDFModel model = idf.fit(tfFeatures);` |
+| `setMinDocFreq` | int value | `IDF` | 设置最小文档频率 | `idf.setMinDocFreq(3);` |
+
+---
+
+### Word2Vec
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将单词映射到向量空间，捕捉语义相似性。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Word2Vec` | 无 | 构造方法 | 创建Word2Vec | `Word2Vec word2Vec = new Word2Vec();` |
+| `setInputCol` | String value | `Word2Vec` | 设置输入列名 | `word2Vec.setInputCol("words");` |
+| `setOutputCol` | String value | `Word2Vec` | 设置输出列名 | `word2Vec.setOutputCol("vector");` |
+| `setVectorSize` | int value | `Word2Vec` | 设置向量维度（默认100） | `word2Vec.setVectorSize(50);` |
+| `setMinCount` | int value | `Word2Vec` | 设置最小出现次数（默认5） | `word2Vec.setMinCount(2);` |
+| `setWindowSize` | int value | `Word2Vec` | 设置窗口大小（默认5） | `word2Vec.setWindowSize(10);` |
+| `fit` | Dataset<?> dataset | `Word2VecModel` | 训练模型 | `Word2VecModel model = word2Vec.fit(sentences);` |
+| `setMaxSentenceLength` | int value | `Word2Vec` | 设置最大句子长度 | `word2Vec.setMaxSentenceLength(1000);` |
+
+---
+
+### CountVectorizer
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将文本转换为词频向量。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `CountVectorizer` | 无 | 构造方法 | 创建CountVectorizer | `CountVectorizer cv = new CountVectorizer();` |
+| `setInputCol` | String value | `CountVectorizer` | 设置输入列名 | `cv.setInputCol("words");` |
+| `setOutputCol` | String value | `CountVectorizer` | 设置输出列名 | `cv.setOutputCol("features");` |
+| `setVocabSize` | int value | `CountVectorizer` | 设置词汇表大小（默认2^18） | `cv.setVocabSize(1000);` |
+| `setMinDF` | double value | `CountVectorizer` | 设置最小文档频率 | `cv.setMinDF(2.0);` |
+| `setMinTF` | double value | `CountVectorizer` | 设置最小词频 | `cv.setMinTF(1.0);` |
+| `fit` | Dataset<?> dataset | `CountVectorizerModel` | 训练模型 | `CountVectorizerModel model = cv.fit(sentences);` |
+| `setBinary` | boolean value | `CountVectorizer` | 设置是否二进制输出 | `cv.setBinary(true);` |
+
+---
+
+### VectorAssembler
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将多列合并为单个向量列。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `VectorAssembler` | 无 | 构造方法 | 创建VectorAssembler | `VectorAssembler assembler = new VectorAssembler();` |
+| `setInputCols` | String[] values | `VectorAssembler` | 设置输入列名 | `assembler.setInputCols(new String[]{"age", "income", "score"});` |
+| `setOutputCol` | String value | `VectorAssembler` | 设置输出列名 | `assembler.setOutputCol("features");` |
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 执行转换 | `Dataset<Row> assembled = assembler.transform(data);` |
+
+---
+
+### MinMaxScaler
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将向量列缩放到[0,1]范围。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `MinMaxScaler` | 无 | 构造方法 | 创建MinMaxScaler | `MinMaxScaler scaler = new MinMaxScaler();` |
+| `setInputCol` | String value | `MinMaxScaler` | 设置输入列名 | `scaler.setInputCol("features");` |
+| `setOutputCol` | String value | `MinMaxScaler` | 设置输出列名 | `scaler.setOutputCol("scaled");` |
+| `setMin` | double value | `MinMaxScaler` | 设置最小值（默认0） | `scaler.setMin(0.0);` |
+| `setMax` | double value | `MinMaxScaler` | 设置最大值（默认1） | `scaler.setMax(1.0);` |
+| `fit` | Dataset<?> dataset | `MinMaxScalerModel` | 训练模型 | `MinMaxScalerModel model = scaler.fit(data);` |
+
+---
+
+### OneHotEncoder
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将分类特征转换为二进制向量。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `OneHotEncoder` | 无 | 构造方法 | 创建OneHotEncoder | `OneHotEncoder encoder = new OneHotEncoder();` |
+| `setInputCol` | String value | `OneHotEncoder` | 设置输入列名 | `encoder.setInputCol("category");` |
+| `setOutputCol` | String value | `OneHotEncoder` | 设置输出列名 | `encoder.setOutputCol("category_vec");` |
+| `setDropLast` | boolean value | `OneHotEncoder` | 是否丢弃最后一个类别（默认true） | `encoder.setDropLast(false);` |
+| `fit` | Dataset<?> dataset | `OneHotEncoderModel` | 训练模型 | `OneHotEncoderModel model = encoder.fit(data);` |
+
+---
+
+### Bucketizer
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将连续特征分桶为离散特征。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Bucketizer` | 无 | 构造方法 | 创建Bucketizer | `Bucketizer bucketizer = new Bucketizer();` |
+| `setInputCol` | String value | `Bucketizer` | 设置输入列名 | `bucketizer.setInputCol("value");` |
+| `setOutputCol` | String value | `Bucketizer` | 设置输出列名 | `bucketizer.setOutputCol("bucket");` |
+| `setSplitsArray` | double[][] splitsArray | `Bucketizer` | 设置分桶边界 | `bucketizer.setSplitsArray(new double[][]{{0, 10, 20, 100}});` |
+
+---
+
+
+### Imputer
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 缺失值填充器，使用均值或中位数填充缺失值。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Imputer` | 无 | 构造方法 | 创建Imputer | `Imputer imputer = new Imputer();` |
+| `setInputCols` | String[] value | `Imputer` | 设置输入列名 | `imputer.setInputCols(new String[]{"age", "income"});` |
+| `setOutputCols` | String[] value | `Imputer` | 设置输出列名 | `imputer.setOutputCols(new String[]{"age_imputed", "income_imputed"});` |
+| `setStrategy` | String value | `Imputer` | 设置填充策略 | `imputer.setStrategy("mean");` |
+| `setMissingValue` | double value | `Imputer` | 设置缺失值标识 | `imputer.setMissingValue(Double.NaN);` |
+| `fit` | Dataset<?> dataset | `ImputerModel` | 训练填充模型 | `ImputerModel model = imputer.fit(data);` |
+
+---
+
+### Binarizer
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 二值化器，将连续特征转换为二值（0/1）。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Binarizer` | 无 | 构造方法 | 创建Binarizer | `Binarizer binarizer = new Binarizer();` |
+| `setInputCol` | String value | `Binarizer` | 设置输入列名 | `binarizer.setInputCol("feature");` |
+| `setOutputCol` | String value | `Binarizer` | 设置输出列名 | `binarizer.setOutputCol("binary_feature");` |
+| `setThreshold` | double value | `Binarizer` | 设置阈值（默认0.5） | `binarizer.setThreshold(0.5);` |
+
+---
+
+### QuantileDiscretizer
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 分位数离散化器，将连续特征按分位数分为多个桶。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `QuantileDiscretizer` | 无 | 构造方法 | 创建QuantileDiscretizer | `QuantileDiscretizer discretizer = new QuantileDiscretizer();` |
+| `setInputCol` | String value | `QuantileDiscretizer` | 设置输入列名 | `discretizer.setInputCol("value");` |
+| `setOutputCol` | String value | `QuantileDiscretizer` | 设置输出列名 | `discretizer.setOutputCol("bucket");` |
+| `setNumBuckets` | int value | `QuantileDiscretizer` | 设置桶数量（默认10） | `discretizer.setNumBuckets(10);` |
+| `fit` | Dataset<?> dataset | `BucketizerModel` | 训练模型 | `BucketizerModel model = discretizer.fit(data);` |
+
+---
+
+
+### StringIndexer
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将字符串标签转换为数值索引（按频率排序）。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `StringIndexer` | 无 | 构造方法 | 创建StringIndexer | `StringIndexer indexer = new StringIndexer();` |
+| `setInputCol` | String value | `StringIndexer` | 设置输入列名 | `indexer.setInputCol("category");` |
+| `setOutputCol` | String value | `StringIndexer` | 设置输出列名 | `indexer.setOutputCol("category_index");` |
+| `setHandleInvalid` | String value | `StringIndexer` | 处理无效值方式 | `indexer.setHandleInvalid("keep");` |
+| `fit` | Dataset<?> dataset | `StringIndexerModel` | 训练模型 | `StringIndexerModel model = indexer.fit(data);` |
+
+---
+
+
+### Pipeline
+**包路径**: `org.apache.spark.ml`
+**说明**: Pipeline是一个工作流，将多个Transformer和Estimator串联执行。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `Pipeline` | 无 | 构造方法 | 创建Pipeline | `Pipeline pipeline = new Pipeline();` |
+| `setStages` | PipelineStage... stages | `Pipeline` | 设置Pipeline阶段 | `pipeline.setStages(new PipelineStage[]{tokenizer, hashingTF, lr});` |
+| `getStages` | 无 | `PipelineStage[]` | 获取Pipeline阶段 | `PipelineStage[] stages = pipeline.getStages();` |
+| `fit` | Dataset<?> dataset | `PipelineModel` | 训练Pipeline | `PipelineModel model = pipeline.fit(trainingData);` |
+| `copy` | ParamMap extra | `Pipeline` | 复制Pipeline | `Pipeline copied = pipeline.copy(new ParamMap());` |
+
+---
+
+### PipelineModel
+**包路径**: `org.apache.spark.ml`
+**说明**: Pipeline训练后的模型，包含多个Transformer。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 执行Pipeline转换 | `Dataset<Row> predictions = model.transform(testData);` |
+| `stages` | 无 | `Transformer[]` | 获取所有阶段 | `Transformer[] stages = model.stages();` |
+| `copy` | ParamMap extra | `PipelineModel` | 复制模型 | `PipelineModel copied = model.copy(new ParamMap());` |
+| `write` | 无 | `MLWriter` | 保存模型 | `model.write().overwrite().save("hdfs://model/path");` |
+
+---
+
+### IndexToString
+**包路径**: `org.apache.spark.ml.feature`
+**说明**: 将数值索引还原为原始字符串标签（StringIndexer的逆操作）。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `IndexToString` | 无 | 构造方法 | 创建IndexToString | `IndexToString converter = new IndexToString();` |
+| `setInputCol` | String value | `IndexToString` | 设置输入列名 | `converter.setInputCol("category_index");` |
+| `setOutputCol` | String value | `IndexToString` | 设置输出列名 | `converter.setOutputCol("original_category");` |
+| `setLabels` | String[] labels | `IndexToString` | 设置标签数组 | `converter.setLabels(new String[]{"cat", "dog", "bird"});` |
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 执行转换 | `Dataset<Row> converted = converter.transform(indexed);` |
+
+---
+
+
 ### StandardScaler / StandardScalerModel
 **包路径**: `org.apache.spark.mllib.feature`
 **说明**: 标准化变换器，将特征标准化到均值0、方差1。
@@ -2775,6 +3130,135 @@ import org.apache.spark.util.LongAccumulator;
 | `transform` | JavaRDD[Vector] data | `JavaRDD[Vector]` | 批量转换 | `JavaRDD<Vector> scaled = model.transform(data);` |
 | `mean` | 无 | `Vector` | 获取均值 | `Vector mean = model.mean();` |
 | `std` | 无 | `Vector` | 获取标准差 | `Vector std = model.std();` |
+
+
+### BinaryClassificationEvaluator
+**包路径**: `org.apache.spark.ml.evaluation`
+**说明**: 二分类评估器，计算AUC、PR等指标。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `BinaryClassificationEvaluator` | 无 | 构造方法 | 创建评估器 | `BinaryClassificationEvaluator evaluator = new BinaryClassificationEvaluator();` |
+| `setLabelCol` | String value | `BinaryClassificationEvaluator` | 设置标签列名 | `evaluator.setLabelCol("label");` |
+| `setRawPredictionCol` | String value | `BinaryClassificationEvaluator` | 设置原始预测列名 | `evaluator.setRawPredictionCol("rawPrediction");` |
+| `setMetricName` | String value | `BinaryClassificationEvaluator` | 设置评估指标 | `evaluator.setMetricName("areaUnderROC");` |
+| `evaluate` | Dataset<?> dataset | `double` | 计算评估值 | `double auc = evaluator.evaluate(predictions);` |
+| `getMetricName` | 无 | `String` | 获取当前指标名 | `String metric = evaluator.getMetricName();` |
+
+---
+
+### MulticlassClassificationEvaluator
+**包路径**: `org.apache.spark.ml.evaluation`
+**说明**: 多分类评估器，计算准确率、F1等指标。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `MulticlassClassificationEvaluator` | 无 | 构造方法 | 创建评估器 | `MulticlassClassificationEvaluator evaluator = new MulticlassClassificationEvaluator();` |
+| `setLabelCol` | String value | `MulticlassClassificationEvaluator` | 设置标签列名 | `evaluator.setLabelCol("label");` |
+| `setPredictionCol` | String value | `MulticlassClassificationEvaluator` | 设置预测列名 | `evaluator.setPredictionCol("prediction");` |
+| `setMetricName` | String value | `MulticlassClassificationEvaluator` | 设置评估指标 | `evaluator.setMetricName("accuracy");` |
+| `evaluate` | Dataset<?> dataset | `double` | 计算评估值 | `double accuracy = evaluator.evaluate(predictions);` |
+| `getMetricName` | 无 | `String` | 获取当前指标名 | `String metric = evaluator.getMetricName();` |
+
+---
+
+### RegressionEvaluator
+**包路径**: `org.apache.spark.ml.evaluation`
+**说明**: 回归评估器，计算RMSE、MAE等指标。
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `RegressionEvaluator` | 无 | 构造方法 | 创建评估器 | `RegressionEvaluator evaluator = new RegressionEvaluator();` |
+| `setLabelCol` | String value | `RegressionEvaluator` | 设置标签列名 | `evaluator.setLabelCol("label");` |
+| `setPredictionCol` | String value | `RegressionEvaluator` | 设置预测列名 | `evaluator.setPredictionCol("prediction");` |
+| `setMetricName` | String value | `RegressionEvaluator` | 设置评估指标 | `evaluator.setMetricName("rmse");` |
+| `evaluate` | Dataset<?> dataset | `double` | 计算评估值 | `double rmse = evaluator.evaluate(predictions);` |
+| `getMetricName` | 无 | `String` | 获取当前指标名 | `String metric = evaluator.getMetricName();` |
+
+---
+
+
+### ParamGridBuilder
+**包路径**: `org.apache.spark.ml.tuning`
+**说明**: 参数网格构建器，用于构建超参数搜索空间。
+**方法数量**: 3+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `ParamGridBuilder` | 无 | 构造方法 | 创建参数网格构建器 | `ParamGridBuilder gridBuilder = new ParamGridBuilder();` |
+| `addGrid` | Param[T] param, T[] values | `ParamGridBuilder` | 添加参数网格 | `gridBuilder.addGrid(lr.regParam(), new Double[]{0.01, 0.1, 1.0});` |
+| `build` | 无 | `ParamMap[]` | 构建参数网格 | `ParamMap[] paramMaps = gridBuilder.build();` |
+
+---
+
+### CrossValidator
+**包路径**: `org.apache.spark.ml.tuning`
+**说明**: K折交叉验证，用于模型选择和超参数调优。
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `CrossValidator` | 无 | 构造方法 | 创建交叉验证器 | `CrossValidator cv = new CrossValidator();` |
+| `setEstimator` | Estimator<?> estimator | `CrossValidator` | 设置估计器 | `cv.setEstimator(lr);` |
+| `setEstimatorParamMaps` | ParamMap[] paramMaps | `CrossValidator` | 设置参数网格 | `cv.setEstimatorParamMaps(paramGrid);` |
+| `setEvaluator` | Evaluator evaluator | `CrossValidator` | 设置评估器 | `cv.setEvaluator(new BinaryClassificationEvaluator());` |
+| `setNumFolds` | int value | `CrossValidator` | 设置折叠数（默认3） | `cv.setNumFolds(5);` |
+| `setParallelism` | int value | `CrossValidator` | 设置并行度 | `cv.setParallelism(2);` |
+| `fit` | Dataset<?> dataset | `CrossValidatorModel` | 执行交叉验证 | `CrossValidatorModel model = cv.fit(trainingData);` |
+| `getBestModel` | 无 | `Model<?>` | 获取最佳模型 | `Model<?> best = cvModel.bestModel();` |
+
+---
+
+### CrossValidatorModel
+**包路径**: `org.apache.spark.ml.tuning`
+**说明**: 交叉验证后的模型，包含最佳模型和所有模型。
+**方法数量**: 4+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `bestModel` | 无 | `Model<?>` | 获取最佳模型 | `Model<?> best = cvModel.bestModel();` |
+| `avgMetrics` | 无 | `double[]` | 获取平均指标 | `double[] metrics = cvModel.avgMetrics();` |
+| `transform` | Dataset<?> dataset | `Dataset[Row]` | 使用最佳模型转换 | `Dataset<Row> predictions = cvModel.transform(testData);` |
+| `write` | 无 | `MLWriter` | 保存模型 | `cvModel.write().overwrite().save("hdfs://model/cv");` |
+
+---
+
+### TrainValidationSplit
+**包路径**: `org.apache.spark.ml.tuning`
+**说明**: 单次训练验证分割，比交叉验证更快但更不稳定。
+**方法数量**: 7+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `TrainValidationSplit` | 无 | 构造方法 | 创建训练验证分割器 | `TrainValidationSplit tvs = new TrainValidationSplit();` |
+| `setEstimator` | Estimator<?> estimator | `TrainValidationSplit` | 设置估计器 | `tvs.setEstimator(lr);` |
+| `setEstimatorParamMaps` | ParamMap[] paramMaps | `TrainValidationSplit` | 设置参数网格 | `tvs.setEstimatorParamMaps(paramGrid);` |
+| `setEvaluator` | Evaluator evaluator | `TrainValidationSplit` | 设置评估器 | `tvs.setEvaluator(new RegressionEvaluator());` |
+| `setTrainRatio` | double value | `TrainValidationSplit` | 设置训练比例（默认0.75） | `tvs.setTrainRatio(0.8);` |
+| `setParallelism` | int value | `TrainValidationSplit` | 设置并行度 | `tvs.setParallelism(2);` |
+| `fit` | Dataset<?> dataset | `TrainValidationSplitModel` | 执行训练验证分割 | `TrainValidationSplitModel model = tvs.fit(trainingData);` |
+
+---
+
+
+### ClusteringEvaluator
+**包路径**: `org.apache.spark.ml.evaluation`
+**说明**: 聚类评估器，计算轮廓系数等指标。
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `ClusteringEvaluator` | 无 | 构造方法 | 创建评估器 | `ClusteringEvaluator evaluator = new ClusteringEvaluator();` |
+| `setPredictionCol` | String value | `ClusteringEvaluator` | 设置预测列名 | `evaluator.setPredictionCol("prediction");` |
+| `setFeaturesCol` | String value | `ClusteringEvaluator` | 设置特征列名 | `evaluator.setFeaturesCol("features");` |
+| `setMetricName` | String value | `ClusteringEvaluator` | 设置评估指标 | `evaluator.setMetricName("silhouette");` |
+| `evaluate` | Dataset<?> dataset | `double` | 计算评估值 | `double silhouette = evaluator.evaluate(predictions);` |
+
+---
+
 
 ### Normalizer
 **包路径**: `org.apache.spark.mllib.feature`
