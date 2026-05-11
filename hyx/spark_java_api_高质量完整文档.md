@@ -1,23 +1,26 @@
 # Spark Java API 高质量完整文档
 
 > **文档特点**:
-> - 包含Spark所有public Java方法
-> - 核心方法提供完整示例
-> - 其他方法提供清晰参数说明
-> - 按业务分类组织
+> - 包含Spark核心public Java API
+> - 移除内部实现类和示例程序
+> - 核心方法提供完整可运行示例
+> - 按业务分类组织，便于测试覆盖
 
-> **统计**: 2840 个方法
+> **说明**: 
+> - 核心API：用户直接调用的public方法（JavaSparkContext、JavaRDD、JavaPairRDD等）
+> - Connector API：数据源开发者使用的接口
+> - 已移除：内部实现类（catalyst/execution包）和示例程序
+
+> **统计**: 259个类，约1600+个public方法
 
 ---
 
 ## 目录
 
-- Core RDD核心: 4 类, 153 方法
-- MLlib机器学习: 33 类, 43 方法
-- SQL DataFrame: 97 类, 858 方法
-- Streaming流处理: 13 类, 69 方法
-- 其他辅助类: 292 类, 1716 方法
-- 存储级别: 1 类, 1 方法
+- Core RDD核心: 5类（含JavaRDDLike接口）
+- SQL DataFrame/Connector: 约200类
+- Streaming流处理: 部分
+- 存储级别: 1类
 
 ---
 
@@ -143,6 +146,73 @@
 | `setName` | name: String | `JavaRDD` | 设置RDD名称，用于Spark UI调试和监控 | // setName：设置RDD名称<br>JavaRDD<String> rdd = sc.textFile("hdfs://data.txt");<br>rdd.setName("raw-input-data");<br>// 在Spark UI中显示此名称便于调试 |
 | `withResources` | ResourceProfile: rp | `JavaRDD` | 设置RDD的资源配置，用于资源隔离和精细控制 | // withResources：设置资源配置<br>ResourceProfile profile = new ResourceProfileBuilder().requireCores(2).build();<br>JavaRDD<String> rddWithResources = rdd.withResources(profile);<br>// 此RDD执行时使用指定的资源 |
 
+
+### JavaRDDLike (核心接口)
+**包路径**: `org.apache.spark.api.java`
+**说明**: JavaRDD、JavaPairRDD、JavaDoubleRDD共同继承的接口，包含最常用的RDD操作方法。
+**方法数量**: 50+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `map` | JFunction[T, R] f | `JavaRDD[R]` | 对每个元素应用函数，一对一转换 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>JavaRDD<Integer> doubled = nums.map(x -> x * 2);<br>// 结果: [2, 4, 6]` |
+| `mapToPair` | PairFunction[T, K, V] f | `JavaPairRDD[K, V]` | 将元素转换为键值对 | `JavaRDD<String> words = sc.parallelize(Arrays.asList("apple", "banana"));<br>JavaPairRDD<String, Integer> pairs = words.mapToPair(w -> new Tuple2<>(w, w.length()));<br>// 结果: [("apple", 5), ("banana", 6)]` |
+| `mapToDouble` | DoubleFunction[T] f | `JavaDoubleRDD` | 将元素转换为Double值 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>JavaDoubleRDD sqrt = nums.mapToDouble(x -> Math.sqrt(x));` |
+| `flatMap` | FlatMapFunction[T, U] f | `JavaRDD[U]` | 将每个元素映射为多个输出元素 | `JavaRDD<String> lines = sc.parallelize(Arrays.asList("hello world", "spark java"));<br>JavaRDD<String> words = lines.flatMap(line -> Arrays.asList(line.split(" ")).iterator());<br>// 结果: ["hello", "world", "spark", "java"]` |
+| `flatMapToPair` | PairFlatMapFunction[T, K, V] f | `JavaPairRDD[K, V]` | 将每个元素映射为多个键值对 | `JavaRDD<String> lines = sc.parallelize(Arrays.asList("a b", "c d"));<br>JavaPairRDD<String, Integer> pairs = lines.flatMapToPair(line -> {<br>    List<Tuple2<String, Integer>> result = new ArrayList<>();<br>    for (String w : line.split(" ")) {<br>        result.add(new Tuple2<>(w, 1));<br>    }<br>    return result.iterator();<br>});` |
+| `mapPartitions` | FlatMapFunction[JIterator[T], U] f | `JavaRDD[U]` | 对每个分区应用函数，适合批量处理 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4), 2);<br>JavaRDD<Integer> partitionSum = nums.mapPartitions(iter -> {<br>    int sum = 0;<br>    while (iter.hasNext()) sum += iter.next();<br>    return Arrays.asList(sum).iterator();<br>});<br>// 结果: [3, 7] (分区0:1+2=3, 分区1:3+4=7)` |
+| `mapPartitionsWithIndex` | JFunction2[Integer, JIterator[T], JIterator[R]] f | `JavaRDD[R]` | 对每个分区应用函数，带分区索引 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4), 2);<br>JavaRDD<String> indexed = nums.mapPartitionsWithIndex((idx, iter) -> {<br>    List<String> result = new ArrayList<>();<br>    while (iter.hasNext()) result.add("Partition " + idx + ": " + iter.next());<br>    return result.iterator();<br>});` |
+| `glom` | 无 | `JavaRDD[JList[T]]` | 将每个分区的元素合并为一个List | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4), 2);<br>JavaRDD<List<Integer>> partitions = nums.glom();<br>// 结果: [[1, 2], [3, 4]]` |
+| `collect` | 无 | `JList[T]` | 将RDD所有元素收集到Driver端，返回Java List | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>List<Integer> list = nums.collect();<br>// 注意：数据量大时可能导致Driver内存溢出` |
+| `collectPartitions` | Array[Int] partitionIds | `Array[JList[T]]` | 收集指定分区的元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5), 3);<br>List<Integer>[] parts = nums.collectPartitions(new int[]{0, 2});<br>// 只收集分区0和分区2` |
+| `toLocalIterator` | 无 | `JIterator[T]` | 返回本地迭代器，逐分区拉取数据 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br>Iterator<Integer> iter = nums.toLocalIterator();<br>while (iter.hasNext()) {<br>    System.out.println(iter.next());<br>}` |
+| `foreach` | VoidFunction[T] f | `Unit` | 对每个元素执行操作（不返回结果） | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>nums.foreach(x -> System.out.println("Value: " + x));` |
+| `foreachPartition` | VoidFunction[JIterator[T]] f | `Unit` | 对每个分区的迭代器执行操作 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4), 2);<br>nums.foreachPartition(iter -> {<br>    int sum = 0;<br>    while (iter.hasNext()) sum += iter.next();<br>    System.out.println("Partition sum: " + sum);<br>});` |
+| `reduce` | JFunction2[T, T, T] f | `T` | 使用函数聚合所有元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>int sum = nums.reduce((a, b) -> a + b);<br>// 结果: 10` |
+| `treeReduce` | JFunction2[T, T, T] f, depth: Int | `T` | 树形聚合，减少Driver负载 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));<br>int sum = nums.treeReduce((a, b) -> a + b, 2);<br>// 深度为2的树形聚合` |
+| `fold` | zeroValue: T, JFunction2[T, T, T] f | `T` | 使用零值进行聚合 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>int sum = nums.fold(0, (a, b) -> a + b);<br>// 结果: 6` |
+| `aggregate` | zeroValue: U, seqOp: JFunction2[U, T, U], combOp: JFunction2[U, U, U] | `U` | 使用不同类型的零值进行聚合 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>Tuple2<Integer, Integer> result = nums.aggregate(<br>    new Tuple2<>(0, 0),  // (sum, count)<br>    (acc, x) -> new Tuple2<>(acc._1 + x, acc._2 + 1),  // 分区内聚合<br>    (acc1, acc2) -> new Tuple2<>(acc1._1 + acc2._1, acc1._2 + acc2._2)  // 分区间合并<br>);<br>// 结果: (10, 4)` |
+| `treeAggregate` | zeroValue: U, seqOp, combOp, depth: Int | `U` | 树形聚合，减少Driver内存压力 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));<br>int sum = nums.treeAggregate(0, (a, b) -> a + b, (a, b) -> a + b, 2);` |
+| `count` | 无 | `Long` | 计算元素总数 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4));<br>long total = nums.count();<br>// 结果: 4` |
+| `countApprox` | timeout: Long, confidence: Double | `PartialResult[BoundedDouble]` | 近似计数，在超时内返回带置信区间结果 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br>PartialResult<BoundedDouble> approx = nums.countApprox(1000, 0.95);` |
+| `countByValue` | 无 | `JMap[T, jl.Long]` | 统计每个值的出现次数 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 1));<br>Map<Integer, Long> counts = nums.countByValue();<br>// 结果: {1: 3, 2: 2, 3: 1}` |
+| `countApproxDistinct` | relativeSD: Double | `Long` | 近似统计唯一值数量（HyperLogLog算法） | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 1, 3, 2, 4, 5, 6, 7));<br>long distinct = nums.countApproxDistinct(0.05);<br>// relativeSD=0.05表示5%误差率` |
+| `take` | num: Int | `JList[T]` | 获取前n个元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br>List<Integer> first3 = nums.take(3);<br>// 结果: [1, 2, 3]` |
+| `takeSample` | withReplacement: Boolean, num: Int, seed: Long | `JList[T]` | 随机采样n个元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br>List<Integer> sample = nums.takeSample(false, 3, 42L);<br>// 不重复采样3个元素` |
+| `first` | 无 | `T` | 获取第一个元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>int first = nums.first();<br>// 结果: 1` |
+| `top` | num: Int, comp: Comparator[T] | `JList[T]` | 获取最大的n个元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 5, 3, 8, 2));<br>List<Integer> top3 = nums.top(3, Comparator.naturalOrder());<br>// 结果: [8, 5, 3]` |
+| `takeOrdered` | num: Int, comp: Comparator[T] | `JList[T]` | 获取最小的n个元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(5, 1, 3, 8, 2));<br>List<Integer> smallest3 = nums.takeOrdered(3, Comparator.naturalOrder());<br>// 结果: [1, 2, 3]` |
+| `max` | comp: Comparator[T] | `T` | 获取最大元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 5, 3, 8, 2));<br>int max = nums.max(Comparator.naturalOrder());<br>// 结果: 8` |
+| `min` | comp: Comparator[T] | `T` | 获取最小元素 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(5, 1, 3, 8, 2));<br>int min = nums.min(Comparator.naturalOrder());<br>// 结果: 1` |
+| `isEmpty` | 无 | `Boolean` | 判断RDD是否为空 | `JavaRDD<Integer> empty = sc.emptyRDD();<br>boolean emptyFlag = empty.isEmpty();<br>// 结果: true` |
+| `groupBy` | JFunction[T, U] f | `JavaPairRDD[U, JIterable[T]]` | 按函数结果分组 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6));<br>JavaPairRDD<Boolean, Iterable<Integer>> grouped = nums.groupBy(x -> x % 2 == 0);<br>// 结果: {false: [1, 3, 5], true: [2, 4, 6]}` |
+| `keyBy` | JFunction[T, U] f | `JavaPairRDD[U, T]` | 将元素转换为键值对，原值为Value | `JavaRDD<String> words = sc.parallelize(Arrays.asList("apple", "banana"));<br>JavaPairRDD<Integer, String> keyed = words.keyBy(w -> w.length());<br>// 结果: [(5, "apple"), (6, "banana")]` |
+| `cartesian` | JavaRDDLike[U, _] other | `JavaPairRDD[T, U]` | 计算两个RDD的笛卡尔积 | `JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2));<br>JavaRDD<String> rdd2 = sc.parallelize(Arrays.asList("a", "b"));<br>JavaPairRDD<Integer, String> cartesian = rdd1.cartesian(rdd2);<br>// 结果: [(1, "a"), (1, "b"), (2, "a"), (2, "b")]` |
+| `zip` | JavaRDDLike[U, _] other | `JavaPairRDD[T, U]` | 将两个RDD按位置配对 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>JavaRDD<String> chars = sc.parallelize(Arrays.asList("a", "b", "c"));<br>JavaPairRDD<Integer, String> zipped = nums.zip(chars);<br>// 结果: [(1, "a"), (2, "b"), (3, "c")]` |
+| `zipPartitions` | JavaRDDLike[U, _] other, FlatMapFunction2[JIterator[T], JIterator[U], V] f | `JavaRDD[V]` | 对两个RDD的分区进行配对处理 | `JavaRDD<Integer> rdd1 = sc.parallelize(Arrays.asList(1, 2), 1);<br>JavaRDD<Integer> rdd2 = sc.parallelize(Arrays.asList(10, 20), 1);<br>JavaRDD<Integer> sums = rdd1.zipPartitions(rdd2, (iter1, iter2) -> {<br>    List<Integer> result = new ArrayList<>();<br>    while (iter1.hasNext() && iter2.hasNext()) {<br>        result.add(iter1.next() + iter2.next());<br>    }<br>    return result.iterator();<br>});` |
+| `zipWithIndex` | 无 | `JavaPairRDD[T, jl.Long]` | 为每个元素添加索引 | `JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"));<br>JavaPairRDD<String, Long> indexed = words.zipWithIndex();<br>// 结果: [("a", 0), ("b", 1), ("c", 2)]` |
+| `zipWithUniqueId` | 无 | `JavaPairRDD[T, jl.Long]` | 为每个元素生成唯一ID（不保证连续） | `JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"), 2);<br>JavaPairRDD<String, Long> uid = words.zipWithUniqueId();<br>// 结果如: [("a", 0), ("b", 1), ("c", 4)]` |
+| `pipe` | command: String | `JavaRDD[String]` | 通过外部程序处理RDD元素 | `JavaRDD<String> data = sc.parallelize(Arrays.asList("1", "2", "3"));<br>JavaRDD<String> piped = data.pipe("cat");<br>// 将每个元素通过cat命令处理` |
+| `pipe` | JList[String] command, JMap[String, String] env | `JavaRDD[String]` | 通过外部程序处理，带环境变量 | `List<String> cmd = Arrays.asList("awk", "{print $1*2}");<br>Map<String, String> env = new HashMap<>();<br>env.put("LC_ALL", "C");<br>JavaRDD<String> result = data.pipe(cmd, env);` |
+| `saveAsTextFile` | path: String | `Unit` | 保存RDD为文本文件 | `JavaRDD<String> words = sc.parallelize(Arrays.asList("hello", "world"));<br>words.saveAsTextFile("hdfs://output/path");` |
+| `saveAsTextFile` | path: String, codec: Class[_ <: CompressionCodec] | `Unit` | 保存为压缩文本文件 | `JavaRDD<String> words = sc.parallelize(Arrays.asList("hello", "world"));<br>words.saveAsTextFile("hdfs://output/path", GzipCodec.class);` |
+| `saveAsObjectFile` | path: String | `Unit` | 保存为序列化对象文件 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>nums.saveAsObjectFile("hdfs://output/nums");` |
+| `checkpoint` | 无 | `Unit` | 标记RDD进行checkpoint | `sc.setCheckpointDir("hdfs://checkpoint/dir");<br>JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3));<br>nums.checkpoint();  // 后续计算会保存到checkpoint目录` |
+| `isCheckpointed` | 无 | `Boolean` | 判断是否已checkpoint | `boolean checked = nums.isCheckpointed();` |
+| `getCheckpointFile` | 无 | `Optional[String]` | 获取checkpoint文件路径 | `Optional<String> file = nums.getCheckpointFile();` |
+| `getNumPartitions` | 无 | `Int` | 获取分区数 | `JavaRDD<Integer> nums = sc.parallelize(Arrays.asList(1, 2, 3, 4), 4);<br>int partitions = nums.getNumPartitions();<br>// 结果: 4` |
+| `partitions` | 无 | `JList[Partition]` | 获取所有分区对象 | `List<Partition> parts = nums.partitions();` |
+| `partitioner` | 无 | `Optional[Partitioner]` | 获取分区器（如果有） | `JavaPairRDD<String, Integer> pairs = ...;<br>Optional<Partitioner> partitioner = pairs.partitioner();` |
+| `id` | 无 | `Int` | 获取RDD唯一ID | `int rddId = nums.id();` |
+| `name` | 无 | `String` | 获取RDD名称 | `String rddName = nums.name();` |
+| `getStorageLevel` | 无 | `StorageLevel` | 获取当前存储级别 | `StorageLevel level = nums.getStorageLevel();` |
+| `toDebugString` | 无 | `String` | 获取RDD的血缘关系字符串 | `String lineage = nums.toDebugString();<br>// 显示RDD如何从父RDD计算而来` |
+| `context` | 无 | `SparkContext` | 获取SparkContext | `SparkContext sc = nums.context();` |
+| `rdd` | 无 | `RDD[T]` | 获取底层Scala RDD | `RDD<Integer> scalaRdd = nums.rdd();` |
+| `countAsync` | 无 | `JavaFutureAction[jl.Long]` | 异步计数 | `JavaFutureAction<Long> future = nums.countAsync();<br>Long count = future.get();  // 阻塞等待结果` |
+| `collectAsync` | 无 | `JavaFutureAction[JList[T]]` | 异步collect | `JavaFutureAction<List<Integer>> future = nums.collectAsync();<br>List<Integer> result = future.get();` |
+| `takeAsync` | num: Int | `JavaFutureAction[JList[T]]` | 异步take | `JavaFutureAction<List<Integer>> future = nums.takeAsync(5);<br>List<Integer> first5 = future.get();` |
+| `foreachAsync` | VoidFunction[T] f | `JavaFutureAction[Void]` | 异步foreach | `JavaFutureAction<Void> future = nums.foreachAsync(x -> System.out.println(x));<br>future.get();  // 等待完成` |
+
 ### JavaSparkContext
 **包路径**: `org.apache.spark.api.java`
 **方法数量**: 45
@@ -191,290 +261,114 @@
 
 ## MLlib机器学习
 
-### JavaAssociationRulesExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 关联规则挖掘示例，从交易数据中发现频繁项集和关联规则 | // 运行: spark-submit --class JavaAssociationRulesExample target/spark-examples.jar<br>// 输入: 交易数据集，输出: 满足置信度的关联规则 |
 
-### JavaBinaryClassificationMetricsExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 二分类评估指标示例，计算AUC、精确率、召回率、F1等指标 | // 运行: spark-submit --class JavaBinaryClassificationMetricsExample target/spark-examples.jar<br>// 输入: 预测结果和真实标签，输出: ROC曲线、PR曲线等评估指标 |
 
-### JavaBisectingKMeansExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 二分K-Means聚类示例，层次聚类算法，自顶向下分裂 | // 运行: spark-submit --class JavaBisectingKMeansExample target/spark-examples.jar<br>// 输入: 向量数据集，输出: 聚类中心和分配结果 |
 
-### JavaChiSqSelectorExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 卡方检验特征选择示例，选择与标签最相关的特征 | // 运行: spark-submit --class JavaChiSqSelectorExample target/spark-examples.jar<br>// 输入: 特征向量和标签，输出: 选定的特征索引 |
 
-### JavaCorrelationsExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 相关性计算示例，计算Pearson和Spearman相关系数 | // 运行: spark-submit --class JavaCorrelationsExample target/spark-examples.jar<br>// 输入: 数值数据集，输出: 相关系数矩阵 |
 
-### JavaElementwiseProductExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 逐元素乘积示例，向量与权重向量的逐元素加权 | // 运行: spark-submit --class JavaElementwiseProductExample target/spark-examples.jar<br>// 输入: 向量数据和权重向量，输出: 加权后的向量 |
 
-### JavaGaussianMixtureExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 高斯混合模型示例，概率聚类，假设数据由多个高斯分布生成 | // 运行: spark-submit --class JavaGaussianMixtureExample target/spark-examples.jar<br>// 输入: 向量数据集，输出: 混合模型参数和聚类分配 |
 
-### JavaGradientBoostingClassificationExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 梯度提升分类示例，GBDT集成学习分类算法 | // 运行: spark-submit --class JavaGradientBoostingClassificationExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 分类模型和预测结果 |
 
-### JavaGradientBoostingRegressionExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 梯度提升回归示例，GBDT集成学习回归算法 | // 运行: spark-submit --class JavaGradientBoostingRegressionExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 回归模型和预测结果 |
 
-### JavaHypothesisTestingExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 假设检验示例，统计显著性检验（卡方检验、t检验等） | // 运行: spark-submit --class JavaHypothesisTestingExample target/spark-examples.jar<br>// 输入: 样本数据，输出: 检验统计量和p值 |
 
-### JavaHypothesisTestingKolmogorovSmirnovTestExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | Kolmogorov-Smirnov检验示例，检验样本是否服从指定分布 | // 运行: spark-submit --class JavaHypothesisTestingKolmogorovSmirnovTestExample target/spark-examples.jar<br>// 输入: 样本数据，输出: KS检验统计量和p值 |
 
-### JavaIsotonicRegressionExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 保序回归示例，单调约束下的回归分析 | // 运行: spark-submit --class JavaIsotonicRegressionExample target/spark-examples.jar<br>// 输入: 有序数据，输出: 保序拟合结果 |
 
-### JavaKMeansExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | K-Means聚类示例，经典聚类算法，将数据划分为K个簇 | // 运行: spark-submit --class JavaKMeansExample target/spark-examples.jar<br>// 输入: 向量数据集，输出: 聚类中心和数据点分配 |
 
-### JavaKernelDensityEstimationExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 核密度估计示例，估计数据的概率密度函数 | // 运行: spark-submit --class JavaKernelDensityEstimationExample target/spark-examples.jar<br>// 输入: 样本数据，输出: 密度估计值 |
 
-### JavaLBFGSExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | LBFGS优化示例，拟牛顿法求解大规模优化问题 | // 运行: spark-submit --class JavaLBFGSExample target/spark-examples.jar<br>// 输入: 优化问题和参数，输出: 最优解 |
 
-### JavaLatentDirichletAllocationExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | LDA主题模型示例，文档主题发现和词分布估计 | // 运行: spark-submit --class JavaLatentDirichletAllocationExample target/spark-examples.jar<br>// 输入: 文档词频矩阵，输出: 主题分布和词主题分布 |
 
-### JavaLogisticRegressionWithLBFGSExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | LBFGS逻辑回归示例，使用拟牛顿法优化逻辑回归 | // 运行: spark-submit --class JavaLogisticRegressionWithLBFGSExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 逻辑回归模型 |
 
-### JavaMultiLabelClassificationMetricsExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 多标签分类评估示例，计算多标签分类指标 | // 运行: spark-submit --class JavaMultiLabelClassificationMetricsExample target/spark-examples.jar<br>// 输入: 多标签预测结果，输出: 准确率、召回率等指标 |
 
-### JavaMulticlassClassificationMetricsExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 多分类评估指标示例，计算混淆矩阵、准确率等 | // 运行: spark-submit --class JavaMulticlassClassificationMetricsExample target/spark-examples.jar<br>// 输入: 多分类预测结果，输出: 混淆矩阵和各项指标 |
 
-### JavaNaiveBayesExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 朴素贝叶斯分类示例，基于概率的分类算法 | // 运行: spark-submit --class JavaNaiveBayesExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 分类模型和预测结果 |
 
-### JavaPCAExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | PCA降维示例，主成分分析，将高维数据降至低维 | // 运行: spark-submit --class JavaPCAExample target/spark-examples.jar<br>// 输入: 高维向量数据，输出: 降维后的向量和主成分 |
 
-### JavaPowerIterationClusteringExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 幂迭代聚类示例，基于相似度矩阵的图聚类算法 | // 运行: spark-submit --class JavaPowerIterationClusteringExample target/spark-examples.jar<br>// 输入: 相似度数据，输出: 聚类分配 |
 
-### JavaPrefixSpanExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | PrefixSpan序列模式挖掘示例，发现序列数据中的频繁模式 | // 运行: spark-submit --class JavaPrefixSpanExample target/spark-examples.jar<br>// 输入: 序列数据集，输出: 频繁序列模式 |
 
-### JavaRandomForestClassificationExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 随机森林分类示例，集成多棵决策树的分类算法 | // 运行: spark-submit --class JavaRandomForestClassificationExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 分类模型和预测结果 |
 
-### JavaRandomForestRegressionExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 随机森林回归示例，集成多棵决策树的回归算法 | // 运行: spark-submit --class JavaRandomForestRegressionExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 回归模型和预测结果 |
 
-### JavaRankingMetricsExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 排序评估指标示例，计算NDCG、MAP等推荐排序指标 | // 运行: spark-submit --class JavaRankingMetricsExample target/spark-examples.jar<br>// 输入: 排序预测结果，输出: NDCG、MAP等指标 |
 
-### JavaRecommendationExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 协同过滤推荐示例，ALS算法实现用户-物品推荐 | // 运行: spark-submit --class JavaRecommendationExample target/spark-examples.jar<br>// 输入: 用户-物品评分矩阵，输出: 用户推荐列表 |
 
-### JavaSVDExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | SVD奇异值分解示例，矩阵分解降维技术 | // 运行: spark-submit --class JavaSVDExample target/spark-examples.jar<br>// 输入: 矩阵数据，输出: U、S、V分解结果 |
 
-### JavaSVMWithSGDExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | SVM支持向量机示例，SGD优化训练线性SVM分类器 | // 运行: spark-submit --class JavaSVMWithSGDExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: SVM分类模型和预测结果 |
 
-### JavaSimpleFPGrowth
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | FP-Growth频繁项集挖掘示例，高效发现交易数据中的频繁模式 | // 运行: spark-submit --class JavaSimpleFPGrowth target/spark-examples.jar<br>// 输入: 交易数据集，输出: 频繁项集及其支持度 |
 
-### JavaStratifiedSamplingExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 分层采样示例，按标签比例进行数据采样 | // 运行: spark-submit --class JavaStratifiedSamplingExample target/spark-examples.jar<br>// 输入: 带标签数据集，输出: 分层采样结果 |
 
-### JavaStreamingTestExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 流式假设检验示例，实时数据流的统计检验 | // 运行: spark-submit --class JavaStreamingTestExample target/spark-examples.jar<br>// 输入: 流式数据，输出: 实时检验结果 |
 
-### JavaSummaryStatisticsExample
-**包路径**: `org.apache.spark.examples.mllib`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 统计摘要示例，计算均值、方差、最大值、最小值等统计量 | // 运行: spark-submit --class JavaSummaryStatisticsExample target/spark-examples.jar<br>// 输入: 数值数据，输出: 完整统计摘要 |
 
 ---
 
 ## SQL DataFrame
 
-### AggregateHashMap
-**包路径**: `org.apache.spark.sql.execution.vectorized`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `find` | key: long | `int` | 在哈希表中查找指定key的位置，返回索引 | 在哈希表中查找指定key，返回索引位置 |
 | `findOrInsert` | key: long | `MutableColumnarRow` | 查找key位置，不存在则插入新条目 | 查找key或插入新条目，返回MutableColumnarRow |
 
-### ArrayExpressionUtils
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**说明**: 数组表达式工具类，提供在有序数组中进行高效二分查找的功能。支持所有基本类型和Object类型，查找时间复杂度O(log n)。返回值：找到返回索引位置，未找到返回`-(插入点+1)`（插入点即应插入位置）。
-**方法数量**: 15
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `binarySearch` | data: boolean&lt;&gt;, value: boolean | `int` | 在boolean数组中二分查找，false排在true前面 | `boolean[] arr = {false, false, true, true};<br>int idx = ArrayExpressionUtils.binarySearch(arr, true);<br>// 返回2（找到索引）<br>int notFound = ArrayExpressionUtils.binarySearch(arr, true);<br>// 未找到返回-(插入点+1)` |
 | `binarySearch` | data: Boolean&lt;&gt;, value: Boolean | `int` | 在Boolean数组中二分查找，支持null值（null排在最前） | `Boolean[] arr = {null, false, true};<br>int idx = ArrayExpressionUtils.binarySearch(arr, false);<br>// null < false < true 排序顺序` |
 | `binarySearch` | data: byte&lt;&gt;, value: byte | `int` | 在byte数组中二分查找，数组必须已升序排序 | `byte[] arr = {1, 3, 5, 7, 9};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 5);<br>// 返回2` |
@@ -491,25 +385,14 @@
 | `binarySearch` | data: Double&lt;&gt;, value: Double | `int` | 在Double数组中二分查找，使用SQLOrderingUtil.compareDoubles处理特殊值 | `Double[] arr = {null, 1.0, 5.0};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 1.0);` |
 | `binarySearch` | data: Object&lt;&gt;, value: Object, comp: Comparator<Object> | `int` | 在Object数组中二分查找，使用自定义Comparator定义排序规则 | `String[] arr = {"apple", "banana", "cherry"};<br>Comparator<String> comp = String::compareTo;<br>int idx = ArrayExpressionUtils.binarySearch(arr, "banana", comp);<br>// 返回1` |
 
-### ArrayOfDecimalsSerDe
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**方法数量**: 6
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getClassOfT` | 无 | `Class&lt;Decimal&gt;` | 获取泛型类型的Class对象 | 返回Decimal类型的Class对象 |
 | `sizeOf` | item: Decimal | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
 | `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
 | `sizeOf` | item: Decimal | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
 | `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
 
-### ArrowColumnVector
-**包路径**: `org.apache.spark.sql.vectorized`
-**说明**: 基于Apache Arrow的列向量实现，用于高效读取列式数据。Arrow是一种跨平台的列式内存格式，支持零拷贝数据共享。
-**方法数量**: 20
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭Arrow列向量，释放底层Arrow ValueVector和子列向量占用的内存资源，防止内存泄漏 | `ArrowColumnVector vector = ...;<br>vector.close();  // 释放内存` |
 | `getArray` | rowId: int | `ColumnarArray` | 获取指定行的数组类型数据，返回ColumnarArray对象，可通过它遍历数组元素 | `ColumnarArray arr = vector.getArray(0);<br>int len = arr.length();<br>for (int i = 0; i < len; i++) {<br>    Object elem = arr.get(i, elementType);<br>}` |
 | `getBoolean` | rowId: int | `boolean` | 获取指定行位置的布尔值数据 | `boolean value = vector.getBoolean(0);<br>// 返回true或false` |
@@ -542,24 +425,14 @@
 | `getSupportCompressionLevel` | 无 | `boolean` | 检查是否支持压缩级别配置 | 检查编解码器是否支持自定义压缩级别 |
 | `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
-### BitmapExpressionUtils
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**方法数量**: 5
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `bitmapAndMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | 对两个位图执行AND合并操作 | 对两个位图执行AND操作，返回交集位图 |
 | `bitmapBitPosition` | value: long | `long` | 计算位图中指定值的位位置 | 计算值在桶内的位位置（0-63） |
 | `bitmapBucketNumber` | value: long | `long` | 计算位图中指定值的桶编号 | 计算值所在的桶编号 |
 | `bitmapCount` | bitmap: byte&lt;&gt; | `long` | 统计位图中设置的位数 | 返回位图中设置的位数统计 |
 | `bitmapMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | 合并两个位图 | 合并两个位图，返回OR结果 |
 
-### BufferedRowIterator
-**包路径**: `org.apache.spark.sql.execution`
-**方法数量**: 6
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `append` | row: InternalRow | `void` | 追加元素 | 向缓冲迭代器追加一行数据 |
 | `durationMs` | 无 | `long` | 获取执行耗时（毫秒） | 返回执行耗时（毫秒） |
 | `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
@@ -567,12 +440,7 @@
 | `next` | 无 | `InternalRow` | 获取迭代器的下一个元素 | 获取迭代器下一行数据 |
 | `shouldStop` | 无 | `boolean` | 检查是否应该停止迭代 | 检查是否应停止迭代处理 |
 
-### CartesianSpatialReferenceSystemMapper
-**包路径**: `org.apache.spark.sql.internal.types`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getSrid` | stringId: String | `Integer` | 获取空间参考系统ID（SRID） | 将字符串空间参考ID转换为整数SRID |
 | `getStringId` | srid: int | `String` | 将SRID转换为字符串标识 | 将整数SRID转换为字符串标识 |
 
@@ -601,32 +469,17 @@
 | `size` | 无 | `int` | 返回Map中键值对的数量 | `int count = map.size();<br>System.out.println("配置项数量: " + count);` |
 | `values` | 无 | `Collection&lt;String&gt;` | 返回所有value的集合 | `Collection&lt;String&gt; values = map.values();<br>for (String value : values) {<br>    System.out.println(value);<br>}` |
 
-### Cast
-**包路径**: `org.apache.spark.sql.connector.expressions`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `dataType` | 无 | `DataType` | 获取数据类型 | 返回Cast目标的数据类型 |
 | `expression` | 无 | `Expression` | 获取表达式对象 | 返回被转换的表达式对象 |
 | `expressionDataType` | 无 | `DataType` | 获取表达式的数据类型 | 返回源表达式的数据类型 |
 
-### ChangelogInfo
-**包路径**: `org.apache.spark.sql.connector.catalog`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `computeUpdates` | 无 | `boolean` | 是否计算更新操作 | 检查是否计算更新记录 |
 | `deduplicationMode` | 无 | `DeduplicationMode` | 获取去重模式 | 返回去重模式配置 |
 | `range` | 无 | `ChangelogRange` | 获取变更日志范围 | 返回变更日志的时间范围 |
 
-### CharVarcharCodegenUtils
-**包路径**: `org.apache.spark.sql.catalyst.util`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `charTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | CHAR类型写入端校验，截断超长字符串 | 校验CHAR类型写入，超长则截断 |
 | `readSidePadding` | inputStr: UTF8String, limit: int | `UTF8String` | 读取端填充，补齐CHAR类型定长 | 读取端补齐CHAR定长字符串 |
 | `varcharTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | VARCHAR类型写入端校验，截断超长字符串 | 校验VARCHAR类型写入，超长则截断 |
@@ -643,12 +496,7 @@
 | `predicateSql` | 无 | `String` | 获取或设置断言SQL表达式 | 获取或设置断言SQL表达式 |
 | `predicateSql` | predicateSql: String | `Builder` | 获取或设置断言SQL表达式 | 获取或设置断言SQL表达式 |
 
-### CollationAwareUTF8String
-**包路径**: `org.apache.spark.sql.catalyst.util`
-**方法数量**: 29
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `binaryTrim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 二进制模式去除两端指定字符 | 去除字符串两端指定字符（二进制模式） |
 | `binaryTrimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 二进制模式去除右侧指定字符 | 去除字符串右侧指定字符（二进制模式） |
 | `compareLowerCase` | left: final UTF8String, right: final UTF8String | `int` | 比较两个字符串的小写形式 | 比较两字符串小写形式，返回差值 |
@@ -679,12 +527,7 @@
 | `trimLeft` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 去除字符串左侧空白 | 去除字符串左侧空白 |
 | `trimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 去除字符串右侧空白 | 去除字符串右侧空白 |
 
-### ColumnDefaultValue
-**包路径**: `org.apache.spark.sql.connector.catalog`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getValue` | 无 | `Literal&lt;?&gt;` | 获取列的默认值 | 返回列默认值的Literal对象 |
 
 ### ColumnVector
@@ -703,12 +546,7 @@
 | `getVariant` | rowId: int | `VariantVal` | 获取Variant类型数据 | 获取Variant变体数据 |
 | `isDefinedAt` | x: DataType | `boolean` | 检查数据类型是否定义 | 检查数据类型是否已定义 |
 
-### ColumnVectorUtils
-**包路径**: `org.apache.spark.sql.execution.vectorized`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `populate` | col: ConstantColumnVector, row: InternalRow, fieldIdx: int | `void` | 填充常量列向量数据 | 填充常量列向量数据 |
 | `toBatch` | schema: StructType, memMode: MemoryMode, row: Iterator<Row> | `ColumnarBatch` | 将行迭代器转换为列式批处理 | 将行迭代器转为列式批处理 |
 | `toJavaIntMap` | map: ColumnarMap | `Map&lt;Integer, Integer&gt;` | 将ColumnarMap转换为Java Map | 将ColumnarMap转为Java整数Map |
@@ -731,13 +569,7 @@
 | `rowIterator` | 无 | `Iterator&lt;InternalRow&gt;` | 返回行迭代器，用于按行遍历批处理中的所有数据 | `Iterator&lt;InternalRow&gt; iter = batch.rowIterator();<br>while (iter.hasNext()) {<br>    InternalRow row = iter.next();<br>    // 按行处理数据<br>}` |
 | `setNumRows` | numRows: int | `void` | 设置批处理的行数量，用于动态调整批处理大小 | `batch.setNumRows(100);<br>// 设置批处理包含100行` |
 
-### ConstantColumnVector
-**包路径**: `org.apache.spark.sql.execution.vectorized`
-**说明**: 常量列向量，为所有行存储相同的值。只保存一份数据副本，极大节省内存。用于表示常量表达式（如常量列、广播变量）。
-**方法数量**: 34
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭列向量，释放字符串、数组、Map和子列向量占用的内存 | `vector.close();  // 释放所有资源` |
 | `closeIfFreeable` | 无 | `void` | 无操作（常量向量跨批处理复用，仅在close时释放） | `// 常量向量数据跨批复用<br>// 此方法为空实现` |
 | `getArray` | rowId: int | `ColumnarArray` | 获取数组数据（所有行返回相同的ColumnarArray） | `ColumnarArray arr = vector.getArray(0);<br>// 所有rowId返回相同的数组` |
@@ -825,21 +657,11 @@
 | `createYearMonthIntervalType` | startField: byte, endField: byte | `YearMonthIntervalType` | 创建年-月间隔类型 | 创建年-月间隔类型 |
 | `createYearMonthIntervalType` | 无 | `YearMonthIntervalType` | 创建年-月间隔类型 | 创建年-月间隔类型 |
 
-### DefaultValue
-**包路径**: `org.apache.spark.sql.connector.catalog`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getExpression` | 无 | `Expression` | 获取默认值表达式 | 获取默认值表达式对象 |
 | `getSql` | 无 | `String` | 获取默认值的SQL表示 | 获取默认值SQL字符串 |
 
-### DelegatingCatalogExtension
-**包路径**: `org.apache.spark.sql.connector.catalog`
-**方法数量**: 22
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `alterNamespace` | namespace: String&lt;&gt;, changes: NamespaceChange... | `void` | 修改命名空间属性 | 修改命名空间属性 |
 | `alterTable` | ident: Identifier, changes: TableChange... | `Table` | 修改表结构或属性 | 修改表结构 |
 | `capabilities` | 无 | `Set&lt;TableCatalogCapability&gt;` | 获取表目录支持的能力 | 返回目录支持的能力集合 |
@@ -873,12 +695,7 @@
 | `ordered` | ordering: SortOrder&lt;&gt; | `OrderedDistribution` | 创建有序分布 | 传入参数执行创建有序分布 |
 | `unspecified` | 无 | `UnspecifiedDistribution` | 创建未指定分布 | 调用该方法执行创建未指定分布 |
 
-### ExpressionImplUtils
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**方法数量**: 7
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getSentences` | str: UTF8String, language: UTF8String, country: UTF8String | `ArrayData` | 将文本分割为句子数组 | 传入参数执行将文本分割为句子数组 |
 | `getSparkVersion` | 无 | `UTF8String` | 获取Spark版本字符串 | 调用该方法执行获取Spark版本字符串 |
 | `isLuhnNumber` | numberString: UTF8String | `boolean` | 校验Luhn算法数字（信用卡号校验） | 传入参数执行校验Luhn算法数字（信用卡号校验） |
@@ -887,12 +704,7 @@
 | `tryValidateUTF8String` | utf8String: UTF8String | `UTF8String` | 尝试校验UTF8字符串 | 传入参数执行尝试校验UTF8字符串 |
 | `validateUTF8String` | utf8String: UTF8String | `UTF8String` | 校验UTF8字符串有效性 | 传入参数执行校验UTF8字符串有效性 |
 
-### ExpressionInfo
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**方法数量**: 13
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getArguments` | 无 | `String` | 获取函数参数说明 | 调用该方法执行获取函数参数说明 |
 | `getClassName` | 无 | `String` | 获取类名 | 调用该方法执行获取类名 |
 | `getDb` | 无 | `String` | 获取数据库名 | 调用该方法执行获取数据库名 |
@@ -950,21 +762,11 @@
 |--------|------|----------|------|------|
 | `name` | 无 | `String` | 获取度量指标名称 | 返回度量指标名称 |
 
-### GeographicSpatialReferenceSystemMapper
-**包路径**: `org.apache.spark.sql.internal.types`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getSrid` | stringId: String | `Integer` | 获取空间参考系统ID（SRID） | 将字符串空间参考ID转换为整数SRID |
 | `getStringId` | srid: int | `String` | 将SRID转换为字符串标识 | 将整数SRID转换为字符串标识 |
 
-### GeometryModel
-**包路径**: `org.apache.spark.sql.catalyst.util.geo`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `toWkt` | 无 | `String` | toWkt操作 | 调用该方法执行toWkt操作 |
 
 ### GetArrayItem
@@ -977,33 +779,18 @@
 | `failOnError` | 无 | `boolean` | failOnError操作 | 调用该方法执行failOnError操作 |
 | `ordinal` | 无 | `Expression` | ordinal操作 | 调用该方法执行ordinal操作 |
 
-### HadoopCompressionCodec
-**包路径**: `org.apache.spark.sql.catalyst.util`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getCompressionCodec` | 无 | `CompressionCodec` | 获取CompressionCodec相关功能 | 调用该方法执行获取CompressionCodec相关功能 |
 | `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
-### HadoopLineRecordReader
-**包路径**: `org.apache.spark.sql.execution.datasources`
-**方法数量**: 5
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getCurrentKey` | 无 | `LongWritable` | 获取CurrentKey相关功能 | 调用该方法执行获取CurrentKey相关功能 |
 | `getCurrentValue` | 无 | `Text` | 获取CurrentValue相关功能 | 调用该方法执行获取CurrentValue相关功能 |
 | `getProgress` | 无 | `float` | 获取Progress相关功能 | 调用该方法执行获取Progress相关功能 |
 | `initialize` | genericSplit: InputSplit, context: TaskAttemptContext | `void` | 初始化插件 | 初始化目录插件 |
 | `nextKeyValue` | 无 | `boolean` | 之后KeyValue相关功能 | 调用该方法执行之后KeyValue相关功能 |
 
-### HiveHasher
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `hashInt` | input: int | `int` | 检查是否存在hInt相关功能 | 传入参数执行检查是否存在hInt相关功能 |
 | `hashLong` | input: long | `int` | 检查是否存在hLong相关功能 | 传入参数执行检查是否存在hLong相关功能 |
 | `hashUnsafeBytes` | base: Object, offset: long, lengthInBytes: int | `int` | 检查是否存在hUnsafeBytes相关功能 | 传入参数执行检查是否存在hUnsafeBytes相关功能 |
@@ -1027,12 +814,7 @@
 | `invoke` | left: int, right: int | `int` | 调用相关功能 | 传入参数执行调用相关功能 |
 | `produceResult` | input: InternalRow | `Integer` | 生产Result相关功能 | 传入参数执行生产Result相关功能 |
 
-### JavaSQLDataSourceExample
-**包路径**: `org.apache.spark.examples.sql`
-**方法数量**: 9
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getCube` | 无 | `int` | 获取Cube相关功能 | 调用该方法执行获取Cube相关功能 |
 | `getSquare` | 无 | `int` | 获取Square相关功能 | 调用该方法执行获取Square相关功能 |
 | `getValue` | 无 | `int` | 获取列的默认值 | 返回列默认值的Literal对象 |
@@ -1041,52 +823,27 @@
 | `setSquare` | square: int | `void` | 设置Square相关功能 | 传入参数执行设置Square相关功能 |
 | `setValue` | value: int | `void` | 设置Value相关功能 | 传入参数执行设置Value相关功能 |
 
-### JavaSparkHiveExample
-**包路径**: `org.apache.spark.examples.sql.hive`
-**方法数量**: 5
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getKey` | 无 | `int` | 获取Key相关功能 | 调用该方法执行获取Key相关功能 |
 | `getValue` | 无 | `String` | 获取列的默认值 | 返回列默认值的Literal对象 |
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 | `setKey` | key: int | `void` | 设置Key相关功能 | 传入参数执行设置Key相关功能 |
 | `setValue` | value: String | `void` | 设置Value相关功能 | 传入参数执行设置Value相关功能 |
 
-### JavaSparkSQLCli
-**包路径**: `org.apache.spark.examples.sql`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaSparkSQLExample
-**包路径**: `org.apache.spark.examples.sql`
-**方法数量**: 5
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getAge` | 无 | `long` | 获取Age相关功能 | 调用该方法执行获取Age相关功能 |
 | `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 | `setAge` | age: long | `void` | 设置Age相关功能 | 传入参数执行设置Age相关功能 |
 | `setName` | name: String | `void` | 设置RDD名称 | 传入参数执行设置Name相关功能 |
 
-### JavaUserDefinedScalar
-**包路径**: `org.apache.spark.examples.sql`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaUserDefinedTypedAggregation
-**包路径**: `org.apache.spark.examples.sql`
-**方法数量**: 15
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `bufferEncoder` | 无 | `Encoder&lt;Average&gt;` | 编码相关功能 | 调用该方法执行编码相关功能 |
 | `finish` | reduction: Average | `Double` | 完成相关功能 | 传入参数执行完成相关功能 |
 | `getCount` | 无 | `long` | 获取Count相关功能 | 调用该方法执行获取Count相关功能 |
@@ -1103,12 +860,7 @@
 | `setSum` | sum: long | `void` | 设置Sum相关功能 | 传入参数执行设置Sum相关功能 |
 | `zero` | 无 | `Average` | zero操作 | 调用该方法执行zero操作 |
 
-### JavaUserDefinedUntypedAggregation
-**包路径**: `org.apache.spark.examples.sql`
-**方法数量**: 11
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `bufferEncoder` | 无 | `Encoder&lt;Average&gt;` | 编码相关功能 | 调用该方法执行编码相关功能 |
 | `finish` | reduction: Average | `Double` | 完成相关功能 | 传入参数执行完成相关功能 |
 | `getCount` | 无 | `long` | 获取Count相关功能 | 调用该方法执行获取Count相关功能 |
@@ -1121,21 +873,11 @@
 | `setSum` | sum: long | `void` | 设置Sum相关功能 | 传入参数执行设置Sum相关功能 |
 | `zero` | 无 | `Average` | zero操作 | 调用该方法执行zero操作 |
 
-### JsonExpressionUtils
-**包路径**: `org.apache.spark.sql.catalyst.expressions.json`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `jsonObjectKeys` | json: UTF8String | `GenericArrayData` | jsonObjectKeys操作 | 传入参数执行jsonObjectKeys操作 |
 | `lengthOfJsonArray` | json: UTF8String | `Integer` | lengthOfJsonArray操作 | 传入参数执行lengthOfJsonArray操作 |
 
-### KVSorterIterator
-**包路径**: `org.apache.spark.sql.execution`
-**方法数量**: 11
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `cleanupResources` | 无 | `void` | 向上相关功能 | 调用该方法执行向上相关功能 |
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `compare` | baseObj1: Object, baseOff1: long, baseLen1: int, baseObj2: Object, baseOff2: long, baseLen2: int | `int` | 比较相关功能 | 传入参数执行比较相关功能 |
@@ -1165,12 +907,7 @@
 | `property` | 无 | `String` | property操作 | 调用该方法执行property操作 |
 | `value` | 无 | `String` | 获取度量指标值 | 返回度量指标数值 |
 
-### NonClosableMutableURLClassLoader
-**包路径**: `org.apache.spark.sql.internal`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 
 ### NumericHistogram
@@ -1191,12 +928,7 @@
 | `reset` | 无 | `void` | 重置相关功能 | 调用该方法执行重置相关功能 |
 | `setUsedBins` | nusedBins: int | `void` | 设置UsedBins相关功能 | 传入参数执行设置UsedBins相关功能 |
 
-### OrcArrayColumnVector
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 11
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
 | `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
 | `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
@@ -1209,12 +941,7 @@
 | `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
 | `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
-### OrcAtomicColumnVector
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 11
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
 | `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
 | `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
@@ -1227,34 +954,19 @@
 | `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
 | `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
-### OrcColumnStatistics
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `add` | newChild: OrcColumnStatistics | `void` | 添加元素 | 传入参数执行添加相关功能 |
 | `get` | ordinal: int | `OrcColumnStatistics` | 获取元素 | 传入参数执行获取相关功能 |
 | `getStatistics` | 无 | `ColumnStatistics` | 获取Statistics相关功能 | 调用该方法执行获取Statistics相关功能 |
 
-### OrcColumnVector
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 5
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `hasNull` | 无 | `boolean` | 检查是否存在Null相关功能 | 调用该方法执行检查是否存在Null相关功能 |
 | `isNullAt` | rowId: int | `boolean` | 判断是否NullAt相关功能 | 传入参数执行判断是否NullAt相关功能 |
 | `numNulls` | 无 | `int` | numNulls操作 | 调用该方法执行numNulls操作 |
 | `setBatchSize` | batchSize: int | `void` | 设置BatchSize相关功能 | 传入参数执行设置BatchSize相关功能 |
 
-### OrcColumnarBatchReader
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 8
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `getCurrentKey` | 无 | `Void` | 获取CurrentKey相关功能 | 调用该方法执行获取CurrentKey相关功能 |
 | `getCurrentValue` | 无 | `ColumnarBatch` | 获取CurrentValue相关功能 | 调用该方法执行获取CurrentValue相关功能 |
@@ -1264,29 +976,14 @@
 | `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, orcTail: OrcTail | `void` | 初始化插件 | 初始化目录插件 |
 | `nextKeyValue` | 无 | `boolean` | 之后KeyValue相关功能 | 调用该方法执行之后KeyValue相关功能 |
 
-### OrcCompressionCodec
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getCompressionKind` | 无 | `CompressionKind` | 获取CompressionKind相关功能 | 调用该方法执行获取CompressionKind相关功能 |
 | `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
-### OrcFooterReader
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `readStatistics` | orcReader: Reader | `OrcColumnStatistics` | 读取Statistics相关功能 | 传入参数执行读取Statistics相关功能 |
 
-### OrcMapColumnVector
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 11
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
 | `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
 | `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
@@ -1299,12 +996,7 @@
 | `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
 | `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
-### OrcStructColumnVector
-**包路径**: `org.apache.spark.sql.execution.datasources.orc`
-**方法数量**: 11
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
 | `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
 | `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
@@ -1317,31 +1009,16 @@
 | `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
 | `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
-### ParquetCompressionCodec
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `fromString` | s: String | `ParquetCompressionCodec` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 | `getCompressionCodec` | 无 | `CompressionCodecName` | 获取CompressionCodec相关功能 | 调用该方法执行获取CompressionCodec相关功能 |
 | `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
-### ParquetFooterReader
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `openFileAndReadFooter` | hadoopConf: Configuration, file: PartitionedFile, keepInputStreamOpen: boolean | `OpenedParquetFooter` | 打开FileAndReadFooter相关功能 | 传入参数执行打开FileAndReadFooter相关功能 |
 | `readFooter` | inputFile: HadoopInputFile, filter: ParquetMetadataConverter.MetadataFilter | `ParquetMetadata` | 读取Footer相关功能 | 传入参数执行读取Footer相关功能 |
 
-### ParquetVectorUpdaterFactory
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 146
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | 解码SingleDictionaryId相关功能 | 传入参数执行解码SingleDictionaryId相关功能 |
 | `getUpdater` | descriptor: ColumnDescriptor, sparkType: DataType | `ParquetVectorUpdater` | 获取Updater相关功能 | 传入参数执行获取Updater相关功能 |
 | `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | 读取Value相关功能 | 传入参数执行读取Value相关功能 |
@@ -1368,12 +1045,7 @@
 | `defaultValue` | expression: Expression | `Builder` | 默认Value相关功能 | 传入参数执行默认Value相关功能 |
 | `defaultValue` | defaultValue: DefaultValue | `Builder` | 默认Value相关功能 | 传入参数执行默认Value相关功能 |
 
-### RowBasedKeyValueBatch
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**方法数量**: 6
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager | `RowBasedKeyValueBatch` | 分配相关功能 | 传入参数执行分配相关功能 |
 | `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager, maxRows: int | `RowBasedKeyValueBatch` | 分配相关功能 | 传入参数执行分配相关功能 |
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
@@ -1389,12 +1061,7 @@
 |--------|------|----------|------|------|
 | `create` | values: Object ... | `Row` | 创建相关功能 | 传入参数执行创建相关功能 |
 
-### SchemaColumnConvertNotSupportedException
-**包路径**: `org.apache.spark.sql.execution.datasources`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getColumn` | 无 | `String` | 获取Column相关功能 | 调用该方法执行获取Column相关功能 |
 | `getLogicalType` | 无 | `String` | 获取LogicalType相关功能 | 调用该方法执行获取LogicalType相关功能 |
 | `getPhysicalType` | 无 | `String` | 获取PhysicalType相关功能 | 调用该方法执行获取PhysicalType相关功能 |
@@ -1407,24 +1074,14 @@
 |--------|------|----------|------|------|
 | `defaultNullOrdering` | 无 | `NullOrdering` | 默认NullOrdering相关功能 | 调用该方法执行默认NullOrdering相关功能 |
 
-### SpatialReferenceSystemCache
-**包路径**: `org.apache.spark.sql.internal.types`
-**方法数量**: 5
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getInstance` | 无 | `SpatialReferenceSystemCache` | 获取Instance相关功能 | 调用该方法执行获取Instance相关功能 |
 | `getSridToSrs` | 无 | `Map&lt;Integer, SpatialReferenceSystemInformation&gt;` | 获取SridToSrs相关功能 | 调用该方法执行获取SridToSrs相关功能 |
 | `getSrsInfo` | srid: int | `SpatialReferenceSystemInformation` | 获取SrsInfo相关功能 | 传入参数执行获取SrsInfo相关功能 |
 | `getSrsInfo` | stringId: String | `SpatialReferenceSystemInformation` | 获取SrsInfo相关功能 | 传入参数执行获取SrsInfo相关功能 |
 | `getStringIdToSrs` | 无 | `Map&lt;String, SpatialReferenceSystemInformation&gt;` | 获取StringIdToSrs相关功能 | 调用该方法执行获取StringIdToSrs相关功能 |
 
-### SpecificParquetRecordReaderBase
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 6
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `getCurrentKey` | 无 | `Void` | 获取CurrentKey相关功能 | 调用该方法执行获取CurrentKey相关功能 |
 | `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | 初始化插件 | 初始化目录插件 |
@@ -1480,12 +1137,7 @@
 | `withPartitions` | partitions: Transform&lt;&gt; | `Builder` | withPartitions操作 | 传入参数执行withPartitions操作 |
 | `withProperties` | properties: String> | `Builder` | withProperties操作 | 传入参数执行withProperties操作 |
 
-### UDFXPathUtil
-**包路径**: `org.apache.spark.sql.catalyst.expressions.xml`
-**方法数量**: 15
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `eval` | xml: String, path: String, qname: QName | `Object` | eval操作 | 传入参数执行eval操作 |
 | `evalBoolean` | xml: String, path: String | `Boolean` | evalBoolean操作 | 传入参数执行evalBoolean操作 |
@@ -1518,12 +1170,7 @@
 |--------|------|----------|------|------|
 | `numPartitions` | 无 | `int` | numPartitions操作 | 调用该方法执行numPartitions操作 |
 
-### UnsafeWriter
-**包路径**: `org.apache.spark.sql.catalyst.expressions.codegen`
-**方法数量**: 17
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `cursor` | 无 | `int` | cursor操作 | 调用该方法执行cursor操作 |
 | `getBufferHolder` | 无 | `BufferHolder` | 获取BufferHolder相关功能 | 调用该方法执行获取BufferHolder相关功能 |
 | `grow` | neededSize: int | `void` | grow操作 | 传入参数执行grow操作 |
@@ -1569,12 +1216,7 @@
 |--------|------|----------|------|------|
 | `build` | expr: Expression | `String` | 构建约束对象 | 构建Check约束对象 |
 
-### VectorFunctionImplUtils
-**包路径**: `org.apache.spark.sql.catalyst.expressions`
-**方法数量**: 9
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `vectorCosineSimilarity` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorCosineSimilarity操作 | 传入参数执行vectorCosineSimilarity操作 |
 | `vectorInfNorm` | vec: ArrayData | `Float` | vectorInfNorm操作 | 传入参数执行vectorInfNorm操作 |
 | `vectorInnerProduct` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorInnerProduct操作 | 传入参数执行vectorInnerProduct操作 |
@@ -1585,21 +1227,11 @@
 | `vectorNormalize` | vec: ArrayData, degree: float, funcName: UTF8String | `ArrayData` | 正常相关功能 | 传入参数执行正常相关功能 |
 | `vectorNormalizeWithNorm` | vec: ArrayData, norm: float | `ArrayData` | 正常相关功能 | 传入参数执行正常相关功能 |
 
-### VectorizedColumnReader
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `visit` | dataPageV1: DataPageV1 | `Integer` | 访问相关功能 | 传入参数执行访问相关功能 |
 | `visit` | dataPageV2: DataPageV2 | `Integer` | 访问相关功能 | 传入参数执行访问相关功能 |
 
-### VectorizedDeltaBinaryPackedReader
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 17
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
 | `readByte` | 无 | `byte` | 读取Byte相关功能 | 调用该方法执行读取Byte相关功能 |
 | `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Bytes相关功能 | 传入参数执行读取Bytes相关功能 |
@@ -1618,12 +1250,7 @@
 | `skipLongs` | total: int | `void` | 跳过Longs相关功能 | 传入参数执行跳过Longs相关功能 |
 | `skipShorts` | total: int | `void` | 跳过Shorts相关功能 | 传入参数执行跳过Shorts相关功能 |
 
-### VectorizedDeltaByteArrayReader
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 7
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
 | `readBinary` | len: int | `Binary` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
 | `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
@@ -1632,12 +1259,7 @@
 | `setPreviousReader` | reader: ValuesReader | `void` | 设置PreviousReader相关功能 | 传入参数执行设置PreviousReader相关功能 |
 | `skipBinary` | total: int | `void` | 跳过Binary相关功能 | 传入参数执行跳过Binary相关功能 |
 
-### VectorizedDeltaLengthByteArrayReader
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 6
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getBytes` | rowId: int | `ByteBuffer` | 获取Bytes相关功能 | 传入参数执行获取Bytes相关功能 |
 | `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
 | `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
@@ -1645,12 +1267,7 @@
 | `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Geometry相关功能 | 传入参数执行读取Geometry相关功能 |
 | `skipBinary` | total: int | `void` | 跳过Binary相关功能 | 传入参数执行跳过Binary相关功能 |
 
-### VectorizedParquetRecordReader
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 12
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `enableReturningBatches` | 无 | `void` | 启用ReturningBatches相关功能 | 调用该方法执行启用ReturningBatches相关功能 |
 | `getCurrentValue` | 无 | `Object` | 获取CurrentValue相关功能 | 调用该方法执行获取CurrentValue相关功能 |
@@ -1664,12 +1281,7 @@
 | `nextKeyValue` | 无 | `boolean` | 之后KeyValue相关功能 | 调用该方法执行之后KeyValue相关功能 |
 | `resultBatch` | 无 | `ColumnarBatch` | resultBatch操作 | 调用该方法执行resultBatch操作 |
 
-### VectorizedPlainValuesReader
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 33
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
 | `readBinary` | total: int, v: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
 | `readBinary` | len: int | `Binary` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
@@ -1704,12 +1316,7 @@
 | `skipLongs` | total: int | `void` | 跳过Longs相关功能 | 传入参数执行跳过Longs相关功能 |
 | `skipShorts` | total: int | `void` | 跳过Shorts相关功能 | 传入参数执行跳过Shorts相关功能 |
 
-### VectorizedReaderBase
-**包路径**: `org.apache.spark.sql.execution.datasources.parquet`
-**方法数量**: 27
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `readBinary` | len: int | `Binary` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
 | `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
 | `readBooleans` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Booleans相关功能 | 传入参数执行读取Booleans相关功能 |
@@ -1759,31 +1366,15 @@
 | `schema` | 无 | `StructType` | 获取schema | 调用该方法执行schema操作 |
 | `sql` | 无 | `String` | 执行SQL查询 | 调用该方法执行sql操作 |
 
-### WkbParseException
-**包路径**: `org.apache.spark.sql.catalyst.util.geo`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getParseError` | 无 | `String` | 获取ParseError相关功能 | 调用该方法执行获取ParseError相关功能 |
 | `getPosition` | 无 | `long` | 获取Position相关功能 | 调用该方法执行获取Position相关功能 |
 
-### WkbReader
-**包路径**: `org.apache.spark.sql.catalyst.util.geo`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `read` | wkb: byte&lt;&gt; | `GeometryModel` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
 | `read` | wkb: byte&lt;&gt;, srid: int | `GeometryModel` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
 
-### WritableColumnVector
-**包路径**: `org.apache.spark.sql.execution.vectorized`
-**说明**: 可写列向量，支持数据写入操作。提供put系列方法（指定位置写入）和append系列方法（追加写入）。写入前需调用reserve预留内存空间。
-**方法数量**: 58
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `addElementsAppended` | num: int | `void` | 增加已追加元素计数，用于手动调整追加位置 | `vector.addElementsAppended(5);<br>// 增加5个元素的计数` |
 | `appendArray` | length: int | `int` | 追加数组数据，返回追加的起始位置 | `int startPos = vector.appendArray(3);<br>// 追加长度为3的数组` |
 | `appendBoolean` | v: boolean | `int` | 追加单个布尔值，返回追加位置 | `int pos = vector.appendBoolean(true);` |
@@ -1864,12 +1455,7 @@
 |--------|------|----------|------|------|
 | `fromString` | str: String | `BatchStatus` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
-### EventTypes
-**包路径**: `org.apache.spark.examples.sql.streaming`
-**方法数量**: 27
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `call` | userId: String, events: Iterator<Row>, state: GroupState<Sessions> | `Iterator&lt;Session&gt;` | 调用相关功能 | 传入参数执行调用相关功能 |
 | `endTime` | 无 | `Timestamp` | 结束Time相关功能 | 调用该方法执行结束Time相关功能 |
 | `getDuration` | 无 | `long` | 获取Duration相关功能 | 调用该方法执行获取Duration相关功能 |
@@ -1908,31 +1494,16 @@
 | `NoTimeout` | 无 | `GroupStateTimeout` | 无超时策略，状态永不自动清理，需手动管理 | // 不设置超时，状态永久保留<br>.timeout(NoTimeout())<br>// 需要手动调用remove()清理状态 |
 | `ProcessingTimeTimeout` | 无 | `GroupStateTimeout` | 基于处理时间的超时策略，状态在指定时间后清理 | // 处理时间超时，定时清理状态<br>.timeout(ProcessingTimeTimeout())<br>// 状态在processingTime超过阈值时触发超时清理 |
 
-### JavaCustomReceiver
-**包路径**: `org.apache.spark.examples.streaming`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 | `onStart` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
 | `onStop` | 无 | `void` | 停止相关功能 | 调用该方法执行停止相关功能 |
 
-### JavaRecord
-**包路径**: `org.apache.spark.examples.streaming`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getWord` | 无 | `String` | 获取Word相关功能 | 调用该方法执行获取Word相关功能 |
 | `setWord` | word: String | `void` | 设置Word相关功能 | 传入参数执行设置Word相关功能 |
 
-### JavaStatefulNetworkWordCount
-**包路径**: `org.apache.spark.examples.streaming`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### KinesisInitialPositions
@@ -2115,22 +1686,12 @@
 |--------|------|----------|------|------|
 | `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
 
-### AmIpServletRequestWrapper
-**包路径**: `org.apache.spark.deploy.yarn`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getRemoteUser` | 无 | `String` | 获取RemoteUser相关功能 | 调用该方法执行获取RemoteUser相关功能 |
 | `getUserPrincipal` | 无 | `Principal` | 获取UserPrincipal相关功能 | 调用该方法执行获取UserPrincipal相关功能 |
 | `isUserInRole` | role: String | `boolean` | 判断是否UserInRole相关功能 | 传入参数执行判断是否UserInRole相关功能 |
 
-### AnonymousAuthenticationProviderImpl
-**包路径**: `org.apache.hive.service.auth`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
 ### ApplicationStatus
@@ -2381,12 +1942,7 @@
 | `fetchResults` | opHandle: OperationHandle | `TRowSet` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
 | `openSession` | username: String, password: String | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
 
-### CLIServiceUtils
-**包路径**: `org.apache.hive.service.cli`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `patternToRegex` | pattern: String | `String` | patternToRegex操作 | 传入参数执行patternToRegex操作 |
 
 ### ChildFirstURLClassLoader
@@ -2606,12 +2162,7 @@
 | `readFrom` | in: InputStream | `CountMinSketch` | 读取From相关功能 | 传入参数执行读取From相关功能 |
 | `readFrom` | bytes: byte&lt;&gt; | `CountMinSketch` | 读取From相关功能 | 传入参数执行读取From相关功能 |
 
-### CryptoUtils
-**包路径**: `org.apache.spark.network.util`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `toCryptoConf` | prefix: String, conf: String>> | `Properties` | toCryptoConf操作 | 传入参数执行toCryptoConf操作 |
 
 ### CtrTransportCipher
@@ -2634,20 +2185,10 @@
 | `transferred` | 无 | `long` | 转移red相关功能 | 调用该方法执行转移red相关功能 |
 | `write` | ctx: ChannelHandlerContext, msg: Object, promise: ChannelPromise | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
-### CustomAuthenticationProviderImpl
-**包路径**: `org.apache.hive.service.auth`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
-### CustomLogKeys
-**包路径**: `org.apache.spark.internal`
-**方法数量**: 28
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `debug` | msg: String | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
 | `debug` | format: String, arg: Object | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
 | `debug` | format: String, arg1: Object, arg2: Object | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
@@ -2771,12 +2312,7 @@
 |--------|------|----------|------|------|
 | `getStatement` | 无 | `String` | 获取Statement相关功能 | 调用该方法执行获取Statement相关功能 |
 
-### ExecutorDiskUtils
-**包路径**: `org.apache.spark.network.shuffle`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getFilePath` | localDirs: String&lt;&gt;, subDirsPerLocalDir: int, filename: String | `String` | 获取FilePath相关功能 | 传入参数执行获取FilePath相关功能 |
 
 ### ExecutorShuffleInfo
@@ -3143,12 +2679,7 @@
 | `verifyDelegationToken` | delegationToken: String | `String` | 验证DelegationToken相关功能 | 传入参数执行验证DelegationToken相关功能 |
 | `verifyProxyAccess` | realUser: String, proxyUser: String, ipAddress: String, hiveConf: HiveConf | `void` | 验证ProxyAccess相关功能 | 传入参数执行验证ProxyAccess相关功能 |
 
-### HiveFunctionRegistryUtils
-**包路径**: `org.apache.hadoop.hive.ql.exec`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getMethodInternal` | udfClass: Class<?>, mlist: List<Method>, exact: boolean, argumentsPassed: List<TypeInfo> | `Method` | 获取MethodInternal相关功能 | 传入参数执行获取MethodInternal相关功能 |
 | `invoke` | m: Method, thisObject: Object, arguments: Object... | `Object` | 调用相关功能 | 传入参数执行调用相关功能 |
 | `matchCost` | argumentPassed: TypeInfo, argumentAccepted: TypeInfo, exact: boolean | `int` | matchCost操作 | 传入参数执行matchCost操作 |
@@ -3175,22 +2706,12 @@
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 | `parse` | argv: String&lt;&gt; | `ServerOptionsProcessorResponse` | 解析相关功能 | 传入参数执行解析相关功能 |
 
-### HiveSessionHookContextImpl
-**包路径**: `org.apache.hive.service.cli.session`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getSessionConf` | 无 | `HiveConf` | 获取SessionConf相关功能 | 调用该方法执行获取SessionConf相关功能 |
 | `getSessionHandle` | 无 | `String` | 获取SessionHandle相关功能 | 调用该方法执行获取SessionHandle相关功能 |
 | `getSessionUser` | 无 | `String` | 获取SessionUser相关功能 | 调用该方法执行获取SessionUser相关功能 |
 
-### HiveSessionImpl
-**包路径**: `org.apache.hive.service.cli.session`
-**方法数量**: 44
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `cancelDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | 判断能否celDelegationToken相关功能 | 传入参数执行判断能否celDelegationToken相关功能 |
 | `cancelOperation` | opHandle: OperationHandle | `void` | 判断能否celOperation相关功能 | 传入参数执行判断能否celOperation相关功能 |
 | `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
@@ -3304,20 +2825,10 @@
 |--------|------|----------|------|------|
 | `startApplication` | listeners: SparkAppHandle.Listener... | `SparkAppHandle` | 启动Application相关功能 | 传入参数执行启动Application相关功能 |
 
-### JavaAFTSurvivalRegressionExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaALSExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 6
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getMovieId` | 无 | `int` | 获取MovieId相关功能 | 调用该方法执行获取MovieId相关功能 |
 | `getRating` | 无 | `float` | 获取Rating相关功能 | 调用该方法执行获取Rating相关功能 |
 | `getTimestamp` | 无 | `long` | 获取Timestamp相关功能 | 调用该方法执行获取Timestamp相关功能 |
@@ -3325,261 +2836,101 @@
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 | `parseRating` | str: String | `Rating` | 解析Rating相关功能 | 传入参数执行解析Rating相关功能 |
 
-### JavaBinarizerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaBucketedRandomProjectionLSHExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaBucketizerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaChiSquareTestExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaCorrelationExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaCountVectorizerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaDCTExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaDecisionTreeClassificationExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaDecisionTreeRegressionExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaDocument
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getId` | 无 | `long` | 获取Id相关功能 | 调用该方法执行获取Id相关功能 |
 | `getText` | 无 | `String` | 获取Text相关功能 | 调用该方法执行获取Text相关功能 |
 
-### JavaEstimatorTransformerParamExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaFMClassifierExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaFMRegressorExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaFPGrowthExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaFeatureHasherExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaGeneralizedLinearRegressionExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaGradientBoostedTreeClassifierExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaGradientBoostedTreeRegressorExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaImputerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaIndexToStringExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaInteractionExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaLDAExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaLabeledDocument
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getLabel` | 无 | `double` | 获取Label相关功能 | 调用该方法执行获取Label相关功能 |
 
-### JavaLinearRegressionWithElasticNetExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaLinearSVCExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaLogisticRegressionSummaryExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaLogisticRegressionWithElasticNetExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaMaxAbsScalerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaMinHashLSHExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaMinMaxScalerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaModelSelectionViaCrossValidationExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaModelSelectionViaTrainValidationSplitExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaModuleOptions
@@ -3590,188 +2941,73 @@
 |--------|------|----------|------|------|
 | `defaultModuleOptions` | 无 | `String` | 默认ModuleOptions相关功能 | 调用该方法执行默认ModuleOptions相关功能 |
 
-### JavaMulticlassLogisticRegressionWithElasticNetExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaMultilayerPerceptronClassifierExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaNGramExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaNormalizerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaOneHotEncoderExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaOneVsRestExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaPipelineExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaPolynomialExpansionExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaQuantileDiscretizerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaRFormulaExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaRandomForestClassifierExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaRandomForestRegressorExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaRobustScalerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaSQLTransformerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaStandardScalerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaStopWordsRemoverExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaStringIndexerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaSummarizerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaTargetEncoderExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaTfIdfExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaTokenizerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaUnivariateFeatureSelectorExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaUtils
-**包路径**: `org.apache.spark.network.util`
-**方法数量**: 49
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `byteStringAs` | str: String, unit: ByteUnit | `long` | 三相关功能 | 传入参数执行三相关功能 |
 | `byteStringAsBytes` | str: String | `long` | 三相关功能 | 传入参数执行三相关功能 |
 | `byteStringAsGb` | str: String | `long` | 三相关功能 | 传入参数执行三相关功能 |
@@ -3820,52 +3056,22 @@
 | `visitFile` | p: Path, a: BasicFileAttributes | `FileVisitResult` | 访问File相关功能 | 传入参数执行访问File相关功能 |
 | `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | 访问File相关功能 | 传入参数执行访问File相关功能 |
 
-### JavaVarianceThresholdSelectorExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaVectorAssemblerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaVectorIndexerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaVectorSizeHintExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaVectorSlicerExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
-### JavaWord2VecExample
-**包路径**: `org.apache.spark.examples.ml`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JobExecutionStatus
@@ -3903,12 +3109,7 @@
 | `indices` | 无 | `Stream&lt;KVIndex&gt;` | indices操作 | 调用该方法执行indices操作 |
 | `type` | 无 | `Class&lt;?&gt;` | type操作 | 调用该方法执行type操作 |
 
-### LdapAuthenticationProviderImpl
-**包路径**: `org.apache.hive.service.auth`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
 ### LevelDB
@@ -4212,12 +3413,7 @@
 |--------|------|----------|------|------|
 | `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | 获取Metrics相关功能 | 调用该方法执行获取Metrics相关功能 |
 
-### NettyUtils
-**包路径**: `org.apache.spark.network.util`
-**方法数量**: 10
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `createEventLoop` | mode: IOMode, numThreads: int, threadPrefix: String | `EventLoopGroup` | 创建EventLoop相关功能 | 传入参数执行创建EventLoop相关功能 |
 | `createFrameDecoder` | 无 | `TransportFrameDecoder` | 创建FrameDecoder相关功能 | 调用该方法执行创建FrameDecoder相关功能 |
 | `createPooledByteBufAllocator` | allowDirectBufs: boolean, allowCache: boolean, numCores: int | `PooledByteBufAllocator` | 创建PooledByteBufAllocator相关功能 | 传入参数执行创建PooledByteBufAllocator相关功能 |
@@ -4419,12 +3615,7 @@
 | `getOperationType` | tOperationType: TOperationType | `OperationType` | 获取OperationType相关功能 | 传入参数执行获取OperationType相关功能 |
 | `toTOperationType` | 无 | `TOperationType` | 顶部相关功能 | 调用该方法执行顶部相关功能 |
 
-### PamAuthenticationProviderImpl
-**包路径**: `org.apache.hive.service.auth`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
 ### ParentClassLoader
@@ -4466,12 +3657,7 @@
 | `sortDescending` | 无 | `boolean` | 排序Descending相关功能 | 调用该方法执行排序Descending相关功能 |
 | `sortSigned` | 无 | `boolean` | 排序Signed相关功能 | 调用该方法执行排序Signed相关功能 |
 
-### ProxyUtils
-**包路径**: `org.apache.spark.deploy.yarn`
-**方法数量**: 4
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `html` | 无 | `HTML&lt;ProxyUtils.__&gt;` | html操作 | 调用该方法执行html操作 |
 | `notFound` | resp: HttpServletResponse, message: String | `void` | notFound操作 | 传入参数执行notFound操作 |
 | `rejectNonHttpRequests` | req: ServletRequest | `void` | 拒绝NonHttpRequests相关功能 | 传入参数执行拒绝NonHttpRequests相关功能 |
@@ -4728,12 +3914,7 @@
 |--------|------|----------|------|------|
 | `doBootstrap` | channel: Channel, rpcHandler: RpcHandler | `RpcHandler` | 执行Bootstrap相关功能 | 传入参数执行执行Bootstrap相关功能 |
 
-### ServiceUtils
-**包路径**: `org.apache.hive.service`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `cleanup` | log: SparkLogger, closeables: java.io.Closeable... | `void` | 向上相关功能 | 传入参数执行向上相关功能 |
 | `indexOfDomainMatch` | userName: String | `int` | 执行相关功能 | 传入参数执行执行相关功能 |
 
@@ -4771,21 +3952,11 @@
 | `setUserName` | userName: String | `void` | 设置UserName相关功能 | 传入参数执行设置UserName相关功能 |
 | `submitBackgroundOperation` | r: Runnable | `Future&lt;?&gt;` | 子mitBackgroundOperation相关功能 | 传入参数执行子mitBackgroundOperation相关功能 |
 
-### ShreddingUtils
-**包路径**: `org.apache.spark.types.variant`
-**方法数量**: 2
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `rebuild` | row: ShreddedRow, schema: VariantSchema | `Variant` | 构建相关功能 | 传入参数执行构建相关功能 |
 | `rebuild` | row: ShreddedRow, metadata: byte&lt;&gt;, schema: VariantSchema, builder: VariantBuilder | `void` | 构建相关功能 | 传入参数执行构建相关功能 |
 
-### ShuffleChecksumHelper
-**包路径**: `org.apache.spark.network.shuffle.checksum`
-**方法数量**: 3
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `diagnoseCorruption` | algorithm: String, checksumFile: File, reduceId: int, partitionData: ManagedBuffer, checksumByReader: long | `Cause` | 向上相关功能 | 传入参数执行向上相关功能 |
 | `getChecksumByAlgorithm` | algorithm: String | `Checksum` | 获取ChecksumByAlgorithm相关功能 | 传入参数执行获取ChecksumByAlgorithm相关功能 |
 | `getChecksumFileName` | blockName: String, algorithm: String | `String` | 获取ChecksumFileName相关功能 | 传入参数执行获取ChecksumFileName相关功能 |
@@ -4844,20 +4015,10 @@
 |--------|------|----------|------|------|
 | `isFinal` | 无 | `boolean` | 判断是否Final相关功能 | 调用该方法执行判断是否Final相关功能 |
 
-### SparkDefaultUDAFEvaluatorResolver
-**包路径**: `org.apache.hadoop.hive.ql.exec`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getEvaluatorClass` | argClasses: List<TypeInfo> | `Class&lt;? extends UDAFEvaluator&gt;` | 获取EvaluatorClass相关功能 | 传入参数执行获取EvaluatorClass相关功能 |
 
-### SparkDefaultUDFMethodResolver
-**包路径**: `org.apache.hadoop.hive.ql.exec`
-**方法数量**: 1
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `getEvalMethod` | argClasses: List<TypeInfo> | `Method` | 获取EvalMethod相关功能 | 传入参数执行获取EvalMethod相关功能 |
 
 ### SparkFirehoseListener
@@ -4948,12 +4109,7 @@
 | `setVerbose` | verbose: boolean | `SparkLauncher` | 设置Verbose相关功能 | 传入参数执行设置Verbose相关功能 |
 | `startApplication` | listeners: SparkAppHandle.Listener... | `SparkAppHandle` | 启动Application相关功能 | 传入参数执行启动Application相关功能 |
 
-### SparkLoggerFactory
-**包路径**: `org.apache.spark.internal`
-**方法数量**: 5
-
-| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
-|--------|------|----------|------|------|
+--------|------|----------|------|------|
 | `disableStructuredLogging` | 无 | `void` | 禁用StructuredLogging相关功能 | 调用该方法执行禁用StructuredLogging相关功能 |
 | `enableStructuredLogging` | 无 | `void` | 启用StructuredLogging相关功能 | 调用该方法执行启用StructuredLogging相关功能 |
 | `getLogger` | name: String | `SparkLogger` | 获取Logger相关功能 | 传入参数执行获取Logger相关功能 |
@@ -5738,3 +4894,161 @@
 | `fromString` | s: String | `StorageLevel` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ---
+
+---
+
+## SparkSession（现代Spark入口）
+
+### SparkSession
+**包路径**: `org.apache.spark.sql`
+**说明**: Spark 2.0+的主入口点，替代了旧版的SQLContext和HiveContext。提供DataFrame/Dataset创建、SQL执行等功能。
+**方法数量**: 30+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `builder` | 无 | `SparkSession.Builder` | 获取SparkSession构建器 | `SparkSession spark = SparkSession.builder()<br>    .appName("MyApp")<br>    .master("local[*]")<br>    .getOrCreate();` |
+| `appName` | String name | `Builder` | 设置应用名称 | `SparkSession.builder().appName("DataProcessing").getOrCreate();` |
+| `master` | String master | `Builder` | 设置运行模式（local/yarn等） | `SparkSession.builder().master("yarn").getOrCreate();` |
+| `config` | String key, String value | `Builder` | 设置配置项 | `SparkSession.builder()<br>    .config("spark.sql.shuffle.partitions", "200")<br>    .getOrCreate();` |
+| `enableHiveSupport` | 无 | `Builder` | 启用Hive支持 | `SparkSession.builder().enableHiveSupport().getOrCreate();` |
+| `getOrCreate` | 无 | `SparkSession` | 获取或创建SparkSession | `SparkSession spark = SparkSession.builder().getOrCreate();` |
+| `version` | 无 | `String` | 获取Spark版本 | `String version = spark.version();<br>// 返回如 "3.5.6"` |
+| `sparkContext` | 无 | `SparkContext` | 获取底层SparkContext | `SparkContext sc = spark.sparkContext();` |
+| `sql` | String sqlText | `DataFrame` | 执行SQL查询 | `DataFrame result = spark.sql("SELECT * FROM table WHERE id > 100");` |
+| `sql` | String sqlText, Map[String, Any] args | `DataFrame` | 执行带参数的SQL查询 | `Map<String, Any> args = new HashMap<>();<br>args.put("id", 100);<br>DataFrame result = spark.sql("SELECT * FROM table WHERE id > :id", args);` |
+| `table` | String tableName | `DataFrame` | 从表名创建DataFrame | `DataFrame df = spark.table("my_table");` |
+| `read` | 无 | `DataFrameReader` | 获取数据读取器 | `DataFrameReader reader = spark.read();<br>DataFrame df = reader.parquet("data.parquet");` |
+| `readStream` | 无 | `DataStreamReader` | 获取流数据读取器 | `DataStreamReader reader = spark.readStream();` |
+| `createDataFrame` | List[Row] rows, StructType schema | `DataFrame` | 从Java List创建DataFrame | `StructType schema = new StructType()<br>    .add("id", DataTypes.IntegerType)<br>    .add("name", DataTypes.StringType);<br>List<Row> rows = Arrays.asList(<br>    RowFactory.create(1, "Alice"),<br>    RowFactory.create(2, "Bob"));<br>DataFrame df = spark.createDataFrame(rows, schema);` |
+| `createDataFrame` | JavaRDD[Row] rdd, StructType schema | `DataFrame` | 从JavaRDD创建DataFrame | `JavaRDD<Row> rowRDD = sc.parallelize(Arrays.asList(<br>    RowFactory.create(1, "Alice")));<br>DataFrame df = spark.createDataFrame(rowRDD, schema);` |
+| `createDataset` | List[T] data, Encoder[T] encoder | `Dataset[T]` | 从Java List创建Dataset | `Encoder<Integer> encoder = Encoders.INT();<br>List<Integer> data = Arrays.asList(1, 2, 3);<br>Dataset<Integer> ds = spark.createDataset(data, encoder);` |
+| `emptyDataFrame` | 无 | `DataFrame` | 创建空DataFrame | `DataFrame empty = spark.emptyDataFrame();` |
+| `range` | long end | `Dataset[Long]` | 创建范围数据（0到end-1） | `Dataset<Long> range = spark.range(100);<br>// 生成0到99的序列` |
+| `range` | long start, long end, long step, int numPartitions | `Dataset[Long]` | 创建范围数据，指定参数 | `Dataset<Long> range = spark.range(0, 100, 2, 10);<br>// 0, 2, 4, ... 98，10个分区` |
+| `udf` | 无 | `UDFRegistration` | 获取UDF注册器 | `spark.udf().register("myFunc", (String s) -> s.toUpperCase(), DataTypes.StringType);` |
+| `catalog` | 无 | `Catalog` | 获取Catalog接口 | `Catalog catalog = spark.catalog();<br>catalog.listTables().show();` |
+| `conf` | 无 | `RuntimeConfig` | 获取运行时配置 | `RuntimeConfig conf = spark.conf();<br>conf.set("spark.sql.autoBroadcastJoinThreshold", "10MB");` |
+| `newSession` | 无 | `SparkSession` | 创建新Session（隔离配置） | `SparkSession newSpark = spark.newSession();` |
+| `stop` | 无 | `Unit` | 停止SparkSession | `spark.stop();` |
+| `close` | 无 | `Unit` | 关闭SparkSession（Java友好） | `spark.close();` |
+| `time` | T => T f | `T` | 测量函数执行时间 | `long result = spark.time(() -> {<br>    return df.count();<br>});<br>// 打印执行时间并返回结果` |
+| `addTag` | String tag | `Unit` | 为操作添加标签 | `spark.addTag("batch-job");` |
+| `removeTag` | String tag | `Unit` | 移除标签 | `spark.removeTag("batch-job");` |
+| `getTags` | 无 | `Set[String]` | 获取所有标签 | `Set<String> tags = spark.getTags();` |
+| `clearTags` | 无 | `Unit` | 清除所有标签 | `spark.clearTags();` |
+| `interruptTag` | String tag | `Seq[String]` | 中断指定标签的操作 | `spark.interruptTag("batch-job");` |
+| `interruptAll` | 无 | `Seq[String]` | 中断所有操作 | `spark.interruptAll();` |
+
+
+### Dataset[T]（类型安全数据集）
+**包路径**: `org.apache.spark.sql`
+**说明**: Spark 2.0+的核心数据处理API，提供类型安全的数据操作。DataFrame是Dataset[Row]的特例。
+**方法数量**: 80+
+
+| 方法名 | 参数 | 返回类型 | 描述 | 示例 |
+|--------|------|----------|------|------|
+| `show` | 无 | `Unit` | 显示前20行数据 | `df.show();` |
+| `show` | int numRows | `Unit` | 显示指定行数 | `df.show(50);` |
+| `show` | int numRows, boolean truncate | `Unit` | 显示指定行数，控制截断 | `df.show(50, false);  // 不截断长字符串` |
+| `printSchema` | 无 | `Unit` | 打印schema结构 | `df.printSchema();` |
+| `schema` | 无 | `StructType` | 获取schema | `StructType schema = df.schema();` |
+| `columns` | 无 | `String[]` | 获取列名数组 | `String[] cols = df.columns();` |
+| `dtypes` | 无 | `Tuple2[]` | 获取列名和类型数组 | `Tuple2<String, String>[] types = df.dtypes();` |
+| `select` | String col, String... cols | `DataFrame` | 选择指定列 | `DataFrame result = df.select("id", "name");` |
+| `select` | Column... cols | `DataFrame` | 选择列（使用Column表达式） | `DataFrame result = df.select(col("id"), col("name").alias("user_name"));` |
+| `selectExpr` | String... exprs | `DataFrame` | 使用SQL表达式选择 | `DataFrame result = df.selectExpr("id", "name as user_name", "age * 2 as double_age");` |
+| `filter` | Column condition | `Dataset[T]` | 过滤数据 | `DataFrame result = df.filter(col("age").gt(18));` |
+| `filter` | String conditionExpr | `Dataset[T]` | 使用SQL表达式过滤 | `DataFrame result = df.filter("age > 18");` |
+| `filter` | FilterFunction[T] func | `Dataset[T]` | 使用函数过滤（Java） | `Dataset<Integer> filtered = ds.filter((FilterFunction<Integer>) x -> x > 10);` |
+| `where` | Column condition | `Dataset[T]` | 过滤（同filter） | `DataFrame result = df.where(col("status").equalTo("active"));` |
+| `groupBy` | String col1, String... cols | `RelationalGroupedDataset` | 按列分组 | `RelationalGroupedDataset grouped = df.groupBy("category");<br>DataFrame result = grouped.count();` |
+| `groupBy` | Column... cols | `RelationalGroupedDataset` | 按Column分组 | `RelationalGroupedDataset grouped = df.groupBy(col("category"), col("region"));` |
+| `agg` | Column expr, Column... exprs | `DataFrame` | 聚合计算 | `DataFrame result = df.agg(count("id").alias("total"), avg("price").alias("avg_price"));` |
+| `agg` | Map[String, String] exprs | `DataFrame` | 聚合（使用字符串表达式） | `Map<String, String> exprs = new HashMap<>();<br>exprs.put("id", "count");<br>exprs.put("price", "avg");<br>DataFrame result = df.agg(exprs);` |
+| `count` | 无 | `long` | 计数 | `long total = df.count();` |
+| `collect` | 无 | `T[]` | 收集所有数据到Driver | `Row[] rows = df.collect();` |
+| `collectAsList` | 无 | `List[T]` | 收集为Java List | `List<Row> rows = df.collectAsList();` |
+| `take` | int n | `T[]` | 获取前n行 | `Row[] first10 = df.take(10);` |
+| `takeAsList` | int n | `List[T]` | 获取前n行为List | `List<Row> first10 = df.takeAsList(10);` |
+| `first` | 无 | `T` | 获取第一行 | `Row firstRow = df.first();` |
+| `head` | 无 | `T` | 获取第一行（同first） | `Row headRow = df.head();` |
+| `head` | int n | `T[]` | 获取前n行（同take） | `Row[] top5 = df.head(5);` |
+| `limit` | int n | `Dataset[T]` | 限制结果行数 | `DataFrame limited = df.limit(100);` |
+| `offset` | int n | `Dataset[T]` | 跳过前n行 | `DataFrame skipped = df.offset(10);` |
+| `distinct` | 无 | `Dataset[T]` | 去重 | `DataFrame unique = df.distinct();` |
+| `dropDuplicates` | 无 | `Dataset[T]` | 去重（同distinct） | `DataFrame unique = df.dropDuplicates();` |
+| `dropDuplicates` | String... colNames | `Dataset[T]` | 按指定列去重 | `DataFrame unique = df.dropDuplicates("id", "name");` |
+| `orderBy` | String sortCol, String... sortCols | `Dataset[T]` | 排序 | `DataFrame sorted = df.orderBy("id");` |
+| `orderBy` | Column... sortExprs | `Dataset[T]` | 排序（使用Column） | `DataFrame sorted = df.orderBy(col("id").desc(), col("name").asc());` |
+| `sort` | String sortCol, String... sortCols | `Dataset[T]` | 排序（同orderBy） | `DataFrame sorted = df.sort("age");` |
+| `sort` | Column... sortExprs | `Dataset[T]` | 排序（同orderBy） | `DataFrame sorted = df.sort(col("age").desc());` |
+| `sortWithinPartitions` | String sortCol, String... sortCols | `Dataset[T]` | 分区内排序 | `DataFrame sorted = df.sortWithinPartitions("id");` |
+| `union` | Dataset[T] other | `Dataset[T]` | 合合（保留重复） | `DataFrame merged = df1.union(df2);` |
+| `unionByName` | Dataset[T] other | `Dataset[T]` | 按列名合并 | `DataFrame merged = df1.unionByName(df2);` |
+| `unionByName` | Dataset[T] other, boolean allowMissingColumns | `Dataset[T]` | 按列名合并，允许缺失列 | `DataFrame merged = df1.unionByName(df2, true);` |
+| `intersect` | Dataset[T] other | `Dataset[T]` | 取交集 | `DataFrame common = df1.intersect(df2);` |
+| `intersectAll` | Dataset[T] other | `Dataset[T]` | 取交集（保留重复） | `DataFrame common = df1.intersectAll(df2);` |
+| `except` | Dataset[T] other | `Dataset[T]` | 取差集 | `DataFrame diff = df1.except(df2);` |
+| `exceptAll` | Dataset[T] other | `Dataset[T]` | 取差集（保留重复） | `DataFrame diff = df1.exceptAll(df2);` |
+| `join` | Dataset[_] right | `DataFrame` | 笛卡尔连接 | `DataFrame result = df1.join(df2);` |
+| `join` | Dataset[_] right, String usingColumn | `DataFrame` | 使用列名连接 | `DataFrame result = df1.join(df2, "id");` |
+| `join` | Dataset[_] right, String[] usingColumns | `DataFrame` | 使用多列连接 | `DataFrame result = df1.join(df2, new String[]{"id", "name"});` |
+| `join` | Dataset[_] right, String usingColumn, String joinType | `DataFrame` | 使用列名连接，指定类型 | `DataFrame result = df1.join(df2, "id", "left");<br>// joinType: inner, left, right, full, semi, anti` |
+| `join` | Dataset[_] right, Column joinExprs | `DataFrame` | 使用条件连接 | `DataFrame result = df1.join(df2, col("df1.id").equalTo(col("df2.user_id")));` |
+| `join` | Dataset[_] right, Column joinExprs, String joinType | `DataFrame` | 使用条件连接，指定类型 | `DataFrame result = df1.join(df2, col("id").equalTo(col("user_id")), "left");` |
+| `crossJoin` | Dataset[_] right | `DataFrame` | 显式笛卡尔连接 | `DataFrame result = df1.crossJoin(df2);` |
+| `joinWith` | Dataset[U] other, Column condition, String joinType | `Dataset[Tuple2[T, U]]` | 类型安全连接 | `Dataset<Tuple2<Row, Row>> result = ds1.joinWith(ds2, col("id").equalTo(col("user_id")), "inner");` |
+| `leftOuterJoin` | JavaPairRDD[K, W] other | `JavaPairRDD[K, (V, Optional[W])]` | 左外连接（PairRDD） | `JavaPairRDD<String, Tuple2<Integer, Optional<String>>> result = pairRDD.leftOuterJoin(otherRDD);` |
+| `rightOuterJoin` | JavaPairRDD[K, W] other | `JavaPairRDD[K, (Optional[V], W)]` | 右外连接（PairRDD） | `JavaPairRDD<String, Tuple2<Optional<Integer>, String>> result = pairRDD.rightOuterJoin(otherRDD);` |
+| `fullOuterJoin` | JavaPairRDD[K, W] other | `JavaPairRDD[K, (Optional[V], Optional[W])]` | 全外连接（PairRDD） | `JavaPairRDD<String, Tuple2<Optional<Integer>, Optional<String>>> result = pairRDD.fullOuterJoin(otherRDD);` |
+| `map` | MapFunction[T, U] func, Encoder[U] encoder | `Dataset[U]` | 映射转换（Java） | `Dataset<String> names = ds.map((MapFunction<Integer, String>) x -> "id:" + x, Encoders.STRING());` |
+| `flatMap` | FlatMapFunction[T, U] func, Encoder[U] encoder | `Dataset[U]` | 扁平映射（Java） | `Dataset<String> words = ds.flatMap((FlatMapFunction<String, String>) s -> Arrays.asList(s.split(" ")).iterator(), Encoders.STRING());` |
+| `mapPartitions` | MapPartitionsFunction[T, U] f, Encoder[U] encoder | `Dataset[U]` | 分区映射（Java） | `Dataset<Integer> partitionSums = ds.mapPartitions((MapPartitionsFunction<Integer, Integer>) iter -> {<br>    int sum = 0;<br>    while (iter.hasNext()) sum += iter.next();<br>    return Arrays.asList(sum).iterator();<br>}, Encoders.INT());` |
+| `foreach` | ForeachFunction[T] func | `Unit` | 对每行执行操作（Java） | `df.foreach((ForeachFunction<Row>) row -> System.out.println(row));` |
+| `foreachPartition` | ForeachPartitionFunction[T] func | `Unit` | 对每个分区执行操作（Java） | `df.foreachPartition((ForeachPartitionFunction<Row>) iter -> {<br>    while (iter.hasNext()) {<br>        Row row = iter.next();<br>        // 处理每行<br>    }<br>});` |
+| `reduce` | ReduceFunction[T] func | `T` | 聚合（Java） | `Integer sum = ds.reduce((ReduceFunction<Integer>) (a, b) -> a + b);` |
+| `groupByKey` | MapFunction[T, K] func, Encoder[K] encoder | `KeyValueGroupedDataset[K, T]` | 按键分组 | `KeyValueGroupedDataset<String, Integer> grouped = ds.groupByKey((MapFunction<Integer, String>) x -> "group_" + x % 3, Encoders.STRING());` |
+| `withColumn` | String colName, Column col | `DataFrame` | 添加新列 | `DataFrame result = df.withColumn("double_age", col("age").multiply(2));` |
+| `withColumnRenamed` | String existingName, String newName | `DataFrame` | 重命名列 | `DataFrame result = df.withColumnRenamed("old_name", "new_name");` |
+| `withColumns` | Map[String, Column] colsMap | `DataFrame` | 批量添加列 | `Map<String, Column> cols = new HashMap<>();<br>cols.put("col1", col("a").plus(col("b")));<br>DataFrame result = df.withColumns(cols);` |
+| `drop` | String colName | `DataFrame` | 删除列 | `DataFrame result = df.drop("unwanted_column");` |
+| `drop` | String... colNames | `DataFrame` | 删除多列 | `DataFrame result = df.drop("col1", "col2");` |
+| `drop` | Column col | `DataFrame` | 删除列（使用Column） | `DataFrame result = df.drop(col("unwanted"));` |
+| `alias` | String alias | `Dataset[T]` | 设置别名 | `DataFrame aliased = df.alias("t1");<br>df.alias("t1").join(df.alias("t2"), col("t1.id").equalTo(col("t2.id")));` |
+| `as` | String alias | `Dataset[T]` | 设置别名（同alias） | `DataFrame aliased = df.as("my_table");` |
+| `toDF` | 无 | `DataFrame` | 转换为DataFrame | `DataFrame df = ds.toDF();` |
+| `toDF` | String... colNames | `DataFrame` | 转换为DataFrame并重命名列 | `DataFrame df = ds.toDF("id", "name", "value");` |
+| `as` | Encoder[U] encoder | `Dataset[U]` | 类型转换 | `Dataset<MyClass> ds = df.as(Encoders.bean(MyClass.class));` |
+| `na` | 无 | `DataFrameNaFunctions` | 获取null值处理工具 | `DataFrameNaFunctions naFuncs = df.na();<br>DataFrame cleaned = df.na().drop();  // 删除含null的行` |
+| `stat` | 无 | `DataFrameStatFunctions` | 获取统计工具 | `DataFrameStatFunctions statFuncs = df.stat();<br>double corr = df.stat().corr("col1", "col2");` |
+| `describe` | String... cols | `DataFrame` | 计算统计描述 | `DataFrame stats = df.describe("age", "salary");<br>stats.show();  // 显示count, mean, stddev, min, max` |
+| `summary` | String... statistics | `DataFrame` | 计算指定统计量 | `DataFrame stats = df.summary("count", "mean", "max");` |
+| `sample` | double fraction | `Dataset[T]` | 随机采样 | `DataFrame sample = df.sample(0.1);  // 10%采样` |
+| `sample` | boolean withReplacement, double fraction, long seed | `Dataset[T]` | 随机采样，指定参数 | `DataFrame sample = df.sample(false, 0.1, 42L);` |
+| `randomSplit` | double[] weights | `Dataset[T][]` | 按权重随机分割 | `Dataset<Row>[] splits = df.randomSplit(new double[]{0.7, 0.3});<br>DataFrame train = splits[0];<br>DataFrame test = splits[1];` |
+| `randomSplit` | double[] weights, long seed | `Dataset[T][]` | 按权重随机分割，指定种子 | `Dataset<Row>[] splits = df.randomSplit(new double[]{0.7, 0.3}, 42L);` |
+| `randomSplitAsList` | double[] weights, long seed | `List[Dataset[T]]` | 按权重分割为List | `List<Dataset<Row>> splits = df.randomSplitAsList(new double[]{0.7, 0.3}, 42L);` |
+| `repartition` | int numPartitions | `Dataset[T]` | 重新分区 | `DataFrame repartitioned = df.repartition(10);` |
+| `repartition` | int numPartitions, Column... partitionExprs | `Dataset[T]` | 按表达式分区 | `DataFrame partitioned = df.repartition(10, col("category"));` |
+| `repartition` | Column... partitionExprs | `Dataset[T]` | 按表达式分区（默认分区数） | `DataFrame partitioned = df.repartition(col("category"));` |
+| `repartitionByRange` | int numPartitions, Column... partitionExprs | `Dataset[T]` | 范围分区 | `DataFrame rangePartitioned = df.repartitionByRange(5, col("id"));` |
+| `coalesce` | int numPartitions | `Dataset[T]` | 合并分区（不shuffle） | `DataFrame merged = df.coalesce(2);` |
+| `cache` | 无 | `Dataset[T]` | 缓存 | `DataFrame cached = df.cache();` |
+| `persist` | 无 | `Dataset[T]` | 持久化（默认MEMORY_AND_DISK） | `DataFrame persisted = df.persist();` |
+| `persist` | StorageLevel newLevel | `Dataset[T]` | 持久化到指定级别 | `DataFrame persisted = df.persist(StorageLevel.MEMORY_ONLY());` |
+| `unpersist` | 无 | `Dataset[T]` | 取消持久化 | `df.unpersist();` |
+| `unpersist` | boolean blocking | `Dataset[T]` | 取消持久化，指定阻塞 | `df.unpersist(true);  // 阻塞等待释放` |
+| `checkpoint` | 无 | `Dataset[T]` | checkpoint | `DataFrame checked = df.checkpoint();` |
+| `localCheckpoint` | 无 | `Dataset[T]` | 本地checkpoint | `DataFrame localCheck = df.localCheckpoint();` |
+| `createTempView` | String viewName | `Unit` | 创建临时视图 | `df.createTempView("my_view");<br>spark.sql("SELECT * FROM my_view");` |
+| `createOrReplaceTempView` | String viewName | `Unit` | 创建或替换临时视图 | `df.createOrReplaceTempView("my_view");` |
+| `createGlobalTempView` | String viewName | `Unit` | 创建全局临时视图 | `df.createGlobalTempView("global_view");<br>spark.sql("SELECT * FROM global_temp.global_view");` |
+| `write` | 无 | `DataFrameWriter[T]` | 获取写入器 | `df.write().mode("overwrite").parquet("output.parquet");` |
+| `writeTo` | String table | `DataFrameWriterV2[T]` | 写入表（V2 API） | `df.writeTo("catalog.db.table").append();` |
+| `writeStream` | 无 | `DataStreamWriter[T]` | 获取流写入器 | `df.writeStream().format("console").start();` |
+| `inputFiles` | 无 | `String[]` | 获取输入文件列表 | `String[] files = df.inputFiles();` |
+| `isEmpty` | 无 | `boolean` | 判断是否为空 | `boolean empty = df.isEmpty();` |
+| `explain` | 无 | `Unit` | 打印执行计划 | `df.explain();` |
+| `explain` | boolean extended | `Unit` | 打印详细执行计划 | `df.explain(true);  // 显示物理计划和逻辑计划` |
+| `explain` | String mode | `Unit` | 打印执行计划（指定模式） | `df.explain("extended");<br>// mode: simple, extended, codegen, cost, formatted` |
+
