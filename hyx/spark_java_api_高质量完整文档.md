@@ -197,7 +197,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 关联规则挖掘示例，从交易数据中发现频繁项集和关联规则 | // 运行: spark-submit --class JavaAssociationRulesExample target/spark-examples.jar<br>// 输入: 交易数据集，输出: 满足置信度的关联规则 |
 
 ### JavaBinaryClassificationMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -205,7 +205,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 二分类评估指标示例，计算AUC、精确率、召回率、F1等指标 | // 运行: spark-submit --class JavaBinaryClassificationMetricsExample target/spark-examples.jar<br>// 输入: 预测结果和真实标签，输出: ROC曲线、PR曲线等评估指标 |
 
 ### JavaBisectingKMeansExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -213,8 +213,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 二分K-Means聚类示例，层次聚类算法，自顶向下分裂 | // 运行: spark-submit --class JavaBisectingKMeansExample target/spark-examples.jar<br>// 输入: 向量数据集，输出: 聚类中心和分配结果 |
 
 ### JavaChiSqSelectorExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -222,8 +221,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 卡方检验特征选择示例，选择与标签最相关的特征 | // 运行: spark-submit --class JavaChiSqSelectorExample target/spark-examples.jar<br>// 输入: 特征向量和标签，输出: 选定的特征索引 |
 
 ### JavaCorrelationsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -231,7 +229,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 相关性计算示例，计算Pearson和Spearman相关系数 | // 运行: spark-submit --class JavaCorrelationsExample target/spark-examples.jar<br>// 输入: 数值数据集，输出: 相关系数矩阵 |
 
 ### JavaElementwiseProductExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -239,8 +237,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 逐元素乘积示例，向量与权重向量的逐元素加权 | // 运行: spark-submit --class JavaElementwiseProductExample target/spark-examples.jar<br>// 输入: 向量数据和权重向量，输出: 加权后的向量 |
 
 ### JavaGaussianMixtureExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -248,8 +245,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 高斯混合模型示例，概率聚类，假设数据由多个高斯分布生成 | // 运行: spark-submit --class JavaGaussianMixtureExample target/spark-examples.jar<br>// 输入: 向量数据集，输出: 混合模型参数和聚类分配 |
 
 ### JavaGradientBoostingClassificationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -257,7 +253,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 梯度提升分类示例，GBDT集成学习分类算法 | // 运行: spark-submit --class JavaGradientBoostingClassificationExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 分类模型和预测结果 |
 
 ### JavaGradientBoostingRegressionExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -265,7 +261,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 梯度提升回归示例，GBDT集成学习回归算法 | // 运行: spark-submit --class JavaGradientBoostingRegressionExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 回归模型和预测结果 |
 
 ### JavaHypothesisTestingExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -273,7 +269,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 假设检验示例，统计显著性检验（卡方检验、t检验等） | // 运行: spark-submit --class JavaHypothesisTestingExample target/spark-examples.jar<br>// 输入: 样本数据，输出: 检验统计量和p值 |
 
 ### JavaHypothesisTestingKolmogorovSmirnovTestExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -281,7 +277,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | Kolmogorov-Smirnov检验示例，检验样本是否服从指定分布 | // 运行: spark-submit --class JavaHypothesisTestingKolmogorovSmirnovTestExample target/spark-examples.jar<br>// 输入: 样本数据，输出: KS检验统计量和p值 |
 
 ### JavaIsotonicRegressionExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -289,8 +285,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 保序回归示例，单调约束下的回归分析 | // 运行: spark-submit --class JavaIsotonicRegressionExample target/spark-examples.jar<br>// 输入: 有序数据，输出: 保序拟合结果 |
 
 ### JavaKMeansExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -298,8 +293,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | K-Means聚类示例，经典聚类算法，将数据划分为K个簇 | // 运行: spark-submit --class JavaKMeansExample target/spark-examples.jar<br>// 输入: 向量数据集，输出: 聚类中心和数据点分配 |
 
 ### JavaKernelDensityEstimationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -307,7 +301,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 核密度估计示例，估计数据的概率密度函数 | // 运行: spark-submit --class JavaKernelDensityEstimationExample target/spark-examples.jar<br>// 输入: 样本数据，输出: 密度估计值 |
 
 ### JavaLBFGSExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -315,7 +309,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | LBFGS优化示例，拟牛顿法求解大规模优化问题 | // 运行: spark-submit --class JavaLBFGSExample target/spark-examples.jar<br>// 输入: 优化问题和参数，输出: 最优解 |
 
 ### JavaLatentDirichletAllocationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -323,7 +317,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | LDA主题模型示例，文档主题发现和词分布估计 | // 运行: spark-submit --class JavaLatentDirichletAllocationExample target/spark-examples.jar<br>// 输入: 文档词频矩阵，输出: 主题分布和词主题分布 |
 
 ### JavaLogisticRegressionWithLBFGSExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -331,7 +325,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | LBFGS逻辑回归示例，使用拟牛顿法优化逻辑回归 | // 运行: spark-submit --class JavaLogisticRegressionWithLBFGSExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 逻辑回归模型 |
 
 ### JavaMultiLabelClassificationMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -339,7 +333,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 多标签分类评估示例，计算多标签分类指标 | // 运行: spark-submit --class JavaMultiLabelClassificationMetricsExample target/spark-examples.jar<br>// 输入: 多标签预测结果，输出: 准确率、召回率等指标 |
 
 ### JavaMulticlassClassificationMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -347,7 +341,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 多分类评估指标示例，计算混淆矩阵、准确率等 | // 运行: spark-submit --class JavaMulticlassClassificationMetricsExample target/spark-examples.jar<br>// 输入: 多分类预测结果，输出: 混淆矩阵和各项指标 |
 
 ### JavaNaiveBayesExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -355,8 +349,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 朴素贝叶斯分类示例，基于概率的分类算法 | // 运行: spark-submit --class JavaNaiveBayesExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 分类模型和预测结果 |
 
 ### JavaPCAExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -364,8 +357,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | PCA降维示例，主成分分析，将高维数据降至低维 | // 运行: spark-submit --class JavaPCAExample target/spark-examples.jar<br>// 输入: 高维向量数据，输出: 降维后的向量和主成分 |
 
 ### JavaPowerIterationClusteringExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -373,8 +365,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 幂迭代聚类示例，基于相似度矩阵的图聚类算法 | // 运行: spark-submit --class JavaPowerIterationClusteringExample target/spark-examples.jar<br>// 输入: 相似度数据，输出: 聚类分配 |
 
 ### JavaPrefixSpanExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -382,8 +373,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | PrefixSpan序列模式挖掘示例，发现序列数据中的频繁模式 | // 运行: spark-submit --class JavaPrefixSpanExample target/spark-examples.jar<br>// 输入: 序列数据集，输出: 频繁序列模式 |
 
 ### JavaRandomForestClassificationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -391,7 +381,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 随机森林分类示例，集成多棵决策树的分类算法 | // 运行: spark-submit --class JavaRandomForestClassificationExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 分类模型和预测结果 |
 
 ### JavaRandomForestRegressionExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -399,7 +389,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 随机森林回归示例，集成多棵决策树的回归算法 | // 运行: spark-submit --class JavaRandomForestRegressionExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: 回归模型和预测结果 |
 
 ### JavaRankingMetricsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -407,7 +397,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 排序评估指标示例，计算NDCG、MAP等推荐排序指标 | // 运行: spark-submit --class JavaRankingMetricsExample target/spark-examples.jar<br>// 输入: 排序预测结果，输出: NDCG、MAP等指标 |
 
 ### JavaRecommendationExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -415,7 +405,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 协同过滤推荐示例，ALS算法实现用户-物品推荐 | // 运行: spark-submit --class JavaRecommendationExample target/spark-examples.jar<br>// 输入: 用户-物品评分矩阵，输出: 用户推荐列表 |
 
 ### JavaSVDExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -423,7 +413,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | SVD奇异值分解示例，矩阵分解降维技术 | // 运行: spark-submit --class JavaSVDExample target/spark-examples.jar<br>// 输入: 矩阵数据，输出: U、S、V分解结果 |
 
 ### JavaSVMWithSGDExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -431,7 +421,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | SVM支持向量机示例，SGD优化训练线性SVM分类器 | // 运行: spark-submit --class JavaSVMWithSGDExample target/spark-examples.jar<br>// 输入: 训练数据集，输出: SVM分类模型和预测结果 |
 
 ### JavaSimpleFPGrowth
 **包路径**: `org.apache.spark.examples.mllib`
@@ -439,7 +429,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | FP-Growth频繁项集挖掘示例，高效发现交易数据中的频繁模式 | // 运行: spark-submit --class JavaSimpleFPGrowth target/spark-examples.jar<br>// 输入: 交易数据集，输出: 频繁项集及其支持度 |
 
 ### JavaStratifiedSamplingExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -447,7 +437,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 分层采样示例，按标签比例进行数据采样 | // 运行: spark-submit --class JavaStratifiedSamplingExample target/spark-examples.jar<br>// 输入: 带标签数据集，输出: 分层采样结果 |
 
 ### JavaStreamingTestExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -455,7 +445,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 流式假设检验示例，实时数据流的统计检验 | // 运行: spark-submit --class JavaStreamingTestExample target/spark-examples.jar<br>// 输入: 流式数据，输出: 实时检验结果 |
 
 ### JavaSummaryStatisticsExample
 **包路径**: `org.apache.spark.examples.mllib`
@@ -463,7 +453,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 统计摘要示例，计算均值、方差、最大值、最小值等统计量 | // 运行: spark-submit --class JavaSummaryStatisticsExample target/spark-examples.jar<br>// 输入: 数值数据，输出: 完整统计摘要 |
 
 ---
 
@@ -475,30 +465,31 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `find` | key: long | `int` | find方法 |  |
-| `findOrInsert` | key: long | `MutableColumnarRow` | findOrInsert方法 |  |
+| `find` | key: long | `int` | 在哈希表中查找指定key的位置，返回索引 | 在哈希表中查找指定key，返回索引位置 |
+| `findOrInsert` | key: long | `MutableColumnarRow` | 查找key位置，不存在则插入新条目 | 查找key或插入新条目，返回MutableColumnarRow |
 
 ### ArrayExpressionUtils
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
+**说明**: 数组表达式工具类，提供在有序数组中进行高效二分查找的功能。支持所有基本类型和Object类型，查找时间复杂度O(log n)。返回值：找到返回索引位置，未找到返回`-(插入点+1)`（插入点即应插入位置）。
 **方法数量**: 15
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `binarySearch` | data: boolean&lt;&gt;, value: boolean | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Boolean&lt;&gt;, value: Boolean | `int` | binarySearch方法 |  |
-| `binarySearch` | data: byte&lt;&gt;, value: byte | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Byte&lt;&gt;, value: Byte | `int` | binarySearch方法 |  |
-| `binarySearch` | data: short&lt;&gt;, value: short | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Short&lt;&gt;, value: Short | `int` | binarySearch方法 |  |
-| `binarySearch` | data: int&lt;&gt;, value: int | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Integer&lt;&gt;, value: Integer | `int` | binarySearch方法 |  |
-| `binarySearch` | data: long&lt;&gt;, value: long | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Long&lt;&gt;, value: Long | `int` | binarySearch方法 |  |
-| `binarySearch` | data: float&lt;&gt;, value: float | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Float&lt;&gt;, value: Float | `int` | binarySearch方法 |  |
-| `binarySearch` | data: double&lt;&gt;, value: double | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Double&lt;&gt;, value: Double | `int` | binarySearch方法 |  |
-| `binarySearch` | data: Object&lt;&gt;, value: Object, comp: Comparator<Object> | `int` | binarySearch方法 |  |
+| `binarySearch` | data: boolean&lt;&gt;, value: boolean | `int` | 在boolean数组中二分查找，false排在true前面 | `boolean[] arr = {false, false, true, true};<br>int idx = ArrayExpressionUtils.binarySearch(arr, true);<br>// 返回2（找到索引）<br>int notFound = ArrayExpressionUtils.binarySearch(arr, true);<br>// 未找到返回-(插入点+1)` |
+| `binarySearch` | data: Boolean&lt;&gt;, value: Boolean | `int` | 在Boolean数组中二分查找，支持null值（null排在最前） | `Boolean[] arr = {null, false, true};<br>int idx = ArrayExpressionUtils.binarySearch(arr, false);<br>// null < false < true 排序顺序` |
+| `binarySearch` | data: byte&lt;&gt;, value: byte | `int` | 在byte数组中二分查找，数组必须已升序排序 | `byte[] arr = {1, 3, 5, 7, 9};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 5);<br>// 返回2` |
+| `binarySearch` | data: Byte&lt;&gt;, value: Byte | `int` | 在Byte数组中二分查找，支持null值排序 | `Byte[] arr = {null, 1, 5, 10};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 5);` |
+| `binarySearch` | data: short&lt;&gt;, value: short | `int` | 在short数组中二分查找，数组必须已升序排序 | `short[] arr = {100, 200, 300};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 200);` |
+| `binarySearch` | data: Short&lt;&gt;, value: Short | `int` | 在Short数组中二分查找，支持null值排序 | `Short[] arr = {null, 10, 20, 30};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 20);` |
+| `binarySearch` | data: int&lt;&gt;, value: int | `int` | 在int数组中二分查找，最常用的整数查找方法 | `int[] arr = {1, 5, 10, 15, 20};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 10);<br>// 返回2（找到返回索引）<br>int notFound = ArrayExpressionUtils.binarySearch(arr, 8);<br>// 返回-3（插入点为2，返回-(2+1)）` |
+| `binarySearch` | data: Integer&lt;&gt;, value: Integer | `int` | 在Integer数组中二分查找，支持null值排序（null排在最前） | `Integer[] arr = {null, 1, 5, 10};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 5);` |
+| `binarySearch` | data: long&lt;&gt;, value: long | `int` | 在long数组中二分查找，用于大整数查找 | `long[] arr = {100L, 200L, 300L};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 200L);` |
+| `binarySearch` | data: Long&lt;&gt;, value: Long | `int` | 在Long数组中二分查找，支持null值排序 | `Long[] arr = {null, 100L, 500L};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 100L);` |
+| `binarySearch` | data: float&lt;&gt;, value: float | `int` | 在float数组中二分查找，遵循SQL浮点数排序规则 | `float[] arr = {1.0f, 2.5f, 3.0f};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 2.5f);` |
+| `binarySearch` | data: Float&lt;&gt;, value: Float | `int` | 在Float数组中二分查找，支持null值，使用SQLOrderingUtil.compareFloats | `Float[] arr = {null, 1.0f, 2.0f};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 1.0f);` |
+| `binarySearch` | data: double&lt;&gt;, value: double | `int` | 在double数组中二分查找，使用标准二分查找算法 | `double[] arr = {1.1, 2.2, 3.3};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 2.2);` |
+| `binarySearch` | data: Double&lt;&gt;, value: Double | `int` | 在Double数组中二分查找，使用SQLOrderingUtil.compareDoubles处理特殊值 | `Double[] arr = {null, 1.0, 5.0};<br>int idx = ArrayExpressionUtils.binarySearch(arr, 1.0);` |
+| `binarySearch` | data: Object&lt;&gt;, value: Object, comp: Comparator<Object> | `int` | 在Object数组中二分查找，使用自定义Comparator定义排序规则 | `String[] arr = {"apple", "banana", "cherry"};<br>Comparator<String> comp = String::compareTo;<br>int idx = ArrayExpressionUtils.binarySearch(arr, "banana", comp);<br>// 返回1` |
 
 ### ArrayOfDecimalsSerDe
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -506,39 +497,39 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getClassOfT` | 无 | `Class&lt;Decimal&gt;` | getClassOfT方法 |  |
-| `getClassOfT` | 无 | `Class&lt;Decimal&gt;` | getClassOfT方法 |  |
-| `sizeOf` | item: Decimal | `int` | sizeOf方法 |  |
-| `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | sizeOf方法 |  |
-| `sizeOf` | item: Decimal | `int` | sizeOf方法 |  |
-| `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | sizeOf方法 |  |
+| `getClassOfT` | 无 | `Class&lt;Decimal&gt;` | 获取泛型类型的Class对象 | 返回Decimal类型的Class对象 |
+| `sizeOf` | item: Decimal | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
+| `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
+| `sizeOf` | item: Decimal | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
+| `sizeOf` | mem: Memory, offsetBytes: long, numItems: int | `int` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
 
 ### ArrowColumnVector
 **包路径**: `org.apache.spark.sql.vectorized`
+**说明**: 基于Apache Arrow的列向量实现，用于高效读取列式数据。Arrow是一种跨平台的列式内存格式，支持零拷贝数据共享。
 **方法数量**: 20
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
-| `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
-| `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getChild` | ordinal: int | `ArrowColumnVector` | getChild方法 |  |
-| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
-| `getDouble` | rowId: int | `double` | getDouble方法 |  |
-| `getFloat` | rowId: int | `float` | getFloat方法 |  |
-| `getGeography` | rowId: int | `GeographyVal` | getGeography方法 |  |
-| `getGeometry` | rowId: int | `GeometryVal` | getGeometry方法 |  |
-| `getInt` | rowId: int | `int` | getInt方法 |  |
-| `getInterval` | rowId: int | `CalendarInterval` | getInterval方法 |  |
-| `getLong` | rowId: int | `long` | getLong方法 |  |
-| `getMap` | rowId: int | `ColumnarMap` | getMap方法 |  |
-| `getShort` | rowId: int | `short` | getShort方法 |  |
-| `getUTF8String` | rowId: int | `UTF8String` | getUTF8String方法 |  |
-| `getValueVector` | 无 | `ValueVector` | getValueVector方法 |  |
-| `hasNull` | 无 | `boolean` | hasNull方法 |  |
-| `isNullAt` | rowId: int | `boolean` | isNullAt方法 |  |
-| `numNulls` | 无 | `int` | numNulls方法 |  |
+| `close` | 无 | `void` | 关闭Arrow列向量，释放底层Arrow ValueVector和子列向量占用的内存资源，防止内存泄漏 | `ArrowColumnVector vector = ...;<br>vector.close();  // 释放内存` |
+| `getArray` | rowId: int | `ColumnarArray` | 获取指定行的数组类型数据，返回ColumnarArray对象，可通过它遍历数组元素 | `ColumnarArray arr = vector.getArray(0);<br>int len = arr.length();<br>for (int i = 0; i < len; i++) {<br>    Object elem = arr.get(i, elementType);<br>}` |
+| `getBoolean` | rowId: int | `boolean` | 获取指定行位置的布尔值数据 | `boolean value = vector.getBoolean(0);<br>// 返回true或false` |
+| `getByte` | rowId: int | `byte` | 获取指定行位置的字节值数据（-128到127） | `byte value = vector.getByte(0);` |
+| `getChild` | ordinal: int | `ArrowColumnVector` | 获取嵌套类型（Struct/Array/Map）的子列向量，ordinal为子列索引 | `ArrowColumnVector child = vector.getChild(0);<br>// 获取Struct的第一个字段列` |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | 获取指定行的Decimal高精度数值，precision为总位数，scale为小数位数 | `Decimal dec = vector.getDecimal(0, 10, 2);<br>// precision=10表示最多10位数字，scale=2表示2位小数` |
+| `getDouble` | rowId: int | `double` | 获取指定行位置的双精度浮点数数据 | `double value = vector.getDouble(0);` |
+| `getFloat` | rowId: int | `float` | 获取指定行位置的单精度浮点数数据 | `float value = vector.getFloat(0);` |
+| `getGeography` | rowId: int | `GeographyVal` | 获取指定行的地理空间数据（Geography类型），用于GIS应用 | `GeographyVal geo = vector.getGeography(0);` |
+| `getGeometry` | rowId: int | `GeometryVal` | 获取指定行的几何空间数据（Geometry类型），用于GIS应用 | `GeometryVal geom = vector.getGeometry(0);` |
+| `getInt` | rowId: int | `int` | 获取指定行位置的整数值数据 | `int value = vector.getInt(0);` |
+| `getInterval` | rowId: int | `CalendarInterval` | 获取指定行的时间间隔数据，包含months、days、microseconds三个字段 | `CalendarInterval interval = vector.getInterval(0);<br>int months = interval.months;<br>int days = interval.days;<br>long microseconds = interval.microseconds;` |
+| `getLong` | rowId: int | `long` | 获取指定行位置的长整数值数据 | `long value = vector.getLong(0);` |
+| `getMap` | rowId: int | `ColumnarMap` | 获取指定行的Map类型数据，返回ColumnarMap对象 | `ColumnarMap map = vector.getMap(0);<br>int numElements = map.numElements();<br>// 可通过keyArray()和valueArray()访问键值` |
+| `getShort` | rowId: int | `short` | 获取指定行位置的短整数值数据（-32768到32767） | `short value = vector.getShort(0);` |
+| `getUTF8String` | rowId: int | `UTF8String` | 获取指定行的UTF8编码字符串数据 | `UTF8String str = vector.getUTF8String(0);<br>String javaStr = str.toString();` |
+| `getValueVector` | 无 | `ValueVector` | 获取底层Arrow ValueVector对象，用于直接访问Arrow原生API | `ValueVector arrowVec = vector.getValueVector();<br>// 可使用Arrow原生API进行高级操作` |
+| `hasNull` | 无 | `boolean` | 检查列向量中是否存在null值，比遍历检查更高效 | `boolean hasNullValues = vector.hasNull();<br>if (hasNullValues) {<br>    // 需要处理null值逻辑<br>}` |
+| `isNullAt` | rowId: int | `boolean` | 检查指定行位置是否为null值，读取数据前应先检查 | `if (!vector.isNullAt(0)) {<br>    int value = vector.getInt(0);<br>} else {<br>    // 处理null情况<br>}` |
+| `numNulls` | 无 | `int` | 返回列向量中null值的总数量 | `int nullCount = vector.numNulls();<br>System.out.println("Null values: " + nullCount);` |
 
 ### AvroCompressionCodec
 **包路径**: `org.apache.spark.sql.avro`
@@ -546,10 +537,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | s: String | `AvroCompressionCodec` | fromString方法 |  |
-| `getCodecName` | 无 | `String` | getCodecName方法 |  |
-| `getSupportCompressionLevel` | 无 | `boolean` | getSupportCompressionLevel方法 |  |
-| `lowerCaseName` | 无 | `String` | lowerCaseName方法 |  |
+| `fromString` | s: String | `AvroCompressionCodec` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
+| `getCodecName` | 无 | `String` | 获取压缩编解码器的名称 | 返回压缩编解码器名称（如"snappy"、"deflate"） |
+| `getSupportCompressionLevel` | 无 | `boolean` | 检查是否支持压缩级别配置 | 检查编解码器是否支持自定义压缩级别 |
+| `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
 ### BitmapExpressionUtils
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -557,11 +548,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `bitmapAndMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | bitmapAndMerge方法 |  |
-| `bitmapBitPosition` | value: long | `long` | bitmapBitPosition方法 |  |
-| `bitmapBucketNumber` | value: long | `long` | bitmapBucketNumber方法 |  |
-| `bitmapCount` | bitmap: byte&lt;&gt; | `long` | bitmapCount方法 |  |
-| `bitmapMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | bitmapMerge方法 |  |
+| `bitmapAndMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | 对两个位图执行AND合并操作 | 对两个位图执行AND操作，返回交集位图 |
+| `bitmapBitPosition` | value: long | `long` | 计算位图中指定值的位位置 | 计算值在桶内的位位置（0-63） |
+| `bitmapBucketNumber` | value: long | `long` | 计算位图中指定值的桶编号 | 计算值所在的桶编号 |
+| `bitmapCount` | bitmap: byte&lt;&gt; | `long` | 统计位图中设置的位数 | 返回位图中设置的位数统计 |
+| `bitmapMerge` | bitmap1: byte&lt;&gt;, bitmap2: byte&lt;&gt; | `void` | 合并两个位图 | 合并两个位图，返回OR结果 |
 
 ### BufferedRowIterator
 **包路径**: `org.apache.spark.sql.execution`
@@ -569,12 +560,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `append` | row: InternalRow | `void` | 追加元素 |  |
-| `durationMs` | 无 | `long` | durationMs方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `incPeakExecutionMemory` | size: long | `void` | incPeakExecutionMemory方法 |  |
-| `next` | 无 | `InternalRow` | next方法 |  |
-| `shouldStop` | 无 | `boolean` | shouldStop方法 |  |
+| `append` | row: InternalRow | `void` | 追加元素 | 向缓冲迭代器追加一行数据 |
+| `durationMs` | 无 | `long` | 获取执行耗时（毫秒） | 返回执行耗时（毫秒） |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `incPeakExecutionMemory` | size: long | `void` | 增加峰值执行内存计数 | 增加峰值执行内存统计 |
+| `next` | 无 | `InternalRow` | 获取迭代器的下一个元素 | 获取迭代器下一行数据 |
+| `shouldStop` | 无 | `boolean` | 检查是否应该停止迭代 | 检查是否应停止迭代处理 |
 
 ### CartesianSpatialReferenceSystemMapper
 **包路径**: `org.apache.spark.sql.internal.types`
@@ -582,32 +573,33 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSrid` | stringId: String | `Integer` | getSrid方法 |  |
-| `getStringId` | srid: int | `String` | getStringId方法 |  |
+| `getSrid` | stringId: String | `Integer` | 获取空间参考系统ID（SRID） | 将字符串空间参考ID转换为整数SRID |
+| `getStringId` | srid: int | `String` | 将SRID转换为字符串标识 | 将整数SRID转换为字符串标识 |
 
 ### CaseInsensitiveStringMap
 **包路径**: `org.apache.spark.sql.util`
+**说明**: 大小写不敏感的字符串键值映射，用于传递配置选项到数据源实现。所有key在内部转换为小写存储，确保key匹配时忽略大小写差异。
 **方法数量**: 17
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `asCaseSensitiveMap` | 无 | `Map&lt;String, String&gt;` | asCaseSensitiveMap方法 |  |
-| `clear` | 无 | `void` | 清空集合 |  |
-| `containsKey` | key: Object | `boolean` | containsKey方法 |  |
-| `containsValue` | value: Object | `boolean` | containsValue方法 |  |
-| `empty` | 无 | `CaseInsensitiveStringMap` | empty方法 |  |
-| `get` | key: Object | `String` | 获取元素 |  |
-| `getBoolean` | key: String, defaultValue: boolean | `boolean` | getBoolean方法 |  |
-| `getDouble` | key: String, defaultValue: double | `double` | getDouble方法 |  |
-| `getInt` | key: String, defaultValue: int | `int` | getInt方法 |  |
-| `getLong` | key: String, defaultValue: long | `long` | getLong方法 |  |
-| `isEmpty` | 无 | `boolean` | 判断是否为空 |  |
-| `keySet` | 无 | `Set&lt;String&gt;` | keySet方法 |  |
-| `put` | key: String, value: String | `String` | 添加键值对 |  |
-| `putAll` | Map<? extends: String, m: ? extends String> | `void` | putAll方法 |  |
-| `remove` | key: Object | `String` | 删除元素 |  |
-| `size` | 无 | `int` | 计算大小 |  |
-| `values` | 无 | `Collection&lt;String&gt;` | 返回所有Value的RDD | // values：获取所有Value<br>JavaPairRDD<String, Integer> pairRDD = sc.parallelizePairs(Arrays.asList(<br>    new Tuple2<>("a", 1),<br>    new Tuple2<>("b", 2)<br>));<br><br>JavaRDD<Integer> valuesRDD = pairRDD.values();<br>// 结果: [1, 2] |
+| `asCaseSensitiveMap` | 无 | `Map&lt;String, String&gt;` | 转换为保留原始大小写的不可变Map，用于需要区分大小写的场景 | `Map&lt;String, String&gt; original = map.asCaseSensitiveMap();<br>// 返回原始key大小写的Map` |
+| `clear` | 无 | `void` | 清空集合（此实现不支持，抛出UnsupportedOperationException） | `// 注意：此方法会抛出异常<br>// CaseInsensitiveStringMap是不可变的` |
+| `containsKey` | key: Object | `boolean` | 检查指定key是否存在（大小写不敏感匹配） | `boolean exists = map.containsKey("Path");<br>// 即使内部存储为"path"也会返回true` |
+| `containsValue` | value: Object | `boolean` | 检查指定value是否存在于Map中 | `boolean hasValue = map.containsValue("hdfs://...");` |
+| `empty` | 无 | `CaseInsensitiveStringMap` | 创建一个空的CaseInsensitiveStringMap实例 | `CaseInsensitiveStringMap empty = CaseInsensitiveStringMap.empty();<br>// 返回空的不可变Map` |
+| `get` | key: Object | `String` | 获取指定key对应的value（大小写不敏感），不存在返回null | `String path = map.get("path");  // 或"PATH"都可` |
+| `getBoolean` | key: String, defaultValue: boolean | `boolean` | 获取指定key的布尔值配置选项，不存在则返回默认值，仅接受"true"/"false"字符串 | `boolean compress = map.getBoolean("compression", false);<br>// key不存在或无效时返回false` |
+| `getDouble` | key: String, defaultValue: double | `double` | 获取指定key的双精度浮点数配置选项，不存在则返回默认值 | `double ratio = map.getDouble("ratio", 1.0);<br>// 解析字符串为double` |
+| `getInt` | key: String, defaultValue: int | `int` | 获取指定key的整数配置选项，不存在则返回默认值 | `int batchSize = map.getInt("batchSize", 1024);<br>// key不存在时返回1024` |
+| `getLong` | key: String, defaultValue: long | `long` | 获取指定key的长整数配置选项，不存在则返回默认值 | `long timeout = map.getLong("timeout", 30000L);` |
+| `isEmpty` | 无 | `boolean` | 判断Map是否为空（没有任何键值对） | `if (map.isEmpty()) {<br>    // Map为空，无配置项<br>}` |
+| `keySet` | 无 | `Set&lt;String&gt;` | 返回所有key的集合（key已转换为小写） | `Set&lt;String&gt; keys = map.keySet();<br>for (String key : keys) {<br>    System.out.println(key);  // 输出小写key<br>}` |
+| `put` | key: String, value: String | `String` | 添加键值对（此实现不支持，抛出UnsupportedOperationException） | `// 注意：CaseInsensitiveStringMap是不可变的<br>// 需要通过构造函数创建` |
+| `putAll` | Map&lt;? extends String, ? extends String&gt; | `void` | 批量添加键值对（此实现不支持，抛出UnsupportedOperationException） | `// 注意：不支持修改操作` |
+| `remove` | key: Object | `String` | 删除指定key（此实现不支持，抛出UnsupportedOperationException） | `// 注意：不支持删除操作` |
+| `size` | 无 | `int` | 返回Map中键值对的数量 | `int count = map.size();<br>System.out.println("配置项数量: " + count);` |
+| `values` | 无 | `Collection&lt;String&gt;` | 返回所有value的集合 | `Collection&lt;String&gt; values = map.values();<br>for (String value : values) {<br>    System.out.println(value);<br>}` |
 
 ### Cast
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -615,9 +607,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `dataType` | 无 | `DataType` | dataType方法 |  |
-| `expression` | 无 | `Expression` | expression方法 |  |
-| `expressionDataType` | 无 | `DataType` | expressionDataType方法 |  |
+| `dataType` | 无 | `DataType` | 获取数据类型 | 返回Cast目标的数据类型 |
+| `expression` | 无 | `Expression` | 获取表达式对象 | 返回被转换的表达式对象 |
+| `expressionDataType` | 无 | `DataType` | 获取表达式的数据类型 | 返回源表达式的数据类型 |
 
 ### ChangelogInfo
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -625,9 +617,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `computeUpdates` | 无 | `boolean` | computeUpdates方法 |  |
-| `deduplicationMode` | 无 | `DeduplicationMode` | deduplicationMode方法 |  |
-| `range` | 无 | `ChangelogRange` | range方法 |  |
+| `computeUpdates` | 无 | `boolean` | 是否计算更新操作 | 检查是否计算更新记录 |
+| `deduplicationMode` | 无 | `DeduplicationMode` | 获取去重模式 | 返回去重模式配置 |
+| `range` | 无 | `ChangelogRange` | 获取变更日志范围 | 返回变更日志的时间范围 |
 
 ### CharVarcharCodegenUtils
 **包路径**: `org.apache.spark.sql.catalyst.util`
@@ -635,9 +627,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `charTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | charTypeWriteSideCheck方法 |  |
-| `readSidePadding` | inputStr: UTF8String, limit: int | `UTF8String` | readSidePadding方法 |  |
-| `varcharTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | varcharTypeWriteSideCheck方法 |  |
+| `charTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | CHAR类型写入端校验，截断超长字符串 | 校验CHAR类型写入，超长则截断 |
+| `readSidePadding` | inputStr: UTF8String, limit: int | `UTF8String` | 读取端填充，补齐CHAR类型定长 | 读取端补齐CHAR定长字符串 |
+| `varcharTypeWriteSideCheck` | inputStr: UTF8String, limit: int | `UTF8String` | VARCHAR类型写入端校验，截断超长字符串 | 校验VARCHAR类型写入，超长则截断 |
 
 ### Check
 **包路径**: `org.apache.spark.sql.connector.catalog.constraints`
@@ -645,11 +637,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | 无 | `Check` | build方法 |  |
-| `predicate` | 无 | `Predicate` | predicate方法 |  |
-| `predicate` | predicate: Predicate | `Builder` | predicate方法 |  |
-| `predicateSql` | 无 | `String` | predicateSql方法 |  |
-| `predicateSql` | predicateSql: String | `Builder` | predicateSql方法 |  |
+| `build` | 无 | `Check` | 构建约束对象 | 构建Check约束对象 |
+| `predicate` | 无 | `Predicate` | 获取或设置断言条件 | 获取或设置断言条件 |
+| `predicate` | predicate: Predicate | `Builder` | 获取或设置断言条件 | 获取或设置断言条件 |
+| `predicateSql` | 无 | `String` | 获取或设置断言SQL表达式 | 获取或设置断言SQL表达式 |
+| `predicateSql` | predicateSql: String | `Builder` | 获取或设置断言SQL表达式 | 获取或设置断言SQL表达式 |
 
 ### CollationAwareUTF8String
 **包路径**: `org.apache.spark.sql.catalyst.util`
@@ -657,35 +649,35 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `binaryTrim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | binaryTrim方法 |  |
-| `binaryTrimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | binaryTrimRight方法 |  |
-| `compareLowerCase` | left: final UTF8String, right: final UTF8String | `int` | compareLowerCase方法 |  |
-| `findInSet` | match: final UTF8String, set: final UTF8String, collationId: int | `int` | findInSet方法 |  |
-| `indexOf` | target: final UTF8String, pattern: final UTF8String, start: final int, collationId: final int | `int` | indexOf方法 |  |
-| `lowerCaseCodePoints` | target: final UTF8String | `UTF8String` | lowerCaseCodePoints方法 |  |
-| `lowercaseContains` | target: final UTF8String, pattern: final UTF8String | `boolean` | lowercaseContains方法 |  |
-| `lowercaseEndsWith` | target: final UTF8String, pattern: final UTF8String | `boolean` | lowercaseEndsWith方法 |  |
-| `lowercaseIndexOf` | target: final UTF8String, pattern: final UTF8String, start: final int | `int` | lowercaseIndexOf方法 |  |
-| `lowercaseReplace` | target: final UTF8String, search: final UTF8String, replace: final UTF8String | `UTF8String` | lowercaseReplace方法 |  |
-| `lowercaseStartsWith` | target: final UTF8String, pattern: final UTF8String | `boolean` | lowercaseStartsWith方法 |  |
-| `lowercaseSubStringIndex` | string: final UTF8String, delimiter: final UTF8String, count: int | `UTF8String` | lowercaseSubStringIndex方法 |  |
-| `lowercaseTranslate` | input: final UTF8String, Map<String: final, dict: String> | `UTF8String` | lowercaseTranslate方法 |  |
-| `lowercaseTrim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | lowercaseTrim方法 |  |
-| `lowercaseTrimLeft` | srcString: final UTF8String, trimString: final UTF8String | `UTF8String` | lowercaseTrimLeft方法 |  |
-| `lowercaseTrimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | lowercaseTrimRight方法 |  |
-| `replace` | target: final UTF8String, search: final UTF8String, replace: final UTF8String, collationId: final int | `UTF8String` | replace方法 |  |
-| `subStringIndex` | string: final UTF8String, delimiter: final UTF8String, count: int, collationId: final int | `UTF8String` | subStringIndex方法 |  |
-| `toLowerCase` | target: final UTF8String | `UTF8String` | toLowerCase方法 |  |
-| `toLowerCase` | target: final UTF8String, collationId: final int | `UTF8String` | toLowerCase方法 |  |
-| `toTitleCase` | target: final UTF8String | `UTF8String` | toTitleCase方法 |  |
-| `toTitleCase` | target: final UTF8String, collationId: final int | `UTF8String` | toTitleCase方法 |  |
-| `toTitleCaseICU` | source: UTF8String | `UTF8String` | toTitleCaseICU方法 |  |
-| `toUpperCase` | target: final UTF8String | `UTF8String` | toUpperCase方法 |  |
-| `toUpperCase` | target: final UTF8String, collationId: final int | `UTF8String` | toUpperCase方法 |  |
-| `translate` | input: final UTF8String, Map<String: final, dict: String>, collationId: final int | `UTF8String` | translate方法 |  |
-| `trim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 去除空白 |  |
-| `trimLeft` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | trimLeft方法 |  |
-| `trimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | trimRight方法 |  |
+| `binaryTrim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 二进制模式去除两端指定字符 | 去除字符串两端指定字符（二进制模式） |
+| `binaryTrimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 二进制模式去除右侧指定字符 | 去除字符串右侧指定字符（二进制模式） |
+| `compareLowerCase` | left: final UTF8String, right: final UTF8String | `int` | 比较两个字符串的小写形式 | 比较两字符串小写形式，返回差值 |
+| `findInSet` | match: final UTF8String, set: final UTF8String, collationId: int | `int` | 在集合字符串中查找匹配项位置 | 在逗号分隔集合中查找元素位置 |
+| `indexOf` | target: final UTF8String, pattern: final UTF8String, start: final int, collationId: final int | `int` | 查找子串在字符串中的起始位置 | 查找子串起始位置，支持指定起始索引 |
+| `lowerCaseCodePoints` | target: final UTF8String | `UTF8String` | 获取小写形式的Unicode码点 | 获取小写Unicode码点字符串 |
+| `lowercaseContains` | target: final UTF8String, pattern: final UTF8String | `boolean` | 忽略大小写检查是否包含子串 | 忽略大小写检查是否包含子串 |
+| `lowercaseEndsWith` | target: final UTF8String, pattern: final UTF8String | `boolean` | 忽略大小写检查是否以指定字符串结尾 | 忽略大小写检查是否以指定结尾 |
+| `lowercaseIndexOf` | target: final UTF8String, pattern: final UTF8String, start: final int | `int` | 忽略大小写查找子串位置 | 忽略大小写查找子串位置 |
+| `lowercaseReplace` | target: final UTF8String, search: final UTF8String, replace: final UTF8String | `UTF8String` | 忽略大小写替换匹配的字符串 | 忽略大小写替换匹配内容 |
+| `lowercaseStartsWith` | target: final UTF8String, pattern: final UTF8String | `boolean` | 忽略大小写检查是否以指定字符串开头 | 忽略大小写检查是否以指定开头 |
+| `lowercaseSubStringIndex` | string: final UTF8String, delimiter: final UTF8String, count: int | `UTF8String` | 忽略大小写的子串索引查找 | 忽略大小写的子串索引 |
+| `lowercaseTranslate` | input: final UTF8String, Map<String: final, dict: String> | `UTF8String` | 忽略大小写的字符转换 | 忽略大小写的字符映射转换 |
+| `lowercaseTrim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 忽略大小写去除两端空白 | 忽略大小写去除两端空白 |
+| `lowercaseTrimLeft` | srcString: final UTF8String, trimString: final UTF8String | `UTF8String` | 忽略大小写去除左侧空白 | 忽略大小写去除左侧空白 |
+| `lowercaseTrimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 忽略大小写去除右侧空白 | 忽略大小写去除右侧空白 |
+| `replace` | target: final UTF8String, search: final UTF8String, replace: final UTF8String, collationId: final int | `UTF8String` | 替换字符串中匹配的内容 | 替换字符串中匹配内容 |
+| `subStringIndex` | string: final UTF8String, delimiter: final UTF8String, count: int, collationId: final int | `UTF8String` | 查找分隔符分隔的子串索引 | 按分隔符查找第N个子串 |
+| `toLowerCase` | target: final UTF8String | `UTF8String` | 转换为小写 | 转换为小写字符串 |
+| `toLowerCase` | target: final UTF8String, collationId: final int | `UTF8String` | 转换为小写 | 转换为小写字符串 |
+| `toTitleCase` | target: final UTF8String | `UTF8String` | 转换为标题大小写 | 转换为标题大小写（首字母大写） |
+| `toTitleCase` | target: final UTF8String, collationId: final int | `UTF8String` | 转换为标题大小写 | 转换为标题大小写（首字母大写） |
+| `toTitleCaseICU` | source: UTF8String | `UTF8String` | 使用ICU库转换为标题大小写 | ICU库标题大小写转换 |
+| `toUpperCase` | target: final UTF8String | `UTF8String` | 转换为大写 | 转换为大写字符串 |
+| `toUpperCase` | target: final UTF8String, collationId: final int | `UTF8String` | 转换为大写 | 转换为大写字符串 |
+| `translate` | input: final UTF8String, Map<String: final, dict: String>, collationId: final int | `UTF8String` | 字符映射转换 | 按字符映射表转换字符串 |
+| `trim` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 去除空白 | 去除字符串两端空白 |
+| `trimLeft` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 去除字符串左侧空白 | 去除字符串左侧空白 |
+| `trimRight` | srcString: final UTF8String, trimString: final UTF8String, collationId: final int | `UTF8String` | 去除字符串右侧空白 | 去除字符串右侧空白 |
 
 ### ColumnDefaultValue
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -693,7 +685,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getValue` | 无 | `Literal&lt;?&gt;` | getValue方法 |  |
+| `getValue` | 无 | `Literal&lt;?&gt;` | 获取列的默认值 | 返回列默认值的Literal对象 |
 
 ### ColumnVector
 **包路径**: `org.apache.spark.sql.vectorized`
@@ -701,15 +693,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `apply` | t: DataType | `DataType` | apply方法 |  |
-| `closeIfFreeable` | 无 | `void` | closeIfFreeable方法 |  |
-| `dataType` | 无 | `DataType` | dataType方法 |  |
-| `getGeography` | rowId: int | `GeographyVal` | getGeography方法 |  |
-| `getGeometry` | rowId: int | `GeometryVal` | getGeometry方法 |  |
-| `getInterval` | rowId: int | `CalendarInterval` | getInterval方法 |  |
-| `getStruct` | rowId: int | `ColumnarRow` | getStruct方法 |  |
-| `getVariant` | rowId: int | `VariantVal` | getVariant方法 |  |
-| `isDefinedAt` | x: DataType | `boolean` | isDefinedAt方法 |  |
+| `apply` | t: DataType | `DataType` | 应用数据类型转换 | 获取数据类型对应的列向量 |
+| `closeIfFreeable` | 无 | `void` | 检查并释放可释放的资源 | 检查并释放可释放的列向量资源 |
+| `dataType` | 无 | `DataType` | 获取数据类型 | 返回Cast目标的数据类型 |
+| `getGeography` | rowId: int | `GeographyVal` | 获取地理空间数据值 | 获取地理空间数据值 |
+| `getGeometry` | rowId: int | `GeometryVal` | 获取几何空间数据值 | 获取几何空间数据值 |
+| `getInterval` | rowId: int | `CalendarInterval` | 获取时间间隔值 | 获取时间间隔数据 |
+| `getStruct` | rowId: int | `ColumnarRow` | 获取Struct类型数据 | 获取Struct结构数据 |
+| `getVariant` | rowId: int | `VariantVal` | 获取Variant类型数据 | 获取Variant变体数据 |
+| `isDefinedAt` | x: DataType | `boolean` | 检查数据类型是否定义 | 检查数据类型是否已定义 |
 
 ### ColumnVectorUtils
 **包路径**: `org.apache.spark.sql.execution.vectorized`
@@ -717,67 +709,69 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `populate` | col: ConstantColumnVector, row: InternalRow, fieldIdx: int | `void` | populate方法 |  |
-| `toBatch` | schema: StructType, memMode: MemoryMode, row: Iterator<Row> | `ColumnarBatch` | toBatch方法 |  |
-| `toJavaIntMap` | map: ColumnarMap | `Map&lt;Integer, Integer&gt;` | toJavaIntMap方法 |  |
+| `populate` | col: ConstantColumnVector, row: InternalRow, fieldIdx: int | `void` | 填充常量列向量数据 | 填充常量列向量数据 |
+| `toBatch` | schema: StructType, memMode: MemoryMode, row: Iterator<Row> | `ColumnarBatch` | 将行迭代器转换为列式批处理 | 将行迭代器转为列式批处理 |
+| `toJavaIntMap` | map: ColumnarMap | `Map&lt;Integer, Integer&gt;` | 将ColumnarMap转换为Java Map | 将ColumnarMap转为Java整数Map |
 
 ### ColumnarBatch
 **包路径**: `org.apache.spark.sql.vectorized`
+**说明**: 列式批处理容器，将多个ColumnVector组织为行式表格，提供行视图访问数据。用于向量化执行，大幅提升数据处理效率。
 **方法数量**: 10
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `closeIfFreeable` | 无 | `void` | closeIfFreeable方法 |  |
-| `column` | ordinal: int | `ColumnVector` | column方法 |  |
-| `getRow` | rowId: int | `InternalRow` | getRow方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `next` | 无 | `InternalRow` | next方法 |  |
-| `numCols` | 无 | `int` | numCols方法 |  |
-| `numRows` | 无 | `int` | numRows方法 |  |
-| `rowIterator` | 无 | `Iterator&lt;InternalRow&gt;` | rowIterator方法 |  |
-| `setNumRows` | numRows: int | `void` | setNumRows方法 |  |
+| `close` | 无 | `void` | 关闭批处理，释放所有列向量占用的内存资源，数据将不可访问 | `ColumnarBatch batch = ...;<br>try {<br>    // 使用batch处理数据<br>} finally {<br>    batch.close();  // 确保释放内存<br>}` |
+| `closeIfFreeable` | 无 | `void` | 如果列向量的资源可被释放，则关闭它们，用于批处理间清理临时内存 | `batch.closeIfFreeable();<br>// 在批处理之间清理可释放资源` |
+| `column` | ordinal: int | `ColumnVector` | 获取指定列索引位置的列向量对象，ordinal从0开始 | `ColumnVector col0 = batch.column(0);<br>ColumnVector col1 = batch.column(1);<br>// 访问各列数据` |
+| `getRow` | rowId: int | `InternalRow` | 获取指定行号的内行对象，返回的行对象在多次调用间会被复用 | `InternalRow row = batch.getRow(0);<br>int value = row.getInt(0);<br>// 注意：row对象会被复用，不要跨调用保存` |
+| `hasNext` | 无 | `boolean` | 检查行迭代器是否还有更多行可遍历（需先调用rowIterator获取迭代器） | `Iterator&lt;InternalRow&gt; iter = batch.rowIterator();<br>while (iter.hasNext()) {<br>    InternalRow row = iter.next();<br>    // 处理每行数据<br>}` |
+| `next` | 无 | `InternalRow` | 获取行迭代器的下一行数据（需先调用rowIterator获取迭代器） | `Iterator&lt;InternalRow&gt; iter = batch.rowIterator();<br>while (iter.hasNext()) {<br>    InternalRow row = iter.next();<br>}` |
+| `numCols` | 无 | `int` | 返回批处理中的列数量 | `int cols = batch.numCols();<br>System.out.println("列数: " + cols);` |
+| `numRows` | 无 | `int` | 返回批处理中的行数量（包括被过滤的行） | `int rows = batch.numRows();<br>System.out.println("行数: " + rows);` |
+| `rowIterator` | 无 | `Iterator&lt;InternalRow&gt;` | 返回行迭代器，用于按行遍历批处理中的所有数据 | `Iterator&lt;InternalRow&gt; iter = batch.rowIterator();<br>while (iter.hasNext()) {<br>    InternalRow row = iter.next();<br>    // 按行处理数据<br>}` |
+| `setNumRows` | numRows: int | `void` | 设置批处理的行数量，用于动态调整批处理大小 | `batch.setNumRows(100);<br>// 设置批处理包含100行` |
 
 ### ConstantColumnVector
 **包路径**: `org.apache.spark.sql.execution.vectorized`
+**说明**: 常量列向量，为所有行存储相同的值。只保存一份数据副本，极大节省内存。用于表示常量表达式（如常量列、广播变量）。
 **方法数量**: 34
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `closeIfFreeable` | 无 | `void` | closeIfFreeable方法 |  |
-| `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
-| `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
-| `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getChild` | ordinal: int | `ColumnVector` | getChild方法 |  |
-| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
-| `getDouble` | rowId: int | `double` | getDouble方法 |  |
-| `getFloat` | rowId: int | `float` | getFloat方法 |  |
-| `getInt` | rowId: int | `int` | getInt方法 |  |
-| `getLong` | rowId: int | `long` | getLong方法 |  |
-| `getMap` | ordinal: int | `ColumnarMap` | getMap方法 |  |
-| `getShort` | rowId: int | `short` | getShort方法 |  |
-| `getUTF8String` | rowId: int | `UTF8String` | getUTF8String方法 |  |
-| `hasNull` | 无 | `boolean` | hasNull方法 |  |
-| `isNullAt` | rowId: int | `boolean` | isNullAt方法 |  |
-| `numNulls` | 无 | `int` | numNulls方法 |  |
-| `setArray` | value: ColumnarArray | `void` | setArray方法 |  |
-| `setBinary` | value: byte&lt;&gt; | `void` | setBinary方法 |  |
-| `setBoolean` | value: boolean | `void` | setBoolean方法 |  |
-| `setByte` | value: byte | `void` | setByte方法 |  |
-| `setCalendarInterval` | value: CalendarInterval | `void` | setCalendarInterval方法 |  |
-| `setChild` | ordinal: int, value: ConstantColumnVector | `void` | setChild方法 |  |
-| `setDecimal` | value: Decimal, precision: int | `void` | setDecimal方法 |  |
-| `setDouble` | value: double | `void` | setDouble方法 |  |
-| `setFloat` | value: float | `void` | setFloat方法 |  |
-| `setInt` | value: int | `void` | setInt方法 |  |
-| `setLong` | value: long | `void` | setLong方法 |  |
-| `setMap` | value: ColumnarMap | `void` | setMap方法 |  |
-| `setNotNull` | 无 | `void` | setNotNull方法 |  |
-| `setNull` | 无 | `void` | setNull方法 |  |
-| `setShort` | value: short | `void` | setShort方法 |  |
-| `setUtf8String` | value: UTF8String | `void` | setUtf8String方法 |  |
-| `setVariant` | value: VariantVal | `void` | setVariant方法 |  |
+| `close` | 无 | `void` | 关闭列向量，释放字符串、数组、Map和子列向量占用的内存 | `vector.close();  // 释放所有资源` |
+| `closeIfFreeable` | 无 | `void` | 无操作（常量向量跨批处理复用，仅在close时释放） | `// 常量向量数据跨批复用<br>// 此方法为空实现` |
+| `getArray` | rowId: int | `ColumnarArray` | 获取数组数据（所有行返回相同的ColumnarArray） | `ColumnarArray arr = vector.getArray(0);<br>// 所有rowId返回相同的数组` |
+| `getBoolean` | rowId: int | `boolean` | 获取布尔值（所有行返回相同的值） | `boolean val = vector.getBoolean(0);<br>// 无需关心rowId，值相同` |
+| `getByte` | rowId: int | `byte` | 获取字节值（所有行返回相同的值） | `byte val = vector.getByte(0);` |
+| `getChild` | ordinal: int | `ColumnVector` | 获取嵌套类型的子列向量 | `ColumnVector child = vector.getChild(0);<br>// 用于Struct/Array等嵌套类型` |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | 获取Decimal高精度数值（所有行返回相同的值） | `Decimal dec = vector.getDecimal(0, 10, 2);<br>// precision和scale指定精度` |
+| `getDouble` | rowId: int | `double` | 获取双精度浮点数（所有行返回相同的值） | `double val = vector.getDouble(0);` |
+| `getFloat` | rowId: int | `float` | 获取单精度浮点数（所有行返回相同的值） | `float val = vector.getFloat(0);` |
+| `getInt` | rowId: int | `int` | 获取整数（所有行返回相同的值） | `int val = vector.getInt(0);` |
+| `getLong` | rowId: int | `long` | 获取长整数（所有行返回相同的值） | `long val = vector.getLong(0);` |
+| `getMap` | ordinal: int | `ColumnarMap` | 获取Map数据（所有行返回相同的ColumnarMap） | `ColumnarMap map = vector.getMap(0);` |
+| `getShort` | rowId: int | `short` | 获取短整数（所有行返回相同的值） | `short val = vector.getShort(0);` |
+| `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8字符串（所有行返回相同的值） | `UTF8String str = vector.getUTF8String(0);<br>String javaStr = str.toString();` |
+| `hasNull` | 无 | `boolean` | 检查是否所有行都是null值 | `boolean isAllNull = vector.hasNull();` |
+| `isNullAt` | rowId: int | `boolean` | 检查指定行是否为null（所有行返回相同的null标记） | `if (vector.isNullAt(0)) {<br>    // 处理null情况<br>}` |
+| `numNulls` | 无 | `int` | 返回null值数量（要么0要么全部行数） | `int nulls = vector.numNulls();<br>// 如果hasNull为true，返回numRows` |
+| `setArray` | value: ColumnarArray | `void` | 设置所有行的数组常量值 | `vector.setArray(arrayValue);<br>// 所有行共享此数组` |
+| `setBinary` | value: byte[] | `void` | 设置所有行的二进制常量值 | `byte[] data = new byte[]{1, 2, 3};<br>vector.setBinary(data);` |
+| `setBoolean` | value: boolean | `void` | 设置所有行的布尔常量值 | `vector.setBoolean(true);<br>// 所有行值为true` |
+| `setByte` | value: byte | `void` | 设置所有行的字节常量值 | `vector.setByte((byte) 100);` |
+| `setCalendarInterval` | value: CalendarInterval | `void` | 设置所有行的时间间隔常量值 | `CalendarInterval interval = new CalendarInterval(1, 2, 1000L);<br>vector.setCalendarInterval(interval);` |
+| `setChild` | ordinal: int, value: ConstantColumnVector | `void` | 设置嵌套类型的子列向量 | `vector.setChild(0, childVector);<br>// 用于Struct字段的子列` |
+| `setDecimal` | value: Decimal, precision: int | `void` | 设置所有行的Decimal常量值 | `Decimal dec = Decimal.apply(123.45);<br>vector.setDecimal(dec, 10);` |
+| `setDouble` | value: double | `void` | 设置所有行的双精度常量值 | `vector.setDouble(3.14);` |
+| `setFloat` | value: float | `void` | 设置所有行的单精度常量值 | `vector.setFloat(2.5f);` |
+| `setInt` | value: int | `void` | 设置所有行的整数常量值 | `vector.setInt(42);<br>// 所有行值为42` |
+| `setLong` | value: long | `void` | 设置所有行的长整数常量值 | `vector.setLong(123456789L);` |
+| `setMap` | value: ColumnarMap | `void` | 设置所有行的Map常量值 | `vector.setMap(mapValue);` |
+| `setNotNull` | 无 | `void` | 设置所有行为非null值 | `vector.setNotNull();<br>// 清除null标记` |
+| `setNull` | 无 | `void` | 设置所有行为null值 | `vector.setNull();<br>// 所有行都是null` |
+| `setShort` | value: short | `void` | 设置所有行的短整数常量值 | `vector.setShort((short) 1000);` |
+| `setUtf8String` | value: UTF8String | `void` | 设置所有行的UTF8字符串常量值 | `UTF8String str = UTF8String.fromString("hello");<br>vector.setUtf8String(str);` |
+| `setVariant` | value: VariantVal | `void` | 设置所有行的Variant类型常量值 | `vector.setVariant(variantValue);` |
 
 ### CustomAvgMetric
 **包路径**: `org.apache.spark.sql.connector.metric`
@@ -785,7 +779,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `aggregateTaskMetrics` | taskMetrics: long&lt;&gt; | `String` | aggregateTaskMetrics方法 |  |
+| `aggregateTaskMetrics` | taskMetrics: long&lt;&gt; | `String` | 聚合任务级别的度量指标 | 聚合任务度量指标为字符串 |
 
 ### CustomSumMetric
 **包路径**: `org.apache.spark.sql.connector.metric`
@@ -793,7 +787,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `aggregateTaskMetrics` | taskMetrics: long&lt;&gt; | `String` | aggregateTaskMetrics方法 |  |
+| `aggregateTaskMetrics` | taskMetrics: long&lt;&gt; | `String` | 聚合任务级别的度量指标 | 聚合任务度量指标为字符串 |
 
 ### CustomTaskMetric
 **包路径**: `org.apache.spark.sql.connector.metric`
@@ -801,8 +795,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `name` | 无 | `String` | name方法 |  |
-| `value` | 无 | `long` | value方法 |  |
+| `name` | 无 | `String` | 获取度量指标名称 | 返回度量指标名称 |
+| `value` | 无 | `long` | 获取度量指标值 | 返回度量指标数值 |
 
 ### DataTypes
 **包路径**: `org.apache.spark.sql.types`
@@ -810,26 +804,26 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createArrayType` | elementType: DataType | `ArrayType` | createArrayType方法 |  |
-| `createArrayType` | elementType: DataType, containsNull: boolean | `ArrayType` | createArrayType方法 |  |
-| `createCharType` | length: int | `CharType` | createCharType方法 |  |
-| `createDayTimeIntervalType` | startField: byte, endField: byte | `DayTimeIntervalType` | createDayTimeIntervalType方法 |  |
-| `createDayTimeIntervalType` | 无 | `DayTimeIntervalType` | createDayTimeIntervalType方法 |  |
-| `createDecimalType` | precision: int, scale: int | `DecimalType` | createDecimalType方法 |  |
-| `createDecimalType` | 无 | `DecimalType` | createDecimalType方法 |  |
-| `createGeographyType` | srid: int | `GeographyType` | createGeographyType方法 |  |
-| `createGeographyType` | crs: String | `GeographyType` | createGeographyType方法 |  |
-| `createGeometryType` | srid: int | `GeometryType` | createGeometryType方法 |  |
-| `createGeometryType` | crs: String | `GeometryType` | createGeometryType方法 |  |
-| `createMapType` | keyType: DataType, valueType: DataType | `MapType` | createMapType方法 |  |
-| `createMapType` | keyType: DataType, valueType: DataType, valueContainsNull: boolean | `MapType` | createMapType方法 |  |
-| `createStructField` | name: String, dataType: DataType, nullable: boolean, metadata: Metadata | `StructField` | createStructField方法 |  |
-| `createStructField` | name: String, dataType: DataType, nullable: boolean | `StructField` | createStructField方法 |  |
-| `createStructType` | fields: List<StructField> | `StructType` | createStructType方法 |  |
-| `createStructType` | fields: StructField&lt;&gt; | `StructType` | createStructType方法 |  |
-| `createVarcharType` | length: int | `VarcharType` | createVarcharType方法 |  |
-| `createYearMonthIntervalType` | startField: byte, endField: byte | `YearMonthIntervalType` | createYearMonthIntervalType方法 |  |
-| `createYearMonthIntervalType` | 无 | `YearMonthIntervalType` | createYearMonthIntervalType方法 |  |
+| `createArrayType` | elementType: DataType | `ArrayType` | 创建数组类型 | 创建数组数据类型 |
+| `createArrayType` | elementType: DataType, containsNull: boolean | `ArrayType` | 创建数组类型 | 创建数组数据类型 |
+| `createCharType` | length: int | `CharType` | 创建CHAR定长字符类型 | 创建CHAR定长类型 |
+| `createDayTimeIntervalType` | startField: byte, endField: byte | `DayTimeIntervalType` | 创建日-时间间隔类型 | 创建日-时间间隔类型 |
+| `createDayTimeIntervalType` | 无 | `DayTimeIntervalType` | 创建日-时间间隔类型 | 创建日-时间间隔类型 |
+| `createDecimalType` | precision: int, scale: int | `DecimalType` | 创建Decimal高精度数值类型 | 创建Decimal高精度类型 |
+| `createDecimalType` | 无 | `DecimalType` | 创建Decimal高精度数值类型 | 创建Decimal高精度类型 |
+| `createGeographyType` | srid: int | `GeographyType` | 创建地理空间类型 | 创建地理空间类型 |
+| `createGeographyType` | crs: String | `GeographyType` | 创建地理空间类型 | 创建地理空间类型 |
+| `createGeometryType` | srid: int | `GeometryType` | 创建几何空间类型 | 创建几何空间类型 |
+| `createGeometryType` | crs: String | `GeometryType` | 创建几何空间类型 | 创建几何空间类型 |
+| `createMapType` | keyType: DataType, valueType: DataType | `MapType` | 创建Map类型 | 创建Map映射类型 |
+| `createMapType` | keyType: DataType, valueType: DataType, valueContainsNull: boolean | `MapType` | 创建Map类型 | 创建Map映射类型 |
+| `createStructField` | name: String, dataType: DataType, nullable: boolean, metadata: Metadata | `StructField` | 创建结构字段 | 创建结构字段定义 |
+| `createStructField` | name: String, dataType: DataType, nullable: boolean | `StructField` | 创建结构字段 | 创建结构字段定义 |
+| `createStructType` | fields: List<StructField> | `StructType` | 创建结构类型 | 创建结构类型定义 |
+| `createStructType` | fields: StructField&lt;&gt; | `StructType` | 创建结构类型 | 创建结构类型定义 |
+| `createVarcharType` | length: int | `VarcharType` | 创建VARCHAR变长字符类型 | 创建VARCHAR变长类型 |
+| `createYearMonthIntervalType` | startField: byte, endField: byte | `YearMonthIntervalType` | 创建年-月间隔类型 | 创建年-月间隔类型 |
+| `createYearMonthIntervalType` | 无 | `YearMonthIntervalType` | 创建年-月间隔类型 | 创建年-月间隔类型 |
 
 ### DefaultValue
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -837,8 +831,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getExpression` | 无 | `Expression` | getExpression方法 |  |
-| `getSql` | 无 | `String` | getSql方法 |  |
+| `getExpression` | 无 | `Expression` | 获取默认值表达式 | 获取默认值表达式对象 |
+| `getSql` | 无 | `String` | 获取默认值的SQL表示 | 获取默认值SQL字符串 |
 
 ### DelegatingCatalogExtension
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -846,28 +840,28 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `alterNamespace` | namespace: String&lt;&gt;, changes: NamespaceChange... | `void` | alterNamespace方法 |  |
-| `alterTable` | ident: Identifier, changes: TableChange... | `Table` | alterTable方法 |  |
-| `capabilities` | 无 | `Set&lt;TableCatalogCapability&gt;` | capabilities方法 |  |
-| `createNamespace` | namespace: String&lt;&gt;, metadata: String> | `void` | createNamespace方法 |  |
-| `createTable` | ident: Identifier, schema: StructType, partitions: Transform&lt;&gt;, properties: String> | `Table` | createTable方法 |  |
-| `createTable` | ident: Identifier, columns: Column&lt;&gt;, partitions: Transform&lt;&gt;, properties: String> | `Table` | createTable方法 |  |
-| `dropNamespace` | namespace: String&lt;&gt;, cascade: boolean | `boolean` | dropNamespace方法 |  |
-| `dropTable` | ident: Identifier | `boolean` | dropTable方法 |  |
-| `functionExists` | ident: Identifier | `boolean` | functionExists方法 |  |
-| `initialize` | name: String, options: CaseInsensitiveStringMap | `void` | initialize方法 |  |
-| `invalidateTable` | ident: Identifier | `void` | invalidateTable方法 |  |
-| `loadFunction` | ident: Identifier | `UnboundFunction` | loadFunction方法 |  |
-| `loadNamespaceMetadata` | namespace: String&lt;&gt; | `Map&lt;String, String&gt;` | loadNamespaceMetadata方法 |  |
-| `loadTable` | ident: Identifier | `Table` | loadTable方法 |  |
-| `loadTable` | ident: Identifier, timestamp: long | `Table` | loadTable方法 |  |
-| `loadTable` | ident: Identifier, version: String | `Table` | loadTable方法 |  |
-| `name` | 无 | `String` | name方法 |  |
-| `namespaceExists` | namespace: String&lt;&gt; | `boolean` | namespaceExists方法 |  |
-| `purgeTable` | ident: Identifier | `boolean` | purgeTable方法 |  |
-| `renameTable` | oldIdent: Identifier, newIdent: Identifier | `void` | renameTable方法 |  |
-| `setDelegateCatalog` | delegate: CatalogPlugin | `void` | setDelegateCatalog方法 |  |
-| `tableExists` | ident: Identifier | `boolean` | tableExists方法 |  |
+| `alterNamespace` | namespace: String&lt;&gt;, changes: NamespaceChange... | `void` | 修改命名空间属性 | 修改命名空间属性 |
+| `alterTable` | ident: Identifier, changes: TableChange... | `Table` | 修改表结构或属性 | 修改表结构 |
+| `capabilities` | 无 | `Set&lt;TableCatalogCapability&gt;` | 获取表目录支持的能力 | 返回目录支持的能力集合 |
+| `createNamespace` | namespace: String&lt;&gt;, metadata: String> | `void` | 创建命名空间 | 创建命名空间 |
+| `createTable` | ident: Identifier, schema: StructType, partitions: Transform&lt;&gt;, properties: String> | `Table` | 创建表 | 创建新表 |
+| `createTable` | ident: Identifier, columns: Column&lt;&gt;, partitions: Transform&lt;&gt;, properties: String> | `Table` | 创建表 | 创建新表 |
+| `dropNamespace` | namespace: String&lt;&gt;, cascade: boolean | `boolean` | 删除命名空间 | 删除命名空间 |
+| `dropTable` | ident: Identifier | `boolean` | 删除表 | 删除表 |
+| `functionExists` | ident: Identifier | `boolean` | 检查函数是否存在 | 检查函数是否存在 |
+| `initialize` | name: String, options: CaseInsensitiveStringMap | `void` | 初始化插件 | 初始化目录插件 |
+| `invalidateTable` | ident: Identifier | `void` | 失效表缓存 | 失效表缓存 |
+| `loadFunction` | ident: Identifier | `UnboundFunction` | 加载函数 | 加载指定函数 |
+| `loadNamespaceMetadata` | namespace: String&lt;&gt; | `Map&lt;String, String&gt;` | 加载命名空间元数据 | 加载命名空间元数据 |
+| `loadTable` | ident: Identifier | `Table` | 加载表 | 加载表对象 |
+| `loadTable` | ident: Identifier, timestamp: long | `Table` | 加载表 | 加载表对象 |
+| `loadTable` | ident: Identifier, version: String | `Table` | 加载表 | 加载表对象 |
+| `name` | 无 | `String` | 获取度量指标名称 | 返回度量指标名称 |
+| `namespaceExists` | namespace: String&lt;&gt; | `boolean` | 检查命名空间是否存在 | 检查命名空间是否存在 |
+| `purgeTable` | ident: Identifier | `boolean` | 彻底删除表（不可恢复） | 彻底删除表 |
+| `renameTable` | oldIdent: Identifier, newIdent: Identifier | `void` | 重命名表 | 重命名表 |
+| `setDelegateCatalog` | delegate: CatalogPlugin | `void` | 设置代理目录 | 设置代理目录 |
+| `tableExists` | ident: Identifier | `boolean` | 检查表是否存在 | 检查表是否存在 |
 
 ### Distributions
 **包路径**: `org.apache.spark.sql.connector.distributions`
@@ -875,9 +869,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `clustered` | clustering: Expression&lt;&gt; | `ClusteredDistribution` | clustered方法 |  |
-| `ordered` | ordering: SortOrder&lt;&gt; | `OrderedDistribution` | ordered方法 |  |
-| `unspecified` | 无 | `UnspecifiedDistribution` | unspecified方法 |  |
+| `clustered` | clustering: Expression&lt;&gt; | `ClusteredDistribution` | 创建聚类分布 | 创建聚类分布对象 |
+| `ordered` | ordering: SortOrder&lt;&gt; | `OrderedDistribution` | 创建有序分布 | 传入参数执行创建有序分布 |
+| `unspecified` | 无 | `UnspecifiedDistribution` | 创建未指定分布 | 调用该方法执行创建未指定分布 |
 
 ### ExpressionImplUtils
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -885,13 +879,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSentences` | str: UTF8String, language: UTF8String, country: UTF8String | `ArrayData` | getSentences方法 |  |
-| `getSparkVersion` | 无 | `UTF8String` | getSparkVersion方法 |  |
-| `isLuhnNumber` | numberString: UTF8String | `boolean` | isLuhnNumber方法 |  |
-| `quote` | str: UTF8String | `UTF8String` | quote方法 |  |
-| `randStr` | rng: XORShiftRandom, length: int | `UTF8String` | randStr方法 |  |
-| `tryValidateUTF8String` | utf8String: UTF8String | `UTF8String` | tryValidateUTF8String方法 |  |
-| `validateUTF8String` | utf8String: UTF8String | `UTF8String` | validateUTF8String方法 |  |
+| `getSentences` | str: UTF8String, language: UTF8String, country: UTF8String | `ArrayData` | 将文本分割为句子数组 | 传入参数执行将文本分割为句子数组 |
+| `getSparkVersion` | 无 | `UTF8String` | 获取Spark版本字符串 | 调用该方法执行获取Spark版本字符串 |
+| `isLuhnNumber` | numberString: UTF8String | `boolean` | 校验Luhn算法数字（信用卡号校验） | 传入参数执行校验Luhn算法数字（信用卡号校验） |
+| `quote` | str: UTF8String | `UTF8String` | 对字符串进行引用处理 | 传入参数执行对字符串进行引用处理 |
+| `randStr` | rng: XORShiftRandom, length: int | `UTF8String` | 生成随机字符串 | 传入参数执行生成随机字符串 |
+| `tryValidateUTF8String` | utf8String: UTF8String | `UTF8String` | 尝试校验UTF8字符串 | 传入参数执行尝试校验UTF8字符串 |
+| `validateUTF8String` | utf8String: UTF8String | `UTF8String` | 校验UTF8字符串有效性 | 传入参数执行校验UTF8字符串有效性 |
 
 ### ExpressionInfo
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -899,19 +893,19 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getArguments` | 无 | `String` | getArguments方法 |  |
-| `getClassName` | 无 | `String` | getClassName方法 |  |
-| `getDb` | 无 | `String` | getDb方法 |  |
-| `getDeprecated` | 无 | `String` | getDeprecated方法 |  |
-| `getExamples` | 无 | `String` | getExamples方法 |  |
-| `getExtended` | 无 | `String` | getExtended方法 |  |
-| `getGroup` | 无 | `String` | getGroup方法 |  |
-| `getName` | 无 | `String` | getName方法 |  |
-| `getNote` | 无 | `String` | getNote方法 |  |
-| `getOriginalExamples` | 无 | `String` | getOriginalExamples方法 |  |
-| `getSince` | 无 | `String` | getSince方法 |  |
-| `getSource` | 无 | `String` | getSource方法 |  |
-| `getUsage` | 无 | `String` | getUsage方法 |  |
+| `getArguments` | 无 | `String` | 获取函数参数说明 | 调用该方法执行获取函数参数说明 |
+| `getClassName` | 无 | `String` | 获取类名 | 调用该方法执行获取类名 |
+| `getDb` | 无 | `String` | 获取数据库名 | 调用该方法执行获取数据库名 |
+| `getDeprecated` | 无 | `String` | 获取弃用说明 | 调用该方法执行获取弃用说明 |
+| `getExamples` | 无 | `String` | 获取使用示例 | 调用该方法执行获取使用示例 |
+| `getExtended` | 无 | `String` | 获取扩展说明 | 调用该方法执行获取扩展说明 |
+| `getGroup` | 无 | `String` | 获取函数分组 | 调用该方法执行获取函数分组 |
+| `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
+| `getNote` | 无 | `String` | 获取备注说明 | 调用该方法执行获取备注说明 |
+| `getOriginalExamples` | 无 | `String` | 获取原始示例 | 调用该方法执行获取原始示例 |
+| `getSince` | 无 | `String` | 获取版本信息 | 调用该方法执行获取版本信息 |
+| `getSource` | 无 | `String` | 获取来源 | 调用该方法执行获取来源 |
+| `getUsage` | 无 | `String` | 获取使用说明 | 调用该方法执行获取使用说明 |
 
 ### Expressions
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -919,16 +913,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `apply` | name: String, args: Expression... | `Transform` | apply方法 |  |
-| `bucket` | numBuckets: int, columns: String... | `Transform` | bucket方法 |  |
-| `column` | name: String | `NamedReference` | column方法 |  |
-| `days` | column: String | `Transform` | days方法 |  |
-| `hours` | column: String | `Transform` | hours方法 |  |
-| `identity` | column: String | `Transform` | identity方法 |  |
-| `months` | column: String | `Transform` | months方法 |  |
-| `sort` | expr: Expression, direction: SortDirection, nullOrder: NullOrdering | `SortOrder` | 排序 |  |
-| `sort` | expr: Expression, direction: SortDirection | `SortOrder` | 排序 |  |
-| `years` | column: String | `Transform` | years方法 |  |
+| `apply` | name: String, args: Expression... | `Transform` | 应用数据类型转换 | 获取数据类型对应的列向量 |
+| `bucket` | numBuckets: int, columns: String... | `Transform` | 创建分桶分区转换 | 传入参数执行创建分桶分区转换 |
+| `column` | name: String | `NamedReference` | 创建列引用表达式 | 传入参数执行创建列引用表达式 |
+| `days` | column: String | `Transform` | 将日期转换为天数 | 传入参数执行将日期转换为天数 |
+| `hours` | column: String | `Transform` | 将时间转换为小时数 | 传入参数执行将时间转换为小时数 |
+| `identity` | column: String | `Transform` | 创建身份分区转换 | 传入参数执行创建身份分区转换 |
+| `months` | column: String | `Transform` | 将日期转换为月份数 | 传入参数执行将日期转换为月份数 |
+| `sort` | expr: Expression, direction: SortDirection, nullOrder: NullOrdering | `SortOrder` | 排序 | 传入参数执行创建排序表达式 |
+| `sort` | expr: Expression, direction: SortDirection | `SortOrder` | 排序 | 传入参数执行创建排序表达式 |
+| `years` | column: String | `Transform` | 年份转换相关功能 | 传入参数执行年份转换相关功能 |
 
 ### Extract
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -936,8 +930,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `field` | 无 | `String` | field方法 |  |
-| `source` | 无 | `Expression` | source方法 |  |
+| `field` | 无 | `String` | field操作 | 调用该方法执行field操作 |
+| `source` | 无 | `Expression` | 源相关功能 | 调用该方法执行源相关功能 |
 
 ### ForeignKey
 **包路径**: `org.apache.spark.sql.connector.catalog.constraints`
@@ -945,8 +939,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | 无 | `ForeignKey` | build方法 |  |
-| `referencedTable` | 无 | `Identifier` | referencedTable方法 |  |
+| `build` | 无 | `ForeignKey` | 构建约束对象 | 构建Check约束对象 |
+| `referencedTable` | 无 | `Identifier` | 引用encedTable相关功能 | 调用该方法执行引用encedTable相关功能 |
 
 ### GeneralScalarExpression
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -954,7 +948,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `name` | 无 | `String` | name方法 |  |
+| `name` | 无 | `String` | 获取度量指标名称 | 返回度量指标名称 |
 
 ### GeographicSpatialReferenceSystemMapper
 **包路径**: `org.apache.spark.sql.internal.types`
@@ -962,8 +956,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSrid` | stringId: String | `Integer` | getSrid方法 |  |
-| `getStringId` | srid: int | `String` | getStringId方法 |  |
+| `getSrid` | stringId: String | `Integer` | 获取空间参考系统ID（SRID） | 将字符串空间参考ID转换为整数SRID |
+| `getStringId` | srid: int | `String` | 将SRID转换为字符串标识 | 将整数SRID转换为字符串标识 |
 
 ### GeometryModel
 **包路径**: `org.apache.spark.sql.catalyst.util.geo`
@@ -971,7 +965,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `toWkt` | 无 | `String` | toWkt方法 |  |
+| `toWkt` | 无 | `String` | toWkt操作 | 调用该方法执行toWkt操作 |
 
 ### GetArrayItem
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -979,9 +973,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `childArray` | 无 | `Expression` | childArray方法 |  |
-| `failOnError` | 无 | `boolean` | failOnError方法 |  |
-| `ordinal` | 无 | `Expression` | ordinal方法 |  |
+| `childArray` | 无 | `Expression` | 子级Array相关功能 | 调用该方法执行子级Array相关功能 |
+| `failOnError` | 无 | `boolean` | failOnError操作 | 调用该方法执行failOnError操作 |
+| `ordinal` | 无 | `Expression` | ordinal操作 | 调用该方法执行ordinal操作 |
 
 ### HadoopCompressionCodec
 **包路径**: `org.apache.spark.sql.catalyst.util`
@@ -989,8 +983,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getCompressionCodec` | 无 | `CompressionCodec` | getCompressionCodec方法 |  |
-| `lowerCaseName` | 无 | `String` | lowerCaseName方法 |  |
+| `getCompressionCodec` | 无 | `CompressionCodec` | 获取CompressionCodec相关功能 | 调用该方法执行获取CompressionCodec相关功能 |
+| `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
 ### HadoopLineRecordReader
 **包路径**: `org.apache.spark.sql.execution.datasources`
@@ -998,11 +992,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getCurrentKey` | 无 | `LongWritable` | getCurrentKey方法 |  |
-| `getCurrentValue` | 无 | `Text` | getCurrentValue方法 |  |
-| `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initialize` | genericSplit: InputSplit, context: TaskAttemptContext | `void` | initialize方法 |  |
-| `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
+| `getCurrentKey` | 无 | `LongWritable` | 获取CurrentKey相关功能 | 调用该方法执行获取CurrentKey相关功能 |
+| `getCurrentValue` | 无 | `Text` | 获取CurrentValue相关功能 | 调用该方法执行获取CurrentValue相关功能 |
+| `getProgress` | 无 | `float` | 获取Progress相关功能 | 调用该方法执行获取Progress相关功能 |
+| `initialize` | genericSplit: InputSplit, context: TaskAttemptContext | `void` | 初始化插件 | 初始化目录插件 |
+| `nextKeyValue` | 无 | `boolean` | 之后KeyValue相关功能 | 调用该方法执行之后KeyValue相关功能 |
 
 ### HiveHasher
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -1010,9 +1004,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `hashInt` | input: int | `int` | hashInt方法 |  |
-| `hashLong` | input: long | `int` | hashLong方法 |  |
-| `hashUnsafeBytes` | base: Object, offset: long, lengthInBytes: int | `int` | hashUnsafeBytes方法 |  |
+| `hashInt` | input: int | `int` | 检查是否存在hInt相关功能 | 传入参数执行检查是否存在hInt相关功能 |
+| `hashLong` | input: long | `int` | 检查是否存在hLong相关功能 | 传入参数执行检查是否存在hLong相关功能 |
+| `hashUnsafeBytes` | base: Object, offset: long, lengthInBytes: int | `int` | 检查是否存在hUnsafeBytes相关功能 | 传入参数执行检查是否存在hUnsafeBytes相关功能 |
 
 ### IdentityColumnSpec
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -1020,9 +1014,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getStart` | 无 | `long` | getStart方法 |  |
-| `getStep` | 无 | `long` | getStep方法 |  |
-| `isAllowExplicitInsert` | 无 | `boolean` | isAllowExplicitInsert方法 |  |
+| `getStart` | 无 | `long` | 获取Start相关功能 | 调用该方法执行获取Start相关功能 |
+| `getStep` | 无 | `long` | 获取Step相关功能 | 调用该方法执行获取Step相关功能 |
+| `isAllowExplicitInsert` | 无 | `boolean` | 判断是否AllowExplicitInsert相关功能 | 调用该方法执行判断是否AllowExplicitInsert相关功能 |
 
 ### IntegerAdd
 **包路径**: `org.apache.spark.sql.connector.catalog.functions`
@@ -1030,9 +1024,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `invoke` | left: int, right: int | `int` | invoke方法 |  |
-| `invoke` | left: int, right: int | `int` | invoke方法 |  |
-| `produceResult` | input: InternalRow | `Integer` | produceResult方法 |  |
+| `invoke` | left: int, right: int | `int` | 调用相关功能 | 传入参数执行调用相关功能 |
+| `produceResult` | input: InternalRow | `Integer` | 生产Result相关功能 | 传入参数执行生产Result相关功能 |
 
 ### JavaSQLDataSourceExample
 **包路径**: `org.apache.spark.examples.sql`
@@ -1040,15 +1033,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getCube` | 无 | `int` | getCube方法 |  |
-| `getSquare` | 无 | `int` | getSquare方法 |  |
-| `getValue` | 无 | `int` | getValue方法 |  |
-| `getValue` | 无 | `int` | getValue方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `setCube` | cube: int | `void` | setCube方法 |  |
-| `setSquare` | square: int | `void` | setSquare方法 |  |
-| `setValue` | value: int | `void` | setValue方法 |  |
-| `setValue` | value: int | `void` | setValue方法 |  |
+| `getCube` | 无 | `int` | 获取Cube相关功能 | 调用该方法执行获取Cube相关功能 |
+| `getSquare` | 无 | `int` | 获取Square相关功能 | 调用该方法执行获取Square相关功能 |
+| `getValue` | 无 | `int` | 获取列的默认值 | 返回列默认值的Literal对象 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `setCube` | cube: int | `void` | 设置Cube相关功能 | 传入参数执行设置Cube相关功能 |
+| `setSquare` | square: int | `void` | 设置Square相关功能 | 传入参数执行设置Square相关功能 |
+| `setValue` | value: int | `void` | 设置Value相关功能 | 传入参数执行设置Value相关功能 |
 
 ### JavaSparkHiveExample
 **包路径**: `org.apache.spark.examples.sql.hive`
@@ -1056,11 +1047,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getKey` | 无 | `int` | getKey方法 |  |
-| `getValue` | 无 | `String` | getValue方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `setKey` | key: int | `void` | setKey方法 |  |
-| `setValue` | value: String | `void` | setValue方法 |  |
+| `getKey` | 无 | `int` | 获取Key相关功能 | 调用该方法执行获取Key相关功能 |
+| `getValue` | 无 | `String` | 获取列的默认值 | 返回列默认值的Literal对象 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `setKey` | key: int | `void` | 设置Key相关功能 | 传入参数执行设置Key相关功能 |
+| `setValue` | value: String | `void` | 设置Value相关功能 | 传入参数执行设置Value相关功能 |
 
 ### JavaSparkSQLCli
 **包路径**: `org.apache.spark.examples.sql`
@@ -1068,7 +1059,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaSparkSQLExample
 **包路径**: `org.apache.spark.examples.sql`
@@ -1076,11 +1067,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getAge` | 无 | `long` | getAge方法 |  |
-| `getName` | 无 | `String` | getName方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `setAge` | age: long | `void` | setAge方法 |  |
-| `setName` | name: String | `void` | 设置RDD名称 |  |
+| `getAge` | 无 | `long` | 获取Age相关功能 | 调用该方法执行获取Age相关功能 |
+| `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `setAge` | age: long | `void` | 设置Age相关功能 | 传入参数执行设置Age相关功能 |
+| `setName` | name: String | `void` | 设置RDD名称 | 传入参数执行设置Name相关功能 |
 
 ### JavaUserDefinedScalar
 **包路径**: `org.apache.spark.examples.sql`
@@ -1088,7 +1079,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaUserDefinedTypedAggregation
 **包路径**: `org.apache.spark.examples.sql`
@@ -1096,21 +1087,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `bufferEncoder` | 无 | `Encoder&lt;Average&gt;` | bufferEncoder方法 |  |
-| `finish` | reduction: Average | `Double` | finish方法 |  |
-| `getCount` | 无 | `long` | getCount方法 |  |
-| `getName` | 无 | `String` | getName方法 |  |
-| `getSalary` | 无 | `long` | getSalary方法 |  |
-| `getSum` | 无 | `long` | getSum方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `merge` | b1: Average, b2: Average | `Average` | merge方法 |  |
-| `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
+| `bufferEncoder` | 无 | `Encoder&lt;Average&gt;` | 编码相关功能 | 调用该方法执行编码相关功能 |
+| `finish` | reduction: Average | `Double` | 完成相关功能 | 传入参数执行完成相关功能 |
+| `getCount` | 无 | `long` | 获取Count相关功能 | 调用该方法执行获取Count相关功能 |
+| `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
+| `getSalary` | 无 | `long` | 获取Salary相关功能 | 调用该方法执行获取Salary相关功能 |
+| `getSum` | 无 | `long` | 获取Sum相关功能 | 调用该方法执行获取Sum相关功能 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `merge` | b1: Average, b2: Average | `Average` | 合并相关功能 | 传入参数执行合并相关功能 |
+| `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | 编码相关功能 | 调用该方法执行编码相关功能 |
 | `reduce` | buffer: Average, employee: Employee | `Average` | 聚合DStream每个RDD | // reduce：聚合所有元素为单个结果<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br><br>// 求和<br>Integer sum = numbers.reduce((a, b) -> a + b);<br>// 结果: 15<br><br>// 求最大值<br>Integer max = numbers.reduce((a, b) -> Math.max(a, b));<br>// 结果: 5<br><br>// 字符串拼接<br>JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"));<br>String concatenated = words.reduce((a, b) -> a + b);<br>// 结果: "abc" |
-| `setCount` | count: long | `void` | setCount方法 |  |
-| `setName` | name: String | `void` | 设置RDD名称 |  |
-| `setSalary` | salary: long | `void` | setSalary方法 |  |
-| `setSum` | sum: long | `void` | setSum方法 |  |
-| `zero` | 无 | `Average` | zero方法 |  |
+| `setCount` | count: long | `void` | 设置Count相关功能 | 传入参数执行设置Count相关功能 |
+| `setName` | name: String | `void` | 设置RDD名称 | 传入参数执行设置Name相关功能 |
+| `setSalary` | salary: long | `void` | 设置Salary相关功能 | 传入参数执行设置Salary相关功能 |
+| `setSum` | sum: long | `void` | 设置Sum相关功能 | 传入参数执行设置Sum相关功能 |
+| `zero` | 无 | `Average` | zero操作 | 调用该方法执行zero操作 |
 
 ### JavaUserDefinedUntypedAggregation
 **包路径**: `org.apache.spark.examples.sql`
@@ -1118,17 +1109,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `bufferEncoder` | 无 | `Encoder&lt;Average&gt;` | bufferEncoder方法 |  |
-| `finish` | reduction: Average | `Double` | finish方法 |  |
-| `getCount` | 无 | `long` | getCount方法 |  |
-| `getSum` | 无 | `long` | getSum方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `merge` | b1: Average, b2: Average | `Average` | merge方法 |  |
-| `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | outputEncoder方法 |  |
+| `bufferEncoder` | 无 | `Encoder&lt;Average&gt;` | 编码相关功能 | 调用该方法执行编码相关功能 |
+| `finish` | reduction: Average | `Double` | 完成相关功能 | 传入参数执行完成相关功能 |
+| `getCount` | 无 | `long` | 获取Count相关功能 | 调用该方法执行获取Count相关功能 |
+| `getSum` | 无 | `long` | 获取Sum相关功能 | 调用该方法执行获取Sum相关功能 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `merge` | b1: Average, b2: Average | `Average` | 合并相关功能 | 传入参数执行合并相关功能 |
+| `outputEncoder` | 无 | `Encoder&lt;Double&gt;` | 编码相关功能 | 调用该方法执行编码相关功能 |
 | `reduce` | buffer: Average, data: Long | `Average` | 聚合DStream每个RDD | // reduce：聚合所有元素为单个结果<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br><br>// 求和<br>Integer sum = numbers.reduce((a, b) -> a + b);<br>// 结果: 15<br><br>// 求最大值<br>Integer max = numbers.reduce((a, b) -> Math.max(a, b));<br>// 结果: 5<br><br>// 字符串拼接<br>JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"));<br>String concatenated = words.reduce((a, b) -> a + b);<br>// 结果: "abc" |
-| `setCount` | count: long | `void` | setCount方法 |  |
-| `setSum` | sum: long | `void` | setSum方法 |  |
-| `zero` | 无 | `Average` | zero方法 |  |
+| `setCount` | count: long | `void` | 设置Count相关功能 | 传入参数执行设置Count相关功能 |
+| `setSum` | sum: long | `void` | 设置Sum相关功能 | 传入参数执行设置Sum相关功能 |
+| `zero` | 无 | `Average` | zero操作 | 调用该方法执行zero操作 |
 
 ### JsonExpressionUtils
 **包路径**: `org.apache.spark.sql.catalyst.expressions.json`
@@ -1136,8 +1127,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `jsonObjectKeys` | json: UTF8String | `GenericArrayData` | jsonObjectKeys方法 |  |
-| `lengthOfJsonArray` | json: UTF8String | `Integer` | lengthOfJsonArray方法 |  |
+| `jsonObjectKeys` | json: UTF8String | `GenericArrayData` | jsonObjectKeys操作 | 传入参数执行jsonObjectKeys操作 |
+| `lengthOfJsonArray` | json: UTF8String | `Integer` | lengthOfJsonArray操作 | 传入参数执行lengthOfJsonArray操作 |
 
 ### KVSorterIterator
 **包路径**: `org.apache.spark.sql.execution`
@@ -1145,17 +1136,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cleanupResources` | 无 | `void` | cleanupResources方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `compare` | baseObj1: Object, baseOff1: long, baseLen1: int, baseObj2: Object, baseOff2: long, baseLen2: int | `int` | compare方法 |  |
-| `getKey` | 无 | `UnsafeRow` | getKey方法 |  |
-| `getPeakMemoryUsedBytes` | 无 | `long` | getPeakMemoryUsedBytes方法 |  |
-| `getSpillSize` | 无 | `long` | getSpillSize方法 |  |
-| `getValue` | 无 | `UnsafeRow` | getValue方法 |  |
-| `insertKV` | key: UnsafeRow, value: UnsafeRow | `void` | insertKV方法 |  |
-| `merge` | other: UnsafeKVExternalSorter | `void` | merge方法 |  |
-| `next` | 无 | `boolean` | next方法 |  |
-| `sortedIterator` | 无 | `KVSorterIterator` | sortedIterator方法 |  |
+| `cleanupResources` | 无 | `void` | 向上相关功能 | 调用该方法执行向上相关功能 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `compare` | baseObj1: Object, baseOff1: long, baseLen1: int, baseObj2: Object, baseOff2: long, baseLen2: int | `int` | 比较相关功能 | 传入参数执行比较相关功能 |
+| `getKey` | 无 | `UnsafeRow` | 获取Key相关功能 | 调用该方法执行获取Key相关功能 |
+| `getPeakMemoryUsedBytes` | 无 | `long` | 获取PeakMemoryUsedBytes相关功能 | 调用该方法执行获取PeakMemoryUsedBytes相关功能 |
+| `getSpillSize` | 无 | `long` | 获取SpillSize相关功能 | 调用该方法执行获取SpillSize相关功能 |
+| `getValue` | 无 | `UnsafeRow` | 获取列的默认值 | 返回列默认值的Literal对象 |
+| `insertKV` | key: UnsafeRow, value: UnsafeRow | `void` | 插入KV相关功能 | 传入参数执行插入KV相关功能 |
+| `merge` | other: UnsafeKVExternalSorter | `void` | 合并相关功能 | 传入参数执行合并相关功能 |
+| `next` | 无 | `boolean` | 获取迭代器的下一个元素 | 获取迭代器下一行数据 |
+| `sortedIterator` | 无 | `KVSorterIterator` | 排序edIterator相关功能 | 调用该方法执行排序edIterator相关功能 |
 
 ### KeyGroupedPartitioning
 **包路径**: `org.apache.spark.sql.connector.read.partitioning`
@@ -1163,7 +1154,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `numPartitions` | 无 | `int` | numPartitions方法 |  |
+| `numPartitions` | 无 | `int` | numPartitions操作 | 调用该方法执行numPartitions操作 |
 
 ### NamespaceChange
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -1171,9 +1162,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `property` | 无 | `String` | property方法 |  |
-| `property` | 无 | `String` | property方法 |  |
-| `value` | 无 | `String` | value方法 |  |
+| `property` | 无 | `String` | property操作 | 调用该方法执行property操作 |
+| `value` | 无 | `String` | 获取度量指标值 | 返回度量指标数值 |
 
 ### NonClosableMutableURLClassLoader
 **包路径**: `org.apache.spark.sql.internal`
@@ -1181,7 +1171,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 
 ### NumericHistogram
 **包路径**: `org.apache.spark.sql.util`
@@ -1189,17 +1179,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `add` | v: double | `void` | 添加元素 |  |
-| `addBin` | x: double, y: double, b: int | `void` | addBin方法 |  |
-| `allocate` | num_bins: int | `void` | allocate方法 |  |
-| `compareTo` | other: Coord | `int` | compareTo方法 |  |
-| `getBin` | b: int | `Coord` | getBin方法 |  |
-| `getNumBins` | 无 | `int` | getNumBins方法 |  |
-| `getUsedBins` | 无 | `int` | getUsedBins方法 |  |
-| `isReady` | 无 | `boolean` | isReady方法 |  |
-| `merge` | other: NumericHistogram | `void` | merge方法 |  |
-| `reset` | 无 | `void` | reset方法 |  |
-| `setUsedBins` | nusedBins: int | `void` | setUsedBins方法 |  |
+| `add` | v: double | `void` | 添加元素 | 传入参数执行添加相关功能 |
+| `addBin` | x: double, y: double, b: int | `void` | 添加二进制数据 | 传入参数执行添加二进制数据 |
+| `allocate` | num_bins: int | `void` | 分配相关功能 | 传入参数执行分配相关功能 |
+| `compareTo` | other: Coord | `int` | 比较To相关功能 | 传入参数执行比较To相关功能 |
+| `getBin` | b: int | `Coord` | 获取Bin相关功能 | 传入参数执行获取Bin相关功能 |
+| `getNumBins` | 无 | `int` | 获取NumBins相关功能 | 调用该方法执行获取NumBins相关功能 |
+| `getUsedBins` | 无 | `int` | 获取UsedBins相关功能 | 调用该方法执行获取UsedBins相关功能 |
+| `isReady` | 无 | `boolean` | 判断是否Ready相关功能 | 调用该方法执行判断是否Ready相关功能 |
+| `merge` | other: NumericHistogram | `void` | 合并相关功能 | 传入参数执行合并相关功能 |
+| `reset` | 无 | `void` | 重置相关功能 | 调用该方法执行重置相关功能 |
+| `setUsedBins` | nusedBins: int | `void` | 设置UsedBins相关功能 | 传入参数执行设置UsedBins相关功能 |
 
 ### OrcArrayColumnVector
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1207,17 +1197,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
-| `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
-| `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
-| `getDouble` | rowId: int | `double` | getDouble方法 |  |
-| `getFloat` | rowId: int | `float` | getFloat方法 |  |
-| `getInt` | rowId: int | `int` | getInt方法 |  |
-| `getLong` | rowId: int | `long` | getLong方法 |  |
-| `getMap` | rowId: int | `ColumnarMap` | getMap方法 |  |
-| `getShort` | rowId: int | `short` | getShort方法 |  |
-| `getUTF8String` | rowId: int | `UTF8String` | getUTF8String方法 |  |
+| `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
+| `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
+| `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | 获取Decimal相关功能 | 传入参数执行获取Decimal相关功能 |
+| `getDouble` | rowId: int | `double` | 获取Double相关功能 | 传入参数执行获取Double相关功能 |
+| `getFloat` | rowId: int | `float` | 获取Float相关功能 | 传入参数执行获取Float相关功能 |
+| `getInt` | rowId: int | `int` | 获取Int相关功能 | 传入参数执行获取Int相关功能 |
+| `getLong` | rowId: int | `long` | 获取Long相关功能 | 传入参数执行获取Long相关功能 |
+| `getMap` | rowId: int | `ColumnarMap` | 获取Map相关功能 | 传入参数执行获取Map相关功能 |
+| `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
+| `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
 ### OrcAtomicColumnVector
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1225,17 +1215,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
-| `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
-| `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
-| `getDouble` | rowId: int | `double` | getDouble方法 |  |
-| `getFloat` | rowId: int | `float` | getFloat方法 |  |
-| `getInt` | rowId: int | `int` | getInt方法 |  |
-| `getLong` | rowId: int | `long` | getLong方法 |  |
-| `getMap` | rowId: int | `ColumnarMap` | getMap方法 |  |
-| `getShort` | rowId: int | `short` | getShort方法 |  |
-| `getUTF8String` | rowId: int | `UTF8String` | getUTF8String方法 |  |
+| `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
+| `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
+| `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | 获取Decimal相关功能 | 传入参数执行获取Decimal相关功能 |
+| `getDouble` | rowId: int | `double` | 获取Double相关功能 | 传入参数执行获取Double相关功能 |
+| `getFloat` | rowId: int | `float` | 获取Float相关功能 | 传入参数执行获取Float相关功能 |
+| `getInt` | rowId: int | `int` | 获取Int相关功能 | 传入参数执行获取Int相关功能 |
+| `getLong` | rowId: int | `long` | 获取Long相关功能 | 传入参数执行获取Long相关功能 |
+| `getMap` | rowId: int | `ColumnarMap` | 获取Map相关功能 | 传入参数执行获取Map相关功能 |
+| `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
+| `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
 ### OrcColumnStatistics
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1243,9 +1233,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `add` | newChild: OrcColumnStatistics | `void` | 添加元素 |  |
-| `get` | ordinal: int | `OrcColumnStatistics` | 获取元素 |  |
-| `getStatistics` | 无 | `ColumnStatistics` | getStatistics方法 |  |
+| `add` | newChild: OrcColumnStatistics | `void` | 添加元素 | 传入参数执行添加相关功能 |
+| `get` | ordinal: int | `OrcColumnStatistics` | 获取元素 | 传入参数执行获取相关功能 |
+| `getStatistics` | 无 | `ColumnStatistics` | 获取Statistics相关功能 | 调用该方法执行获取Statistics相关功能 |
 
 ### OrcColumnVector
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1253,11 +1243,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `hasNull` | 无 | `boolean` | hasNull方法 |  |
-| `isNullAt` | rowId: int | `boolean` | isNullAt方法 |  |
-| `numNulls` | 无 | `int` | numNulls方法 |  |
-| `setBatchSize` | batchSize: int | `void` | setBatchSize方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `hasNull` | 无 | `boolean` | 检查是否存在Null相关功能 | 调用该方法执行检查是否存在Null相关功能 |
+| `isNullAt` | rowId: int | `boolean` | 判断是否NullAt相关功能 | 传入参数执行判断是否NullAt相关功能 |
+| `numNulls` | 无 | `int` | numNulls操作 | 调用该方法执行numNulls操作 |
+| `setBatchSize` | batchSize: int | `void` | 设置BatchSize相关功能 | 传入参数执行设置BatchSize相关功能 |
 
 ### OrcColumnarBatchReader
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1265,14 +1255,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `getCurrentKey` | 无 | `Void` | getCurrentKey方法 |  |
-| `getCurrentValue` | 无 | `ColumnarBatch` | getCurrentValue方法 |  |
-| `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initBatch` | orcSchema: TypeDescription, requiredFields: StructField&lt;&gt;, requestedDataColIds: int&lt;&gt;, requestedPartitionColIds: int&lt;&gt;, partitionValues: InternalRow | `void` | initBatch方法 |  |
-| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
-| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, orcTail: OrcTail | `void` | initialize方法 |  |
-| `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getCurrentKey` | 无 | `Void` | 获取CurrentKey相关功能 | 调用该方法执行获取CurrentKey相关功能 |
+| `getCurrentValue` | 无 | `ColumnarBatch` | 获取CurrentValue相关功能 | 调用该方法执行获取CurrentValue相关功能 |
+| `getProgress` | 无 | `float` | 获取Progress相关功能 | 调用该方法执行获取Progress相关功能 |
+| `initBatch` | orcSchema: TypeDescription, requiredFields: StructField&lt;&gt;, requestedDataColIds: int&lt;&gt;, requestedPartitionColIds: int&lt;&gt;, partitionValues: InternalRow | `void` | 初始化Batch相关功能 | 传入参数执行初始化Batch相关功能 |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | 初始化插件 | 初始化目录插件 |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, orcTail: OrcTail | `void` | 初始化插件 | 初始化目录插件 |
+| `nextKeyValue` | 无 | `boolean` | 之后KeyValue相关功能 | 调用该方法执行之后KeyValue相关功能 |
 
 ### OrcCompressionCodec
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1280,8 +1270,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getCompressionKind` | 无 | `CompressionKind` | getCompressionKind方法 |  |
-| `lowerCaseName` | 无 | `String` | lowerCaseName方法 |  |
+| `getCompressionKind` | 无 | `CompressionKind` | 获取CompressionKind相关功能 | 调用该方法执行获取CompressionKind相关功能 |
+| `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
 ### OrcFooterReader
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1289,7 +1279,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `readStatistics` | orcReader: Reader | `OrcColumnStatistics` | readStatistics方法 |  |
+| `readStatistics` | orcReader: Reader | `OrcColumnStatistics` | 读取Statistics相关功能 | 传入参数执行读取Statistics相关功能 |
 
 ### OrcMapColumnVector
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1297,17 +1287,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
-| `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
-| `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
-| `getDouble` | rowId: int | `double` | getDouble方法 |  |
-| `getFloat` | rowId: int | `float` | getFloat方法 |  |
-| `getInt` | rowId: int | `int` | getInt方法 |  |
-| `getLong` | rowId: int | `long` | getLong方法 |  |
-| `getMap` | ordinal: int | `ColumnarMap` | getMap方法 |  |
-| `getShort` | rowId: int | `short` | getShort方法 |  |
-| `getUTF8String` | rowId: int | `UTF8String` | getUTF8String方法 |  |
+| `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
+| `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
+| `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | 获取Decimal相关功能 | 传入参数执行获取Decimal相关功能 |
+| `getDouble` | rowId: int | `double` | 获取Double相关功能 | 传入参数执行获取Double相关功能 |
+| `getFloat` | rowId: int | `float` | 获取Float相关功能 | 传入参数执行获取Float相关功能 |
+| `getInt` | rowId: int | `int` | 获取Int相关功能 | 传入参数执行获取Int相关功能 |
+| `getLong` | rowId: int | `long` | 获取Long相关功能 | 传入参数执行获取Long相关功能 |
+| `getMap` | ordinal: int | `ColumnarMap` | 获取Map相关功能 | 传入参数执行获取Map相关功能 |
+| `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
+| `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
 ### OrcStructColumnVector
 **包路径**: `org.apache.spark.sql.execution.datasources.orc`
@@ -1315,17 +1305,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
-| `getBoolean` | rowId: int | `boolean` | getBoolean方法 |  |
-| `getByte` | rowId: int | `byte` | getByte方法 |  |
-| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
-| `getDouble` | rowId: int | `double` | getDouble方法 |  |
-| `getFloat` | rowId: int | `float` | getFloat方法 |  |
-| `getInt` | rowId: int | `int` | getInt方法 |  |
-| `getLong` | rowId: int | `long` | getLong方法 |  |
-| `getMap` | rowId: int | `ColumnarMap` | getMap方法 |  |
-| `getShort` | rowId: int | `short` | getShort方法 |  |
-| `getUTF8String` | rowId: int | `UTF8String` | getUTF8String方法 |  |
+| `getArray` | rowId: int | `ColumnarArray` | 获取Array相关功能 | 传入参数执行获取Array相关功能 |
+| `getBoolean` | rowId: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
+| `getByte` | rowId: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | 获取Decimal相关功能 | 传入参数执行获取Decimal相关功能 |
+| `getDouble` | rowId: int | `double` | 获取Double相关功能 | 传入参数执行获取Double相关功能 |
+| `getFloat` | rowId: int | `float` | 获取Float相关功能 | 传入参数执行获取Float相关功能 |
+| `getInt` | rowId: int | `int` | 获取Int相关功能 | 传入参数执行获取Int相关功能 |
+| `getLong` | rowId: int | `long` | 获取Long相关功能 | 传入参数执行获取Long相关功能 |
+| `getMap` | rowId: int | `ColumnarMap` | 获取Map相关功能 | 传入参数执行获取Map相关功能 |
+| `getShort` | rowId: int | `short` | 获取Short相关功能 | 传入参数执行获取Short相关功能 |
+| `getUTF8String` | rowId: int | `UTF8String` | 获取UTF8String相关功能 | 传入参数执行获取UTF8String相关功能 |
 
 ### ParquetCompressionCodec
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1333,9 +1323,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | s: String | `ParquetCompressionCodec` | fromString方法 |  |
-| `getCompressionCodec` | 无 | `CompressionCodecName` | getCompressionCodec方法 |  |
-| `lowerCaseName` | 无 | `String` | lowerCaseName方法 |  |
+| `fromString` | s: String | `ParquetCompressionCodec` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
+| `getCompressionCodec` | 无 | `CompressionCodecName` | 获取CompressionCodec相关功能 | 调用该方法执行获取CompressionCodec相关功能 |
+| `lowerCaseName` | 无 | `String` | 转换为小写的名称 | 返回编解码器名称的小写形式 |
 
 ### ParquetFooterReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1343,8 +1333,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `openFileAndReadFooter` | hadoopConf: Configuration, file: PartitionedFile, keepInputStreamOpen: boolean | `OpenedParquetFooter` | openFileAndReadFooter方法 |  |
-| `readFooter` | inputFile: HadoopInputFile, filter: ParquetMetadataConverter.MetadataFilter | `ParquetMetadata` | readFooter方法 |  |
+| `openFileAndReadFooter` | hadoopConf: Configuration, file: PartitionedFile, keepInputStreamOpen: boolean | `OpenedParquetFooter` | 打开FileAndReadFooter相关功能 | 传入参数执行打开FileAndReadFooter相关功能 |
+| `readFooter` | inputFile: HadoopInputFile, filter: ParquetMetadataConverter.MetadataFilter | `ParquetMetadata` | 读取Footer相关功能 | 传入参数执行读取Footer相关功能 |
 
 ### ParquetVectorUpdaterFactory
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1352,152 +1342,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | decodeSingleDictionaryId方法 |  |
-| `getUpdater` | descriptor: ColumnDescriptor, sparkType: DataType | `ParquetVectorUpdater` | getUpdater方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValue方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | readValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
-| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | skipValues方法 |  |
+| `decodeSingleDictionaryId` | offset: int, values: WritableColumnVector, dictionaryIds: WritableColumnVector, dictionary: Dictionary | `void` | 解码SingleDictionaryId相关功能 | 传入参数执行解码SingleDictionaryId相关功能 |
+| `getUpdater` | descriptor: ColumnDescriptor, sparkType: DataType | `ParquetVectorUpdater` | 获取Updater相关功能 | 传入参数执行获取Updater相关功能 |
+| `readValue` | offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | 读取Value相关功能 | 传入参数执行读取Value相关功能 |
+| `readValues` | total: int, offset: int, values: WritableColumnVector, valuesReader: VectorizedValuesReader | `void` | 读取Values相关功能 | 传入参数执行读取Values相关功能 |
+| `skipValues` | total: int, valuesReader: VectorizedValuesReader | `void` | 跳过Values相关功能 | 传入参数执行跳过Values相关功能 |
 
 ### PrimaryKey
 **包路径**: `org.apache.spark.sql.connector.catalog.constraints`
@@ -1505,7 +1354,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | 无 | `PrimaryKey` | build方法 |  |
+| `build` | 无 | `PrimaryKey` | 构建约束对象 | 构建Check约束对象 |
 
 ### ProcedureParameter
 **包路径**: `org.apache.spark.sql.connector.catalog.procedures`
@@ -1513,11 +1362,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | 无 | `ProcedureParameter` | build方法 |  |
-| `comment` | comment: String | `Builder` | comment方法 |  |
-| `defaultValue` | sql: String | `Builder` | defaultValue方法 |  |
-| `defaultValue` | expression: Expression | `Builder` | defaultValue方法 |  |
-| `defaultValue` | defaultValue: DefaultValue | `Builder` | defaultValue方法 |  |
+| `build` | 无 | `ProcedureParameter` | 构建约束对象 | 构建Check约束对象 |
+| `comment` | comment: String | `Builder` | comment操作 | 传入参数执行comment操作 |
+| `defaultValue` | sql: String | `Builder` | 默认Value相关功能 | 传入参数执行默认Value相关功能 |
+| `defaultValue` | expression: Expression | `Builder` | 默认Value相关功能 | 传入参数执行默认Value相关功能 |
+| `defaultValue` | defaultValue: DefaultValue | `Builder` | 默认Value相关功能 | 传入参数执行默认Value相关功能 |
 
 ### RowBasedKeyValueBatch
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -1525,12 +1374,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager | `RowBasedKeyValueBatch` | allocate方法 |  |
-| `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager, maxRows: int | `RowBasedKeyValueBatch` | allocate方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `getValueRow` | rowId: int | `UnsafeRow` | getValueRow方法 |  |
-| `numRows` | 无 | `int` | numRows方法 |  |
-| `spill` | size: long, trigger: MemoryConsumer | `long` | spill方法 |  |
+| `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager | `RowBasedKeyValueBatch` | 分配相关功能 | 传入参数执行分配相关功能 |
+| `allocate` | keySchema: StructType, valueSchema: StructType, manager: TaskMemoryManager, maxRows: int | `RowBasedKeyValueBatch` | 分配相关功能 | 传入参数执行分配相关功能 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getValueRow` | rowId: int | `UnsafeRow` | 获取ValueRow相关功能 | 传入参数执行获取ValueRow相关功能 |
+| `numRows` | 无 | `int` | numRows操作 | 调用该方法执行numRows操作 |
+| `spill` | size: long, trigger: MemoryConsumer | `long` | spill操作 | 传入参数执行spill操作 |
 
 ### RowFactory
 **包路径**: `org.apache.spark.sql`
@@ -1538,7 +1387,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `create` | values: Object ... | `Row` | create方法 |  |
+| `create` | values: Object ... | `Row` | 创建相关功能 | 传入参数执行创建相关功能 |
 
 ### SchemaColumnConvertNotSupportedException
 **包路径**: `org.apache.spark.sql.execution.datasources`
@@ -1546,9 +1395,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getColumn` | 无 | `String` | getColumn方法 |  |
-| `getLogicalType` | 无 | `String` | getLogicalType方法 |  |
-| `getPhysicalType` | 无 | `String` | getPhysicalType方法 |  |
+| `getColumn` | 无 | `String` | 获取Column相关功能 | 调用该方法执行获取Column相关功能 |
+| `getLogicalType` | 无 | `String` | 获取LogicalType相关功能 | 调用该方法执行获取LogicalType相关功能 |
+| `getPhysicalType` | 无 | `String` | 获取PhysicalType相关功能 | 调用该方法执行获取PhysicalType相关功能 |
 
 ### SortDirection
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -1556,7 +1405,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `defaultNullOrdering` | 无 | `NullOrdering` | defaultNullOrdering方法 |  |
+| `defaultNullOrdering` | 无 | `NullOrdering` | 默认NullOrdering相关功能 | 调用该方法执行默认NullOrdering相关功能 |
 
 ### SpatialReferenceSystemCache
 **包路径**: `org.apache.spark.sql.internal.types`
@@ -1564,11 +1413,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getInstance` | 无 | `SpatialReferenceSystemCache` | getInstance方法 |  |
-| `getSridToSrs` | 无 | `Map&lt;Integer, SpatialReferenceSystemInformation&gt;` | getSridToSrs方法 |  |
-| `getSrsInfo` | srid: int | `SpatialReferenceSystemInformation` | getSrsInfo方法 |  |
-| `getSrsInfo` | stringId: String | `SpatialReferenceSystemInformation` | getSrsInfo方法 |  |
-| `getStringIdToSrs` | 无 | `Map&lt;String, SpatialReferenceSystemInformation&gt;` | getStringIdToSrs方法 |  |
+| `getInstance` | 无 | `SpatialReferenceSystemCache` | 获取Instance相关功能 | 调用该方法执行获取Instance相关功能 |
+| `getSridToSrs` | 无 | `Map&lt;Integer, SpatialReferenceSystemInformation&gt;` | 获取SridToSrs相关功能 | 调用该方法执行获取SridToSrs相关功能 |
+| `getSrsInfo` | srid: int | `SpatialReferenceSystemInformation` | 获取SrsInfo相关功能 | 传入参数执行获取SrsInfo相关功能 |
+| `getSrsInfo` | stringId: String | `SpatialReferenceSystemInformation` | 获取SrsInfo相关功能 | 传入参数执行获取SrsInfo相关功能 |
+| `getStringIdToSrs` | 无 | `Map&lt;String, SpatialReferenceSystemInformation&gt;` | 获取StringIdToSrs相关功能 | 调用该方法执行获取StringIdToSrs相关功能 |
 
 ### SpecificParquetRecordReaderBase
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1576,12 +1425,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `getCurrentKey` | 无 | `Void` | getCurrentKey方法 |  |
-| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
-| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, inputFile: Option<HadoopInputFile>, inputStream: Option<SeekableInputStream>, fileFooter: Option<ParquetMetadata> | `void` | initialize方法 |  |
-| `readNextRowGroup` | 无 | `PageReadStore` | readNextRowGroup方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getCurrentKey` | 无 | `Void` | 获取CurrentKey相关功能 | 调用该方法执行获取CurrentKey相关功能 |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | 初始化插件 | 初始化目录插件 |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, inputFile: Option<HadoopInputFile>, inputStream: Option<SeekableInputStream>, fileFooter: Option<ParquetMetadata> | `void` | 初始化插件 | 初始化目录插件 |
+| `readNextRowGroup` | 无 | `PageReadStore` | 读取NextRowGroup相关功能 | 调用该方法执行读取NextRowGroup相关功能 |
 
 ### SupportsPushDownJoin
 **包路径**: `org.apache.spark.sql.connector.read`
@@ -1589,7 +1437,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `prettyString` | 无 | `String` | prettyString方法 |  |
+| `prettyString` | 无 | `String` | 前ttyString相关功能 | 调用该方法执行前ttyString相关功能 |
 
 ### TableChange
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -1597,28 +1445,26 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `column` | 无 | `String` | column方法 |  |
-| `comment` | 无 | `String` | comment方法 |  |
-| `constraint` | 无 | `Constraint` | constraint方法 |  |
-| `dataType` | 无 | `DataType` | dataType方法 |  |
-| `defaultValue` | 无 | `ColumnDefaultValue` | defaultValue方法 |  |
-| `ifExists` | 无 | `Boolean` | ifExists方法 |  |
-| `ifExists` | 无 | `boolean` | ifExists方法 |  |
-| `isNullable` | 无 | `boolean` | isNullable方法 |  |
-| `mode` | 无 | `Mode` | mode方法 |  |
-| `name` | 无 | `String` | name方法 |  |
-| `newComment` | 无 | `String` | newComment方法 |  |
-| `newCurrentDefault` | 无 | `DefaultValue` | newCurrentDefault方法 |  |
-| `newDataType` | 无 | `DataType` | newDataType方法 |  |
-| `newDefaultValue` | 无 | `String` | newDefaultValue方法 |  |
-| `newName` | 无 | `String` | newName方法 |  |
-| `nullable` | 无 | `boolean` | nullable方法 |  |
-| `position` | 无 | `ColumnPosition` | position方法 |  |
-| `position` | 无 | `ColumnPosition` | position方法 |  |
-| `property` | 无 | `String` | property方法 |  |
-| `property` | 无 | `String` | property方法 |  |
-| `validatedTableVersion` | 无 | `String` | validatedTableVersion方法 |  |
-| `value` | 无 | `String` | value方法 |  |
+| `column` | 无 | `String` | 创建列引用表达式 | 调用该方法执行创建列引用表达式 |
+| `comment` | 无 | `String` | comment操作 | 调用该方法执行comment操作 |
+| `constraint` | 无 | `Constraint` | 约束相关功能 | 调用该方法执行约束相关功能 |
+| `dataType` | 无 | `DataType` | 获取数据类型 | 返回Cast目标的数据类型 |
+| `defaultValue` | 无 | `ColumnDefaultValue` | 默认Value相关功能 | 调用该方法执行默认Value相关功能 |
+| `ifExists` | 无 | `Boolean` | 判断是否相关功能 | 调用该方法执行判断是否相关功能 |
+| `ifExists` | 无 | `boolean` | 判断是否相关功能 | 调用该方法执行判断是否相关功能 |
+| `isNullable` | 无 | `boolean` | 判断是否Nullable相关功能 | 调用该方法执行判断是否Nullable相关功能 |
+| `mode` | 无 | `Mode` | mode操作 | 调用该方法执行mode操作 |
+| `name` | 无 | `String` | 获取度量指标名称 | 返回度量指标名称 |
+| `newComment` | 无 | `String` | newComment操作 | 调用该方法执行newComment操作 |
+| `newCurrentDefault` | 无 | `DefaultValue` | 默认相关功能 | 调用该方法执行默认相关功能 |
+| `newDataType` | 无 | `DataType` | newDataType操作 | 调用该方法执行newDataType操作 |
+| `newDefaultValue` | 无 | `String` | 默认相关功能 | 调用该方法执行默认相关功能 |
+| `newName` | 无 | `String` | newName操作 | 调用该方法执行newName操作 |
+| `nullable` | 无 | `boolean` | nullable操作 | 调用该方法执行nullable操作 |
+| `position` | 无 | `ColumnPosition` | position操作 | 调用该方法执行position操作 |
+| `property` | 无 | `String` | property操作 | 调用该方法执行property操作 |
+| `validatedTableVersion` | 无 | `String` | 校验dTableVersion相关功能 | 调用该方法执行校验dTableVersion相关功能 |
+| `value` | 无 | `String` | 获取度量指标值 | 返回度量指标数值 |
 
 ### TableInfo
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -1626,13 +1472,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | 无 | `TableInfo` | build方法 |  |
-| `properties` | 无 | `Map&lt;String, String&gt;` | properties方法 |  |
-| `schema` | 无 | `StructType` | 获取schema |  |
-| `withColumns` | columns: Column&lt;&gt; | `Builder` | withColumns方法 |  |
-| `withConstraints` | constraints: Constraint&lt;&gt; | `Builder` | withConstraints方法 |  |
-| `withPartitions` | partitions: Transform&lt;&gt; | `Builder` | withPartitions方法 |  |
-| `withProperties` | properties: String> | `Builder` | withProperties方法 |  |
+| `build` | 无 | `TableInfo` | 构建约束对象 | 构建Check约束对象 |
+| `properties` | 无 | `Map&lt;String, String&gt;` | properties操作 | 调用该方法执行properties操作 |
+| `schema` | 无 | `StructType` | 获取schema | 调用该方法执行schema操作 |
+| `withColumns` | columns: Column&lt;&gt; | `Builder` | 列相关功能 | 传入参数执行列相关功能 |
+| `withConstraints` | constraints: Constraint&lt;&gt; | `Builder` | 约束相关功能 | 传入参数执行约束相关功能 |
+| `withPartitions` | partitions: Transform&lt;&gt; | `Builder` | withPartitions操作 | 传入参数执行withPartitions操作 |
+| `withProperties` | properties: String> | `Builder` | withProperties操作 | 传入参数执行withProperties操作 |
 
 ### UDFXPathUtil
 **包路径**: `org.apache.spark.sql.catalyst.expressions.xml`
@@ -1640,21 +1486,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `eval` | xml: String, path: String, qname: QName | `Object` | eval方法 |  |
-| `evalBoolean` | xml: String, path: String | `Boolean` | evalBoolean方法 |  |
-| `evalNode` | xml: String, path: String | `Node` | evalNode方法 |  |
-| `evalNodeList` | xml: String, path: String | `NodeList` | evalNodeList方法 |  |
-| `evalNumber` | xml: String, path: String | `Double` | evalNumber方法 |  |
-| `evalString` | xml: String, path: String | `String` | evalString方法 |  |
-| `mark` | readAheadLimit: int | `void` | mark方法 |  |
-| `markSupported` | 无 | `boolean` | markSupported方法 |  |
-| `read` | 无 | `int` | 读取数据源创建DataFrame |  |
-| `read` | cbuf: char&lt;&gt;, off: int, len: int | `int` | 读取数据源创建DataFrame |  |
-| `ready` | 无 | `boolean` | ready方法 |  |
-| `reset` | 无 | `void` | reset方法 |  |
-| `set` | s: String | `void` | 设置元素 |  |
-| `skip` | ns: long | `long` | skip方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `eval` | xml: String, path: String, qname: QName | `Object` | eval操作 | 传入参数执行eval操作 |
+| `evalBoolean` | xml: String, path: String | `Boolean` | evalBoolean操作 | 传入参数执行evalBoolean操作 |
+| `evalNode` | xml: String, path: String | `Node` | evalNode操作 | 传入参数执行evalNode操作 |
+| `evalNodeList` | xml: String, path: String | `NodeList` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `evalNumber` | xml: String, path: String | `Double` | evalNumber操作 | 传入参数执行evalNumber操作 |
+| `evalString` | xml: String, path: String | `String` | 三相关功能 | 传入参数执行三相关功能 |
+| `mark` | readAheadLimit: int | `void` | mark操作 | 传入参数执行mark操作 |
+| `markSupported` | 无 | `boolean` | 支持相关功能 | 调用该方法执行支持相关功能 |
+| `read` | 无 | `int` | 读取数据源创建DataFrame | 调用该方法执行读取相关功能 |
+| `read` | cbuf: char&lt;&gt;, off: int, len: int | `int` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
+| `ready` | 无 | `boolean` | 读取y相关功能 | 调用该方法执行读取y相关功能 |
+| `reset` | 无 | `void` | 重置相关功能 | 调用该方法执行重置相关功能 |
+| `set` | s: String | `void` | 设置元素 | 传入参数执行设置相关功能 |
+| `skip` | ns: long | `long` | 跳过相关功能 | 传入参数执行跳过相关功能 |
 
 ### Unique
 **包路径**: `org.apache.spark.sql.connector.catalog.constraints`
@@ -1662,7 +1508,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | 无 | `Unique` | build方法 |  |
+| `build` | 无 | `Unique` | 构建约束对象 | 构建Check约束对象 |
 
 ### UnknownPartitioning
 **包路径**: `org.apache.spark.sql.connector.read.partitioning`
@@ -1670,7 +1516,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `numPartitions` | 无 | `int` | numPartitions方法 |  |
+| `numPartitions` | 无 | `int` | numPartitions操作 | 调用该方法执行numPartitions操作 |
 
 ### UnsafeWriter
 **包路径**: `org.apache.spark.sql.catalyst.expressions.codegen`
@@ -1678,23 +1524,23 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cursor` | 无 | `int` | cursor方法 |  |
-| `getBufferHolder` | 无 | `BufferHolder` | getBufferHolder方法 |  |
-| `grow` | neededSize: int | `void` | grow方法 |  |
-| `increaseCursor` | val: int | `void` | increaseCursor方法 |  |
-| `reset` | 无 | `void` | reset方法 |  |
-| `setOffsetAndSizeFromPreviousCursor` | ordinal: int, previousCursor: int | `void` | setOffsetAndSizeFromPreviousCursor方法 |  |
-| `totalSize` | 无 | `int` | totalSize方法 |  |
-| `write` | ordinal: int, input: UTF8String | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, input: GeographyVal | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, input: GeometryVal | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, input: byte&lt;&gt; | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, input: byte&lt;&gt;, offset: int, numBytes: int | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, input: CalendarInterval | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, input: VariantVal | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, row: UnsafeRow | `void` | 写入DataFrame到数据源 |  |
-| `write` | ordinal: int, map: UnsafeMapData | `void` | 写入DataFrame到数据源 |  |
-| `write` | array: UnsafeArrayData | `void` | 写入DataFrame到数据源 |  |
+| `cursor` | 无 | `int` | cursor操作 | 调用该方法执行cursor操作 |
+| `getBufferHolder` | 无 | `BufferHolder` | 获取BufferHolder相关功能 | 调用该方法执行获取BufferHolder相关功能 |
+| `grow` | neededSize: int | `void` | grow操作 | 传入参数执行grow操作 |
+| `increaseCursor` | val: int | `void` | increaseCursor操作 | 传入参数执行increaseCursor操作 |
+| `reset` | 无 | `void` | 重置相关功能 | 调用该方法执行重置相关功能 |
+| `setOffsetAndSizeFromPreviousCursor` | ordinal: int, previousCursor: int | `void` | 设置OffsetAndSizeFromPreviousCursor相关功能 | 传入参数执行设置OffsetAndSizeFromPreviousCursor相关功能 |
+| `totalSize` | 无 | `int` | totalSize操作 | 调用该方法执行totalSize操作 |
+| `write` | ordinal: int, input: UTF8String | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, input: GeographyVal | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, input: GeometryVal | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, input: byte&lt;&gt; | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, input: byte&lt;&gt;, offset: int, numBytes: int | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, input: CalendarInterval | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, input: VariantVal | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, row: UnsafeRow | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | ordinal: int, map: UnsafeMapData | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | array: UnsafeArrayData | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### UserDefinedAggregateFunc
 **包路径**: `org.apache.spark.sql.connector.expressions.aggregate`
@@ -1702,9 +1548,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `canonicalName` | 无 | `String` | canonicalName方法 |  |
-| `isDistinct` | 无 | `boolean` | isDistinct方法 |  |
-| `name` | 无 | `String` | name方法 |  |
+| `canonicalName` | 无 | `String` | 判断能否onicalName相关功能 | 调用该方法执行判断能否onicalName相关功能 |
+| `isDistinct` | 无 | `boolean` | 判断是否Distinct相关功能 | 调用该方法执行判断是否Distinct相关功能 |
+| `name` | 无 | `String` | 获取度量指标名称 | 返回度量指标名称 |
 
 ### UserDefinedScalarFunc
 **包路径**: `org.apache.spark.sql.connector.expressions`
@@ -1712,8 +1558,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `canonicalName` | 无 | `String` | canonicalName方法 |  |
-| `name` | 无 | `String` | name方法 |  |
+| `canonicalName` | 无 | `String` | 判断能否onicalName相关功能 | 调用该方法执行判断能否onicalName相关功能 |
+| `name` | 无 | `String` | 获取度量指标名称 | 返回度量指标名称 |
 
 ### V2ExpressionSQLBuilder
 **包路径**: `org.apache.spark.sql.connector.util`
@@ -1721,7 +1567,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | expr: Expression | `String` | build方法 |  |
+| `build` | expr: Expression | `String` | 构建约束对象 | 构建Check约束对象 |
 
 ### VectorFunctionImplUtils
 **包路径**: `org.apache.spark.sql.catalyst.expressions`
@@ -1729,15 +1575,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `vectorCosineSimilarity` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorCosineSimilarity方法 |  |
-| `vectorInfNorm` | vec: ArrayData | `Float` | vectorInfNorm方法 |  |
-| `vectorInnerProduct` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorInnerProduct方法 |  |
-| `vectorL1Norm` | vec: ArrayData | `Float` | vectorL1Norm方法 |  |
-| `vectorL2Distance` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorL2Distance方法 |  |
-| `vectorL2Norm` | vec: ArrayData | `Float` | vectorL2Norm方法 |  |
-| `vectorNorm` | vec: ArrayData, degree: float, funcName: UTF8String | `Float` | vectorNorm方法 |  |
-| `vectorNormalize` | vec: ArrayData, degree: float, funcName: UTF8String | `ArrayData` | vectorNormalize方法 |  |
-| `vectorNormalizeWithNorm` | vec: ArrayData, norm: float | `ArrayData` | vectorNormalizeWithNorm方法 |  |
+| `vectorCosineSimilarity` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorCosineSimilarity操作 | 传入参数执行vectorCosineSimilarity操作 |
+| `vectorInfNorm` | vec: ArrayData | `Float` | vectorInfNorm操作 | 传入参数执行vectorInfNorm操作 |
+| `vectorInnerProduct` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | vectorInnerProduct操作 | 传入参数执行vectorInnerProduct操作 |
+| `vectorL1Norm` | vec: ArrayData | `Float` | vectorL1Norm操作 | 传入参数执行vectorL1Norm操作 |
+| `vectorL2Distance` | left: ArrayData, right: ArrayData, funcName: UTF8String | `Float` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `vectorL2Norm` | vec: ArrayData | `Float` | vectorL2Norm操作 | 传入参数执行vectorL2Norm操作 |
+| `vectorNorm` | vec: ArrayData, degree: float, funcName: UTF8String | `Float` | vectorNorm操作 | 传入参数执行vectorNorm操作 |
+| `vectorNormalize` | vec: ArrayData, degree: float, funcName: UTF8String | `ArrayData` | 正常相关功能 | 传入参数执行正常相关功能 |
+| `vectorNormalizeWithNorm` | vec: ArrayData, norm: float | `ArrayData` | 正常相关功能 | 传入参数执行正常相关功能 |
 
 ### VectorizedColumnReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1745,8 +1591,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `visit` | dataPageV1: DataPageV1 | `Integer` | visit方法 |  |
-| `visit` | dataPageV2: DataPageV2 | `Integer` | visit方法 |  |
+| `visit` | dataPageV1: DataPageV1 | `Integer` | 访问相关功能 | 传入参数执行访问相关功能 |
+| `visit` | dataPageV2: DataPageV2 | `Integer` | 访问相关功能 | 传入参数执行访问相关功能 |
 
 ### VectorizedDeltaBinaryPackedReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1754,23 +1600,23 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
-| `readByte` | 无 | `byte` | readByte方法 |  |
-| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | readBytes方法 |  |
-| `readInteger` | 无 | `int` | readInteger方法 |  |
-| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readIntegers方法 |  |
-| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
-| `readLong` | 无 | `long` | readLong方法 |  |
-| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readLongs方法 |  |
-| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | readLongsWithRebase方法 |  |
-| `readShort` | 无 | `short` | readShort方法 |  |
-| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | readShorts方法 |  |
-| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedIntegers方法 |  |
-| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedLongs方法 |  |
-| `skipBytes` | total: int | `void` | skipBytes方法 |  |
-| `skipIntegers` | total: int | `void` | skipIntegers方法 |  |
-| `skipLongs` | total: int | `void` | skipLongs方法 |  |
-| `skipShorts` | total: int | `void` | skipShorts方法 |  |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
+| `readByte` | 无 | `byte` | 读取Byte相关功能 | 调用该方法执行读取Byte相关功能 |
+| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Bytes相关功能 | 传入参数执行读取Bytes相关功能 |
+| `readInteger` | 无 | `int` | 读取Integer相关功能 | 调用该方法执行读取Integer相关功能 |
+| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Integers相关功能 | 传入参数执行读取Integers相关功能 |
+| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | 读取IntegersWithRebase相关功能 | 传入参数执行读取IntegersWithRebase相关功能 |
+| `readLong` | 无 | `long` | 读取Long相关功能 | 调用该方法执行读取Long相关功能 |
+| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Longs相关功能 | 传入参数执行读取Longs相关功能 |
+| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | 读取LongsWithRebase相关功能 | 传入参数执行读取LongsWithRebase相关功能 |
+| `readShort` | 无 | `short` | 读取Short相关功能 | 调用该方法执行读取Short相关功能 |
+| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Shorts相关功能 | 传入参数执行读取Shorts相关功能 |
+| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取UnsignedIntegers相关功能 | 传入参数执行读取UnsignedIntegers相关功能 |
+| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取UnsignedLongs相关功能 | 传入参数执行读取UnsignedLongs相关功能 |
+| `skipBytes` | total: int | `void` | 跳过Bytes相关功能 | 传入参数执行跳过Bytes相关功能 |
+| `skipIntegers` | total: int | `void` | 跳过Integers相关功能 | 传入参数执行跳过Integers相关功能 |
+| `skipLongs` | total: int | `void` | 跳过Longs相关功能 | 传入参数执行跳过Longs相关功能 |
+| `skipShorts` | total: int | `void` | 跳过Shorts相关功能 | 传入参数执行跳过Shorts相关功能 |
 
 ### VectorizedDeltaByteArrayReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1778,13 +1624,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
-| `readBinary` | len: int | `Binary` | readBinary方法 |  |
-| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
-| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
-| `setPreviousReader` | reader: ValuesReader | `void` | setPreviousReader方法 |  |
-| `skipBinary` | total: int | `void` | skipBinary方法 |  |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
+| `readBinary` | len: int | `Binary` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
+| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
+| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Geography相关功能 | 传入参数执行读取Geography相关功能 |
+| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Geometry相关功能 | 传入参数执行读取Geometry相关功能 |
+| `setPreviousReader` | reader: ValuesReader | `void` | 设置PreviousReader相关功能 | 传入参数执行设置PreviousReader相关功能 |
+| `skipBinary` | total: int | `void` | 跳过Binary相关功能 | 传入参数执行跳过Binary相关功能 |
 
 ### VectorizedDeltaLengthByteArrayReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1792,12 +1638,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getBytes` | rowId: int | `ByteBuffer` | getBytes方法 |  |
-| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
-| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
-| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
-| `skipBinary` | total: int | `void` | skipBinary方法 |  |
+| `getBytes` | rowId: int | `ByteBuffer` | 获取Bytes相关功能 | 传入参数执行获取Bytes相关功能 |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
+| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
+| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Geography相关功能 | 传入参数执行读取Geography相关功能 |
+| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Geometry相关功能 | 传入参数执行读取Geometry相关功能 |
+| `skipBinary` | total: int | `void` | 跳过Binary相关功能 | 传入参数执行跳过Binary相关功能 |
 
 ### VectorizedParquetRecordReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1805,18 +1651,18 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `enableReturningBatches` | 无 | `void` | enableReturningBatches方法 |  |
-| `getCurrentValue` | 无 | `Object` | getCurrentValue方法 |  |
-| `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initBatch` | partitionColumns: StructType, partitionValues: InternalRow | `void` | initBatch方法 |  |
-| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | initialize方法 |  |
-| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, inputFile: Option<HadoopInputFile>, inputStream: Option<SeekableInputStream>, fileFooter: Option<ParquetMetadata> | `void` | initialize方法 |  |
-| `initialize` | path: String, columns: List<String> | `void` | initialize方法 |  |
-| `initialize` | fileSchema: MessageType, requestedSchema: MessageType, rowGroupReader: ParquetRowGroupReader, totalRowCount: int | `void` | initialize方法 |  |
-| `nextBatch` | 无 | `boolean` | nextBatch方法 |  |
-| `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
-| `resultBatch` | 无 | `ColumnarBatch` | resultBatch方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `enableReturningBatches` | 无 | `void` | 启用ReturningBatches相关功能 | 调用该方法执行启用ReturningBatches相关功能 |
+| `getCurrentValue` | 无 | `Object` | 获取CurrentValue相关功能 | 调用该方法执行获取CurrentValue相关功能 |
+| `getProgress` | 无 | `float` | 获取Progress相关功能 | 调用该方法执行获取Progress相关功能 |
+| `initBatch` | partitionColumns: StructType, partitionValues: InternalRow | `void` | 初始化Batch相关功能 | 传入参数执行初始化Batch相关功能 |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext | `void` | 初始化插件 | 初始化目录插件 |
+| `initialize` | inputSplit: InputSplit, taskAttemptContext: TaskAttemptContext, inputFile: Option<HadoopInputFile>, inputStream: Option<SeekableInputStream>, fileFooter: Option<ParquetMetadata> | `void` | 初始化插件 | 初始化目录插件 |
+| `initialize` | path: String, columns: List<String> | `void` | 初始化插件 | 初始化目录插件 |
+| `initialize` | fileSchema: MessageType, requestedSchema: MessageType, rowGroupReader: ParquetRowGroupReader, totalRowCount: int | `void` | 初始化插件 | 初始化目录插件 |
+| `nextBatch` | 无 | `boolean` | 之后Batch相关功能 | 调用该方法执行之后Batch相关功能 |
+| `nextKeyValue` | 无 | `boolean` | 之后KeyValue相关功能 | 调用该方法执行之后KeyValue相关功能 |
+| `resultBatch` | 无 | `ColumnarBatch` | resultBatch操作 | 调用该方法执行resultBatch操作 |
 
 ### VectorizedPlainValuesReader
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1824,39 +1670,39 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | initFromPage方法 |  |
-| `readBinary` | total: int, v: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
-| `readBinary` | len: int | `Binary` | readBinary方法 |  |
-| `readBoolean` | 无 | `boolean` | readBoolean方法 |  |
-| `readBooleans` | total: int, c: WritableColumnVector, rowId: int | `void` | readBooleans方法 |  |
-| `readByte` | 无 | `byte` | readByte方法 |  |
-| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | readBytes方法 |  |
-| `readDouble` | 无 | `double` | readDouble方法 |  |
-| `readDoubles` | total: int, c: WritableColumnVector, rowId: int | `void` | readDoubles方法 |  |
-| `readFloat` | 无 | `float` | readFloat方法 |  |
-| `readFloats` | total: int, c: WritableColumnVector, rowId: int | `void` | readFloats方法 |  |
-| `readGeography` | total: int, v: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int, v: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
-| `readInteger` | 无 | `int` | readInteger方法 |  |
-| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readIntegers方法 |  |
-| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
-| `readLong` | 无 | `long` | readLong方法 |  |
-| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readLongs方法 |  |
-| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | readLongsWithRebase方法 |  |
-| `readShort` | 无 | `short` | readShort方法 |  |
-| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | readShorts方法 |  |
-| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedIntegers方法 |  |
-| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedLongs方法 |  |
-| `skip` | 无 | `void` | skip方法 |  |
-| `skipBinary` | total: int | `void` | skipBinary方法 |  |
-| `skipBooleans` | total: int | `void` | skipBooleans方法 |  |
-| `skipBytes` | total: int | `void` | skipBytes方法 |  |
-| `skipDoubles` | total: int | `void` | skipDoubles方法 |  |
-| `skipFixedLenByteArray` | total: int, len: int | `void` | skipFixedLenByteArray方法 |  |
-| `skipFloats` | total: int | `void` | skipFloats方法 |  |
-| `skipIntegers` | total: int | `void` | skipIntegers方法 |  |
-| `skipLongs` | total: int | `void` | skipLongs方法 |  |
-| `skipShorts` | total: int | `void` | skipShorts方法 |  |
+| `initFromPage` | valueCount: int, in: ByteBufferInputStream | `void` | 初始化FromPage相关功能 | 传入参数执行初始化FromPage相关功能 |
+| `readBinary` | total: int, v: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
+| `readBinary` | len: int | `Binary` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
+| `readBoolean` | 无 | `boolean` | 读取Boolean相关功能 | 调用该方法执行读取Boolean相关功能 |
+| `readBooleans` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Booleans相关功能 | 传入参数执行读取Booleans相关功能 |
+| `readByte` | 无 | `byte` | 读取Byte相关功能 | 调用该方法执行读取Byte相关功能 |
+| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Bytes相关功能 | 传入参数执行读取Bytes相关功能 |
+| `readDouble` | 无 | `double` | 读取Double相关功能 | 调用该方法执行读取Double相关功能 |
+| `readDoubles` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Doubles相关功能 | 传入参数执行读取Doubles相关功能 |
+| `readFloat` | 无 | `float` | 读取Float相关功能 | 调用该方法执行读取Float相关功能 |
+| `readFloats` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Floats相关功能 | 传入参数执行读取Floats相关功能 |
+| `readGeography` | total: int, v: WritableColumnVector, rowId: int | `void` | 读取Geography相关功能 | 传入参数执行读取Geography相关功能 |
+| `readGeometry` | total: int, v: WritableColumnVector, rowId: int | `void` | 读取Geometry相关功能 | 传入参数执行读取Geometry相关功能 |
+| `readInteger` | 无 | `int` | 读取Integer相关功能 | 调用该方法执行读取Integer相关功能 |
+| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Integers相关功能 | 传入参数执行读取Integers相关功能 |
+| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | 读取IntegersWithRebase相关功能 | 传入参数执行读取IntegersWithRebase相关功能 |
+| `readLong` | 无 | `long` | 读取Long相关功能 | 调用该方法执行读取Long相关功能 |
+| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Longs相关功能 | 传入参数执行读取Longs相关功能 |
+| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | 读取LongsWithRebase相关功能 | 传入参数执行读取LongsWithRebase相关功能 |
+| `readShort` | 无 | `short` | 读取Short相关功能 | 调用该方法执行读取Short相关功能 |
+| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Shorts相关功能 | 传入参数执行读取Shorts相关功能 |
+| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取UnsignedIntegers相关功能 | 传入参数执行读取UnsignedIntegers相关功能 |
+| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取UnsignedLongs相关功能 | 传入参数执行读取UnsignedLongs相关功能 |
+| `skip` | 无 | `void` | 跳过相关功能 | 调用该方法执行跳过相关功能 |
+| `skipBinary` | total: int | `void` | 跳过Binary相关功能 | 传入参数执行跳过Binary相关功能 |
+| `skipBooleans` | total: int | `void` | 跳过Booleans相关功能 | 传入参数执行跳过Booleans相关功能 |
+| `skipBytes` | total: int | `void` | 跳过Bytes相关功能 | 传入参数执行跳过Bytes相关功能 |
+| `skipDoubles` | total: int | `void` | 跳过Doubles相关功能 | 传入参数执行跳过Doubles相关功能 |
+| `skipFixedLenByteArray` | total: int, len: int | `void` | 跳过FixedLenByteArray相关功能 | 传入参数执行跳过FixedLenByteArray相关功能 |
+| `skipFloats` | total: int | `void` | 跳过Floats相关功能 | 传入参数执行跳过Floats相关功能 |
+| `skipIntegers` | total: int | `void` | 跳过Integers相关功能 | 传入参数执行跳过Integers相关功能 |
+| `skipLongs` | total: int | `void` | 跳过Longs相关功能 | 传入参数执行跳过Longs相关功能 |
+| `skipShorts` | total: int | `void` | 跳过Shorts相关功能 | 传入参数执行跳过Shorts相关功能 |
 
 ### VectorizedReaderBase
 **包路径**: `org.apache.spark.sql.execution.datasources.parquet`
@@ -1864,33 +1710,33 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `readBinary` | len: int | `Binary` | readBinary方法 |  |
-| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | readBinary方法 |  |
-| `readBooleans` | total: int, c: WritableColumnVector, rowId: int | `void` | readBooleans方法 |  |
-| `readByte` | 无 | `byte` | readByte方法 |  |
-| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | readBytes方法 |  |
-| `readDoubles` | total: int, c: WritableColumnVector, rowId: int | `void` | readDoubles方法 |  |
-| `readFloats` | total: int, c: WritableColumnVector, rowId: int | `void` | readFloats方法 |  |
-| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeography方法 |  |
-| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | readGeometry方法 |  |
-| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readIntegers方法 |  |
-| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | readIntegersWithRebase方法 |  |
-| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readLongs方法 |  |
-| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | readLongsWithRebase方法 |  |
-| `readShort` | 无 | `short` | readShort方法 |  |
-| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | readShorts方法 |  |
-| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedIntegers方法 |  |
-| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | readUnsignedLongs方法 |  |
-| `skip` | 无 | `void` | skip方法 |  |
-| `skipBinary` | total: int | `void` | skipBinary方法 |  |
-| `skipBooleans` | total: int | `void` | skipBooleans方法 |  |
-| `skipBytes` | total: int | `void` | skipBytes方法 |  |
-| `skipDoubles` | total: int | `void` | skipDoubles方法 |  |
-| `skipFixedLenByteArray` | total: int, len: int | `void` | skipFixedLenByteArray方法 |  |
-| `skipFloats` | total: int | `void` | skipFloats方法 |  |
-| `skipIntegers` | total: int | `void` | skipIntegers方法 |  |
-| `skipLongs` | total: int | `void` | skipLongs方法 |  |
-| `skipShorts` | total: int | `void` | skipShorts方法 |  |
+| `readBinary` | len: int | `Binary` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
+| `readBinary` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Binary相关功能 | 传入参数执行读取Binary相关功能 |
+| `readBooleans` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Booleans相关功能 | 传入参数执行读取Booleans相关功能 |
+| `readByte` | 无 | `byte` | 读取Byte相关功能 | 调用该方法执行读取Byte相关功能 |
+| `readBytes` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Bytes相关功能 | 传入参数执行读取Bytes相关功能 |
+| `readDoubles` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Doubles相关功能 | 传入参数执行读取Doubles相关功能 |
+| `readFloats` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Floats相关功能 | 传入参数执行读取Floats相关功能 |
+| `readGeography` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Geography相关功能 | 传入参数执行读取Geography相关功能 |
+| `readGeometry` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Geometry相关功能 | 传入参数执行读取Geometry相关功能 |
+| `readIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Integers相关功能 | 传入参数执行读取Integers相关功能 |
+| `readIntegersWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean | `void` | 读取IntegersWithRebase相关功能 | 传入参数执行读取IntegersWithRebase相关功能 |
+| `readLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Longs相关功能 | 传入参数执行读取Longs相关功能 |
+| `readLongsWithRebase` | total: int, c: WritableColumnVector, rowId: int, failIfRebase: boolean, timeZone: String | `void` | 读取LongsWithRebase相关功能 | 传入参数执行读取LongsWithRebase相关功能 |
+| `readShort` | 无 | `short` | 读取Short相关功能 | 调用该方法执行读取Short相关功能 |
+| `readShorts` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取Shorts相关功能 | 传入参数执行读取Shorts相关功能 |
+| `readUnsignedIntegers` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取UnsignedIntegers相关功能 | 传入参数执行读取UnsignedIntegers相关功能 |
+| `readUnsignedLongs` | total: int, c: WritableColumnVector, rowId: int | `void` | 读取UnsignedLongs相关功能 | 传入参数执行读取UnsignedLongs相关功能 |
+| `skip` | 无 | `void` | 跳过相关功能 | 调用该方法执行跳过相关功能 |
+| `skipBinary` | total: int | `void` | 跳过Binary相关功能 | 传入参数执行跳过Binary相关功能 |
+| `skipBooleans` | total: int | `void` | 跳过Booleans相关功能 | 传入参数执行跳过Booleans相关功能 |
+| `skipBytes` | total: int | `void` | 跳过Bytes相关功能 | 传入参数执行跳过Bytes相关功能 |
+| `skipDoubles` | total: int | `void` | 跳过Doubles相关功能 | 传入参数执行跳过Doubles相关功能 |
+| `skipFixedLenByteArray` | total: int, len: int | `void` | 跳过FixedLenByteArray相关功能 | 传入参数执行跳过FixedLenByteArray相关功能 |
+| `skipFloats` | total: int | `void` | 跳过Floats相关功能 | 传入参数执行跳过Floats相关功能 |
+| `skipIntegers` | total: int | `void` | 跳过Integers相关功能 | 传入参数执行跳过Integers相关功能 |
+| `skipLongs` | total: int | `void` | 跳过Longs相关功能 | 传入参数执行跳过Longs相关功能 |
+| `skipShorts` | total: int | `void` | 跳过Shorts相关功能 | 传入参数执行跳过Shorts相关功能 |
 
 ### ViewChange
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -1898,9 +1744,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `property` | 无 | `String` | property方法 |  |
-| `property` | 无 | `String` | property方法 |  |
-| `value` | 无 | `String` | value方法 |  |
+| `property` | 无 | `String` | property操作 | 调用该方法执行property操作 |
+| `value` | 无 | `String` | 获取度量指标值 | 返回度量指标数值 |
 
 ### ViewInfo
 **包路径**: `org.apache.spark.sql.connector.catalog`
@@ -1908,11 +1753,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `currentCatalog` | 无 | `String` | currentCatalog方法 |  |
-| `ident` | 无 | `Identifier` | ident方法 |  |
-| `properties` | 无 | `Map&lt;String, String&gt;` | properties方法 |  |
-| `schema` | 无 | `StructType` | 获取schema |  |
-| `sql` | 无 | `String` | 执行SQL查询 |  |
+| `currentCatalog` | 无 | `String` | 当前Catalog相关功能 | 调用该方法执行当前Catalog相关功能 |
+| `ident` | 无 | `Identifier` | ident操作 | 调用该方法执行ident操作 |
+| `properties` | 无 | `Map&lt;String, String&gt;` | properties操作 | 调用该方法执行properties操作 |
+| `schema` | 无 | `StructType` | 获取schema | 调用该方法执行schema操作 |
+| `sql` | 无 | `String` | 执行SQL查询 | 调用该方法执行sql操作 |
 
 ### WkbParseException
 **包路径**: `org.apache.spark.sql.catalyst.util.geo`
@@ -1920,8 +1765,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getParseError` | 无 | `String` | getParseError方法 |  |
-| `getPosition` | 无 | `long` | getPosition方法 |  |
+| `getParseError` | 无 | `String` | 获取ParseError相关功能 | 调用该方法执行获取ParseError相关功能 |
+| `getPosition` | 无 | `long` | 获取Position相关功能 | 调用该方法执行获取Position相关功能 |
 
 ### WkbReader
 **包路径**: `org.apache.spark.sql.catalyst.util.geo`
@@ -1929,73 +1774,74 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `read` | wkb: byte&lt;&gt; | `GeometryModel` | 读取数据源创建DataFrame |  |
-| `read` | wkb: byte&lt;&gt;, srid: int | `GeometryModel` | 读取数据源创建DataFrame |  |
+| `read` | wkb: byte&lt;&gt; | `GeometryModel` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
+| `read` | wkb: byte&lt;&gt;, srid: int | `GeometryModel` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
 
 ### WritableColumnVector
 **包路径**: `org.apache.spark.sql.execution.vectorized`
+**说明**: 可写列向量，支持数据写入操作。提供put系列方法（指定位置写入）和append系列方法（追加写入）。写入前需调用reserve预留内存空间。
 **方法数量**: 58
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addElementsAppended` | num: int | `void` | addElementsAppended方法 |  |
-| `appendArray` | length: int | `int` | appendArray方法 |  |
-| `appendBoolean` | v: boolean | `int` | appendBoolean方法 |  |
-| `appendBooleans` | count: int, v: boolean | `int` | appendBooleans方法 |  |
-| `appendBooleans` | count: int, src: byte, offset: int | `int` | appendBooleans方法 |  |
-| `appendByte` | v: byte | `int` | appendByte方法 |  |
-| `appendByteArray` | value: byte&lt;&gt;, offset: int, length: int | `int` | appendByteArray方法 |  |
-| `appendBytes` | count: int, v: byte | `int` | appendBytes方法 |  |
-| `appendBytes` | length: int, src: byte&lt;&gt;, offset: int | `int` | appendBytes方法 |  |
-| `appendDouble` | v: double | `int` | appendDouble方法 |  |
-| `appendDoubles` | count: int, v: double | `int` | appendDoubles方法 |  |
-| `appendDoubles` | length: int, src: double&lt;&gt;, offset: int | `int` | appendDoubles方法 |  |
-| `appendFloat` | v: float | `int` | appendFloat方法 |  |
-| `appendFloats` | count: int, v: float | `int` | appendFloats方法 |  |
-| `appendFloats` | length: int, src: float&lt;&gt;, offset: int | `int` | appendFloats方法 |  |
-| `appendInt` | v: int | `int` | appendInt方法 |  |
-| `appendInts` | count: int, v: int | `int` | appendInts方法 |  |
-| `appendInts` | length: int, src: int&lt;&gt;, offset: int | `int` | appendInts方法 |  |
-| `appendLong` | v: long | `int` | appendLong方法 |  |
-| `appendLongs` | count: int, v: long | `int` | appendLongs方法 |  |
-| `appendLongs` | length: int, src: long&lt;&gt;, offset: int | `int` | appendLongs方法 |  |
-| `appendNotNull` | 无 | `int` | appendNotNull方法 |  |
-| `appendNotNulls` | count: int | `int` | appendNotNulls方法 |  |
-| `appendNull` | 无 | `int` | appendNull方法 |  |
-| `appendNulls` | count: int | `int` | appendNulls方法 |  |
-| `appendObjects` | length: int, value: Object | `Optional&lt;Integer&gt;` | appendObjects方法 |  |
-| `appendShort` | v: short | `int` | appendShort方法 |  |
-| `appendShorts` | count: int, v: short | `int` | appendShorts方法 |  |
-| `appendShorts` | length: int, src: short&lt;&gt;, offset: int | `int` | appendShorts方法 |  |
-| `appendStruct` | isNull: boolean | `int` | appendStruct方法 |  |
-| `arrayData` | 无 | `WritableColumnVector` | arrayData方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `closeIfFreeable` | 无 | `void` | closeIfFreeable方法 |  |
-| `getArray` | rowId: int | `ColumnarArray` | getArray方法 |  |
-| `getChild` | ordinal: int | `WritableColumnVector` | getChild方法 |  |
-| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | getDecimal方法 |  |
-| `getDictionaryIds` | 无 | `WritableColumnVector` | getDictionaryIds方法 |  |
-| `getElementsAppended` | 无 | `int` | getElementsAppended方法 |  |
-| `getMap` | rowId: int | `ColumnarMap` | getMap方法 |  |
-| `getNumChildren` | 无 | `int` | getNumChildren方法 |  |
-| `getUTF8String` | rowId: int | `UTF8String` | getUTF8String方法 |  |
-| `hasDictionary` | 无 | `boolean` | hasDictionary方法 |  |
-| `hasNull` | 无 | `boolean` | hasNull方法 |  |
-| `isAllNull` | 无 | `boolean` | isAllNull方法 |  |
-| `isMissing` | 无 | `boolean` | isMissing方法 |  |
-| `numNulls` | 无 | `int` | numNulls方法 |  |
-| `putBooleans` | rowId: int, count: int, src: byte, srcIndex: int | `void` | putBooleans方法 |  |
-| `putByteArray` | rowId: int, value: byte&lt;&gt; | `int` | putByteArray方法 |  |
-| `putByteArray` | rowId: int, src: ByteBuffer, srcPosition: int, length: int | `int` | putByteArray方法 |  |
-| `putDecimal` | rowId: int, value: Decimal, precision: int | `void` | putDecimal方法 |  |
-| `putInterval` | rowId: int, value: CalendarInterval | `void` | putInterval方法 |  |
-| `reserve` | requiredCapacity: int | `void` | reserve方法 |  |
-| `reserveAdditional` | additionalCapacity: int | `void` | reserveAdditional方法 |  |
-| `reserveDictionaryIds` | capacity: int | `WritableColumnVector` | reserveDictionaryIds方法 |  |
-| `reset` | 无 | `void` | reset方法 |  |
-| `setDictionary` | dictionary: Dictionary | `void` | setDictionary方法 |  |
-| `setIsConstant` | 无 | `void` | setIsConstant方法 |  |
-| `setMissing` | 无 | `void` | setMissing方法 |  |
+| `addElementsAppended` | num: int | `void` | 增加已追加元素计数，用于手动调整追加位置 | `vector.addElementsAppended(5);<br>// 增加5个元素的计数` |
+| `appendArray` | length: int | `int` | 追加数组数据，返回追加的起始位置 | `int startPos = vector.appendArray(3);<br>// 追加长度为3的数组` |
+| `appendBoolean` | v: boolean | `int` | 追加单个布尔值，返回追加位置 | `int pos = vector.appendBoolean(true);` |
+| `appendBooleans` | count: int, v: boolean | `int` | 批量追加相同布尔值，返回起始位置 | `int startPos = vector.appendBooleans(10, true);<br>// 追加10个true值` |
+| `appendBooleans` | count: int, src: byte, offset: int | `int` | 从字节位图追加布尔值，src每bit对应一个布尔 | `byte bitmap = 0x0F;  // 低4位为true<br>int pos = vector.appendBooleans(4, bitmap, 0);` |
+| `appendByte` | v: byte | `int` | 追加单个字节值 | `int pos = vector.appendByte((byte) 100);` |
+| `appendByteArray` | value: byte[], offset: int, length: int | `int` | 追加字节数组的部分内容 | `byte[] data = {1, 2, 3, 4, 5};<br>int pos = vector.appendByteArray(data, 1, 3);  // 追加{2,3,4}` |
+| `appendBytes` | count: int, v: byte | `int` | 批量追加相同字节值 | `int pos = vector.appendBytes(100, (byte) 0);<br>// 追加100个0字节` |
+| `appendBytes` | length: int, src: byte[], offset: int | `int` | 批量追加字节数组内容 | `byte[] src = {1, 2, 3};<br>int pos = vector.appendBytes(3, src, 0);` |
+| `appendDouble` | v: double | `int` | 追加单个双精度值 | `int pos = vector.appendDouble(3.14);` |
+| `appendDoubles` | count: int, v: double | `int` | 批量追加相同双精度值 | `int pos = vector.appendDoubles(10, 1.5);` |
+| `appendDoubles` | length: int, src: double[], offset: int | `int` | 批量追加双精度数组内容 | `double[] values = {1.1, 2.2, 3.3};<br>int pos = vector.appendDoubles(3, values, 0);` |
+| `appendFloat` | v: float | `int` | 追加单个单精度值 | `int pos = vector.appendFloat(2.5f);` |
+| `appendFloats` | count: int, v: float | `int` | 批量追加相同单精度值 | `int pos = vector.appendFloats(5, 1.0f);` |
+| `appendFloats` | length: int, src: float[], offset: int | `int` | 批量追加单精度数组内容 | `float[] values = {1.0f, 2.0f};<br>int pos = vector.appendFloats(2, values, 0);` |
+| `appendInt` | v: int | `int` | 追加单个整数值 | `int pos = vector.appendInt(42);` |
+| `appendInts` | count: int, v: int | `int` | 批量追加相同整数值 | `int pos = vector.appendInts(100, 0);` |
+| `appendInts` | length: int, src: int[], offset: int | `int` | 批量追加整数数组内容 | `int[] values = {1, 2, 3, 4, 5};<br>int pos = vector.appendInts(3, values, 2);  // 追加{3,4,5}` |
+| `appendLong` | v: long | `int` | 追加单个长整数值 | `int pos = vector.appendLong(100000L);` |
+| `appendLongs` | count: int, v: long | `int` | 批量追加相同长整数值 | `int pos = vector.appendLongs(10, 0L);` |
+| `appendLongs` | length: int, src: long[], offset: int | `int` | 批量追加长整数数组内容 | `long[] values = {1L, 2L, 3L};<br>int pos = vector.appendLongs(3, values, 0);` |
+| `appendNotNull` | 无 | `int` | 追加非null标记，返回追加位置 | `int pos = vector.appendNotNull();` |
+| `appendNotNulls` | count: int | `int` | 批量追加非null标记 | `int pos = vector.appendNotNulls(100);` |
+| `appendNull` | 无 | `int` | 追加null标记，返回追加位置 | `int pos = vector.appendNull();` |
+| `appendNulls` | count: int | `int` | 批量追加null标记 | `int pos = vector.appendNulls(10);` |
+| `appendObjects` | length: int, value: Object | `Optional<Integer>` | 追加对象数组（不常用，部分类型不支持） | `Optional&lt;Integer&gt; pos = vector.appendObjects(1, obj);` |
+| `appendShort` | v: short | `int` | 追加单个短整数值 | `int pos = vector.appendShort((short) 100);` |
+| `appendShorts` | count: int, v: short | `int` | 批量追加相同短整数值 | `int pos = vector.appendShorts(5, (short) 10);` |
+| `appendShorts` | length: int, src: short[], offset: int | `int` | 批量追加短整数数组内容 | `short[] values = {1, 2, 3};<br>int pos = vector.appendShorts(3, values, 0);` |
+| `appendStruct` | isNull: boolean | `int` | 追加Struct结构，isNull指定是否为null | `int pos = vector.appendStruct(false);<br>// 需后续填充子字段` |
+| `arrayData` | 无 | `WritableColumnVector` | 获取存储数组数据的底层列向量 | `WritableColumnVector arrData = vector.arrayData();<br>// 用于写入Array类型的元素` |
+| `close` | 无 | `void` | 关闭列向量，释放内存和子列向量 | `vector.close();` |
+| `closeIfFreeable` | 无 | `void` | 无操作（实现类可能重写） | `// 默认为空实现` |
+| `getArray` | rowId: int | `ColumnarArray` | 获取指定行的数组数据 | `ColumnarArray arr = vector.getArray(0);` |
+| `getChild` | ordinal: int | `WritableColumnVector` | 获取嵌套类型的子列向量 | `WritableColumnVector child = vector.getChild(0);<br>// 用于写入Struct字段` |
+| `getDecimal` | rowId: int, precision: int, scale: int | `Decimal` | 获取指定行的Decimal值 | `Decimal dec = vector.getDecimal(0, 10, 2);` |
+| `getDictionaryIds` | 无 | `WritableColumnVector` | 获取字典编码的ID列向量 | `WritableColumnVector dictIds = vector.getDictionaryIds();` |
+| `getElementsAppended` | 无 | `int` | 获取已追加元素的数量 | `int count = vector.getElementsAppended();` |
+| `getMap` | rowId: int | `ColumnarMap` | 获取指定行的Map数据 | `ColumnarMap map = vector.getMap(0);` |
+| `getNumChildren` | 无 | `int` | 获取子列向量数量 | `int numChildren = vector.getNumChildren();` |
+| `getUTF8String` | rowId: int | `UTF8String` | 获取指定行的UTF8字符串 | `UTF8String str = vector.getUTF8String(0);` |
+| `hasDictionary` | 无 | `boolean` | 检查是否使用字典编码 | `if (vector.hasDictionary()) {<br>    // 使用字典解码读取<br>}` |
+| `hasNull` | 无 | `boolean` | 检查是否存在null值 | `boolean hasNulls = vector.hasNull();` |
+| `isAllNull` | 无 | `boolean` | 检查是否所有值都是null | `boolean allNull = vector.isAllNull();` |
+| `isMissing` | 无 | `boolean` | 检查是否为缺失状态 | `boolean missing = vector.isMissing();` |
+| `numNulls` | 无 | `int` | 返回null值数量 | `int nullCount = vector.numNulls();` |
+| `putBooleans` | rowId: int, count: int, src: byte, srcIndex: int | `void` | 从位图写入布尔值到指定位置 | `byte bitmap = 0x55;<br>vector.putBooleans(0, 4, bitmap, 0);` |
+| `putByteArray` | rowId: int, value: byte[] | `int` | 写入字节数组到指定行 | `int offset = vector.putByteArray(0, new byte[]{1,2,3});` |
+| `putByteArray` | rowId: int, src: ByteBuffer, srcPosition: int, length: int | `int` | 从ByteBuffer写入字节数组 | `ByteBuffer buf = ByteBuffer.wrap(data);<br>int offset = vector.putByteArray(0, buf, 0, 10);` |
+| `putDecimal` | rowId: int, value: Decimal, precision: int | `void` | 写入Decimal值到指定行 | `Decimal dec = Decimal.apply(123.45);<br>vector.putDecimal(0, dec, 10);` |
+| `putInterval` | rowId: int, value: CalendarInterval | `void` | 写入时间间隔到指定行 | `CalendarInterval interval = new CalendarInterval(1, 2, 1000L);<br>vector.putInterval(0, interval);` |
+| `reserve` | requiredCapacity: int | `void` | 预留指定容量的内存空间，写入前必须调用 | `vector.reserve(1000);<br>// 预留1000个元素的容量` |
+| `reserveAdditional` | additionalCapacity: int | `void` | 预留额外的内存空间（追加当前容量） | `vector.reserveAdditional(100);<br>// 增加100容量` |
+| `reserveDictionaryIds` | capacity: int | `WritableColumnVector` | 为字典编码预留ID存储空间 | `WritableColumnVector dictIds = vector.reserveDictionaryIds(1000);` |
+| `reset` | 无 | `void` | 重置列向量，清空数据准备重新写入 | `vector.reset();<br>// 清空数据，重置计数器` |
+| `setDictionary` | dictionary: Dictionary | `void` | 设置字典编码对象 | `vector.setDictionary(dictionary);<br>// 启用字典解码` |
+| `setIsConstant` | 无 | `void` | 设置为常量列向量 | `vector.setIsConstant();<br>// 标记为常量值列` |
+| `setMissing` | 无 | `void` | 设置为缺失状态 | `vector.setMissing();` |
 
 ### WriteBuilder
 **包路径**: `org.apache.spark.sql.connector.write`
@@ -2003,8 +1849,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `toBatch` | 无 | `BatchWrite` | toBatch方法 |  |
-| `toStreaming` | 无 | `StreamingWrite` | toStreaming方法 |  |
+| `toBatch` | 无 | `BatchWrite` | 将行迭代器转换为列式批处理 | 将行迭代器转为列式批处理 |
+| `toStreaming` | 无 | `StreamingWrite` | toStreaming操作 | 调用该方法执行toStreaming操作 |
 
 ---
 
@@ -2016,7 +1862,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | str: String | `BatchStatus` | fromString方法 |  |
+| `fromString` | str: String | `BatchStatus` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ### EventTypes
 **包路径**: `org.apache.spark.examples.sql.streaming`
@@ -2024,33 +1870,33 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `call` | userId: String, events: Iterator<Row>, state: GroupState<Sessions> | `Iterator&lt;Session&gt;` | call方法 |  |
-| `endTime` | 无 | `Timestamp` | endTime方法 |  |
-| `getDuration` | 无 | `long` | getDuration方法 |  |
-| `getEndTimestamp` | 无 | `Timestamp` | getEndTimestamp方法 |  |
-| `getEventType` | 无 | `EventTypes` | getEventType方法 |  |
-| `getEvents` | 无 | `List&lt;SessionEvent&gt;` | getEvents方法 |  |
-| `getId` | 无 | `String` | getId方法 |  |
-| `getNumEvents` | 无 | `int` | getNumEvents方法 |  |
-| `getSessions` | 无 | `List&lt;SessionAcc&gt;` | getSessions方法 |  |
-| `getStartTimestamp` | 无 | `Timestamp` | getStartTimestamp方法 |  |
-| `getUserId` | 无 | `String` | getUserId方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `newInstance` | sessions: List<SessionAcc> | `Sessions` | newInstance方法 |  |
-| `newInstance` | userId: String, eventTypeStr: String, startTimestamp: Timestamp, gapDuration: long | `SessionEvent` | newInstance方法 |  |
-| `newInstance` | event: SessionEvent | `SessionAcc` | newInstance方法 |  |
-| `newInstance` | events: List<SessionEvent> | `SessionAcc` | newInstance方法 |  |
-| `newInstance` | id: String, duration: long, numEvents: int | `Session` | newInstance方法 |  |
-| `setDuration` | duration: long | `void` | setDuration方法 |  |
-| `setEndTimestamp` | endTimestamp: Timestamp | `void` | setEndTimestamp方法 |  |
-| `setEventType` | eventType: EventTypes | `void` | setEventType方法 |  |
-| `setEvents` | events: List<SessionEvent> | `void` | setEvents方法 |  |
-| `setId` | id: String | `void` | setId方法 |  |
-| `setNumEvents` | numEvents: int | `void` | setNumEvents方法 |  |
-| `setSessions` | sessions: List<SessionAcc> | `void` | setSessions方法 |  |
-| `setStartTimestamp` | startTimestamp: Timestamp | `void` | setStartTimestamp方法 |  |
-| `setUserId` | userId: String | `void` | setUserId方法 |  |
-| `startTime` | 无 | `Timestamp` | startTime方法 |  |
+| `call` | userId: String, events: Iterator<Row>, state: GroupState<Sessions> | `Iterator&lt;Session&gt;` | 调用相关功能 | 传入参数执行调用相关功能 |
+| `endTime` | 无 | `Timestamp` | 结束Time相关功能 | 调用该方法执行结束Time相关功能 |
+| `getDuration` | 无 | `long` | 获取Duration相关功能 | 调用该方法执行获取Duration相关功能 |
+| `getEndTimestamp` | 无 | `Timestamp` | 获取EndTimestamp相关功能 | 调用该方法执行获取EndTimestamp相关功能 |
+| `getEventType` | 无 | `EventTypes` | 获取EventType相关功能 | 调用该方法执行获取EventType相关功能 |
+| `getEvents` | 无 | `List&lt;SessionEvent&gt;` | 获取Events相关功能 | 调用该方法执行获取Events相关功能 |
+| `getId` | 无 | `String` | 获取Id相关功能 | 调用该方法执行获取Id相关功能 |
+| `getNumEvents` | 无 | `int` | 获取NumEvents相关功能 | 调用该方法执行获取NumEvents相关功能 |
+| `getSessions` | 无 | `List&lt;SessionAcc&gt;` | 获取Sessions相关功能 | 调用该方法执行获取Sessions相关功能 |
+| `getStartTimestamp` | 无 | `Timestamp` | 获取StartTimestamp相关功能 | 调用该方法执行获取StartTimestamp相关功能 |
+| `getUserId` | 无 | `String` | 获取UserId相关功能 | 调用该方法执行获取UserId相关功能 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `newInstance` | sessions: List<SessionAcc> | `Sessions` | newInstance操作 | 传入参数执行newInstance操作 |
+| `newInstance` | userId: String, eventTypeStr: String, startTimestamp: Timestamp, gapDuration: long | `SessionEvent` | newInstance操作 | 传入参数执行newInstance操作 |
+| `newInstance` | event: SessionEvent | `SessionAcc` | newInstance操作 | 传入参数执行newInstance操作 |
+| `newInstance` | events: List<SessionEvent> | `SessionAcc` | newInstance操作 | 传入参数执行newInstance操作 |
+| `newInstance` | id: String, duration: long, numEvents: int | `Session` | newInstance操作 | 传入参数执行newInstance操作 |
+| `setDuration` | duration: long | `void` | 设置Duration相关功能 | 传入参数执行设置Duration相关功能 |
+| `setEndTimestamp` | endTimestamp: Timestamp | `void` | 设置EndTimestamp相关功能 | 传入参数执行设置EndTimestamp相关功能 |
+| `setEventType` | eventType: EventTypes | `void` | 设置EventType相关功能 | 传入参数执行设置EventType相关功能 |
+| `setEvents` | events: List<SessionEvent> | `void` | 设置Events相关功能 | 传入参数执行设置Events相关功能 |
+| `setId` | id: String | `void` | 设置Id相关功能 | 传入参数执行设置Id相关功能 |
+| `setNumEvents` | numEvents: int | `void` | 设置NumEvents相关功能 | 传入参数执行设置NumEvents相关功能 |
+| `setSessions` | sessions: List<SessionAcc> | `void` | 设置Sessions相关功能 | 传入参数执行设置Sessions相关功能 |
+| `setStartTimestamp` | startTimestamp: Timestamp | `void` | 设置StartTimestamp相关功能 | 传入参数执行设置StartTimestamp相关功能 |
+| `setUserId` | userId: String | `void` | 设置UserId相关功能 | 传入参数执行设置UserId相关功能 |
+| `startTime` | 无 | `Timestamp` | 启动Time相关功能 | 调用该方法执行启动Time相关功能 |
 
 ### GroupStateTimeout
 **包路径**: `org.apache.spark.sql.streaming`
@@ -2058,9 +1904,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `EventTimeTimeout` | 无 | `GroupStateTimeout` | EventTimeTimeout方法 |  |
-| `NoTimeout` | 无 | `GroupStateTimeout` | NoTimeout方法 |  |
-| `ProcessingTimeTimeout` | 无 | `GroupStateTimeout` | ProcessingTimeTimeout方法 |  |
+| `EventTimeTimeout` | 无 | `GroupStateTimeout` | 基于事件时间的超时策略，状态在水印超时时被清理 | // 事件时间超时，适合处理延迟数据<br>.timeout(EventTimeTimeout())<br>// 状态在eventTime超过watermark时触发超时清理 |
+| `NoTimeout` | 无 | `GroupStateTimeout` | 无超时策略，状态永不自动清理，需手动管理 | // 不设置超时，状态永久保留<br>.timeout(NoTimeout())<br>// 需要手动调用remove()清理状态 |
+| `ProcessingTimeTimeout` | 无 | `GroupStateTimeout` | 基于处理时间的超时策略，状态在指定时间后清理 | // 处理时间超时，定时清理状态<br>.timeout(ProcessingTimeTimeout())<br>// 状态在processingTime超过阈值时触发超时清理 |
 
 ### JavaCustomReceiver
 **包路径**: `org.apache.spark.examples.streaming`
@@ -2068,9 +1914,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `onStart` | 无 | `void` | onStart方法 |  |
-| `onStop` | 无 | `void` | onStop方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `onStart` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
+| `onStop` | 无 | `void` | 停止相关功能 | 调用该方法执行停止相关功能 |
 
 ### JavaRecord
 **包路径**: `org.apache.spark.examples.streaming`
@@ -2078,8 +1924,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getWord` | 无 | `String` | getWord方法 |  |
-| `setWord` | word: String | `void` | setWord方法 |  |
+| `getWord` | 无 | `String` | 获取Word相关功能 | 调用该方法执行获取Word相关功能 |
+| `setWord` | word: String | `void` | 设置Word相关功能 | 传入参数执行设置Word相关功能 |
 
 ### JavaStatefulNetworkWordCount
 **包路径**: `org.apache.spark.examples.streaming`
@@ -2087,7 +1933,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### KinesisInitialPositions
 **包路径**: `org.apache.spark.streaming.kinesis`
@@ -2095,11 +1941,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromKinesisInitialPosition` | initialPositionInStream: InitialPositionInStream | `KinesisInitialPosition` | fromKinesisInitialPosition方法 |  |
-| `getPosition` | 无 | `InitialPositionInStream` | getPosition方法 |  |
-| `getPosition` | 无 | `InitialPositionInStream` | getPosition方法 |  |
-| `getPosition` | 无 | `InitialPositionInStream` | getPosition方法 |  |
-| `getTimestamp` | 无 | `Date` | getTimestamp方法 |  |
+| `fromKinesisInitialPosition` | initialPositionInStream: InitialPositionInStream | `KinesisInitialPosition` | 初始化相关功能 | 传入参数执行初始化相关功能 |
+| `getPosition` | 无 | `InitialPositionInStream` | 获取Position相关功能 | 调用该方法执行获取Position相关功能 |
+| `getTimestamp` | 无 | `Date` | 获取Timestamp相关功能 | 调用该方法执行获取Timestamp相关功能 |
 
 ### OutputMode
 **包路径**: `org.apache.spark.sql.streaming`
@@ -2107,9 +1951,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Append` | 无 | `OutputMode` | Append方法 |  |
-| `Complete` | 无 | `OutputMode` | Complete方法 |  |
-| `Update` | 无 | `OutputMode` | Update方法 |  |
+| `Append` | 无 | `OutputMode` | Append输出模式，只输出新增结果，适合无状态或聚合查询 | // Append模式：只输出新数据<br>// 适合无聚合操作或事件时间水印查询<br>.outputMode("append")<br>// 只追加新行，不修改已有数据 |
+| `Complete` | 无 | `OutputMode` | Complete输出模式，输出完整结果，适合聚合查询 | // Complete模式：输出全部结果<br>// 适合聚合查询（如groupBy后count）<br>.outputMode("complete")<br>// 每次输出完整聚合结果表 |
+| `Update` | 无 | `OutputMode` | Update输出模式，只输出更新的行，适合聚合查询 | // Update模式：只输出变更的行<br>// 适合聚合查询，只输出有更新的分组<br>.outputMode("update")<br>// 仅输出被更新或新增的行 |
 
 ### ReadMaxBytes
 **包路径**: `org.apache.spark.sql.connector.read.streaming`
@@ -2117,7 +1961,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `maxBytes` | 无 | `long` | maxBytes方法 |  |
+| `maxBytes` | 无 | `long` | maxBytes操作 | 调用该方法执行maxBytes操作 |
 
 ### ReadMaxFiles
 **包路径**: `org.apache.spark.sql.connector.read.streaming`
@@ -2125,7 +1969,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `maxFiles` | 无 | `int` | maxFiles方法 |  |
+| `maxFiles` | 无 | `int` | maxFiles操作 | 调用该方法执行maxFiles操作 |
 
 ### SupportsRealTimeRead
 **包路径**: `org.apache.spark.sql.connector.read.streaming`
@@ -2133,10 +1977,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `hasRecord` | 无 | `boolean` | hasRecord方法 |  |
-| `newStatusWithArrivalTimeMs` | recArrivalTime: Long | `RecordStatus` | newStatusWithArrivalTimeMs方法 |  |
-| `newStatusWithoutArrivalTime` | hasRecord: boolean | `RecordStatus` | newStatusWithoutArrivalTime方法 |  |
-| `recArrivalTime` | 无 | `Optional&lt;Long&gt;` | recArrivalTime方法 |  |
+| `hasRecord` | 无 | `boolean` | 检查是否存在Record相关功能 | 调用该方法执行检查是否存在Record相关功能 |
+| `newStatusWithArrivalTimeMs` | recArrivalTime: Long | `RecordStatus` | 时间相关功能 | 传入参数执行时间相关功能 |
+| `newStatusWithoutArrivalTime` | hasRecord: boolean | `RecordStatus` | 时间相关功能 | 传入参数执行时间相关功能 |
+| `recArrivalTime` | 无 | `Optional&lt;Long&gt;` | 时间相关功能 | 调用该方法执行时间相关功能 |
 
 ### TimeMode
 **包路径**: `org.apache.spark.sql.streaming`
@@ -2144,9 +1988,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `EventTime` | 无 | `TimeMode` | EventTime方法 |  |
-| `None` | 无 | `TimeMode` | None方法 |  |
-| `ProcessingTime` | 无 | `TimeMode` | ProcessingTime方法 |  |
+| `EventTime` | 无 | `TimeMode` | EventTime时间模式，使用事件时间戳处理数据，支持水印和延迟数据 | // 事件时间模式：基于数据中的时间字段<br>// 支持水印处理延迟数据<br>.withWatermark("timestamp", "10 minutes")<br>// 按数据携带的时间戳处理 |
+| `None` | 无 | `TimeMode` | None时间模式，不使用时间概念，适用于无时间语义的处理 | // 无时间模式：不考虑时间<br>// 适用于简单映射、过滤等无时间语义操作<br>// 不支持水印和超时功能 |
+| `ProcessingTime` | 无 | `TimeMode` | ProcessingTime时间模式，使用处理时间（系统时钟），不支持延迟数据处理 | // 处理时间模式：基于Spark处理时间<br>// 使用系统时钟，不处理延迟数据<br>// 结果依赖于数据处理时刻 |
 
 ### Trigger
 **包路径**: `org.apache.spark.sql.streaming`
@@ -2154,21 +1998,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `AvailableNow` | 无 | `Trigger` | AvailableNow方法 |  |
-| `Continuous` | intervalMs: long | `Trigger` | Continuous方法 |  |
-| `Continuous` | interval: long, timeUnit: TimeUnit | `Trigger` | Continuous方法 |  |
-| `Continuous` | interval: Duration | `Trigger` | Continuous方法 |  |
-| `Continuous` | interval: String | `Trigger` | Continuous方法 |  |
-| `Once` | 无 | `Trigger` | Once方法 |  |
-| `ProcessingTime` | intervalMs: long | `Trigger` | ProcessingTime方法 |  |
-| `ProcessingTime` | interval: long, timeUnit: TimeUnit | `Trigger` | ProcessingTime方法 |  |
-| `ProcessingTime` | interval: Duration | `Trigger` | ProcessingTime方法 |  |
-| `ProcessingTime` | interval: String | `Trigger` | ProcessingTime方法 |  |
-| `RealTime` | batchDurationMs: long | `Trigger` | RealTime方法 |  |
-| `RealTime` | batchDuration: long, timeUnit: TimeUnit | `Trigger` | RealTime方法 |  |
-| `RealTime` | batchDuration: Duration | `Trigger` | RealTime方法 |  |
-| `RealTime` | batchDuration: String | `Trigger` | RealTime方法 |  |
-| `RealTime` | 无 | `Trigger` | RealTime方法 |  |
+| `AvailableNow` | 无 | `Trigger` | AvailableNow触发器，一次性处理所有可用数据，适合批量加载 | // AvailableNow：处理所有可用数据后停止<br>// 适合一次性批量处理或历史数据加载<br>.trigger(Trigger.AvailableNow())<br>// 处理完所有数据后自动停止查询 |
+| `Continuous` | intervalMs: long | `Trigger` | Continuous连续触发器，毫秒级低延迟连续处理，支持持续查询 | // Continuous：连续处理模式（毫秒）<br>// 低延迟连续处理，适合实时流处理<br>.trigger(Trigger.Continuous(100))  // 100ms间隔 |
+| `Continuous` | interval: long, timeUnit: TimeUnit | `Trigger` | Continuous连续触发器，指定时间单位，支持灵活间隔设置 | // Continuous：连续处理（指定时间单位）<br>.trigger(Trigger.Continuous(1, TimeUnit.SECONDS))  // 1秒间隔 |
+| `Continuous` | interval: Duration | `Trigger` | Continuous连续触发器，使用Java Duration对象设置间隔 | // Continuous：使用Duration设置间隔<br>.trigger(Trigger.Continuous(Duration.ofSeconds(5))) |
+| `Continuous` | interval: String | `Trigger` | Continuous连续触发器，字符串格式设置间隔（如"5 seconds"） | // Continuous：字符串格式设置间隔<br>.trigger(Trigger.Continuous("5 seconds")) |
+| `Once` | 无 | `Trigger` | Once触发器，执行一次批处理后停止，适合一次性查询 | // Once：执行一次批处理后停止<br>// 适合测试或一次性数据处理<br>.trigger(Trigger.Once())<br>// 处理完当前数据后停止查询 |
+| `ProcessingTime` | intervalMs: long | `Trigger` | ProcessingTime定时触发器，按固定毫秒间隔触发批处理 | // ProcessingTime：固定间隔触发（毫秒）<br>// 微批处理模式，按固定间隔执行<br>.trigger(Trigger.ProcessingTime(5000))  // 5秒间隔 |
+| `ProcessingTime` | interval: long, timeUnit: TimeUnit | `Trigger` | ProcessingTime定时触发器，指定时间单位设置间隔 | // ProcessingTime：固定间隔（指定时间单位）<br>.trigger(Trigger.ProcessingTime(1, TimeUnit.MINUTES))  // 1分钟间隔 |
+| `ProcessingTime` | interval: Duration | `Trigger` | ProcessingTime定时触发器，使用Java Duration对象设置间隔 | // ProcessingTime：使用Duration设置间隔<br>.trigger(Trigger.ProcessingTime(Duration.ofMinutes(10))) |
+| `ProcessingTime` | interval: String | `Trigger` | ProcessingTime定时触发器，字符串格式设置间隔（如"1 minute"） | // ProcessingTime：字符串格式设置间隔<br>.trigger(Trigger.ProcessingTime("1 minute")) |
+| `RealTime` | batchDurationMs: long | `Trigger` | RealTime实时触发器，毫秒级实时处理新数据 | // RealTime：实时处理新数据（毫秒）<br>// 尽快处理新到达的数据<br>.trigger(Trigger.RealTime(1000))  // 1秒检查新数据 |
+| `RealTime` | batchDuration: long, timeUnit: TimeUnit | `Trigger` | RealTime实时触发器，指定时间单位设置批处理时长 | // RealTime：指定时间单位设置批处理时长<br>.trigger(Trigger.RealTime(5, TimeUnit.SECONDS)) |
+| `RealTime` | batchDuration: Duration | `Trigger` | RealTime实时触发器，使用Java Duration对象设置批处理时长 | // RealTime：使用Duration设置批处理时长<br>.trigger(Trigger.RealTime(Duration.ofSeconds(10))) |
+| `RealTime` | batchDuration: String | `Trigger` | RealTime实时触发器，字符串格式设置批处理时长 | // RealTime：字符串格式设置批处理时长<br>.trigger(Trigger.RealTime("10 seconds")) |
+| `RealTime` | 无 | `Trigger` | RealTime实时触发器，使用默认批处理时长 | // RealTime：默认批处理时长<br>// 使用系统默认设置进行实时处理<br>.trigger(Trigger.RealTime()) |
 
 ---
 
@@ -2180,15 +2024,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `channelActive` | client: TransportClient | `void` | channelActive方法 |  |
-| `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
-| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught方法 |  |
-| `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | getMergedBlockMetaReqHandler方法 |  |
-| `getStreamManager` | 无 | `StreamManager` | getStreamManager方法 |  |
-| `isAuthenticated` | 无 | `boolean` | isAuthenticated方法 |  |
-| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | receive方法 |  |
-| `receive` | client: TransportClient, message: ByteBuffer | `void` | receive方法 |  |
-| `receiveStream` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
+| `channelActive` | client: TransportClient | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `channelInactive` | client: TransportClient | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | 获取MergedBlockMetaReqHandler相关功能 | 调用该方法执行获取MergedBlockMetaReqHandler相关功能 |
+| `getStreamManager` | 无 | `StreamManager` | 获取StreamManager相关功能 | 调用该方法执行获取StreamManager相关功能 |
+| `isAuthenticated` | 无 | `boolean` | 判断是否Authenticated相关功能 | 调用该方法执行判断是否Authenticated相关功能 |
+| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | 接收相关功能 | 传入参数执行接收相关功能 |
+| `receive` | client: TransportClient, message: ByteBuffer | `void` | 接收相关功能 | 传入参数执行接收相关功能 |
+| `receiveStream` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | 接收Stream相关功能 | 传入参数执行接收Stream相关功能 |
 
 ### AbstractFetchShuffleBlocks
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2196,8 +2040,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### AbstractFileRegion
 **包路径**: `org.apache.spark.network.util`
@@ -2205,11 +2049,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `retain` | 无 | `AbstractFileRegion` | retain方法 |  |
-| `retain` | increment: int | `AbstractFileRegion` | retain方法 |  |
-| `touch` | 无 | `AbstractFileRegion` | touch方法 |  |
-| `touch` | o: Object | `AbstractFileRegion` | touch方法 |  |
-| `transfered` | 无 | `long` | transfered方法 |  |
+| `retain` | 无 | `AbstractFileRegion` | retain操作 | 调用该方法执行retain操作 |
+| `retain` | increment: int | `AbstractFileRegion` | retain操作 | 传入参数执行retain操作 |
+| `touch` | 无 | `AbstractFileRegion` | touch操作 | 调用该方法执行touch操作 |
+| `touch` | o: Object | `AbstractFileRegion` | touch操作 | 传入参数执行touch操作 |
+| `transfered` | 无 | `long` | 转移ed相关功能 | 调用该方法执行转移ed相关功能 |
 
 ### AbstractLauncher
 **包路径**: `org.apache.spark.launcher`
@@ -2217,21 +2061,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addAppArgs` | args: String... | `T` | addAppArgs方法 |  |
+| `addAppArgs` | args: String... | `T` | 添加应用参数 | 传入参数执行添加应用参数 |
 | `addFile` | file: String | `T` | 添加文件到Spark作业，所有Executor可访问 | // 添加文件到Spark作业<br>sc.addFile("hdfs://path/to/config.txt");<br>sc.addFile("s3://bucket/data.json");<br><br>// 在Executor中访问文件<br>String filePath = SparkFiles.get("config.txt"); |
 | `addJar` | jar: String | `T` | 添加JAR包到Spark作业 | // 添加依赖JAR包<br>sc.addJar("hdfs://path/to/dependency.jar");<br>sc.addJar("/local/path/to/lib.jar"); |
-| `addPyFile` | file: String | `T` | addPyFile方法 |  |
-| `addSparkArg` | arg: String | `T` | addSparkArg方法 |  |
-| `addSparkArg` | name: String, value: String | `T` | addSparkArg方法 |  |
-| `setAppName` | appName: String | `T` | setAppName方法 |  |
-| `setAppResource` | resource: String | `T` | setAppResource方法 |  |
-| `setConf` | key: String, value: String | `T` | setConf方法 |  |
-| `setDeployMode` | mode: String | `T` | setDeployMode方法 |  |
-| `setMainClass` | mainClass: String | `T` | setMainClass方法 |  |
-| `setMaster` | master: String | `T` | setMaster方法 |  |
-| `setPropertiesFile` | path: String | `T` | setPropertiesFile方法 |  |
-| `setRemote` | remote: String | `T` | setRemote方法 |  |
-| `setVerbose` | verbose: boolean | `T` | setVerbose方法 |  |
+| `addPyFile` | file: String | `T` | 添加Python文件 | 传入参数执行添加Python文件 |
+| `addSparkArg` | arg: String | `T` | 添加Spark参数 | 传入参数执行添加Spark参数 |
+| `addSparkArg` | name: String, value: String | `T` | 添加Spark参数 | 传入参数执行添加Spark参数 |
+| `setAppName` | appName: String | `T` | 设置AppName相关功能 | 传入参数执行设置AppName相关功能 |
+| `setAppResource` | resource: String | `T` | 设置AppResource相关功能 | 传入参数执行设置AppResource相关功能 |
+| `setConf` | key: String, value: String | `T` | 设置Conf相关功能 | 传入参数执行设置Conf相关功能 |
+| `setDeployMode` | mode: String | `T` | 设置DeployMode相关功能 | 传入参数执行设置DeployMode相关功能 |
+| `setMainClass` | mainClass: String | `T` | 设置MainClass相关功能 | 传入参数执行设置MainClass相关功能 |
+| `setMaster` | master: String | `T` | 设置Master相关功能 | 传入参数执行设置Master相关功能 |
+| `setPropertiesFile` | path: String | `T` | 设置PropertiesFile相关功能 | 传入参数执行设置PropertiesFile相关功能 |
+| `setRemote` | remote: String | `T` | 设置Remote相关功能 | 传入参数执行设置Remote相关功能 |
+| `setVerbose` | verbose: boolean | `T` | 设置Verbose相关功能 | 传入参数执行设置Verbose相关功能 |
 
 ### AbstractMessage
 **包路径**: `org.apache.spark.network.protocol`
@@ -2239,8 +2083,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `body` | 无 | `ManagedBuffer` | body方法 |  |
-| `isBodyInFrame` | 无 | `boolean` | isBodyInFrame方法 |  |
+| `body` | 无 | `ManagedBuffer` | body操作 | 调用该方法执行body操作 |
+| `isBodyInFrame` | 无 | `boolean` | 判断是否BodyInFrame相关功能 | 调用该方法执行判断是否BodyInFrame相关功能 |
 
 ### AbstractService
 **包路径**: `org.apache.hive.service`
@@ -2248,8 +2092,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getName` | 无 | `String` | getName方法 |  |
-| `getStartTime` | 无 | `long` | getStartTime方法 |  |
+| `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
+| `getStartTime` | 无 | `long` | 获取StartTime相关功能 | 调用该方法执行获取StartTime相关功能 |
 
 ### AmIpFilter
 **包路径**: `org.apache.spark.deploy.yarn`
@@ -2257,11 +2101,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `destroy` | 无 | `void` | destroy方法 |  |
-| `doFilter` | req: ServletRequest, resp: ServletResponse, chain: FilterChain | `void` | doFilter方法 |  |
-| `findRedirectUrl` | 无 | `String` | findRedirectUrl方法 |  |
-| `init` | conf: FilterConfig | `void` | init方法 |  |
-| `isValidUrl` | url: String | `boolean` | isValidUrl方法 |  |
+| `destroy` | 无 | `void` | 销毁相关功能 | 调用该方法执行销毁相关功能 |
+| `doFilter` | req: ServletRequest, resp: ServletResponse, chain: FilterChain | `void` | 执行Filter相关功能 | 传入参数执行执行Filter相关功能 |
+| `findRedirectUrl` | 无 | `String` | 查找RedirectUrl相关功能 | 调用该方法执行查找RedirectUrl相关功能 |
+| `init` | conf: FilterConfig | `void` | 初始化相关功能 | 传入参数执行初始化相关功能 |
+| `isValidUrl` | url: String | `boolean` | 判断是否ValidUrl相关功能 | 传入参数执行判断是否ValidUrl相关功能 |
 
 ### AmIpPrincipal
 **包路径**: `org.apache.spark.deploy.yarn`
@@ -2269,7 +2113,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getName` | 无 | `String` | getName方法 |  |
+| `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
 
 ### AmIpServletRequestWrapper
 **包路径**: `org.apache.spark.deploy.yarn`
@@ -2277,9 +2121,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getRemoteUser` | 无 | `String` | getRemoteUser方法 |  |
-| `getUserPrincipal` | 无 | `Principal` | getUserPrincipal方法 |  |
-| `isUserInRole` | role: String | `boolean` | isUserInRole方法 |  |
+| `getRemoteUser` | 无 | `String` | 获取RemoteUser相关功能 | 调用该方法执行获取RemoteUser相关功能 |
+| `getUserPrincipal` | 无 | `Principal` | 获取UserPrincipal相关功能 | 调用该方法执行获取UserPrincipal相关功能 |
+| `isUserInRole` | role: String | `boolean` | 判断是否UserInRole相关功能 | 传入参数执行判断是否UserInRole相关功能 |
 
 ### AnonymousAuthenticationProviderImpl
 **包路径**: `org.apache.hive.service.auth`
@@ -2287,7 +2131,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
 ### ApplicationStatus
 **包路径**: `org.apache.spark.status.api.v1`
@@ -2295,7 +2139,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | str: String | `ApplicationStatus` | fromString方法 |  |
+| `fromString` | str: String | `ApplicationStatus` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ### AuthClientBootstrap
 **包路径**: `org.apache.spark.network.crypto`
@@ -2303,7 +2147,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | client: TransportClient, channel: Channel | `void` | doBootstrap方法 |  |
+| `doBootstrap` | client: TransportClient, channel: Channel | `void` | 执行Bootstrap相关功能 | 传入参数执行执行Bootstrap相关功能 |
 
 ### AuthMethods
 **包路径**: `org.apache.hive.service.auth`
@@ -2311,9 +2155,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getAuthMethod` | 无 | `String` | getAuthMethod方法 |  |
-| `getAuthenticationProvider` | authMethod: AuthMethods | `PasswdAuthenticationProvider` | getAuthenticationProvider方法 |  |
-| `getValidAuthMethod` | authMethodStr: String | `AuthMethods` | getValidAuthMethod方法 |  |
+| `getAuthMethod` | 无 | `String` | 获取AuthMethod相关功能 | 调用该方法执行获取AuthMethod相关功能 |
+| `getAuthenticationProvider` | authMethod: AuthMethods | `PasswdAuthenticationProvider` | 获取AuthenticationProvider相关功能 | 传入参数执行获取AuthenticationProvider相关功能 |
+| `getValidAuthMethod` | authMethodStr: String | `AuthMethods` | 获取ValidAuthMethod相关功能 | 传入参数执行获取ValidAuthMethod相关功能 |
 
 ### AuthServerBootstrap
 **包路径**: `org.apache.spark.network.crypto`
@@ -2321,7 +2165,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | channel: Channel, rpcHandler: RpcHandler | `RpcHandler` | doBootstrap方法 |  |
+| `doBootstrap` | channel: Channel, rpcHandler: RpcHandler | `RpcHandler` | 执行Bootstrap相关功能 | 传入参数执行执行Bootstrap相关功能 |
 
 ### BestEffortLazyVal
 **包路径**: `org.apache.spark.util`
@@ -2329,7 +2173,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `apply` | 无 | `T` | apply方法 |  |
+| `apply` | 无 | `T` | 应用数据类型转换 | 获取数据类型对应的列向量 |
 
 ### BlockPushNonFatalFailure
 **包路径**: `org.apache.spark.network.server`
@@ -2337,12 +2181,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getErrorMsg` | blockId: String, errorCode: ReturnCode | `String` | getErrorMsg方法 |  |
-| `getResponse` | 无 | `ByteBuffer` | getResponse方法 |  |
-| `getReturnCode` | 无 | `ReturnCode` | getReturnCode方法 |  |
-| `getReturnCode` | id: byte | `ReturnCode` | getReturnCode方法 |  |
-| `id` | 无 | `byte` | id方法 |  |
-| `shouldNotRetryErrorCode` | returnCode: ReturnCode | `boolean` | shouldNotRetryErrorCode方法 |  |
+| `getErrorMsg` | blockId: String, errorCode: ReturnCode | `String` | 获取ErrorMsg相关功能 | 传入参数执行获取ErrorMsg相关功能 |
+| `getResponse` | 无 | `ByteBuffer` | 获取Response相关功能 | 调用该方法执行获取Response相关功能 |
+| `getReturnCode` | 无 | `ReturnCode` | 获取ReturnCode相关功能 | 调用该方法执行获取ReturnCode相关功能 |
+| `getReturnCode` | id: byte | `ReturnCode` | 获取ReturnCode相关功能 | 传入参数执行获取ReturnCode相关功能 |
+| `id` | 无 | `byte` | id操作 | 调用该方法执行id操作 |
+| `shouldNotRetryErrorCode` | returnCode: ReturnCode | `boolean` | 判断是否应该NotRetryErrorCode相关功能 | 传入参数执行判断是否应该NotRetryErrorCode相关功能 |
 
 ### BlockPushReturnCode
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2350,9 +2194,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `BlockPushReturnCode` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `BlockPushReturnCode` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### BlockStoreClient
 **包路径**: `org.apache.spark.network.shuffle`
@@ -2360,17 +2204,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `diagnoseCorruption` | host: String, port: int, execId: String, shuffleId: int, mapId: long, reduceId: int, checksum: long, algorithm: String | `Cause` | diagnoseCorruption方法 |  |
-| `finalizeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int, listener: MergeFinalizerListener | `void` | finalizeShuffleMerge方法 |  |
-| `getAppAttemptId` | 无 | `String` | getAppAttemptId方法 |  |
-| `getHostLocalDirs` | host: String, port: int, execIds: String&lt;&gt;, hostLocalDirsCompletable: String&lt;&gt;>> | `void` | getHostLocalDirs方法 |  |
-| `getMergedBlockMeta` | host: String, port: int, shuffleId: int, shuffleMergeId: int, reduceId: int, listener: MergedBlocksMetaListener | `void` | getMergedBlockMeta方法 |  |
-| `onFailure` | t: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `pushBlocks` | host: String, port: int, blockIds: String&lt;&gt;, buffers: ManagedBuffer&lt;&gt;, listener: BlockPushingListener | `void` | pushBlocks方法 |  |
-| `removeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int | `boolean` | removeShuffleMerge方法 |  |
-| `setAppAttemptId` | appAttemptId: String | `void` | setAppAttemptId方法 |  |
-| `shuffleMetrics` | 无 | `MetricSet` | shuffleMetrics方法 |  |
+| `diagnoseCorruption` | host: String, port: int, execId: String, shuffleId: int, mapId: long, reduceId: int, checksum: long, algorithm: String | `Cause` | 向上相关功能 | 传入参数执行向上相关功能 |
+| `finalizeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int, listener: MergeFinalizerListener | `void` | 终结ShuffleMerge相关功能 | 传入参数执行终结ShuffleMerge相关功能 |
+| `getAppAttemptId` | 无 | `String` | 获取AppAttemptId相关功能 | 调用该方法执行获取AppAttemptId相关功能 |
+| `getHostLocalDirs` | host: String, port: int, execIds: String&lt;&gt;, hostLocalDirsCompletable: String&lt;&gt;>> | `void` | 获取HostLocalDirs相关功能 | 传入参数执行获取HostLocalDirs相关功能 |
+| `getMergedBlockMeta` | host: String, port: int, shuffleId: int, shuffleMergeId: int, reduceId: int, listener: MergedBlocksMetaListener | `void` | 获取MergedBlockMeta相关功能 | 传入参数执行获取MergedBlockMeta相关功能 |
+| `onFailure` | t: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `pushBlocks` | host: String, port: int, blockIds: String&lt;&gt;, buffers: ManagedBuffer&lt;&gt;, listener: BlockPushingListener | `void` | 压入Blocks相关功能 | 传入参数执行压入Blocks相关功能 |
+| `removeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int | `boolean` | 移除ShuffleMerge相关功能 | 传入参数执行移除ShuffleMerge相关功能 |
+| `setAppAttemptId` | appAttemptId: String | `void` | 设置AppAttemptId相关功能 | 传入参数执行设置AppAttemptId相关功能 |
+| `shuffleMetrics` | 无 | `MetricSet` | 随机打乱Metrics相关功能 | 调用该方法执行随机打乱Metrics相关功能 |
 
 ### BlockTransferMessage
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2378,9 +2222,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromByteBuffer` | msg: ByteBuffer | `BlockTransferMessage` | fromByteBuffer方法 |  |
-| `id` | 无 | `byte` | id方法 |  |
-| `toByteBuffer` | 无 | `ByteBuffer` | toByteBuffer方法 |  |
+| `fromByteBuffer` | msg: ByteBuffer | `BlockTransferMessage` | fromByteBuffer操作 | 传入参数执行fromByteBuffer操作 |
+| `id` | 无 | `byte` | id操作 | 调用该方法执行id操作 |
+| `toByteBuffer` | 无 | `ByteBuffer` | toByteBuffer操作 | 调用该方法执行toByteBuffer操作 |
 
 ### BlocksRemoved
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2388,9 +2232,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `BlocksRemoved` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `BlocksRemoved` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### BloomFilter
 **包路径**: `org.apache.spark.util.sketch`
@@ -2398,16 +2242,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cardinality` | 无 | `long` | cardinality方法 |  |
-| `create` | expectedNumItems: long | `BloomFilter` | create方法 |  |
-| `create` | expectedNumItems: long, fpp: double | `BloomFilter` | create方法 |  |
-| `create` | expectedNumItems: long, numBits: long | `BloomFilter` | create方法 |  |
-| `create` | expectedNumItems: long, numBits: long, seed: int | `BloomFilter` | create方法 |  |
-| `create` | version: Version, expectedNumItems: long, numBits: long, seed: int | `BloomFilter` | create方法 |  |
-| `optimalNumOfBits` | n: long, p: double | `long` | optimalNumOfBits方法 |  |
-| `optimalNumOfBits` | expectedNumItems: long, maxNumItems: long, maxNumOfBits: long | `long` | optimalNumOfBits方法 |  |
-| `readFrom` | in: InputStream | `BloomFilter` | readFrom方法 |  |
-| `readFrom` | bytes: byte&lt;&gt; | `BloomFilter` | readFrom方法 |  |
+| `cardinality` | 无 | `long` | cardinality操作 | 调用该方法执行cardinality操作 |
+| `create` | expectedNumItems: long | `BloomFilter` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `create` | expectedNumItems: long, fpp: double | `BloomFilter` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `create` | expectedNumItems: long, numBits: long | `BloomFilter` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `create` | expectedNumItems: long, numBits: long, seed: int | `BloomFilter` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `create` | version: Version, expectedNumItems: long, numBits: long, seed: int | `BloomFilter` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `optimalNumOfBits` | n: long, p: double | `long` | 双相关功能 | 传入参数执行双相关功能 |
+| `optimalNumOfBits` | expectedNumItems: long, maxNumItems: long, maxNumOfBits: long | `long` | 双相关功能 | 传入参数执行双相关功能 |
+| `readFrom` | in: InputStream | `BloomFilter` | 读取From相关功能 | 传入参数执行读取From相关功能 |
+| `readFrom` | bytes: byte&lt;&gt; | `BloomFilter` | 读取From相关功能 | 传入参数执行读取From相关功能 |
 
 ### BreakableService
 **包路径**: `org.apache.hive.service`
@@ -2415,13 +2259,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getCount` | state: STATE | `int` | getCount方法 |  |
-| `init` | conf: HiveConf | `void` | init方法 |  |
-| `setFailOnInit` | failOnInit: boolean | `void` | setFailOnInit方法 |  |
-| `setFailOnStart` | failOnStart: boolean | `void` | setFailOnStart方法 |  |
-| `setFailOnStop` | failOnStop: boolean | `void` | setFailOnStop方法 |  |
-| `start` | 无 | `void` | start方法 |  |
-| `stop` | 无 | `void` | 停止SparkContext，释放资源 |  |
+| `getCount` | state: STATE | `int` | 获取Count相关功能 | 传入参数执行获取Count相关功能 |
+| `init` | conf: HiveConf | `void` | 初始化相关功能 | 传入参数执行初始化相关功能 |
+| `setFailOnInit` | failOnInit: boolean | `void` | 设置FailOnInit相关功能 | 传入参数执行设置FailOnInit相关功能 |
+| `setFailOnStart` | failOnStart: boolean | `void` | 设置FailOnStart相关功能 | 传入参数执行设置FailOnStart相关功能 |
+| `setFailOnStop` | failOnStop: boolean | `void` | 设置FailOnStop相关功能 | 传入参数执行设置FailOnStop相关功能 |
+| `start` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
+| `stop` | 无 | `void` | 停止SparkContext，释放资源 | 调用该方法执行停止相关功能 |
 
 ### ByteArrayMethods
 **包路径**: `org.apache.spark.unsafe.array`
@@ -2429,14 +2273,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `arrayEquals` | leftBase: Object, leftOffset: long, rightBase: Object, rightOffset: long, length: final long | `boolean` | arrayEquals方法 |  |
-| `contains` | arr: byte&lt;&gt;, sub: byte&lt;&gt; | `boolean` | 判断是否包含 |  |
-| `endsWith` | array: byte&lt;&gt;, target: byte&lt;&gt; | `boolean` | 判断是否以指定字符串结尾 |  |
-| `matchAt` | arr: byte&lt;&gt;, sub: byte&lt;&gt;, pos: int | `boolean` | matchAt方法 |  |
-| `nextPowerOf2` | num: long | `long` | nextPowerOf2方法 |  |
-| `roundNumberOfBytesToNearestWord` | numBytes: int | `int` | roundNumberOfBytesToNearestWord方法 |  |
-| `roundNumberOfBytesToNearestWord` | numBytes: long | `long` | roundNumberOfBytesToNearestWord方法 |  |
-| `startsWith` | array: byte&lt;&gt;, target: byte&lt;&gt; | `boolean` | 判断是否以指定字符串开头 |  |
+| `arrayEquals` | leftBase: Object, leftOffset: long, rightBase: Object, rightOffset: long, length: final long | `boolean` | 数组相等判断 | 传入参数执行数组相等判断 |
+| `contains` | arr: byte&lt;&gt;, sub: byte&lt;&gt; | `boolean` | 判断是否包含 | 传入参数执行包含相关功能 |
+| `endsWith` | array: byte&lt;&gt;, target: byte&lt;&gt; | `boolean` | 判断是否以指定字符串结尾 | 传入参数执行结束sWith相关功能 |
+| `matchAt` | arr: byte&lt;&gt;, sub: byte&lt;&gt;, pos: int | `boolean` | matchAt操作 | 传入参数执行matchAt操作 |
+| `nextPowerOf2` | num: long | `long` | 之后PowerOf2相关功能 | 传入参数执行之后PowerOf2相关功能 |
+| `roundNumberOfBytesToNearestWord` | numBytes: int | `int` | roundNumberOfBytesToNearestWord操作 | 传入参数执行roundNumberOfBytesToNearestWord操作 |
+| `roundNumberOfBytesToNearestWord` | numBytes: long | `long` | roundNumberOfBytesToNearestWord操作 | 传入参数执行roundNumberOfBytesToNearestWord操作 |
+| `startsWith` | array: byte&lt;&gt;, target: byte&lt;&gt; | `boolean` | 判断是否以指定字符串开头 | 传入参数执行启动sWith相关功能 |
 
 ### ByteArrayReadableChannel
 **包路径**: `org.apache.spark.network.util`
@@ -2444,10 +2288,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `feedData` | buf: ByteBuf | `void` | feedData方法 |  |
-| `isOpen` | 无 | `boolean` | isOpen方法 |  |
-| `read` | dst: ByteBuffer | `int` | 读取数据源创建DataFrame |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `feedData` | buf: ByteBuf | `void` | feedData操作 | 传入参数执行feedData操作 |
+| `isOpen` | 无 | `boolean` | 判断是否Open相关功能 | 调用该方法执行判断是否Open相关功能 |
+| `read` | dst: ByteBuffer | `int` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
 
 ### ByteArrayWritableChannel
 **包路径**: `org.apache.spark.network.util`
@@ -2455,11 +2299,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `isOpen` | 无 | `boolean` | isOpen方法 |  |
-| `length` | 无 | `int` | 计算长度 |  |
-| `reset` | 无 | `void` | reset方法 |  |
-| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `isOpen` | 无 | `boolean` | 判断是否Open相关功能 | 调用该方法执行判断是否Open相关功能 |
+| `length` | 无 | `int` | 计算长度 | 调用该方法执行length操作 |
+| `reset` | 无 | `void` | 重置相关功能 | 调用该方法执行重置相关功能 |
+| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### ByteBufferWriteableChannel
 **包路径**: `org.apache.spark.network.util`
@@ -2467,9 +2311,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `isOpen` | 无 | `boolean` | isOpen方法 |  |
-| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `isOpen` | 无 | `boolean` | 判断是否Open相关功能 | 调用该方法执行判断是否Open相关功能 |
+| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### ByteUnit
 **包路径**: `org.apache.spark.network.util`
@@ -2477,14 +2321,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `convertFrom` | d: long, u: ByteUnit | `long` | convertFrom方法 |  |
-| `convertTo` | d: long, u: ByteUnit | `long` | convertTo方法 |  |
-| `toBytes` | d: long | `long` | toBytes方法 |  |
-| `toGiB` | d: long | `long` | toGiB方法 |  |
-| `toKiB` | d: long | `long` | toKiB方法 |  |
-| `toMiB` | d: long | `long` | toMiB方法 |  |
-| `toPiB` | d: long | `long` | toPiB方法 |  |
-| `toTiB` | d: long | `long` | toTiB方法 |  |
+| `convertFrom` | d: long, u: ByteUnit | `long` | 转换From相关功能 | 传入参数执行转换From相关功能 |
+| `convertTo` | d: long, u: ByteUnit | `long` | 转换To相关功能 | 传入参数执行转换To相关功能 |
+| `toBytes` | d: long | `long` | toBytes操作 | 传入参数执行toBytes操作 |
+| `toGiB` | d: long | `long` | toGiB操作 | 传入参数执行toGiB操作 |
+| `toKiB` | d: long | `long` | toKiB操作 | 传入参数执行toKiB操作 |
+| `toMiB` | d: long | `long` | toMiB操作 | 传入参数执行toMiB操作 |
+| `toPiB` | d: long | `long` | 顶部iB相关功能 | 传入参数执行顶部iB相关功能 |
+| `toTiB` | d: long | `long` | toTiB操作 | 传入参数执行toTiB操作 |
 
 ### CLIService
 **包路径**: `org.apache.hive.service.cli`
@@ -2492,41 +2336,41 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
-| `cancelOperation` | opHandle: OperationHandle | `void` | cancelOperation方法 |  |
-| `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
-| `closeSession` | sessionHandle: SessionHandle | `void` | closeSession方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
-| `fetchResults` | opHandle: OperationHandle | `TRowSet` | fetchResults方法 |  |
-| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
-| `getCatalogs` | sessionHandle: SessionHandle | `OperationHandle` | getCatalogs方法 |  |
-| `getColumns` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | getColumns方法 |  |
-| `getCrossReference` | sessionHandle: SessionHandle, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
-| `getDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
-| `getFunctions` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, functionName: String | `OperationHandle` | getFunctions方法 |  |
-| `getHttpUGI` | 无 | `UserGroupInformation` | getHttpUGI方法 |  |
-| `getInfo` | sessionHandle: SessionHandle, getInfoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
-| `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | getOperationStatus方法 |  |
-| `getPrimaryKeys` | sessionHandle: SessionHandle, catalog: String, schema: String, table: String | `OperationHandle` | getPrimaryKeys方法 |  |
-| `getQueryId` | opHandle: TOperationHandle | `String` | getQueryId方法 |  |
-| `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | getResultSetMetadata方法 |  |
-| `getSchemas` | sessionHandle: SessionHandle, catalogName: String, schemaName: String | `OperationHandle` | getSchemas方法 |  |
-| `getServiceUGI` | 无 | `UserGroupInformation` | getServiceUGI方法 |  |
-| `getSessionConf` | sessionHandle: SessionHandle | `HiveConf` | getSessionConf方法 |  |
-| `getSessionManager` | 无 | `SessionManager` | getSessionManager方法 |  |
-| `getTableTypes` | sessionHandle: SessionHandle | `OperationHandle` | getTableTypes方法 |  |
-| `getTables` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
-| `getTypeInfo` | sessionHandle: SessionHandle | `OperationHandle` | getTypeInfo方法 |  |
-| `openSession` | protocol: TProtocolVersion, username: String, password: String, configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSession` | username: String, password: String, configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSessionWithImpersonation` | protocol: TProtocolVersion, username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `openSessionWithImpersonation` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `openSessionWithImpersonation` | username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `renewDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
+| `cancelDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | 判断能否celDelegationToken相关功能 | 传入参数执行判断能否celDelegationToken相关功能 |
+| `cancelOperation` | opHandle: OperationHandle | `void` | 判断能否celOperation相关功能 | 传入参数执行判断能否celOperation相关功能 |
+| `closeOperation` | opHandle: OperationHandle | `void` | 关闭Operation相关功能 | 传入参数执行关闭Operation相关功能 |
+| `closeSession` | sessionHandle: SessionHandle | `void` | 关闭Session相关功能 | 传入参数执行关闭Session相关功能 |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | 执行Statement相关功能 | 传入参数执行执行Statement相关功能 |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | 执行Statement相关功能 | 传入参数执行执行Statement相关功能 |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | 执行StatementAsync相关功能 | 传入参数执行执行StatementAsync相关功能 |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | 执行StatementAsync相关功能 | 传入参数执行执行StatementAsync相关功能 |
+| `fetchResults` | opHandle: OperationHandle | `TRowSet` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
+| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
+| `getCatalogs` | sessionHandle: SessionHandle | `OperationHandle` | 获取Catalogs相关功能 | 传入参数执行获取Catalogs相关功能 |
+| `getColumns` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | 获取Columns相关功能 | 传入参数执行获取Columns相关功能 |
+| `getCrossReference` | sessionHandle: SessionHandle, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | 获取CrossReference相关功能 | 传入参数执行获取CrossReference相关功能 |
+| `getDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | 获取DelegationToken相关功能 | 传入参数执行获取DelegationToken相关功能 |
+| `getFunctions` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, functionName: String | `OperationHandle` | 获取Functions相关功能 | 传入参数执行获取Functions相关功能 |
+| `getHttpUGI` | 无 | `UserGroupInformation` | 获取HttpUGI相关功能 | 调用该方法执行获取HttpUGI相关功能 |
+| `getInfo` | sessionHandle: SessionHandle, getInfoType: GetInfoType | `GetInfoValue` | 获取Info相关功能 | 传入参数执行获取Info相关功能 |
+| `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | 获取OperationStatus相关功能 | 传入参数执行获取OperationStatus相关功能 |
+| `getPrimaryKeys` | sessionHandle: SessionHandle, catalog: String, schema: String, table: String | `OperationHandle` | 获取PrimaryKeys相关功能 | 传入参数执行获取PrimaryKeys相关功能 |
+| `getQueryId` | opHandle: TOperationHandle | `String` | 获取QueryId相关功能 | 传入参数执行获取QueryId相关功能 |
+| `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | 获取ResultSetMetadata相关功能 | 传入参数执行获取ResultSetMetadata相关功能 |
+| `getSchemas` | sessionHandle: SessionHandle, catalogName: String, schemaName: String | `OperationHandle` | 获取Schemas相关功能 | 传入参数执行获取Schemas相关功能 |
+| `getServiceUGI` | 无 | `UserGroupInformation` | 获取ServiceUGI相关功能 | 调用该方法执行获取ServiceUGI相关功能 |
+| `getSessionConf` | sessionHandle: SessionHandle | `HiveConf` | 获取SessionConf相关功能 | 传入参数执行获取SessionConf相关功能 |
+| `getSessionManager` | 无 | `SessionManager` | 获取SessionManager相关功能 | 调用该方法执行获取SessionManager相关功能 |
+| `getTableTypes` | sessionHandle: SessionHandle | `OperationHandle` | 获取TableTypes相关功能 | 传入参数执行获取TableTypes相关功能 |
+| `getTables` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | 获取Tables相关功能 | 传入参数执行获取Tables相关功能 |
+| `getTypeInfo` | sessionHandle: SessionHandle | `OperationHandle` | 获取TypeInfo相关功能 | 传入参数执行获取TypeInfo相关功能 |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, configuration: String> | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, configuration: String> | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
+| `openSession` | username: String, password: String, configuration: String> | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
+| `openSessionWithImpersonation` | protocol: TProtocolVersion, username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | 打开SessionWithImpersonation相关功能 | 传入参数执行打开SessionWithImpersonation相关功能 |
+| `openSessionWithImpersonation` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, configuration: String>, delegationToken: String | `SessionHandle` | 打开SessionWithImpersonation相关功能 | 传入参数执行打开SessionWithImpersonation相关功能 |
+| `openSessionWithImpersonation` | username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | 打开SessionWithImpersonation相关功能 | 传入参数执行打开SessionWithImpersonation相关功能 |
+| `renewDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken操作 | 传入参数执行renewDelegationToken操作 |
 
 ### CLIServiceClient
 **包路径**: `org.apache.hive.service.cli`
@@ -2534,8 +2378,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fetchResults` | opHandle: OperationHandle | `TRowSet` | fetchResults方法 |  |
-| `openSession` | username: String, password: String | `SessionHandle` | openSession方法 |  |
+| `fetchResults` | opHandle: OperationHandle | `TRowSet` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
+| `openSession` | username: String, password: String | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
 
 ### CLIServiceUtils
 **包路径**: `org.apache.hive.service.cli`
@@ -2543,7 +2387,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `patternToRegex` | pattern: String | `String` | patternToRegex方法 |  |
+| `patternToRegex` | pattern: String | `String` | patternToRegex操作 | 传入参数执行patternToRegex操作 |
 
 ### ChildFirstURLClassLoader
 **包路径**: `org.apache.spark.util`
@@ -2551,9 +2395,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getResource` | name: String | `URL` | getResource方法 |  |
-| `getResources` | name: String | `Enumeration&lt;URL&gt;` | getResources方法 |  |
-| `loadClass` | name: String, resolve: boolean | `Class&lt;?&gt;` | loadClass方法 |  |
+| `getResource` | name: String | `URL` | 获取Resource相关功能 | 传入参数执行获取Resource相关功能 |
+| `getResources` | name: String | `Enumeration&lt;URL&gt;` | 获取Resources相关功能 | 传入参数执行获取Resources相关功能 |
+| `loadClass` | name: String, resolve: boolean | `Class&lt;?&gt;` | 加载Class相关功能 | 传入参数执行加载Class相关功能 |
 
 ### ChunkFetchRequestHandler
 **包路径**: `org.apache.spark.network.server`
@@ -2561,8 +2405,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught方法 |  |
-| `processFetchRequest` | channel: final Channel, msg: final ChunkFetchRequest | `void` | processFetchRequest方法 |  |
+| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `processFetchRequest` | channel: final Channel, msg: final ChunkFetchRequest | `void` | 处理FetchRequest相关功能 | 传入参数执行处理FetchRequest相关功能 |
 
 ### ClassicTableTypeMapping
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -2570,8 +2414,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getTableTypeNames` | 无 | `Set&lt;String&gt;` | getTableTypeNames方法 |  |
-| `mapToClientType` | hiveTypeName: String | `String` | mapToClientType方法 |  |
+| `getTableTypeNames` | 无 | `Set&lt;String&gt;` | 获取TableTypeNames相关功能 | 调用该方法执行获取TableTypeNames相关功能 |
+| `mapToClientType` | hiveTypeName: String | `String` | 映射ToClientType相关功能 | 传入参数执行映射ToClientType相关功能 |
 
 ### CodePointIteratorType
 **包路径**: `org.apache.spark.unsafe.types`
@@ -2579,97 +2423,95 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `binaryCompare` | other: final UTF8String | `int` | binaryCompare方法 |  |
-| `binaryEquals` | other: final UTF8String | `boolean` | binaryEquals方法 |  |
-| `blankString` | length: int | `UTF8String` | blankString方法 |  |
-| `bytePosToChar` | bytePos: int | `int` | bytePosToChar方法 |  |
-| `charPosToByte` | charPos: int | `int` | charPosToByte方法 |  |
-| `clone` | 无 | `UTF8String` | 克隆对象 |  |
-| `codePointFrom` | byteIndex: int | `int` | codePointFrom方法 |  |
-| `codePointIterator` | 无 | `Iterator&lt;Integer&gt;` | codePointIterator方法 |  |
-| `codePointIterator` | iteratorMode: CodePointIteratorType | `Iterator&lt;Integer&gt;` | codePointIterator方法 |  |
-| `compareTo` | other: @Nonnull final UTF8String | `int` | compareTo方法 |  |
-| `concat` | inputs: UTF8String... | `UTF8String` | 拼接字符串 |  |
-| `concatWs` | separator: UTF8String, inputs: UTF8String... | `UTF8String` | concatWs方法 |  |
-| `contains` | substring: final UTF8String | `boolean` | 判断是否包含 |  |
-| `copy` | 无 | `UTF8String` | copy方法 |  |
-| `copyUTF8String` | start: int, end: int | `UTF8String` | copyUTF8String方法 |  |
-| `endsWith` | suffix: final UTF8String | `boolean` | 判断是否以指定字符串结尾 |  |
-| `find` | str: UTF8String, start: int | `int` | find方法 |  |
-| `findInSet` | match: UTF8String | `int` | findInSet方法 |  |
-| `fromAddress` | base: Object, offset: long, numBytes: int | `UTF8String` | fromAddress方法 |  |
-| `fromBytes` | bytes: byte&lt;&gt; | `UTF8String` | fromBytes方法 |  |
-| `fromBytes` | bytes: byte&lt;&gt;, offset: int, numBytes: int | `UTF8String` | fromBytes方法 |  |
-| `fromString` | str: String | `UTF8String` | fromString方法 |  |
-| `getBaseObject` | 无 | `Object` | getBaseObject方法 |  |
-| `getBaseOffset` | 无 | `long` | getBaseOffset方法 |  |
-| `getByte` | byteIndex: int | `byte` | getByte方法 |  |
-| `getByteBuffer` | 无 | `ByteBuffer` | getByteBuffer方法 |  |
-| `getChar` | charIndex: int | `int` | getChar方法 |  |
-| `getPrefix` | 无 | `long` | getPrefix方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `indexOf` | v: UTF8String, start: int | `int` | indexOf方法 |  |
-| `indexOfEmpty` | start: int | `int` | indexOfEmpty方法 |  |
-| `isFullAscii` | 无 | `boolean` | isFullAscii方法 |  |
-| `isValid` | 无 | `boolean` | isValid方法 |  |
-| `isWhitespaceOrISOControl` | codePoint: int | `boolean` | isWhitespaceOrISOControl方法 |  |
-| `levenshteinDistance` | other: UTF8String | `int` | levenshteinDistance方法 |  |
-| `levenshteinDistance` | other: UTF8String, threshold: int | `int` | levenshteinDistance方法 |  |
-| `lpad` | len: int, pad: UTF8String | `UTF8String` | lpad方法 |  |
-| `makeValid` | 无 | `UTF8String` | makeValid方法 |  |
-| `matchAt` | s: final UTF8String, pos: int | `boolean` | matchAt方法 |  |
-| `next` | 无 | `Integer` | next方法 |  |
-| `next` | 无 | `Integer` | next方法 |  |
-| `numBytes` | 无 | `int` | numBytes方法 |  |
-| `numBytesForFirstByte` | b: final byte | `int` | numBytesForFirstByte方法 |  |
-| `numChars` | 无 | `int` | numChars方法 |  |
-| `read` | kryo: Kryo, in: Input | `void` | 读取数据源创建DataFrame |  |
-| `readExternal` | in: ObjectInput | `void` | readExternal方法 |  |
-| `repeat` | times: int | `UTF8String` | repeat方法 |  |
-| `replace` | search: UTF8String, replace: UTF8String | `UTF8String` | replace方法 |  |
-| `reverse` | 无 | `UTF8String` | reverse方法 |  |
-| `reverseCodePointIterator` | 无 | `Iterator&lt;Integer&gt;` | reverseCodePointIterator方法 |  |
-| `reverseCodePointIterator` | iteratorMode: CodePointIteratorType | `Iterator&lt;Integer&gt;` | reverseCodePointIterator方法 |  |
-| `rfind` | str: UTF8String, start: int | `int` | rfind方法 |  |
-| `rpad` | len: int, pad: UTF8String | `UTF8String` | rpad方法 |  |
-| `semanticCompare` | other: final UTF8String, collationId: int | `int` | semanticCompare方法 |  |
-| `semanticEquals` | other: final UTF8String, collationId: int | `boolean` | semanticEquals方法 |  |
-| `soundex` | 无 | `UTF8String` | soundex方法 |  |
-| `startsWith` | prefix: final UTF8String | `boolean` | 判断是否以指定字符串开头 |  |
-| `subStringIndex` | delim: UTF8String, count: int | `UTF8String` | subStringIndex方法 |  |
-| `substring` | start: final int, until: final int | `UTF8String` | 截取子字符串 |  |
-| `substringSQL` | pos: int, length: int | `UTF8String` | substringSQL方法 |  |
-| `toBinaryString` | val: long | `UTF8String` | toBinaryString方法 |  |
-| `toByte` | intWrapper: IntWrapper | `boolean` | toByte方法 |  |
-| `toByteExact` | 无 | `byte` | toByteExact方法 |  |
-| `toInt` | intWrapper: IntWrapper | `boolean` | toInt方法 |  |
-| `toIntExact` | 无 | `int` | toIntExact方法 |  |
-| `toLong` | toLongResult: LongWrapper | `boolean` | toLong方法 |  |
-| `toLongExact` | 无 | `long` | toLongExact方法 |  |
-| `toLowerCase` | 无 | `UTF8String` | toLowerCase方法 |  |
-| `toLowerCaseAscii` | 无 | `UTF8String` | toLowerCaseAscii方法 |  |
-| `toShort` | intWrapper: IntWrapper | `boolean` | toShort方法 |  |
-| `toShortExact` | 无 | `short` | toShortExact方法 |  |
-| `toTitleCase` | 无 | `UTF8String` | toTitleCase方法 |  |
-| `toTitleCaseICU` | 无 | `UTF8String` | toTitleCaseICU方法 |  |
-| `toUpperCase` | 无 | `UTF8String` | toUpperCase方法 |  |
-| `toUpperCaseAscii` | 无 | `UTF8String` | toUpperCaseAscii方法 |  |
-| `toValidString` | 无 | `String` | toValidString方法 |  |
-| `translate` | dict: String> | `UTF8String` | translate方法 |  |
-| `trim` | 无 | `UTF8String` | 去除空白 |  |
-| `trim` | trimString: UTF8String | `UTF8String` | 去除空白 |  |
-| `trimAll` | 无 | `UTF8String` | trimAll方法 |  |
-| `trimLeft` | 无 | `UTF8String` | trimLeft方法 |  |
-| `trimLeft` | trimString: UTF8String | `UTF8String` | trimLeft方法 |  |
-| `trimRight` | 无 | `UTF8String` | trimRight方法 |  |
-| `trimRight` | trimString: UTF8String | `UTF8String` | trimRight方法 |  |
-| `trimTrailingSpaces` | numSpaces: int | `UTF8String` | trimTrailingSpaces方法 |  |
-| `write` | kryo: Kryo, out: Output | `void` | 写入DataFrame到数据源 |  |
-| `writeExternal` | out: ObjectOutput | `void` | writeExternal方法 |  |
-| `writeTo` | buffer: ByteBuffer | `void` | writeTo方法 |  |
-| `writeTo` | out: OutputStream | `void` | writeTo方法 |  |
-| `writeToMemory` | target: Object, targetOffset: long | `void` | writeToMemory方法 |  |
+| `binaryCompare` | other: final UTF8String | `int` | 二进制数据比较 | 传入参数执行二进制数据比较 |
+| `binaryEquals` | other: final UTF8String | `boolean` | 二进制数据相等判断 | 传入参数执行二进制数据相等判断 |
+| `blankString` | length: int | `UTF8String` | 生成空白字符串 | 传入参数执行生成空白字符串 |
+| `bytePosToChar` | bytePos: int | `int` | 后相关功能 | 传入参数执行后相关功能 |
+| `charPosToByte` | charPos: int | `int` | 后相关功能 | 传入参数执行后相关功能 |
+| `clone` | 无 | `UTF8String` | 克隆对象 | 调用该方法执行克隆相关功能 |
+| `codePointFrom` | byteIndex: int | `int` | 指向相关功能 | 传入参数执行指向相关功能 |
+| `codePointIterator` | 无 | `Iterator&lt;Integer&gt;` | 指向相关功能 | 调用该方法执行指向相关功能 |
+| `codePointIterator` | iteratorMode: CodePointIteratorType | `Iterator&lt;Integer&gt;` | 指向相关功能 | 传入参数执行指向相关功能 |
+| `compareTo` | other: @Nonnull final UTF8String | `int` | 比较To相关功能 | 传入参数执行比较To相关功能 |
+| `concat` | inputs: UTF8String... | `UTF8String` | 拼接字符串 | 传入参数执行concat操作 |
+| `concatWs` | separator: UTF8String, inputs: UTF8String... | `UTF8String` | concatWs操作 | 传入参数执行concatWs操作 |
+| `contains` | substring: final UTF8String | `boolean` | 判断是否包含 | 传入参数执行包含相关功能 |
+| `copy` | 无 | `UTF8String` | 复制相关功能 | 调用该方法执行复制相关功能 |
+| `copyUTF8String` | start: int, end: int | `UTF8String` | 复制UTF8String相关功能 | 传入参数执行复制UTF8String相关功能 |
+| `endsWith` | suffix: final UTF8String | `boolean` | 判断是否以指定字符串结尾 | 传入参数执行结束sWith相关功能 |
+| `find` | str: UTF8String, start: int | `int` | 在哈希表中查找指定key的位置，返回索引 | 在哈希表中查找指定key，返回索引位置 |
+| `findInSet` | match: UTF8String | `int` | 在集合字符串中查找匹配项位置 | 在逗号分隔集合中查找元素位置 |
+| `fromAddress` | base: Object, offset: long, numBytes: int | `UTF8String` | 添加相关功能 | 传入参数执行添加相关功能 |
+| `fromBytes` | bytes: byte&lt;&gt; | `UTF8String` | fromBytes操作 | 传入参数执行fromBytes操作 |
+| `fromBytes` | bytes: byte&lt;&gt;, offset: int, numBytes: int | `UTF8String` | fromBytes操作 | 传入参数执行fromBytes操作 |
+| `fromString` | str: String | `UTF8String` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
+| `getBaseObject` | 无 | `Object` | 获取BaseObject相关功能 | 调用该方法执行获取BaseObject相关功能 |
+| `getBaseOffset` | 无 | `long` | 获取BaseOffset相关功能 | 调用该方法执行获取BaseOffset相关功能 |
+| `getByte` | byteIndex: int | `byte` | 获取Byte相关功能 | 传入参数执行获取Byte相关功能 |
+| `getByteBuffer` | 无 | `ByteBuffer` | 获取ByteBuffer相关功能 | 调用该方法执行获取ByteBuffer相关功能 |
+| `getChar` | charIndex: int | `int` | 获取Char相关功能 | 传入参数执行获取Char相关功能 |
+| `getPrefix` | 无 | `long` | 获取Prefix相关功能 | 调用该方法执行获取Prefix相关功能 |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `indexOf` | v: UTF8String, start: int | `int` | 查找子串在字符串中的起始位置 | 查找子串起始位置，支持指定起始索引 |
+| `indexOfEmpty` | start: int | `int` | indexOfEmpty操作 | 传入参数执行indexOfEmpty操作 |
+| `isFullAscii` | 无 | `boolean` | 判断是否FullAscii相关功能 | 调用该方法执行判断是否FullAscii相关功能 |
+| `isValid` | 无 | `boolean` | 判断是否Valid相关功能 | 调用该方法执行判断是否Valid相关功能 |
+| `isWhitespaceOrISOControl` | codePoint: int | `boolean` | 判断是否WhitespaceOrISOControl相关功能 | 传入参数执行判断是否WhitespaceOrISOControl相关功能 |
+| `levenshteinDistance` | other: UTF8String | `int` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `levenshteinDistance` | other: UTF8String, threshold: int | `int` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `lpad` | len: int, pad: UTF8String | `UTF8String` | lpad操作 | 传入参数执行lpad操作 |
+| `makeValid` | 无 | `UTF8String` | 创建Valid相关功能 | 调用该方法执行创建Valid相关功能 |
+| `matchAt` | s: final UTF8String, pos: int | `boolean` | matchAt操作 | 传入参数执行matchAt操作 |
+| `next` | 无 | `Integer` | 获取迭代器的下一个元素 | 获取迭代器下一行数据 |
+| `numBytes` | 无 | `int` | numBytes操作 | 调用该方法执行numBytes操作 |
+| `numBytesForFirstByte` | b: final byte | `int` | 第一个相关功能 | 传入参数执行第一个相关功能 |
+| `numChars` | 无 | `int` | numChars操作 | 调用该方法执行numChars操作 |
+| `read` | kryo: Kryo, in: Input | `void` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
+| `readExternal` | in: ObjectInput | `void` | 读取External相关功能 | 传入参数执行读取External相关功能 |
+| `repeat` | times: int | `UTF8String` | 重复相关功能 | 传入参数执行重复相关功能 |
+| `replace` | search: UTF8String, replace: UTF8String | `UTF8String` | 替换字符串中匹配的内容 | 替换字符串中匹配内容 |
+| `reverse` | 无 | `UTF8String` | reverse操作 | 调用该方法执行reverse操作 |
+| `reverseCodePointIterator` | 无 | `Iterator&lt;Integer&gt;` | 指向相关功能 | 调用该方法执行指向相关功能 |
+| `reverseCodePointIterator` | iteratorMode: CodePointIteratorType | `Iterator&lt;Integer&gt;` | 指向相关功能 | 传入参数执行指向相关功能 |
+| `rfind` | str: UTF8String, start: int | `int` | 查找相关功能 | 传入参数执行查找相关功能 |
+| `rpad` | len: int, pad: UTF8String | `UTF8String` | rpad操作 | 传入参数执行rpad操作 |
+| `semanticCompare` | other: final UTF8String, collationId: int | `int` | 比较相关功能 | 传入参数执行比较相关功能 |
+| `semanticEquals` | other: final UTF8String, collationId: int | `boolean` | 判断相等相关功能 | 传入参数执行判断相等相关功能 |
+| `soundex` | 无 | `UTF8String` | soundex操作 | 调用该方法执行soundex操作 |
+| `startsWith` | prefix: final UTF8String | `boolean` | 判断是否以指定字符串开头 | 传入参数执行启动sWith相关功能 |
+| `subStringIndex` | delim: UTF8String, count: int | `UTF8String` | 查找分隔符分隔的子串索引 | 按分隔符查找第N个子串 |
+| `substring` | start: final int, until: final int | `UTF8String` | 截取子字符串 | 传入参数执行子string相关功能 |
+| `substringSQL` | pos: int, length: int | `UTF8String` | 子stringSQL相关功能 | 传入参数执行子stringSQL相关功能 |
+| `toBinaryString` | val: long | `UTF8String` | 双相关功能 | 传入参数执行双相关功能 |
+| `toByte` | intWrapper: IntWrapper | `boolean` | toByte操作 | 传入参数执行toByte操作 |
+| `toByteExact` | 无 | `byte` | 艾相关功能 | 调用该方法执行艾相关功能 |
+| `toInt` | intWrapper: IntWrapper | `boolean` | toInt操作 | 传入参数执行toInt操作 |
+| `toIntExact` | 无 | `int` | 艾相关功能 | 调用该方法执行艾相关功能 |
+| `toLong` | toLongResult: LongWrapper | `boolean` | toLong操作 | 传入参数执行toLong操作 |
+| `toLongExact` | 无 | `long` | 艾相关功能 | 调用该方法执行艾相关功能 |
+| `toLowerCase` | 无 | `UTF8String` | 转换为小写 | 转换为小写字符串 |
+| `toLowerCaseAscii` | 无 | `UTF8String` | toLowerCaseAscii操作 | 调用该方法执行toLowerCaseAscii操作 |
+| `toShort` | intWrapper: IntWrapper | `boolean` | toShort操作 | 传入参数执行toShort操作 |
+| `toShortExact` | 无 | `short` | 艾相关功能 | 调用该方法执行艾相关功能 |
+| `toTitleCase` | 无 | `UTF8String` | 转换为标题大小写 | 转换为标题大小写（首字母大写） |
+| `toTitleCaseICU` | 无 | `UTF8String` | 使用ICU库转换为标题大小写 | ICU库标题大小写转换 |
+| `toUpperCase` | 无 | `UTF8String` | 转换为大写 | 转换为大写字符串 |
+| `toUpperCaseAscii` | 无 | `UTF8String` | 向上相关功能 | 调用该方法执行向上相关功能 |
+| `toValidString` | 无 | `String` | 有效相关功能 | 调用该方法执行有效相关功能 |
+| `translate` | dict: String> | `UTF8String` | 字符映射转换 | 按字符映射表转换字符串 |
+| `trim` | 无 | `UTF8String` | 去除空白 | 去除字符串两端空白 |
+| `trim` | trimString: UTF8String | `UTF8String` | 去除空白 | 去除字符串两端空白 |
+| `trimAll` | 无 | `UTF8String` | 三mAll相关功能 | 调用该方法执行三mAll相关功能 |
+| `trimLeft` | 无 | `UTF8String` | 去除字符串左侧空白 | 去除字符串左侧空白 |
+| `trimLeft` | trimString: UTF8String | `UTF8String` | 去除字符串左侧空白 | 去除字符串左侧空白 |
+| `trimRight` | 无 | `UTF8String` | 去除字符串右侧空白 | 去除字符串右侧空白 |
+| `trimRight` | trimString: UTF8String | `UTF8String` | 去除字符串右侧空白 | 去除字符串右侧空白 |
+| `trimTrailingSpaces` | numSpaces: int | `UTF8String` | 三mTrailingSpaces相关功能 | 传入参数执行三mTrailingSpaces相关功能 |
+| `write` | kryo: Kryo, out: Output | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `writeExternal` | out: ObjectOutput | `void` | 写入External相关功能 | 传入参数执行写入External相关功能 |
+| `writeTo` | buffer: ByteBuffer | `void` | 写入To相关功能 | 传入参数执行写入To相关功能 |
+| `writeTo` | out: OutputStream | `void` | 写入To相关功能 | 传入参数执行写入To相关功能 |
+| `writeToMemory` | target: Object, targetOffset: long | `void` | 写入ToMemory相关功能 | 传入参数执行写入ToMemory相关功能 |
 
 ### ColumnBasedSet
 **包路径**: `org.apache.hive.service.cli`
@@ -2677,16 +2519,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addRow` | fields: Object&lt;&gt; | `ColumnBasedSet` | addRow方法 |  |
-| `extractSubset` | maxRows: int | `ColumnBasedSet` | extractSubset方法 |  |
-| `getColumns` | 无 | `List&lt;ColumnBuffer&gt;` | getColumns方法 |  |
-| `getStartOffset` | 无 | `long` | getStartOffset方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | 获取迭代器 |  |
-| `numColumns` | 无 | `int` | numColumns方法 |  |
-| `numRows` | 无 | `int` | numRows方法 |  |
-| `setStartOffset` | startOffset: long | `void` | setStartOffset方法 |  |
-| `toTRowSet` | 无 | `TRowSet` | toTRowSet方法 |  |
+| `addRow` | fields: Object&lt;&gt; | `ColumnBasedSet` | 添加行到批处理 | 传入参数执行添加行到批处理 |
+| `extractSubset` | maxRows: int | `ColumnBasedSet` | 额外ctSubset相关功能 | 传入参数执行额外ctSubset相关功能 |
+| `getColumns` | 无 | `List&lt;ColumnBuffer&gt;` | 获取Columns相关功能 | 调用该方法执行获取Columns相关功能 |
+| `getStartOffset` | 无 | `long` | 获取StartOffset相关功能 | 调用该方法执行获取StartOffset相关功能 |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | 获取迭代器 | 调用该方法执行时期相关功能 |
+| `numColumns` | 无 | `int` | 列相关功能 | 调用该方法执行列相关功能 |
+| `numRows` | 无 | `int` | numRows操作 | 调用该方法执行numRows操作 |
+| `setStartOffset` | startOffset: long | `void` | 设置StartOffset相关功能 | 传入参数执行设置StartOffset相关功能 |
+| `toTRowSet` | 无 | `TRowSet` | 设置相关功能 | 调用该方法执行设置相关功能 |
 
 ### ColumnDescriptor
 **包路径**: `org.apache.hive.service.cli`
@@ -2694,15 +2536,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getComment` | 无 | `String` | getComment方法 |  |
-| `getName` | 无 | `String` | getName方法 |  |
-| `getOrdinalPosition` | 无 | `int` | getOrdinalPosition方法 |  |
-| `getType` | 无 | `Type` | getType方法 |  |
-| `getTypeDescriptor` | 无 | `TypeDescriptor` | getTypeDescriptor方法 |  |
-| `getTypeName` | 无 | `String` | getTypeName方法 |  |
-| `isPrimitive` | 无 | `boolean` | isPrimitive方法 |  |
-| `newPrimitiveColumnDescriptor` | name: String, comment: String, type: Type, position: int | `ColumnDescriptor` | newPrimitiveColumnDescriptor方法 |  |
-| `toTColumnDesc` | 无 | `TColumnDesc` | toTColumnDesc方法 |  |
+| `getComment` | 无 | `String` | 获取Comment相关功能 | 调用该方法执行获取Comment相关功能 |
+| `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
+| `getOrdinalPosition` | 无 | `int` | 获取OrdinalPosition相关功能 | 调用该方法执行获取OrdinalPosition相关功能 |
+| `getType` | 无 | `Type` | 获取Type相关功能 | 调用该方法执行获取Type相关功能 |
+| `getTypeDescriptor` | 无 | `TypeDescriptor` | 获取TypeDescriptor相关功能 | 调用该方法执行获取TypeDescriptor相关功能 |
+| `getTypeName` | 无 | `String` | 获取TypeName相关功能 | 调用该方法执行获取TypeName相关功能 |
+| `isPrimitive` | 无 | `boolean` | 判断是否Primitive相关功能 | 调用该方法执行判断是否Primitive相关功能 |
+| `newPrimitiveColumnDescriptor` | name: String, comment: String, type: Type, position: int | `ColumnDescriptor` | 列相关功能 | 传入参数执行列相关功能 |
+| `toTColumnDesc` | 无 | `TColumnDesc` | 列相关功能 | 调用该方法执行列相关功能 |
 
 ### ColumnValue
 **包路径**: `org.apache.hive.service.cli`
@@ -2710,8 +2552,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `toColumnValue` | value: TColumnValue | `Object` | toColumnValue方法 |  |
-| `toTColumnValue` | typeDescriptor: TypeDescriptor, value: Object | `TColumnValue` | toTColumnValue方法 |  |
+| `toColumnValue` | value: TColumnValue | `Object` | 列相关功能 | 传入参数执行列相关功能 |
+| `toTColumnValue` | typeDescriptor: TypeDescriptor, value: Object | `TColumnValue` | 列相关功能 | 传入参数执行列相关功能 |
 
 ### CompositeService
 **包路径**: `org.apache.hive.service`
@@ -2719,8 +2561,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getServices` | 无 | `Collection&lt;Service&gt;` | getServices方法 |  |
-| `run` | 无 | `void` | run方法 |  |
+| `getServices` | 无 | `Collection&lt;Service&gt;` | 获取Services相关功能 | 调用该方法执行获取Services相关功能 |
+| `run` | 无 | `void` | 运行相关功能 | 调用该方法执行运行相关功能 |
 
 ### ConfigProvider
 **包路径**: `org.apache.spark.network.util`
@@ -2728,11 +2570,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
-| `getBoolean` | name: String, defaultValue: boolean | `boolean` | getBoolean方法 |  |
-| `getDouble` | name: String, defaultValue: double | `double` | getDouble方法 |  |
-| `getInt` | name: String, defaultValue: int | `int` | getInt方法 |  |
-| `getLong` | name: String, defaultValue: long | `long` | getLong方法 |  |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 | 传入参数执行获取相关功能 |
+| `getBoolean` | name: String, defaultValue: boolean | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
+| `getDouble` | name: String, defaultValue: double | `double` | 获取Double相关功能 | 传入参数执行获取Double相关功能 |
+| `getInt` | name: String, defaultValue: int | `int` | 获取Int相关功能 | 传入参数执行获取Int相关功能 |
+| `getLong` | name: String, defaultValue: long | `long` | 获取Long相关功能 | 传入参数执行获取Long相关功能 |
 
 ### CookieSigner
 **包路径**: `org.apache.hive.service`
@@ -2740,8 +2582,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `signCookie` | str: String | `String` | signCookie方法 |  |
-| `verifyAndExtract` | signedStr: String | `String` | verifyAndExtract方法 |  |
+| `signCookie` | str: String | `String` | 签名Cookie相关功能 | 传入参数执行签名Cookie相关功能 |
+| `verifyAndExtract` | signedStr: String | `String` | 验证AndExtract相关功能 | 传入参数执行验证AndExtract相关功能 |
 
 ### CorruptionCause
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2749,9 +2591,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `CorruptionCause` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `CorruptionCause` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### CountMinSketch
 **包路径**: `org.apache.spark.util.sketch`
@@ -2759,10 +2601,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `create` | depth: int, width: int, seed: int | `CountMinSketch` | create方法 |  |
-| `create` | eps: double, confidence: double, seed: int | `CountMinSketch` | create方法 |  |
-| `readFrom` | in: InputStream | `CountMinSketch` | readFrom方法 |  |
-| `readFrom` | bytes: byte&lt;&gt; | `CountMinSketch` | readFrom方法 |  |
+| `create` | depth: int, width: int, seed: int | `CountMinSketch` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `create` | eps: double, confidence: double, seed: int | `CountMinSketch` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `readFrom` | in: InputStream | `CountMinSketch` | 读取From相关功能 | 传入参数执行读取From相关功能 |
+| `readFrom` | bytes: byte&lt;&gt; | `CountMinSketch` | 读取From相关功能 | 传入参数执行读取From相关功能 |
 
 ### CryptoUtils
 **包路径**: `org.apache.spark.network.util`
@@ -2770,7 +2612,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `toCryptoConf` | prefix: String, conf: String>> | `Properties` | toCryptoConf方法 |  |
+| `toCryptoConf` | prefix: String, conf: String>> | `Properties` | toCryptoConf操作 | 传入参数执行toCryptoConf操作 |
 
 ### CtrTransportCipher
 **包路径**: `org.apache.spark.network.crypto`
@@ -2778,19 +2620,19 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
-| `channelRead` | ctx: ChannelHandlerContext, data: Object | `void` | channelRead方法 |  |
-| `close` | ctx: ChannelHandlerContext, promise: ChannelPromise | `void` | close方法 |  |
+| `addToChannel` | ch: Channel | `void` | 添加到通道 | 传入参数执行添加到通道 |
+| `channelRead` | ctx: ChannelHandlerContext, data: Object | `void` | 读取相关功能 | 传入参数执行读取相关功能 |
+| `close` | ctx: ChannelHandlerContext, promise: ChannelPromise | `void` | 关闭相关功能 | 传入参数执行关闭相关功能 |
 | `count` | 无 | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
-| `getKeyId` | 无 | `String` | getKeyId方法 |  |
-| `handlerRemoved` | ctx: ChannelHandlerContext | `void` | handlerRemoved方法 |  |
-| `position` | 无 | `long` | position方法 |  |
-| `release` | decrement: int | `boolean` | release方法 |  |
-| `retain` | increment: int | `EncryptedMessage` | retain方法 |  |
-| `touch` | o: Object | `EncryptedMessage` | touch方法 |  |
-| `transferTo` | target: WritableByteChannel, position: long | `long` | transferTo方法 |  |
-| `transferred` | 无 | `long` | transferred方法 |  |
-| `write` | ctx: ChannelHandlerContext, msg: Object, promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
+| `getKeyId` | 无 | `String` | 获取KeyId相关功能 | 调用该方法执行获取KeyId相关功能 |
+| `handlerRemoved` | ctx: ChannelHandlerContext | `void` | 处理rRemoved相关功能 | 传入参数执行处理rRemoved相关功能 |
+| `position` | 无 | `long` | position操作 | 调用该方法执行position操作 |
+| `release` | decrement: int | `boolean` | 发布相关功能 | 传入参数执行发布相关功能 |
+| `retain` | increment: int | `EncryptedMessage` | retain操作 | 传入参数执行retain操作 |
+| `touch` | o: Object | `EncryptedMessage` | touch操作 | 传入参数执行touch操作 |
+| `transferTo` | target: WritableByteChannel, position: long | `long` | 转移To相关功能 | 传入参数执行转移To相关功能 |
+| `transferred` | 无 | `long` | 转移red相关功能 | 调用该方法执行转移red相关功能 |
+| `write` | ctx: ChannelHandlerContext, msg: Object, promise: ChannelPromise | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### CustomAuthenticationProviderImpl
 **包路径**: `org.apache.hive.service.auth`
@@ -2798,7 +2640,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
 ### CustomLogKeys
 **包路径**: `org.apache.spark.internal`
@@ -2806,34 +2648,34 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `debug` | msg: String | `void` | debug方法 |  |
-| `debug` | format: String, arg: Object | `void` | debug方法 |  |
-| `debug` | format: String, arg1: Object, arg2: Object | `void` | debug方法 |  |
-| `debug` | format: String, arguments: Object... | `void` | debug方法 |  |
-| `debug` | msg: String, throwable: Throwable | `void` | debug方法 |  |
-| `error` | msg: String | `void` | error方法 |  |
-| `error` | msg: String, throwable: Throwable | `void` | error方法 |  |
-| `error` | msg: String, mdcs: MDC... | `void` | error方法 |  |
-| `error` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | error方法 |  |
-| `getSlf4jLogger` | 无 | `Logger` | getSlf4jLogger方法 |  |
-| `info` | msg: String | `void` | info方法 |  |
-| `info` | msg: String, throwable: Throwable | `void` | info方法 |  |
-| `info` | msg: String, mdcs: MDC... | `void` | info方法 |  |
-| `info` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | info方法 |  |
-| `isDebugEnabled` | 无 | `boolean` | isDebugEnabled方法 |  |
-| `isErrorEnabled` | 无 | `boolean` | isErrorEnabled方法 |  |
-| `isInfoEnabled` | 无 | `boolean` | isInfoEnabled方法 |  |
-| `isTraceEnabled` | 无 | `boolean` | isTraceEnabled方法 |  |
-| `isWarnEnabled` | 无 | `boolean` | isWarnEnabled方法 |  |
-| `trace` | msg: String | `void` | trace方法 |  |
-| `trace` | format: String, arg: Object | `void` | trace方法 |  |
-| `trace` | format: String, arg1: Object, arg2: Object | `void` | trace方法 |  |
-| `trace` | format: String, arguments: Object... | `void` | trace方法 |  |
-| `trace` | msg: String, throwable: Throwable | `void` | trace方法 |  |
-| `warn` | msg: String | `void` | warn方法 |  |
-| `warn` | msg: String, throwable: Throwable | `void` | warn方法 |  |
-| `warn` | msg: String, mdcs: MDC... | `void` | warn方法 |  |
-| `warn` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | warn方法 |  |
+| `debug` | msg: String | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
+| `debug` | format: String, arg: Object | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
+| `debug` | format: String, arg1: Object, arg2: Object | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
+| `debug` | format: String, arguments: Object... | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
+| `debug` | msg: String, throwable: Throwable | `void` | 调试相关功能 | 传入参数执行调试相关功能 |
+| `error` | msg: String | `void` | error操作 | 传入参数执行error操作 |
+| `error` | msg: String, throwable: Throwable | `void` | error操作 | 传入参数执行error操作 |
+| `error` | msg: String, mdcs: MDC... | `void` | error操作 | 传入参数执行error操作 |
+| `error` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | error操作 | 传入参数执行error操作 |
+| `getSlf4jLogger` | 无 | `Logger` | 获取Slf4jLogger相关功能 | 调用该方法执行获取Slf4jLogger相关功能 |
+| `info` | msg: String | `void` | info操作 | 传入参数执行info操作 |
+| `info` | msg: String, throwable: Throwable | `void` | info操作 | 传入参数执行info操作 |
+| `info` | msg: String, mdcs: MDC... | `void` | info操作 | 传入参数执行info操作 |
+| `info` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | info操作 | 传入参数执行info操作 |
+| `isDebugEnabled` | 无 | `boolean` | 判断是否DebugEnabled相关功能 | 调用该方法执行判断是否DebugEnabled相关功能 |
+| `isErrorEnabled` | 无 | `boolean` | 判断是否ErrorEnabled相关功能 | 调用该方法执行判断是否ErrorEnabled相关功能 |
+| `isInfoEnabled` | 无 | `boolean` | 判断是否InfoEnabled相关功能 | 调用该方法执行判断是否InfoEnabled相关功能 |
+| `isTraceEnabled` | 无 | `boolean` | 判断是否TraceEnabled相关功能 | 调用该方法执行判断是否TraceEnabled相关功能 |
+| `isWarnEnabled` | 无 | `boolean` | 判断是否WarnEnabled相关功能 | 调用该方法执行判断是否WarnEnabled相关功能 |
+| `trace` | msg: String | `void` | 追踪相关功能 | 传入参数执行追踪相关功能 |
+| `trace` | format: String, arg: Object | `void` | 追踪相关功能 | 传入参数执行追踪相关功能 |
+| `trace` | format: String, arg1: Object, arg2: Object | `void` | 追踪相关功能 | 传入参数执行追踪相关功能 |
+| `trace` | format: String, arguments: Object... | `void` | 追踪相关功能 | 传入参数执行追踪相关功能 |
+| `trace` | msg: String, throwable: Throwable | `void` | 追踪相关功能 | 传入参数执行追踪相关功能 |
+| `warn` | msg: String | `void` | warn操作 | 传入参数执行warn操作 |
+| `warn` | msg: String, throwable: Throwable | `void` | warn操作 | 传入参数执行warn操作 |
+| `warn` | msg: String, mdcs: MDC... | `void` | warn操作 | 传入参数执行warn操作 |
+| `warn` | msg: String, throwable: Throwable, mdcs: MDC... | `void` | warn操作 | 传入参数执行warn操作 |
 
 ### DBBackend
 **包路径**: `org.apache.spark.network.shuffledb`
@@ -2841,8 +2683,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `byName` | value: String | `DBBackend` | byName方法 |  |
-| `fileName` | prefix: String | `String` | fileName方法 |  |
+| `byName` | value: String | `DBBackend` | byName操作 | 传入参数执行byName操作 |
+| `fileName` | prefix: String | `String` | fileName操作 | 传入参数执行fileName操作 |
 
 ### DBProvider
 **包路径**: `org.apache.spark.network.util`
@@ -2850,8 +2692,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `initDB` | dbBackend: DBBackend, dbFile: File, version: StoreVersion, mapper: ObjectMapper | `DB` | initDB方法 |  |
-| `initDB` | dbBackend: DBBackend, file: File | `DB` | initDB方法 |  |
+| `initDB` | dbBackend: DBBackend, dbFile: File, version: StoreVersion, mapper: ObjectMapper | `DB` | 初始化DB相关功能 | 传入参数执行初始化DB相关功能 |
+| `initDB` | dbBackend: DBBackend, file: File | `DB` | 初始化DB相关功能 | 传入参数执行初始化DB相关功能 |
 
 ### DelegateSymlinkTextInputFormat
 **包路径**: `org.apache.hadoop.hive.ql.io`
@@ -2859,12 +2701,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `configure` | job: JobConf | `void` | configure方法 |  |
-| `getContentSummary` | p: Path, job: JobConf | `ContentSummary` | getContentSummary方法 |  |
-| `getRecordReader` | split: InputSplit, job: JobConf, reporter: Reporter | `RecordReader&lt;LongWritable, Text&gt;` | getRecordReader方法 |  |
-| `getTargetPath` | 无 | `Path` | getTargetPath方法 |  |
-| `readFields` | in: DataInput | `void` | readFields方法 |  |
-| `write` | out: DataOutput | `void` | 写入DataFrame到数据源 |  |
+| `configure` | job: JobConf | `void` | configure操作 | 传入参数执行configure操作 |
+| `getContentSummary` | p: Path, job: JobConf | `ContentSummary` | 获取ContentSummary相关功能 | 传入参数执行获取ContentSummary相关功能 |
+| `getRecordReader` | split: InputSplit, job: JobConf, reporter: Reporter | `RecordReader&lt;LongWritable, Text&gt;` | 获取RecordReader相关功能 | 传入参数执行获取RecordReader相关功能 |
+| `getTargetPath` | 无 | `Path` | 获取TargetPath相关功能 | 调用该方法执行获取TargetPath相关功能 |
+| `readFields` | in: DataInput | `void` | 读取Fields相关功能 | 传入参数执行读取Fields相关功能 |
+| `write` | out: DataOutput | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### DiagnoseCorruption
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2872,9 +2714,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `DiagnoseCorruption` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `DiagnoseCorruption` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### Encoders
 **包路径**: `org.apache.spark.network.protocol`
@@ -2882,22 +2724,22 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `String` | decode方法 |  |
-| `decode` | buf: ByteBuf | `RoaringBitmap` | decode方法 |  |
-| `encode` | buf: ByteBuf, s: String | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf, b: RoaringBitmap | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf, arr: byte&lt;&gt; | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf, strings: String&lt;&gt; | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf, ints: int&lt;&gt; | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf, longs: long&lt;&gt; | `void` | encode方法 |  |
-| `encode` | buf: ByteBuf, bitmaps: RoaringBitmap&lt;&gt; | `void` | encode方法 |  |
-| `encodedLength` | s: String | `int` | encodedLength方法 |  |
-| `encodedLength` | b: RoaringBitmap | `int` | encodedLength方法 |  |
-| `encodedLength` | arr: byte&lt;&gt; | `int` | encodedLength方法 |  |
-| `encodedLength` | strings: String&lt;&gt; | `int` | encodedLength方法 |  |
-| `encodedLength` | ints: int&lt;&gt; | `int` | encodedLength方法 |  |
-| `encodedLength` | longs: long&lt;&gt; | `int` | encodedLength方法 |  |
-| `encodedLength` | bitmaps: RoaringBitmap&lt;&gt; | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `String` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `decode` | buf: ByteBuf | `RoaringBitmap` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf, s: String | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encode` | buf: ByteBuf, b: RoaringBitmap | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encode` | buf: ByteBuf, arr: byte&lt;&gt; | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encode` | buf: ByteBuf, strings: String&lt;&gt; | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encode` | buf: ByteBuf, ints: int&lt;&gt; | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encode` | buf: ByteBuf, longs: long&lt;&gt; | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encode` | buf: ByteBuf, bitmaps: RoaringBitmap&lt;&gt; | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | s: String | `int` | 编码dLength相关功能 | 传入参数执行编码dLength相关功能 |
+| `encodedLength` | b: RoaringBitmap | `int` | 编码dLength相关功能 | 传入参数执行编码dLength相关功能 |
+| `encodedLength` | arr: byte&lt;&gt; | `int` | 编码dLength相关功能 | 传入参数执行编码dLength相关功能 |
+| `encodedLength` | strings: String&lt;&gt; | `int` | 编码dLength相关功能 | 传入参数执行编码dLength相关功能 |
+| `encodedLength` | ints: int&lt;&gt; | `int` | 编码dLength相关功能 | 传入参数执行编码dLength相关功能 |
+| `encodedLength` | longs: long&lt;&gt; | `int` | 编码dLength相关功能 | 传入参数执行编码dLength相关功能 |
+| `encodedLength` | bitmaps: RoaringBitmap&lt;&gt; | `int` | 编码dLength相关功能 | 传入参数执行编码dLength相关功能 |
 
 ### EncryptedMessageWithHeader
 **包路径**: `org.apache.spark.network.protocol`
@@ -2905,12 +2747,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `isEndOfInput` | 无 | `boolean` | isEndOfInput方法 |  |
-| `length` | 无 | `long` | 计算长度 |  |
-| `progress` | 无 | `long` | progress方法 |  |
-| `readChunk` | ctx: ChannelHandlerContext | `ByteBuf` | readChunk方法 |  |
-| `readChunk` | allocator: ByteBufAllocator | `ByteBuf` | readChunk方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `isEndOfInput` | 无 | `boolean` | 判断是否EndOfInput相关功能 | 调用该方法执行判断是否EndOfInput相关功能 |
+| `length` | 无 | `long` | 计算长度 | 调用该方法执行length操作 |
+| `progress` | 无 | `long` | progress操作 | 调用该方法执行progress操作 |
+| `readChunk` | ctx: ChannelHandlerContext | `ByteBuf` | 读取Chunk相关功能 | 传入参数执行读取Chunk相关功能 |
+| `readChunk` | allocator: ByteBufAllocator | `ByteBuf` | 读取Chunk相关功能 | 传入参数执行读取Chunk相关功能 |
 
 ### ErrorHandler
 **包路径**: `org.apache.spark.network.shuffle`
@@ -2918,10 +2760,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `shouldLogError` | t: Throwable | `boolean` | shouldLogError方法 |  |
-| `shouldLogError` | t: Throwable | `boolean` | shouldLogError方法 |  |
-| `shouldRetryError` | t: Throwable | `boolean` | shouldRetryError方法 |  |
-| `shouldRetryError` | t: Throwable | `boolean` | shouldRetryError方法 |  |
+| `shouldLogError` | t: Throwable | `boolean` | 判断是否应该LogError相关功能 | 传入参数执行判断是否应该LogError相关功能 |
+| `shouldRetryError` | t: Throwable | `boolean` | 判断是否应该RetryError相关功能 | 传入参数执行判断是否应该RetryError相关功能 |
 
 ### ExecuteStatementOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -2929,7 +2769,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getStatement` | 无 | `String` | getStatement方法 |  |
+| `getStatement` | 无 | `String` | 获取Statement相关功能 | 调用该方法执行获取Statement相关功能 |
 
 ### ExecutorDiskUtils
 **包路径**: `org.apache.spark.network.shuffle`
@@ -2937,7 +2777,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getFilePath` | localDirs: String&lt;&gt;, subDirsPerLocalDir: int, filename: String | `String` | getFilePath方法 |  |
+| `getFilePath` | localDirs: String&lt;&gt;, subDirsPerLocalDir: int, filename: String | `String` | 获取FilePath相关功能 | 传入参数执行获取FilePath相关功能 |
 
 ### ExecutorShuffleInfo
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -2945,9 +2785,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `ExecutorShuffleInfo` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `ExecutorShuffleInfo` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### ExternalBlockHandler
 **包路径**: `org.apache.spark.network.shuffle`
@@ -2955,26 +2795,22 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
-| `channelActive` | client: TransportClient | `void` | channelActive方法 |  |
-| `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught方法 |  |
-| `executorRemoved` | executorId: String, appId: String | `void` | executorRemoved方法 |  |
-| `getAllMetrics` | 无 | `MetricSet` | getAllMetrics方法 |  |
-| `getBlockResolver` | 无 | `ExternalShuffleBlockResolver` | getBlockResolver方法 |  |
-| `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | getMergedBlockMetaReqHandler方法 |  |
-| `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | getMetrics方法 |  |
-| `getStreamManager` | 无 | `StreamManager` | getStreamManager方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `next` | 无 | `ManagedBuffer` | next方法 |  |
-| `next` | 无 | `ManagedBuffer` | next方法 |  |
-| `next` | 无 | `ManagedBuffer` | next方法 |  |
-| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | receive方法 |  |
-| `receiveMergeBlockMetaReq` | client: TransportClient, metaRequest: MergedBlockMetaRequest, callback: MergedBlockMetaResponseCallback | `void` | receiveMergeBlockMetaReq方法 |  |
-| `receiveStream` | client: TransportClient, messageHeader: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | 应用移除事件 | 传入参数执行应用移除事件 |
+| `channelActive` | client: TransportClient | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `channelInactive` | client: TransportClient | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `executorRemoved` | executorId: String, appId: String | `void` | 移除相关功能 | 传入参数执行移除相关功能 |
+| `getAllMetrics` | 无 | `MetricSet` | 获取AllMetrics相关功能 | 调用该方法执行获取AllMetrics相关功能 |
+| `getBlockResolver` | 无 | `ExternalShuffleBlockResolver` | 获取BlockResolver相关功能 | 调用该方法执行获取BlockResolver相关功能 |
+| `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | 获取MergedBlockMetaReqHandler相关功能 | 调用该方法执行获取MergedBlockMetaReqHandler相关功能 |
+| `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | 获取Metrics相关功能 | 调用该方法执行获取Metrics相关功能 |
+| `getStreamManager` | 无 | `StreamManager` | 获取StreamManager相关功能 | 调用该方法执行获取StreamManager相关功能 |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `next` | 无 | `ManagedBuffer` | 获取迭代器的下一个元素 | 获取迭代器下一行数据 |
+| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | 接收相关功能 | 传入参数执行接收相关功能 |
+| `receiveMergeBlockMetaReq` | client: TransportClient, metaRequest: MergedBlockMetaRequest, callback: MergedBlockMetaResponseCallback | `void` | 接收MergeBlockMetaReq相关功能 | 传入参数执行接收MergeBlockMetaReq相关功能 |
+| `receiveStream` | client: TransportClient, messageHeader: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | 接收Stream相关功能 | 传入参数执行接收Stream相关功能 |
 
 ### ExternalBlockStoreClient
 **包路径**: `org.apache.spark.network.shuffle`
@@ -2982,23 +2818,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `fetchBlocks` | host: String, port: int, execId: String, blockIds: String&lt;&gt;, listener: BlockFetchingListener, downloadFileManager: DownloadFileManager | `void` | fetchBlocks方法 |  |
-| `finalizeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int, listener: MergeFinalizerListener | `void` | finalizeShuffleMerge方法 |  |
-| `getMergedBlockMeta` | host: String, port: int, shuffleId: int, shuffleMergeId: int, reduceId: int, listener: MergedBlocksMetaListener | `void` | getMergedBlockMeta方法 |  |
-| `init` | appId: String | `void` | init方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `onSuccess` | numChunks: int, buffer: ManagedBuffer | `void` | onSuccess方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `pushBlocks` | host: String, port: int, blockIds: String&lt;&gt;, buffers: ManagedBuffer&lt;&gt;, listener: BlockPushingListener | `void` | pushBlocks方法 |  |
-| `registerWithShuffleServer` | host: String, port: int, execId: String, executorInfo: ExecutorShuffleInfo | `void` | registerWithShuffleServer方法 |  |
-| `removeBlocks` | host: String, port: int, execId: String, blockIds: String&lt;&gt; | `Future&lt;Integer&gt;` | removeBlocks方法 |  |
-| `removeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int | `boolean` | removeShuffleMerge方法 |  |
-| `setAppAttemptId` | appAttemptId: String | `void` | setAppAttemptId方法 |  |
-| `shuffleMetrics` | 无 | `MetricSet` | shuffleMetrics方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `fetchBlocks` | host: String, port: int, execId: String, blockIds: String&lt;&gt;, listener: BlockFetchingListener, downloadFileManager: DownloadFileManager | `void` | 获取Blocks相关功能 | 传入参数执行获取Blocks相关功能 |
+| `finalizeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int, listener: MergeFinalizerListener | `void` | 终结ShuffleMerge相关功能 | 传入参数执行终结ShuffleMerge相关功能 |
+| `getMergedBlockMeta` | host: String, port: int, shuffleId: int, shuffleMergeId: int, reduceId: int, listener: MergedBlocksMetaListener | `void` | 获取MergedBlockMeta相关功能 | 传入参数执行获取MergedBlockMeta相关功能 |
+| `init` | appId: String | `void` | 初始化相关功能 | 传入参数执行初始化相关功能 |
+| `onFailure` | e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `onSuccess` | numChunks: int, buffer: ManagedBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `pushBlocks` | host: String, port: int, blockIds: String&lt;&gt;, buffers: ManagedBuffer&lt;&gt;, listener: BlockPushingListener | `void` | 压入Blocks相关功能 | 传入参数执行压入Blocks相关功能 |
+| `registerWithShuffleServer` | host: String, port: int, execId: String, executorInfo: ExecutorShuffleInfo | `void` | 注册WithShuffleServer相关功能 | 传入参数执行注册WithShuffleServer相关功能 |
+| `removeBlocks` | host: String, port: int, execId: String, blockIds: String&lt;&gt; | `Future&lt;Integer&gt;` | 移除Blocks相关功能 | 传入参数执行移除Blocks相关功能 |
+| `removeShuffleMerge` | host: String, port: int, shuffleId: int, shuffleMergeId: int | `boolean` | 移除ShuffleMerge相关功能 | 传入参数执行移除ShuffleMerge相关功能 |
+| `setAppAttemptId` | appAttemptId: String | `void` | 设置AppAttemptId相关功能 | 传入参数执行设置AppAttemptId相关功能 |
+| `shuffleMetrics` | 无 | `MetricSet` | 随机打乱Metrics相关功能 | 调用该方法执行随机打乱Metrics相关功能 |
 
 ### ExternalShuffleBlockResolver
 **包路径**: `org.apache.spark.network.shuffle`
@@ -3006,18 +2840,18 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
-| `diagnoseShuffleBlockCorruption` | appId: String, execId: String, shuffleId: int, mapId: long, reduceId: int, checksumByReader: long, algorithm: String | `Cause` | diagnoseShuffleBlockCorruption方法 |  |
-| `executorRemoved` | executorId: String, appId: String | `void` | executorRemoved方法 |  |
-| `getBlockData` | appId: String, execId: String, shuffleId: int, mapId: long, reduceId: int | `ManagedBuffer` | getBlockData方法 |  |
-| `getContinuousBlocksData` | appId: String, execId: String, shuffleId: int, mapId: long, startReduceId: int, endReduceId: int | `ManagedBuffer` | getContinuousBlocksData方法 |  |
-| `getDiskPersistedRddBlockData` | executor: ExecutorShuffleInfo, rddId: int, splitIndex: int | `ManagedBuffer` | getDiskPersistedRddBlockData方法 |  |
-| `getLocalDirs` | appId: String, execIds: Set<String> | `Map&lt;String, String[]&gt;` | getLocalDirs方法 |  |
-| `getRddBlockData` | appId: String, execId: String, rddId: int, splitIndex: int | `ManagedBuffer` | getRddBlockData方法 |  |
-| `getRegisteredExecutorsSize` | 无 | `int` | getRegisteredExecutorsSize方法 |  |
-| `load` | filePath: String | `ShuffleIndexInformation` | load方法 |  |
-| `registerExecutor` | appId: String, execId: String, executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
-| `removeBlocks` | appId: String, execId: String, blockIds: String&lt;&gt; | `int` | removeBlocks方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | 应用移除事件 | 传入参数执行应用移除事件 |
+| `diagnoseShuffleBlockCorruption` | appId: String, execId: String, shuffleId: int, mapId: long, reduceId: int, checksumByReader: long, algorithm: String | `Cause` | 锁定相关功能 | 传入参数执行锁定相关功能 |
+| `executorRemoved` | executorId: String, appId: String | `void` | 移除相关功能 | 传入参数执行移除相关功能 |
+| `getBlockData` | appId: String, execId: String, shuffleId: int, mapId: long, reduceId: int | `ManagedBuffer` | 获取BlockData相关功能 | 传入参数执行获取BlockData相关功能 |
+| `getContinuousBlocksData` | appId: String, execId: String, shuffleId: int, mapId: long, startReduceId: int, endReduceId: int | `ManagedBuffer` | 获取ContinuousBlocksData相关功能 | 传入参数执行获取ContinuousBlocksData相关功能 |
+| `getDiskPersistedRddBlockData` | executor: ExecutorShuffleInfo, rddId: int, splitIndex: int | `ManagedBuffer` | 获取DiskPersistedRddBlockData相关功能 | 传入参数执行获取DiskPersistedRddBlockData相关功能 |
+| `getLocalDirs` | appId: String, execIds: Set<String> | `Map&lt;String, String[]&gt;` | 获取LocalDirs相关功能 | 传入参数执行获取LocalDirs相关功能 |
+| `getRddBlockData` | appId: String, execId: String, rddId: int, splitIndex: int | `ManagedBuffer` | 获取RddBlockData相关功能 | 传入参数执行获取RddBlockData相关功能 |
+| `getRegisteredExecutorsSize` | 无 | `int` | 获取RegisteredExecutorsSize相关功能 | 调用该方法执行获取RegisteredExecutorsSize相关功能 |
+| `load` | filePath: String | `ShuffleIndexInformation` | 加载相关功能 | 传入参数执行加载相关功能 |
+| `registerExecutor` | appId: String, execId: String, executorInfo: ExecutorShuffleInfo | `void` | 注册Executor相关功能 | 传入参数执行注册Executor相关功能 |
+| `removeBlocks` | appId: String, execId: String, blockIds: String&lt;&gt; | `int` | 移除Blocks相关功能 | 传入参数执行移除Blocks相关功能 |
 
 ### FetchOrientation
 **包路径**: `org.apache.hive.service.cli`
@@ -3025,8 +2859,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getFetchOrientation` | tFetchOrientation: TFetchOrientation | `FetchOrientation` | getFetchOrientation方法 |  |
-| `toTFetchOrientation` | 无 | `TFetchOrientation` | toTFetchOrientation方法 |  |
+| `getFetchOrientation` | tFetchOrientation: TFetchOrientation | `FetchOrientation` | 获取FetchOrientation相关功能 | 传入参数执行获取FetchOrientation相关功能 |
+| `toTFetchOrientation` | 无 | `TFetchOrientation` | 获取相关功能 | 调用该方法执行获取相关功能 |
 
 ### FetchShuffleBlockChunks
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -3034,10 +2868,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `FetchShuffleBlockChunks` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
-| `getNumBlocks` | 无 | `int` | getNumBlocks方法 |  |
+| `decode` | buf: ByteBuf | `FetchShuffleBlockChunks` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
+| `getNumBlocks` | 无 | `int` | 获取NumBlocks相关功能 | 调用该方法执行获取NumBlocks相关功能 |
 
 ### FetchShuffleBlocks
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -3045,10 +2879,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `FetchShuffleBlocks` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
-| `getNumBlocks` | 无 | `int` | getNumBlocks方法 |  |
+| `decode` | buf: ByteBuf | `FetchShuffleBlocks` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
+| `getNumBlocks` | 无 | `int` | 获取NumBlocks相关功能 | 调用该方法执行获取NumBlocks相关功能 |
 
 ### FetchType
 **包路径**: `org.apache.hive.service.cli`
@@ -3056,8 +2890,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getFetchType` | tFetchType: short | `FetchType` | getFetchType方法 |  |
-| `toTFetchType` | 无 | `short` | toTFetchType方法 |  |
+| `getFetchType` | tFetchType: short | `FetchType` | 获取FetchType相关功能 | 传入参数执行获取FetchType相关功能 |
+| `toTFetchType` | 无 | `short` | 获取相关功能 | 调用该方法执行获取相关功能 |
 
 ### FilterService
 **包路径**: `org.apache.hive.service`
@@ -3065,14 +2899,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getHiveConf` | 无 | `HiveConf` | getHiveConf方法 |  |
-| `getName` | 无 | `String` | getName方法 |  |
-| `getStartTime` | 无 | `long` | getStartTime方法 |  |
-| `init` | config: HiveConf | `void` | init方法 |  |
-| `register` | listener: ServiceStateChangeListener | `void` | register方法 |  |
-| `start` | 无 | `void` | start方法 |  |
-| `stop` | 无 | `void` | 停止SparkContext，释放资源 |  |
-| `unregister` | listener: ServiceStateChangeListener | `void` | unregister方法 |  |
+| `getHiveConf` | 无 | `HiveConf` | 获取HiveConf相关功能 | 调用该方法执行获取HiveConf相关功能 |
+| `getName` | 无 | `String` | 获取名称 | 调用该方法执行获取名称 |
+| `getStartTime` | 无 | `long` | 获取StartTime相关功能 | 调用该方法执行获取StartTime相关功能 |
+| `init` | config: HiveConf | `void` | 初始化相关功能 | 传入参数执行初始化相关功能 |
+| `register` | listener: ServiceStateChangeListener | `void` | 注册相关功能 | 传入参数执行注册相关功能 |
+| `start` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
+| `stop` | 无 | `void` | 停止SparkContext，释放资源 | 调用该方法执行停止相关功能 |
+| `unregister` | listener: ServiceStateChangeListener | `void` | 取消注册相关功能 | 传入参数执行取消注册相关功能 |
 
 ### FinalizeShuffleMerge
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -3080,9 +2914,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `FinalizeShuffleMerge` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `FinalizeShuffleMerge` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### GangliaReporter
 **包路径**: `com.codahale.metrics.ganglia`
@@ -3090,19 +2924,19 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | gmetric: GMetric | `GangliaReporter` | build方法 |  |
-| `build` | gmetrics: GMetric... | `GangliaReporter` | build方法 |  |
-| `convertDurationsTo` | durationUnit: TimeUnit | `Builder` | convertDurationsTo方法 |  |
-| `convertRatesTo` | rateUnit: TimeUnit | `Builder` | convertRatesTo方法 |  |
-| `disabledMetricAttributes` | disabledMetricAttributes: Set<MetricAttribute> | `Builder` | disabledMetricAttributes方法 |  |
+| `build` | gmetric: GMetric | `GangliaReporter` | 构建约束对象 | 构建Check约束对象 |
+| `build` | gmetrics: GMetric... | `GangliaReporter` | 构建约束对象 | 构建Check约束对象 |
+| `convertDurationsTo` | durationUnit: TimeUnit | `Builder` | 转换DurationsTo相关功能 | 传入参数执行转换DurationsTo相关功能 |
+| `convertRatesTo` | rateUnit: TimeUnit | `Builder` | 转换RatesTo相关功能 | 传入参数执行转换RatesTo相关功能 |
+| `disabledMetricAttributes` | disabledMetricAttributes: Set<MetricAttribute> | `Builder` | 禁用dMetricAttributes相关功能 | 传入参数执行禁用dMetricAttributes相关功能 |
 | `filter` | filter: MetricFilter | `Builder` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
-| `forRegistry` | registry: MetricRegistry | `Builder` | forRegistry方法 |  |
-| `prefixedWith` | prefix: String | `Builder` | prefixedWith方法 |  |
-| `report` | gauges: Gauge>, counters: Counter>, histograms: Histogram>, meters: Meter>, timers: Timer> | `void` | report方法 |  |
-| `scheduleOn` | executor: ScheduledExecutorService | `Builder` | scheduleOn方法 |  |
-| `shutdownExecutorOnStop` | shutdownExecutorOnStop: boolean | `Builder` | shutdownExecutorOnStop方法 |  |
-| `withDMax` | dMax: int | `Builder` | withDMax方法 |  |
-| `withTMax` | tMax: int | `Builder` | withTMax方法 |  |
+| `forRegistry` | registry: MetricRegistry | `Builder` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `prefixedWith` | prefix: String | `Builder` | 前fixedWith相关功能 | 传入参数执行前fixedWith相关功能 |
+| `report` | gauges: Gauge>, counters: Counter>, histograms: Histogram>, meters: Meter>, timers: Timer> | `void` | report操作 | 传入参数执行report操作 |
+| `scheduleOn` | executor: ScheduledExecutorService | `Builder` | 调度On相关功能 | 传入参数执行调度On相关功能 |
+| `shutdownExecutorOnStop` | shutdownExecutorOnStop: boolean | `Builder` | 关闭ExecutorOnStop相关功能 | 传入参数执行关闭ExecutorOnStop相关功能 |
+| `withDMax` | dMax: int | `Builder` | withDMax操作 | 传入参数执行withDMax操作 |
+| `withTMax` | tMax: int | `Builder` | withTMax操作 | 传入参数执行withTMax操作 |
 
 ### GcmTransportCipher
 **包路径**: `org.apache.spark.network.crypto`
@@ -3110,17 +2944,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addToChannel` | ch: Channel | `void` | addToChannel方法 |  |
-| `channelRead` | ctx: ChannelHandlerContext, ciphertextMessage: Object | `void` | channelRead方法 |  |
+| `addToChannel` | ch: Channel | `void` | 添加到通道 | 传入参数执行添加到通道 |
+| `channelRead` | ctx: ChannelHandlerContext, ciphertextMessage: Object | `void` | 读取相关功能 | 传入参数执行读取相关功能 |
 | `count` | 无 | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
-| `getKeyId` | 无 | `String` | getKeyId方法 |  |
-| `position` | 无 | `long` | position方法 |  |
-| `release` | decrement: int | `boolean` | release方法 |  |
-| `retain` | increment: int | `GcmEncryptedMessage` | retain方法 |  |
-| `touch` | o: Object | `GcmEncryptedMessage` | touch方法 |  |
-| `transferTo` | target: WritableByteChannel, position: long | `long` | transferTo方法 |  |
-| `transferred` | 无 | `long` | transferred方法 |  |
-| `write` | ctx: ChannelHandlerContext, msg: Object, promise: ChannelPromise | `void` | 写入DataFrame到数据源 |  |
+| `getKeyId` | 无 | `String` | 获取KeyId相关功能 | 调用该方法执行获取KeyId相关功能 |
+| `position` | 无 | `long` | position操作 | 调用该方法执行position操作 |
+| `release` | decrement: int | `boolean` | 发布相关功能 | 传入参数执行发布相关功能 |
+| `retain` | increment: int | `GcmEncryptedMessage` | retain操作 | 传入参数执行retain操作 |
+| `touch` | o: Object | `GcmEncryptedMessage` | touch操作 | 传入参数执行touch操作 |
+| `transferTo` | target: WritableByteChannel, position: long | `long` | 转移To相关功能 | 传入参数执行转移To相关功能 |
+| `transferred` | 无 | `long` | 转移red相关功能 | 调用该方法执行转移red相关功能 |
+| `write` | ctx: ChannelHandlerContext, msg: Object, promise: ChannelPromise | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### GetCatalogsOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3128,9 +2962,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetColumnsOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3138,9 +2972,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetCrossReferenceOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3148,9 +2982,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetFunctionsOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3158,9 +2992,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetInfoType
 **包路径**: `org.apache.hive.service.cli`
@@ -3168,8 +3002,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getGetInfoType` | tGetInfoType: TGetInfoType | `GetInfoType` | getGetInfoType方法 |  |
-| `toTGetInfoType` | 无 | `TGetInfoType` | toTGetInfoType方法 |  |
+| `getGetInfoType` | tGetInfoType: TGetInfoType | `GetInfoType` | 获取GetInfoType相关功能 | 传入参数执行获取GetInfoType相关功能 |
+| `toTGetInfoType` | 无 | `TGetInfoType` | 获取相关功能 | 调用该方法执行获取相关功能 |
 
 ### GetInfoValue
 **包路径**: `org.apache.hive.service.cli`
@@ -3177,11 +3011,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getIntValue` | 无 | `int` | getIntValue方法 |  |
-| `getLongValue` | 无 | `long` | getLongValue方法 |  |
-| `getShortValue` | 无 | `short` | getShortValue方法 |  |
-| `getStringValue` | 无 | `String` | getStringValue方法 |  |
-| `toTGetInfoValue` | 无 | `TGetInfoValue` | toTGetInfoValue方法 |  |
+| `getIntValue` | 无 | `int` | 获取IntValue相关功能 | 调用该方法执行获取IntValue相关功能 |
+| `getLongValue` | 无 | `long` | 获取LongValue相关功能 | 调用该方法执行获取LongValue相关功能 |
+| `getShortValue` | 无 | `short` | 获取ShortValue相关功能 | 调用该方法执行获取ShortValue相关功能 |
+| `getStringValue` | 无 | `String` | 获取StringValue相关功能 | 调用该方法执行获取StringValue相关功能 |
+| `toTGetInfoValue` | 无 | `TGetInfoValue` | 获取相关功能 | 调用该方法执行获取相关功能 |
 
 ### GetLocalDirsForExecutors
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -3189,9 +3023,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `GetLocalDirsForExecutors` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `GetLocalDirsForExecutors` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### GetPrimaryKeysOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3199,9 +3033,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetSchemasOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3209,9 +3043,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetTableTypesOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3219,9 +3053,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetTablesOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3229,9 +3063,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### GetTypeInfoOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3239,9 +3073,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | getNextRowSet方法 |  |
-| `getResultSetSchema` | 无 | `TTableSchema` | getResultSetSchema方法 |  |
-| `runInternal` | 无 | `void` | runInternal方法 |  |
+| `getNextRowSet` | orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取NextRowSet相关功能 | 传入参数执行获取NextRowSet相关功能 |
+| `getResultSetSchema` | 无 | `TTableSchema` | 获取ResultSetSchema相关功能 | 调用该方法执行获取ResultSetSchema相关功能 |
+| `runInternal` | 无 | `void` | 运行Internal相关功能 | 调用该方法执行运行Internal相关功能 |
 
 ### HadoopConfigProvider
 **包路径**: `org.apache.spark.network.yarn.util`
@@ -3249,8 +3083,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | name: String | `String` | 获取元素 |  |
-| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
+| `get` | name: String | `String` | 获取元素 | 传入参数执行获取相关功能 |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 | 传入参数执行获取相关功能 |
 
 ### Handle
 **包路径**: `org.apache.hive.service.cli`
@@ -3258,7 +3092,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getHandleIdentifier` | 无 | `HandleIdentifier` | getHandleIdentifier方法 |  |
+| `getHandleIdentifier` | 无 | `HandleIdentifier` | 获取HandleIdentifier相关功能 | 调用该方法执行获取HandleIdentifier相关功能 |
 
 ### HandleIdentifier
 **包路径**: `org.apache.hive.service.cli`
@@ -3266,9 +3100,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getPublicId` | 无 | `UUID` | getPublicId方法 |  |
-| `getSecretId` | 无 | `UUID` | getSecretId方法 |  |
-| `toTHandleIdentifier` | 无 | `THandleIdentifier` | toTHandleIdentifier方法 |  |
+| `getPublicId` | 无 | `UUID` | 获取PublicId相关功能 | 调用该方法执行获取PublicId相关功能 |
+| `getSecretId` | 无 | `UUID` | 获取SecretId相关功能 | 调用该方法执行获取SecretId相关功能 |
+| `toTHandleIdentifier` | 无 | `THandleIdentifier` | 处理相关功能 | 调用该方法执行处理相关功能 |
 
 ### HashMapGrowthStrategy
 **包路径**: `org.apache.spark.unsafe.map`
@@ -3276,7 +3110,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `nextCapacity` | currentCapacity: int | `int` | nextCapacity方法 |  |
+| `nextCapacity` | currentCapacity: int | `int` | 之后Capacity相关功能 | 传入参数执行之后Capacity相关功能 |
 
 ### HeapMemoryAllocator
 **包路径**: `org.apache.spark.unsafe.memory`
@@ -3284,8 +3118,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `allocate` | size: long | `MemoryBlock` | allocate方法 |  |
-| `free` | memory: MemoryBlock | `void` | free方法 |  |
+| `allocate` | size: long | `MemoryBlock` | 分配相关功能 | 传入参数执行分配相关功能 |
+| `free` | memory: MemoryBlock | `void` | free操作 | 传入参数执行free操作 |
 
 ### HiveAuthFactory
 **包路径**: `org.apache.hive.service.auth`
@@ -3293,21 +3127,21 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | delegationToken: String | `void` | cancelDelegationToken方法 |  |
-| `getAuthName` | 无 | `String` | getAuthName方法 |  |
-| `getAuthProcFactory` | service: ThriftCLIService | `TProcessorFactory` | getAuthProcFactory方法 |  |
-| `getAuthTransFactory` | 无 | `TTransportFactory` | getAuthTransFactory方法 |  |
-| `getDelegationToken` | owner: String, renewer: String, remoteAddr: String | `String` | getDelegationToken方法 |  |
-| `getIpAddress` | 无 | `String` | getIpAddress方法 |  |
-| `getRemoteUser` | 无 | `String` | getRemoteUser方法 |  |
-| `getSaslProperties` | 无 | `Map&lt;String, String&gt;` | getSaslProperties方法 |  |
-| `getUserFromToken` | delegationToken: String | `String` | getUserFromToken方法 |  |
-| `loginFromKeytab` | hiveConf: HiveConf | `void` | loginFromKeytab方法 |  |
-| `loginFromSpnegoKeytabAndReturnUGI` | hiveConf: HiveConf | `UserGroupInformation` | loginFromSpnegoKeytabAndReturnUGI方法 |  |
-| `needUgiLogin` | ugi: UserGroupInformation, principal: String, keytab: String | `boolean` | needUgiLogin方法 |  |
-| `renewDelegationToken` | delegationToken: String | `void` | renewDelegationToken方法 |  |
-| `verifyDelegationToken` | delegationToken: String | `String` | verifyDelegationToken方法 |  |
-| `verifyProxyAccess` | realUser: String, proxyUser: String, ipAddress: String, hiveConf: HiveConf | `void` | verifyProxyAccess方法 |  |
+| `cancelDelegationToken` | delegationToken: String | `void` | 判断能否celDelegationToken相关功能 | 传入参数执行判断能否celDelegationToken相关功能 |
+| `getAuthName` | 无 | `String` | 获取AuthName相关功能 | 调用该方法执行获取AuthName相关功能 |
+| `getAuthProcFactory` | service: ThriftCLIService | `TProcessorFactory` | 获取AuthProcFactory相关功能 | 传入参数执行获取AuthProcFactory相关功能 |
+| `getAuthTransFactory` | 无 | `TTransportFactory` | 获取AuthTransFactory相关功能 | 调用该方法执行获取AuthTransFactory相关功能 |
+| `getDelegationToken` | owner: String, renewer: String, remoteAddr: String | `String` | 获取DelegationToken相关功能 | 传入参数执行获取DelegationToken相关功能 |
+| `getIpAddress` | 无 | `String` | 获取IpAddress相关功能 | 调用该方法执行获取IpAddress相关功能 |
+| `getRemoteUser` | 无 | `String` | 获取RemoteUser相关功能 | 调用该方法执行获取RemoteUser相关功能 |
+| `getSaslProperties` | 无 | `Map&lt;String, String&gt;` | 获取SaslProperties相关功能 | 调用该方法执行获取SaslProperties相关功能 |
+| `getUserFromToken` | delegationToken: String | `String` | 获取UserFromToken相关功能 | 传入参数执行获取UserFromToken相关功能 |
+| `loginFromKeytab` | hiveConf: HiveConf | `void` | 日志inFromKeytab相关功能 | 传入参数执行日志inFromKeytab相关功能 |
+| `loginFromSpnegoKeytabAndReturnUGI` | hiveConf: HiveConf | `UserGroupInformation` | 日志inFromSpnegoKeytabAndReturnUGI相关功能 | 传入参数执行日志inFromSpnegoKeytabAndReturnUGI相关功能 |
+| `needUgiLogin` | ugi: UserGroupInformation, principal: String, keytab: String | `boolean` | 需要UgiLogin相关功能 | 传入参数执行需要UgiLogin相关功能 |
+| `renewDelegationToken` | delegationToken: String | `void` | renewDelegationToken操作 | 传入参数执行renewDelegationToken操作 |
+| `verifyDelegationToken` | delegationToken: String | `String` | 验证DelegationToken相关功能 | 传入参数执行验证DelegationToken相关功能 |
+| `verifyProxyAccess` | realUser: String, proxyUser: String, ipAddress: String, hiveConf: HiveConf | `void` | 验证ProxyAccess相关功能 | 传入参数执行验证ProxyAccess相关功能 |
 
 ### HiveFunctionRegistryUtils
 **包路径**: `org.apache.hadoop.hive.ql.exec`
@@ -3315,9 +3149,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getMethodInternal` | udfClass: Class<?>, mlist: List<Method>, exact: boolean, argumentsPassed: List<TypeInfo> | `Method` | getMethodInternal方法 |  |
-| `invoke` | m: Method, thisObject: Object, arguments: Object... | `Object` | invoke方法 |  |
-| `matchCost` | argumentPassed: TypeInfo, argumentAccepted: TypeInfo, exact: boolean | `int` | matchCost方法 |  |
+| `getMethodInternal` | udfClass: Class<?>, mlist: List<Method>, exact: boolean, argumentsPassed: List<TypeInfo> | `Method` | 获取MethodInternal相关功能 | 传入参数执行获取MethodInternal相关功能 |
+| `invoke` | m: Method, thisObject: Object, arguments: Object... | `Object` | 调用相关功能 | 传入参数执行调用相关功能 |
+| `matchCost` | argumentPassed: TypeInfo, argumentAccepted: TypeInfo, exact: boolean | `int` | matchCost操作 | 传入参数执行matchCost操作 |
 
 ### HiveSQLException
 **包路径**: `org.apache.hive.service.cli`
@@ -3325,9 +3159,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `toCause` | details: List<String> | `Throwable` | toCause方法 |  |
-| `toTStatus` | 无 | `TStatus` | toTStatus方法 |  |
-| `toTStatus` | e: Exception | `TStatus` | toTStatus方法 |  |
+| `toCause` | details: List<String> | `Throwable` | toCause操作 | 传入参数执行toCause操作 |
+| `toTStatus` | 无 | `TStatus` | toTStatus操作 | 调用该方法执行toTStatus操作 |
+| `toTStatus` | e: Exception | `TStatus` | toTStatus操作 | 传入参数执行toTStatus操作 |
 
 ### HiveServer2
 **包路径**: `org.apache.hive.service.server`
@@ -3335,12 +3169,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `apply` | 无 | `BoxedUnit` | apply方法 |  |
-| `execute` | 无 | `void` | execute方法 |  |
-| `execute` | 无 | `void` | execute方法 |  |
-| `isHTTPTransportMode` | hiveConf: HiveConf | `boolean` | isHTTPTransportMode方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `parse` | argv: String&lt;&gt; | `ServerOptionsProcessorResponse` | parse方法 |  |
+| `apply` | 无 | `BoxedUnit` | 应用数据类型转换 | 获取数据类型对应的列向量 |
+| `execute` | 无 | `void` | 执行相关功能 | 调用该方法执行执行相关功能 |
+| `isHTTPTransportMode` | hiveConf: HiveConf | `boolean` | 判断是否HTTPTransportMode相关功能 | 传入参数执行判断是否HTTPTransportMode相关功能 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `parse` | argv: String&lt;&gt; | `ServerOptionsProcessorResponse` | 解析相关功能 | 传入参数执行解析相关功能 |
 
 ### HiveSessionHookContextImpl
 **包路径**: `org.apache.hive.service.cli.session`
@@ -3348,9 +3181,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSessionConf` | 无 | `HiveConf` | getSessionConf方法 |  |
-| `getSessionHandle` | 无 | `String` | getSessionHandle方法 |  |
-| `getSessionUser` | 无 | `String` | getSessionUser方法 |  |
+| `getSessionConf` | 无 | `HiveConf` | 获取SessionConf相关功能 | 调用该方法执行获取SessionConf相关功能 |
+| `getSessionHandle` | 无 | `String` | 获取SessionHandle相关功能 | 调用该方法执行获取SessionHandle相关功能 |
+| `getSessionUser` | 无 | `String` | 获取SessionUser相关功能 | 调用该方法执行获取SessionUser相关功能 |
 
 ### HiveSessionImpl
 **包路径**: `org.apache.hive.service.cli.session`
@@ -3358,50 +3191,50 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
-| `cancelOperation` | opHandle: OperationHandle | `void` | cancelOperation方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `closeExpiredOperations` | 无 | `void` | closeExpiredOperations方法 |  |
-| `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
-| `executeStatement` | statement: String, confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
-| `executeStatement` | statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
-| `executeStatementAsync` | statement: String, confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
-| `executeStatementAsync` | statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
-| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
-| `getCatalogs` | 无 | `OperationHandle` | getCatalogs方法 |  |
-| `getColumns` | catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | getColumns方法 |  |
-| `getCrossReference` | primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
-| `getDelegationToken` | authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
-| `getFunctions` | catalogName: String, schemaName: String, functionName: String | `OperationHandle` | getFunctions方法 |  |
-| `getHiveConf` | 无 | `HiveConf` | getHiveConf方法 |  |
-| `getInfo` | getInfoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
-| `getIpAddress` | 无 | `String` | getIpAddress方法 |  |
-| `getLastAccessTime` | 无 | `long` | getLastAccessTime方法 |  |
-| `getMetaStoreClient` | 无 | `IMetaStoreClient` | getMetaStoreClient方法 |  |
-| `getNoOperationTime` | 无 | `long` | getNoOperationTime方法 |  |
-| `getOperationLogSessionDir` | 无 | `File` | getOperationLogSessionDir方法 |  |
-| `getPassword` | 无 | `String` | getPassword方法 |  |
-| `getPrimaryKeys` | catalog: String, schema: String, table: String | `OperationHandle` | getPrimaryKeys方法 |  |
-| `getProtocolVersion` | 无 | `TProtocolVersion` | getProtocolVersion方法 |  |
-| `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | getResultSetMetadata方法 |  |
-| `getSchemas` | catalogName: String, schemaName: String | `OperationHandle` | getSchemas方法 |  |
-| `getSessionHandle` | 无 | `SessionHandle` | getSessionHandle方法 |  |
-| `getSessionManager` | 无 | `SessionManager` | getSessionManager方法 |  |
-| `getSessionState` | 无 | `SessionState` | getSessionState方法 |  |
-| `getTableTypes` | 无 | `OperationHandle` | getTableTypes方法 |  |
-| `getTables` | catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
-| `getTypeInfo` | 无 | `OperationHandle` | getTypeInfo方法 |  |
-| `getUserName` | 无 | `String` | getUserName方法 |  |
-| `getUsername` | 无 | `String` | getUsername方法 |  |
-| `isOperationLogEnabled` | 无 | `boolean` | isOperationLogEnabled方法 |  |
-| `open` | sessionConfMap: String> | `void` | open方法 |  |
-| `renewDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
-| `setIpAddress` | ipAddress: String | `void` | setIpAddress方法 |  |
-| `setOperationLogSessionDir` | operationLogRootDir: File | `void` | setOperationLogSessionDir方法 |  |
-| `setOperationManager` | operationManager: OperationManager | `void` | setOperationManager方法 |  |
-| `setSessionManager` | sessionManager: SessionManager | `void` | setSessionManager方法 |  |
-| `setUserName` | userName: String | `void` | setUserName方法 |  |
-| `setVariable` | varname: String, varvalue: String | `int` | setVariable方法 |  |
+| `cancelDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | 判断能否celDelegationToken相关功能 | 传入参数执行判断能否celDelegationToken相关功能 |
+| `cancelOperation` | opHandle: OperationHandle | `void` | 判断能否celOperation相关功能 | 传入参数执行判断能否celOperation相关功能 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `closeExpiredOperations` | 无 | `void` | 关闭ExpiredOperations相关功能 | 调用该方法执行关闭ExpiredOperations相关功能 |
+| `closeOperation` | opHandle: OperationHandle | `void` | 关闭Operation相关功能 | 传入参数执行关闭Operation相关功能 |
+| `executeStatement` | statement: String, confOverlay: String> | `OperationHandle` | 执行Statement相关功能 | 传入参数执行执行Statement相关功能 |
+| `executeStatement` | statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | 执行Statement相关功能 | 传入参数执行执行Statement相关功能 |
+| `executeStatementAsync` | statement: String, confOverlay: String> | `OperationHandle` | 执行StatementAsync相关功能 | 传入参数执行执行StatementAsync相关功能 |
+| `executeStatementAsync` | statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | 执行StatementAsync相关功能 | 传入参数执行执行StatementAsync相关功能 |
+| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
+| `getCatalogs` | 无 | `OperationHandle` | 获取Catalogs相关功能 | 调用该方法执行获取Catalogs相关功能 |
+| `getColumns` | catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | 获取Columns相关功能 | 传入参数执行获取Columns相关功能 |
+| `getCrossReference` | primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | 获取CrossReference相关功能 | 传入参数执行获取CrossReference相关功能 |
+| `getDelegationToken` | authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | 获取DelegationToken相关功能 | 传入参数执行获取DelegationToken相关功能 |
+| `getFunctions` | catalogName: String, schemaName: String, functionName: String | `OperationHandle` | 获取Functions相关功能 | 传入参数执行获取Functions相关功能 |
+| `getHiveConf` | 无 | `HiveConf` | 获取HiveConf相关功能 | 调用该方法执行获取HiveConf相关功能 |
+| `getInfo` | getInfoType: GetInfoType | `GetInfoValue` | 获取Info相关功能 | 传入参数执行获取Info相关功能 |
+| `getIpAddress` | 无 | `String` | 获取IpAddress相关功能 | 调用该方法执行获取IpAddress相关功能 |
+| `getLastAccessTime` | 无 | `long` | 获取LastAccessTime相关功能 | 调用该方法执行获取LastAccessTime相关功能 |
+| `getMetaStoreClient` | 无 | `IMetaStoreClient` | 获取MetaStoreClient相关功能 | 调用该方法执行获取MetaStoreClient相关功能 |
+| `getNoOperationTime` | 无 | `long` | 获取NoOperationTime相关功能 | 调用该方法执行获取NoOperationTime相关功能 |
+| `getOperationLogSessionDir` | 无 | `File` | 获取OperationLogSessionDir相关功能 | 调用该方法执行获取OperationLogSessionDir相关功能 |
+| `getPassword` | 无 | `String` | 获取Password相关功能 | 调用该方法执行获取Password相关功能 |
+| `getPrimaryKeys` | catalog: String, schema: String, table: String | `OperationHandle` | 获取PrimaryKeys相关功能 | 传入参数执行获取PrimaryKeys相关功能 |
+| `getProtocolVersion` | 无 | `TProtocolVersion` | 获取ProtocolVersion相关功能 | 调用该方法执行获取ProtocolVersion相关功能 |
+| `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | 获取ResultSetMetadata相关功能 | 传入参数执行获取ResultSetMetadata相关功能 |
+| `getSchemas` | catalogName: String, schemaName: String | `OperationHandle` | 获取Schemas相关功能 | 传入参数执行获取Schemas相关功能 |
+| `getSessionHandle` | 无 | `SessionHandle` | 获取SessionHandle相关功能 | 调用该方法执行获取SessionHandle相关功能 |
+| `getSessionManager` | 无 | `SessionManager` | 获取SessionManager相关功能 | 调用该方法执行获取SessionManager相关功能 |
+| `getSessionState` | 无 | `SessionState` | 获取SessionState相关功能 | 调用该方法执行获取SessionState相关功能 |
+| `getTableTypes` | 无 | `OperationHandle` | 获取TableTypes相关功能 | 调用该方法执行获取TableTypes相关功能 |
+| `getTables` | catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | 获取Tables相关功能 | 传入参数执行获取Tables相关功能 |
+| `getTypeInfo` | 无 | `OperationHandle` | 获取TypeInfo相关功能 | 调用该方法执行获取TypeInfo相关功能 |
+| `getUserName` | 无 | `String` | 获取UserName相关功能 | 调用该方法执行获取UserName相关功能 |
+| `getUsername` | 无 | `String` | 获取Username相关功能 | 调用该方法执行获取Username相关功能 |
+| `isOperationLogEnabled` | 无 | `boolean` | 判断是否OperationLogEnabled相关功能 | 调用该方法执行判断是否OperationLogEnabled相关功能 |
+| `open` | sessionConfMap: String> | `void` | 打开相关功能 | 传入参数执行打开相关功能 |
+| `renewDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken操作 | 传入参数执行renewDelegationToken操作 |
+| `setIpAddress` | ipAddress: String | `void` | 设置IpAddress相关功能 | 传入参数执行设置IpAddress相关功能 |
+| `setOperationLogSessionDir` | operationLogRootDir: File | `void` | 设置OperationLogSessionDir相关功能 | 传入参数执行设置OperationLogSessionDir相关功能 |
+| `setOperationManager` | operationManager: OperationManager | `void` | 设置OperationManager相关功能 | 传入参数执行设置OperationManager相关功能 |
+| `setSessionManager` | sessionManager: SessionManager | `void` | 设置SessionManager相关功能 | 传入参数执行设置SessionManager相关功能 |
+| `setUserName` | userName: String | `void` | 设置UserName相关功能 | 传入参数执行设置UserName相关功能 |
+| `setVariable` | varname: String, varvalue: String | `int` | 设置Variable相关功能 | 传入参数执行设置Variable相关功能 |
 
 ### HiveSessionImplwithUGI
 **包路径**: `org.apache.hive.service.cli.session`
@@ -3409,14 +3242,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `getDelegationToken` | 无 | `String` | getDelegationToken方法 |  |
-| `getDelegationToken` | authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
-| `getSessionUgi` | 无 | `UserGroupInformation` | getSessionUgi方法 |  |
-| `renewDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
-| `setProxySession` | proxySession: HiveSession | `void` | setProxySession方法 |  |
-| `setSessionUGI` | owner: String | `void` | setSessionUGI方法 |  |
+| `cancelDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | 判断能否celDelegationToken相关功能 | 传入参数执行判断能否celDelegationToken相关功能 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getDelegationToken` | 无 | `String` | 获取DelegationToken相关功能 | 调用该方法执行获取DelegationToken相关功能 |
+| `getDelegationToken` | authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | 获取DelegationToken相关功能 | 传入参数执行获取DelegationToken相关功能 |
+| `getSessionUgi` | 无 | `UserGroupInformation` | 获取SessionUgi相关功能 | 调用该方法执行获取SessionUgi相关功能 |
+| `renewDelegationToken` | authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken操作 | 传入参数执行renewDelegationToken操作 |
+| `setProxySession` | proxySession: HiveSession | `void` | 设置ProxySession相关功能 | 传入参数执行设置ProxySession相关功能 |
+| `setSessionUGI` | owner: String | `void` | 设置SessionUGI相关功能 | 传入参数执行设置SessionUGI相关功能 |
 
 ### HiveSessionProxy
 **包路径**: `org.apache.hive.service.cli.session`
@@ -3424,8 +3257,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getProxy` | hiveSession: HiveSession, ugi: UserGroupInformation | `HiveSession` | getProxy方法 |  |
-| `invoke` | arg0: Object, method: final Method, args: final Object&lt;&gt; | `Object` | invoke方法 |  |
+| `getProxy` | hiveSession: HiveSession, ugi: UserGroupInformation | `HiveSession` | 获取Proxy相关功能 | 传入参数执行获取Proxy相关功能 |
+| `invoke` | arg0: Object, method: final Method, args: final Object&lt;&gt; | `Object` | 调用相关功能 | 传入参数执行调用相关功能 |
 
 ### HiveTableTypeMapping
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -3433,8 +3266,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getTableTypeNames` | 无 | `Set&lt;String&gt;` | getTableTypeNames方法 |  |
-| `mapToClientType` | hiveTypeName: String | `String` | mapToClientType方法 |  |
+| `getTableTypeNames` | 无 | `Set&lt;String&gt;` | 获取TableTypeNames相关功能 | 调用该方法执行获取TableTypeNames相关功能 |
+| `mapToClientType` | hiveTypeName: String | `String` | 映射ToClientType相关功能 | 传入参数执行映射ToClientType相关功能 |
 
 ### InMemoryStore
 **包路径**: `org.apache.spark.util.kvstore`
@@ -3442,27 +3275,26 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `accept` | key: Comparable<Object>, value: T | `void` | accept方法 |  |
-| `clear` | 无 | `void` | 清空集合 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `close` | 无 | `void` | close方法 |  |
+| `accept` | key: Comparable<Object>, value: T | `void` | 接受相关功能 | 传入参数执行接受相关功能 |
+| `clear` | 无 | `void` | 清空集合 | 调用该方法执行清除相关功能 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `count` | type: Class<?> | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `count` | 无 | `int` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
-| `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
-| `delete` | key: Object | `boolean` | delete方法 |  |
-| `delete` | key: Object, value: T | `boolean` | delete方法 |  |
-| `get` | key: Object | `T` | 获取元素 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
-| `next` | 无 | `T` | next方法 |  |
-| `next` | max: int | `List&lt;T&gt;` | next方法 |  |
-| `put` | value: T | `void` | 添加键值对 |  |
-| `setMetadata` | value: Object | `void` | setMetadata方法 |  |
-| `size` | 无 | `int` | 计算大小 |  |
-| `skip` | n: long | `boolean` | skip方法 |  |
-| `view` | 无 | `InMemoryView&lt;T&gt;` | view方法 |  |
-| `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
+| `delete` | type: Class<?>, naturalKey: Object | `void` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `delete` | key: Object | `boolean` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `delete` | key: Object, value: T | `boolean` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `get` | key: Object | `T` | 获取元素 | 传入参数执行获取相关功能 |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 | 调用该方法执行时期相关功能 |
+| `next` | 无 | `T` | 获取迭代器的下一个元素 | 获取迭代器下一行数据 |
+| `next` | max: int | `List&lt;T&gt;` | 获取迭代器的下一个元素 | 获取迭代器下一行数据 |
+| `put` | value: T | `void` | 添加键值对 | 传入参数执行放入相关功能 |
+| `setMetadata` | value: Object | `void` | 设置Metadata相关功能 | 传入参数执行设置Metadata相关功能 |
+| `size` | 无 | `int` | 计算大小 | 调用该方法执行size操作 |
+| `skip` | n: long | `boolean` | 跳过相关功能 | 传入参数执行跳过相关功能 |
+| `view` | 无 | `InMemoryView&lt;T&gt;` | view操作 | 调用该方法执行view操作 |
+| `write` | value: Object | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### InProcessLauncher
 **包路径**: `org.apache.spark.launcher`
@@ -3470,7 +3302,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `startApplication` | listeners: SparkAppHandle.Listener... | `SparkAppHandle` | startApplication方法 |  |
+| `startApplication` | listeners: SparkAppHandle.Listener... | `SparkAppHandle` | 启动Application相关功能 | 传入参数执行启动Application相关功能 |
 
 ### JavaAFTSurvivalRegressionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3478,7 +3310,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaALSExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3486,12 +3318,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getMovieId` | 无 | `int` | getMovieId方法 |  |
-| `getRating` | 无 | `float` | getRating方法 |  |
-| `getTimestamp` | 无 | `long` | getTimestamp方法 |  |
-| `getUserId` | 无 | `int` | getUserId方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `parseRating` | str: String | `Rating` | parseRating方法 |  |
+| `getMovieId` | 无 | `int` | 获取MovieId相关功能 | 调用该方法执行获取MovieId相关功能 |
+| `getRating` | 无 | `float` | 获取Rating相关功能 | 调用该方法执行获取Rating相关功能 |
+| `getTimestamp` | 无 | `long` | 获取Timestamp相关功能 | 调用该方法执行获取Timestamp相关功能 |
+| `getUserId` | 无 | `int` | 获取UserId相关功能 | 调用该方法执行获取UserId相关功能 |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
+| `parseRating` | str: String | `Rating` | 解析Rating相关功能 | 传入参数执行解析Rating相关功能 |
 
 ### JavaBinarizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3499,7 +3331,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaBucketedRandomProjectionLSHExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3507,7 +3339,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaBucketizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3515,7 +3347,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaChiSquareTestExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3523,7 +3355,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaCorrelationExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3531,7 +3363,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaCountVectorizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3539,7 +3371,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaDCTExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3547,7 +3379,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaDecisionTreeClassificationExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3555,7 +3387,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaDecisionTreeRegressionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3563,7 +3395,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaDocument
 **包路径**: `org.apache.spark.examples.ml`
@@ -3571,8 +3403,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getId` | 无 | `long` | getId方法 |  |
-| `getText` | 无 | `String` | getText方法 |  |
+| `getId` | 无 | `long` | 获取Id相关功能 | 调用该方法执行获取Id相关功能 |
+| `getText` | 无 | `String` | 获取Text相关功能 | 调用该方法执行获取Text相关功能 |
 
 ### JavaEstimatorTransformerParamExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3580,7 +3412,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaFMClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3588,7 +3420,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaFMRegressorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3596,7 +3428,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaFPGrowthExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3604,7 +3436,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaFeatureHasherExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3612,7 +3444,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaGeneralizedLinearRegressionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3620,7 +3452,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaGradientBoostedTreeClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3628,7 +3460,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaGradientBoostedTreeRegressorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3636,7 +3468,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaImputerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3644,7 +3476,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaIndexToStringExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3652,7 +3484,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaInteractionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3660,7 +3492,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaLDAExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3668,7 +3500,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaLabeledDocument
 **包路径**: `org.apache.spark.examples.ml`
@@ -3676,7 +3508,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getLabel` | 无 | `double` | getLabel方法 |  |
+| `getLabel` | 无 | `double` | 获取Label相关功能 | 调用该方法执行获取Label相关功能 |
 
 ### JavaLinearRegressionWithElasticNetExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3684,7 +3516,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaLinearSVCExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3692,7 +3524,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaLogisticRegressionSummaryExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3700,7 +3532,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaLogisticRegressionWithElasticNetExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3708,7 +3540,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaMaxAbsScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3716,7 +3548,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaMinHashLSHExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3724,7 +3556,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaMinMaxScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3732,7 +3564,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaModelSelectionViaCrossValidationExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3740,7 +3572,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaModelSelectionViaTrainValidationSplitExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3748,7 +3580,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaModuleOptions
 **包路径**: `org.apache.spark.launcher`
@@ -3756,7 +3588,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `defaultModuleOptions` | 无 | `String` | defaultModuleOptions方法 |  |
+| `defaultModuleOptions` | 无 | `String` | 默认ModuleOptions相关功能 | 调用该方法执行默认ModuleOptions相关功能 |
 
 ### JavaMulticlassLogisticRegressionWithElasticNetExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3764,7 +3596,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaMultilayerPerceptronClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3772,7 +3604,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaNGramExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3780,7 +3612,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaNormalizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3788,7 +3620,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaOneHotEncoderExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3796,7 +3628,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaOneVsRestExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3804,7 +3636,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaPipelineExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3812,7 +3644,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaPolynomialExpansionExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3820,7 +3652,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaQuantileDiscretizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3828,7 +3660,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaRFormulaExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3836,7 +3668,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaRandomForestClassifierExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3844,7 +3676,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaRandomForestRegressorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3852,7 +3684,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaRobustScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3860,7 +3692,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaSQLTransformerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3868,7 +3700,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaStandardScalerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3876,7 +3708,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaStopWordsRemoverExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3884,7 +3716,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaStringIndexerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3892,7 +3724,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaSummarizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3900,7 +3732,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaTargetEncoderExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3908,7 +3740,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaTfIdfExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3916,7 +3748,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaTokenizerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3924,7 +3756,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaUnivariateFeatureSelectorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3932,7 +3764,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaUtils
 **包路径**: `org.apache.spark.network.util`
@@ -3940,55 +3772,53 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `byteStringAs` | str: String, unit: ByteUnit | `long` | byteStringAs方法 |  |
-| `byteStringAsBytes` | str: String | `long` | byteStringAsBytes方法 |  |
-| `byteStringAsGb` | str: String | `long` | byteStringAsGb方法 |  |
-| `byteStringAsKb` | str: String | `long` | byteStringAsKb方法 |  |
-| `byteStringAsMb` | str: String | `long` | byteStringAsMb方法 |  |
-| `bytesToString` | b: ByteBuffer | `String` | bytesToString方法 |  |
-| `checkArgument` | check: boolean, msg: String, args: Object... | `void` | checkArgument方法 |  |
-| `checkState` | check: boolean, msg: String, args: Object... | `void` | checkState方法 |  |
-| `checkedCast` | value: long | `int` | checkedCast方法 |  |
-| `cleanDirectory` | dir: File | `void` | cleanDirectory方法 |  |
-| `closeQuietly` | closeable: Closeable | `void` | closeQuietly方法 |  |
-| `contentEquals` | file1: File, file2: File | `boolean` | contentEquals方法 |  |
-| `copyDirectory` | src: File, dst: File | `void` | copyDirectory方法 |  |
-| `copyURLToFile` | url: URL, file: File | `void` | copyURLToFile方法 |  |
-| `createDirectory` | root: String | `File` | createDirectory方法 |  |
-| `createDirectory` | root: String, namePrefix: String | `File` | createDirectory方法 |  |
-| `deleteQuietly` | file: File | `void` | deleteQuietly方法 |  |
-| `deleteRecursively` | file: File | `void` | deleteRecursively方法 |  |
-| `deleteRecursively` | file: File, filter: FilenameFilter | `void` | deleteRecursively方法 |  |
-| `digestToHexString` | algorithm: String, input: byte&lt;&gt; | `String` | digestToHexString方法 |  |
-| `digestToHexString` | algorithm: String, input: String | `String` | digestToHexString方法 |  |
-| `forceDeleteOnExit` | file: File | `void` | forceDeleteOnExit方法 |  |
-| `isTesting` | 无 | `boolean` | isTesting方法 |  |
+| `byteStringAs` | str: String, unit: ByteUnit | `long` | 三相关功能 | 传入参数执行三相关功能 |
+| `byteStringAsBytes` | str: String | `long` | 三相关功能 | 传入参数执行三相关功能 |
+| `byteStringAsGb` | str: String | `long` | 三相关功能 | 传入参数执行三相关功能 |
+| `byteStringAsKb` | str: String | `long` | 三相关功能 | 传入参数执行三相关功能 |
+| `byteStringAsMb` | str: String | `long` | 三相关功能 | 传入参数执行三相关功能 |
+| `bytesToString` | b: ByteBuffer | `String` | 三相关功能 | 传入参数执行三相关功能 |
+| `checkArgument` | check: boolean, msg: String, args: Object... | `void` | 检查Argument相关功能 | 传入参数执行检查Argument相关功能 |
+| `checkState` | check: boolean, msg: String, args: Object... | `void` | 检查State相关功能 | 传入参数执行检查State相关功能 |
+| `checkedCast` | value: long | `int` | 检查edCast相关功能 | 传入参数执行检查edCast相关功能 |
+| `cleanDirectory` | dir: File | `void` | cleanDirectory操作 | 传入参数执行cleanDirectory操作 |
+| `closeQuietly` | closeable: Closeable | `void` | 关闭Quietly相关功能 | 传入参数执行关闭Quietly相关功能 |
+| `contentEquals` | file1: File, file2: File | `boolean` | 判断相等相关功能 | 传入参数执行判断相等相关功能 |
+| `copyDirectory` | src: File, dst: File | `void` | 复制Directory相关功能 | 传入参数执行复制Directory相关功能 |
+| `copyURLToFile` | url: URL, file: File | `void` | 复制URLToFile相关功能 | 传入参数执行复制URLToFile相关功能 |
+| `createDirectory` | root: String | `File` | 创建Directory相关功能 | 传入参数执行创建Directory相关功能 |
+| `createDirectory` | root: String, namePrefix: String | `File` | 创建Directory相关功能 | 传入参数执行创建Directory相关功能 |
+| `deleteQuietly` | file: File | `void` | 删除请求Quietly相关功能 | 传入参数执行删除请求Quietly相关功能 |
+| `deleteRecursively` | file: File | `void` | 删除请求Recursively相关功能 | 传入参数执行删除请求Recursively相关功能 |
+| `deleteRecursively` | file: File, filter: FilenameFilter | `void` | 删除请求Recursively相关功能 | 传入参数执行删除请求Recursively相关功能 |
+| `digestToHexString` | algorithm: String, input: byte&lt;&gt; | `String` | 摘要ToHexString相关功能 | 传入参数执行摘要ToHexString相关功能 |
+| `digestToHexString` | algorithm: String, input: String | `String` | 摘要ToHexString相关功能 | 传入参数执行摘要ToHexString相关功能 |
+| `forceDeleteOnExit` | file: File | `void` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `isTesting` | 无 | `boolean` | 判断是否Testing相关功能 | 调用该方法执行判断是否Testing相关功能 |
 | `join` | arr: List<Object>, sep: String | `String` | 连接DataFrame | // join：内连接<br>List<Tuple2<String, Integer>> orders = Arrays.asList(<br>    new Tuple2<>("user1", 100),<br>    new Tuple2<>("user2", 200)<br>);<br>List<Tuple2<String, String>> users = Arrays.asList(<br>    new Tuple2<>("user1", "Alice"),<br>    new Tuple2<>("user2", "Bob")<br>);<br><br>JavaPairRDD<String, Integer> orderRDD = sc.parallelizePairs(orders);<br>JavaPairRDD<String, String> userRDD = sc.parallelizePairs(users);<br><br>// 内连接<br>JavaPairRDD<String, Tuple2<Integer, String>> joined = orderRDD.join(userRDD);<br>// 结果: [("user1", (100, "Alice")), ("user2", (200, "Bob"))] |
-| `listFiles` | dir: File | `Set&lt;File&gt;` | listFiles方法 |  |
-| `listPaths` | dir: File | `Set&lt;Path&gt;` | listPaths方法 |  |
-| `md5Hex` | input: byte&lt;&gt; | `String` | md5Hex方法 |  |
-| `md5Hex` | input: String | `String` | md5Hex方法 |  |
-| `moveDirectory` | src: File, dst: File | `void` | moveDirectory方法 |  |
-| `moveFile` | src: File, dst: File | `void` | moveFile方法 |  |
-| `nonNegativeHash` | obj: Object | `int` | nonNegativeHash方法 |  |
-| `postVisitDirectory` | dir: Path, e: IOException | `FileVisitResult` | postVisitDirectory方法 |  |
-| `preVisitDirectory` | p: Path, a: BasicFileAttributes | `FileVisitResult` | preVisitDirectory方法 |  |
-| `preVisitDirectory` | dir: Path, attrs: BasicFileAttributes | `FileVisitResult` | preVisitDirectory方法 |  |
-| `readFully` | channel: ReadableByteChannel, dst: ByteBuffer | `void` | readFully方法 |  |
-| `readFully` | in: InputStream, arr: byte&lt;&gt;, off: int, len: int | `void` | readFully方法 |  |
-| `sha256Hex` | input: byte&lt;&gt; | `String` | sha256Hex方法 |  |
-| `sha256Hex` | input: String | `String` | sha256Hex方法 |  |
-| `sizeOf` | file: File | `long` | sizeOf方法 |  |
-| `sizeOf` | dirPath: Path | `long` | sizeOf方法 |  |
-| `stackTraceToString` | t: Throwable | `String` | stackTraceToString方法 |  |
-| `stringToBytes` | s: String | `ByteBuffer` | stringToBytes方法 |  |
-| `timeStringAs` | str: String, unit: TimeUnit | `long` | timeStringAs方法 |  |
-| `timeStringAsMs` | str: String | `long` | timeStringAsMs方法 |  |
-| `timeStringAsSec` | str: String | `long` | timeStringAsSec方法 |  |
-| `visitFile` | p: Path, a: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
-| `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
-| `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
-| `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | visitFile方法 |  |
+| `listFiles` | dir: File | `Set&lt;File&gt;` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `listPaths` | dir: File | `Set&lt;Path&gt;` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `md5Hex` | input: byte&lt;&gt; | `String` | md5Hex操作 | 传入参数执行md5Hex操作 |
+| `md5Hex` | input: String | `String` | md5Hex操作 | 传入参数执行md5Hex操作 |
+| `moveDirectory` | src: File, dst: File | `void` | 移动Directory相关功能 | 传入参数执行移动Directory相关功能 |
+| `moveFile` | src: File, dst: File | `void` | 移动File相关功能 | 传入参数执行移动File相关功能 |
+| `nonNegativeHash` | obj: Object | `int` | 检查是否存在相关功能 | 传入参数执行检查是否存在相关功能 |
+| `postVisitDirectory` | dir: Path, e: IOException | `FileVisitResult` | 后VisitDirectory相关功能 | 传入参数执行后VisitDirectory相关功能 |
+| `preVisitDirectory` | p: Path, a: BasicFileAttributes | `FileVisitResult` | 上一个isitDirectory相关功能 | 传入参数执行上一个isitDirectory相关功能 |
+| `preVisitDirectory` | dir: Path, attrs: BasicFileAttributes | `FileVisitResult` | 上一个isitDirectory相关功能 | 传入参数执行上一个isitDirectory相关功能 |
+| `readFully` | channel: ReadableByteChannel, dst: ByteBuffer | `void` | 读取Fully相关功能 | 传入参数执行读取Fully相关功能 |
+| `readFully` | in: InputStream, arr: byte&lt;&gt;, off: int, len: int | `void` | 读取Fully相关功能 | 传入参数执行读取Fully相关功能 |
+| `sha256Hex` | input: byte&lt;&gt; | `String` | sha256Hex操作 | 传入参数执行sha256Hex操作 |
+| `sha256Hex` | input: String | `String` | sha256Hex操作 | 传入参数执行sha256Hex操作 |
+| `sizeOf` | file: File | `long` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
+| `sizeOf` | dirPath: Path | `long` | 计算对象或数组占用的内存大小 | 计算Decimal对象或数组的内存大小 |
+| `stackTraceToString` | t: Throwable | `String` | 追踪相关功能 | 传入参数执行追踪相关功能 |
+| `stringToBytes` | s: String | `ByteBuffer` | 三相关功能 | 传入参数执行三相关功能 |
+| `timeStringAs` | str: String, unit: TimeUnit | `long` | 时间StringAs相关功能 | 传入参数执行时间StringAs相关功能 |
+| `timeStringAsMs` | str: String | `long` | 时间StringAsMs相关功能 | 传入参数执行时间StringAsMs相关功能 |
+| `timeStringAsSec` | str: String | `long` | 时间StringAsSec相关功能 | 传入参数执行时间StringAsSec相关功能 |
+| `visitFile` | p: Path, a: BasicFileAttributes | `FileVisitResult` | 访问File相关功能 | 传入参数执行访问File相关功能 |
+| `visitFile` | file: Path, attrs: BasicFileAttributes | `FileVisitResult` | 访问File相关功能 | 传入参数执行访问File相关功能 |
 
 ### JavaVarianceThresholdSelectorExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -3996,7 +3826,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaVectorAssemblerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4004,7 +3834,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaVectorIndexerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4012,7 +3842,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaVectorSizeHintExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4020,7 +3850,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaVectorSlicerExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4028,7 +3858,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JavaWord2VecExample
 **包路径**: `org.apache.spark.examples.ml`
@@ -4036,7 +3866,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### JobExecutionStatus
 **包路径**: `org.apache.spark`
@@ -4044,7 +3874,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | str: String | `JobExecutionStatus` | fromString方法 |  |
+| `fromString` | str: String | `JobExecutionStatus` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ### KVStoreView
 **包路径**: `org.apache.spark.util.kvstore`
@@ -4052,14 +3882,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `closeableIterator` | 无 | `KVStoreIterator&lt;T&gt;` | closeableIterator方法 |  |
+| `closeableIterator` | 无 | `KVStoreIterator&lt;T&gt;` | 关闭ableIterator相关功能 | 调用该方法执行关闭ableIterator相关功能 |
 | `first` | value: Object | `KVStoreView&lt;T&gt;` | 第一行 | // first：获取第一个元素<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(10, 20, 30));<br>Integer first = rdd.first();<br>// 结果: 10 |
-| `index` | name: String | `KVStoreView&lt;T&gt;` | index方法 |  |
-| `last` | value: Object | `KVStoreView&lt;T&gt;` | last方法 |  |
+| `index` | name: String | `KVStoreView&lt;T&gt;` | index操作 | 传入参数执行index操作 |
+| `last` | value: Object | `KVStoreView&lt;T&gt;` | 最后一个相关功能 | 传入参数执行最后一个相关功能 |
 | `max` | max: long | `KVStoreView&lt;T&gt;` | 最大值 | // max：最大值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double max = doubleRDD.max();<br>// 结果: 30.0 |
-| `parent` | value: Object | `KVStoreView&lt;T&gt;` | parent方法 |  |
-| `reverse` | 无 | `KVStoreView&lt;T&gt;` | reverse方法 |  |
-| `skip` | n: long | `KVStoreView&lt;T&gt;` | skip方法 |  |
+| `parent` | value: Object | `KVStoreView&lt;T&gt;` | 父级相关功能 | 传入参数执行父级相关功能 |
+| `reverse` | 无 | `KVStoreView&lt;T&gt;` | reverse操作 | 调用该方法执行reverse操作 |
+| `skip` | n: long | `KVStoreView&lt;T&gt;` | 跳过相关功能 | 传入参数执行跳过相关功能 |
 
 ### KVTypeInfo
 **包路径**: `org.apache.spark.util.kvstore`
@@ -4067,13 +3897,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | instance: Object | `Object` | 获取元素 |  |
-| `get` | instance: Object | `Object` | 获取元素 |  |
-| `getIndexValue` | indexName: String, instance: Object | `Object` | getIndexValue方法 |  |
-| `getType` | 无 | `Class&lt;?&gt;` | getType方法 |  |
-| `getType` | 无 | `Class&lt;?&gt;` | getType方法 |  |
-| `indices` | 无 | `Stream&lt;KVIndex&gt;` | indices方法 |  |
-| `type` | 无 | `Class&lt;?&gt;` | type方法 |  |
+| `get` | instance: Object | `Object` | 获取元素 | 传入参数执行获取相关功能 |
+| `getIndexValue` | indexName: String, instance: Object | `Object` | 获取IndexValue相关功能 | 传入参数执行获取IndexValue相关功能 |
+| `getType` | 无 | `Class&lt;?&gt;` | 获取Type相关功能 | 调用该方法执行获取Type相关功能 |
+| `indices` | 无 | `Stream&lt;KVIndex&gt;` | indices操作 | 调用该方法执行indices操作 |
+| `type` | 无 | `Class&lt;?&gt;` | type操作 | 调用该方法执行type操作 |
 
 ### LdapAuthenticationProviderImpl
 **包路径**: `org.apache.hive.service.auth`
@@ -4081,7 +3909,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
 ### LevelDB
 **包路径**: `org.apache.spark.network.shuffledb`
@@ -4089,18 +3917,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `close` | 无 | `void` | close方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `count` | type: Class<?> | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
-| `delete` | key: byte&lt;&gt; | `void` | delete方法 |  |
-| `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
-| `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
-| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
-| `put` | key: byte&lt;&gt;, value: byte&lt;&gt; | `void` | 添加键值对 |  |
-| `setMetadata` | value: Object | `void` | setMetadata方法 |  |
-| `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
-| `writeAll` | values: List<?> | `void` | writeAll方法 |  |
+| `delete` | key: byte&lt;&gt; | `void` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `delete` | type: Class<?>, naturalKey: Object | `void` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `iterator` | 无 | `DBIterator` | 获取迭代器 | 调用该方法执行时期相关功能 |
+| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 | 调用该方法执行时期相关功能 |
+| `put` | key: byte&lt;&gt;, value: byte&lt;&gt; | `void` | 添加键值对 | 传入参数执行放入相关功能 |
+| `setMetadata` | value: Object | `void` | 设置Metadata相关功能 | 传入参数执行设置Metadata相关功能 |
+| `write` | value: Object | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `writeAll` | values: List<?> | `void` | 写入All相关功能 | 传入参数执行写入All相关功能 |
 
 ### LevelDBIterator
 **包路径**: `org.apache.spark.network.shuffledb`
@@ -4108,9 +3935,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `seek` | key: byte&lt;&gt; | `void` | seek方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `seek` | key: byte&lt;&gt; | `void` | 定位相关功能 | 传入参数执行定位相关功能 |
 
 ### LevelDBProvider
 **包路径**: `org.apache.spark.network.util`
@@ -4118,10 +3945,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkVersion` | db: DB, newversion: StoreVersion, mapper: ObjectMapper | `void` | checkVersion方法 |  |
-| `initLevelDB` | dbFile: File, version: StoreVersion, mapper: ObjectMapper | `DB` | initLevelDB方法 |  |
-| `log` | message: String | `void` | log方法 |  |
-| `storeVersion` | db: DB, version: StoreVersion, mapper: ObjectMapper | `void` | storeVersion方法 |  |
+| `checkVersion` | db: DB, newversion: StoreVersion, mapper: ObjectMapper | `void` | 检查Version相关功能 | 传入参数执行检查Version相关功能 |
+| `initLevelDB` | dbFile: File, version: StoreVersion, mapper: ObjectMapper | `DB` | 初始化LevelDB相关功能 | 传入参数执行初始化LevelDB相关功能 |
+| `log` | message: String | `void` | 日志相关功能 | 传入参数执行日志相关功能 |
+| `storeVersion` | db: DB, version: StoreVersion, mapper: ObjectMapper | `void` | 版本相关功能 | 传入参数执行版本相关功能 |
 
 ### LocalDirsForExecutors
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4129,10 +3956,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `LocalDirsForExecutors` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
-| `getLocalDirsByExec` | 无 | `Map&lt;String, String[]&gt;` | getLocalDirsByExec方法 |  |
+| `decode` | buf: ByteBuf | `LocalDirsForExecutors` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
+| `getLocalDirsByExec` | 无 | `Map&lt;String, String[]&gt;` | 获取LocalDirsByExec相关功能 | 调用该方法执行获取LocalDirsByExec相关功能 |
 
 ### LocalDiskShuffleDataIO
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4140,8 +3967,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `driver` | 无 | `ShuffleDriverComponents` | driver方法 |  |
-| `executor` | 无 | `ShuffleExecutorComponents` | executor方法 |  |
+| `driver` | 无 | `ShuffleDriverComponents` | driver操作 | 调用该方法执行driver操作 |
+| `executor` | 无 | `ShuffleExecutorComponents` | executor操作 | 调用该方法执行executor操作 |
 
 ### LocalDiskShuffleDriverComponents
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4149,9 +3976,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cleanupApplication` | 无 | `void` | cleanupApplication方法 |  |
-| `initializeApplication` | 无 | `Map&lt;String, String&gt;` | initializeApplication方法 |  |
-| `removeShuffle` | shuffleId: int, blocking: boolean | `void` | removeShuffle方法 |  |
+| `cleanupApplication` | 无 | `void` | 向上相关功能 | 调用该方法执行向上相关功能 |
+| `initializeApplication` | 无 | `Map&lt;String, String&gt;` | 初始化ializeApplication相关功能 | 调用该方法执行初始化ializeApplication相关功能 |
+| `removeShuffle` | shuffleId: int, blocking: boolean | `void` | 移除Shuffle相关功能 | 传入参数执行移除Shuffle相关功能 |
 
 ### LocalDiskShuffleExecutorComponents
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4159,9 +3986,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createMapOutputWriter` | shuffleId: int, mapTaskId: long, numPartitions: int | `ShuffleMapOutputWriter` | createMapOutputWriter方法 |  |
-| `createSingleFileMapOutputWriter` | shuffleId: int, mapId: long | `Optional&lt;SingleSpillShuffleMapOutputWriter&gt;` | createSingleFileMapOutputWriter方法 |  |
-| `initializeExecutor` | appId: String, execId: String, extraConfigs: String> | `void` | initializeExecutor方法 |  |
+| `createMapOutputWriter` | shuffleId: int, mapTaskId: long, numPartitions: int | `ShuffleMapOutputWriter` | 创建MapOutputWriter相关功能 | 传入参数执行创建MapOutputWriter相关功能 |
+| `createSingleFileMapOutputWriter` | shuffleId: int, mapId: long | `Optional&lt;SingleSpillShuffleMapOutputWriter&gt;` | 创建SingleFileMapOutputWriter相关功能 | 传入参数执行创建SingleFileMapOutputWriter相关功能 |
+| `initializeExecutor` | appId: String, execId: String, extraConfigs: String> | `void` | 初始化ializeExecutor相关功能 | 传入参数执行初始化ializeExecutor相关功能 |
 
 ### LocalDiskShuffleMapOutputWriter
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4169,19 +3996,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `abort` | error: Throwable | `void` | abort方法 |  |
-| `channel` | 无 | `WritableByteChannel` | channel方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `commitAllPartitions` | checksums: long&lt;&gt; | `MapOutputCommitMessage` | commitAllPartitions方法 |  |
-| `getCount` | 无 | `long` | getCount方法 |  |
-| `getCount` | 无 | `long` | getCount方法 |  |
-| `getNumBytesWritten` | 无 | `long` | getNumBytesWritten方法 |  |
-| `getPartitionWriter` | reducePartitionId: int | `ShufflePartitionWriter` | getPartitionWriter方法 |  |
-| `openChannelWrapper` | 无 | `Optional&lt;WritableByteChannelWrapper&gt;` | openChannelWrapper方法 |  |
-| `openStream` | 无 | `OutputStream` | openStream方法 |  |
-| `write` | b: int | `void` | 写入DataFrame到数据源 |  |
-| `write` | buf: byte&lt;&gt;, pos: int, length: int | `void` | 写入DataFrame到数据源 |  |
+| `abort` | error: Throwable | `void` | 中止操作 | 传入参数执行中止操作 |
+| `channel` | 无 | `WritableByteChannel` | channel操作 | 调用该方法执行channel操作 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `commitAllPartitions` | checksums: long&lt;&gt; | `MapOutputCommitMessage` | commitAllPartitions操作 | 传入参数执行commitAllPartitions操作 |
+| `getCount` | 无 | `long` | 获取Count相关功能 | 调用该方法执行获取Count相关功能 |
+| `getNumBytesWritten` | 无 | `long` | 获取NumBytesWritten相关功能 | 调用该方法执行获取NumBytesWritten相关功能 |
+| `getPartitionWriter` | reducePartitionId: int | `ShufflePartitionWriter` | 获取PartitionWriter相关功能 | 传入参数执行获取PartitionWriter相关功能 |
+| `openChannelWrapper` | 无 | `Optional&lt;WritableByteChannelWrapper&gt;` | 打开ChannelWrapper相关功能 | 调用该方法执行打开ChannelWrapper相关功能 |
+| `openStream` | 无 | `OutputStream` | 打开Stream相关功能 | 调用该方法执行打开Stream相关功能 |
+| `write` | b: int | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `write` | buf: byte&lt;&gt;, pos: int, length: int | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### LocalDiskSingleSpillMapOutputWriter
 **包路径**: `org.apache.spark.shuffle.sort.io`
@@ -4189,7 +4014,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `transferMapSpillFile` | mapSpillFile: File, partitionLengths: long&lt;&gt;, checksums: long&lt;&gt; | `void` | transferMapSpillFile方法 |  |
+| `transferMapSpillFile` | mapSpillFile: File, partitionLengths: long&lt;&gt;, checksums: long&lt;&gt; | `void` | 转移MapSpillFile相关功能 | 传入参数执行转移MapSpillFile相关功能 |
 
 ### LogDivertAppender
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -4197,8 +4022,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `append` | event: LogEvent | `void` | 追加元素 |  |
-| `create` | operationManager: OperationManager, loggingMode: OperationLog.LoggingLevel | `LogDivertAppender` | create方法 |  |
+| `append` | event: LogEvent | `void` | 追加元素 | 向缓冲迭代器追加一行数据 |
+| `create` | operationManager: OperationManager, loggingMode: OperationLog.LoggingLevel | `LogDivertAppender` | 创建相关功能 | 传入参数执行创建相关功能 |
 | `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, objects: Object... | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, s: String, o: Object, o1: Object | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
@@ -4213,14 +4038,14 @@
 | `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, o: Object, throwable: Throwable | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `filter` | logger: org.apache.logging.log4j.core.Logger, level: Level, marker: Marker, message: Message, throwable: Throwable | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
 | `filter` | logEvent: LogEvent | `Result` | 过滤行 | // 过滤满足条件的元素<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br><br>// 过滤大于5的数<br>JavaRDD<Integer> greaterThan5 = numbers.filter(x -> x > 5);<br>// 结果: [6, 7, 8, 9, 10]<br><br>// 过滤偶数<br>JavaRDD<Integer> evens = numbers.filter(x -> x % 2 == 0);<br>// 结果: [2, 4, 6, 8, 10] |
-| `getOnMatch` | 无 | `Result` | getOnMatch方法 |  |
-| `getOnMismatch` | 无 | `Result` | getOnMismatch方法 |  |
-| `getState` | 无 | `State` | getState方法 |  |
-| `initialize` | 无 | `void` | initialize方法 |  |
-| `isStarted` | 无 | `boolean` | isStarted方法 |  |
-| `isStopped` | 无 | `boolean` | isStopped方法 |  |
-| `start` | 无 | `void` | start方法 |  |
-| `stop` | 无 | `void` | 停止SparkContext，释放资源 |  |
+| `getOnMatch` | 无 | `Result` | 获取OnMatch相关功能 | 调用该方法执行获取OnMatch相关功能 |
+| `getOnMismatch` | 无 | `Result` | 获取OnMismatch相关功能 | 调用该方法执行获取OnMismatch相关功能 |
+| `getState` | 无 | `State` | 获取State相关功能 | 调用该方法执行获取State相关功能 |
+| `initialize` | 无 | `void` | 初始化插件 | 初始化目录插件 |
+| `isStarted` | 无 | `boolean` | 判断是否Started相关功能 | 调用该方法执行判断是否Started相关功能 |
+| `isStopped` | 无 | `boolean` | 判断是否Stopped相关功能 | 调用该方法执行判断是否Stopped相关功能 |
+| `start` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
+| `stop` | 无 | `void` | 停止SparkContext，释放资源 | 调用该方法执行停止相关功能 |
 
 ### MapConfigProvider
 **包路径**: `org.apache.spark.network.util`
@@ -4228,8 +4053,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `get` | name: String | `String` | 获取元素 |  |
-| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
+| `get` | name: String | `String` | 获取元素 | 传入参数执行获取相关功能 |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 | 传入参数执行获取相关功能 |
 
 ### MemoryBlock
 **包路径**: `org.apache.spark.unsafe.memory`
@@ -4237,9 +4062,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fill` | value: byte | `void` | fill方法 |  |
-| `fromLongArray` | array: final long&lt;&gt; | `MemoryBlock` | fromLongArray方法 |  |
-| `size` | 无 | `long` | 计算大小 |  |
+| `fill` | value: byte | `void` | fill操作 | 传入参数执行fill操作 |
+| `fromLongArray` | array: final long&lt;&gt; | `MemoryBlock` | fromLongArray操作 | 传入参数执行fromLongArray操作 |
+| `size` | 无 | `long` | 计算大小 | 调用该方法执行size操作 |
 
 ### MemoryConsumer
 **包路径**: `org.apache.spark.memory`
@@ -4247,13 +4072,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `acquireMemory` | size: long | `long` | acquireMemory方法 |  |
-| `allocateArray` | size: long | `LongArray` | allocateArray方法 |  |
-| `freeArray` | array: LongArray | `void` | freeArray方法 |  |
-| `freeMemory` | size: long | `void` | freeMemory方法 |  |
-| `getMode` | 无 | `MemoryMode` | getMode方法 |  |
-| `getUsed` | 无 | `long` | getUsed方法 |  |
-| `spill` | 无 | `void` | spill方法 |  |
+| `acquireMemory` | size: long | `long` | 获取内存 | 传入参数执行获取内存 |
+| `allocateArray` | size: long | `LongArray` | 分配数组内存 | 传入参数执行分配数组内存 |
+| `freeArray` | array: LongArray | `void` | freeArray操作 | 传入参数执行freeArray操作 |
+| `freeMemory` | size: long | `void` | freeMemory操作 | 传入参数执行freeMemory操作 |
+| `getMode` | 无 | `MemoryMode` | 获取Mode相关功能 | 调用该方法执行获取Mode相关功能 |
+| `getUsed` | 无 | `long` | 获取Used相关功能 | 调用该方法执行获取Used相关功能 |
+| `spill` | 无 | `void` | spill操作 | 调用该方法执行spill操作 |
 
 ### MemoryLocation
 **包路径**: `org.apache.spark.unsafe.memory`
@@ -4261,9 +4086,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getBaseObject` | 无 | `Object` | getBaseObject方法 |  |
-| `getBaseOffset` | 无 | `long` | getBaseOffset方法 |  |
-| `setObjAndOffset` | newObj: Object, newOffset: long | `void` | setObjAndOffset方法 |  |
+| `getBaseObject` | 无 | `Object` | 获取BaseObject相关功能 | 调用该方法执行获取BaseObject相关功能 |
+| `getBaseOffset` | 无 | `long` | 获取BaseOffset相关功能 | 调用该方法执行获取BaseOffset相关功能 |
+| `setObjAndOffset` | newObj: Object, newOffset: long | `void` | 设置ObjAndOffset相关功能 | 传入参数执行设置ObjAndOffset相关功能 |
 
 ### MergeStatuses
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4271,9 +4096,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `MergeStatuses` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `MergeStatuses` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### MergedBlockMeta
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4281,8 +4106,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getChunksBitmapBuffer` | 无 | `ManagedBuffer` | getChunksBitmapBuffer方法 |  |
-| `getNumChunks` | 无 | `int` | getNumChunks方法 |  |
+| `getChunksBitmapBuffer` | 无 | `ManagedBuffer` | 获取ChunksBitmapBuffer相关功能 | 调用该方法执行获取ChunksBitmapBuffer相关功能 |
+| `getNumChunks` | 无 | `int` | 获取NumChunks相关功能 | 调用该方法执行获取NumChunks相关功能 |
 
 ### MergedBlockMetaRequest
 **包路径**: `org.apache.spark.network.protocol`
@@ -4290,10 +4115,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `MergedBlockMetaRequest` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
-| `type` | 无 | `Type` | type方法 |  |
+| `decode` | buf: ByteBuf | `MergedBlockMetaRequest` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
+| `type` | 无 | `Type` | type操作 | 调用该方法执行type操作 |
 
 ### MergedBlockMetaSuccess
 **包路径**: `org.apache.spark.network.protocol`
@@ -4301,12 +4126,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createFailureResponse` | error: String | `ResponseMessage` | createFailureResponse方法 |  |
-| `decode` | buf: ByteBuf | `MergedBlockMetaSuccess` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
-| `getNumChunks` | 无 | `int` | getNumChunks方法 |  |
-| `type` | 无 | `Type` | type方法 |  |
+| `createFailureResponse` | error: String | `ResponseMessage` | 创建FailureResponse相关功能 | 传入参数执行创建FailureResponse相关功能 |
+| `decode` | buf: ByteBuf | `MergedBlockMetaSuccess` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
+| `getNumChunks` | 无 | `int` | 获取NumChunks相关功能 | 调用该方法执行获取NumChunks相关功能 |
+| `type` | 无 | `Type` | type操作 | 调用该方法执行type操作 |
 
 ### Message
 **包路径**: `org.apache.spark.network.protocol`
@@ -4314,10 +4139,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `Type` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
-| `id` | 无 | `byte` | id方法 |  |
+| `decode` | buf: ByteBuf | `Type` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
+| `id` | 无 | `byte` | id操作 | 调用该方法执行id操作 |
 
 ### MessageWithHeader
 **包路径**: `org.apache.spark.network.protocol`
@@ -4326,12 +4151,12 @@
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
 | `count` | 无 | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
-| `position` | 无 | `long` | position方法 |  |
-| `release` | decrement: int | `boolean` | release方法 |  |
-| `retain` | increment: int | `MessageWithHeader` | retain方法 |  |
-| `touch` | o: Object | `MessageWithHeader` | touch方法 |  |
-| `transferTo` | target: final WritableByteChannel, position: final long | `long` | transferTo方法 |  |
-| `transferred` | 无 | `long` | transferred方法 |  |
+| `position` | 无 | `long` | position操作 | 调用该方法执行position操作 |
+| `release` | decrement: int | `boolean` | 发布相关功能 | 传入参数执行发布相关功能 |
+| `retain` | increment: int | `MessageWithHeader` | retain操作 | 传入参数执行retain操作 |
+| `touch` | o: Object | `MessageWithHeader` | touch操作 | 传入参数执行touch操作 |
+| `transferTo` | target: final WritableByteChannel, position: final long | `long` | 转移To相关功能 | 传入参数执行转移To相关功能 |
+| `transferred` | 无 | `long` | 转移red相关功能 | 调用该方法执行转移red相关功能 |
 
 ### MetadataOperation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -4339,7 +4164,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 
 ### MutableURLClassLoader
 **包路径**: `org.apache.spark.util`
@@ -4347,7 +4172,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addURL` | url: URL | `void` | addURL方法 |  |
+| `addURL` | url: URL | `void` | 添加URL | 传入参数执行添加URL |
 
 ### MyLauncher
 **包路径**: `org.apache.spark.launcher`
@@ -4355,8 +4180,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
-| `main` | args: String&lt;&gt; | `void` | main方法 |  |
+| `main` | args: String&lt;&gt; | `void` | 主要相关功能 | 传入参数执行主要相关功能 |
 
 ### NettyLogger
 **包路径**: `org.apache.spark.network.util`
@@ -4364,7 +4188,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getLoggingHandler` | 无 | `LoggingHandler` | getLoggingHandler方法 |  |
+| `getLoggingHandler` | 无 | `LoggingHandler` | 获取LoggingHandler相关功能 | 调用该方法执行获取LoggingHandler相关功能 |
 
 ### NettyManagedBuffer
 **包路径**: `org.apache.spark.network.buffer`
@@ -4372,13 +4196,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `convertToNetty` | 无 | `Object` | convertToNetty方法 |  |
-| `convertToNettyForSsl` | 无 | `Object` | convertToNettyForSsl方法 |  |
-| `createInputStream` | 无 | `InputStream` | createInputStream方法 |  |
-| `nioByteBuffer` | 无 | `ByteBuffer` | nioByteBuffer方法 |  |
-| `release` | 无 | `ManagedBuffer` | release方法 |  |
-| `retain` | 无 | `ManagedBuffer` | retain方法 |  |
-| `size` | 无 | `long` | 计算大小 |  |
+| `convertToNetty` | 无 | `Object` | 转换ToNetty相关功能 | 调用该方法执行转换ToNetty相关功能 |
+| `convertToNettyForSsl` | 无 | `Object` | 转换ToNettyForSsl相关功能 | 调用该方法执行转换ToNettyForSsl相关功能 |
+| `createInputStream` | 无 | `InputStream` | 创建InputStream相关功能 | 调用该方法执行创建InputStream相关功能 |
+| `nioByteBuffer` | 无 | `ByteBuffer` | nioByteBuffer操作 | 调用该方法执行nioByteBuffer操作 |
+| `release` | 无 | `ManagedBuffer` | 发布相关功能 | 调用该方法执行发布相关功能 |
+| `retain` | 无 | `ManagedBuffer` | retain操作 | 调用该方法执行retain操作 |
+| `size` | 无 | `long` | 计算大小 | 调用该方法执行size操作 |
 
 ### NettyMemoryMetrics
 **包路径**: `org.apache.spark.network.util`
@@ -4386,7 +4210,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | getMetrics方法 |  |
+| `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | 获取Metrics相关功能 | 调用该方法执行获取Metrics相关功能 |
 
 ### NettyUtils
 **包路径**: `org.apache.spark.network.util`
@@ -4394,16 +4218,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createEventLoop` | mode: IOMode, numThreads: int, threadPrefix: String | `EventLoopGroup` | createEventLoop方法 |  |
-| `createFrameDecoder` | 无 | `TransportFrameDecoder` | createFrameDecoder方法 |  |
-| `createPooledByteBufAllocator` | allowDirectBufs: boolean, allowCache: boolean, numCores: int | `PooledByteBufAllocator` | createPooledByteBufAllocator方法 |  |
-| `createThreadFactory` | threadPoolPrefix: String | `ThreadFactory` | createThreadFactory方法 |  |
-| `defaultNumThreads` | numUsableCores: int | `int` | defaultNumThreads方法 |  |
-| `freeDirectMemory` | 无 | `long` | freeDirectMemory方法 |  |
-| `getClientChannelClass` | mode: IOMode | `Class&lt;? extends Channel&gt;` | getClientChannelClass方法 |  |
-| `getRemoteAddress` | channel: Channel | `String` | getRemoteAddress方法 |  |
-| `getServerChannelClass` | mode: IOMode | `Class&lt;? extends ServerChannel&gt;` | getServerChannelClass方法 |  |
-| `preferDirectBufs` | conf: TransportConf | `boolean` | preferDirectBufs方法 |  |
+| `createEventLoop` | mode: IOMode, numThreads: int, threadPrefix: String | `EventLoopGroup` | 创建EventLoop相关功能 | 传入参数执行创建EventLoop相关功能 |
+| `createFrameDecoder` | 无 | `TransportFrameDecoder` | 创建FrameDecoder相关功能 | 调用该方法执行创建FrameDecoder相关功能 |
+| `createPooledByteBufAllocator` | allowDirectBufs: boolean, allowCache: boolean, numCores: int | `PooledByteBufAllocator` | 创建PooledByteBufAllocator相关功能 | 传入参数执行创建PooledByteBufAllocator相关功能 |
+| `createThreadFactory` | threadPoolPrefix: String | `ThreadFactory` | 创建ThreadFactory相关功能 | 传入参数执行创建ThreadFactory相关功能 |
+| `defaultNumThreads` | numUsableCores: int | `int` | 默认NumThreads相关功能 | 传入参数执行默认NumThreads相关功能 |
+| `freeDirectMemory` | 无 | `long` | freeDirectMemory操作 | 调用该方法执行freeDirectMemory操作 |
+| `getClientChannelClass` | mode: IOMode | `Class&lt;? extends Channel&gt;` | 获取ClientChannelClass相关功能 | 传入参数执行获取ClientChannelClass相关功能 |
+| `getRemoteAddress` | channel: Channel | `String` | 获取RemoteAddress相关功能 | 传入参数执行获取RemoteAddress相关功能 |
+| `getServerChannelClass` | mode: IOMode | `Class&lt;? extends ServerChannel&gt;` | 获取ServerChannelClass相关功能 | 传入参数执行获取ServerChannelClass相关功能 |
+| `preferDirectBufs` | conf: TransportConf | `boolean` | 前ferDirectBufs相关功能 | 传入参数执行前ferDirectBufs相关功能 |
 
 ### NioManagedBuffer
 **包路径**: `org.apache.spark.network.buffer`
@@ -4411,13 +4235,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `convertToNetty` | 无 | `Object` | convertToNetty方法 |  |
-| `convertToNettyForSsl` | 无 | `Object` | convertToNettyForSsl方法 |  |
-| `createInputStream` | 无 | `InputStream` | createInputStream方法 |  |
-| `nioByteBuffer` | 无 | `ByteBuffer` | nioByteBuffer方法 |  |
-| `release` | 无 | `ManagedBuffer` | release方法 |  |
-| `retain` | 无 | `ManagedBuffer` | retain方法 |  |
-| `size` | 无 | `long` | 计算大小 |  |
+| `convertToNetty` | 无 | `Object` | 转换ToNetty相关功能 | 调用该方法执行转换ToNetty相关功能 |
+| `convertToNettyForSsl` | 无 | `Object` | 转换ToNettyForSsl相关功能 | 调用该方法执行转换ToNettyForSsl相关功能 |
+| `createInputStream` | 无 | `InputStream` | 创建InputStream相关功能 | 调用该方法执行创建InputStream相关功能 |
+| `nioByteBuffer` | 无 | `ByteBuffer` | nioByteBuffer操作 | 调用该方法执行nioByteBuffer操作 |
+| `release` | 无 | `ManagedBuffer` | 发布相关功能 | 调用该方法执行发布相关功能 |
+| `retain` | 无 | `ManagedBuffer` | retain操作 | 调用该方法执行retain操作 |
+| `size` | 无 | `long` | 计算大小 | 调用该方法执行size操作 |
 
 ### NoOpMergedShuffleFileManager
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4425,13 +4249,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
-| `finalizeShuffleMerge` | msg: FinalizeShuffleMerge | `MergeStatuses` | finalizeShuffleMerge方法 |  |
-| `getMergedBlockData` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, chunkId: int | `ManagedBuffer` | getMergedBlockData方法 |  |
-| `getMergedBlockMeta` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int | `MergedBlockMeta` | getMergedBlockMeta方法 |  |
-| `receiveBlockDataAsStream` | msg: PushBlockStream | `StreamCallbackWithID` | receiveBlockDataAsStream方法 |  |
-| `registerExecutor` | appId: String, executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
-| `removeShuffleMerge` | removeShuffleMerge: RemoveShuffleMerge | `void` | removeShuffleMerge方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | 应用移除事件 | 传入参数执行应用移除事件 |
+| `finalizeShuffleMerge` | msg: FinalizeShuffleMerge | `MergeStatuses` | 终结ShuffleMerge相关功能 | 传入参数执行终结ShuffleMerge相关功能 |
+| `getMergedBlockData` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, chunkId: int | `ManagedBuffer` | 获取MergedBlockData相关功能 | 传入参数执行获取MergedBlockData相关功能 |
+| `getMergedBlockMeta` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int | `MergedBlockMeta` | 获取MergedBlockMeta相关功能 | 传入参数执行获取MergedBlockMeta相关功能 |
+| `receiveBlockDataAsStream` | msg: PushBlockStream | `StreamCallbackWithID` | 接收BlockDataAsStream相关功能 | 传入参数执行接收BlockDataAsStream相关功能 |
+| `registerExecutor` | appId: String, executorInfo: ExecutorShuffleInfo | `void` | 注册Executor相关功能 | 传入参数执行注册Executor相关功能 |
+| `removeShuffleMerge` | removeShuffleMerge: RemoveShuffleMerge | `void` | 移除ShuffleMerge相关功能 | 传入参数执行移除ShuffleMerge相关功能 |
 
 ### NoOpRpcHandler
 **包路径**: `org.apache.spark.network.server`
@@ -4439,8 +4263,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getStreamManager` | 无 | `StreamManager` | getStreamManager方法 |  |
-| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | receive方法 |  |
+| `getStreamManager` | 无 | `StreamManager` | 获取StreamManager相关功能 | 调用该方法执行获取StreamManager相关功能 |
+| `receive` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `void` | 接收相关功能 | 传入参数执行接收相关功能 |
 
 ### OneForOneBlockFetcher
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4448,14 +4272,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `onComplete` | streamId: String | `void` | onComplete方法 |  |
-| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
-| `onFailure` | chunkIndex: int, e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | chunkIndex: int, buffer: ManagedBuffer | `void` | onSuccess方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `start` | 无 | `void` | start方法 |  |
+| `onComplete` | streamId: String | `void` | 完成相关功能 | 传入参数执行完成相关功能 |
+| `onData` | streamId: String, buf: ByteBuffer | `void` | onData操作 | 传入参数执行onData操作 |
+| `onFailure` | chunkIndex: int, e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onFailure` | e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onSuccess` | chunkIndex: int, buffer: ManagedBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `start` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
 
 ### OneForOneBlockPusher
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4463,9 +4287,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `start` | 无 | `void` | start方法 |  |
+| `onFailure` | e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `start` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
 
 ### OneForOneStreamManager
 **包路径**: `org.apache.spark.network.server`
@@ -4473,20 +4297,20 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkAuthorization` | client: TransportClient, streamId: long | `void` | checkAuthorization方法 |  |
-| `chunkBeingSent` | streamId: long | `void` | chunkBeingSent方法 |  |
-| `chunkSent` | streamId: long | `void` | chunkSent方法 |  |
-| `chunksBeingTransferred` | 无 | `long` | chunksBeingTransferred方法 |  |
-| `connectionTerminated` | channel: Channel | `void` | connectionTerminated方法 |  |
-| `genStreamChunkId` | streamId: long, chunkId: int | `String` | genStreamChunkId方法 |  |
-| `getChunk` | streamId: long, chunkIndex: int | `ManagedBuffer` | getChunk方法 |  |
-| `numStreamStates` | 无 | `int` | numStreamStates方法 |  |
-| `openStream` | streamChunkId: String | `ManagedBuffer` | openStream方法 |  |
-| `parseStreamChunkId` | streamChunkId: String | `Pair&lt;Long, Integer&gt;` | parseStreamChunkId方法 |  |
-| `registerStream` | appId: String, buffers: Iterator<ManagedBuffer>, channel: Channel, isBufferMaterializedOnNext: boolean | `long` | registerStream方法 |  |
-| `registerStream` | appId: String, buffers: Iterator<ManagedBuffer>, channel: Channel | `long` | registerStream方法 |  |
-| `streamBeingSent` | streamId: String | `void` | streamBeingSent方法 |  |
-| `streamSent` | streamId: String | `void` | streamSent方法 |  |
+| `checkAuthorization` | client: TransportClient, streamId: long | `void` | 检查Authorization相关功能 | 传入参数执行检查Authorization相关功能 |
+| `chunkBeingSent` | streamId: long | `void` | chunkBeingSent操作 | 传入参数执行chunkBeingSent操作 |
+| `chunkSent` | streamId: long | `void` | chunkSent操作 | 传入参数执行chunkSent操作 |
+| `chunksBeingTransferred` | 无 | `long` | 转移相关功能 | 调用该方法执行转移相关功能 |
+| `connectionTerminated` | channel: Channel | `void` | 连接ionTerminated相关功能 | 传入参数执行连接ionTerminated相关功能 |
+| `genStreamChunkId` | streamId: long, chunkId: int | `String` | genStreamChunkId操作 | 传入参数执行genStreamChunkId操作 |
+| `getChunk` | streamId: long, chunkIndex: int | `ManagedBuffer` | 获取Chunk相关功能 | 传入参数执行获取Chunk相关功能 |
+| `numStreamStates` | 无 | `int` | numStreamStates操作 | 调用该方法执行numStreamStates操作 |
+| `openStream` | streamChunkId: String | `ManagedBuffer` | 打开Stream相关功能 | 传入参数执行打开Stream相关功能 |
+| `parseStreamChunkId` | streamChunkId: String | `Pair&lt;Long, Integer&gt;` | 解析StreamChunkId相关功能 | 传入参数执行解析StreamChunkId相关功能 |
+| `registerStream` | appId: String, buffers: Iterator<ManagedBuffer>, channel: Channel, isBufferMaterializedOnNext: boolean | `long` | 注册Stream相关功能 | 传入参数执行注册Stream相关功能 |
+| `registerStream` | appId: String, buffers: Iterator<ManagedBuffer>, channel: Channel | `long` | 注册Stream相关功能 | 传入参数执行注册Stream相关功能 |
+| `streamBeingSent` | streamId: String | `void` | streamBeingSent操作 | 传入参数执行streamBeingSent操作 |
+| `streamSent` | streamId: String | `void` | streamSent操作 | 传入参数执行streamSent操作 |
 
 ### OpenBlocks
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4494,9 +4318,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `OpenBlocks` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `OpenBlocks` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### Operation
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -4504,28 +4328,28 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancel` | 无 | `void` | cancel方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `getBackgroundHandle` | 无 | `Future&lt;?&gt;` | getBackgroundHandle方法 |  |
-| `getConfiguration` | 无 | `HiveConf` | getConfiguration方法 |  |
-| `getHandle` | 无 | `OperationHandle` | getHandle方法 |  |
-| `getLastAccessTime` | 无 | `long` | getLastAccessTime方法 |  |
-| `getOperationLog` | 无 | `OperationLog` | getOperationLog方法 |  |
-| `getOperationTimeout` | 无 | `long` | getOperationTimeout方法 |  |
-| `getParentSession` | 无 | `HiveSession` | getParentSession方法 |  |
-| `getProtocolVersion` | 无 | `TProtocolVersion` | getProtocolVersion方法 |  |
-| `getStatus` | 无 | `OperationStatus` | getStatus方法 |  |
-| `getType` | 无 | `OperationType` | getType方法 |  |
-| `hasResultSet` | 无 | `boolean` | hasResultSet方法 |  |
-| `isCanceled` | 无 | `boolean` | isCanceled方法 |  |
-| `isFailed` | 无 | `boolean` | isFailed方法 |  |
-| `isFinished` | 无 | `boolean` | isFinished方法 |  |
-| `isRunning` | 无 | `boolean` | isRunning方法 |  |
-| `isTimedOut` | current: long | `boolean` | isTimedOut方法 |  |
-| `run` | 无 | `void` | run方法 |  |
-| `setConfiguration` | configuration: HiveConf | `void` | setConfiguration方法 |  |
-| `setOperationTimeout` | operationTimeout: long | `void` | setOperationTimeout方法 |  |
-| `shouldRunAsync` | 无 | `boolean` | shouldRunAsync方法 |  |
+| `cancel` | 无 | `void` | 判断能否cel相关功能 | 调用该方法执行判断能否cel相关功能 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getBackgroundHandle` | 无 | `Future&lt;?&gt;` | 获取BackgroundHandle相关功能 | 调用该方法执行获取BackgroundHandle相关功能 |
+| `getConfiguration` | 无 | `HiveConf` | 获取Configuration相关功能 | 调用该方法执行获取Configuration相关功能 |
+| `getHandle` | 无 | `OperationHandle` | 获取Handle相关功能 | 调用该方法执行获取Handle相关功能 |
+| `getLastAccessTime` | 无 | `long` | 获取LastAccessTime相关功能 | 调用该方法执行获取LastAccessTime相关功能 |
+| `getOperationLog` | 无 | `OperationLog` | 获取OperationLog相关功能 | 调用该方法执行获取OperationLog相关功能 |
+| `getOperationTimeout` | 无 | `long` | 获取OperationTimeout相关功能 | 调用该方法执行获取OperationTimeout相关功能 |
+| `getParentSession` | 无 | `HiveSession` | 获取ParentSession相关功能 | 调用该方法执行获取ParentSession相关功能 |
+| `getProtocolVersion` | 无 | `TProtocolVersion` | 获取ProtocolVersion相关功能 | 调用该方法执行获取ProtocolVersion相关功能 |
+| `getStatus` | 无 | `OperationStatus` | 获取Status相关功能 | 调用该方法执行获取Status相关功能 |
+| `getType` | 无 | `OperationType` | 获取Type相关功能 | 调用该方法执行获取Type相关功能 |
+| `hasResultSet` | 无 | `boolean` | 检查是否存在ResultSet相关功能 | 调用该方法执行检查是否存在ResultSet相关功能 |
+| `isCanceled` | 无 | `boolean` | 判断是否Canceled相关功能 | 调用该方法执行判断是否Canceled相关功能 |
+| `isFailed` | 无 | `boolean` | 判断是否Failed相关功能 | 调用该方法执行判断是否Failed相关功能 |
+| `isFinished` | 无 | `boolean` | 判断是否Finished相关功能 | 调用该方法执行判断是否Finished相关功能 |
+| `isRunning` | 无 | `boolean` | 判断是否Running相关功能 | 调用该方法执行判断是否Running相关功能 |
+| `isTimedOut` | current: long | `boolean` | 判断是否TimedOut相关功能 | 传入参数执行判断是否TimedOut相关功能 |
+| `run` | 无 | `void` | 运行相关功能 | 调用该方法执行运行相关功能 |
+| `setConfiguration` | configuration: HiveConf | `void` | 设置Configuration相关功能 | 传入参数执行设置Configuration相关功能 |
+| `setOperationTimeout` | operationTimeout: long | `void` | 设置OperationTimeout相关功能 | 传入参数执行设置OperationTimeout相关功能 |
+| `shouldRunAsync` | 无 | `boolean` | 判断是否应该RunAsync相关功能 | 调用该方法执行判断是否应该RunAsync相关功能 |
 
 ### OperationHandle
 **包路径**: `org.apache.hive.service.cli`
@@ -4533,11 +4357,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getOperationType` | 无 | `OperationType` | getOperationType方法 |  |
-| `getProtocolVersion` | 无 | `TProtocolVersion` | getProtocolVersion方法 |  |
-| `hasResultSet` | 无 | `boolean` | hasResultSet方法 |  |
-| `setHasResultSet` | hasResultSet: boolean | `void` | setHasResultSet方法 |  |
-| `toTOperationHandle` | 无 | `TOperationHandle` | toTOperationHandle方法 |  |
+| `getOperationType` | 无 | `OperationType` | 获取OperationType相关功能 | 调用该方法执行获取OperationType相关功能 |
+| `getProtocolVersion` | 无 | `TProtocolVersion` | 获取ProtocolVersion相关功能 | 调用该方法执行获取ProtocolVersion相关功能 |
+| `hasResultSet` | 无 | `boolean` | 检查是否存在ResultSet相关功能 | 调用该方法执行检查是否存在ResultSet相关功能 |
+| `setHasResultSet` | hasResultSet: boolean | `void` | 设置HasResultSet相关功能 | 传入参数执行设置HasResultSet相关功能 |
+| `toTOperationHandle` | 无 | `TOperationHandle` | 处理相关功能 | 调用该方法执行处理相关功能 |
 
 ### OperationManager
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -4545,25 +4369,25 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelOperation` | opHandle: OperationHandle | `void` | cancelOperation方法 |  |
-| `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
-| `getOperation` | operationHandle: OperationHandle | `Operation` | getOperation方法 |  |
-| `getOperationLogByThread` | 无 | `OperationLog` | getOperationLogByThread方法 |  |
-| `getOperationLogRowSet` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long | `TRowSet` | getOperationLogRowSet方法 |  |
-| `getOperationNextRowSet` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long | `TRowSet` | getOperationNextRowSet方法 |  |
-| `getOperationResultSetSchema` | opHandle: OperationHandle | `TTableSchema` | getOperationResultSetSchema方法 |  |
-| `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | getOperationStatus方法 |  |
-| `newExecuteStatementOperation` | parentSession: HiveSession, statement: String, confOverlay: String>, runAsync: boolean, queryTimeout: long | `ExecuteStatementOperation` | newExecuteStatementOperation方法 |  |
-| `newGetCatalogsOperation` | parentSession: HiveSession | `GetCatalogsOperation` | newGetCatalogsOperation方法 |  |
-| `newGetColumnsOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String, columnName: String | `GetColumnsOperation` | newGetColumnsOperation方法 |  |
-| `newGetCrossReferenceOperation` | session: HiveSession, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `GetCrossReferenceOperation` | newGetCrossReferenceOperation方法 |  |
-| `newGetFunctionsOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, functionName: String | `GetFunctionsOperation` | newGetFunctionsOperation方法 |  |
-| `newGetPrimaryKeysOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String | `GetPrimaryKeysOperation` | newGetPrimaryKeysOperation方法 |  |
-| `newGetSchemasOperation` | parentSession: HiveSession, catalogName: String, schemaName: String | `GetSchemasOperation` | newGetSchemasOperation方法 |  |
-| `newGetTableTypesOperation` | parentSession: HiveSession | `GetTableTypesOperation` | newGetTableTypesOperation方法 |  |
-| `newGetTablesOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `MetadataOperation` | newGetTablesOperation方法 |  |
-| `newGetTypeInfoOperation` | parentSession: HiveSession | `GetTypeInfoOperation` | newGetTypeInfoOperation方法 |  |
-| `removeExpiredOperations` | handles: OperationHandle&lt;&gt; | `List&lt;Operation&gt;` | removeExpiredOperations方法 |  |
+| `cancelOperation` | opHandle: OperationHandle | `void` | 判断能否celOperation相关功能 | 传入参数执行判断能否celOperation相关功能 |
+| `closeOperation` | opHandle: OperationHandle | `void` | 关闭Operation相关功能 | 传入参数执行关闭Operation相关功能 |
+| `getOperation` | operationHandle: OperationHandle | `Operation` | 获取Operation相关功能 | 传入参数执行获取Operation相关功能 |
+| `getOperationLogByThread` | 无 | `OperationLog` | 获取OperationLogByThread相关功能 | 调用该方法执行获取OperationLogByThread相关功能 |
+| `getOperationLogRowSet` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取OperationLogRowSet相关功能 | 传入参数执行获取OperationLogRowSet相关功能 |
+| `getOperationNextRowSet` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long | `TRowSet` | 获取OperationNextRowSet相关功能 | 传入参数执行获取OperationNextRowSet相关功能 |
+| `getOperationResultSetSchema` | opHandle: OperationHandle | `TTableSchema` | 获取OperationResultSetSchema相关功能 | 传入参数执行获取OperationResultSetSchema相关功能 |
+| `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | 获取OperationStatus相关功能 | 传入参数执行获取OperationStatus相关功能 |
+| `newExecuteStatementOperation` | parentSession: HiveSession, statement: String, confOverlay: String>, runAsync: boolean, queryTimeout: long | `ExecuteStatementOperation` | 执行相关功能 | 传入参数执行执行相关功能 |
+| `newGetCatalogsOperation` | parentSession: HiveSession | `GetCatalogsOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetColumnsOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String, columnName: String | `GetColumnsOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetCrossReferenceOperation` | session: HiveSession, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `GetCrossReferenceOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetFunctionsOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, functionName: String | `GetFunctionsOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetPrimaryKeysOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String | `GetPrimaryKeysOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetSchemasOperation` | parentSession: HiveSession, catalogName: String, schemaName: String | `GetSchemasOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetTableTypesOperation` | parentSession: HiveSession | `GetTableTypesOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetTablesOperation` | parentSession: HiveSession, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `MetadataOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `newGetTypeInfoOperation` | parentSession: HiveSession | `GetTypeInfoOperation` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `removeExpiredOperations` | handles: OperationHandle&lt;&gt; | `List&lt;Operation&gt;` | 移除ExpiredOperations相关功能 | 传入参数执行移除ExpiredOperations相关功能 |
 
 ### OperationState
 **包路径**: `org.apache.hive.service.cli`
@@ -4571,11 +4395,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getOperationState` | tOperationState: TOperationState | `OperationState` | getOperationState方法 |  |
-| `isTerminal` | 无 | `boolean` | isTerminal方法 |  |
-| `toTOperationState` | 无 | `TOperationState` | toTOperationState方法 |  |
-| `validateTransition` | oldState: OperationState, newState: OperationState | `void` | validateTransition方法 |  |
-| `validateTransition` | newState: OperationState | `void` | validateTransition方法 |  |
+| `getOperationState` | tOperationState: TOperationState | `OperationState` | 获取OperationState相关功能 | 传入参数执行获取OperationState相关功能 |
+| `isTerminal` | 无 | `boolean` | 判断是否Terminal相关功能 | 调用该方法执行判断是否Terminal相关功能 |
+| `toTOperationState` | 无 | `TOperationState` | 顶部相关功能 | 调用该方法执行顶部相关功能 |
+| `validateTransition` | oldState: OperationState, newState: OperationState | `void` | 校验Transition相关功能 | 传入参数执行校验Transition相关功能 |
+| `validateTransition` | newState: OperationState | `void` | 校验Transition相关功能 | 传入参数执行校验Transition相关功能 |
 
 ### OperationStatus
 **包路径**: `org.apache.hive.service.cli`
@@ -4583,8 +4407,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getOperationException` | 无 | `HiveSQLException` | getOperationException方法 |  |
-| `getState` | 无 | `OperationState` | getState方法 |  |
+| `getOperationException` | 无 | `HiveSQLException` | 获取OperationException相关功能 | 调用该方法执行获取OperationException相关功能 |
+| `getState` | 无 | `OperationState` | 获取State相关功能 | 调用该方法执行获取State相关功能 |
 
 ### OperationType
 **包路径**: `org.apache.hive.service.cli`
@@ -4592,8 +4416,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getOperationType` | tOperationType: TOperationType | `OperationType` | getOperationType方法 |  |
-| `toTOperationType` | 无 | `TOperationType` | toTOperationType方法 |  |
+| `getOperationType` | tOperationType: TOperationType | `OperationType` | 获取OperationType相关功能 | 传入参数执行获取OperationType相关功能 |
+| `toTOperationType` | 无 | `TOperationType` | 顶部相关功能 | 调用该方法执行顶部相关功能 |
 
 ### PamAuthenticationProviderImpl
 **包路径**: `org.apache.hive.service.auth`
@@ -4601,7 +4425,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `Authenticate` | user: String, password: String | `void` | Authenticate方法 |  |
+| `Authenticate` | user: String, password: String | `void` | 认证操作 | 传入参数执行认证操作 |
 
 ### ParentClassLoader
 **包路径**: `org.apache.spark.util`
@@ -4609,8 +4433,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `findClass` | name: String | `Class&lt;?&gt;` | findClass方法 |  |
-| `loadClass` | name: String, resolve: boolean | `Class&lt;?&gt;` | loadClass方法 |  |
+| `findClass` | name: String | `Class&lt;?&gt;` | 查找Class相关功能 | 传入参数执行查找Class相关功能 |
+| `loadClass` | name: String, resolve: boolean | `Class&lt;?&gt;` | 加载Class相关功能 | 传入参数执行加载Class相关功能 |
 
 ### PlainSaslServer
 **包路径**: `org.apache.hive.service.auth`
@@ -4618,12 +4442,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `createSaslServer` | mechanism: String, protocol: String, serverName: String, props: ?>, cbh: CallbackHandler | `SaslServer` | createSaslServer方法 |  |
-| `dispose` | 无 | `void` | dispose方法 |  |
-| `getAuthorizationID` | 无 | `String` | getAuthorizationID方法 |  |
-| `getMechanismName` | 无 | `String` | getMechanismName方法 |  |
-| `getNegotiatedProperty` | propName: String | `Object` | getNegotiatedProperty方法 |  |
-| `isComplete` | 无 | `boolean` | isComplete方法 |  |
+| `createSaslServer` | mechanism: String, protocol: String, serverName: String, props: ?>, cbh: CallbackHandler | `SaslServer` | 创建SaslServer相关功能 | 传入参数执行创建SaslServer相关功能 |
+| `dispose` | 无 | `void` | 释放相关功能 | 调用该方法执行释放相关功能 |
+| `getAuthorizationID` | 无 | `String` | 获取AuthorizationID相关功能 | 调用该方法执行获取AuthorizationID相关功能 |
+| `getMechanismName` | 无 | `String` | 获取MechanismName相关功能 | 调用该方法执行获取MechanismName相关功能 |
+| `getNegotiatedProperty` | propName: String | `Object` | 获取NegotiatedProperty相关功能 | 传入参数执行获取NegotiatedProperty相关功能 |
+| `isComplete` | 无 | `boolean` | 判断是否Complete相关功能 | 调用该方法执行判断是否Complete相关功能 |
 
 ### PrefixComparators
 **包路径**: `org.apache.spark.util.collection.unsafe.sort`
@@ -4631,41 +4455,16 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `compare` | aPrefix: long, bPrefix: long | `int` | compare方法 |  |
-| `compare` | aPrefix: long, bPrefix: long | `int` | compare方法 |  |
-| `compare` | bPrefix: long, aPrefix: long | `int` | compare方法 |  |
-| `compare` | bPrefix: long, aPrefix: long | `int` | compare方法 |  |
-| `compare` | a: long, b: long | `int` | compare方法 |  |
-| `compare` | a: long, b: long | `int` | compare方法 |  |
-| `compare` | b: long, a: long | `int` | compare方法 |  |
-| `compare` | b: long, a: long | `int` | compare方法 |  |
-| `computePrefix` | value: UTF8String | `long` | computePrefix方法 |  |
-| `computePrefix` | bytes: byte&lt;&gt; | `long` | computePrefix方法 |  |
-| `computePrefix` | value: double | `long` | computePrefix方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `nullsFirst` | 无 | `boolean` | nullsFirst方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortDescending` | 无 | `boolean` | sortDescending方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
-| `sortSigned` | 无 | `boolean` | sortSigned方法 |  |
+| `compare` | aPrefix: long, bPrefix: long | `int` | 比较相关功能 | 传入参数执行比较相关功能 |
+| `compare` | bPrefix: long, aPrefix: long | `int` | 比较相关功能 | 传入参数执行比较相关功能 |
+| `compare` | a: long, b: long | `int` | 比较相关功能 | 传入参数执行比较相关功能 |
+| `compare` | b: long, a: long | `int` | 比较相关功能 | 传入参数执行比较相关功能 |
+| `computePrefix` | value: UTF8String | `long` | 计算Prefix相关功能 | 传入参数执行计算Prefix相关功能 |
+| `computePrefix` | bytes: byte&lt;&gt; | `long` | 计算Prefix相关功能 | 传入参数执行计算Prefix相关功能 |
+| `computePrefix` | value: double | `long` | 计算Prefix相关功能 | 传入参数执行计算Prefix相关功能 |
+| `nullsFirst` | 无 | `boolean` | 第一个相关功能 | 调用该方法执行第一个相关功能 |
+| `sortDescending` | 无 | `boolean` | 排序Descending相关功能 | 调用该方法执行排序Descending相关功能 |
+| `sortSigned` | 无 | `boolean` | 排序Signed相关功能 | 调用该方法执行排序Signed相关功能 |
 
 ### ProxyUtils
 **包路径**: `org.apache.spark.deploy.yarn`
@@ -4673,10 +4472,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `html` | 无 | `HTML&lt;ProxyUtils.__&gt;` | html方法 |  |
-| `notFound` | resp: HttpServletResponse, message: String | `void` | notFound方法 |  |
-| `rejectNonHttpRequests` | req: ServletRequest | `void` | rejectNonHttpRequests方法 |  |
-| `sendRedirect` | request: HttpServletRequest, response: HttpServletResponse, target: String | `void` | sendRedirect方法 |  |
+| `html` | 无 | `HTML&lt;ProxyUtils.__&gt;` | html操作 | 调用该方法执行html操作 |
+| `notFound` | resp: HttpServletResponse, message: String | `void` | notFound操作 | 传入参数执行notFound操作 |
+| `rejectNonHttpRequests` | req: ServletRequest | `void` | 拒绝NonHttpRequests相关功能 | 传入参数执行拒绝NonHttpRequests相关功能 |
+| `sendRedirect` | request: HttpServletRequest, response: HttpServletResponse, target: String | `void` | 发送Redirect相关功能 | 传入参数执行发送Redirect相关功能 |
 
 ### PushBlockStream
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4684,9 +4483,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `PushBlockStream` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `PushBlockStream` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### RadixSort
 **包路径**: `org.apache.spark.util.collection.unsafe.sort`
@@ -4694,8 +4493,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `sort` | array: LongArray, numRecords: long, startByteIndex: int, endByteIndex: int, desc: boolean, signed: boolean | `int` | 排序 |  |
-| `sortKeyPrefixArray` | array: LongArray, startIndex: long, numRecords: long, startByteIndex: int, endByteIndex: int, desc: boolean, signed: boolean | `int` | sortKeyPrefixArray方法 |  |
+| `sort` | array: LongArray, numRecords: long, startByteIndex: int, endByteIndex: int, desc: boolean, signed: boolean | `int` | 排序 | 传入参数执行创建排序表达式 |
+| `sortKeyPrefixArray` | array: LongArray, startIndex: long, numRecords: long, startByteIndex: int, endByteIndex: int, desc: boolean, signed: boolean | `int` | 排序KeyPrefixArray相关功能 | 传入参数执行排序KeyPrefixArray相关功能 |
 
 ### ReadAheadInputStream
 **包路径**: `org.apache.spark.io`
@@ -4703,11 +4502,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `available` | 无 | `int` | available方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `read` | 无 | `int` | 读取数据源创建DataFrame |  |
-| `read` | b: byte&lt;&gt;, offset: int, len: int | `int` | 读取数据源创建DataFrame |  |
-| `skip` | n: long | `long` | skip方法 |  |
+| `available` | 无 | `int` | 检查数据是否可用 | 调用该方法执行检查数据是否可用 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `read` | 无 | `int` | 读取数据源创建DataFrame | 调用该方法执行读取相关功能 |
+| `read` | b: byte&lt;&gt;, offset: int, len: int | `int` | 读取数据源创建DataFrame | 传入参数执行读取相关功能 |
+| `skip` | n: long | `long` | 跳过相关功能 | 传入参数执行跳过相关功能 |
 
 ### RegisterExecutor
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4715,9 +4514,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `RegisterExecutor` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `RegisterExecutor` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### RemoteBlockPushResolver
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4725,41 +4524,37 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | applicationRemoved方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `finalizeShuffleMerge` | msg: FinalizeShuffleMerge | `MergeStatuses` | finalizeShuffleMerge方法 |  |
-| `getAppPathsInfo` | 无 | `AppPathsInfo` | getAppPathsInfo方法 |  |
-| `getCompletionResponse` | 无 | `ByteBuffer` | getCompletionResponse方法 |  |
-| `getCompletionResponse` | 无 | `ByteBuffer` | getCompletionResponse方法 |  |
-| `getDataFilePos` | 无 | `long` | getDataFilePos方法 |  |
-| `getDos` | 无 | `DataOutputStream` | getDos方法 |  |
-| `getID` | 无 | `String` | getID方法 |  |
-| `getID` | 无 | `String` | getID方法 |  |
-| `getMapTracker` | 无 | `RoaringBitmap` | getMapTracker方法 |  |
-| `getMergedBlockData` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, chunkId: int | `ManagedBuffer` | getMergedBlockData方法 |  |
-| `getMergedBlockMeta` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int | `MergedBlockMeta` | getMergedBlockMeta方法 |  |
-| `getMergedShuffleDataFile` | shuffleId: int, shuffleMergeId: int, reduceId: int | `File` | getMergedShuffleDataFile方法 |  |
-| `getMergedShuffleIndexFilePath` | shuffleId: int, shuffleMergeId: int, reduceId: int | `String` | getMergedShuffleIndexFilePath方法 |  |
-| `getMergedShuffleMetaFile` | shuffleId: int, shuffleMergeId: int, reduceId: int | `File` | getMergedShuffleMetaFile方法 |  |
-| `getMetrics` | 无 | `MetricSet` | getMetrics方法 |  |
-| `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | getMetrics方法 |  |
-| `getShuffleMergePartitions` | 无 | `Map&lt;Integer, AppShufflePartitionInfo&gt;` | getShuffleMergePartitions方法 |  |
-| `getShuffles` | 无 | `ConcurrentMap&lt;Integer, AppShuffleMergePartitionsInfo&gt;` | getShuffles方法 |  |
-| `isFinalized` | 无 | `boolean` | isFinalized方法 |  |
-| `load` | filePath: String | `ShuffleIndexInformation` | load方法 |  |
-| `onComplete` | streamId: String | `void` | onComplete方法 |  |
-| `onComplete` | streamId: String | `void` | onComplete方法 |  |
-| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
-| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
-| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | streamId: String, throwable: Throwable | `void` | onFailure方法 |  |
-| `receiveBlockDataAsStream` | msg: PushBlockStream | `StreamCallbackWithID` | receiveBlockDataAsStream方法 |  |
-| `registerExecutor` | appId: String, executorInfo: ExecutorShuffleInfo | `void` | registerExecutor方法 |  |
-| `removeShuffleMerge` | msg: RemoveShuffleMerge | `void` | removeShuffleMerge方法 |  |
-| `run` | 无 | `void` | run方法 |  |
-| `setDataFilePos` | dataFilePos: long | `void` | setDataFilePos方法 |  |
-| `setReduceIds` | reduceIds: int&lt;&gt; | `void` | setReduceIds方法 |  |
-| `shouldLogError` | t: Throwable | `boolean` | shouldLogError方法 |  |
+| `applicationRemoved` | appId: String, cleanupLocalDirs: boolean | `void` | 应用移除事件 | 传入参数执行应用移除事件 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `finalizeShuffleMerge` | msg: FinalizeShuffleMerge | `MergeStatuses` | 终结ShuffleMerge相关功能 | 传入参数执行终结ShuffleMerge相关功能 |
+| `getAppPathsInfo` | 无 | `AppPathsInfo` | 获取AppPathsInfo相关功能 | 调用该方法执行获取AppPathsInfo相关功能 |
+| `getCompletionResponse` | 无 | `ByteBuffer` | 获取CompletionResponse相关功能 | 调用该方法执行获取CompletionResponse相关功能 |
+| `getDataFilePos` | 无 | `long` | 获取DataFilePos相关功能 | 调用该方法执行获取DataFilePos相关功能 |
+| `getDos` | 无 | `DataOutputStream` | 获取Dos相关功能 | 调用该方法执行获取Dos相关功能 |
+| `getID` | 无 | `String` | 获取ID相关功能 | 调用该方法执行获取ID相关功能 |
+| `getMapTracker` | 无 | `RoaringBitmap` | 获取MapTracker相关功能 | 调用该方法执行获取MapTracker相关功能 |
+| `getMergedBlockData` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, chunkId: int | `ManagedBuffer` | 获取MergedBlockData相关功能 | 传入参数执行获取MergedBlockData相关功能 |
+| `getMergedBlockMeta` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int | `MergedBlockMeta` | 获取MergedBlockMeta相关功能 | 传入参数执行获取MergedBlockMeta相关功能 |
+| `getMergedShuffleDataFile` | shuffleId: int, shuffleMergeId: int, reduceId: int | `File` | 获取MergedShuffleDataFile相关功能 | 传入参数执行获取MergedShuffleDataFile相关功能 |
+| `getMergedShuffleIndexFilePath` | shuffleId: int, shuffleMergeId: int, reduceId: int | `String` | 获取MergedShuffleIndexFilePath相关功能 | 传入参数执行获取MergedShuffleIndexFilePath相关功能 |
+| `getMergedShuffleMetaFile` | shuffleId: int, shuffleMergeId: int, reduceId: int | `File` | 获取MergedShuffleMetaFile相关功能 | 传入参数执行获取MergedShuffleMetaFile相关功能 |
+| `getMetrics` | 无 | `MetricSet` | 获取Metrics相关功能 | 调用该方法执行获取Metrics相关功能 |
+| `getMetrics` | 无 | `Map&lt;String, Metric&gt;` | 获取Metrics相关功能 | 调用该方法执行获取Metrics相关功能 |
+| `getShuffleMergePartitions` | 无 | `Map&lt;Integer, AppShufflePartitionInfo&gt;` | 获取ShuffleMergePartitions相关功能 | 调用该方法执行获取ShuffleMergePartitions相关功能 |
+| `getShuffles` | 无 | `ConcurrentMap&lt;Integer, AppShuffleMergePartitionsInfo&gt;` | 获取Shuffles相关功能 | 调用该方法执行获取Shuffles相关功能 |
+| `isFinalized` | 无 | `boolean` | 判断是否Finalized相关功能 | 调用该方法执行判断是否Finalized相关功能 |
+| `load` | filePath: String | `ShuffleIndexInformation` | 加载相关功能 | 传入参数执行加载相关功能 |
+| `onComplete` | streamId: String | `void` | 完成相关功能 | 传入参数执行完成相关功能 |
+| `onData` | streamId: String, buf: ByteBuffer | `void` | onData操作 | 传入参数执行onData操作 |
+| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onFailure` | streamId: String, throwable: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `receiveBlockDataAsStream` | msg: PushBlockStream | `StreamCallbackWithID` | 接收BlockDataAsStream相关功能 | 传入参数执行接收BlockDataAsStream相关功能 |
+| `registerExecutor` | appId: String, executorInfo: ExecutorShuffleInfo | `void` | 注册Executor相关功能 | 传入参数执行注册Executor相关功能 |
+| `removeShuffleMerge` | msg: RemoveShuffleMerge | `void` | 移除ShuffleMerge相关功能 | 传入参数执行移除ShuffleMerge相关功能 |
+| `run` | 无 | `void` | 运行相关功能 | 调用该方法执行运行相关功能 |
+| `setDataFilePos` | dataFilePos: long | `void` | 设置DataFilePos相关功能 | 传入参数执行设置DataFilePos相关功能 |
+| `setReduceIds` | reduceIds: int&lt;&gt; | `void` | 设置ReduceIds相关功能 | 传入参数执行设置ReduceIds相关功能 |
+| `shouldLogError` | t: Throwable | `boolean` | 判断是否应该LogError相关功能 | 传入参数执行判断是否应该LogError相关功能 |
 
 ### RemoveBlocks
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4767,9 +4562,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `RemoveBlocks` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `RemoveBlocks` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### RemoveShuffleMerge
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -4777,9 +4572,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `RemoveShuffleMerge` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `RemoveShuffleMerge` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### RetryingBlockTransferor
 **包路径**: `org.apache.spark.network.shuffle`
@@ -4787,15 +4582,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getRetryCount` | 无 | `int` | getRetryCount方法 |  |
-| `getTransferType` | 无 | `String` | getTransferType方法 |  |
-| `onBlockFetchFailure` | blockId: String, exception: Throwable | `void` | onBlockFetchFailure方法 |  |
-| `onBlockFetchSuccess` | blockId: String, data: ManagedBuffer | `void` | onBlockFetchSuccess方法 |  |
-| `onBlockPushFailure` | blockId: String, exception: Throwable | `void` | onBlockPushFailure方法 |  |
-| `onBlockPushSuccess` | blockId: String, data: ManagedBuffer | `void` | onBlockPushSuccess方法 |  |
-| `onBlockTransferFailure` | blockId: String, exception: Throwable | `void` | onBlockTransferFailure方法 |  |
-| `onBlockTransferSuccess` | blockId: String, data: ManagedBuffer | `void` | onBlockTransferSuccess方法 |  |
-| `start` | 无 | `void` | start方法 |  |
+| `getRetryCount` | 无 | `int` | 获取RetryCount相关功能 | 调用该方法执行获取RetryCount相关功能 |
+| `getTransferType` | 无 | `String` | 获取TransferType相关功能 | 调用该方法执行获取TransferType相关功能 |
+| `onBlockFetchFailure` | blockId: String, exception: Throwable | `void` | 锁定相关功能 | 传入参数执行锁定相关功能 |
+| `onBlockFetchSuccess` | blockId: String, data: ManagedBuffer | `void` | 锁定相关功能 | 传入参数执行锁定相关功能 |
+| `onBlockPushFailure` | blockId: String, exception: Throwable | `void` | 锁定相关功能 | 传入参数执行锁定相关功能 |
+| `onBlockPushSuccess` | blockId: String, data: ManagedBuffer | `void` | 锁定相关功能 | 传入参数执行锁定相关功能 |
+| `onBlockTransferFailure` | blockId: String, exception: Throwable | `void` | 锁定相关功能 | 传入参数执行锁定相关功能 |
+| `onBlockTransferSuccess` | blockId: String, data: ManagedBuffer | `void` | 锁定相关功能 | 传入参数执行锁定相关功能 |
+| `start` | 无 | `void` | 启动相关功能 | 调用该方法执行启动相关功能 |
 
 ### RocksDB
 **包路径**: `org.apache.spark.network.shuffledb`
@@ -4803,18 +4598,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `close` | 无 | `void` | close方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
 | `count` | type: Class<?> | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
 | `count` | type: Class<?>, index: String, indexedValue: Object | `long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
-| `delete` | key: byte&lt;&gt; | `void` | delete方法 |  |
-| `delete` | type: Class<?>, naturalKey: Object | `void` | delete方法 |  |
-| `iterator` | 无 | `DBIterator` | 获取迭代器 |  |
-| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 |  |
-| `put` | key: byte&lt;&gt;, value: byte&lt;&gt; | `void` | 添加键值对 |  |
-| `setMetadata` | value: Object | `void` | setMetadata方法 |  |
-| `write` | value: Object | `void` | 写入DataFrame到数据源 |  |
-| `writeAll` | values: List<?> | `void` | writeAll方法 |  |
+| `delete` | key: byte&lt;&gt; | `void` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `delete` | type: Class<?>, naturalKey: Object | `void` | 删除请求相关功能 | 传入参数执行删除请求相关功能 |
+| `iterator` | 无 | `DBIterator` | 获取迭代器 | 调用该方法执行时期相关功能 |
+| `iterator` | 无 | `Iterator&lt;T&gt;` | 获取迭代器 | 调用该方法执行时期相关功能 |
+| `put` | key: byte&lt;&gt;, value: byte&lt;&gt; | `void` | 添加键值对 | 传入参数执行放入相关功能 |
+| `setMetadata` | value: Object | `void` | 设置Metadata相关功能 | 传入参数执行设置Metadata相关功能 |
+| `write` | value: Object | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
+| `writeAll` | values: List<?> | `void` | 写入All相关功能 | 传入参数执行写入All相关功能 |
 
 ### RocksDBIterator
 **包路径**: `org.apache.spark.network.shuffledb`
@@ -4822,9 +4616,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `seek` | key: byte&lt;&gt; | `void` | seek方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `seek` | key: byte&lt;&gt; | `void` | 定位相关功能 | 传入参数执行定位相关功能 |
 
 ### RocksDBProvider
 **包路径**: `org.apache.spark.network.util`
@@ -4832,9 +4626,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkVersion` | db: RocksDB, newversion: StoreVersion, mapper: ObjectMapper | `void` | checkVersion方法 |  |
-| `initRockDB` | dbFile: File, version: StoreVersion, mapper: ObjectMapper | `RocksDB` | initRockDB方法 |  |
-| `storeVersion` | db: RocksDB, version: StoreVersion, mapper: ObjectMapper | `void` | storeVersion方法 |  |
+| `checkVersion` | db: RocksDB, newversion: StoreVersion, mapper: ObjectMapper | `void` | 检查Version相关功能 | 传入参数执行检查Version相关功能 |
+| `initRockDB` | dbFile: File, version: StoreVersion, mapper: ObjectMapper | `RocksDB` | 初始化RockDB相关功能 | 传入参数执行初始化RockDB相关功能 |
+| `storeVersion` | db: RocksDB, version: StoreVersion, mapper: ObjectMapper | `void` | 版本相关功能 | 传入参数执行版本相关功能 |
 
 ### RowBasedSet
 **包路径**: `org.apache.hive.service.cli`
@@ -4842,18 +4636,18 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addRow` | fields: Object&lt;&gt; | `RowBasedSet` | addRow方法 |  |
-| `extractSubset` | maxRows: int | `RowBasedSet` | extractSubset方法 |  |
-| `getSize` | 无 | `int` | getSize方法 |  |
-| `getStartOffset` | 无 | `long` | getStartOffset方法 |  |
-| `hasNext` | 无 | `boolean` | hasNext方法 |  |
-| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | 获取迭代器 |  |
-| `numColumns` | 无 | `int` | numColumns方法 |  |
-| `numRows` | 无 | `int` | numRows方法 |  |
-| `remove` | 无 | `void` | 删除元素 |  |
-| `removeRange` | fromIndex: int, toIndex: int | `void` | removeRange方法 |  |
-| `setStartOffset` | startOffset: long | `void` | setStartOffset方法 |  |
-| `toTRowSet` | 无 | `TRowSet` | toTRowSet方法 |  |
+| `addRow` | fields: Object&lt;&gt; | `RowBasedSet` | 添加行到批处理 | 传入参数执行添加行到批处理 |
+| `extractSubset` | maxRows: int | `RowBasedSet` | 额外ctSubset相关功能 | 传入参数执行额外ctSubset相关功能 |
+| `getSize` | 无 | `int` | 获取Size相关功能 | 调用该方法执行获取Size相关功能 |
+| `getStartOffset` | 无 | `long` | 获取StartOffset相关功能 | 调用该方法执行获取StartOffset相关功能 |
+| `hasNext` | 无 | `boolean` | 检查迭代器是否还有下一元素 | 检查迭代器是否还有下一行 |
+| `iterator` | 无 | `Iterator&lt;Object[]&gt;` | 获取迭代器 | 调用该方法执行时期相关功能 |
+| `numColumns` | 无 | `int` | 列相关功能 | 调用该方法执行列相关功能 |
+| `numRows` | 无 | `int` | numRows操作 | 调用该方法执行numRows操作 |
+| `remove` | 无 | `void` | 删除元素 | 调用该方法执行移除相关功能 |
+| `removeRange` | fromIndex: int, toIndex: int | `void` | 移除Range相关功能 | 传入参数执行移除Range相关功能 |
+| `setStartOffset` | startOffset: long | `void` | 设置StartOffset相关功能 | 传入参数执行设置StartOffset相关功能 |
+| `toTRowSet` | 无 | `TRowSet` | 设置相关功能 | 调用该方法执行设置相关功能 |
 
 ### RowSetFactory
 **包路径**: `org.apache.hive.service.cli`
@@ -4861,8 +4655,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `create` | schema: TableSchema, version: TProtocolVersion, isBlobBased: boolean | `RowSet` | create方法 |  |
-| `create` | results: TRowSet, version: TProtocolVersion | `RowSet` | create方法 |  |
+| `create` | schema: TableSchema, version: TProtocolVersion, isBlobBased: boolean | `RowSet` | 创建相关功能 | 传入参数执行创建相关功能 |
+| `create` | results: TRowSet, version: TProtocolVersion | `RowSet` | 创建相关功能 | 传入参数执行创建相关功能 |
 
 ### RpcHandler
 **包路径**: `org.apache.spark.network.server`
@@ -4870,15 +4664,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `channelActive` | client: TransportClient | `void` | channelActive方法 |  |
-| `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
-| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught方法 |  |
-| `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | getMergedBlockMetaReqHandler方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `receive` | client: TransportClient, message: ByteBuffer | `void` | receive方法 |  |
-| `receiveMergeBlockMetaReq` | client: TransportClient, mergedBlockMetaRequest: MergedBlockMetaRequest, callback: MergedBlockMetaResponseCallback | `void` | receiveMergeBlockMetaReq方法 |  |
-| `receiveStream` | client: TransportClient, messageHeader: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | receiveStream方法 |  |
+| `channelActive` | client: TransportClient | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `channelInactive` | client: TransportClient | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `exceptionCaught` | cause: Throwable, client: TransportClient | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `getMergedBlockMetaReqHandler` | 无 | `MergedBlockMetaReqHandler` | 获取MergedBlockMetaReqHandler相关功能 | 调用该方法执行获取MergedBlockMetaReqHandler相关功能 |
+| `onFailure` | e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `receive` | client: TransportClient, message: ByteBuffer | `void` | 接收相关功能 | 传入参数执行接收相关功能 |
+| `receiveMergeBlockMetaReq` | client: TransportClient, mergedBlockMetaRequest: MergedBlockMetaRequest, callback: MergedBlockMetaResponseCallback | `void` | 接收MergeBlockMetaReq相关功能 | 传入参数执行接收MergeBlockMetaReq相关功能 |
+| `receiveStream` | client: TransportClient, messageHeader: ByteBuffer, callback: RpcResponseCallback | `StreamCallbackWithID` | 接收Stream相关功能 | 传入参数执行接收Stream相关功能 |
 
 ### SSLFactory
 **包路径**: `org.apache.spark.network.ssl`
@@ -4886,20 +4680,20 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `build` | 无 | `SSLFactory` | build方法 |  |
-| `certChain` | certChain: File | `Builder` | certChain方法 |  |
-| `checkClientTrusted` | x509Certificates: X509Certificate&lt;&gt;, s: String | `void` | checkClientTrusted方法 |  |
-| `checkServerTrusted` | x509Certificates: X509Certificate&lt;&gt;, s: String | `void` | checkServerTrusted方法 |  |
-| `createSSLEngine` | isClient: boolean, allocator: ByteBufAllocator | `SSLEngine` | createSSLEngine方法 |  |
-| `destroy` | 无 | `void` | destroy方法 |  |
-| `keyPassword` | keyPassword: String | `Builder` | keyPassword方法 |  |
-| `keyStore` | keyStore: File, keyStorePassword: String | `Builder` | keyStore方法 |  |
-| `openSslEnabled` | enabled: boolean | `Builder` | openSslEnabled方法 |  |
-| `privateKey` | privateKey: File | `Builder` | privateKey方法 |  |
-| `privateKeyPassword` | privateKeyPassword: String | `Builder` | privateKeyPassword方法 |  |
-| `requestedCiphers` | requestedCiphers: String&lt;&gt; | `Builder` | requestedCiphers方法 |  |
-| `requestedProtocol` | requestedProtocol: String | `Builder` | requestedProtocol方法 |  |
-| `trustStore` | trustStore: File, trustStorePassword: String, trustStoreReloadingEnabled: boolean, trustStoreReloadIntervalMs: int | `Builder` | trustStore方法 |  |
+| `build` | 无 | `SSLFactory` | 构建约束对象 | 构建Check约束对象 |
+| `certChain` | certChain: File | `Builder` | certChain操作 | 传入参数执行certChain操作 |
+| `checkClientTrusted` | x509Certificates: X509Certificate&lt;&gt;, s: String | `void` | 检查ClientTrusted相关功能 | 传入参数执行检查ClientTrusted相关功能 |
+| `checkServerTrusted` | x509Certificates: X509Certificate&lt;&gt;, s: String | `void` | 检查ServerTrusted相关功能 | 传入参数执行检查ServerTrusted相关功能 |
+| `createSSLEngine` | isClient: boolean, allocator: ByteBufAllocator | `SSLEngine` | 创建SSLEngine相关功能 | 传入参数执行创建SSLEngine相关功能 |
+| `destroy` | 无 | `void` | 销毁相关功能 | 调用该方法执行销毁相关功能 |
+| `keyPassword` | keyPassword: String | `Builder` | keyPassword操作 | 传入参数执行keyPassword操作 |
+| `keyStore` | keyStore: File, keyStorePassword: String | `Builder` | keyStore操作 | 传入参数执行keyStore操作 |
+| `openSslEnabled` | enabled: boolean | `Builder` | 打开SslEnabled相关功能 | 传入参数执行打开SslEnabled相关功能 |
+| `privateKey` | privateKey: File | `Builder` | 私有Key相关功能 | 传入参数执行私有Key相关功能 |
+| `privateKeyPassword` | privateKeyPassword: String | `Builder` | 私有KeyPassword相关功能 | 传入参数执行私有KeyPassword相关功能 |
+| `requestedCiphers` | requestedCiphers: String&lt;&gt; | `Builder` | 请求edCiphers相关功能 | 传入参数执行请求edCiphers相关功能 |
+| `requestedProtocol` | requestedProtocol: String | `Builder` | 请求edProtocol相关功能 | 传入参数执行请求edProtocol相关功能 |
+| `trustStore` | trustStore: File, trustStorePassword: String, trustStoreReloadingEnabled: boolean, trustStoreReloadIntervalMs: int | `Builder` | trustStore操作 | 传入参数执行trustStore操作 |
 
 ### SaslClientBootstrap
 **包路径**: `org.apache.spark.network.sasl`
@@ -4907,7 +4701,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | client: TransportClient, channel: Channel | `void` | doBootstrap方法 |  |
+| `doBootstrap` | client: TransportClient, channel: Channel | `void` | 执行Bootstrap相关功能 | 传入参数执行执行Bootstrap相关功能 |
 
 ### SaslQOP
 **包路径**: `org.apache.hive.service.auth`
@@ -4915,7 +4709,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | str: String | `SaslQOP` | fromString方法 |  |
+| `fromString` | str: String | `SaslQOP` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ### SaslRpcHandler
 **包路径**: `org.apache.spark.network.sasl`
@@ -4923,8 +4717,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `channelInactive` | client: TransportClient | `void` | channelInactive方法 |  |
-| `doAuthChallenge` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `boolean` | doAuthChallenge方法 |  |
+| `channelInactive` | client: TransportClient | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `doAuthChallenge` | client: TransportClient, message: ByteBuffer, callback: RpcResponseCallback | `boolean` | 执行AuthChallenge相关功能 | 传入参数执行执行AuthChallenge相关功能 |
 
 ### SaslServerBootstrap
 **包路径**: `org.apache.spark.network.sasl`
@@ -4932,7 +4726,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `doBootstrap` | channel: Channel, rpcHandler: RpcHandler | `RpcHandler` | doBootstrap方法 |  |
+| `doBootstrap` | channel: Channel, rpcHandler: RpcHandler | `RpcHandler` | 执行Bootstrap相关功能 | 传入参数执行执行Bootstrap相关功能 |
 
 ### ServiceUtils
 **包路径**: `org.apache.hive.service`
@@ -4940,8 +4734,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cleanup` | log: SparkLogger, closeables: java.io.Closeable... | `void` | cleanup方法 |  |
-| `indexOfDomainMatch` | userName: String | `int` | indexOfDomainMatch方法 |  |
+| `cleanup` | log: SparkLogger, closeables: java.io.Closeable... | `void` | 向上相关功能 | 传入参数执行向上相关功能 |
+| `indexOfDomainMatch` | userName: String | `int` | 执行相关功能 | 传入参数执行执行相关功能 |
 
 ### SessionHandle
 **包路径**: `org.apache.hive.service.cli`
@@ -4949,9 +4743,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getProtocolVersion` | 无 | `TProtocolVersion` | getProtocolVersion方法 |  |
-| `getSessionId` | 无 | `UUID` | getSessionId方法 |  |
-| `toTSessionHandle` | 无 | `TSessionHandle` | toTSessionHandle方法 |  |
+| `getProtocolVersion` | 无 | `TProtocolVersion` | 获取ProtocolVersion相关功能 | 调用该方法执行获取ProtocolVersion相关功能 |
+| `getSessionId` | 无 | `UUID` | 获取SessionId相关功能 | 调用该方法执行获取SessionId相关功能 |
+| `toTSessionHandle` | 无 | `TSessionHandle` | 处理相关功能 | 调用该方法执行处理相关功能 |
 
 ### SessionManager
 **包路径**: `org.apache.hive.service.cli.session`
@@ -4959,23 +4753,23 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `clearIpAddress` | 无 | `void` | clearIpAddress方法 |  |
-| `clearProxyUserName` | 无 | `void` | clearProxyUserName方法 |  |
-| `clearUserName` | 无 | `void` | clearUserName方法 |  |
-| `closeSession` | sessionHandle: SessionHandle | `void` | closeSession方法 |  |
-| `getIpAddress` | 无 | `String` | getIpAddress方法 |  |
-| `getOpenSessionCount` | 无 | `int` | getOpenSessionCount方法 |  |
-| `getOperationManager` | 无 | `OperationManager` | getOperationManager方法 |  |
-| `getProxyUserName` | 无 | `String` | getProxyUserName方法 |  |
-| `getSession` | sessionHandle: SessionHandle | `HiveSession` | getSession方法 |  |
-| `getUserName` | 无 | `String` | getUserName方法 |  |
-| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, sessionConf: String> | `SessionHandle` | openSession方法 |  |
-| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, sessionConf: String>, withImpersonation: boolean, delegationToken: String | `SessionHandle` | openSession方法 |  |
-| `run` | 无 | `void` | run方法 |  |
-| `setIpAddress` | ipAddress: String | `void` | setIpAddress方法 |  |
-| `setProxyUserName` | userName: String | `void` | setProxyUserName方法 |  |
-| `setUserName` | userName: String | `void` | setUserName方法 |  |
-| `submitBackgroundOperation` | r: Runnable | `Future&lt;?&gt;` | submitBackgroundOperation方法 |  |
+| `clearIpAddress` | 无 | `void` | 清除IpAddress相关功能 | 调用该方法执行清除IpAddress相关功能 |
+| `clearProxyUserName` | 无 | `void` | 清除ProxyUserName相关功能 | 调用该方法执行清除ProxyUserName相关功能 |
+| `clearUserName` | 无 | `void` | 清除UserName相关功能 | 调用该方法执行清除UserName相关功能 |
+| `closeSession` | sessionHandle: SessionHandle | `void` | 关闭Session相关功能 | 传入参数执行关闭Session相关功能 |
+| `getIpAddress` | 无 | `String` | 获取IpAddress相关功能 | 调用该方法执行获取IpAddress相关功能 |
+| `getOpenSessionCount` | 无 | `int` | 获取OpenSessionCount相关功能 | 调用该方法执行获取OpenSessionCount相关功能 |
+| `getOperationManager` | 无 | `OperationManager` | 获取OperationManager相关功能 | 调用该方法执行获取OperationManager相关功能 |
+| `getProxyUserName` | 无 | `String` | 获取ProxyUserName相关功能 | 调用该方法执行获取ProxyUserName相关功能 |
+| `getSession` | sessionHandle: SessionHandle | `HiveSession` | 获取Session相关功能 | 传入参数执行获取Session相关功能 |
+| `getUserName` | 无 | `String` | 获取UserName相关功能 | 调用该方法执行获取UserName相关功能 |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, sessionConf: String> | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
+| `openSession` | protocol: TProtocolVersion, username: String, password: String, ipAddress: String, sessionConf: String>, withImpersonation: boolean, delegationToken: String | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
+| `run` | 无 | `void` | 运行相关功能 | 调用该方法执行运行相关功能 |
+| `setIpAddress` | ipAddress: String | `void` | 设置IpAddress相关功能 | 传入参数执行设置IpAddress相关功能 |
+| `setProxyUserName` | userName: String | `void` | 设置ProxyUserName相关功能 | 传入参数执行设置ProxyUserName相关功能 |
+| `setUserName` | userName: String | `void` | 设置UserName相关功能 | 传入参数执行设置UserName相关功能 |
+| `submitBackgroundOperation` | r: Runnable | `Future&lt;?&gt;` | 子mitBackgroundOperation相关功能 | 传入参数执行子mitBackgroundOperation相关功能 |
 
 ### ShreddingUtils
 **包路径**: `org.apache.spark.types.variant`
@@ -4983,8 +4777,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `rebuild` | row: ShreddedRow, schema: VariantSchema | `Variant` | rebuild方法 |  |
-| `rebuild` | row: ShreddedRow, metadata: byte&lt;&gt;, schema: VariantSchema, builder: VariantBuilder | `void` | rebuild方法 |  |
+| `rebuild` | row: ShreddedRow, schema: VariantSchema | `Variant` | 构建相关功能 | 传入参数执行构建相关功能 |
+| `rebuild` | row: ShreddedRow, metadata: byte&lt;&gt;, schema: VariantSchema, builder: VariantBuilder | `void` | 构建相关功能 | 传入参数执行构建相关功能 |
 
 ### ShuffleChecksumHelper
 **包路径**: `org.apache.spark.network.shuffle.checksum`
@@ -4992,9 +4786,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `diagnoseCorruption` | algorithm: String, checksumFile: File, reduceId: int, partitionData: ManagedBuffer, checksumByReader: long | `Cause` | diagnoseCorruption方法 |  |
-| `getChecksumByAlgorithm` | algorithm: String | `Checksum` | getChecksumByAlgorithm方法 |  |
-| `getChecksumFileName` | blockName: String, algorithm: String | `String` | getChecksumFileName方法 |  |
+| `diagnoseCorruption` | algorithm: String, checksumFile: File, reduceId: int, partitionData: ManagedBuffer, checksumByReader: long | `Cause` | 向上相关功能 | 传入参数执行向上相关功能 |
+| `getChecksumByAlgorithm` | algorithm: String | `Checksum` | 获取ChecksumByAlgorithm相关功能 | 传入参数执行获取ChecksumByAlgorithm相关功能 |
+| `getChecksumFileName` | blockName: String, algorithm: String | `String` | 获取ChecksumFileName相关功能 | 传入参数执行获取ChecksumFileName相关功能 |
 
 ### ShuffleIndexInformation
 **包路径**: `org.apache.spark.network.shuffle`
@@ -5002,9 +4796,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getIndex` | reduceId: int | `ShuffleIndexRecord` | getIndex方法 |  |
-| `getIndex` | startReduceId: int, endReduceId: int | `ShuffleIndexRecord` | getIndex方法 |  |
-| `getRetainedMemorySize` | 无 | `int` | getRetainedMemorySize方法 |  |
+| `getIndex` | reduceId: int | `ShuffleIndexRecord` | 获取Index相关功能 | 传入参数执行获取Index相关功能 |
+| `getIndex` | startReduceId: int, endReduceId: int | `ShuffleIndexRecord` | 获取Index相关功能 | 传入参数执行获取Index相关功能 |
+| `getRetainedMemorySize` | 无 | `int` | 获取RetainedMemorySize相关功能 | 调用该方法执行获取RetainedMemorySize相关功能 |
 
 ### ShuffleSecretManager
 **包路径**: `org.apache.spark.network.sasl`
@@ -5012,11 +4806,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSaslUser` | appId: String | `String` | getSaslUser方法 |  |
-| `getSecretKey` | appId: String | `String` | getSecretKey方法 |  |
-| `registerApp` | appId: String, shuffleSecret: String | `void` | registerApp方法 |  |
-| `registerApp` | appId: String, shuffleSecret: ByteBuffer | `void` | registerApp方法 |  |
-| `unregisterApp` | appId: String | `void` | unregisterApp方法 |  |
+| `getSaslUser` | appId: String | `String` | 获取SaslUser相关功能 | 传入参数执行获取SaslUser相关功能 |
+| `getSecretKey` | appId: String | `String` | 获取SecretKey相关功能 | 传入参数执行获取SecretKey相关功能 |
+| `registerApp` | appId: String, shuffleSecret: String | `void` | 注册App相关功能 | 传入参数执行注册App相关功能 |
+| `registerApp` | appId: String, shuffleSecret: ByteBuffer | `void` | 注册App相关功能 | 传入参数执行注册App相关功能 |
+| `unregisterApp` | appId: String | `void` | 取消注册App相关功能 | 传入参数执行取消注册App相关功能 |
 
 ### ShuffleTransportContext
 **包路径**: `org.apache.spark.network.shuffle`
@@ -5024,9 +4818,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `acceptInboundMessage` | msg: Object | `boolean` | acceptInboundMessage方法 |  |
-| `initializePipeline` | channel: SocketChannel, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
-| `initializePipeline` | channel: SocketChannel, channelRpcHandler: RpcHandler, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
+| `acceptInboundMessage` | msg: Object | `boolean` | 接受入站消息 | 传入参数执行接受入站消息 |
+| `initializePipeline` | channel: SocketChannel, isClient: boolean | `TransportChannelHandler` | 初始化ializePipeline相关功能 | 传入参数执行初始化ializePipeline相关功能 |
+| `initializePipeline` | channel: SocketChannel, channelRpcHandler: RpcHandler, isClient: boolean | `TransportChannelHandler` | 初始化ializePipeline相关功能 | 传入参数执行初始化ializePipeline相关功能 |
 
 ### SimpleDownloadFile
 **包路径**: `org.apache.spark.network.shuffle`
@@ -5034,13 +4828,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `closeAndRead` | 无 | `ManagedBuffer` | closeAndRead方法 |  |
-| `delete` | 无 | `boolean` | delete方法 |  |
-| `isOpen` | 无 | `boolean` | isOpen方法 |  |
-| `openForWriting` | 无 | `DownloadFileWritableChannel` | openForWriting方法 |  |
-| `path` | 无 | `String` | path方法 |  |
-| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `closeAndRead` | 无 | `ManagedBuffer` | 关闭AndRead相关功能 | 调用该方法执行关闭AndRead相关功能 |
+| `delete` | 无 | `boolean` | 删除请求相关功能 | 调用该方法执行删除请求相关功能 |
+| `isOpen` | 无 | `boolean` | 判断是否Open相关功能 | 调用该方法执行判断是否Open相关功能 |
+| `openForWriting` | 无 | `DownloadFileWritableChannel` | 打开ForWriting相关功能 | 调用该方法执行打开ForWriting相关功能 |
+| `path` | 无 | `String` | path操作 | 调用该方法执行path操作 |
+| `write` | src: ByteBuffer | `int` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### SparkAppHandle
 **包路径**: `org.apache.spark.launcher`
@@ -5048,7 +4842,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `isFinal` | 无 | `boolean` | isFinal方法 |  |
+| `isFinal` | 无 | `boolean` | 判断是否Final相关功能 | 调用该方法执行判断是否Final相关功能 |
 
 ### SparkDefaultUDAFEvaluatorResolver
 **包路径**: `org.apache.hadoop.hive.ql.exec`
@@ -5056,7 +4850,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getEvaluatorClass` | argClasses: List<TypeInfo> | `Class&lt;? extends UDAFEvaluator&gt;` | getEvaluatorClass方法 |  |
+| `getEvaluatorClass` | argClasses: List<TypeInfo> | `Class&lt;? extends UDAFEvaluator&gt;` | 获取EvaluatorClass相关功能 | 传入参数执行获取EvaluatorClass相关功能 |
 
 ### SparkDefaultUDFMethodResolver
 **包路径**: `org.apache.hadoop.hive.ql.exec`
@@ -5064,7 +4858,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getEvalMethod` | argClasses: List<TypeInfo> | `Method` | getEvalMethod方法 |  |
+| `getEvalMethod` | argClasses: List<TypeInfo> | `Method` | 获取EvalMethod相关功能 | 传入参数执行获取EvalMethod相关功能 |
 
 ### SparkFirehoseListener
 **包路径**: `org.apache.spark`
@@ -5072,42 +4866,42 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `onApplicationEnd` | applicationEnd: SparkListenerApplicationEnd | `void` | onApplicationEnd方法 |  |
-| `onApplicationStart` | applicationStart: SparkListenerApplicationStart | `void` | onApplicationStart方法 |  |
-| `onBlockManagerAdded` | blockManagerAdded: SparkListenerBlockManagerAdded | `void` | onBlockManagerAdded方法 |  |
-| `onBlockManagerRemoved` | blockManagerRemoved: SparkListenerBlockManagerRemoved | `void` | onBlockManagerRemoved方法 |  |
-| `onBlockUpdated` | blockUpdated: SparkListenerBlockUpdated | `void` | onBlockUpdated方法 |  |
-| `onEnvironmentUpdate` | environmentUpdate: SparkListenerEnvironmentUpdate | `void` | onEnvironmentUpdate方法 |  |
-| `onEvent` | event: SparkListenerEvent | `void` | onEvent方法 |  |
-| `onExecutorAdded` | executorAdded: SparkListenerExecutorAdded | `void` | onExecutorAdded方法 |  |
-| `onExecutorBlacklisted` | executorBlacklisted: SparkListenerExecutorBlacklisted | `void` | onExecutorBlacklisted方法 |  |
-| `onExecutorBlacklistedForStage` | executorBlacklistedForStage: SparkListenerExecutorBlacklistedForStage | `void` | onExecutorBlacklistedForStage方法 |  |
-| `onExecutorExcluded` | executorExcluded: SparkListenerExecutorExcluded | `void` | onExecutorExcluded方法 |  |
-| `onExecutorExcludedForStage` | executorExcludedForStage: SparkListenerExecutorExcludedForStage | `void` | onExecutorExcludedForStage方法 |  |
-| `onExecutorMetricsUpdate` | executorMetricsUpdate: SparkListenerExecutorMetricsUpdate | `void` | onExecutorMetricsUpdate方法 |  |
-| `onExecutorRemoved` | executorRemoved: SparkListenerExecutorRemoved | `void` | onExecutorRemoved方法 |  |
-| `onExecutorUnblacklisted` | executorUnblacklisted: SparkListenerExecutorUnblacklisted | `void` | onExecutorUnblacklisted方法 |  |
-| `onExecutorUnexcluded` | executorUnexcluded: SparkListenerExecutorUnexcluded | `void` | onExecutorUnexcluded方法 |  |
-| `onJobEnd` | jobEnd: SparkListenerJobEnd | `void` | onJobEnd方法 |  |
-| `onJobStart` | jobStart: SparkListenerJobStart | `void` | onJobStart方法 |  |
-| `onNodeBlacklisted` | nodeBlacklisted: SparkListenerNodeBlacklisted | `void` | onNodeBlacklisted方法 |  |
-| `onNodeBlacklistedForStage` | nodeBlacklistedForStage: SparkListenerNodeBlacklistedForStage | `void` | onNodeBlacklistedForStage方法 |  |
-| `onNodeExcluded` | nodeExcluded: SparkListenerNodeExcluded | `void` | onNodeExcluded方法 |  |
-| `onNodeExcludedForStage` | nodeExcludedForStage: SparkListenerNodeExcludedForStage | `void` | onNodeExcludedForStage方法 |  |
-| `onNodeUnblacklisted` | nodeUnblacklisted: SparkListenerNodeUnblacklisted | `void` | onNodeUnblacklisted方法 |  |
-| `onNodeUnexcluded` | nodeUnexcluded: SparkListenerNodeUnexcluded | `void` | onNodeUnexcluded方法 |  |
-| `onOtherEvent` | event: SparkListenerEvent | `void` | onOtherEvent方法 |  |
-| `onResourceProfileAdded` | event: SparkListenerResourceProfileAdded | `void` | onResourceProfileAdded方法 |  |
-| `onSpeculativeTaskSubmitted` | speculativeTask: SparkListenerSpeculativeTaskSubmitted | `void` | onSpeculativeTaskSubmitted方法 |  |
-| `onStageCompleted` | stageCompleted: SparkListenerStageCompleted | `void` | onStageCompleted方法 |  |
-| `onStageExecutorMetrics` | executorMetrics: SparkListenerStageExecutorMetrics | `void` | onStageExecutorMetrics方法 |  |
-| `onStageSubmitted` | stageSubmitted: SparkListenerStageSubmitted | `void` | onStageSubmitted方法 |  |
-| `onTaskEnd` | taskEnd: SparkListenerTaskEnd | `void` | onTaskEnd方法 |  |
-| `onTaskGettingResult` | taskGettingResult: SparkListenerTaskGettingResult | `void` | onTaskGettingResult方法 |  |
-| `onTaskStart` | taskStart: SparkListenerTaskStart | `void` | onTaskStart方法 |  |
-| `onUnpersistRDD` | unpersistRDD: SparkListenerUnpersistRDD | `void` | onUnpersistRDD方法 |  |
-| `onUnschedulableTaskSetAdded` | unschedulableTaskSetAdded: SparkListenerUnschedulableTaskSetAdded | `void` | onUnschedulableTaskSetAdded方法 |  |
-| `onUnschedulableTaskSetRemoved` | unschedulableTaskSetRemoved: SparkListenerUnschedulableTaskSetRemoved | `void` | onUnschedulableTaskSetRemoved方法 |  |
+| `onApplicationEnd` | applicationEnd: SparkListenerApplicationEnd | `void` | 结束相关功能 | 传入参数执行结束相关功能 |
+| `onApplicationStart` | applicationStart: SparkListenerApplicationStart | `void` | 启动相关功能 | 传入参数执行启动相关功能 |
+| `onBlockManagerAdded` | blockManagerAdded: SparkListenerBlockManagerAdded | `void` | 添加相关功能 | 传入参数执行添加相关功能 |
+| `onBlockManagerRemoved` | blockManagerRemoved: SparkListenerBlockManagerRemoved | `void` | 移除相关功能 | 传入参数执行移除相关功能 |
+| `onBlockUpdated` | blockUpdated: SparkListenerBlockUpdated | `void` | 更新相关功能 | 传入参数执行更新相关功能 |
+| `onEnvironmentUpdate` | environmentUpdate: SparkListenerEnvironmentUpdate | `void` | 更新相关功能 | 传入参数执行更新相关功能 |
+| `onEvent` | event: SparkListenerEvent | `void` | onEvent操作 | 传入参数执行onEvent操作 |
+| `onExecutorAdded` | executorAdded: SparkListenerExecutorAdded | `void` | 添加相关功能 | 传入参数执行添加相关功能 |
+| `onExecutorBlacklisted` | executorBlacklisted: SparkListenerExecutorBlacklisted | `void` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `onExecutorBlacklistedForStage` | executorBlacklistedForStage: SparkListenerExecutorBlacklistedForStage | `void` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `onExecutorExcluded` | executorExcluded: SparkListenerExecutorExcluded | `void` | onExecutorExcluded操作 | 传入参数执行onExecutorExcluded操作 |
+| `onExecutorExcludedForStage` | executorExcludedForStage: SparkListenerExecutorExcludedForStage | `void` | 年龄相关功能 | 传入参数执行年龄相关功能 |
+| `onExecutorMetricsUpdate` | executorMetricsUpdate: SparkListenerExecutorMetricsUpdate | `void` | 更新相关功能 | 传入参数执行更新相关功能 |
+| `onExecutorRemoved` | executorRemoved: SparkListenerExecutorRemoved | `void` | 移除相关功能 | 传入参数执行移除相关功能 |
+| `onExecutorUnblacklisted` | executorUnblacklisted: SparkListenerExecutorUnblacklisted | `void` | 运行相关功能 | 传入参数执行运行相关功能 |
+| `onExecutorUnexcluded` | executorUnexcluded: SparkListenerExecutorUnexcluded | `void` | 运行相关功能 | 传入参数执行运行相关功能 |
+| `onJobEnd` | jobEnd: SparkListenerJobEnd | `void` | 结束相关功能 | 传入参数执行结束相关功能 |
+| `onJobStart` | jobStart: SparkListenerJobStart | `void` | 启动相关功能 | 传入参数执行启动相关功能 |
+| `onNodeBlacklisted` | nodeBlacklisted: SparkListenerNodeBlacklisted | `void` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `onNodeBlacklistedForStage` | nodeBlacklistedForStage: SparkListenerNodeBlacklistedForStage | `void` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `onNodeExcluded` | nodeExcluded: SparkListenerNodeExcluded | `void` | onNodeExcluded操作 | 传入参数执行onNodeExcluded操作 |
+| `onNodeExcludedForStage` | nodeExcludedForStage: SparkListenerNodeExcludedForStage | `void` | 年龄相关功能 | 传入参数执行年龄相关功能 |
+| `onNodeUnblacklisted` | nodeUnblacklisted: SparkListenerNodeUnblacklisted | `void` | 判断是否相关功能 | 传入参数执行判断是否相关功能 |
+| `onNodeUnexcluded` | nodeUnexcluded: SparkListenerNodeUnexcluded | `void` | onNodeUnexcluded操作 | 传入参数执行onNodeUnexcluded操作 |
+| `onOtherEvent` | event: SparkListenerEvent | `void` | onOtherEvent操作 | 传入参数执行onOtherEvent操作 |
+| `onResourceProfileAdded` | event: SparkListenerResourceProfileAdded | `void` | 添加相关功能 | 传入参数执行添加相关功能 |
+| `onSpeculativeTaskSubmitted` | speculativeTask: SparkListenerSpeculativeTaskSubmitted | `void` | 子相关功能 | 传入参数执行子相关功能 |
+| `onStageCompleted` | stageCompleted: SparkListenerStageCompleted | `void` | 完成相关功能 | 传入参数执行完成相关功能 |
+| `onStageExecutorMetrics` | executorMetrics: SparkListenerStageExecutorMetrics | `void` | 年龄相关功能 | 传入参数执行年龄相关功能 |
+| `onStageSubmitted` | stageSubmitted: SparkListenerStageSubmitted | `void` | 子相关功能 | 传入参数执行子相关功能 |
+| `onTaskEnd` | taskEnd: SparkListenerTaskEnd | `void` | 结束相关功能 | 传入参数执行结束相关功能 |
+| `onTaskGettingResult` | taskGettingResult: SparkListenerTaskGettingResult | `void` | 获取相关功能 | 传入参数执行获取相关功能 |
+| `onTaskStart` | taskStart: SparkListenerTaskStart | `void` | 启动相关功能 | 传入参数执行启动相关功能 |
+| `onUnpersistRDD` | unpersistRDD: SparkListenerUnpersistRDD | `void` | 持久化相关功能 | 传入参数执行持久化相关功能 |
+| `onUnschedulableTaskSetAdded` | unschedulableTaskSetAdded: SparkListenerUnschedulableTaskSetAdded | `void` | 设置相关功能 | 传入参数执行设置相关功能 |
+| `onUnschedulableTaskSetRemoved` | unschedulableTaskSetRemoved: SparkListenerUnschedulableTaskSetRemoved | `void` | 设置相关功能 | 传入参数执行设置相关功能 |
 
 ### SparkGenericUDAFBridge
 **包路径**: `org.apache.hadoop.hive.ql.udf.generic`
@@ -5115,11 +4909,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getEvaluator` | parameters: TypeInfo&lt;&gt; | `GenericUDAFEvaluator` | getEvaluator方法 |  |
-| `iterate` | agg: AggregationBuffer, parameters: Object&lt;&gt; | `void` | iterate方法 |  |
-| `merge` | agg: AggregationBuffer, partial: Object | `void` | merge方法 |  |
-| `terminate` | agg: AggregationBuffer | `Object` | terminate方法 |  |
-| `terminatePartial` | agg: AggregationBuffer | `Object` | terminatePartial方法 |  |
+| `getEvaluator` | parameters: TypeInfo&lt;&gt; | `GenericUDAFEvaluator` | 获取Evaluator相关功能 | 传入参数执行获取Evaluator相关功能 |
+| `iterate` | agg: AggregationBuffer, parameters: Object&lt;&gt; | `void` | 迭代相关功能 | 传入参数执行迭代相关功能 |
+| `merge` | agg: AggregationBuffer, partial: Object | `void` | 合并相关功能 | 传入参数执行合并相关功能 |
+| `terminate` | agg: AggregationBuffer | `Object` | terminate操作 | 传入参数执行terminate操作 |
+| `terminatePartial` | agg: AggregationBuffer | `Object` | terminatePartial操作 | 传入参数执行terminatePartial操作 |
 
 ### SparkLauncher
 **包路径**: `org.apache.spark.launcher`
@@ -5127,32 +4921,32 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addAppArgs` | args: String... | `SparkLauncher` | addAppArgs方法 |  |
+| `addAppArgs` | args: String... | `SparkLauncher` | 添加应用参数 | 传入参数执行添加应用参数 |
 | `addFile` | file: String | `SparkLauncher` | 添加文件到Spark作业，所有Executor可访问 | // 添加文件到Spark作业<br>sc.addFile("hdfs://path/to/config.txt");<br>sc.addFile("s3://bucket/data.json");<br><br>// 在Executor中访问文件<br>String filePath = SparkFiles.get("config.txt"); |
 | `addJar` | jar: String | `SparkLauncher` | 添加JAR包到Spark作业 | // 添加依赖JAR包<br>sc.addJar("hdfs://path/to/dependency.jar");<br>sc.addJar("/local/path/to/lib.jar"); |
-| `addPyFile` | file: String | `SparkLauncher` | addPyFile方法 |  |
-| `addSparkArg` | arg: String | `SparkLauncher` | addSparkArg方法 |  |
-| `addSparkArg` | name: String, value: String | `SparkLauncher` | addSparkArg方法 |  |
-| `directory` | dir: File | `SparkLauncher` | directory方法 |  |
-| `launch` | 无 | `Process` | launch方法 |  |
-| `redirectError` | 无 | `SparkLauncher` | redirectError方法 |  |
-| `redirectError` | to: ProcessBuilder.Redirect | `SparkLauncher` | redirectError方法 |  |
-| `redirectError` | errFile: File | `SparkLauncher` | redirectError方法 |  |
-| `redirectOutput` | to: ProcessBuilder.Redirect | `SparkLauncher` | redirectOutput方法 |  |
-| `redirectOutput` | outFile: File | `SparkLauncher` | redirectOutput方法 |  |
-| `redirectToLog` | loggerName: String | `SparkLauncher` | redirectToLog方法 |  |
-| `setAppName` | appName: String | `SparkLauncher` | setAppName方法 |  |
-| `setAppResource` | resource: String | `SparkLauncher` | setAppResource方法 |  |
-| `setConf` | key: String, value: String | `SparkLauncher` | setConf方法 |  |
-| `setConfig` | name: String, value: String | `void` | setConfig方法 |  |
-| `setDeployMode` | mode: String | `SparkLauncher` | setDeployMode方法 |  |
-| `setJavaHome` | javaHome: String | `SparkLauncher` | setJavaHome方法 |  |
-| `setMainClass` | mainClass: String | `SparkLauncher` | setMainClass方法 |  |
-| `setMaster` | master: String | `SparkLauncher` | setMaster方法 |  |
-| `setPropertiesFile` | path: String | `SparkLauncher` | setPropertiesFile方法 |  |
-| `setSparkHome` | sparkHome: String | `SparkLauncher` | setSparkHome方法 |  |
-| `setVerbose` | verbose: boolean | `SparkLauncher` | setVerbose方法 |  |
-| `startApplication` | listeners: SparkAppHandle.Listener... | `SparkAppHandle` | startApplication方法 |  |
+| `addPyFile` | file: String | `SparkLauncher` | 添加Python文件 | 传入参数执行添加Python文件 |
+| `addSparkArg` | arg: String | `SparkLauncher` | 添加Spark参数 | 传入参数执行添加Spark参数 |
+| `addSparkArg` | name: String, value: String | `SparkLauncher` | 添加Spark参数 | 传入参数执行添加Spark参数 |
+| `directory` | dir: File | `SparkLauncher` | directory操作 | 传入参数执行directory操作 |
+| `launch` | 无 | `Process` | launch操作 | 调用该方法执行launch操作 |
+| `redirectError` | 无 | `SparkLauncher` | 重定向Error相关功能 | 调用该方法执行重定向Error相关功能 |
+| `redirectError` | to: ProcessBuilder.Redirect | `SparkLauncher` | 重定向Error相关功能 | 传入参数执行重定向Error相关功能 |
+| `redirectError` | errFile: File | `SparkLauncher` | 重定向Error相关功能 | 传入参数执行重定向Error相关功能 |
+| `redirectOutput` | to: ProcessBuilder.Redirect | `SparkLauncher` | 重定向Output相关功能 | 传入参数执行重定向Output相关功能 |
+| `redirectOutput` | outFile: File | `SparkLauncher` | 重定向Output相关功能 | 传入参数执行重定向Output相关功能 |
+| `redirectToLog` | loggerName: String | `SparkLauncher` | 重定向ToLog相关功能 | 传入参数执行重定向ToLog相关功能 |
+| `setAppName` | appName: String | `SparkLauncher` | 设置AppName相关功能 | 传入参数执行设置AppName相关功能 |
+| `setAppResource` | resource: String | `SparkLauncher` | 设置AppResource相关功能 | 传入参数执行设置AppResource相关功能 |
+| `setConf` | key: String, value: String | `SparkLauncher` | 设置Conf相关功能 | 传入参数执行设置Conf相关功能 |
+| `setConfig` | name: String, value: String | `void` | 设置Config相关功能 | 传入参数执行设置Config相关功能 |
+| `setDeployMode` | mode: String | `SparkLauncher` | 设置DeployMode相关功能 | 传入参数执行设置DeployMode相关功能 |
+| `setJavaHome` | javaHome: String | `SparkLauncher` | 设置JavaHome相关功能 | 传入参数执行设置JavaHome相关功能 |
+| `setMainClass` | mainClass: String | `SparkLauncher` | 设置MainClass相关功能 | 传入参数执行设置MainClass相关功能 |
+| `setMaster` | master: String | `SparkLauncher` | 设置Master相关功能 | 传入参数执行设置Master相关功能 |
+| `setPropertiesFile` | path: String | `SparkLauncher` | 设置PropertiesFile相关功能 | 传入参数执行设置PropertiesFile相关功能 |
+| `setSparkHome` | sparkHome: String | `SparkLauncher` | 设置SparkHome相关功能 | 传入参数执行设置SparkHome相关功能 |
+| `setVerbose` | verbose: boolean | `SparkLauncher` | 设置Verbose相关功能 | 传入参数执行设置Verbose相关功能 |
+| `startApplication` | listeners: SparkAppHandle.Listener... | `SparkAppHandle` | 启动Application相关功能 | 传入参数执行启动Application相关功能 |
 
 ### SparkLoggerFactory
 **包路径**: `org.apache.spark.internal`
@@ -5160,11 +4954,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `disableStructuredLogging` | 无 | `void` | disableStructuredLogging方法 |  |
-| `enableStructuredLogging` | 无 | `void` | enableStructuredLogging方法 |  |
-| `getLogger` | name: String | `SparkLogger` | getLogger方法 |  |
-| `getLogger` | clazz: Class<?> | `SparkLogger` | getLogger方法 |  |
-| `isStructuredLoggingEnabled` | 无 | `boolean` | isStructuredLoggingEnabled方法 |  |
+| `disableStructuredLogging` | 无 | `void` | 禁用StructuredLogging相关功能 | 调用该方法执行禁用StructuredLogging相关功能 |
+| `enableStructuredLogging` | 无 | `void` | 启用StructuredLogging相关功能 | 调用该方法执行启用StructuredLogging相关功能 |
+| `getLogger` | name: String | `SparkLogger` | 获取Logger相关功能 | 传入参数执行获取Logger相关功能 |
+| `getLogger` | clazz: Class<?> | `SparkLogger` | 获取Logger相关功能 | 传入参数执行获取Logger相关功能 |
+| `isStructuredLoggingEnabled` | 无 | `boolean` | 判断是否StructuredLoggingEnabled相关功能 | 调用该方法执行判断是否StructuredLoggingEnabled相关功能 |
 
 ### SparkOrcNewRecordReader
 **包路径**: `org.apache.hadoop.hive.ql.io.orc`
@@ -5172,13 +4966,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `getCurrentKey` | 无 | `NullWritable` | getCurrentKey方法 |  |
-| `getCurrentValue` | 无 | `OrcStruct` | getCurrentValue方法 |  |
-| `getObjectInspector` | 无 | `ObjectInspector` | getObjectInspector方法 |  |
-| `getProgress` | 无 | `float` | getProgress方法 |  |
-| `initialize` | split: InputSplit, context: TaskAttemptContext | `void` | initialize方法 |  |
-| `nextKeyValue` | 无 | `boolean` | nextKeyValue方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getCurrentKey` | 无 | `NullWritable` | 获取CurrentKey相关功能 | 调用该方法执行获取CurrentKey相关功能 |
+| `getCurrentValue` | 无 | `OrcStruct` | 获取CurrentValue相关功能 | 调用该方法执行获取CurrentValue相关功能 |
+| `getObjectInspector` | 无 | `ObjectInspector` | 获取ObjectInspector相关功能 | 调用该方法执行获取ObjectInspector相关功能 |
+| `getProgress` | 无 | `float` | 获取Progress相关功能 | 调用该方法执行获取Progress相关功能 |
+| `initialize` | split: InputSplit, context: TaskAttemptContext | `void` | 初始化插件 | 初始化目录插件 |
+| `nextKeyValue` | 无 | `boolean` | 之后KeyValue相关功能 | 调用该方法执行之后KeyValue相关功能 |
 
 ### SparkSaslClient
 **包路径**: `org.apache.spark.network.sasl`
@@ -5186,8 +4980,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getNegotiatedProperty` | name: String | `Object` | getNegotiatedProperty方法 |  |
-| `handle` | callbacks: Callback&lt;&gt; | `void` | handle方法 |  |
+| `getNegotiatedProperty` | name: String | `Object` | 获取NegotiatedProperty相关功能 | 传入参数执行获取NegotiatedProperty相关功能 |
+| `handle` | callbacks: Callback&lt;&gt; | `void` | 处理相关功能 | 传入参数执行处理相关功能 |
 
 ### SparkSaslServer
 **包路径**: `org.apache.spark.network.sasl`
@@ -5195,9 +4989,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `encodeIdentifier` | identifier: String | `String` | encodeIdentifier方法 |  |
-| `getNegotiatedProperty` | name: String | `Object` | getNegotiatedProperty方法 |  |
-| `handle` | callbacks: Callback&lt;&gt; | `void` | handle方法 |  |
+| `encodeIdentifier` | identifier: String | `String` | 编码Identifier相关功能 | 传入参数执行编码Identifier相关功能 |
+| `getNegotiatedProperty` | name: String | `Object` | 获取NegotiatedProperty相关功能 | 传入参数执行获取NegotiatedProperty相关功能 |
+| `handle` | callbacks: Callback&lt;&gt; | `void` | 处理相关功能 | 传入参数执行处理相关功能 |
 
 ### StageStatus
 **包路径**: `org.apache.spark.status.api.v1`
@@ -5205,7 +4999,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | str: String | `StageStatus` | fromString方法 |  |
+| `fromString` | str: String | `StageStatus` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ### StorageLevels
 **包路径**: `org.apache.spark.api.java`
@@ -5213,7 +5007,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `create` | useDisk: boolean, useMemory: boolean, useOffHeap: boolean, deserialized: boolean, replication: int | `StorageLevel` | create方法 |  |
+| `create` | useDisk: boolean, useMemory: boolean, useOffHeap: boolean, deserialized: boolean, replication: int | `StorageLevel` | 创建相关功能 | 传入参数执行创建相关功能 |
 
 ### StreamHandle
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -5221,9 +5015,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `StreamHandle` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `StreamHandle` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### StreamInterceptor
 **包路径**: `org.apache.spark.network.client`
@@ -5231,9 +5025,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `channelInactive` | 无 | `void` | channelInactive方法 |  |
-| `exceptionCaught` | cause: Throwable | `void` | exceptionCaught方法 |  |
-| `handle` | buf: ByteBuf | `boolean` | handle方法 |  |
+| `channelInactive` | 无 | `void` | 活跃相关功能 | 调用该方法执行活跃相关功能 |
+| `exceptionCaught` | cause: Throwable | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `handle` | buf: ByteBuf | `boolean` | 处理相关功能 | 传入参数执行处理相关功能 |
 
 ### StreamManager
 **包路径**: `org.apache.spark.network.server`
@@ -5241,14 +5035,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkAuthorization` | client: TransportClient, streamId: long | `void` | checkAuthorization方法 |  |
-| `chunkBeingSent` | streamId: long | `void` | chunkBeingSent方法 |  |
-| `chunkSent` | streamId: long | `void` | chunkSent方法 |  |
-| `chunksBeingTransferred` | 无 | `long` | chunksBeingTransferred方法 |  |
-| `connectionTerminated` | channel: Channel | `void` | connectionTerminated方法 |  |
-| `openStream` | streamId: String | `ManagedBuffer` | openStream方法 |  |
-| `streamBeingSent` | streamId: String | `void` | streamBeingSent方法 |  |
-| `streamSent` | streamId: String | `void` | streamSent方法 |  |
+| `checkAuthorization` | client: TransportClient, streamId: long | `void` | 检查Authorization相关功能 | 传入参数执行检查Authorization相关功能 |
+| `chunkBeingSent` | streamId: long | `void` | chunkBeingSent操作 | 传入参数执行chunkBeingSent操作 |
+| `chunkSent` | streamId: long | `void` | chunkSent操作 | 传入参数执行chunkSent操作 |
+| `chunksBeingTransferred` | 无 | `long` | 转移相关功能 | 调用该方法执行转移相关功能 |
+| `connectionTerminated` | channel: Channel | `void` | 连接ionTerminated相关功能 | 传入参数执行连接ionTerminated相关功能 |
+| `openStream` | streamId: String | `ManagedBuffer` | 打开Stream相关功能 | 传入参数执行打开Stream相关功能 |
+| `streamBeingSent` | streamId: String | `void` | streamBeingSent操作 | 传入参数执行streamBeingSent操作 |
+| `streamSent` | streamId: String | `void` | streamSent操作 | 传入参数执行streamSent操作 |
 
 ### TServlet
 **包路径**: `org.apache.hive.service.cli.thrift`
@@ -5256,11 +5050,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addCustomHeader` | key: final String, value: final String | `void` | addCustomHeader方法 |  |
-| `getKey` | 无 | `String` | getKey方法 |  |
-| `getValue` | 无 | `String` | getValue方法 |  |
-| `setCustomHeaders` | headers: String>> | `void` | setCustomHeaders方法 |  |
-| `setValue` | value: String | `String` | setValue方法 |  |
+| `addCustomHeader` | key: final String, value: final String | `void` | 添加自定义请求头 | 传入参数执行添加自定义请求头 |
+| `getKey` | 无 | `String` | 获取Key相关功能 | 调用该方法执行获取Key相关功能 |
+| `getValue` | 无 | `String` | 获取列的默认值 | 返回列默认值的Literal对象 |
+| `setCustomHeaders` | headers: String>> | `void` | 设置CustomHeaders相关功能 | 传入参数执行设置CustomHeaders相关功能 |
+| `setValue` | value: String | `String` | 设置Value相关功能 | 传入参数执行设置Value相关功能 |
 
 ### TSetIpAddressProcessor
 **包路径**: `org.apache.hive.service.auth`
@@ -5268,9 +5062,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getUserIpAddress` | 无 | `String` | getUserIpAddress方法 |  |
-| `getUserName` | 无 | `String` | getUserName方法 |  |
-| `process` | in: final TProtocol, out: final TProtocol | `void` | process方法 |  |
+| `getUserIpAddress` | 无 | `String` | 获取UserIpAddress相关功能 | 调用该方法执行获取UserIpAddress相关功能 |
+| `getUserName` | 无 | `String` | 获取UserName相关功能 | 调用该方法执行获取UserName相关功能 |
+| `process` | in: final TProtocol, out: final TProtocol | `void` | 处理相关功能 | 传入参数执行处理相关功能 |
 
 ### TSubjectAssumingTransport
 **包路径**: `org.apache.hive.service.auth`
@@ -5278,7 +5072,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `open` | 无 | `void` | open方法 |  |
+| `open` | 无 | `void` | 打开相关功能 | 调用该方法执行打开相关功能 |
 
 ### TableSchema
 **包路径**: `org.apache.hive.service.cli`
@@ -5286,13 +5080,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addPrimitiveColumn` | columnName: String, columnType: Type, columnComment: String | `TableSchema` | addPrimitiveColumn方法 |  |
-| `addStringColumn` | columnName: String, columnComment: String | `TableSchema` | addStringColumn方法 |  |
-| `clear` | 无 | `void` | 清空集合 |  |
-| `getColumnDescriptorAt` | pos: int | `ColumnDescriptor` | getColumnDescriptorAt方法 |  |
-| `getColumnDescriptors` | 无 | `List&lt;ColumnDescriptor&gt;` | getColumnDescriptors方法 |  |
-| `getSize` | 无 | `int` | getSize方法 |  |
-| `toTTableSchema` | 无 | `TTableSchema` | toTTableSchema方法 |  |
+| `addPrimitiveColumn` | columnName: String, columnType: Type, columnComment: String | `TableSchema` | 添加原始类型列 | 传入参数执行添加原始类型列 |
+| `addStringColumn` | columnName: String, columnComment: String | `TableSchema` | 添加字符串类型列 | 传入参数执行添加字符串类型列 |
+| `clear` | 无 | `void` | 清空集合 | 调用该方法执行清除相关功能 |
+| `getColumnDescriptorAt` | pos: int | `ColumnDescriptor` | 获取ColumnDescriptorAt相关功能 | 传入参数执行获取ColumnDescriptorAt相关功能 |
+| `getColumnDescriptors` | 无 | `List&lt;ColumnDescriptor&gt;` | 获取ColumnDescriptors相关功能 | 调用该方法执行获取ColumnDescriptors相关功能 |
+| `getSize` | 无 | `int` | 获取Size相关功能 | 调用该方法执行获取Size相关功能 |
+| `toTTableSchema` | 无 | `TTableSchema` | toTTableSchema操作 | 调用该方法执行toTTableSchema操作 |
 
 ### TableTypeMappingFactory
 **包路径**: `org.apache.hive.service.cli.operation`
@@ -5300,7 +5094,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getTableTypeMapping` | mappingType: String | `TableTypeMapping` | getTableTypeMapping方法 |  |
+| `getTableTypeMapping` | mappingType: String | `TableTypeMapping` | 获取TableTypeMapping相关功能 | 传入参数执行获取TableTypeMapping相关功能 |
 
 ### TaskMemoryManager
 **包路径**: `org.apache.spark.memory`
@@ -5308,22 +5102,22 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `acquireExecutionMemory` | required: long, requestingConsumer: MemoryConsumer | `long` | acquireExecutionMemory方法 |  |
-| `allocatePage` | size: long, consumer: MemoryConsumer | `MemoryBlock` | allocatePage方法 |  |
-| `cleanUpAllAllocatedMemory` | 无 | `long` | cleanUpAllAllocatedMemory方法 |  |
-| `decodePageNumber` | pagePlusOffsetAddress: long | `int` | decodePageNumber方法 |  |
-| `encodePageNumberAndOffset` | page: MemoryBlock, offsetInPage: long | `long` | encodePageNumberAndOffset方法 |  |
-| `encodePageNumberAndOffset` | pageNumber: int, offsetInPage: long | `long` | encodePageNumberAndOffset方法 |  |
-| `freePage` | page: MemoryBlock, consumer: MemoryConsumer | `void` | freePage方法 |  |
-| `getMemoryConsumptionForThisTask` | 无 | `long` | getMemoryConsumptionForThisTask方法 |  |
-| `getOffsetInPage` | pagePlusOffsetAddress: long | `long` | getOffsetInPage方法 |  |
-| `getPage` | pagePlusOffsetAddress: long | `Object` | getPage方法 |  |
-| `getPeakOffHeapExecutionMemory` | 无 | `long` | getPeakOffHeapExecutionMemory方法 |  |
-| `getPeakOnHeapExecutionMemory` | 无 | `long` | getPeakOnHeapExecutionMemory方法 |  |
-| `getTungstenMemoryMode` | 无 | `MemoryMode` | getTungstenMemoryMode方法 |  |
-| `pageSizeBytes` | 无 | `long` | pageSizeBytes方法 |  |
-| `releaseExecutionMemory` | size: long, consumer: MemoryConsumer | `void` | releaseExecutionMemory方法 |  |
-| `showMemoryUsage` | 无 | `void` | showMemoryUsage方法 |  |
+| `acquireExecutionMemory` | required: long, requestingConsumer: MemoryConsumer | `long` | 获取执行内存 | 传入参数执行获取执行内存 |
+| `allocatePage` | size: long, consumer: MemoryConsumer | `MemoryBlock` | 分配页面内存 | 传入参数执行分配页面内存 |
+| `cleanUpAllAllocatedMemory` | 无 | `long` | 分配相关功能 | 调用该方法执行分配相关功能 |
+| `decodePageNumber` | pagePlusOffsetAddress: long | `int` | 解码PageNumber相关功能 | 传入参数执行解码PageNumber相关功能 |
+| `encodePageNumberAndOffset` | page: MemoryBlock, offsetInPage: long | `long` | 编码PageNumberAndOffset相关功能 | 传入参数执行编码PageNumberAndOffset相关功能 |
+| `encodePageNumberAndOffset` | pageNumber: int, offsetInPage: long | `long` | 编码PageNumberAndOffset相关功能 | 传入参数执行编码PageNumberAndOffset相关功能 |
+| `freePage` | page: MemoryBlock, consumer: MemoryConsumer | `void` | 年龄相关功能 | 传入参数执行年龄相关功能 |
+| `getMemoryConsumptionForThisTask` | 无 | `long` | 获取MemoryConsumptionForThisTask相关功能 | 调用该方法执行获取MemoryConsumptionForThisTask相关功能 |
+| `getOffsetInPage` | pagePlusOffsetAddress: long | `long` | 获取OffsetInPage相关功能 | 传入参数执行获取OffsetInPage相关功能 |
+| `getPage` | pagePlusOffsetAddress: long | `Object` | 获取Page相关功能 | 传入参数执行获取Page相关功能 |
+| `getPeakOffHeapExecutionMemory` | 无 | `long` | 获取PeakOffHeapExecutionMemory相关功能 | 调用该方法执行获取PeakOffHeapExecutionMemory相关功能 |
+| `getPeakOnHeapExecutionMemory` | 无 | `long` | 获取PeakOnHeapExecutionMemory相关功能 | 调用该方法执行获取PeakOnHeapExecutionMemory相关功能 |
+| `getTungstenMemoryMode` | 无 | `MemoryMode` | 获取TungstenMemoryMode相关功能 | 调用该方法执行获取TungstenMemoryMode相关功能 |
+| `pageSizeBytes` | 无 | `long` | 年龄相关功能 | 调用该方法执行年龄相关功能 |
+| `releaseExecutionMemory` | size: long, consumer: MemoryConsumer | `void` | 发布ExecutionMemory相关功能 | 传入参数执行发布ExecutionMemory相关功能 |
+| `showMemoryUsage` | 无 | `void` | 年龄相关功能 | 调用该方法执行年龄相关功能 |
 
 ### TaskSorting
 **包路径**: `org.apache.spark.status.api.v1`
@@ -5331,7 +5125,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | str: String | `TaskSorting` | fromString方法 |  |
+| `fromString` | str: String | `TaskSorting` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ### TaskStatus
 **包路径**: `org.apache.spark.status.api.v1`
@@ -5339,7 +5133,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | str: String | `TaskStatus` | fromString方法 |  |
+| `fromString` | str: String | `TaskStatus` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ### ThreadFactoryWithGarbageCleanup
 **包路径**: `org.apache.hive.service.server`
@@ -5347,8 +5141,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getThreadRawStoreMap` | 无 | `Map&lt;Long, RawStore&gt;` | getThreadRawStoreMap方法 |  |
-| `newThread` | runnable: Runnable | `Thread` | newThread方法 |  |
+| `getThreadRawStoreMap` | 无 | `Map&lt;Long, RawStore&gt;` | 获取ThreadRawStoreMap相关功能 | 调用该方法执行获取ThreadRawStoreMap相关功能 |
+| `newThread` | runnable: Runnable | `Thread` | 读取相关功能 | 传入参数执行读取相关功能 |
 
 ### ThreadWithGarbageCleanup
 **包路径**: `org.apache.hive.service.server`
@@ -5356,8 +5150,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cacheThreadLocalRawStore` | 无 | `void` | cacheThreadLocalRawStore方法 |  |
-| `finalize` | 无 | `void` | finalize方法 |  |
+| `cacheThreadLocalRawStore` | 无 | `void` | 缓存ThreadLocalRawStore相关功能 | 调用该方法执行缓存ThreadLocalRawStore相关功能 |
+| `finalize` | 无 | `void` | 终结相关功能 | 调用该方法执行终结相关功能 |
 
 ### ThriftBinaryCLIService
 **包路径**: `org.apache.hive.service.cli.thrift`
@@ -5365,8 +5159,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `GetQueryId` | req: TGetQueryIdReq | `TGetQueryIdResp` | GetQueryId方法 |  |
-| `run` | 无 | `void` | run方法 |  |
+| `GetQueryId` | req: TGetQueryIdReq | `TGetQueryIdResp` | 获取QueryId相关功能 | 传入参数执行获取QueryId相关功能 |
+| `run` | 无 | `void` | 运行相关功能 | 调用该方法执行运行相关功能 |
 
 ### ThriftCLIService
 **包路径**: `org.apache.hive.service.cli.thrift`
@@ -5374,40 +5168,40 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `CancelDelegationToken` | req: TCancelDelegationTokenReq | `TCancelDelegationTokenResp` | CancelDelegationToken方法 |  |
-| `CancelOperation` | req: TCancelOperationReq | `TCancelOperationResp` | CancelOperation方法 |  |
-| `CloseOperation` | req: TCloseOperationReq | `TCloseOperationResp` | CloseOperation方法 |  |
-| `CloseSession` | req: TCloseSessionReq | `TCloseSessionResp` | CloseSession方法 |  |
-| `DownloadData` | req: TDownloadDataReq | `TDownloadDataResp` | DownloadData方法 |  |
-| `ExecuteStatement` | req: TExecuteStatementReq | `TExecuteStatementResp` | ExecuteStatement方法 |  |
-| `FetchResults` | req: TFetchResultsReq | `TFetchResultsResp` | FetchResults方法 |  |
-| `GetCatalogs` | req: TGetCatalogsReq | `TGetCatalogsResp` | GetCatalogs方法 |  |
-| `GetColumns` | req: TGetColumnsReq | `TGetColumnsResp` | GetColumns方法 |  |
-| `GetCrossReference` | req: TGetCrossReferenceReq | `TGetCrossReferenceResp` | GetCrossReference方法 |  |
-| `GetDelegationToken` | req: TGetDelegationTokenReq | `TGetDelegationTokenResp` | GetDelegationToken方法 |  |
-| `GetFunctions` | req: TGetFunctionsReq | `TGetFunctionsResp` | GetFunctions方法 |  |
-| `GetInfo` | req: TGetInfoReq | `TGetInfoResp` | GetInfo方法 |  |
-| `GetOperationStatus` | req: TGetOperationStatusReq | `TGetOperationStatusResp` | GetOperationStatus方法 |  |
-| `GetPrimaryKeys` | req: TGetPrimaryKeysReq | `TGetPrimaryKeysResp` | GetPrimaryKeys方法 |  |
-| `GetQueryId` | req: TGetQueryIdReq | `TGetQueryIdResp` | GetQueryId方法 |  |
-| `GetResultSetMetadata` | req: TGetResultSetMetadataReq | `TGetResultSetMetadataResp` | GetResultSetMetadata方法 |  |
-| `GetSchemas` | req: TGetSchemasReq | `TGetSchemasResp` | GetSchemas方法 |  |
-| `GetTableTypes` | req: TGetTableTypesReq | `TGetTableTypesResp` | GetTableTypes方法 |  |
-| `GetTables` | req: TGetTablesReq | `TGetTablesResp` | GetTables方法 |  |
-| `GetTypeInfo` | req: TGetTypeInfoReq | `TGetTypeInfoResp` | GetTypeInfo方法 |  |
-| `OpenSession` | req: TOpenSessionReq | `TOpenSessionResp` | OpenSession方法 |  |
-| `RenewDelegationToken` | req: TRenewDelegationTokenReq | `TRenewDelegationTokenResp` | RenewDelegationToken方法 |  |
-| `SetClientInfo` | req: TSetClientInfoReq | `TSetClientInfoResp` | SetClientInfo方法 |  |
-| `UploadData` | req: TUploadDataReq | `TUploadDataResp` | UploadData方法 |  |
-| `createContext` | input: TProtocol, output: TProtocol | `ServerContext` | createContext方法 |  |
-| `deleteContext` | serverContext: ServerContext, input: TProtocol, output: TProtocol | `void` | deleteContext方法 |  |
-| `getPortNumber` | 无 | `int` | getPortNumber方法 |  |
-| `getServerIPAddress` | 无 | `InetAddress` | getServerIPAddress方法 |  |
-| `getSessionHandle` | 无 | `SessionHandle` | getSessionHandle方法 |  |
-| `isWrapperFor` | aClass: Class<?> | `boolean` | isWrapperFor方法 |  |
-| `preServe` | 无 | `void` | preServe方法 |  |
-| `processContext` | serverContext: ServerContext, input: TTransport, output: TTransport | `void` | processContext方法 |  |
-| `setSessionHandle` | sessionHandle: SessionHandle | `void` | setSessionHandle方法 |  |
+| `CancelDelegationToken` | req: TCancelDelegationTokenReq | `TCancelDelegationTokenResp` | 判断能否celDelegationToken相关功能 | 传入参数执行判断能否celDelegationToken相关功能 |
+| `CancelOperation` | req: TCancelOperationReq | `TCancelOperationResp` | 判断能否celOperation相关功能 | 传入参数执行判断能否celOperation相关功能 |
+| `CloseOperation` | req: TCloseOperationReq | `TCloseOperationResp` | 关闭Operation相关功能 | 传入参数执行关闭Operation相关功能 |
+| `CloseSession` | req: TCloseSessionReq | `TCloseSessionResp` | 关闭Session相关功能 | 传入参数执行关闭Session相关功能 |
+| `DownloadData` | req: TDownloadDataReq | `TDownloadDataResp` | 执行wnloadData相关功能 | 传入参数执行执行wnloadData相关功能 |
+| `ExecuteStatement` | req: TExecuteStatementReq | `TExecuteStatementResp` | 执行Statement相关功能 | 传入参数执行执行Statement相关功能 |
+| `FetchResults` | req: TFetchResultsReq | `TFetchResultsResp` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
+| `GetCatalogs` | req: TGetCatalogsReq | `TGetCatalogsResp` | 获取Catalogs相关功能 | 传入参数执行获取Catalogs相关功能 |
+| `GetColumns` | req: TGetColumnsReq | `TGetColumnsResp` | 获取Columns相关功能 | 传入参数执行获取Columns相关功能 |
+| `GetCrossReference` | req: TGetCrossReferenceReq | `TGetCrossReferenceResp` | 获取CrossReference相关功能 | 传入参数执行获取CrossReference相关功能 |
+| `GetDelegationToken` | req: TGetDelegationTokenReq | `TGetDelegationTokenResp` | 获取DelegationToken相关功能 | 传入参数执行获取DelegationToken相关功能 |
+| `GetFunctions` | req: TGetFunctionsReq | `TGetFunctionsResp` | 获取Functions相关功能 | 传入参数执行获取Functions相关功能 |
+| `GetInfo` | req: TGetInfoReq | `TGetInfoResp` | 获取Info相关功能 | 传入参数执行获取Info相关功能 |
+| `GetOperationStatus` | req: TGetOperationStatusReq | `TGetOperationStatusResp` | 获取OperationStatus相关功能 | 传入参数执行获取OperationStatus相关功能 |
+| `GetPrimaryKeys` | req: TGetPrimaryKeysReq | `TGetPrimaryKeysResp` | 获取PrimaryKeys相关功能 | 传入参数执行获取PrimaryKeys相关功能 |
+| `GetQueryId` | req: TGetQueryIdReq | `TGetQueryIdResp` | 获取QueryId相关功能 | 传入参数执行获取QueryId相关功能 |
+| `GetResultSetMetadata` | req: TGetResultSetMetadataReq | `TGetResultSetMetadataResp` | 获取ResultSetMetadata相关功能 | 传入参数执行获取ResultSetMetadata相关功能 |
+| `GetSchemas` | req: TGetSchemasReq | `TGetSchemasResp` | 获取Schemas相关功能 | 传入参数执行获取Schemas相关功能 |
+| `GetTableTypes` | req: TGetTableTypesReq | `TGetTableTypesResp` | 获取TableTypes相关功能 | 传入参数执行获取TableTypes相关功能 |
+| `GetTables` | req: TGetTablesReq | `TGetTablesResp` | 获取Tables相关功能 | 传入参数执行获取Tables相关功能 |
+| `GetTypeInfo` | req: TGetTypeInfoReq | `TGetTypeInfoResp` | 获取TypeInfo相关功能 | 传入参数执行获取TypeInfo相关功能 |
+| `OpenSession` | req: TOpenSessionReq | `TOpenSessionResp` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
+| `RenewDelegationToken` | req: TRenewDelegationTokenReq | `TRenewDelegationTokenResp` | RenewDelegationToken操作 | 传入参数执行RenewDelegationToken操作 |
+| `SetClientInfo` | req: TSetClientInfoReq | `TSetClientInfoResp` | 设置ClientInfo相关功能 | 传入参数执行设置ClientInfo相关功能 |
+| `UploadData` | req: TUploadDataReq | `TUploadDataResp` | 向上loadData相关功能 | 传入参数执行向上loadData相关功能 |
+| `createContext` | input: TProtocol, output: TProtocol | `ServerContext` | 创建Context相关功能 | 传入参数执行创建Context相关功能 |
+| `deleteContext` | serverContext: ServerContext, input: TProtocol, output: TProtocol | `void` | 删除请求Context相关功能 | 传入参数执行删除请求Context相关功能 |
+| `getPortNumber` | 无 | `int` | 获取PortNumber相关功能 | 调用该方法执行获取PortNumber相关功能 |
+| `getServerIPAddress` | 无 | `InetAddress` | 获取ServerIPAddress相关功能 | 调用该方法执行获取ServerIPAddress相关功能 |
+| `getSessionHandle` | 无 | `SessionHandle` | 获取SessionHandle相关功能 | 调用该方法执行获取SessionHandle相关功能 |
+| `isWrapperFor` | aClass: Class<?> | `boolean` | 判断是否WrapperFor相关功能 | 传入参数执行判断是否WrapperFor相关功能 |
+| `preServe` | 无 | `void` | 前Serve相关功能 | 调用该方法执行前Serve相关功能 |
+| `processContext` | serverContext: ServerContext, input: TTransport, output: TTransport | `void` | 处理Context相关功能 | 传入参数执行处理Context相关功能 |
+| `setSessionHandle` | sessionHandle: SessionHandle | `void` | 设置SessionHandle相关功能 | 传入参数执行设置SessionHandle相关功能 |
 
 ### ThriftCLIServiceClient
 **包路径**: `org.apache.hive.service.cli.thrift`
@@ -5415,34 +5209,34 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `cancelDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | cancelDelegationToken方法 |  |
-| `cancelOperation` | opHandle: OperationHandle | `void` | cancelOperation方法 |  |
-| `checkStatus` | status: TStatus | `void` | checkStatus方法 |  |
-| `closeOperation` | opHandle: OperationHandle | `void` | closeOperation方法 |  |
-| `closeSession` | sessionHandle: SessionHandle | `void` | closeSession方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatement方法 |  |
-| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatement方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | executeStatementAsync方法 |  |
-| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | executeStatementAsync方法 |  |
-| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | fetchResults方法 |  |
-| `fetchResults` | opHandle: OperationHandle | `TRowSet` | fetchResults方法 |  |
-| `getCatalogs` | sessionHandle: SessionHandle | `OperationHandle` | getCatalogs方法 |  |
-| `getColumns` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | getColumns方法 |  |
-| `getCrossReference` | sessionHandle: SessionHandle, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | getCrossReference方法 |  |
-| `getDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | getDelegationToken方法 |  |
-| `getFunctions` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, functionName: String | `OperationHandle` | getFunctions方法 |  |
-| `getInfo` | sessionHandle: SessionHandle, infoType: GetInfoType | `GetInfoValue` | getInfo方法 |  |
-| `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | getOperationStatus方法 |  |
-| `getPrimaryKeys` | sessionHandle: SessionHandle, catalog: String, schema: String, table: String | `OperationHandle` | getPrimaryKeys方法 |  |
-| `getQueryId` | operationHandle: TOperationHandle | `String` | getQueryId方法 |  |
-| `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | getResultSetMetadata方法 |  |
-| `getSchemas` | sessionHandle: SessionHandle, catalogName: String, schemaName: String | `OperationHandle` | getSchemas方法 |  |
-| `getTableTypes` | sessionHandle: SessionHandle | `OperationHandle` | getTableTypes方法 |  |
-| `getTables` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | getTables方法 |  |
-| `getTypeInfo` | sessionHandle: SessionHandle | `OperationHandle` | getTypeInfo方法 |  |
-| `openSession` | username: String, password: String, configuration: String> | `SessionHandle` | openSession方法 |  |
-| `openSessionWithImpersonation` | username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | openSessionWithImpersonation方法 |  |
-| `renewDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken方法 |  |
+| `cancelDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | 判断能否celDelegationToken相关功能 | 传入参数执行判断能否celDelegationToken相关功能 |
+| `cancelOperation` | opHandle: OperationHandle | `void` | 判断能否celOperation相关功能 | 传入参数执行判断能否celOperation相关功能 |
+| `checkStatus` | status: TStatus | `void` | 检查Status相关功能 | 传入参数执行检查Status相关功能 |
+| `closeOperation` | opHandle: OperationHandle | `void` | 关闭Operation相关功能 | 传入参数执行关闭Operation相关功能 |
+| `closeSession` | sessionHandle: SessionHandle | `void` | 关闭Session相关功能 | 传入参数执行关闭Session相关功能 |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | 执行Statement相关功能 | 传入参数执行执行Statement相关功能 |
+| `executeStatement` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | 执行Statement相关功能 | 传入参数执行执行Statement相关功能 |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String> | `OperationHandle` | 执行StatementAsync相关功能 | 传入参数执行执行StatementAsync相关功能 |
+| `executeStatementAsync` | sessionHandle: SessionHandle, statement: String, confOverlay: String>, queryTimeout: long | `OperationHandle` | 执行StatementAsync相关功能 | 传入参数执行执行StatementAsync相关功能 |
+| `fetchResults` | opHandle: OperationHandle, orientation: FetchOrientation, maxRows: long, fetchType: FetchType | `TRowSet` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
+| `fetchResults` | opHandle: OperationHandle | `TRowSet` | 获取Results相关功能 | 传入参数执行获取Results相关功能 |
+| `getCatalogs` | sessionHandle: SessionHandle | `OperationHandle` | 获取Catalogs相关功能 | 传入参数执行获取Catalogs相关功能 |
+| `getColumns` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, columnName: String | `OperationHandle` | 获取Columns相关功能 | 传入参数执行获取Columns相关功能 |
+| `getCrossReference` | sessionHandle: SessionHandle, primaryCatalog: String, primarySchema: String, primaryTable: String, foreignCatalog: String, foreignSchema: String, foreignTable: String | `OperationHandle` | 获取CrossReference相关功能 | 传入参数执行获取CrossReference相关功能 |
+| `getDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, owner: String, renewer: String | `String` | 获取DelegationToken相关功能 | 传入参数执行获取DelegationToken相关功能 |
+| `getFunctions` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, functionName: String | `OperationHandle` | 获取Functions相关功能 | 传入参数执行获取Functions相关功能 |
+| `getInfo` | sessionHandle: SessionHandle, infoType: GetInfoType | `GetInfoValue` | 获取Info相关功能 | 传入参数执行获取Info相关功能 |
+| `getOperationStatus` | opHandle: OperationHandle | `OperationStatus` | 获取OperationStatus相关功能 | 传入参数执行获取OperationStatus相关功能 |
+| `getPrimaryKeys` | sessionHandle: SessionHandle, catalog: String, schema: String, table: String | `OperationHandle` | 获取PrimaryKeys相关功能 | 传入参数执行获取PrimaryKeys相关功能 |
+| `getQueryId` | operationHandle: TOperationHandle | `String` | 获取QueryId相关功能 | 传入参数执行获取QueryId相关功能 |
+| `getResultSetMetadata` | opHandle: OperationHandle | `TTableSchema` | 获取ResultSetMetadata相关功能 | 传入参数执行获取ResultSetMetadata相关功能 |
+| `getSchemas` | sessionHandle: SessionHandle, catalogName: String, schemaName: String | `OperationHandle` | 获取Schemas相关功能 | 传入参数执行获取Schemas相关功能 |
+| `getTableTypes` | sessionHandle: SessionHandle | `OperationHandle` | 获取TableTypes相关功能 | 传入参数执行获取TableTypes相关功能 |
+| `getTables` | sessionHandle: SessionHandle, catalogName: String, schemaName: String, tableName: String, tableTypes: List<String> | `OperationHandle` | 获取Tables相关功能 | 传入参数执行获取Tables相关功能 |
+| `getTypeInfo` | sessionHandle: SessionHandle | `OperationHandle` | 获取TypeInfo相关功能 | 传入参数执行获取TypeInfo相关功能 |
+| `openSession` | username: String, password: String, configuration: String> | `SessionHandle` | 打开Session相关功能 | 传入参数执行打开Session相关功能 |
+| `openSessionWithImpersonation` | username: String, password: String, configuration: String>, delegationToken: String | `SessionHandle` | 打开SessionWithImpersonation相关功能 | 传入参数执行打开SessionWithImpersonation相关功能 |
+| `renewDelegationToken` | sessionHandle: SessionHandle, authFactory: HiveAuthFactory, tokenStr: String | `void` | renewDelegationToken操作 | 传入参数执行renewDelegationToken操作 |
 
 ### ThriftHttpCLIService
 **包路径**: `org.apache.hive.service.cli.thrift`
@@ -5450,7 +5244,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `run` | 无 | `void` | run方法 |  |
+| `run` | 无 | `void` | 运行相关功能 | 调用该方法执行运行相关功能 |
 
 ### ThriftHttpServlet
 **包路径**: `org.apache.hive.service.cli.thrift`
@@ -5458,7 +5252,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `run` | 无 | `String` | run方法 |  |
+| `run` | 无 | `String` | 运行相关功能 | 调用该方法执行运行相关功能 |
 
 ### TimerWithCustomTimeUnit
 **包路径**: `org.apache.spark.network.util`
@@ -5466,14 +5260,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `dump` | outputStream: OutputStream | `void` | dump方法 |  |
-| `getMax` | 无 | `long` | getMax方法 |  |
-| `getMean` | 无 | `double` | getMean方法 |  |
-| `getMin` | 无 | `long` | getMin方法 |  |
-| `getSnapshot` | 无 | `Snapshot` | getSnapshot方法 |  |
-| `getStdDev` | 无 | `double` | getStdDev方法 |  |
-| `getValue` | v: double | `double` | getValue方法 |  |
-| `size` | 无 | `int` | 计算大小 |  |
+| `dump` | outputStream: OutputStream | `void` | dump操作 | 传入参数执行dump操作 |
+| `getMax` | 无 | `long` | 获取Max相关功能 | 调用该方法执行获取Max相关功能 |
+| `getMean` | 无 | `double` | 获取Mean相关功能 | 调用该方法执行获取Mean相关功能 |
+| `getMin` | 无 | `long` | 获取Min相关功能 | 调用该方法执行获取Min相关功能 |
+| `getSnapshot` | 无 | `Snapshot` | 获取Snapshot相关功能 | 调用该方法执行获取Snapshot相关功能 |
+| `getStdDev` | 无 | `double` | 获取StdDev相关功能 | 调用该方法执行获取StdDev相关功能 |
+| `getValue` | v: double | `double` | 获取列的默认值 | 返回列默认值的Literal对象 |
+| `size` | 无 | `int` | 计算大小 | 调用该方法执行size操作 |
 
 ### TransientBestEffortLazyVal
 **包路径**: `org.apache.spark.util`
@@ -5481,7 +5275,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `apply` | 无 | `T` | apply方法 |  |
+| `apply` | 无 | `T` | 应用数据类型转换 | 获取数据类型对应的列向量 |
 
 ### TransportChannelHandler
 **包路径**: `org.apache.spark.network.server`
@@ -5489,17 +5283,17 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `acceptInboundMessage` | msg: Object | `boolean` | acceptInboundMessage方法 |  |
-| `channelActive` | ctx: ChannelHandlerContext | `void` | channelActive方法 |  |
-| `channelInactive` | ctx: ChannelHandlerContext | `void` | channelInactive方法 |  |
-| `channelRead0` | ctx: ChannelHandlerContext, request: Message | `void` | channelRead0方法 |  |
-| `channelRegistered` | ctx: ChannelHandlerContext | `void` | channelRegistered方法 |  |
-| `channelUnregistered` | ctx: ChannelHandlerContext | `void` | channelUnregistered方法 |  |
-| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught方法 |  |
-| `getClient` | 无 | `TransportClient` | getClient方法 |  |
-| `getRequestHandler` | 无 | `TransportRequestHandler` | getRequestHandler方法 |  |
-| `getResponseHandler` | 无 | `TransportResponseHandler` | getResponseHandler方法 |  |
-| `userEventTriggered` | ctx: ChannelHandlerContext, evt: Object | `void` | userEventTriggered方法 |  |
+| `acceptInboundMessage` | msg: Object | `boolean` | 接受入站消息 | 传入参数执行接受入站消息 |
+| `channelActive` | ctx: ChannelHandlerContext | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `channelInactive` | ctx: ChannelHandlerContext | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `channelRead0` | ctx: ChannelHandlerContext, request: Message | `void` | 读取相关功能 | 传入参数执行读取相关功能 |
+| `channelRegistered` | ctx: ChannelHandlerContext | `void` | 注册相关功能 | 传入参数执行注册相关功能 |
+| `channelUnregistered` | ctx: ChannelHandlerContext | `void` | 注册相关功能 | 传入参数执行注册相关功能 |
+| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `getClient` | 无 | `TransportClient` | 获取Client相关功能 | 调用该方法执行获取Client相关功能 |
+| `getRequestHandler` | 无 | `TransportRequestHandler` | 获取RequestHandler相关功能 | 调用该方法执行获取RequestHandler相关功能 |
+| `getResponseHandler` | 无 | `TransportResponseHandler` | 获取ResponseHandler相关功能 | 调用该方法执行获取ResponseHandler相关功能 |
+| `userEventTriggered` | ctx: ChannelHandlerContext, evt: Object | `void` | 触发相关功能 | 传入参数执行触发相关功能 |
 
 ### TransportClient
 **包路径**: `org.apache.spark.network.client`
@@ -5507,25 +5301,25 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `fetchChunk` | streamId: long, chunkIndex: int, callback: ChunkReceivedCallback | `void` | fetchChunk方法 |  |
-| `getChannel` | 无 | `Channel` | getChannel方法 |  |
-| `getClientId` | 无 | `String` | getClientId方法 |  |
-| `getHandler` | 无 | `TransportResponseHandler` | getHandler方法 |  |
-| `getSocketAddress` | 无 | `SocketAddress` | getSocketAddress方法 |  |
-| `isActive` | 无 | `boolean` | isActive方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `operationComplete` | future: Future<? super Void> | `void` | operationComplete方法 |  |
-| `removeRpcRequest` | requestId: long | `void` | removeRpcRequest方法 |  |
-| `send` | message: ByteBuffer | `void` | send方法 |  |
-| `sendMergedBlockMetaReq` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, callback: MergedBlockMetaResponseCallback | `void` | sendMergedBlockMetaReq方法 |  |
-| `sendRpc` | message: ByteBuffer, callback: RpcResponseCallback | `long` | sendRpc方法 |  |
-| `sendRpcSync` | message: ByteBuffer, timeoutMs: long | `ByteBuffer` | sendRpcSync方法 |  |
-| `setClientId` | id: String | `void` | setClientId方法 |  |
-| `stream` | streamId: String, callback: StreamCallback | `void` | stream方法 |  |
-| `timeOut` | 无 | `void` | timeOut方法 |  |
-| `uploadStream` | meta: ManagedBuffer, data: ManagedBuffer, callback: RpcResponseCallback | `long` | uploadStream方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `fetchChunk` | streamId: long, chunkIndex: int, callback: ChunkReceivedCallback | `void` | 获取Chunk相关功能 | 传入参数执行获取Chunk相关功能 |
+| `getChannel` | 无 | `Channel` | 获取Channel相关功能 | 调用该方法执行获取Channel相关功能 |
+| `getClientId` | 无 | `String` | 获取ClientId相关功能 | 调用该方法执行获取ClientId相关功能 |
+| `getHandler` | 无 | `TransportResponseHandler` | 获取Handler相关功能 | 调用该方法执行获取Handler相关功能 |
+| `getSocketAddress` | 无 | `SocketAddress` | 获取SocketAddress相关功能 | 调用该方法执行获取SocketAddress相关功能 |
+| `isActive` | 无 | `boolean` | 判断是否Active相关功能 | 调用该方法执行判断是否Active相关功能 |
+| `onFailure` | e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `operationComplete` | future: Future<? super Void> | `void` | 完成相关功能 | 传入参数执行完成相关功能 |
+| `removeRpcRequest` | requestId: long | `void` | 移除RpcRequest相关功能 | 传入参数执行移除RpcRequest相关功能 |
+| `send` | message: ByteBuffer | `void` | 发送相关功能 | 传入参数执行发送相关功能 |
+| `sendMergedBlockMetaReq` | appId: String, shuffleId: int, shuffleMergeId: int, reduceId: int, callback: MergedBlockMetaResponseCallback | `void` | 发送MergedBlockMetaReq相关功能 | 传入参数执行发送MergedBlockMetaReq相关功能 |
+| `sendRpc` | message: ByteBuffer, callback: RpcResponseCallback | `long` | 发送Rpc相关功能 | 传入参数执行发送Rpc相关功能 |
+| `sendRpcSync` | message: ByteBuffer, timeoutMs: long | `ByteBuffer` | 发送RpcSync相关功能 | 传入参数执行发送RpcSync相关功能 |
+| `setClientId` | id: String | `void` | 设置ClientId相关功能 | 传入参数执行设置ClientId相关功能 |
+| `stream` | streamId: String, callback: StreamCallback | `void` | stream操作 | 传入参数执行stream操作 |
+| `timeOut` | 无 | `void` | 超时相关功能 | 调用该方法执行超时相关功能 |
+| `uploadStream` | meta: ManagedBuffer, data: ManagedBuffer, callback: RpcResponseCallback | `long` | 向上loadStream相关功能 | 传入参数执行向上loadStream相关功能 |
 
 ### TransportClientFactory
 **包路径**: `org.apache.spark.network.client`
@@ -5533,13 +5327,13 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `createClient` | remoteHost: String, remotePort: int, fastFail: boolean | `TransportClient` | createClient方法 |  |
-| `createClient` | remoteHost: String, remotePort: int | `TransportClient` | createClient方法 |  |
-| `createUnmanagedClient` | remoteHost: String, remotePort: int | `TransportClient` | createUnmanagedClient方法 |  |
-| `getAllMetrics` | 无 | `MetricSet` | getAllMetrics方法 |  |
-| `initChannel` | ch: SocketChannel | `void` | initChannel方法 |  |
-| `operationComplete` | handshakeFuture: final Future<Channel> | `void` | operationComplete方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `createClient` | remoteHost: String, remotePort: int, fastFail: boolean | `TransportClient` | 创建Client相关功能 | 传入参数执行创建Client相关功能 |
+| `createClient` | remoteHost: String, remotePort: int | `TransportClient` | 创建Client相关功能 | 传入参数执行创建Client相关功能 |
+| `createUnmanagedClient` | remoteHost: String, remotePort: int | `TransportClient` | 创建UnmanagedClient相关功能 | 传入参数执行创建UnmanagedClient相关功能 |
+| `getAllMetrics` | 无 | `MetricSet` | 获取AllMetrics相关功能 | 调用该方法执行获取AllMetrics相关功能 |
+| `initChannel` | ch: SocketChannel | `void` | 初始化Channel相关功能 | 传入参数执行初始化Channel相关功能 |
+| `operationComplete` | handshakeFuture: final Future<Channel> | `void` | 完成相关功能 | 传入参数执行完成相关功能 |
 
 ### TransportConf
 **包路径**: `org.apache.spark.network.util`
@@ -5547,64 +5341,64 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `authEngineVersion` | 无 | `int` | authEngineVersion方法 |  |
-| `authRTTimeoutMs` | 无 | `int` | authRTTimeoutMs方法 |  |
-| `backLog` | 无 | `int` | backLog方法 |  |
-| `chunkFetchHandlerThreads` | 无 | `int` | chunkFetchHandlerThreads方法 |  |
-| `cipherTransformation` | 无 | `String` | cipherTransformation方法 |  |
-| `clientThreads` | 无 | `int` | clientThreads方法 |  |
-| `connectionCreationTimeoutMs` | 无 | `int` | connectionCreationTimeoutMs方法 |  |
-| `connectionTimeoutMs` | 无 | `int` | connectionTimeoutMs方法 |  |
-| `cryptoConf` | 无 | `Properties` | cryptoConf方法 |  |
-| `enableSaslRetries` | 无 | `boolean` | enableSaslRetries方法 |  |
-| `enableTcpKeepAlive` | 无 | `boolean` | enableTcpKeepAlive方法 |  |
-| `encryptionEnabled` | 无 | `boolean` | encryptionEnabled方法 |  |
-| `finalizeShuffleMergeHandlerThreads` | 无 | `int` | finalizeShuffleMergeHandlerThreads方法 |  |
-| `get` | name: String, defaultValue: String | `String` | 获取元素 |  |
-| `getInt` | name: String, defaultValue: int | `int` | getInt方法 |  |
-| `getModuleName` | 无 | `String` | getModuleName方法 |  |
-| `ioExceptionsThresholdDuringMerge` | 无 | `int` | ioExceptionsThresholdDuringMerge方法 |  |
-| `ioMode` | 无 | `String` | ioMode方法 |  |
-| `ioRetryWaitTimeMs` | 无 | `int` | ioRetryWaitTimeMs方法 |  |
-| `lazyFileDescriptor` | 无 | `boolean` | lazyFileDescriptor方法 |  |
-| `maxChunksBeingTransferred` | 无 | `long` | maxChunksBeingTransferred方法 |  |
-| `maxIORetries` | 无 | `int` | maxIORetries方法 |  |
-| `maxSaslEncryptedBlockSize` | 无 | `int` | maxSaslEncryptedBlockSize方法 |  |
-| `memoryMapBytes` | 无 | `int` | memoryMapBytes方法 |  |
-| `mergedIndexCacheSize` | 无 | `long` | mergedIndexCacheSize方法 |  |
-| `mergedShuffleCleanerShutdownTimeout` | 无 | `long` | mergedShuffleCleanerShutdownTimeout方法 |  |
-| `mergedShuffleFileManagerImpl` | 无 | `String` | mergedShuffleFileManagerImpl方法 |  |
-| `minChunkSizeInMergedShuffleFile` | 无 | `int` | minChunkSizeInMergedShuffleFile方法 |  |
-| `numConnectionsPerPeer` | 无 | `int` | numConnectionsPerPeer方法 |  |
-| `portMaxRetries` | 无 | `int` | portMaxRetries方法 |  |
-| `preferDirectBufs` | 无 | `boolean` | preferDirectBufs方法 |  |
-| `preferDirectBufsForSharedByteBufAllocators` | 无 | `boolean` | preferDirectBufsForSharedByteBufAllocators方法 |  |
-| `receiveBuf` | 无 | `int` | receiveBuf方法 |  |
-| `saslEncryption` | 无 | `boolean` | saslEncryption方法 |  |
-| `saslFallback` | 无 | `boolean` | saslFallback方法 |  |
-| `saslServerAlwaysEncrypt` | 无 | `boolean` | saslServerAlwaysEncrypt方法 |  |
-| `sendBuf` | 无 | `int` | sendBuf方法 |  |
-| `separateChunkFetchRequest` | 无 | `boolean` | separateChunkFetchRequest方法 |  |
-| `separateFinalizeShuffleMerge` | 无 | `boolean` | separateFinalizeShuffleMerge方法 |  |
-| `serverThreads` | 无 | `int` | serverThreads方法 |  |
-| `sharedByteBufAllocators` | 无 | `boolean` | sharedByteBufAllocators方法 |  |
-| `sslRpcCertChain` | 无 | `File` | sslRpcCertChain方法 |  |
-| `sslRpcEnabled` | 无 | `boolean` | sslRpcEnabled方法 |  |
-| `sslRpcEnabledAndKeysAreValid` | 无 | `boolean` | sslRpcEnabledAndKeysAreValid方法 |  |
-| `sslRpcKeyPassword` | 无 | `String` | sslRpcKeyPassword方法 |  |
-| `sslRpcKeyStore` | 无 | `File` | sslRpcKeyStore方法 |  |
-| `sslRpcKeyStorePassword` | 无 | `String` | sslRpcKeyStorePassword方法 |  |
-| `sslRpcOpenSslEnabled` | 无 | `boolean` | sslRpcOpenSslEnabled方法 |  |
-| `sslRpcPrivateKey` | 无 | `File` | sslRpcPrivateKey方法 |  |
-| `sslRpcPrivateKeyPassword` | 无 | `String` | sslRpcPrivateKeyPassword方法 |  |
-| `sslRpcProtocol` | 无 | `String` | sslRpcProtocol方法 |  |
-| `sslRpcTrustStore` | 无 | `File` | sslRpcTrustStore方法 |  |
-| `sslRpcTrustStorePassword` | 无 | `String` | sslRpcTrustStorePassword方法 |  |
-| `sslRpcTrustStoreReloadingEnabled` | 无 | `boolean` | sslRpcTrustStoreReloadingEnabled方法 |  |
-| `sslRpctrustStoreReloadIntervalMs` | 无 | `int` | sslRpctrustStoreReloadIntervalMs方法 |  |
-| `sslShuffleChunkSize` | 无 | `int` | sslShuffleChunkSize方法 |  |
-| `useOldFetchProtocol` | 无 | `boolean` | useOldFetchProtocol方法 |  |
-| `verboseMetrics` | 无 | `boolean` | verboseMetrics方法 |  |
+| `authEngineVersion` | 无 | `int` | 认证引擎版本 | 调用该方法执行认证引擎版本 |
+| `authRTTimeoutMs` | 无 | `int` | 认证超时时间（毫秒） | 调用该方法执行认证超时时间（毫秒） |
+| `backLog` | 无 | `int` | 获取待处理日志 | 调用该方法执行获取待处理日志 |
+| `chunkFetchHandlerThreads` | 无 | `int` | 读取相关功能 | 调用该方法执行读取相关功能 |
+| `cipherTransformation` | 无 | `String` | 转换相关功能 | 调用该方法执行转换相关功能 |
+| `clientThreads` | 无 | `int` | 读取相关功能 | 调用该方法执行读取相关功能 |
+| `connectionCreationTimeoutMs` | 无 | `int` | 连接ionCreationTimeoutMs相关功能 | 调用该方法执行连接ionCreationTimeoutMs相关功能 |
+| `connectionTimeoutMs` | 无 | `int` | 连接ionTimeoutMs相关功能 | 调用该方法执行连接ionTimeoutMs相关功能 |
+| `cryptoConf` | 无 | `Properties` | cryptoConf操作 | 调用该方法执行cryptoConf操作 |
+| `enableSaslRetries` | 无 | `boolean` | 启用SaslRetries相关功能 | 调用该方法执行启用SaslRetries相关功能 |
+| `enableTcpKeepAlive` | 无 | `boolean` | 启用TcpKeepAlive相关功能 | 调用该方法执行启用TcpKeepAlive相关功能 |
+| `encryptionEnabled` | 无 | `boolean` | 加密ionEnabled相关功能 | 调用该方法执行加密ionEnabled相关功能 |
+| `finalizeShuffleMergeHandlerThreads` | 无 | `int` | 终结ShuffleMergeHandlerThreads相关功能 | 调用该方法执行终结ShuffleMergeHandlerThreads相关功能 |
+| `get` | name: String, defaultValue: String | `String` | 获取元素 | 传入参数执行获取相关功能 |
+| `getInt` | name: String, defaultValue: int | `int` | 获取Int相关功能 | 传入参数执行获取Int相关功能 |
+| `getModuleName` | 无 | `String` | 获取ModuleName相关功能 | 调用该方法执行获取ModuleName相关功能 |
+| `ioExceptionsThresholdDuringMerge` | 无 | `int` | 合并相关功能 | 调用该方法执行合并相关功能 |
+| `ioMode` | 无 | `String` | ioMode操作 | 调用该方法执行ioMode操作 |
+| `ioRetryWaitTimeMs` | 无 | `int` | 等待相关功能 | 调用该方法执行等待相关功能 |
+| `lazyFileDescriptor` | 无 | `boolean` | lazyFileDescriptor操作 | 调用该方法执行lazyFileDescriptor操作 |
+| `maxChunksBeingTransferred` | 无 | `long` | 转移相关功能 | 调用该方法执行转移相关功能 |
+| `maxIORetries` | 无 | `int` | 三相关功能 | 调用该方法执行三相关功能 |
+| `maxSaslEncryptedBlockSize` | 无 | `int` | 锁定相关功能 | 调用该方法执行锁定相关功能 |
+| `memoryMapBytes` | 无 | `int` | 映射相关功能 | 调用该方法执行映射相关功能 |
+| `mergedIndexCacheSize` | 无 | `long` | 合并dIndexCacheSize相关功能 | 调用该方法执行合并dIndexCacheSize相关功能 |
+| `mergedShuffleCleanerShutdownTimeout` | 无 | `long` | 合并dShuffleCleanerShutdownTimeout相关功能 | 调用该方法执行合并dShuffleCleanerShutdownTimeout相关功能 |
+| `mergedShuffleFileManagerImpl` | 无 | `String` | 合并dShuffleFileManagerImpl相关功能 | 调用该方法执行合并dShuffleFileManagerImpl相关功能 |
+| `minChunkSizeInMergedShuffleFile` | 无 | `int` | 合并相关功能 | 调用该方法执行合并相关功能 |
+| `numConnectionsPerPeer` | 无 | `int` | 连接相关功能 | 调用该方法执行连接相关功能 |
+| `portMaxRetries` | 无 | `int` | 三相关功能 | 调用该方法执行三相关功能 |
+| `preferDirectBufs` | 无 | `boolean` | 前ferDirectBufs相关功能 | 调用该方法执行前ferDirectBufs相关功能 |
+| `preferDirectBufsForSharedByteBufAllocators` | 无 | `boolean` | 前ferDirectBufsForSharedByteBufAllocators相关功能 | 调用该方法执行前ferDirectBufsForSharedByteBufAllocators相关功能 |
+| `receiveBuf` | 无 | `int` | 接收Buf相关功能 | 调用该方法执行接收Buf相关功能 |
+| `saslEncryption` | 无 | `boolean` | 加密相关功能 | 调用该方法执行加密相关功能 |
+| `saslFallback` | 无 | `boolean` | saslFallback操作 | 调用该方法执行saslFallback操作 |
+| `saslServerAlwaysEncrypt` | 无 | `boolean` | 加密相关功能 | 调用该方法执行加密相关功能 |
+| `sendBuf` | 无 | `int` | 发送Buf相关功能 | 调用该方法执行发送Buf相关功能 |
+| `separateChunkFetchRequest` | 无 | `boolean` | 请求相关功能 | 调用该方法执行请求相关功能 |
+| `separateFinalizeShuffleMerge` | 无 | `boolean` | 合并相关功能 | 调用该方法执行合并相关功能 |
+| `serverThreads` | 无 | `int` | 读取相关功能 | 调用该方法执行读取相关功能 |
+| `sharedByteBufAllocators` | 无 | `boolean` | sharedByteBufAllocators操作 | 调用该方法执行sharedByteBufAllocators操作 |
+| `sslRpcCertChain` | 无 | `File` | sslRpcCertChain操作 | 调用该方法执行sslRpcCertChain操作 |
+| `sslRpcEnabled` | 无 | `boolean` | 启用相关功能 | 调用该方法执行启用相关功能 |
+| `sslRpcEnabledAndKeysAreValid` | 无 | `boolean` | 启用相关功能 | 调用该方法执行启用相关功能 |
+| `sslRpcKeyPassword` | 无 | `String` | sslRpcKeyPassword操作 | 调用该方法执行sslRpcKeyPassword操作 |
+| `sslRpcKeyStore` | 无 | `File` | sslRpcKeyStore操作 | 调用该方法执行sslRpcKeyStore操作 |
+| `sslRpcKeyStorePassword` | 无 | `String` | sslRpcKeyStorePassword操作 | 调用该方法执行sslRpcKeyStorePassword操作 |
+| `sslRpcOpenSslEnabled` | 无 | `boolean` | 打开相关功能 | 调用该方法执行打开相关功能 |
+| `sslRpcPrivateKey` | 无 | `File` | 私有相关功能 | 调用该方法执行私有相关功能 |
+| `sslRpcPrivateKeyPassword` | 无 | `String` | 私有相关功能 | 调用该方法执行私有相关功能 |
+| `sslRpcProtocol` | 无 | `String` | 原型相关功能 | 调用该方法执行原型相关功能 |
+| `sslRpcTrustStore` | 无 | `File` | sslRpcTrustStore操作 | 调用该方法执行sslRpcTrustStore操作 |
+| `sslRpcTrustStorePassword` | 无 | `String` | sslRpcTrustStorePassword操作 | 调用该方法执行sslRpcTrustStorePassword操作 |
+| `sslRpcTrustStoreReloadingEnabled` | 无 | `boolean` | 加载相关功能 | 调用该方法执行加载相关功能 |
+| `sslRpctrustStoreReloadIntervalMs` | 无 | `int` | 加载相关功能 | 调用该方法执行加载相关功能 |
+| `sslShuffleChunkSize` | 无 | `int` | 随机打乱相关功能 | 调用该方法执行随机打乱相关功能 |
+| `useOldFetchProtocol` | 无 | `boolean` | 获取相关功能 | 调用该方法执行获取相关功能 |
+| `verboseMetrics` | 无 | `boolean` | 三相关功能 | 调用该方法执行三相关功能 |
 
 ### TransportContext
 **包路径**: `org.apache.spark.network`
@@ -5612,18 +5406,18 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `createClientFactory` | bootstraps: List<TransportClientBootstrap> | `TransportClientFactory` | createClientFactory方法 |  |
-| `createClientFactory` | 无 | `TransportClientFactory` | createClientFactory方法 |  |
-| `createServer` | port: int, bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
-| `createServer` | host: String, port: int, bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
-| `createServer` | bootstraps: List<TransportServerBootstrap> | `TransportServer` | createServer方法 |  |
-| `createServer` | 无 | `TransportServer` | createServer方法 |  |
-| `getConf` | 无 | `TransportConf` | getConf方法 |  |
-| `getRegisteredConnections` | 无 | `Counter` | getRegisteredConnections方法 |  |
-| `initializePipeline` | channel: SocketChannel, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
-| `initializePipeline` | channel: SocketChannel, channelRpcHandler: RpcHandler, isClient: boolean | `TransportChannelHandler` | initializePipeline方法 |  |
-| `sslEncryptionEnabled` | 无 | `boolean` | sslEncryptionEnabled方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `createClientFactory` | bootstraps: List<TransportClientBootstrap> | `TransportClientFactory` | 创建ClientFactory相关功能 | 传入参数执行创建ClientFactory相关功能 |
+| `createClientFactory` | 无 | `TransportClientFactory` | 创建ClientFactory相关功能 | 调用该方法执行创建ClientFactory相关功能 |
+| `createServer` | port: int, bootstraps: List<TransportServerBootstrap> | `TransportServer` | 创建Server相关功能 | 传入参数执行创建Server相关功能 |
+| `createServer` | host: String, port: int, bootstraps: List<TransportServerBootstrap> | `TransportServer` | 创建Server相关功能 | 传入参数执行创建Server相关功能 |
+| `createServer` | bootstraps: List<TransportServerBootstrap> | `TransportServer` | 创建Server相关功能 | 传入参数执行创建Server相关功能 |
+| `createServer` | 无 | `TransportServer` | 创建Server相关功能 | 调用该方法执行创建Server相关功能 |
+| `getConf` | 无 | `TransportConf` | 获取Conf相关功能 | 调用该方法执行获取Conf相关功能 |
+| `getRegisteredConnections` | 无 | `Counter` | 获取RegisteredConnections相关功能 | 调用该方法执行获取RegisteredConnections相关功能 |
+| `initializePipeline` | channel: SocketChannel, isClient: boolean | `TransportChannelHandler` | 初始化ializePipeline相关功能 | 传入参数执行初始化ializePipeline相关功能 |
+| `initializePipeline` | channel: SocketChannel, channelRpcHandler: RpcHandler, isClient: boolean | `TransportChannelHandler` | 初始化ializePipeline相关功能 | 传入参数执行初始化ializePipeline相关功能 |
+| `sslEncryptionEnabled` | 无 | `boolean` | 启用相关功能 | 调用该方法执行启用相关功能 |
 
 ### TransportFrameDecoder
 **包路径**: `org.apache.spark.network.util`
@@ -5631,11 +5425,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `channelInactive` | ctx: ChannelHandlerContext | `void` | channelInactive方法 |  |
-| `channelRead` | ctx: ChannelHandlerContext, data: Object | `void` | channelRead方法 |  |
-| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught方法 |  |
-| `handlerRemoved` | ctx: ChannelHandlerContext | `void` | handlerRemoved方法 |  |
-| `setInterceptor` | interceptor: Interceptor | `void` | setInterceptor方法 |  |
+| `channelInactive` | ctx: ChannelHandlerContext | `void` | 活跃相关功能 | 传入参数执行活跃相关功能 |
+| `channelRead` | ctx: ChannelHandlerContext, data: Object | `void` | 读取相关功能 | 传入参数执行读取相关功能 |
+| `exceptionCaught` | ctx: ChannelHandlerContext, cause: Throwable | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `handlerRemoved` | ctx: ChannelHandlerContext | `void` | 处理rRemoved相关功能 | 传入参数执行处理rRemoved相关功能 |
+| `setInterceptor` | interceptor: Interceptor | `void` | 设置Interceptor相关功能 | 传入参数执行设置Interceptor相关功能 |
 
 ### TransportRequestHandler
 **包路径**: `org.apache.spark.network.server`
@@ -5643,20 +5437,18 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `channelActive` | 无 | `void` | channelActive方法 |  |
-| `channelInactive` | 无 | `void` | channelInactive方法 |  |
-| `exceptionCaught` | cause: Throwable | `void` | exceptionCaught方法 |  |
-| `getID` | 无 | `String` | getID方法 |  |
-| `handle` | request: RequestMessage | `void` | handle方法 |  |
-| `onComplete` | streamId: String | `void` | onComplete方法 |  |
-| `onData` | streamId: String, buf: ByteBuffer | `void` | onData方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure方法 |  |
-| `onFailure` | e: Throwable | `void` | onFailure方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `onSuccess` | response: ByteBuffer | `void` | onSuccess方法 |  |
-| `onSuccess` | numChunks: int, buffer: ManagedBuffer | `void` | onSuccess方法 |  |
+| `channelActive` | 无 | `void` | 活跃相关功能 | 调用该方法执行活跃相关功能 |
+| `channelInactive` | 无 | `void` | 活跃相关功能 | 调用该方法执行活跃相关功能 |
+| `exceptionCaught` | cause: Throwable | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `getID` | 无 | `String` | 获取ID相关功能 | 调用该方法执行获取ID相关功能 |
+| `handle` | request: RequestMessage | `void` | 处理相关功能 | 传入参数执行处理相关功能 |
+| `onComplete` | streamId: String | `void` | 完成相关功能 | 传入参数执行完成相关功能 |
+| `onData` | streamId: String, buf: ByteBuffer | `void` | onData操作 | 传入参数执行onData操作 |
+| `onFailure` | e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onFailure` | streamId: String, cause: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onFailure` | e: Throwable | `void` | onFailure操作 | 传入参数执行onFailure操作 |
+| `onSuccess` | response: ByteBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
+| `onSuccess` | numChunks: int, buffer: ManagedBuffer | `void` | onSuccess操作 | 传入参数执行onSuccess操作 |
 
 ### TransportResponseHandler
 **包路径**: `org.apache.spark.network.client`
@@ -5664,20 +5456,20 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addFetchRequest` | streamChunkId: StreamChunkId, callback: ChunkReceivedCallback | `void` | addFetchRequest方法 |  |
-| `addRpcRequest` | requestId: long, callback: BaseResponseCallback | `void` | addRpcRequest方法 |  |
-| `addStreamCallback` | streamId: String, callback: StreamCallback | `void` | addStreamCallback方法 |  |
-| `channelActive` | 无 | `void` | channelActive方法 |  |
-| `channelInactive` | 无 | `void` | channelInactive方法 |  |
-| `deactivateStream` | 无 | `void` | deactivateStream方法 |  |
-| `exceptionCaught` | cause: Throwable | `void` | exceptionCaught方法 |  |
-| `getTimeOfLastRequestNs` | 无 | `long` | getTimeOfLastRequestNs方法 |  |
-| `handle` | message: ResponseMessage | `void` | handle方法 |  |
-| `hasOutstandingRequests` | 无 | `Boolean` | hasOutstandingRequests方法 |  |
-| `numOutstandingRequests` | 无 | `int` | numOutstandingRequests方法 |  |
-| `removeFetchRequest` | streamChunkId: StreamChunkId | `void` | removeFetchRequest方法 |  |
-| `removeRpcRequest` | requestId: long | `void` | removeRpcRequest方法 |  |
-| `updateTimeOfLastRequest` | 无 | `void` | updateTimeOfLastRequest方法 |  |
+| `addFetchRequest` | streamChunkId: StreamChunkId, callback: ChunkReceivedCallback | `void` | 添加数据获取请求 | 传入参数执行添加数据获取请求 |
+| `addRpcRequest` | requestId: long, callback: BaseResponseCallback | `void` | 添加RPC请求 | 传入参数执行添加RPC请求 |
+| `addStreamCallback` | streamId: String, callback: StreamCallback | `void` | 添加流回调 | 传入参数执行添加流回调 |
+| `channelActive` | 无 | `void` | 活跃相关功能 | 调用该方法执行活跃相关功能 |
+| `channelInactive` | 无 | `void` | 活跃相关功能 | 调用该方法执行活跃相关功能 |
+| `deactivateStream` | 无 | `void` | deactivateStream操作 | 调用该方法执行deactivateStream操作 |
+| `exceptionCaught` | cause: Throwable | `void` | exceptionCaught操作 | 传入参数执行exceptionCaught操作 |
+| `getTimeOfLastRequestNs` | 无 | `long` | 获取TimeOfLastRequestNs相关功能 | 调用该方法执行获取TimeOfLastRequestNs相关功能 |
+| `handle` | message: ResponseMessage | `void` | 处理相关功能 | 传入参数执行处理相关功能 |
+| `hasOutstandingRequests` | 无 | `Boolean` | 检查是否存在OutstandingRequests相关功能 | 调用该方法执行检查是否存在OutstandingRequests相关功能 |
+| `numOutstandingRequests` | 无 | `int` | 请求相关功能 | 调用该方法执行请求相关功能 |
+| `removeFetchRequest` | streamChunkId: StreamChunkId | `void` | 移除FetchRequest相关功能 | 传入参数执行移除FetchRequest相关功能 |
+| `removeRpcRequest` | requestId: long | `void` | 移除RpcRequest相关功能 | 传入参数执行移除RpcRequest相关功能 |
+| `updateTimeOfLastRequest` | 无 | `void` | 更新TimeOfLastRequest相关功能 | 调用该方法执行更新TimeOfLastRequest相关功能 |
 
 ### TransportServer
 **包路径**: `org.apache.spark.network.server`
@@ -5685,10 +5477,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `close` | 无 | `void` | close方法 |  |
-| `getAllMetrics` | 无 | `MetricSet` | getAllMetrics方法 |  |
-| `getPort` | 无 | `int` | getPort方法 |  |
-| `getRegisteredConnections` | 无 | `Counter` | getRegisteredConnections方法 |  |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getAllMetrics` | 无 | `MetricSet` | 获取AllMetrics相关功能 | 调用该方法执行获取AllMetrics相关功能 |
+| `getPort` | 无 | `int` | 获取Port相关功能 | 调用该方法执行获取Port相关功能 |
+| `getRegisteredConnections` | 无 | `Counter` | 获取RegisteredConnections相关功能 | 调用该方法执行获取RegisteredConnections相关功能 |
 
 ### TypeDescriptor
 **包路径**: `org.apache.hive.service.cli`
@@ -5696,14 +5488,14 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getColumnSize` | 无 | `Integer` | getColumnSize方法 |  |
-| `getDecimalDigits` | 无 | `Integer` | getDecimalDigits方法 |  |
-| `getPrecision` | 无 | `Integer` | getPrecision方法 |  |
-| `getType` | 无 | `Type` | getType方法 |  |
-| `getTypeName` | 无 | `String` | getTypeName方法 |  |
-| `getTypeQualifiers` | 无 | `TypeQualifiers` | getTypeQualifiers方法 |  |
-| `setTypeQualifiers` | typeQualifiers: TypeQualifiers | `void` | setTypeQualifiers方法 |  |
-| `toTTypeDesc` | 无 | `TTypeDesc` | toTTypeDesc方法 |  |
+| `getColumnSize` | 无 | `Integer` | 获取ColumnSize相关功能 | 调用该方法执行获取ColumnSize相关功能 |
+| `getDecimalDigits` | 无 | `Integer` | 获取DecimalDigits相关功能 | 调用该方法执行获取DecimalDigits相关功能 |
+| `getPrecision` | 无 | `Integer` | 获取Precision相关功能 | 调用该方法执行获取Precision相关功能 |
+| `getType` | 无 | `Type` | 获取Type相关功能 | 调用该方法执行获取Type相关功能 |
+| `getTypeName` | 无 | `String` | 获取TypeName相关功能 | 调用该方法执行获取TypeName相关功能 |
+| `getTypeQualifiers` | 无 | `TypeQualifiers` | 获取TypeQualifiers相关功能 | 调用该方法执行获取TypeQualifiers相关功能 |
+| `setTypeQualifiers` | typeQualifiers: TypeQualifiers | `void` | 设置TypeQualifiers相关功能 | 传入参数执行设置TypeQualifiers相关功能 |
+| `toTTypeDesc` | 无 | `TTypeDesc` | toTTypeDesc操作 | 调用该方法执行toTTypeDesc操作 |
 
 ### TypeQualifiers
 **包路径**: `org.apache.hive.service.cli`
@@ -5711,15 +5503,15 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromTTypeQualifiers` | ttq: TTypeQualifiers | `TypeQualifiers` | fromTTypeQualifiers方法 |  |
-| `fromTypeInfo` | pti: PrimitiveTypeInfo | `TypeQualifiers` | fromTypeInfo方法 |  |
-| `getCharacterMaximumLength` | 无 | `Integer` | getCharacterMaximumLength方法 |  |
-| `getPrecision` | 无 | `Integer` | getPrecision方法 |  |
-| `getScale` | 无 | `Integer` | getScale方法 |  |
-| `setCharacterMaximumLength` | characterMaximumLength: int | `void` | setCharacterMaximumLength方法 |  |
-| `setPrecision` | precision: Integer | `void` | setPrecision方法 |  |
-| `setScale` | scale: Integer | `void` | setScale方法 |  |
-| `toTTypeQualifiers` | 无 | `TTypeQualifiers` | toTTypeQualifiers方法 |  |
+| `fromTTypeQualifiers` | ttq: TTypeQualifiers | `TypeQualifiers` | 判断相等相关功能 | 传入参数执行判断相等相关功能 |
+| `fromTypeInfo` | pti: PrimitiveTypeInfo | `TypeQualifiers` | fromTypeInfo操作 | 传入参数执行fromTypeInfo操作 |
+| `getCharacterMaximumLength` | 无 | `Integer` | 获取CharacterMaximumLength相关功能 | 调用该方法执行获取CharacterMaximumLength相关功能 |
+| `getPrecision` | 无 | `Integer` | 获取Precision相关功能 | 调用该方法执行获取Precision相关功能 |
+| `getScale` | 无 | `Integer` | 获取Scale相关功能 | 调用该方法执行获取Scale相关功能 |
+| `setCharacterMaximumLength` | characterMaximumLength: int | `void` | 设置CharacterMaximumLength相关功能 | 传入参数执行设置CharacterMaximumLength相关功能 |
+| `setPrecision` | precision: Integer | `void` | 设置Precision相关功能 | 传入参数执行设置Precision相关功能 |
+| `setScale` | scale: Integer | `void` | 设置Scale相关功能 | 传入参数执行设置Scale相关功能 |
+| `toTTypeQualifiers` | 无 | `TTypeQualifiers` | 判断相等相关功能 | 调用该方法执行判断相等相关功能 |
 
 ### UTF8StringBuilder
 **包路径**: `org.apache.spark.unsafe`
@@ -5727,11 +5519,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `append` | value: UTF8String | `void` | 追加元素 |  |
-| `append` | value: String | `void` | 追加元素 |  |
-| `appendBytes` | base: Object, offset: long, length: int | `void` | appendBytes方法 |  |
-| `appendCodePoint` | codePoint: int | `void` | appendCodePoint方法 |  |
-| `build` | 无 | `UTF8String` | build方法 |  |
+| `append` | value: UTF8String | `void` | 追加元素 | 向缓冲迭代器追加一行数据 |
+| `append` | value: String | `void` | 追加元素 | 向缓冲迭代器追加一行数据 |
+| `appendBytes` | base: Object, offset: long, length: int | `void` | 追加字节到数组 | 传入参数执行追加字节到数组 |
+| `appendCodePoint` | codePoint: int | `void` | 追加Unicode码点到字符串 | 传入参数执行追加Unicode码点到字符串 |
+| `build` | 无 | `UTF8String` | 构建约束对象 | 构建Check约束对象 |
 
 ### UnsafeAlignedOffset
 **包路径**: `org.apache.spark.unsafe`
@@ -5739,10 +5531,10 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getSize` | object: Object, offset: long | `int` | getSize方法 |  |
-| `getUaoSize` | 无 | `int` | getUaoSize方法 |  |
-| `putSize` | object: Object, offset: long, value: int | `void` | putSize方法 |  |
-| `setUaoSize` | size: int | `void` | setUaoSize方法 |  |
+| `getSize` | object: Object, offset: long | `int` | 获取Size相关功能 | 传入参数执行获取Size相关功能 |
+| `getUaoSize` | 无 | `int` | 获取UaoSize相关功能 | 调用该方法执行获取UaoSize相关功能 |
+| `putSize` | object: Object, offset: long, value: int | `void` | 放入Size相关功能 | 传入参数执行放入Size相关功能 |
+| `setUaoSize` | size: int | `void` | 设置UaoSize相关功能 | 传入参数执行设置UaoSize相关功能 |
 
 ### UnsafeMemoryAllocator
 **包路径**: `org.apache.spark.unsafe.memory`
@@ -5750,8 +5542,8 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `allocate` | size: long | `MemoryBlock` | allocate方法 |  |
-| `free` | memory: MemoryBlock | `void` | free方法 |  |
+| `allocate` | size: long | `MemoryBlock` | 分配相关功能 | 传入参数执行分配相关功能 |
+| `free` | memory: MemoryBlock | `void` | free操作 | 传入参数执行free操作 |
 
 ### UnsafeShuffleWriter
 **包路径**: `org.apache.spark.shuffle.sort`
@@ -5759,12 +5551,11 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `channel` | 无 | `WritableByteChannel` | channel方法 |  |
-| `close` | 无 | `void` | close方法 |  |
-| `getPeakMemoryUsedBytes` | 无 | `long` | getPeakMemoryUsedBytes方法 |  |
-| `stop` | success: boolean | `Option&lt;MapStatus&gt;` | 停止SparkContext，释放资源 |  |
-| `write` | records: V>> | `void` | 写入DataFrame到数据源 |  |
-| `write` | records: V>> | `void` | 写入DataFrame到数据源 |  |
+| `channel` | 无 | `WritableByteChannel` | channel操作 | 调用该方法执行channel操作 |
+| `close` | 无 | `void` | 关闭相关功能 | 调用该方法执行关闭相关功能 |
+| `getPeakMemoryUsedBytes` | 无 | `long` | 获取PeakMemoryUsedBytes相关功能 | 调用该方法执行获取PeakMemoryUsedBytes相关功能 |
+| `stop` | success: boolean | `Option&lt;MapStatus&gt;` | 停止SparkContext，释放资源 | 传入参数执行停止相关功能 |
+| `write` | records: V>> | `void` | 写入DataFrame到数据源 | 传入参数执行写入相关功能 |
 
 ### UploadBlock
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -5772,9 +5563,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `UploadBlock` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `UploadBlock` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### UploadBlockStream
 **包路径**: `org.apache.spark.network.shuffle.protocol`
@@ -5782,9 +5573,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `decode` | buf: ByteBuf | `UploadBlockStream` | decode方法 |  |
-| `encode` | buf: ByteBuf | `void` | encode方法 |  |
-| `encodedLength` | 无 | `int` | encodedLength方法 |  |
+| `decode` | buf: ByteBuf | `UploadBlockStream` | 解码相关功能 | 传入参数执行解码相关功能 |
+| `encode` | buf: ByteBuf | `void` | 编码相关功能 | 传入参数执行编码相关功能 |
+| `encodedLength` | 无 | `int` | 编码dLength相关功能 | 调用该方法执行编码dLength相关功能 |
 
 ### VariantBuilder
 **包路径**: `org.apache.spark.types.variant`
@@ -5792,28 +5583,28 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `addKey` | key: String | `int` | addKey方法 |  |
-| `appendBinary` | binary: byte&lt;&gt; | `void` | appendBinary方法 |  |
-| `appendBoolean` | b: boolean | `void` | appendBoolean方法 |  |
-| `appendDate` | daysSinceEpoch: int | `void` | appendDate方法 |  |
-| `appendDecimal` | d: BigDecimal | `void` | appendDecimal方法 |  |
-| `appendDouble` | d: double | `void` | appendDouble方法 |  |
-| `appendFloat` | f: float | `void` | appendFloat方法 |  |
-| `appendLong` | l: long | `void` | appendLong方法 |  |
-| `appendNull` | 无 | `void` | appendNull方法 |  |
-| `appendString` | str: String | `void` | appendString方法 |  |
-| `appendTimestamp` | microsSinceEpoch: long | `void` | appendTimestamp方法 |  |
-| `appendTimestampNtz` | microsSinceEpoch: long | `void` | appendTimestampNtz方法 |  |
-| `appendUuid` | uuid: UUID | `void` | appendUuid方法 |  |
-| `appendVariant` | v: Variant | `void` | appendVariant方法 |  |
-| `compareTo` | other: FieldEntry | `int` | compareTo方法 |  |
-| `finishWritingArray` | start: int, offsets: ArrayList<Integer> | `void` | finishWritingArray方法 |  |
-| `finishWritingObject` | start: int, fields: ArrayList<FieldEntry> | `void` | finishWritingObject方法 |  |
-| `getWritePos` | 无 | `int` | getWritePos方法 |  |
-| `parseJson` | json: String, allowDuplicateKeys: boolean | `Variant` | parseJson方法 |  |
-| `parseJson` | parser: JsonParser, allowDuplicateKeys: boolean | `Variant` | parseJson方法 |  |
-| `result` | 无 | `Variant` | result方法 |  |
-| `shallowAppendVariant` | v: Variant | `void` | shallowAppendVariant方法 |  |
+| `addKey` | key: String | `int` | 添加键 | 传入参数执行添加键 |
+| `appendBinary` | binary: byte&lt;&gt; | `void` | 追加二进制数据到数组 | 传入参数执行追加二进制数据到数组 |
+| `appendBoolean` | b: boolean | `void` | 追加布尔值到数组 | 传入参数执行追加布尔值到数组 |
+| `appendDate` | daysSinceEpoch: int | `void` | 追加日期到数组 | 传入参数执行追加日期到数组 |
+| `appendDecimal` | d: BigDecimal | `void` | 追加Decimal到数组 | 传入参数执行追加Decimal到数组 |
+| `appendDouble` | d: double | `void` | 追加双精度浮点数到数组 | 传入参数执行追加双精度浮点数到数组 |
+| `appendFloat` | f: float | `void` | 追加单精度浮点数到数组 | 传入参数执行追加单精度浮点数到数组 |
+| `appendLong` | l: long | `void` | 追加长整数到数组 | 传入参数执行追加长整数到数组 |
+| `appendNull` | 无 | `void` | 追加null值到数组 | 调用该方法执行追加null值到数组 |
+| `appendString` | str: String | `void` | 追加字符串到数组 | 传入参数执行追加字符串到数组 |
+| `appendTimestamp` | microsSinceEpoch: long | `void` | 追加时间戳到数组 | 传入参数执行追加时间戳到数组 |
+| `appendTimestampNtz` | microsSinceEpoch: long | `void` | 追加无时区时间戳到数组 | 传入参数执行追加无时区时间戳到数组 |
+| `appendUuid` | uuid: UUID | `void` | 追加UUID到数组 | 传入参数执行追加UUID到数组 |
+| `appendVariant` | v: Variant | `void` | 追加Variant类型到数组 | 传入参数执行追加Variant类型到数组 |
+| `compareTo` | other: FieldEntry | `int` | 比较To相关功能 | 传入参数执行比较To相关功能 |
+| `finishWritingArray` | start: int, offsets: ArrayList<Integer> | `void` | 完成WritingArray相关功能 | 传入参数执行完成WritingArray相关功能 |
+| `finishWritingObject` | start: int, fields: ArrayList<FieldEntry> | `void` | 完成WritingObject相关功能 | 传入参数执行完成WritingObject相关功能 |
+| `getWritePos` | 无 | `int` | 获取WritePos相关功能 | 调用该方法执行获取WritePos相关功能 |
+| `parseJson` | json: String, allowDuplicateKeys: boolean | `Variant` | 解析Json相关功能 | 传入参数执行解析Json相关功能 |
+| `parseJson` | parser: JsonParser, allowDuplicateKeys: boolean | `Variant` | 解析Json相关功能 | 传入参数执行解析Json相关功能 |
+| `result` | 无 | `Variant` | result操作 | 调用该方法执行result操作 |
+| `shallowAppendVariant` | v: Variant | `void` | 追加相关功能 | 传入参数执行追加相关功能 |
 
 ### VariantSchema
 **包路径**: `org.apache.spark.types.variant`
@@ -5821,7 +5612,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `isUnshredded` | 无 | `boolean` | isUnshredded方法 |  |
+| `isUnshredded` | 无 | `boolean` | 判断是否Unshredded相关功能 | 调用该方法执行判断是否Unshredded相关功能 |
 
 ### VariantShreddingWriter
 **包路径**: `org.apache.spark.types.variant`
@@ -5829,7 +5620,7 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `castShredded` | v: Variant, schema: VariantSchema, builder: ShreddedResultBuilder | `ShreddedResult` | castShredded方法 |  |
+| `castShredded` | v: Variant, schema: VariantSchema, builder: ShreddedResultBuilder | `ShreddedResult` | castShredded操作 | 传入参数执行castShredded操作 |
 
 ### VariantUtil
 **包路径**: `org.apache.spark.types.variant`
@@ -5837,24 +5628,24 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `arrayHeader` | largeSize: boolean, offsetSize: int | `byte` | arrayHeader方法 |  |
-| `getBoolean` | value: byte&lt;&gt;, pos: int | `boolean` | getBoolean方法 |  |
-| `getDecimal` | value: byte&lt;&gt;, pos: int | `BigDecimal` | getDecimal方法 |  |
-| `getDecimalWithOriginalScale` | value: byte&lt;&gt;, pos: int | `BigDecimal` | getDecimalWithOriginalScale方法 |  |
-| `getDouble` | value: byte&lt;&gt;, pos: int | `double` | getDouble方法 |  |
-| `getFloat` | value: byte&lt;&gt;, pos: int | `float` | getFloat方法 |  |
-| `getLong` | value: byte&lt;&gt;, pos: int | `long` | getLong方法 |  |
-| `getMetadataKey` | metadata: byte&lt;&gt;, id: int | `String` | getMetadataKey方法 |  |
-| `getString` | value: byte&lt;&gt;, pos: int | `String` | getString方法 |  |
-| `getType` | value: byte&lt;&gt;, pos: int | `Type` | getType方法 |  |
-| `getTypeInfo` | value: byte&lt;&gt;, pos: int | `int` | getTypeInfo方法 |  |
-| `getUuid` | value: byte&lt;&gt;, pos: int | `UUID` | getUuid方法 |  |
-| `objectHeader` | largeSize: boolean, idSize: int, offsetSize: int | `byte` | objectHeader方法 |  |
-| `primitiveHeader` | type: int | `byte` | primitiveHeader方法 |  |
-| `readUnsigned` | bytes: byte&lt;&gt;, pos: int, numBytes: int | `int` | readUnsigned方法 |  |
-| `shortStrHeader` | size: int | `byte` | shortStrHeader方法 |  |
-| `valueSize` | value: byte&lt;&gt;, pos: int | `int` | valueSize方法 |  |
-| `writeLong` | bytes: byte&lt;&gt;, pos: int, value: long, numBytes: int | `void` | writeLong方法 |  |
+| `arrayHeader` | largeSize: boolean, offsetSize: int | `byte` | 获取数组头部信息 | 传入参数执行获取数组头部信息 |
+| `getBoolean` | value: byte&lt;&gt;, pos: int | `boolean` | 获取Boolean相关功能 | 传入参数执行获取Boolean相关功能 |
+| `getDecimal` | value: byte&lt;&gt;, pos: int | `BigDecimal` | 获取Decimal相关功能 | 传入参数执行获取Decimal相关功能 |
+| `getDecimalWithOriginalScale` | value: byte&lt;&gt;, pos: int | `BigDecimal` | 获取DecimalWithOriginalScale相关功能 | 传入参数执行获取DecimalWithOriginalScale相关功能 |
+| `getDouble` | value: byte&lt;&gt;, pos: int | `double` | 获取Double相关功能 | 传入参数执行获取Double相关功能 |
+| `getFloat` | value: byte&lt;&gt;, pos: int | `float` | 获取Float相关功能 | 传入参数执行获取Float相关功能 |
+| `getLong` | value: byte&lt;&gt;, pos: int | `long` | 获取Long相关功能 | 传入参数执行获取Long相关功能 |
+| `getMetadataKey` | metadata: byte&lt;&gt;, id: int | `String` | 获取MetadataKey相关功能 | 传入参数执行获取MetadataKey相关功能 |
+| `getString` | value: byte&lt;&gt;, pos: int | `String` | 获取String相关功能 | 传入参数执行获取String相关功能 |
+| `getType` | value: byte&lt;&gt;, pos: int | `Type` | 获取Type相关功能 | 传入参数执行获取Type相关功能 |
+| `getTypeInfo` | value: byte&lt;&gt;, pos: int | `int` | 获取TypeInfo相关功能 | 传入参数执行获取TypeInfo相关功能 |
+| `getUuid` | value: byte&lt;&gt;, pos: int | `UUID` | 获取Uuid相关功能 | 传入参数执行获取Uuid相关功能 |
+| `objectHeader` | largeSize: boolean, idSize: int, offsetSize: int | `byte` | 头部请求相关功能 | 传入参数执行头部请求相关功能 |
+| `primitiveHeader` | type: int | `byte` | 头部请求相关功能 | 传入参数执行头部请求相关功能 |
+| `readUnsigned` | bytes: byte&lt;&gt;, pos: int, numBytes: int | `int` | 读取Unsigned相关功能 | 传入参数执行读取Unsigned相关功能 |
+| `shortStrHeader` | size: int | `byte` | 头部请求相关功能 | 传入参数执行头部请求相关功能 |
+| `valueSize` | value: byte&lt;&gt;, pos: int | `int` | valueSize操作 | 传入参数执行valueSize操作 |
+| `writeLong` | bytes: byte&lt;&gt;, pos: int, value: long, numBytes: int | `void` | 写入Long相关功能 | 传入参数执行写入Long相关功能 |
 
 ### VariantVal
 **包路径**: `org.apache.spark.unsafe.types`
@@ -5862,9 +5653,9 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `debugString` | 无 | `String` | debugString方法 |  |
-| `readFromUnsafeRow` | offsetAndSize: long, baseObject: Object, baseOffset: long | `VariantVal` | readFromUnsafeRow方法 |  |
-| `toJson` | zoneId: ZoneId | `String` | toJson方法 |  |
+| `debugString` | 无 | `String` | 调试String相关功能 | 调用该方法执行调试String相关功能 |
+| `readFromUnsafeRow` | offsetAndSize: long, baseObject: Object, baseOffset: long | `VariantVal` | 读取FromUnsafeRow相关功能 | 传入参数执行读取FromUnsafeRow相关功能 |
+| `toJson` | zoneId: ZoneId | `String` | toJson操作 | 传入参数执行toJson操作 |
 
 ### YarnShuffleService
 **包路径**: `org.apache.spark.network.yarn`
@@ -5872,12 +5663,12 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `getMetaData` | 无 | `ByteBuffer` | getMetaData方法 |  |
-| `initializeApplication` | context: ApplicationInitializationContext | `void` | initializeApplication方法 |  |
-| `initializeContainer` | context: ContainerInitializationContext | `void` | initializeContainer方法 |  |
-| `setRecoveryPath` | recoveryPath: Path | `void` | setRecoveryPath方法 |  |
-| `stopApplication` | context: ApplicationTerminationContext | `void` | stopApplication方法 |  |
-| `stopContainer` | context: ContainerTerminationContext | `void` | stopContainer方法 |  |
+| `getMetaData` | 无 | `ByteBuffer` | 获取MetaData相关功能 | 调用该方法执行获取MetaData相关功能 |
+| `initializeApplication` | context: ApplicationInitializationContext | `void` | 初始化ializeApplication相关功能 | 传入参数执行初始化ializeApplication相关功能 |
+| `initializeContainer` | context: ContainerInitializationContext | `void` | 初始化ializeContainer相关功能 | 传入参数执行初始化ializeContainer相关功能 |
+| `setRecoveryPath` | recoveryPath: Path | `void` | 设置RecoveryPath相关功能 | 传入参数执行设置RecoveryPath相关功能 |
+| `stopApplication` | context: ApplicationTerminationContext | `void` | 停止Application相关功能 | 传入参数执行停止Application相关功能 |
+| `stopContainer` | context: ContainerTerminationContext | `void` | 停止Container相关功能 | 传入参数执行停止Container相关功能 |
 
 ### instead
 **包路径**: `org.apache.spark.api.java`
@@ -5885,54 +5676,54 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `checkpoint` | 无 | `Unit` | checkpoint DStream |  |
+| `checkpoint` | 无 | `Unit` | checkpoint DStream | 调用该方法执行检查point相关功能 |
 | `collect` | 无 | `JList` | 收集所有行 | // collect：将RDD收集到Driver端<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"));<br>List<String> list = rdd.collect();<br><br>// 注意：collect会将所有数据拉回Driver<br>// 数据量大时可能导致Driver内存溢出，慎用！ |
-| `collectAsync` | 无 | `JavaFutureAction` | collectAsync方法 |  |
-| `collectPartitions` | Array[Int]: partitionIds | `Array` | collectPartitions方法 |  |
+| `collectAsync` | 无 | `JavaFutureAction` | 收集Async相关功能 | 调用该方法执行收集Async相关功能 |
+| `collectPartitions` | Array[Int]: partitionIds | `Array` | 收集Partitions相关功能 | 传入参数执行收集Partitions相关功能 |
 | `count` | 无 | `Long` | 统计行数 | // count：统计元素总数<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c", "d", "e"));<br>long count = rdd.count();<br>// 结果: 5 |
-| `countApprox` | timeout: Long, confidence: Double | `PartialResult` | countApprox方法 |  |
-| `countApprox` | timeout: Long | `PartialResult` | countApprox方法 |  |
-| `countApproxDistinct` | relativeSD: Double | `Long` | countApproxDistinct方法 |  |
-| `countAsync` | 无 | `JavaFutureAction` | countAsync方法 |  |
-| `countByValue` | 无 | `JMap` | 统计每个批次每个值的出现次数 |  |
-| `countByValueApprox` | timeout: Long, confidence: Double | `PartialResult` | countByValueApprox方法 |  |
-| `countByValueApprox` | timeout: Long | `PartialResult` | countByValueApprox方法 |  |
+| `countApprox` | timeout: Long, confidence: Double | `PartialResult` | 计数Approx相关功能 | 传入参数执行计数Approx相关功能 |
+| `countApprox` | timeout: Long | `PartialResult` | 计数Approx相关功能 | 传入参数执行计数Approx相关功能 |
+| `countApproxDistinct` | relativeSD: Double | `Long` | 计数ApproxDistinct相关功能 | 传入参数执行计数ApproxDistinct相关功能 |
+| `countAsync` | 无 | `JavaFutureAction` | 计数Async相关功能 | 调用该方法执行计数Async相关功能 |
+| `countByValue` | 无 | `JMap` | 统计每个批次每个值的出现次数 | 调用该方法执行计数ByValue相关功能 |
+| `countByValueApprox` | timeout: Long, confidence: Double | `PartialResult` | 计数ByValueApprox相关功能 | 传入参数执行计数ByValueApprox相关功能 |
+| `countByValueApprox` | timeout: Long | `PartialResult` | 计数ByValueApprox相关功能 | 传入参数执行计数ByValueApprox相关功能 |
 | `first` | 无 | `T` | 第一行 | // first：获取第一个元素<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(10, 20, 30));<br>Integer first = rdd.first();<br>// 结果: 10 |
-| `flatMapToDouble` | DoubleFlatMapFunction[T]: f | `JavaDoubleRDD` | flatMapToDouble方法 |  |
-| `fold` | T: zeroValue | `Unit` | 使用零值和组合函数聚合RDD |  |
+| `flatMapToDouble` | DoubleFlatMapFunction[T]: f | `JavaDoubleRDD` | 映射相关功能 | 传入参数执行映射相关功能 |
+| `fold` | T: zeroValue | `Unit` | 使用零值和组合函数聚合RDD | 传入参数执行折叠/归约相关功能 |
 | `foreach` | VoidFunction[T]: f | `Unit` | 对每个元素应用函数，用于副作用操作 | // foreach：对每个元素执行操作（副作用）<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("a", "b", "c"));<br><br>// 打印每个元素（在Executor上执行）<br>rdd.foreach(x -> System.out.println("Element: " + x));<br><br>// 写入外部系统<br>rdd.foreach(x -> {<br>    // 写入数据库、发送消息等<br>    database.insert(x);<br>}); |
-| `foreachAsync` | VoidFunction[T]: f | `JavaFutureAction` | foreachAsync方法 |  |
-| `foreachPartition` | VoidFunction[JIterator[T]]: f | `Unit` | 对每个分区应用函数 |  |
-| `foreachPartitionAsync` | VoidFunction[JIterator[T]]: f | `JavaFutureAction` | foreachPartitionAsync方法 |  |
-| `getCheckpointFile` | 无 | `Optional` | getCheckpointFile方法 |  |
-| `glom` | 无 | `JavaRDD` | glom方法 |  |
-| `isEmpty` | 无 | `Boolean` | 判断是否为空 |  |
-| `iterator` | Partition: split, TaskContext: taskContext | `JIterator` | 获取迭代器 |  |
-| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
-| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f, preservesPartitioning: Boolean | `JavaDoubleRDD` | mapPartitionsToDouble方法 |  |
+| `foreachAsync` | VoidFunction[T]: f | `JavaFutureAction` | 检查是否存在相关功能 | 传入参数执行检查是否存在相关功能 |
+| `foreachPartition` | VoidFunction[JIterator[T]]: f | `Unit` | 对每个分区应用函数 | 传入参数执行foreachPartition操作 |
+| `foreachPartitionAsync` | VoidFunction[JIterator[T]]: f | `JavaFutureAction` | foreachPartitionAsync操作 | 传入参数执行foreachPartitionAsync操作 |
+| `getCheckpointFile` | 无 | `Optional` | 获取CheckpointFile相关功能 | 调用该方法执行获取CheckpointFile相关功能 |
+| `glom` | 无 | `JavaRDD` | glom操作 | 调用该方法执行glom操作 |
+| `isEmpty` | 无 | `Boolean` | 判断是否为空 | 调用该方法执行判断是否Empty相关功能 |
+| `iterator` | Partition: split, TaskContext: taskContext | `JIterator` | 获取迭代器 | 传入参数执行时期相关功能 |
+| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f | `JavaDoubleRDD` | 映射PartitionsToDouble相关功能 | 传入参数执行映射PartitionsToDouble相关功能 |
+| `mapPartitionsToDouble` | DoubleFlatMapFunction[JIterator[T]]: f, preservesPartitioning: Boolean | `JavaDoubleRDD` | 映射PartitionsToDouble相关功能 | 传入参数执行映射PartitionsToDouble相关功能 |
 | `max` | Comparator[T]: comp | `T` | 最大值 | // max：最大值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double max = doubleRDD.max();<br>// 结果: 30.0 |
 | `min` | Comparator[T]: comp | `T` | 最小值 | // min：最小值<br>JavaDoubleRDD doubleRDD = sc.parallelizeDoubles(Arrays.asList(10.0, 20.0, 5.0, 30.0));<br>double min = doubleRDD.min();<br>// 结果: 5.0 |
-| `pipe` | command: String | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command, JMap[String: env | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int | `JavaRDD` | pipe方法 |  |
-| `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int, encoding: String | `JavaRDD` | pipe方法 |  |
+| `pipe` | command: String | `JavaRDD` | pipe操作 | 传入参数执行pipe操作 |
+| `pipe` | JList[String]: command | `JavaRDD` | pipe操作 | 传入参数执行pipe操作 |
+| `pipe` | JList[String]: command, JMap[String: env | `JavaRDD` | pipe操作 | 传入参数执行pipe操作 |
+| `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int | `JavaRDD` | pipe操作 | 传入参数执行pipe操作 |
+| `pipe` | JList[String]: command, JMap[String: env, separateWorkingDir: Boolean, bufferSize: Int, encoding: String | `JavaRDD` | pipe操作 | 传入参数执行pipe操作 |
 | `reduce` | JFunction2[T: f | `T` | 聚合DStream每个RDD | // reduce：聚合所有元素为单个结果<br>JavaRDD<Integer> numbers = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5));<br><br>// 求和<br>Integer sum = numbers.reduce((a, b) -> a + b);<br>// 结果: 15<br><br>// 求最大值<br>Integer max = numbers.reduce((a, b) -> Math.max(a, b));<br>// 结果: 5<br><br>// 字符串拼接<br>JavaRDD<String> words = sc.parallelize(Arrays.asList("a", "b", "c"));<br>String concatenated = words.reduce((a, b) -> a + b);<br>// 结果: "abc" |
-| `saveAsObjectFile` | path: String | `Unit` | 保存RDD为序列化对象文件 |  |
+| `saveAsObjectFile` | path: String | `Unit` | 保存RDD为序列化对象文件 | 传入参数执行保存AsObjectFile相关功能 |
 | `saveAsTextFile` | path: String | `Unit` | 保存RDD为文本文件 | // saveAsTextFile：保存为文本文件<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("line1", "line2", "line3"));<br>rdd.saveAsTextFile("hdfs://output/path/");<br><br>// 输出目录下会有多个文件：part-00000, part-00001... |
 | `saveAsTextFile` | path: String, CompressionCodec]: codec | `Unit` | 保存RDD为文本文件 | // saveAsTextFile：保存为文本文件<br>JavaRDD<String> rdd = sc.parallelize(Arrays.asList("line1", "line2", "line3"));<br>rdd.saveAsTextFile("hdfs://output/path/");<br><br>// 输出目录下会有多个文件：part-00000, part-00001... |
 | `take` | num: Int | `JList` | 取前n行 | // take：获取前n个元素<br>JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));<br>List<Integer> top5 = rdd.take(5);<br>// 结果: [1, 2, 3, 4, 5] |
-| `takeAsync` | num: Int | `JavaFutureAction` | takeAsync方法 |  |
-| `takeOrdered` | num: Int, Comparator[T]: comp | `JList` | 返回排序后的前n个元素 |  |
-| `takeOrdered` | num: Int | `JList` | 返回排序后的前n个元素 |  |
-| `toDebugString` | 无 | `String` | toDebugString方法 |  |
-| `toLocalIterator` | 无 | `JIterator` | toLocalIterator方法 |  |
-| `top` | num: Int, Comparator[T]: comp | `JList` | 返回最大的n个元素 |  |
-| `top` | num: Int | `JList` | 返回最大的n个元素 |  |
-| `treeReduce` | JFunction2[T: f, depth: Int | `T` | treeReduce方法 |  |
-| `treeReduce` | JFunction2[T: f | `T` | treeReduce方法 |  |
-| `zipWithIndex` | 无 | `JavaPairRDD` | zipWithIndex方法 |  |
-| `zipWithUniqueId` | 无 | `JavaPairRDD` | zipWithUniqueId方法 |  |
+| `takeAsync` | num: Int | `JavaFutureAction` | 获取Async相关功能 | 传入参数执行获取Async相关功能 |
+| `takeOrdered` | num: Int, Comparator[T]: comp | `JList` | 返回排序后的前n个元素 | 传入参数执行获取Ordered相关功能 |
+| `takeOrdered` | num: Int | `JList` | 返回排序后的前n个元素 | 传入参数执行获取Ordered相关功能 |
+| `toDebugString` | 无 | `String` | 调试相关功能 | 调用该方法执行调试相关功能 |
+| `toLocalIterator` | 无 | `JIterator` | 本地相关功能 | 调用该方法执行本地相关功能 |
+| `top` | num: Int, Comparator[T]: comp | `JList` | 返回最大的n个元素 | 传入参数执行顶部相关功能 |
+| `top` | num: Int | `JList` | 返回最大的n个元素 | 传入参数执行顶部相关功能 |
+| `treeReduce` | JFunction2[T: f, depth: Int | `T` | 减少相关功能 | 传入参数执行减少相关功能 |
+| `treeReduce` | JFunction2[T: f | `T` | 减少相关功能 | 传入参数执行减少相关功能 |
+| `zipWithIndex` | 无 | `JavaPairRDD` | zipWithIndex操作 | 调用该方法执行zipWithIndex操作 |
+| `zipWithUniqueId` | 无 | `JavaPairRDD` | 唯一相关功能 | 调用该方法执行唯一相关功能 |
 
 ---
 
@@ -5944,6 +5735,6 @@
 
 | 方法名 | 参数 | 返回类型 | 描述 | 示例 |
 |--------|------|----------|------|------|
-| `fromString` | s: String | `StorageLevel` | fromString方法 |  |
+| `fromString` | s: String | `StorageLevel` | 从字符串解析枚举值或配置 | 从字符串解析Avro压缩编解码器类型 |
 
 ---
