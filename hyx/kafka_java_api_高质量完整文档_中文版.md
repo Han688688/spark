@@ -894,3 +894,474 @@ public class KafkaStreamsExample {
 
 ---
 
+
+---
+
+## 八、Admin Result类
+
+Admin API的所有操作都返回专门的Result类：
+
+| Result类 | 主要方法 | 说明 |
+|----------|----------|------|
+| `CreateTopicsResult` | `all()`, `values()` | 创建Topic结果 |
+| `DeleteTopicsResult` | `all()`, `values()` | 删除Topic结果 |
+| `ListTopicsResult` | `names()`, `listings()` | 列出Topic结果 |
+| `DescribeTopicsResult` | `all()`, `topicDescriptions()` | 描述Topic结果 |
+| `DescribeClusterResult` | `nodes()`, `controller()`, `clusterId()` | 描述集群结果 |
+| `DescribeConfigsResult` | `all()`, `values()` | 描述配置结果 |
+| `CreateAclsResult` | `all()`, `values()` | 创建ACL结果 |
+| `DeleteAclsResult` | `all()`, `values()` | 删除ACL结果 |
+| `DescribeAclsResult` | `values()` | 描述ACL结果 |
+| `CreatePartitionsResult` | `all()`, `values()` | 创建分区结果 |
+| `AlterConfigsResult` | `all()` | 修改配置结果 |
+| `AlterReplicaLogDirsResult` | `all()`, `values()` | 修改副本目录结果 |
+
+### CreateTopicsResult
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: 创建Topic的结果。
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `all` | 无 | `KafkaFuture<Void>` | 获取所有结果（等待完成） | `CreateTopicsResult result = admin.createTopics(topics);<br>result.all().get();  // 等待所有Topic创建完成` |
+| `values` | 无 | `Map<String,KafkaFuture<Void>>` | 获取每个Topic的结果 | `Map<String, KafkaFuture<Void>> futures = result.values();<br>futures.get("topic1").get();  // 等待单个Topic` |
+
+---
+
+### ListTopicsResult
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: 列出Topic的结果。
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `names` | 无 | `KafkaFuture<Set<String>>` | 获取Topic名称集合 | `Set<String> topics = admin.listTopics().names().get();` |
+| `listings` | 无 | `KafkaFuture<Collection<TopicListing>>` | 获取Topic列表（含详情） | `Collection<TopicListing> listings = admin.listTopics().listings().get();` |
+
+---
+
+### DescribeTopicsResult
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: 描述Topic的结果。
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `all` | 无 | `KafkaFuture<Map<String,TopicDescription>>` | 获取所有Topic描述 | `Map<String, TopicDescription> desc = result.all().get();` |
+| `topicDescriptions` | 无 | `Map<String,KafkaFuture<TopicDescription>>` | 获取单个Topic描述 | `TopicDescription topic = result.topicDescriptions().get("topic").get();` |
+
+---
+
+### DescribeClusterResult
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: 描述集群的结果。
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `nodes` | 无 | `KafkaFuture<Collection<Node>>` | 获取所有节点 | `Collection<Node> nodes = result.nodes().get();` |
+| `controller` | 无 | `KafkaFuture<Node>` | 获取Controller节点 | `Node controller = result.controller().get();` |
+| `clusterId` | 无 | `KafkaFuture<String>` | 获取集群ID | `String clusterId = result.clusterId().get();` |
+
+---
+
+### DescribeConfigsResult
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: 描述配置的结果。
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `all` | 无 | `KafkaFuture<Map<ConfigResource,Config>>` | 获取所有配置 | `Map<ConfigResource, Config> configs = result.all().get();` |
+| `values` | 无 | `Map<ConfigResource,KafkaFuture<Config>>` | 获取单个资源配置 | `Config config = result.values().get(resource).get();` |
+
+---
+
+## 九、Admin Option类
+
+Admin操作接受Option类进行配置：
+
+| Option类 | 说明 |
+|----------|------|
+| `CreateTopicsOptions` | 创建Topic选项 |
+| `DeleteTopicsOptions` | 删除Topic选项 |
+| `ListTopicsOptions` | 列出Topic选项 |
+| `DescribeTopicsOptions` | 描述Topic选项 |
+| `DescribeClusterOptions` | 描述集群选项 |
+| `DescribeConfigsOptions` | 描述配置选项 |
+| `CreateAclsOptions` | 创建ACL选项 |
+| `DeleteAclsOptions` | 删除ACL选项 |
+| `DescribeAclsOptions` | 描述ACL选项 |
+| `AlterConfigsOptions` | 修改配置选项 |
+| `CreatePartitionsOptions` | 创建分区选项 |
+
+### CreateTopicsOptions
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: 创建Topic的选项。
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `timeoutMs` | Long timeout | `CreateTopicsOptions` | 设置超时时间 | `CreateTopicsOptions options = new CreateTopicsOptions().timeoutMs(30000L);` |
+| `validateOnly` | Boolean validateOnly | `CreateTopicsOptions` | 仅验证不创建 | `CreateTopicsOptions options = new CreateTopicsOptions().validateOnly(true);  // 只验证不实际创建` |
+
+---
+
+### ListTopicsOptions
+**包路径**: `org.apache.kafka.clients.admin`
+**说明**: 列出Topic的选项。
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `timeoutMs` | Long timeout | `ListTopicsOptions` | 设置超时时间 | `ListTopicsOptions options = new ListTopicsOptions().timeoutMs(10000L);` |
+| `listInternal` | Boolean listInternal | `ListTopicsOptions` | 是否包含内部Topic | `ListTopicsOptions options = new ListTopicsOptions().listInternal(true);  // 包含内部Topic` |
+
+---
+
+## 十、State Stores（状态存储）
+
+### StateStore
+**包路径**: `org.apache.kafka.streams.state`
+**说明**: 状态存储接口，所有状态存储的基类。
+**稳定性**: 稳定
+**方法数量**: 6
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `name` | 无 | `String` | 获取存储名称 | `String name = store.name();` |
+| `init` | ProcessorContext context, StateStore root | `void` | 初始化存储 | `store.init(context, root);` |
+| `flush` | 无 | `void` | 刷新到存储 | `store.flush();` |
+| `close` | 无 | `void` | 关闭存储 | `store.close();` |
+| `persistent` | 无 | `boolean` | 是否持久化 | `boolean persistent = store.persistent();` |
+| `isOpen` | 无 | `boolean` | 是否打开 | `boolean open = store.isOpen();` |
+
+---
+
+### KeyValueStore<K,V>
+**包路径**: `org.apache.kafka.streams.state`
+**说明**: 键值状态存储，最常用的状态存储类型。
+**稳定性**: 稳定
+**方法数量**: 10+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `get` | K key | `V` | 获取值 | `V value = store.get("key");` |
+| `put` | K key, V value | `void` | 存储键值 | `store.put("key", "value");` |
+| `putAll` | List<KeyValue<K,V>> entries | `void` | 批量存储 | `store.putAll(entries);` |
+| `delete` | K key | `V` | 删除键值 | `V deleted = store.delete("key");` |
+| `range` | K from, K to | `KeyValueIterator<K,V>` | 获取范围 | `KeyValueIterator<K, V> iter = store.range("a", "z");` |
+| `all` | 无 | `KeyValueIterator<K,V>` | 获取所有 | `KeyValueIterator<K, V> iter = store.all();` |
+| `approximateNumEntries` | 无 | `long` | 获取大概条目数 | `long count = store.approximateNumEntries();` |
+
+---
+
+### WindowStore<K,V>
+**包路径**: `org.apache.kafka.streams.state`
+**说明**: 窗口状态存储，用于存储窗口聚合结果。
+**稳定性**: 稳定
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `put` | K key, V value, long windowStartTimestamp | `void` | 存储窗口数据 | `store.put("key", "value", timestamp);` |
+| `fetch` | K key, long timeFrom, long timeTo | `WindowStoreIterator<V>` | 获取窗口数据 | `WindowStoreIterator<V> iter = store.fetch("key", fromTime, toTime);` |
+| `fetchAll` | long timeFrom, long timeTo | `KeyValueIterator<Windowed<K>,V>` | 获取所有窗口数据 | `KeyValueIterator<Windowed<K>, V> iter = store.fetchAll(fromTime, toTime);` |
+| `all` | 无 | `KeyValueIterator<Windowed<K>,V>` | 获取所有数据 | `KeyValueIterator<Windowed<K>, V> iter = store.all();` |
+
+---
+
+### SessionStore<K,V>
+**包路径**: `org.apache.kafka.streams.state`
+**说明**: Session状态存储，用于存储Session聚合结果。
+**稳定性**: 定定
+**方法数量**: 6+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `fetch` | K key | `KeyValueIterator<Windowed<K>,V>` | 获取Session数据 | `KeyValueIterator<Windowed<K>, V> iter = store.fetch("key");` |
+| `fetch` | K keyFrom, K keyTo | `KeyValueIterator<Windowed<K>,V>` | 获取范围Session | `KeyValueIterator<Windowed<K>, V> iter = store.fetch("a", "z");` |
+
+---
+
+## 十一、窗口类补充
+
+### SessionWindows
+**包路径**: `org.apache.kafka.kafka.streams.kstream`
+**说明**: Session窗口，基于会话的窗口。
+**稳定性**: 稳定
+**方法数量**: 4
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `withInactivityGap` | Duration inactivityGap | `SessionWindows` | 设置不活动间隔 | `SessionWindows windows = SessionWindows.withInactivityGap(Duration.ofMinutes(5));` |
+| `grace` | Duration gracePeriod | `SessionWindows` | 设置宽限期 | `SessionWindows windows = SessionWindows.withInactivityGap(Duration.ofMinutes(5)).grace(Duration.ofMinutes(1));` |
+
+---
+
+## 十二、Header接口补充
+
+### Header
+**包路径**: `org.apache.kafka.common.header`
+**说明**: 单个消息头。
+**稳定性**: 稳定
+**方法数量**: 2
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `key` | 无 | `String` | 获取消息头Key | `String key = header.key();` |
+| `value` | 无 | `byte[]` | 获取消息头Value | `byte[] value = header.value();` |
+
+---
+
+### RecordHeader
+**包路径**: `org.apache.kafka.common.header.internals`
+**说明**: 消息头实现类。
+**稳定性**: 稳定
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `RecordHeader` | String key, byte[] value | 构造方法 | 创建消息头 | `RecordHeader header = new RecordHeader("source", "app1".getBytes());` |
+
+---
+
+## 十三、Config类
+
+### ConfigDef
+**包路径**: `org.apache.kafka.common.config`
+**说明**: 配置参数定义类，用于定义配置参数及其验证规则。
+**稳定性**: 稳定
+**方法数量**: 20+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `define` | String name, ConfigDef.Type type, Object defaultValue, ConfigDef.Importance importance, String doc | `ConfigDef` | 定义配置参数 | `configDef.define("batch.size", ConfigDef.Type.INT, 16384, ConfigDef.Importance.MEDIUM, "Batch size");` |
+| `validate` | Map<String,String> props | `Map<String,ConfigValue>` | 验证配置 | `Map<String, ConfigValue> validated = configDef.validate(props);` |
+
+---
+
+### Config
+**包路径**: `org.apache.kafka.common.config`
+**说明**: 配置值集合，包含多个ConfigValue。
+**稳定性**: 稳定
+**方法数量**: 5+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `get` | String name | `ConfigValue` | 获取配置值 | `ConfigValue value = config.get("batch.size");` |
+| `values` | 无 | `Collection<ConfigValue>` | 获取所有配置值 | `Collection<ConfigValue> values = config.values();` |
+
+---
+
+### ConfigValue
+**包路径**: `org.apache.kafka.common.config`
+**说明**: 单个配置值，包含值、错误和推荐值。
+**稳定性**: 稳定
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `name` | 无 | `String` | 获取配置名称 | `String name = configValue.name();` |
+| `value` | 无 | `Object` | 获取配置值 | `Object value = configValue.value();` |
+| `errorMessages` | 无 | `List<String>` | 获取错误消息 | `List<String> errors = configValue.errorMessages();` |
+| `recommendedValues` | 无 | `List<Object>` | 获取推荐值 | `List<Object> recommended = configValue.recommendedValues();` |
+
+---
+
+## 十四、错误类
+
+Kafka定义了丰富的异常类：
+
+| 异常类 | 说明 |
+|--------|------|
+| `KafkaException` | Kafka基础异常类 |
+| `TimeoutException` | 操作超时 |
+| `InterruptException` | 操作被中断 |
+| `WakeupException` | Consumer被唤醒 |
+| `AuthorizationException` | 授权失败 |
+| `AuthenticationException` | 认证失败 |
+| `UnsupportedVersionException` | 版本不支持 |
+| `IllegalStateException` | 非法状态 |
+| `CommitFailedException` | 提交失败 |
+| `RecordTooLargeException` | 记录太大 |
+| `SerializationException` | 序列化错误 |
+| `DeserializationException` | 反序列化错误 |
+| `BufferExhaustedException` | 缓冲区耗尽 |
+| `OutOfOrderSequenceException` | 序列号乱序 |
+| `ProducerFencedException` | Producer被fenced |
+| `OutOfOrdersException` | 序列号乱序 |
+| `GroupAuthorizationException` | Consumer组授权失败 |
+| `TopicAuthorizationException` | Topic授权失败 |
+| `ClusterAuthorizationException` | 集群授权失败 |
+| `InvalidTopicException` | Topic名无效 |
+| `InvalidGroupIdException` | Consumer组ID无效 |
+| `InvalidRecordException` | 记录无效 |
+| `InvalidReplicationFactorException` | 副本因子无效 |
+| `NotLeaderForPartitionException` | 不是分区Leader |
+| `UnknownTopicOrPartitionException` | Topic或分区未知 |
+| `LeaderNotAvailableException` | Leader不可用 |
+| `BrokerNotAvailableException` | Broker不可用 |
+| `ReplicaNotAvailableException` | 副本不可用 |
+| `NetworkException` | 网络错误 |
+| `CorruptRecordException` | 记录损坏 |
+
+---
+
+### KafkaException
+**包路径**: `org.apache.kafka.common.errors`
+**说明**: Kafka基础异常类，所有Kafka异常的父类。
+**稳定性**: 稳定
+
+```java
+try {
+    producer.send(record);
+} catch (KafkaException e) {
+    // 处理Kafka异常
+    e.printStackTrace();
+}
+```
+
+---
+
+### TimeoutException
+**包路径**: `org.apache.kafka.common.errors`
+**说明**: 操作超时异常。
+**稳定性**: 稳定
+
+```java
+try {
+    consumer.poll(Duration.ofMillis(1000));
+} catch (TimeoutException e) {
+    // 超时处理
+    System.out.println("Poll超时");
+}
+```
+
+---
+
+### WakeupException
+**包路径**: `org.apache.kafka.common.errors`
+**说明**: Consumer被wakeup()唤醒的异常。
+**稳定性**: 稳定
+
+```java
+try {
+    while (true) {
+        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+    }
+} catch (WakeupException e) {
+    // 正常退出循环
+    consumer.close();
+}
+```
+
+---
+
+### CommitFailedException
+**包路径**: `org.apache.kafka.common.errors`
+**说明**: 提交偏移量失败的异常。
+**稳定性**: 稳定
+
+```java
+try {
+    consumer.commitSync();
+} catch (CommitFailedException e) {
+    // 提交失败，可能是因为rebalance
+    System.out.println("提交失败");
+}
+```
+
+---
+
+### SerializationException
+**包路径**: `org.apache.common.errors`
+**说明**: 序列化失败的异常。
+**稳定性**: 稳定
+
+```java
+try {
+    producer.send(new ProducerRecord<>("topic", "key", object));
+} catch (SerializationException e) {
+    // 序列化失败
+    System.out.println("序列化失败: " + e.getMessage());
+}
+```
+
+---
+
+## 十五、Connect Data/Schema类
+
+### Schema
+**包路径**: `org.apache.kafka.connect.data`
+**说明**: Schema接口，定义数据结构。
+**稳定性**: 稳定
+**方法数量**: 12+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `type` | 无 | `Schema.Type` | 获取Schema类型 | `Schema.Type type = schema.type();  // INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOLEAN, STRING, BYTES, ARRAY, MAP, STRUCT` |
+| `name` | 无 | `String` | 获取Schema名称 | `String name = schema.name();` |
+| `version` | 无 | `Integer` | 获取Schema版本 | `Integer version = schema.version();` |
+| `doc` | 无 | `String` | 获取文档说明 | `String doc = schema.doc();` |
+| `parameters` | 无 | `Map<String,String>` | 获取参数 | `Map<String, String> params = schema.parameters();` |
+| `isOptional` | 无 | `boolean` | 是否可选 | `boolean optional = schema.isOptional();` |
+| `defaultValue` | 无 | `Object` | 获取默认值 | `Object default = schema.defaultValue();` |
+| `fields` | 无 | `List<Field>` | 获取所有字段 | `List<Field> fields = schema.fields();` |
+| `field` | String fieldName | `Field` | 获取指定字段 | `Field field = schema.field("name");` |
+| `keySchema` | 无 | `Schema` | 获取Map的Key Schema | `Schema keySchema = schema.keySchema();` |
+| `valueSchema` | 无 | `Schema` | 获取Map/Array的Value Schema | `Schema valueSchema = schema.valueSchema();` |
+
+---
+
+### Schema.Type
+**包路径**: `org.apache.kafka.connect.data`
+**说明**: Schema类型枚举。
+
+| 类型 | 说明 |
+|------|------|
+| `INT8` | 8位整数 |
+| `INT16` | 16位整数 |
+| `INT32` | 32位整数 |
+| `INT64` | 64位整数 |
+| `FLOAT32` | 32位浮点数 |
+| `FLOAT64` | 64位浮点数（Double） |
+| `BOOLEAN` | 布尔值 |
+| `STRING` | 字符串 |
+| `BYTES` | 字节数组 |
+| `ARRAY` | 数组 |
+| `MAP` | Map |
+| `STRUCT` | 结构体 |
+
+---
+
+### SchemaBuilder
+**包路径**: `org.apache.kafka.connect.data`
+**说明**: Schema构建器，用于创建Schema。
+**稳定性**: 稳定
+**方法数量**: 15+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `type` | Schema.Type type | `SchemaBuilder` | 设置类型 | `SchemaBuilder builder = SchemaBuilder.type(Schema.Type.STRUCT);` |
+| `name` | String name | `SchemaBuilder` | 设置名称 | `builder.name("MySchema");` |
+| `version` | Integer version | `SchemaBuilder` | 设置版本 | `builder.version(1);` |
+| `doc` | String doc | `SchemaBuilder` | 设置文档 | `builder.doc("用户数据结构");` |
+| `parameter` | String key, String value | `SchemaBuilder` | 添加参数 | `builder.parameter("key", "value");` |
+| `optional` | 无 | `SchemaBuilder` | 设置为可选 | `builder.optional();` |
+| `required` | 无 | `SchemaBuilder` | 设置为必填 | `builder.required();` |
+| `defaultValue` | Object value | `SchemaBuilder` | 设置默认值 | `builder.defaultValue("default");` |
+| `field` | String fieldName, Schema fieldSchema | `SchemaBuilder` | 添加字段 | `builder.field("id", SchemaBuilder.INT64_SCHEMA);` |
+| `build` | 无 | `Schema` | 构建Schema | `Schema schema = builder.build();` |
+
+---
+
+### Struct
+**包路径**: `org.apache.kafka.connect.data`
+**说明**: 结构化数据容器，用于存储复杂数据。
+**稳定性**: 稳定
+**方法数量**: 8+
+
+| 方法名 | 参数 | 返回类型 | 说明 | 示例 |
+|--------|------|----------|------|------|
+| `schema` | 无 | `Schema` | 获取Schema | `Schema schema = struct.schema();` |
+| `put` | String fieldName, Object value | `Struct` | 设置字段值 | `struct.put("name", "张三");` |
+| `get` | String fieldName | `Object` | 获取字段值 | `Object name = struct.get("name");` |
+| `getInt32` | String fieldName | `Integer` | 获取Int32值 | `Integer age = struct.getInt32("age");` |
+| `getString` | String fieldName | `String` | 获取String值 | `String name = struct.getString("name");` |
+| `validate` | 无 | `void` | 验证结构 | `struct.validate();` |
+
+---
+
