@@ -1,321 +1,315 @@
-# TestCaseGenerationSkill
+# TestCaseGenerationSkill - 文档驱动版README
 
-基于组件交互描述和种子用例自动生成测试用例的通用Skill。
-
-## 核心特点
-
-1. **通用性强** - 支持任意组件组合（Spark/Kafka/Flink/HDFS等）
-2. **模板驱动** - 标准化输入输出，质量可控
-3. **经验驱动** - 从种子用例学习，生成质量高
-4. **自动生成** - 用例+脚本+覆盖分析一体化
-
-## 目录结构
-
-```
-TestCaseGenerationSkill/
-├── templates/               # 模板文件目录
-│   ├── interaction_template.yaml   # 交互描述模板 ⭐必读
-│   ├── test_case_template.yaml     # 用例模板
-│   └── script_template.py          # 脚本模板
-│
-├── config/                  # 配置文件目录
-│   ├── skill_config.yaml           # Skill主配置 ⭐必读
-│   └── generation_limits.yaml      # 生成限制配置 ⭐必读
-│
-├── seed_cases/              # 种子用例目录 ⭐必填
-│   ├── spark_kafka_hdfs/           # Spark-Kafka-HDFS种子用例
-│   └── flink_kafka_hive/           # Flink-Kafka-Hive种子用例
-│
-├── src/                     # 源码目录
-│   ├── skill.py                    # 主Skill类 ⭐核心
-│   ├── interaction_parser.py       # 交互解析器
-│   ├── seed_analyzer.py            # 种子分析器
-│   ├── generator.py                # 用例生成器
-│   ├── script_generator.py         # 脚本生成器
-│   └── quality_checker.py          # 质量检查器
-│
-├── tests/                   # Skill测试目录
-│   └ test_skill.py                 # 单元测试
-│
-├── examples/                # 使用示例目录 ⭐必读
-│   └ README.md                     # 使用示例
-│
-├── docs/                    # 文档目录
-│   ├── README.md                    # 本文档 ⭐必读
-│   └── USAGE.md                     # 使用指南
-│
-└── output/                  # 输出目录（运行后生成）
-    ├── test_cases.json             # 生成的测试用例
-    ├── test_script_*.py            # 自动化脚本
-    ├── coverage_analysis.yaml      # 覆盖分析
-    └── generation_report.md        # 生成报告
-```
-
-## 快速开始
-
-### 1. 准备交互描述
-
-参考 `templates/interaction_template.yaml` 编写组件交互描述。
-
-**必填字段**:
-- `interaction.name` - 交互名称
-- `interaction.components` - 组件列表
-- `interaction.flow` - 交互流程步骤
-- `data_schema` - 数据Schema
-- `constraints` - 约束条件
-
-### 2. 准备种子用例
-
-参考 `seed_cases/spark_kafka_hdfs/example_seed.yaml` 编写种子用例。
-
-**必填内容**:
-- 至少1个正常流程用例
-- 至少1个异常处理用例（可选但推荐）
-- 至少1个边界值用例（可选但推荐）
-
-### 3. 执行生成
-
-```bash
-cd TestCaseGenerationSkill
-
-python src/skill.py \
-  --interaction your_interaction.yaml \
-  --seed your_seed_cases.yaml \
-  --output output
-```
-
-### 4. 查看输出
-
-```bash
-ls output/
-
-# test_cases.json         - 生成的测试用例列表
-# test_script_0.py        - pytest自动化脚本
-# coverage_analysis.yaml  - 覆盖维度分析
-# generation_report.md    - 执行报告
-```
-
-## 输入文件说明
-
-### 交互描述（必填）
-
-**位置**: `templates/interaction_template.yaml`
-
-**作用**: 描述组件之间的交互过程
-
-**示例**:
-```yaml
-interaction:
-  name: "数据管道"
-  components: ["Kafka", "Spark", "HDFS"]
-  flow:
-    - step: "发送消息"
-      component: "Kafka"
-      action: "Producer.send"
-      input: "JSON数据"
-      output: "Topic"
-```
-
-### 种子用例（必填）
-
-**位置**: `seed_cases/your_scenario/example_seed.yaml`
-
-**作用**: 提供高质量种子用例供泛化学习
-
-**要求**:
-- 正常流程用例（P0优先级）
-- 异常处理用例（P0优先级）
-- 边界值用例（P1优先级）
-
-### 生成配置（可选）
-
-**位置**: `config/generation_limits.yaml`
-
-**作用**: 控制生成数量、质量、覆盖维度
-
-**关键配置**:
-```yaml
-quantity_limits:
-  max_cases_per_scenario: 10
-  min_cases_per_scenario: 3
-
-priority_distribution:
-  P0_ratio: 0.2
-  P1_ratio: 0.5
-  P2_ratio: 0.3
-
-coverage_dimensions:
-  required:
-    - normal_flow      # 必选
-    - error_handling   # 必选
-    - boundary_values  # 必选
-```
-
-## 输出文件说明
-
-### test_cases.json
-
-生成的测试用例列表，包含：
-- case_id: 用例ID
-- case_name: 用例名称
-- priority: 优先级（P0/P1/P2）
-- scenario: 场景信息
-- test_steps: 测试步骤
-- assertions: 验证点
-- cleanup: 清理步骤
-
-### test_script_*.py
-
-pytest自动化测试脚本，包含：
-- 测试类定义
-- Setup Fixture
-- 正常测试方法
-- 异常测试方法
-- 边界测试方法
-- 辅助函数
-
-### coverage_analysis.yaml
-
-覆盖维度分析，包含：
-- 维度覆盖（normal/error/boundary）
-- 组件覆盖
-- 交互类型覆盖
-- 总体覆盖率
-
-### generation_report.md
-
-执行报告，包含：
-- 生成时间统计
-- 用例数量统计
-- 优先级分布
-- 覆盖分析
-- 质量指标
-
-## 适用场景
-
-✅ **适用场景**:
-- 组件交互测试（Kafka→Spark→HDFS）
-- 数据流测试
-- 边界值测试
-- 异常处理测试
-- 新场景扩展
-
-❌ **不适用场景**:
-- API全覆盖测试
-- 性能基准测试
-- 安全渗透测试
-
-## 质量保证
-
-### 生成限制
-
-通过 `generation_limits.yaml` 控制：
-- 数量限制（min/max用例数）
-- 优先级分布（P0/P1/P2比例）
-- 覆盖维度（必选维度保证）
-- 数据限制（输入大小、类型）
-
-### 质量检查
-
-自动检查：
-- 用例完整性（必填字段）
-- 步骤可执行性
-- 验证点有效性
-- 数据合法性
-- 清理完整性
-
-### 覆盖保证
-
-必选维度：
-1. normal_flow - 正常流程
-2. error_handling - 异常处理
-3. boundary_values - 边界值
-
-## 扩展性
-
-### 添加新场景
-
-1. 在 `seed_cases/` 创建新目录
-2. 添加种子用例
-3. 准备交互描述
-4. 执行生成
-
-### 自定义模板
-
-1. 复制 `templates/` 目录模板
-2. 修改模板结构
-3. 在 `config/skill_config.yaml` 指定自定义模板路径
-
-### 自定义配置
-
-修改 `config/generation_limits.yaml`:
-- 调整数量限制
-- 调整优先级分布
-- 调整覆盖维度
-
-## 示例场景
-
-### Spark-Kafka-HDFS
-
-已提供完整示例：
-- `seed_cases/spark_kafka_hdfs/example_seed.yaml`
-- `examples/kafka_spark_hdfs_interaction.yaml`
-
-### Flink-Kafka-Hive
-
-已提供完整示例：
-- `seed_cases/flink_kafka_hive/example_seed.yaml`
-
-## 最佳实践
-
-1. **高质量种子用例** - 至少3-5个包含正常/异常/边界
-2. **清晰的交互描述** - 使用标准模板，填写完整
-3. **合理的生成限制** - 控制数量，确保质量
-4. **持续迭代优化** - 积累种子，优化模板
-
-## 常见问题
-
-**Q: 生成用例数量太多怎么办？**
-A: 调整 `generation_limits.yaml` 中的 `max_cases_per_scenario`
-
-**Q: 覆盖维度不够怎么办？**
-A: 确保种子用例包含 normal/error/boundary 三种类型
-
-**Q: 生成的脚本不能执行怎么办？**
-A: 检查模板中导入部分，根据实际组件调整
-
-**Q: 如何添加新组件？**
-A: 只需在交互描述中添加组件，无需修改Skill代码
-
-## 技术原理
-
-### 泛化策略
-
-1. **参数泛化** - 改变输入参数值
-2. **路径泛化** - 改变执行路径
-3. **组合泛化** - 组合多个场景
-
-### 学习机制
-
-从种子用例提取：
-- 交互模式
-- 数据模式
-- 验证模式
-- 异常处理模式
-- 清理模式
-
-## 开发者信息
-
-- **Skill名称**: TestCaseGenerationSkill
-- **版本**: 1.0.0
-- **类型**: test_generation
-- **作者**: AI4SE
+**Skill版本**: v3.0（文档驱动版）  
+**核心理念**: **规范优先，代码辅助**
 
 ---
 
-**参考文档**:
-- templates/interaction_template.yaml - 交互描述模板
-- config/generation_limits.yaml - 生成限制配置
-- examples/README.md - 使用示例
+## 一、Skill简介
 
-**开始使用**: 阅读 `examples/README.md`
+### 1.1 什么是TestCaseGenerationSkill
+
+TestCaseGenerationSkill是一个基于**文档驱动**的测试用例自动生成规范体系，通过Markdown文档定义规范、YAML配置定义参数、模板定义格式，实现跨组件复用、灵活调整、AI友好执行的测试用例生成能力。
+
+---
+
+### 1.2 核心特点
+
+**文档驱动优势**（7胜）:
+1. ✅ **学习成本低** - 读文档vs读代码
+2. ✅ **理解难度低** - 自然语言vs编程语言
+3. ✅ **修改成本低** - 编辑文档vs修改代码
+4. ✅ **维护成本低** - 文档版本vs代码版本
+5. ✅ **复用性强** - 跨组件引用vsimport模块
+6. ✅ **灵活性强** - 改文档即生效vs改代码需部署
+7. ✅ **AI友好** - 直接阅读vs需要理解
+
+---
+
+## 二、目录结构
+
+```
+TestCaseGenerationSkill/
+│
+├── docs/                     # ⭐⭐⭐核心：规范文档
+│   ├── skill_spec.md         # Skill总体规范
+│   ├── interaction_spec.md   # 交互描述规范
+│   ├── testcase_spec.md      # 测试用例规范
+│   ├── generation_rules.md   # 生成规则
+│   ├── quality_standards.md  # 质量标准
+│   ├── coverage_dimensions.md# 覆盖维度（待创建）
+│   ├── 文档驱动架构说明.md   # 文档驱动理念说明
+│   └── README.md             # 本文档
+│
+├── config/                   # ⭐⭐配置：参数定义
+│   ├── skill_config.yaml     # Skill配置
+│   ├── generation_limits.yaml# 生成限制
+│   └── quality_thresholds.yaml# 质量阈值（待创建）
+│
+├── templates/                # ⭐⭐模板：格式标准
+│   ├── interaction_template.yaml
+│   ├── testcase_template.yaml
+│   └── script_template.md    # pytest模板（待创建）
+│
+├── seed_cases/               # ⭐种子：学习参考
+│   ├── spark_kafka_hdfs/
+│   └ flink_kafka_hive/
+│   └── example_library.yaml
+│
+└── 架构优化说明.md           # 优化历程说明
+```
+
+---
+
+## 三、快速开始
+
+### Step 1: 阅读规范文档（必读）
+
+```
+必须阅读（按顺序）：
+├── docs/README.md（本文档）
+├── docs/skill_spec.md（Skill总体规范）
+├── docs/interaction_spec.md（交互描述规范）
+├── docs/testcase_spec.md（测试用例规范）
+└── docs/generation_rules.md（生成规则）
+
+推荐阅读：
+├── docs/quality_standards.md（质量标准）
+├── docs/文档驱动架构说明.md（架构理念）
+└── 架构优化说明.md（优化历程）
+```
+
+---
+
+### Step 2: 准备输入文件（必须）
+
+```
+准备交互描述：
+├── 参照 templates/interaction_template.yaml
+├── 参照 docs/interaction_spec.md规范
+└── 创建 your_interaction.yaml
+
+准备种子用例：
+├── 参照 templates/testcase_template.yaml
+├── 参照 docs/testcase_spec.md规范
+├── 参照 seed_cases/spark_kafka_hdfs/example_seed.yaml示例
+└── 创建 your_seed_cases.yaml
+
+种子用例要求：
+├── 至少1个正常流程用例（P0）
+├── 至少1个异常处理用例（推荐）
+├── 至少1个边界值用例（推荐）
+```
+
+---
+
+### Step 3: AI执行生成
+
+**AI执行流程**:
+```
+AI根据文档规范执行：
+├── 阅读docs/规范文档理解输入
+├── 根据generation_rules.md生成用例
+├── 根据testcase_spec.md填写用例格式
+├── 根据quality_standards.md检查质量
+├── 根据script_template.md生成脚本
+└── 输出test_cases.yaml和test_script.py
+```
+
+---
+
+### Step 4: 验证输出
+
+```
+必须验证：
+├── 输出文件格式正确（符合规范）
+├── 用例数量符合限制（3-10个）
+├── 质量分数达标（≥0.8）
+├── 覆盖维度完整（正常+异常+边界）
+```
+
+---
+
+## 四、使用示例
+
+### 4.1 输入示例（交互描述）
+
+```yaml
+# interaction.yaml
+interaction:
+  name: spark_kafka_hdfs_data_flow
+  components: [Spark, Kafka, HDFS]
+  flow:
+    - step: 1
+      component: Spark
+      action: read_from_hdfs
+      input: hdfs://data/input
+      output: DataFrame
+    
+    - step: 2
+      component: Spark
+      action: process_data
+      output: ProcessedDataFrame
+    
+    - step: 3
+      component: Kafka
+      action: produce_message
+      input: ProcessedDataFrame
+      output: kafka://topic/output
+
+data_schema:
+  input_data: {type: JSON, schema: {fields: [id, name, value]}}
+  output_data: {type: KafkaMessage, schema: {key: id}}
+
+constraints:
+  data_constraints: [{name: input_size, min: 1, max: 10000}]
+  performance_constraints: [{name: processing_time, max_ms: 5000}]
+```
+
+---
+
+### 4.2 输入示例（种子用例）
+
+```yaml
+# seed_cases.yaml
+seed_cases:
+  - case_name: spark_kafka_normal_flow_basic
+    case_type: normal_flow
+    priority: P0
+    test_steps:
+      - {step_number: 1, action: read_from_hdfs, component: Spark}
+      - {step_number: 2, action: process_data, component: Spark}
+      - {step_number: 3, action: produce_message, component: Kafka}
+    test_data:
+      input: {data_size: 100, data_format: JSON}
+      expected_output: {status: success}
+    assertions:
+      - {assertion_type: count, description: 验证消息数量, expected_value: 100}
+    cleanup: [清理HDFS数据, 清理Kafka消息]
+  
+  - case_name: spark_kafka_error_handling_kafka_failure
+    case_type: error_handling
+    priority: P0
+    test_steps:
+      - {step_number: 1, action: simulate_kafka_failure, component: Kafka}
+      - {step_number: 2, action: trigger_process, expected_result: exception}
+    assertions:
+      - {assertion_type: exception, description: 验证异常捕获}
+```
+
+---
+
+### 4.3 输出示例（生成的测试用例）
+
+```yaml
+# test_cases.yaml（AI根据规范生成）
+test_cases:
+  - case_id: auto-202605201234-001
+    case_name: spark_kafka_normal_flow_basic
+    case_type: normal_flow
+    priority: P0
+    scenario:
+      name: spark_kafka_hdfs_data_flow
+      components: [Spark, Kafka, HDFS]
+    preconditions:
+      - HDFS正常运行
+      - Kafka正常运行
+    test_steps:
+      - step_number: 1
+        action: read_from_hdfs
+        component: Spark
+        expected_result: 成功读取DataFrame
+      - step_number: 2
+        action: process_data
+        component: Spark
+        expected_result: 处理成功
+      - step_number: 3
+        action: produce_message
+        component: Kafka
+        expected_result: 消息发送成功
+    test_data:
+      input: {data_size: 100, data_format: JSON}
+    assertions:
+      - assertion_type: count
+        description: 验证消息数量
+        expected_value: 100
+    cleanup: [清理HDFS数据, 清理Kafka消息]
+  
+  # ... 其他用例（异常处理、边界值）
+```
+
+---
+
+## 五、文档驱动vs代码驱动
+
+### 对比总结
+
+| 维度 | 文档驱动（v3.0） | 代码驱动（v2.0） |
+|------|----------------|----------------|
+| **学习成本** | ✅ 低（读文档） | ❌ 高（读1500+行代码） |
+| **理解难度** | ✅ 低（自然语言） | ❌ 高（编程语言） |
+| **修改成本** | ✅ 低（编辑Markdown） | ❌ 高（修改Python代码） |
+| **复用性** | ✅ 强（跨组件引用文档） | ❌ 中（import模块） |
+| **灵活性** | ✅ 强（改文档即生效） | ❌ 中（改代码需部署） |
+| **AI友好** | ✅ 强（直接阅读） | ❌ 中（需要理解代码） |
+| **文件数量** | ✅ 15个文档/配置 | ❌ 18个文件+代码 |
+
+---
+
+## 六、核心文档索引
+
+### 6.1 必读文档（5个）
+
+| 文档 | 路径 | 说明 | 优先级 |
+|------|------|------|--------|
+| README | `docs/README.md` | Skill总览（本文档） | ⭐⭐⭐⭐⭐ |
+| Skill规范 | `docs/skill_spec.md` | Skill总体规范 | ⭐⭐⭐⭐⭐ |
+| 交互规范 | `docs/interaction_spec.md` | 如何描述组件交互 | ⭐⭐⭐⭐⭐ |
+| 用例规范 | `docs/testcase_spec.md` | 测试用例标准格式 | ⭐⭐⭐⭐⭐ |
+| 生成规则 | `docs/generation_rules.md` | 用例生成规则 | ⭐⭐⭐⭐⭐ |
+
+---
+
+### 6.2 推荐文档（3个）
+
+| 文档 | 路径 | 说明 | 优先级 |
+|------|------|------|--------|
+| 质量标准 | `docs/quality_standards.md` | 质量检查标准 | ⭐⭐⭐⭐ |
+| 架构说明 | `docs/文档驱动架构说明.md` | 文档驱动理念 | ⭐⭐⭐⭐ |
+| 优化说明 | `架构优化说明.md` | 优化历程 | ⭐⭐⭐ |
+
+---
+
+## 七、常见问题
+
+### Q1: 为什么采用文档驱动而非代码实现？
+
+**答案**: 文档驱动在学习、理解、修改、维护、复用、灵活性、AI友好7个维度胜出，更适合Skill规范定义场景。详细对比见`docs/文档驱动架构说明.md`。
+
+---
+
+### Q2: 如何调整生成规则？
+
+**答案**: 直接编辑`docs/generation_rules.md`文档，修改规则描述即可生效。无需修改代码。
+
+---
+
+### Q3: 如何用于新组件（如Redis）？
+
+**答案**: 
+1. 阅读`docs/interaction_spec.md`学习交互描述规范
+2. 创建Redis的交互描述YAML文件
+3. 创建Redis的种子用例YAML文件
+4. AI根据文档规范生成Redis测试用例
+
+---
+
+## 八、联系方式
+
+**GitHub**: https://github.com/Han688688/spark  
+**Issues**: https://github.com/Han688688/spark/issues  
+**文档反馈**: 直接修改文档并提交PR
+
+---
+
+**文档结束** - TestCaseGenerationSkill v3.0 文档驱动版README
