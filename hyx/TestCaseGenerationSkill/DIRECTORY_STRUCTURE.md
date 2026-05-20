@@ -24,13 +24,11 @@ TestCaseGenerationSkill/
 │   └ [your_scenario]/                     # 你的场景（需要创建）
 │       └ example_seed.yaml               # ⭐你的种子用例
 │
-├── src/                            # 源码目录（6个文件）
+├── src/                            # 源码目录（4个文件 - 已优化）
 │   ├── skill.py                           # ⭐⭐⭐主Skill类 - 核心入口
-│   ├── interaction_parser.py              # 交互描述解析器
-│   ├── seed_analyzer.py                   # 种子用例分析器
-│   ├── generator.py                       # 测试用例生成器
-│   ├── script_generator.py                # 自动化脚本生成器
-│   ├── quality_checker.py                 # 质量检查器
+│   ├── analyzer.py                        # 分析器（合并interaction_parser + seed_analyzer）
+│   ├── generator.py                       # 生成器+质量检查器（合并generator + quality_checker）
+│   └── script_generator.py                # 自动化脚本生成器
 │
 ├── tests/                           # Skill测试目录（1个文件）
 │   └ test_skill.py                        # 单元测试 - 验证Skill功能
@@ -138,20 +136,16 @@ seed_cases/
 | 文件 | 功能 | 核心程度 |
 |------|------|---------|
 | `skill.py` | 主Skill类，协调各模块执行 | ⭐⭐⭐⭐⭐ 核心 |
-| `interaction_parser.py` | 解析组件交互描述 | ⭐⭐⭐ 重要 |
-| `seed_analyzer.py` | 分析种子用例模式 | ⭐⭐⭐ 重要 |
-| `generator.py` | 生成测试用例 | ⭐⭐⭐⭐ 重要 |
+| `analyzer.py` | 分析器（交互解析+种子分析） | ⭐⭐⭐⭐ 重要 |
+| `generator.py` | 生成器+质量检查器 | ⭐⭐⭐⭐ 重要 |
 | `script_generator.py` | 生成pytest脚本 | ⭐⭐⭐ 重要 |
-| `quality_checker.py` | 检查用例质量 | ⭐⭐ 辅助 |
 
 **执行流程**:
 ```
 skill.py
-  ├── interaction_parser.py  # 解析交互描述
-  ├── seed_analyzer.py       # 分析种子模式
-  ├── generator.py           # 生成用例
-  ├── script_generator.py    # 生成脚本
-  └── quality_checker.py     # 质量检查
+  ├── analyzer.py              # 解析交互 + 分析种子
+  ├── generator.py             # 生成用例 + 质量检查
+  └── script_generator.py      # 生成脚本
 ```
 
 ---
@@ -337,12 +331,12 @@ cat output/generation_report.md
 | templates/ | 3 | 模板文件 |
 | config/ | 2 | 配置文件 |
 | seed_cases/ | 2+ | 种子用例（示例+你的） |
-| src/ | 6 | 源码文件 |
+| src/ | 4 | 源码文件（已优化合并） |
 | tests/ | 1 | 测试文件 |
 | examples/ | 1 | 示例文件 |
 | docs/ | 2 | 文档文件 |
 | output/ | 4 | 输出文件（运行后） |
-| **总计** | **19+** | 完整Skill |
+| **总计** | **17+** | 完整Skill（已优化） |
 
 ---
 

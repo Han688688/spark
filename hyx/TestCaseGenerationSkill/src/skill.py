@@ -12,11 +12,9 @@ from pathlib import Path
 from datetime import datetime
 
 # 导入子模块
-from interaction_parser import InteractionParser
-from seed_analyzer import SeedAnalyzer
-from generator import TestCaseGenerator
+from analyzer import InteractionParser, SeedAnalyzer
+from generator import TestCaseGenerator, QualityChecker
 from script_generator import ScriptGenerator
-from quality_checker import QualityChecker
 
 
 class TestCaseGenerationSkill:
