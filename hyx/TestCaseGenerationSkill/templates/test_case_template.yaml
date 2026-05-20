@@ -1,0 +1,132 @@
+# 测试用例模板
+# 用于生成标准化的测试用例
+
+metadata:
+  template_version: "1.0"
+  template_name: "测试用例模板"
+  description: "自动化生成的测试用例标准格式"
+
+# ========== 必填字段 ==========
+
+test_case:
+  # 用例ID（自动生成）
+  case_id: "auto-{timestamp}-{index}"
+  
+  # 用例名称（必填）
+  case_name: ""
+  
+  # 用例描述（必填）
+  description: ""
+  
+  # 优先级（必填）: P0/P1/P2
+  priority: ""
+  
+  # 用例类型（必填）: functional/performance/error/boundary
+  case_type: ""
+  
+  # 场景信息（必填）
+  scenario:
+    name: ""
+    components: []
+    interaction_type: ""  # data_flow/state_sync/event_trigger/query/config
+  
+  # 前置条件（必填）
+  preconditions:
+    - ""
+  
+  # 测试步骤（必填）
+  test_steps:
+    - step_number: 0
+      action: ""
+      component: ""
+      input: ""
+      expected_result: ""
+      # 可选
+      timeout: 0
+  
+  # 测试数据（必填）
+  test_data:
+    input: ""
+    expected_output: ""
+    # 可选
+    data_source: ""
+    data_size: 0
+  
+  # 验证点（必填）
+  assertions:
+    - assertion_type: ""  # data/function/state/performance
+      description: ""
+      expected_value: ""
+      actual_value: ""
+      tolerance: ""
+  
+  # 清理步骤（必填）
+  cleanup:
+    - ""
+
+# ========== 可选字段 ==========
+
+# 标签（可选）
+tags: []
+
+# 依赖用例（可选）
+dependencies: []
+
+# 预估时间（可选）
+estimated_time: ""
+
+# 执行环境（可选）
+execution_env:
+  cluster_size: ""
+  resource_config: ""
+
+# ========== 示例 ==========
+
+example:
+  test_case:
+    case_name: "正常数据流处理_边界值"
+    description: "测试最小数据量场景"
+    priority: "P1"
+    case_type: "functional"
+    
+    scenario:
+      name: "Kafka-Spark-HDFS数据管道"
+      components: ["Kafka", "Spark", "HDFS"]
+      interaction_type: "data_flow"
+    
+    preconditions:
+      - "Kafka集群正常运行"
+      - "Spark应用已启动"
+      - "HDFS目录已创建"
+    
+    test_steps:
+      - step_number: 1
+        action: "Kafka发送1条消息"
+        component: "Kafka"
+        input: '{"id":1,"name":"test"}'
+        expected_result: "消息成功发送"
+      - step_number: 2
+        action: "Spark消费处理"
+        component: "Spark"
+        expected_result: "成功处理1条数据"
+      - step_number: 3
+        action: "写入HDFS"
+        component: "HDFS"
+        expected_result: "文件创建成功"
+    
+    test_data:
+      input: '{"id":1,"name":"test","timestamp":1234567890}'
+      expected_output: "HDFS文件包含1条记录"
+      data_size: 1
+    
+    assertions:
+      - assertion_type: "data"
+        description: "验证Kafka消息数"
+        expected_value: "1"
+      - assertion_type: "data"
+        description: "验证HDFS文件存在"
+        expected_value: "true"
+    
+    cleanup:
+      - "删除Kafka消息"
+      - "删除HDFS文件"

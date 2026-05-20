@@ -1,0 +1,79 @@
+# 种子用例示例：Flink-Kafka-Hive实时分析
+# 另一个场景的种子用例
+
+metadata:
+  seed_id: "002"
+  scenario_name: "Flink-Kafka-Hive实时分析"
+  components: ["Flink", "Kafka", "Hive"]
+  interaction_type: "data_flow"
+  quality_level: "high"
+
+# ========== 种子用例1: 正常流程 ==========
+
+case_001:
+  case_name: "实时数据写入Hive"
+  case_type: "normal_flow"
+  priority: "P0"
+  
+  scenario:
+    description: "Flink消费Kafka实时写入Hive表"
+  
+  test_steps:
+    - step_number: 1
+      action: "Kafka发送流数据"
+      component: "Kafka"
+      expected_result: "消息发送成功"
+    
+    - step_number: 2
+      action: "Flink消费处理"
+      component: "Flink"
+      expected_result: "Flink Job运行正常"
+    
+    - step_number: 3
+      action: "写入Hive表"
+      component: "Hive"
+      expected_result: "Hive表数据增加"
+  
+  assertions:
+    - "验证Kafka消费正常"
+    - "验证Hive表数据正确"
+  
+  cleanup:
+    - "清理Hive表"
+
+# ========== 种子用例2: Hive写入异常 ==========
+
+case_002:
+  case_name: "Hive写入失败回滚"
+  case_type: "error_handling"
+  priority: "P0"
+  
+  scenario:
+    description: "Hive写入失败时Flink的处理"
+  
+  test_steps:
+    - step_number: 1
+      action: "模拟Hive故障"
+      expected_result: "Hive不可用"
+    
+    - step_number: 2
+      action: "Flink尝试写入"
+      expected_result: "写入失败，触发回滚"
+  
+  assertions:
+    - "验证异常捕获"
+    - "验证数据不丢失"
+  
+  cleanup:
+    - "恢复Hive"
+
+# ========== 泛化模式 ==========
+
+generalization_patterns:
+  data_patterns:
+    - "数据量: 小 → 大"
+    - "数据频率: 低 → 高"
+  
+  error_patterns:
+    - "Hive故障"
+    - "Flink Job失败"

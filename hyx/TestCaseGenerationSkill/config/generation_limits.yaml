@@ -1,0 +1,199 @@
+# 用例生成限制配置
+# 控制生成的数量、质量、覆盖维度
+
+metadata:
+  config_version: "1.0"
+  config_name: "用例生成限制"
+  description: "控制生成策略和限制规则"
+
+# ========== 数量限制 ==========
+
+quantity_limits:
+  # 每个场景最大用例数
+  max_cases_per_scenario: 10
+  
+  # 每个场景最小用例数
+  min_cases_per_scenario: 3
+  
+  # 单次生成最大总用例数
+  max_total_cases: 50
+  
+  # 单次生成最小总用例数
+  min_total_cases: 5
+
+# ========== 优先级分布 ==========
+
+priority_distribution:
+  # P0 - 核心路径，必须通过
+  P0_ratio: 0.2  # 20%
+  
+  # P1 - 重要场景，主要功能
+  P1_ratio: 0.5  # 50%
+  
+  # P2 - 边界场景，次要功能
+  P2_ratio: 0.3  # 30%
+
+# ========== 覆盖维度 ==========
+
+coverage_dimensions:
+  # 必选维度（必须覆盖）
+  required:
+    - dimension: "normal_flow"
+      name: "正常流程"
+      min_cases: 1
+      description: "正常数据流，无异常"
+    
+    - dimension: "error_handling"
+      name: "异常处理"
+      min_cases: 1
+      description: "组件异常、网络异常、数据异常"
+    
+    - dimension: "boundary_values"
+      name: "边界值"
+      min_cases: 1
+      description: "最小值、最大值、空值、特殊值"
+  
+  # 可选维度（根据场景选择）
+  optional:
+    - dimension: "performance"
+      name: "性能场景"
+      description: "大数据量、高并发"
+      enabled: false
+    
+    - dimension: "concurrency"
+      name: "并发场景"
+      description: "多线程、多进程并发访问"
+      enabled: false
+    
+    - dimension: "security"
+      name: "安全场景"
+      description: "权限、认证、加密"
+      enabled: false
+    
+    - dimension: "compatibility"
+      name: "兼容性"
+      description: "版本兼容、配置兼容"
+      enabled: false
+
+# ========== 数据限制 ==========
+
+data_limits:
+  # 输入数据大小限制
+  input_size:
+    min: 1
+    max: 10000
+    recommended: [1, 10, 100, 1000, 10000]
+  
+  # 支持的数据类型
+  allowed_types:
+    - "int"
+    - "string"
+    - "long"
+    - "double"
+    - "boolean"
+    - "array"
+    - "object"
+    - "null"
+  
+  # 边界值示例
+  boundary_values:
+    int:
+      min: 0
+      max: 2147483647
+      special: [-1, 0, 1]
+    string:
+      min_length: 0
+      max_length: 1000
+      special: ["", " ", "特殊字符", "超长字符串"]
+    long:
+      min: 0
+      max: 9223372036854775807
+
+# ========== 禁止规则 ==========
+
+forbidden_rules:
+  # 禁止生成的用例模式
+  patterns:
+    - "空用例（无验证点）"
+    - "重复用例（完全相同）"
+    - "无效数据（格式不匹配schema）"
+    - "不可执行步骤（组件不支持该操作）"
+    - "无意义的边界值（不在合理范围内）"
+  
+  # 禁止的组件组合
+  component_combinations: []
+  
+  # 禁止的交互类型
+  interaction_types: []
+
+# ========== 质量控制 ==========
+
+quality_control:
+  # 每个用例必须包含的验证点数量
+  min_assertions: 2
+  max_assertions: 10
+  
+  # 每个用例必须包含的步骤数量
+  min_steps: 2
+  max_steps: 10
+  
+  # 必须包含的字段
+  required_fields:
+    - "case_name"
+    - "priority"
+    - "scenario"
+    - "preconditions"
+    - "test_steps"
+    - "test_data"
+    - "assertions"
+    - "cleanup"
+
+# ========== 泛化策略 ==========
+
+generalization_strategies:
+  # 参数泛化
+  parameter_generalization:
+    enabled: true
+    strategies:
+      - "替换数据值"
+      - "替换数据类型"
+      - "替换数据大小"
+  
+  # 路径泛化
+  path_generalization:
+    enabled: true
+    strategies:
+      - "正常路径 → 异常路径"
+      - "添加中间步骤"
+      - "跳过某些步骤"
+  
+  # 组合泛化
+  combination_generalization:
+    enabled: true
+    strategies:
+      - "组合多个场景"
+      - "组合多种异常"
+
+# ========== 脚本生成限制 ==========
+
+script_limits:
+  # 支持的测试框架
+  frameworks:
+    - "pytest"
+    - "junit"
+    - "testng"
+  
+  # 默认框架
+  default_framework: "pytest"
+  
+  # 命名规范
+  naming:
+    class_prefix: "Test"
+    method_prefix: "test_"
+    file_prefix: "test_"
+  
+  # 断言规范
+  assertions:
+    each_step_assertion: true  # 每个步骤需有断言
+    final_assertion: true      # 最终结果断言
+    error_assertion: true      # 异常断言

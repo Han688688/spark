@@ -1,0 +1,120 @@
+# 组件交互描述模板
+# 用于描述多个组件之间的数据流和交互过程
+
+metadata:
+  template_version: "1.0"
+  template_name: "组件交互描述模板"
+  description: "标准化的组件交互描述格式"
+
+# ========== 必填字段 ==========
+
+interaction:
+  # 交互名称（必填）
+  name: ""
+  
+  # 参与组件列表（必填）
+  components: []
+  
+  # 交互流程（必填）
+  flow:
+    - step: ""
+      component: ""
+      action: ""
+      input: ""
+      output: ""
+      # 可选字段
+      description: ""
+      timeout: 0
+      retry_count: 0
+
+# ========== 数据Schema（必填） ==========
+
+data_schema:
+  # 输入数据格式
+  input_data:
+    type: ""
+    fields: []
+    example: ""
+  
+  # 中间数据格式
+  intermediate_data:
+    type: ""
+    fields: []
+  
+  # 输出数据格式
+  output_data:
+    type: ""
+    fields: []
+    format: ""
+
+# ========== 约束条件（必填） ==========
+
+constraints:
+  # 数据约束
+  data_constraints:
+    - ""
+  
+  # 性能约束
+  performance_constraints:
+    - ""
+  
+  # 可靠性约束
+  reliability_constraints:
+    - ""
+
+# ========== 可选字段 ==========
+
+# 环境配置（可选）
+environment:
+  cluster_config: ""
+  resource_requirements: ""
+
+# 异常处理（可选）
+error_handling:
+  retry_strategy: ""
+  fallback_action: ""
+
+# 监控指标（可选）
+monitoring:
+  metrics: []
+  alerts: []
+
+# ========== 示例 ==========
+
+example:
+  interaction:
+    name: "Kafka-Spark-HDFS数据管道"
+    components: ["Kafka", "Spark", "HDFS"]
+    flow:
+      - step: "数据生产"
+        component: "Kafka"
+        action: "Producer发送消息"
+        input: "业务JSON数据"
+        output: "Kafka消息队列"
+      - step: "数据处理"
+        component: "Spark"
+        action: "Streaming消费处理"
+        input: "Kafka Topic"
+        output: "处理后DataFrame"
+      - step: "数据存储"
+        component: "HDFS"
+        action: "写入Parquet文件"
+        input: "DataFrame"
+        output: "HDFS文件"
+  
+  data_schema:
+    input_data:
+      type: "JSON"
+      fields: ["id:int", "name:string", "timestamp:long"]
+    output_data:
+      type: "Parquet"
+      format: "列式存储"
+  
+  constraints:
+    data_constraints:
+      - "消息不能重复"
+      - "文件完整性保证"
+    performance_constraints:
+      - "吞吐量>=10000条/秒"
+    reliability_constraints:
+      - "异常自动重试"

@@ -1,0 +1,194 @@
+# Skill主配置文件
+# TestCaseGenerationSkill的全局配置
+
+metadata:
+  skill_name: "TestCaseGenerationSkill"
+  skill_version: "1.0.0"
+  skill_description: "基于组件交互描述和种子用例自动生成测试用例"
+  created_date: "2026-05-19"
+
+# ========== Skill基本信息 ==========
+
+skill_info:
+  name: "TestCaseGenerationSkill"
+  type: "test_generation"
+  author: "AI4SE"
+  
+  # 适用场景
+  applicable_scenarios:
+    - "组件交互测试"
+    - "数据流测试"
+    - "边界值测试"
+    - "异常处理测试"
+  
+  # 不适用场景
+  not_applicable:
+    - "API全覆盖测试"
+    - "性能基准测试"
+    - "安全渗透测试"
+
+# ========== 输入配置 ==========
+
+input_config:
+  # 必填输入
+  required_inputs:
+    - name: "interaction_description"
+      type: "yaml"
+      description: "组件交互描述"
+      template: "templates/interaction_template.yaml"
+    
+    - name: "seed_cases"
+      type: "yaml/json"
+      description: "种子测试用例"
+      min_count: 1
+      max_count: 10
+    
+    - name: "generation_config"
+      type: "yaml"
+      description: "生成配置"
+      default: "config/generation_limits.yaml"
+  
+  # 可选输入
+  optional_inputs:
+    - name: "domain_knowledge"
+      type: "yaml"
+      description: "领域知识"
+    
+    - name: "historical_cases"
+      type: "json"
+      description: "历史测试用例库"
+    
+    - name: "custom_templates"
+      type: "yaml"
+      description: "自定义模板"
+
+# ========== 输出配置 ==========
+
+output_config:
+  # 输出目录
+  output_directory: "generated_cases"
+  
+  # 输出文件
+  output_files:
+    - name: "test_cases.json"
+      description: "生成的测试用例列表"
+      format: "json"
+    
+    - name: "automation_scripts"
+      description: "自动化测试脚本"
+      format: "python/pytest"
+    
+    - name: "coverage_analysis.yaml"
+      description: "覆盖维度分析"
+      format: "yaml"
+    
+    - name: "generation_report.md"
+      description: "生成报告"
+      format: "markdown"
+
+# ========== 执行配置 ==========
+
+execution_config:
+  # 执行模式
+  mode: "batch"  # batch/interactive
+  
+  # 并发配置
+  concurrency:
+    enabled: false
+    max_workers: 1
+  
+  # 超时配置
+  timeout:
+    generation_timeout: 300  # 5分钟
+    per_case_timeout: 30     # 每个用例30秒
+  
+  # 日志配置
+  logging:
+    level: "INFO"
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    output_file: "skill_execution.log"
+
+# ========== 模型配置 ==========
+
+model_config:
+  # 大模型配置
+  llm_provider: "openai"  # openai/claude/local
+  
+  # 模型参数
+  model_parameters:
+    model_name: "gpt-4"
+    temperature: 0.7
+    max_tokens: 4000
+    top_p: 0.9
+  
+  # Prompt模板路径
+  prompt_templates:
+    generation_prompt: "templates/prompts/generation_prompt.txt"
+    analysis_prompt: "templates/prompts/analysis_prompt.txt"
+
+# ========== 质量检查配置 ==========
+
+quality_check:
+  # 启用质量检查
+  enabled: true
+  
+  # 检查项
+  check_items:
+    - "用例完整性"
+    - "步骤可执行性"
+    - "断言有效性"
+    - "数据合法性"
+    - "清理完整性"
+  
+  # 质量阈值
+  quality_threshold:
+    min_score: 0.8  # 最低质量分数
+    pass_rate: 0.9  # 通过率阈值
+
+# ========== 缓存配置 ==========
+
+cache_config:
+  # 启用缓存
+  enabled: true
+  
+  # 缓存目录
+  cache_directory: ".cache"
+  
+  # 缓存策略
+  strategy: "lru"  # lru/ttl
+  max_size: 1000
+  ttl: 3600  # 1小时
+
+# ========== 组件支持配置 ==========
+
+supported_components:
+  # 已验证支持的组件
+  verified:
+    - "Spark"
+    - "Kafka"
+    - "HDFS"
+    - "Hive"
+    - "Flink"
+    - "Iceberg"
+    - "Delta Lake"
+    - "HBase"
+  
+  # 支持的交互类型
+  interaction_types:
+    - "data_flow"        # 数据流
+    - "state_sync"       # 状态同步
+    - "event_trigger"    # 事件触发
+    - "query_access"     # 查询访问
+    - "config_linkage"   # 配置联动
+
+# ========== 扩展配置 ==========
+
+extensions:
+  # 自定义泛化策略
+  custom_generalization: []
+  
+  # 自定义验证规则
+  custom_validation: []
+  
+  # 自定义生成规则
+  custom_generation: []
