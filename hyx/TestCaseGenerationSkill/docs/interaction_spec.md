@@ -138,6 +138,9 @@ flow:
     description: string   # ⭐⭐ 可选 - 步骤描述
     timeout: number       # ⭐ 可选 - 超时时间（毫秒）
     retry_count: number   # ⭐ 可选 - 重试次数
+    branch: string        # ⭐ 可选 - 分支标识（多分支场景）
+    loop: boolean         # ⭐ 可选 - 循环标识（持续处理场景）
+    loop_interval: string # ⭐ 可选 - 循环间隔（如"5min"、"1s"）
 ```
 
 **示例**:
@@ -779,7 +782,7 @@ constraints:
 
 ## 七、交互描述常见问题
 
-> **注意**: Q1和Q3中提到的`branch`/`loop`/`loop_interval`字段为**实验性功能**，尚未纳入2.2.3节flow步骤的正式结构定义和interaction_template.yaml。使用时需自行扩展flow步骤结构，正式规范将在后续版本纳入。
+> **注意**: Q1和Q3中提到的`branch`/`loop`/`loop_interval`字段已纳入2.2.3节flow步骤的正式结构定义，覆盖规则见generation_rules.md。
 
 ### Q1: 如何描述复杂的多分支交互？
 

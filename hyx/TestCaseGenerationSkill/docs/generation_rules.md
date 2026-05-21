@@ -296,6 +296,16 @@ file → file（验证文件存在/内容）
 
 **示例**: flow.actions=[read_from_hdfs, process_data, write_to_hdfs]，异常用例允许action=[simulate_hdfs_failure, verify_retry]。
 
+### 7.7 分支和循环路径覆盖
+
+**分支路径(branch)**: 当flow步骤包含branch字段时，每个branch至少1个用例覆盖。
+
+示例：flow含branch=normal和branch=error，则需至少2个用例（1个覆盖normal分支，1个覆盖error分支）。
+
+**循环路径(loop)**: 当flow步骤包含loop=true时，至少1个用例验证循环场景：
+- 循环正常终止
+- 循环异常（超时/资源耗尽）
+
 ---
 
 **文档结束** - 用例生成规则文档 v3.0

@@ -17,6 +17,9 @@ interaction:
       description: ""
       timeout: 0
       retry_count: 0
+      branch: ""        # 可选 - 分支标识（多分支场景）
+      loop: false        # 可选 - 循环标识（持续处理场景）
+      loop_interval: ""  # 可选 - 循环间隔
 
 data_schema:
   input_data:

@@ -35,10 +35,7 @@
 维度覆盖率 = 已覆盖的必选维度数 / 总必选维度数
 ```
 
-示例：覆盖了normal_flow和error_handling，但缺少boundary_values
-```
-维度覆盖率 = 2 / 3 = 66.7%
-```
+必须达到100%（3个必选维度全部覆盖）。
 
 ### 3.2 组件覆盖率
 
@@ -46,16 +43,29 @@
 组件覆盖率 = 已覆盖的组件数 / 交互描述中的总组件数
 ```
 
-### 3.3 总体覆盖率
+每个组件至少1个用例涉及（正常流程用例要求包含完整流程，覆盖所有组件）。
+
+### 3.3 路径覆盖率
 
 ```
-总体覆盖率 = (维度覆盖率 + 组件覆盖率) / 2
+路径覆盖率 = 已覆盖的flow.action数 / flow总action数
+```
+
+正常流程用例的test_steps必须覆盖flow中的每个action。异常场景的衍生action（simulate_xxx/verify_xxx）不强制纳入路径覆盖计算。
+
+**最低要求**: 路径覆盖率 >= 100%（正常流程用例需覆盖flow的所有action）。
+
+### 3.4 总体覆盖率
+
+```
+总体覆盖率 = (维度覆盖率 + 组件覆盖率 + 路径覆盖率) / 3
 ```
 
 ### 3.4 达标标准
 
 - 维度覆盖率 >= 100%（3个必选维度全部覆盖）
 - 组件覆盖率 >= 100%（每个组件至少1个用例涉及）
+- 路径覆盖率 >= 100%（正常流程用例覆盖所有flow.action）
 - error_type覆盖率 >= 50%（适用error_type至少覆盖一半）
 - 总体覆盖率 >= 80%
 
@@ -66,9 +76,10 @@
 1. 首次生成后计算覆盖率
 2. 若维度覆盖率<100% → 补充缺失维度用例
 3. 若组件覆盖率<100% → 为未覆盖组件补充涉及该组件的用例
-4. 若error_type覆盖率<50% → 补充缺失error_type的异常用例
-5. 重新计算覆盖率，最多循环3次
-6. 3次后仍不达标 → 在generation_report中标记coverage_warning
+4. 若路径覆盖率<100% → 补充覆盖缺失flow.action的正常用例步骤
+5. 若error_type覆盖率<50% → 补充缺失error_type的异常用例
+6. 重新计算覆盖率，最多循环3次
+7. 3次后仍不达标 → 在generation_report中标记coverage_warning
 
 ---
 
@@ -107,9 +118,14 @@ coverage_analysis:
     coverage_ratio: 0.5     # 2/4
     qualified: true         # >= 50%
   
+  path_coverage:
+    flow_actions: [read_from_hdfs, process_data, write_to_hdfs]
+    covered_actions: [read_from_hdfs, process_data, write_to_hdfs]
+    coverage_ratio: 1.0     # 3/3
+  
   dimension_coverage: 1.0     # 3/3必选维度覆盖
   component_coverage: 1.0     # 3/3组件覆盖
-  overall_coverage: 1.0       # (1.0+1.0)/2
+  overall_coverage: 1.0       # (1.0+1.0+1.0)/3
   
   coverage_qualified: true    # all thresholds met
   supplement_loops: 0         # 补生成循环次数
@@ -126,6 +142,7 @@ coverage_analysis:
 | boundary_values | 从constraints提取边界类型，生成size/format/null/range边界用例 |
 | 组件未覆盖 | 检查该组件是否在flow中出现，增加涉及该组件的用例 |
 | error_type未覆盖 | 补充缺失error_type的异常用例，按零节适用交互类型规则 |
+| 路径未覆盖 | 正常流程用例需覆盖所有flow.action，缺步骤则补充或拆分用例 |
 
 补充生成后必须重新计算覆盖率（见3.5门禁机制）。
 
