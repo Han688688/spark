@@ -37,7 +37,7 @@ TestCaseGenerationSkill/
 │
 ├── templates/                # ⭐ 格式模板
 │   ├── interaction_template.yaml
-│   ├── testcase_template.yaml
+│   ├── test_case_template.yaml
 │   ├── script_template.md    # pytest脚本模板
 │
 ├── seed_cases/               # ⭐ 种子用例示例（6个场景，5种交互类型全覆盖）
@@ -74,7 +74,7 @@ interaction:
 data_schema: {input_data: {type: JSON}, output_data: {type: KafkaMessage}}
 constraints: {data_constraints: [{name: input_size, min: 1, max: 10000}]}
 
-# 种子用例（参照 templates/testcase_template.yaml）
+# 种子用例（参照 templates/test_case_template.yaml）
 seed_cases:
   - {case_name: normal_basic, case_type: normal_flow, priority: P0, ...}
   - {case_name: error_kafka, case_type: error_handling, priority: P0, ...}

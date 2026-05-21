@@ -53,7 +53,7 @@ test_cases:
     assertions:
       - assertion_type: value
         description: 验证Kafka消息发送成功
-        expected_value: kafka_offset == 100
+        expected_value: 100
 
       - assertion_type: count
         description: 验证Spark处理数量
@@ -61,7 +61,7 @@ test_cases:
 
       - assertion_type: file
         description: 验证HDFS输出文件存在且非空
-        expected_value: hdfs_path_exists_and_nonempty
+        expected_value: file_exists
 
     cleanup:
       - 删除Kafka Topic test_topic
@@ -102,7 +102,7 @@ test_cases:
         data_size: 100
       expected_output:
         status: error
-        error_message: Kafka连接失败
+        count: 0
 
     assertions:
       - assertion_type: exception
@@ -111,7 +111,7 @@ test_cases:
 
       - assertion_type: function
         description: 验证重试机制触发
-        expected_value: retry_count >= 3
+        expected_value: retry_mechanism_triggered
 
     cleanup:
       - 恢复Kafka集群
@@ -157,7 +157,7 @@ test_cases:
     assertions:
       - assertion_type: value
         description: 验证1条数据完整处理
-        expected_value: input_1_output_1
+        expected_value: 1
 
     cleanup:
       - 清理测试数据
@@ -203,11 +203,27 @@ test_cases:
     assertions:
       - assertion_type: function
         description: 验证大数据量处理完成
-        expected_value: processing_time < 30s
+        expected_value: processing_completed_within_threshold
 
       - assertion_type: value
         description: 验证数据完整性
-        expected_value: input_10000_output_10000
+        expected_value: 10000
 
     cleanup:
       - 清理大数据
+
+generalization_patterns:
+  data_patterns:
+    - "message_count: 1 -> 10 -> 100 -> 1000 -> 10000"
+    - "data_format: JSON -> Avro -> Parquet"
+    - "data_size: small -> medium -> large"
+  
+  error_patterns:
+    - "component_failure: Kafka -> Spark -> HDFS"
+    - "network_failure: connection_timeout -> network_disconnect -> DNS_failure"
+    - "data_failure: format_error -> data_corruption -> data_missing"
+  
+  assertion_patterns:
+    - "data_validation: count_match -> value_match -> format_match"
+    - "file_validation: existence -> integrity -> permission"
+    - "performance_validation: processing_time -> throughput -> resource_usage"

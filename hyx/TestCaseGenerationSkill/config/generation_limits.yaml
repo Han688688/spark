@@ -82,7 +82,7 @@ data_limits:
     string:
       min_length: 0
       max_length: 1000
-      special: ["", " ", "特殊字符", "超长字符串"]
+      special: ["", " ", "special_chars", "extra_long_string"]
     long:
       min: 0
       max: 9223372036854775807

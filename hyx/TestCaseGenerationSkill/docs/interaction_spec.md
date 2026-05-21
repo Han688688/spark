@@ -248,6 +248,26 @@ constraints:
   reliability_constraints: list  # ⭐⭐ 可选 - 可靠性约束
 ```
 
+#### 2.4.0 constraint.type权威枚举定义
+
+constraint.type是约束类型的唯一定义源（见skill_spec.md索引），共11种，分3组：
+
+| 组 | constraint.type | 说明 | 适用约束组 |
+|----|-----------------|------|-----------|
+| 数据 | size | 数据大小/数量 | data_constraints |
+| 数据 | format | 数据格式 | data_constraints |
+| 数据 | range | 数值范围 | data_constraints |
+| 数据 | rate | 数据速率 | data_constraints |
+| 数据 | null | 空值处理 | data_constraints |
+| 性能 | latency | 响应延迟 | performance_constraints |
+| 性能 | throughput | 吞吐量 | performance_constraints |
+| 性能 | resource | 资源占用 | performance_constraints |
+| 可靠性 | retry | 重试策略 | reliability_constraints |
+| 可靠性 | guarantee | 可靠性保证 | reliability_constraints |
+| 可靠性 | interval | 检查间隔 | reliability_constraints |
+
+**检查规则**: 每个constraint的type必须是上述11种之一，且type必须属于其约束组。
+
 ---
 
 #### 2.4.1 data_constraints字段
@@ -730,6 +750,8 @@ constraints:
 ---
 
 ## 七、交互描述常见问题
+
+> **注意**: Q1和Q3中提到的`branch`/`loop`/`loop_interval`字段为**实验性功能**，尚未纳入2.2.3节flow步骤的正式结构定义和interaction_template.yaml。使用时需自行扩展flow步骤结构，正式规范将在后续版本纳入。
 
 ### Q1: 如何描述复杂的多分支交互？
 

@@ -53,7 +53,7 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        hive_record_count: 200
+        count: 200
     
     assertions:
       - assertion_type: "count"
@@ -64,7 +64,7 @@ test_cases:
         expected_value: 200
       - assertion_type: "value"
         description: "验证聚合结果字段值"
-        expected_value: "avg_value字段正确"
+        expected_value: "avg_value_correct"
     
     cleanup:
       - "清理Kafka测试topic消息"
@@ -106,7 +106,7 @@ test_cases:
         expected_value: "HiveConnectionException"
       - assertion_type: "function"
         description: "验证Flink重试机制触发"
-        expected_value: "重试3次后记录异常"
+        expected_value: "retry_and_log_exception"
     
     cleanup:
       - "恢复Hive正常运行"
@@ -147,7 +147,7 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        hive_record_count: 1
+        count: 1
     
     assertions:
       - assertion_type: "count"

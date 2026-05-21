@@ -73,7 +73,7 @@ error_type仅用于error_handling类型用例的scenario.error_type字段。
 
 **格式**: YAML  
 **文件名**: `test_cases.yaml`  
-**模板**: `templates/testcase_template.yaml`
+**模板**: `templates/test_case_template.yaml`
 
 ---
 
@@ -521,7 +521,7 @@ expected_value字段允许3种类型，每种类型有明确使用场景：
 
 ## 九、测试用例命名规范
 
-### 7.1 命名格式
+### 9.1 命名格式
 
 **格式**: `{scenario}_{case_type}_{variant}`
 
@@ -672,7 +672,7 @@ cleanup:
 
 ## 十二、测试用例模板索引
 
-**模板路径**: `templates/testcase_template.yaml`
+**模板路径**: `templates/test_case_template.yaml`
 
 **使用方式**:
 1. 复制模板文件

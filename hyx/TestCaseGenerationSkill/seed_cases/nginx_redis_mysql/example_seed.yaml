@@ -59,18 +59,18 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        response_time_ms: 50
+        count: 100
     
     assertions:
       - assertion_type: "value"
         description: "验证返回数据包含用户字段"
-        expected_value: "包含id/name/email字段"
-      - assertion_type: "count"
+        expected_value: "contains_required_fields"
+      - assertion_type: "function"
         description: "验证响应时间符合要求"
-        expected_value: "<100ms"
+        expected_value: "response_time_within_threshold"
       - assertion_type: "state"
         description: "验证Redis缓存状态"
-        expected_value: "缓存命中或回写成功"
+        expected_value: "cache_hit_or_writeback_success"
     
     cleanup:
       - "删除Redis测试缓存键"
@@ -117,10 +117,10 @@ test_cases:
         expected_value: "RedisConnectionException"
       - assertion_type: "function"
         description: "验证降级策略触发"
-        expected_value: "绕过Redis直查MySQL"
+        expected_value: "fallback_to_mysql"
       - assertion_type: "value"
         description: "验证查询结果仍然正确"
-        expected_value: "返回正确用户数据"
+        expected_value: "correct_user_data"
     
     cleanup:
       - "恢复Redis正常运行"
@@ -165,7 +165,7 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        cache_miss_rate: 1.0
+        count: 100
     
     assertions:
       - assertion_type: "count"

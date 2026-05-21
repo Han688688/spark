@@ -55,18 +55,18 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        order_processed: true
+        count: 1
     
     assertions:
       - assertion_type: "count"
         description: "验证消息投递和消费数量"
-        expected_value: "发布1条=消费1条"
+        expected_value: 1
       - assertion_type: "function"
         description: "验证订单处理业务逻辑执行"
-        expected_value: "订单状态变为processed"
+        expected_value: "order_status_processed"
       - assertion_type: "state"
         description: "验证消息ACK后队列状态"
-        expected_value: "队列中无残留消息"
+        expected_value: "queue_empty"
     
     cleanup:
       - "清空RabbitMQ测试队列"
@@ -112,10 +112,10 @@ test_cases:
         expected_value: "OrderProcessingException"
       - assertion_type: "function"
         description: "验证重试和死信机制"
-        expected_value: "重试3次后进入死信队列"
+        expected_value: "retry_then_dead_letter"
       - assertion_type: "state"
         description: "验证死信队列状态"
-        expected_value: "死信队列包含1条消息"
+        expected_value: "dead_letter_queue_has_message"
     
     cleanup:
       - "清空所有队列"
@@ -155,7 +155,7 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        all_consumed: true
+        count: 1000
     
     assertions:
       - assertion_type: "count"

@@ -52,15 +52,15 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        config_applied: true
+        count: 1
     
     assertions:
       - assertion_type: "state"
         description: "验证ZooKeeper znode版本号递增"
-        expected_value: "version > 原version"
+        expected_value: "version_incremented"
       - assertion_type: "function"
         description: "验证Kafka动态配置生效"
-        expected_value: "log.retention.hours=72生效"
+        expected_value: "config_applied_successfully"
     
     cleanup:
       - "恢复ZooKeeper原始配置"
@@ -100,7 +100,7 @@ test_cases:
         expected_value: "SessionExpiredException"
       - assertion_type: "function"
         description: "验证Kafka自动重连机制"
-        expected_value: "重连成功并恢复配置监听"
+        expected_value: "reconnect_and_resume_monitoring"
     
     cleanup:
       - "恢复ZooKeeper连接"
@@ -139,7 +139,7 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        all_config_applied: true
+        count: 10
     
     assertions:
       - assertion_type: "count"

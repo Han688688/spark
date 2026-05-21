@@ -51,15 +51,15 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        sync_consistent: true
+        count: 1
     
     assertions:
       - assertion_type: "state"
         description: "验证Redis和ES状态一致"
-        expected_value: "Redis.status == ES.status"
+        expected_value: "status_consistent"
       - assertion_type: "function"
         description: "验证同步机制正常执行"
-        expected_value: "状态变更→事件检测→ES更新全流程完成"
+        expected_value: "sync_flow_completed"
     
     cleanup:
       - "恢复Redis原始状态"
@@ -105,7 +105,7 @@ test_cases:
         expected_value: "ElasticsearchConnectionException"
       - assertion_type: "function"
         description: "验证补偿同步机制"
-        expected_value: "ES恢复后补偿同步成功"
+        expected_value: "compensatory_sync_success"
     
     cleanup:
       - "恢复Elasticsearch"
@@ -144,7 +144,7 @@ test_cases:
         data_format: "JSON"
       expected_output:
         status: "success"
-        all_consistent: true
+        count: 1000
     
     assertions:
       - assertion_type: "count"

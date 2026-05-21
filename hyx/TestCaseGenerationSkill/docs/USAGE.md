@@ -52,7 +52,7 @@ constraints:
 
 ### 2.2 种子用例（必须）
 
-参照 `templates/testcase_template.yaml` 和 `docs/testcase_spec.md`：
+参照 `templates/test_case_template.yaml` 和 `docs/testcase_spec.md`：
 
 **最低要求**: 1个正常用例(P0) + 1个异常用例(P0推荐)
 
