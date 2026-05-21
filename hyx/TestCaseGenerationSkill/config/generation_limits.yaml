@@ -9,17 +9,10 @@ metadata:
 # ========== 数量限制 ==========
 
 quantity_limits:
-  # 每个场景最大用例数
   max_cases_per_scenario: 10
-  
-  # 每个场景最小用例数
   min_cases_per_scenario: 3
-  
-  # 单次生成最大总用例数
   max_total_cases: 50
-  
-  # 单次生成最小总用例数
-  min_total_cases: 5
+  min_total_cases: 3
 
 # ========== 优先级分布 ==========
 

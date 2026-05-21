@@ -1,79 +1,183 @@
-# 种子用例示例：Flink-Kafka-Hive实时分析
-# 另一个场景的种子用例
+# 种子用例：Flink-Kafka-Hive实时分析
 
 metadata:
   seed_id: "002"
   scenario_name: "Flink-Kafka-Hive实时分析"
   components: ["Flink", "Kafka", "Hive"]
   interaction_type: "data_flow"
-  quality_level: "high"
 
-# ========== 种子用例1: 正常流程 ==========
+# ========== 种子1: 正常流程 ==========
 
 case_001:
-  case_name: "实时数据写入Hive"
+  case_name: "flink_kafka_hive_normal_flow_basic"
   case_type: "normal_flow"
   priority: "P0"
   
   scenario:
-    description: "Flink消费Kafka实时写入Hive表"
+    name: "flink_kafka_hive_streaming"
+    components: ["Kafka", "Flink", "Hive"]
+    interaction_type: "data_flow"
+    description: "Flink消费Kafka流数据，窗口聚合后写入Hive表"
+  
+  preconditions:
+    - "Kafka集群正常运行，topic已创建"
+    - "Flink集群正常运行"
+    - "Hive表已创建，schema匹配"
   
   test_steps:
     - step_number: 1
-      action: "Kafka发送流数据"
+      action: "produce_stream"
       component: "Kafka"
-      expected_result: "消息发送成功"
+      input: "外部系统实时数据"
+      expected_result: "消息成功发送到kafka://topic/input_stream"
     
     - step_number: 2
-      action: "Flink消费处理"
+      action: "consume_stream"
       component: "Flink"
-      expected_result: "Flink Job运行正常"
+      input: "kafka://topic/input_stream"
+      expected_result: "Flink成功消费流数据"
     
     - step_number: 3
-      action: "写入Hive表"
+      action: "window_aggregation"
+      component: "Flink"
+      input: "FlinkStream"
+      expected_result: "5分钟窗口聚合计算成功"
+    
+    - step_number: 4
+      action: "store_result"
       component: "Hive"
-      expected_result: "Hive表数据增加"
+      input: "AggregatedResult"
+      expected_result: "结果成功写入Hive表"
+  
+  test_data:
+    input:
+      data_size: 1000
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      hive_record_count: 200
   
   assertions:
-    - "验证Kafka消费正常"
-    - "验证Hive表数据正确"
+    - assertion_type: "count"
+      description: "验证Kafka消息消费数量"
+      expected_value: 1000
+    - assertion_type: "count"
+      description: "验证Hive表新增记录数"
+      expected_value: 200
+    - assertion_type: "value"
+      description: "验证聚合结果字段值"
+      expected_value: "avg_value字段正确"
   
   cleanup:
-    - "清理Hive表"
+    - "清理Kafka测试topic消息"
+    - "清理Hive测试表数据"
 
-# ========== 种子用例2: Hive写入异常 ==========
+# ========== 种子2: 异常处理 ==========
 
 case_002:
-  case_name: "Hive写入失败回滚"
+  case_name: "flink_kafka_hive_hive_failure_handling"
   case_type: "error_handling"
   priority: "P0"
   
   scenario:
-    description: "Hive写入失败时Flink的处理"
+    name: "flink_kafka_hive_streaming"
+    error_type: "hive_connection_failure"
+    description: "Hive连接失败时的异常处理"
+  
+  preconditions:
+    - "Kafka集群正常运行"
+    - "Flink集群正常运行"
+    - "Hive模拟故障状态"
   
   test_steps:
     - step_number: 1
-      action: "模拟Hive故障"
-      expected_result: "Hive不可用"
+      action: "simulate_hive_failure"
+      component: "Hive"
+      expected_result: "Hive停止运行"
     
     - step_number: 2
-      action: "Flink尝试写入"
-      expected_result: "写入失败，触发回滚"
+      action: "trigger_flink_processing"
+      component: "Flink"
+      expected_result: "Flink尝试写入Hive"
+    
+    - step_number: 3
+      action: "verify_retry_mechanism"
+      component: "Flink"
+      expected_result: "触发重试机制，记录异常"
   
   assertions:
-    - "验证异常捕获"
-    - "验证数据不丢失"
+    - assertion_type: "exception"
+      description: "验证Hive连接异常被捕获"
+      expected_value: "HiveConnectionException"
+    - assertion_type: "function"
+      description: "验证Flink重试机制触发"
+      expected_value: "重试3次后记录异常"
   
   cleanup:
-    - "恢复Hive"
+    - "恢复Hive正常运行"
+    - "清理Flink异常日志"
+
+# ========== 种子3: 边界值 ==========
+
+case_003:
+  case_name: "flink_kafka_hive_min_data_size"
+  case_type: "boundary_values"
+  priority: "P1"
+  
+  scenario:
+    name: "flink_kafka_hive_streaming"
+    description: "最小数据量（1条）测试"
+  
+  preconditions:
+    - "Kafka正常运行"
+    - "Flink正常运行"
+    - "Hive表已创建"
+  
+  test_steps:
+    - step_number: 1
+      action: "send_single_message"
+      component: "Kafka"
+      expected_result: "1条消息发送成功"
+    
+    - step_number: 2
+      action: "process_single_record"
+      component: "Flink"
+      expected_result: "单条数据处理成功"
+    
+    - step_number: 3
+      action: "write_single_record"
+      component: "Hive"
+      expected_result: "1条记录写入Hive"
+  
+  test_data:
+    input:
+      data_size: 1
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      hive_record_count: 1
+  
+  assertions:
+    - assertion_type: "count"
+      description: "验证最小数据量处理"
+      expected_value: 1
+  
+  cleanup:
+    - "清理Kafka单条消息"
+    - "清理Hive单条记录"
 
 # ========== 泛化模式 ==========
 
 generalization_patterns:
   data_patterns:
-    - "数据量: 小 → 大"
-    - "数据频率: 低 → 高"
+    - "数据量: 1 → 100 → 1000 → 10000"
+    - "数据格式: JSON → Avro → CSV"
+    - "窗口大小: 1min → 5min → 1hour"
   
   error_patterns:
-    - "Hive故障"
-    - "Flink Job失败"
+    - "Hive连接故障 → Kafka连接故障 → Flink Job失败"
+    - "数据格式异常 → 数据缺失 → 数据重复"
+  
+  assertion_patterns:
+    - "count验证 → value验证 → exception验证"
+    - "单字段验证 → 多字段组合验证"

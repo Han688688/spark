@@ -395,7 +395,7 @@ test_steps:
 
 ### 5.1 验证点类型
 
-**4种验证类型**:
+**6种验证类型**（权威定义见零节）:
 
 | 类型 | 说明 | 适用场景 |
 |------|------|---------|
@@ -403,6 +403,8 @@ test_steps:
 | `count` | 数量验证 | 验证数量是否等于预期值 |
 | `exception` | 异常验证 | 验证异常是否抛出 |
 | `function` | 功能验证 | 验证功能是否正常执行 |
+| `state` | 状态验证 | 验证状态变化是否正确 |
+| `file` | 文件验证 | 验证文件存在或内容正确 |
 
 ---
 
@@ -620,7 +622,7 @@ cleanup:
 - `case_id` 格式为`auto-{timestamp}-{sequence}`
 - `priority` 格式为P0/P1/P2
 - `step_number` 从1开始递增
-- `assertion_type` 为value/count/exception/function之一
+- `assertion_type` 为零节定义的6种之一（value/count/exception/function/state/file）
 
 ---
 

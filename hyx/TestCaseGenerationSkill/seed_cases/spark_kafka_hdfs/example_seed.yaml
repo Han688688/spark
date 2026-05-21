@@ -77,14 +77,14 @@ case_001:
       file_format: "parquet"
   
   assertions:
-    - assertion_type: "data"
+    - assertion_type: "value"
       description: "验证Kafka消息发送成功"
       check_code: |
         kafka_offset = consumer.endOffsets([topic_partition])
         assert kafka_offset == 100
       expected_value: "100"
     
-    - assertion_type: "data"
+    - assertion_type: "value"
       description: "验证Spark处理数量"
       check_code: |
         processed_count = df.count()
@@ -190,7 +190,7 @@ case_003:
       expected_result: "文件创建，包含1条记录"
   
   assertions:
-    - assertion_type: "data"
+    - assertion_type: "value"
       description: "验证1条数据完整处理"
       expected_value: "输入1条，输出1条"
   
@@ -227,11 +227,11 @@ case_004:
       expected_result: "文件完整性校验通过"
   
   assertions:
-    - assertion_type: "performance"
+    - assertion_type: "function"
       description: "验证处理性能"
       expected_value: "处理时间<30秒"
     
-    - assertion_type: "data"
+    - assertion_type: "value"
       description: "验证数据完整性"
       expected_value: "输入10000条，输出10000条"
   
