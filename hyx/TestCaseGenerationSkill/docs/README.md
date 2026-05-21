@@ -40,9 +40,13 @@ TestCaseGenerationSkill/
 │   ├── testcase_template.yaml
 │   ├── script_template.md    # pytest脚本模板
 │
-├── seed_cases/               # ⭐ 种子用例示例
-│   ├── spark_kafka_hdfs/
-│   ├── flink_kafka_hive/
+├── seed_cases/               # ⭐ 种子用例示例（6个场景，5种交互类型全覆盖）
+│   ├── spark_kafka_hdfs/     # data_flow（大数据管道）
+│   ├── flink_kafka_hive/     # data_flow（流式处理）
+│   ├── nginx_redis_mysql/    # query_access（Web查询缓存）
+│   ├── zookeeper_kafka/      # config_linkage（配置联动）
+│   ├── redis_elasticsearch/  # state_sync（状态同步）
+│   └── rabbitmq_springboot/  # event_trigger（事件触发）
 │
 └── examples/                 # ⭐ 使用示例
     └── README.md

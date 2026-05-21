@@ -1,0 +1,172 @@
+# 种子用例：ZooKeeper-Kafka配置联动
+# 交互类型: config_linkage（配置中心联动消息队列）
+
+metadata:
+  seed_id: "004"
+  scenario_name: "ZooKeeper-Kafka配置联动"
+  components: ["ZooKeeper", "Kafka"]
+  interaction_type: "config_linkage"
+
+# ========== 种子1: 正常流程 ==========
+
+case_001:
+  case_name: "zookeeper_kafka_config_linkage_normal"
+  case_type: "normal_flow"
+  priority: "P0"
+  
+  scenario:
+    name: "zookeeper_kafka_config_linkage"
+    components: ["ZooKeeper", "Kafka"]
+    interaction_type: "config_linkage"
+    description: "ZooKeeper配置变更后，Kafka Broker感知变更并应用新配置"
+  
+  preconditions:
+    - "ZooKeeper集群正常运行"
+    - "Kafka集群正常运行，Broker已注册到ZooKeeper"
+    - "ZooKeeper中存在Kafka配置znode"
+  
+  test_steps:
+    - step_number: 1
+      action: "update_config_znode"
+      component: "ZooKeeper"
+      input: "SET /kafka/config/broker-0 = {log.retention.hours:72}"
+      expected_result: "配置znode更新成功，版本号递增"
+    
+    - step_number: 2
+      action: "watch_triggered"
+      component: "ZooKeeper"
+      expected_result: "Kafka Broker的Watcher收到变更通知"
+    
+    - step_number: 3
+      action: "read_new_config"
+      component: "Kafka"
+      input: "GET /kafka/config/broker-0"
+      expected_result: "Kafka读取新配置"
+    
+    - step_number: 4
+      action: "apply_dynamic_config"
+      component: "Kafka"
+      expected_result: "Kafka应用新配置（动态配置生效）"
+  
+  test_data:
+    input:
+      data_size: 1
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      config_applied: true
+  
+  assertions:
+    - assertion_type: "state"
+      description: "验证ZooKeeper znode版本号递增"
+      expected_value: "version > 原version"
+    - assertion_type: "function"
+      description: "验证Kafka动态配置生效"
+      expected_value: "log.retention.hours=72生效"
+  
+  cleanup:
+    - "恢复ZooKeeper原始配置"
+
+# ========== 种子2: 异常处理 ==========
+
+case_002:
+  case_name: "zookeeper_kafka_zk_failure_config_handling"
+  case_type: "error_handling"
+  priority: "P0"
+  
+  scenario:
+    name: "zookeeper_kafka_config_linkage"
+    error_type: "zookeeper_session_expired"
+    description: "ZooKeeper会话过期时Kafka的处理"
+  
+  preconditions:
+    - "ZooKeeper正常运行"
+    - "Kafka正常运行"
+  
+  test_steps:
+    - step_number: 1
+      action: "simulate_zk_session_expire"
+      component: "ZooKeeper"
+      expected_result: "Kafka与ZooKeeper的会话过期"
+    
+    - step_number: 2
+      action: "detect_session_loss"
+      component: "Kafka"
+      expected_result: "Kafka检测到会话丢失"
+    
+    - step_number: 3
+      action: "reconnect_zk"
+      component: "Kafka"
+      expected_result: "Kafka重新连接ZooKeeper并重建会话"
+  
+  assertions:
+    - assertion_type: "exception"
+      description: "验证会话过期异常被捕获"
+      expected_value: "SessionExpiredException"
+    - assertion_type: "function"
+      description: "验证Kafka自动重连机制"
+      expected_value: "重连成功并恢复配置监听"
+  
+  cleanup:
+    - "恢复ZooKeeper连接"
+
+# ========== 种子3: 边界值 ==========
+
+case_003:
+  case_name: "zookeeper_kafka_config_batch_update_boundary"
+  case_type: "boundary_values"
+  priority: "P1"
+  
+  scenario:
+    name: "zookeeper_kafka_config_linkage"
+    description: "批量更新10个Broker配置时的联动"
+  
+  preconditions:
+    - "ZooKeeper正常运行"
+    - "Kafka 10个Broker正常运行"
+  
+  test_steps:
+    - step_number: 1
+      action: "batch_update_configs"
+      component: "ZooKeeper"
+      expected_result: "更新10个Broker配置znode"
+    
+    - step_number: 2
+      action: "all_watchers_triggered"
+      component: "ZooKeeper"
+      expected_result: "10个Watcher全部触发"
+    
+    - step_number: 3
+      action: "all_brokers_apply_config"
+      component: "Kafka"
+      expected_result: "10个Broker全部应用新配置"
+  
+  test_data:
+    input:
+      data_size: 10
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      all_config_applied: true
+  
+  assertions:
+    - assertion_type: "count"
+      description: "验证所有Broker配置更新"
+      expected_value: 10
+  
+  cleanup:
+    - "恢复10个Broker原始配置"
+
+# ========== 泛化模式 ==========
+
+generalization_patterns:
+  data_patterns:
+    - "配置项: 单项 → 批量 → 全量"
+    - "配置类型: 动态配置 → 静态配置 → 混合配置"
+  
+  error_patterns:
+    - "ZooKeeper故障 → Kafka会话丢失 → 重连恢复"
+    - "配置冲突 → 配置丢失 → 配置格式错误"
+  
+  assertion_patterns:
+    - "state验证（znode版本） → function验证（配置生效） → count验证（批量数量）"

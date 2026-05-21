@@ -1,0 +1,179 @@
+# 种子用例：Redis-Elasticsearch状态同步
+# 交互类型: state_sync（缓存同步搜索引擎）
+
+metadata:
+  seed_id: "005"
+  scenario_name: "Redis-Elasticsearch状态同步"
+  components: ["Redis", "Elasticsearch"]
+  interaction_type: "state_sync"
+
+# ========== 种子1: 正常流程 ==========
+
+case_001:
+  case_name: "redis_elasticsearch_state_sync_normal"
+  case_type: "normal_flow"
+  priority: "P0"
+  
+  scenario:
+    name: "redis_elasticsearch_state_sync"
+    components: ["Redis", "Elasticsearch"]
+    interaction_type: "state_sync"
+    description: "Redis缓存状态变更后，同步更新Elasticsearch索引"
+  
+  preconditions:
+    - "Redis缓存服务正常运行"
+    - "Elasticsearch集群正常运行，索引已创建"
+  
+  test_steps:
+    - step_number: 1
+      action: "update_cache_state"
+      component: "Redis"
+      input: "HSET product:1001 status=active"
+      expected_result: "Redis缓存状态更新成功"
+    
+    - step_number: 2
+      action: "detect_state_change"
+      component: "Redis"
+      expected_result: "检测到状态变更事件"
+    
+    - step_number: 3
+      action: "sync_to_elasticsearch"
+      component: "Elasticsearch"
+      input: "POST /products/_update/1001 {status:active}"
+      expected_result: "Elasticsearch索引状态同步更新"
+    
+    - step_number: 4
+      action: "verify_sync_consistency"
+      component: "Elasticsearch"
+      expected_result: "ES查询结果与Redis状态一致"
+  
+  test_data:
+    input:
+      data_size: 1
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      sync_consistent: true
+  
+  assertions:
+    - assertion_type: "state"
+      description: "验证Redis和ES状态一致"
+      expected_value: "Redis.status == ES.status"
+    - assertion_type: "function"
+      description: "验证同步机制正常执行"
+      expected_value: "状态变更→事件检测→ES更新全流程完成"
+  
+  cleanup:
+    - "恢复Redis原始状态"
+    - "恢复ES原始索引"
+
+# ========== 种子2: 异常处理 ==========
+
+case_002:
+  case_name: "redis_elasticsearch_es_failure_sync_handling"
+  case_type: "error_handling"
+  priority: "P0"
+  
+  scenario:
+    name: "redis_elasticsearch_state_sync"
+    error_type: "elasticsearch_connection_failure"
+    description: "Elasticsearch连接失败时，Redis状态变更的同步处理"
+  
+  preconditions:
+    - "Redis正常运行"
+    - "Elasticsearch模拟故障状态"
+  
+  test_steps:
+    - step_number: 1
+      action: "simulate_es_failure"
+      component: "Elasticsearch"
+      expected_result: "Elasticsearch不可用"
+    
+    - step_number: 2
+      action: "update_cache_state"
+      component: "Redis"
+      expected_result: "Redis状态更新成功"
+    
+    - step_number: 3
+      action: "detect_sync_failure"
+      component: "Redis"
+      expected_result: "检测到同步失败，记录待同步事件"
+    
+    - step_number: 4
+      action: "retry_sync_after_recovery"
+      component: "Elasticsearch"
+      expected_result: "ES恢复后，重试同步成功"
+  
+  assertions:
+    - assertion_type: "exception"
+      description: "验证ES连接异常被捕获"
+      expected_value: "ElasticsearchConnectionException"
+    - assertion_type: "function"
+      description: "验证补偿同步机制"
+      expected_value: "ES恢复后补偿同步成功"
+  
+  cleanup:
+    - "恢复Elasticsearch"
+
+# ========== 种子3: 边界值 ==========
+
+case_003:
+  case_name: "redis_elasticsearch_batch_state_sync_boundary"
+  case_type: "boundary_values"
+  priority: "P1"
+  
+  scenario:
+    name: "redis_elasticsearch_state_sync"
+    description: "批量状态同步（1000条）的边界场景"
+  
+  preconditions:
+    - "Redis正常运行"
+    - "Elasticsearch正常运行"
+  
+  test_steps:
+    - step_number: 1
+      action: "batch_update_cache_states"
+      component: "Redis"
+      expected_result: "批量更新1000条状态"
+    
+    - step_number: 2
+      action: "batch_sync_to_es"
+      component: "Elasticsearch"
+      expected_result: "批量同步1000条到ES索引"
+    
+    - step_number: 3
+      action: "verify_batch_consistency"
+      component: "Elasticsearch"
+      expected_result: "1000条状态全部一致"
+  
+  test_data:
+    input:
+      data_size: 1000
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      all_consistent: true
+  
+  assertions:
+    - assertion_type: "count"
+      description: "验证批量同步数量"
+      expected_value: 1000
+  
+  cleanup:
+    - "清空Redis批量状态"
+    - "清空ES批量索引"
+
+# ========== 泛化模式 ==========
+
+generalization_patterns:
+  data_patterns:
+    - "同步粒度: 单条 → 批量 → 全量"
+    - "同步方向: Redis→ES → ES→Redis → 双向"
+    - "同步延迟: 实时 → 近实时 → 定时批量"
+  
+  error_patterns:
+    - "ES故障 → Redis故障 → 双故障"
+    - "同步丢失 → 同步冲突 → 同步延迟超时"
+  
+  assertion_patterns:
+    - "state验证（一致性） → count验证（批量数量） → function验证（补偿机制）"

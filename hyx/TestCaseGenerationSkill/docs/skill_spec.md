@@ -65,7 +65,7 @@ Step 7: 结果输出    → 输出YAML用例、脚本、报告
 - P0占比 >= 50%（详见generation_rules.md）
 - 类型覆盖: normal_flow + error_handling + boundary_values（详见coverage_dimensions.md）
 - 质量分数 >= 0.8（详见quality_standards.md）
-- 组件不限定：any_component: true
+- 组件不限定：any_component: true（已验证6个场景，覆盖5种交互类型）
 
 ---
 

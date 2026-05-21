@@ -1,0 +1,202 @@
+# 种子用例：Nginx-Redis-MySQL查询访问
+# 交互类型: query_access（Web服务查询缓存数据库）
+
+metadata:
+  seed_id: "003"
+  scenario_name: "Nginx-Redis-MySQL查询访问"
+  components: ["Nginx", "Redis", "MySQL"]
+  interaction_type: "query_access"
+
+# ========== 种子1: 正常流程 ==========
+
+case_001:
+  case_name: "nginx_redis_mysql_query_access_normal"
+  case_type: "normal_flow"
+  priority: "P0"
+  
+  scenario:
+    name: "nginx_redis_mysql_query_access"
+    components: ["Nginx", "Redis", "MySQL"]
+    interaction_type: "query_access"
+    description: "Nginx反向代理收到查询请求，优先查Redis缓存，缓存未命中则查MySQL并回写缓存"
+  
+  preconditions:
+    - "Nginx反向代理正常运行"
+    - "Redis缓存服务正常运行"
+    - "MySQL数据库正常运行，表数据已准备"
+  
+  test_steps:
+    - step_number: 1
+      action: "receive_query_request"
+      component: "Nginx"
+      input: "GET /api/user?id=100"
+      expected_result: "Nginx收到查询请求"
+    
+    - step_number: 2
+      action: "lookup_cache"
+      component: "Redis"
+      input: "key=user:100"
+      expected_result: "Redis返回缓存数据（命中）或返回空（未命中）"
+    
+    - step_number: 3
+      action: "query_database"
+      component: "MySQL"
+      input: "SELECT * FROM users WHERE id=100"
+      expected_result: "MySQL返回用户数据"
+    
+    - step_number: 4
+      action: "write_back_cache"
+      component: "Redis"
+      input: "SET user:100 = {data}"
+      expected_result: "查询结果回写Redis缓存"
+    
+    - step_number: 5
+      action: "return_response"
+      component: "Nginx"
+      expected_result: "返回查询结果给客户端"
+  
+  test_data:
+    input:
+      data_size: 100
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      response_time_ms: 50
+  
+  assertions:
+    - assertion_type: "value"
+      description: "验证返回数据包含用户字段"
+      expected_value: "包含id/name/email字段"
+    - assertion_type: "count"
+      description: "验证响应时间符合要求"
+      expected_value: "<100ms"
+    - assertion_type: "state"
+      description: "验证Redis缓存状态"
+      expected_value: "缓存命中或回写成功"
+  
+  cleanup:
+    - "删除Redis测试缓存键"
+    - "清理MySQL测试数据"
+
+# ========== 种子2: 异常处理 ==========
+
+case_002:
+  case_name: "nginx_redis_mysql_redis_failure_handling"
+  case_type: "error_handling"
+  priority: "P0"
+  
+  scenario:
+    name: "nginx_redis_mysql_query_access"
+    error_type: "redis_connection_failure"
+    description: "Redis连接失败时，直接查MySQL并返回结果"
+  
+  preconditions:
+    - "Nginx正常运行"
+    - "Redis模拟故障状态"
+    - "MySQL正常运行"
+  
+  test_steps:
+    - step_number: 1
+      action: "simulate_redis_failure"
+      component: "Redis"
+      expected_result: "Redis停止运行"
+    
+    - step_number: 2
+      action: "receive_query_request"
+      component: "Nginx"
+      expected_result: "Nginx收到请求，尝试查Redis失败"
+    
+    - step_number: 3
+      action: "fallback_query_database"
+      component: "MySQL"
+      expected_result: "直接查MySQL获取数据"
+    
+    - step_number: 4
+      action: "return_response"
+      component: "Nginx"
+      expected_result: "返回查询结果（降级模式）"
+  
+  assertions:
+    - assertion_type: "exception"
+      description: "验证Redis异常被捕获"
+      expected_value: "RedisConnectionException"
+    - assertion_type: "function"
+      description: "验证降级策略触发"
+      expected_value: "绕过Redis直查MySQL"
+    - assertion_type: "value"
+      description: "验证查询结果仍然正确"
+      expected_value: "返回正确用户数据"
+  
+  cleanup:
+    - "恢复Redis正常运行"
+
+# ========== 种子3: 边界值 ==========
+
+case_003:
+  case_name: "nginx_redis_mysql_cache_miss_boundary"
+  case_type: "boundary_values"
+  priority: "P1"
+  
+  scenario:
+    name: "nginx_redis_mysql_query_access"
+    description: "缓存全部未命中时查询数据库的边界场景"
+  
+  preconditions:
+    - "Nginx正常运行"
+    - "Redis缓存为空（全部未命中）"
+    - "MySQL正常运行"
+  
+  test_steps:
+    - step_number: 1
+      action: "receive_batch_query"
+      component: "Nginx"
+      expected_result: "收到100个查询请求"
+    
+    - step_number: 2
+      action: "lookup_cache_all_miss"
+      component: "Redis"
+      expected_result: "全部缓存未命中"
+    
+    - step_number: 3
+      action: "batch_query_database"
+      component: "MySQL"
+      expected_result: "MySQL承受100次查询"
+    
+    - step_number: 4
+      action: "batch_write_cache"
+      component: "Redis"
+      expected_result: "100条数据回写缓存"
+  
+  test_data:
+    input:
+      data_size: 100
+      data_format: "JSON"
+    expected_output:
+      status: "success"
+      cache_miss_rate: 1.0
+  
+  assertions:
+    - assertion_type: "count"
+      description: "验证缓存未命中数量"
+      expected_value: 100
+  
+  cleanup:
+    - "清空Redis测试缓存"
+    - "清理MySQL测试数据"
+
+# ========== 泛化模式 ==========
+
+generalization_patterns:
+  data_patterns:
+    - "查询类型: 单条查询 → 批量查询 → 范围查询"
+    - "缓存命中率: 全命中 → 部分命中 → 全未命中"
+    - "数据大小: 1条 → 100条 → 10000条"
+  
+  error_patterns:
+    - "Redis故障 → MySQL故障 → Nginx故障"
+    - "缓存雪崩 → 缓存穿透 → 缓存击穿"
+    - "连接超时 → 连接拒绝 → 连接池耗尽"
+  
+  assertion_patterns:
+    - "value验证 → count验证 → state验证（缓存状态）"
+    - "响应时间验证 → 降级策略验证 → 数据一致性验证"
