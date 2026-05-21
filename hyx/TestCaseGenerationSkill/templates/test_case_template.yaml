@@ -1,132 +1,91 @@
 # 测试用例模板
-# 用于生成标准化的测试用例
+# 权威枚举值来源: docs/testcase_spec.md
 
 metadata:
-  template_version: "1.0"
+  template_version: "3.0"
   template_name: "测试用例模板"
-  description: "自动化生成的测试用例标准格式"
-
-# ========== 必填字段 ==========
 
 test_case:
-  # 用例ID（自动生成）
   case_id: "auto-{timestamp}-{index}"
-  
-  # 用例名称（必填）
   case_name: ""
-  
-  # 用例描述（必填）
-  description: ""
-  
-  # 优先级（必填）: P0/P1/P2
-  priority: ""
-  
-  # 用例类型（必填）: functional/performance/error/boundary
-  case_type: ""
-  
-  # 场景信息（必填）
+  case_type: ""  # 枚举: normal_flow / error_handling / boundary_values / performance / stability
+  priority: ""   # 枚举: P0 / P1 / P2
+  generated_time: ""
+  seed_scenario: ""
+
   scenario:
     name: ""
     components: []
-    interaction_type: ""  # data_flow/state_sync/event_trigger/query/config
-  
-  # 前置条件（必填）
+    interaction_type: ""  # 枚举: data_flow / state_sync / event_trigger / query_access / config_linkage
+    description: ""
+    error_type: ""  # 仅error_handling类型需要
+
   preconditions:
     - ""
-  
-  # 测试步骤（必填）
+
   test_steps:
-    - step_number: 0
+    - step_number: 1
       action: ""
       component: ""
       input: ""
       expected_result: ""
-      # 可选
       timeout: 0
-  
-  # 测试数据（必填）
+      retry_count: 0
+
   test_data:
-    input: ""
-    expected_output: ""
-    # 可选
-    data_source: ""
-    data_size: 0
-  
-  # 验证点（必填）
+    input:
+      data_size: 0
+      data_format: ""  # 枚举: JSON / CSV / Avro / Parquet
+      specific_data: {}
+    expected_output:
+      status: ""
+      count: 0
+
   assertions:
-    - assertion_type: ""  # data/function/state/performance
+    - assertion_type: ""  # 枚举: value / count / exception / function / state / file
       description: ""
       expected_value: ""
-      actual_value: ""
-      tolerance: ""
-  
-  # 清理步骤（必填）
+
   cleanup:
     - ""
 
-# ========== 可选字段 ==========
-
-# 标签（可选）
-tags: []
-
-# 依赖用例（可选）
-dependencies: []
-
-# 预估时间（可选）
-estimated_time: ""
-
-# 执行环境（可选）
-execution_env:
-  cluster_size: ""
-  resource_config: ""
-
-# ========== 示例 ==========
-
 example:
   test_case:
-    case_name: "正常数据流处理_边界值"
-    description: "测试最小数据量场景"
-    priority: "P1"
-    case_type: "functional"
-    
+    case_id: "auto-20260520-001"
+    case_name: "spark_kafka_hdfs_normal_flow_basic"
+    case_type: "normal_flow"
+    priority: "P0"
     scenario:
-      name: "Kafka-Spark-HDFS数据管道"
-      components: ["Kafka", "Spark", "HDFS"]
+      name: "spark_kafka_hdfs_data_flow"
+      components: ["Spark", "Kafka", "HDFS"]
       interaction_type: "data_flow"
-    
+      description: "Spark读取HDFS数据，处理后发送到Kafka"
     preconditions:
+      - "HDFS集群正常运行"
       - "Kafka集群正常运行"
-      - "Spark应用已启动"
-      - "HDFS目录已创建"
-    
     test_steps:
       - step_number: 1
-        action: "Kafka发送1条消息"
-        component: "Kafka"
-        input: '{"id":1,"name":"test"}'
-        expected_result: "消息成功发送"
-      - step_number: 2
-        action: "Spark消费处理"
+        action: "read_from_hdfs"
         component: "Spark"
-        expected_result: "成功处理1条数据"
+        expected_result: "DataFrame成功创建"
+      - step_number: 2
+        action: "process_data"
+        component: "Spark"
+        expected_result: "数据处理成功"
       - step_number: 3
-        action: "写入HDFS"
-        component: "HDFS"
-        expected_result: "文件创建成功"
-    
+        action: "produce_message"
+        component: "Kafka"
+        expected_result: "消息发送成功"
     test_data:
-      input: '{"id":1,"name":"test","timestamp":1234567890}'
-      expected_output: "HDFS文件包含1条记录"
-      data_size: 1
-    
+      input: {data_size: 100, data_format: "JSON"}
+      expected_output: {status: "success", count: 100}
     assertions:
-      - assertion_type: "data"
-        description: "验证Kafka消息数"
-        expected_value: "1"
-      - assertion_type: "data"
-        description: "验证HDFS文件存在"
-        expected_value: "true"
-    
+      - assertion_type: "count"
+        description: "验证Kafka消息数量"
+        expected_value: 100
+      - assertion_type: "value"
+        description: "验证数据完整性"
+        expected_value: "无数据丢失"
     cleanup:
-      - "删除Kafka消息"
-      - "删除HDFS文件"
+      - "清理HDFS测试数据"
+      - "清理Kafka测试topic"

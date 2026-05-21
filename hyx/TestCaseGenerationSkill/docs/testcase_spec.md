@@ -1,8 +1,44 @@
 # 测试用例规范文档
 
 **文档版本**: v3.0  
-**最后更新**: 2026-05-20  
-**文档定位**: 定义测试用例的标准格式和必填字段
+**最后更新**: 2026-05-21  
+**文档定位**: 定义测试用例的标准格式和必填字段  
+**权威性**: 本文档是case_type、assertion_type、priority枚举值的唯一定义源
+
+---
+
+## 零、权威枚举值定义
+
+以下枚举值为全Skill体系的唯一定义源。模板、种子、配置中的枚举值必须与此一致。
+
+### case_type枚举（5种）
+
+| 值 | 说明 | 优先级 | 必选 |
+|-----|------|--------|------|
+| normal_flow | 正常流程 | P0 | 必须 |
+| error_handling | 异常处理 | P0 | 必须 |
+| boundary_values | 边界值 | P1 | 必须 |
+| performance | 性能测试 | P1 | 可选 |
+| stability | 稳定性测试 | P2 | 可选 |
+
+### assertion_type枚举（6种）
+
+| 值 | 说明 | 适用场景 |
+|-----|------|---------|
+| value | 值验证 | 验证字段值等于预期 |
+| count | 数量验证 | 验证数量等于预期 |
+| exception | 异常验证 | 验证异常被抛出 |
+| function | 功能验证 | 验证功能正常执行 |
+| state | 状态验证 | 验证状态变化正确 |
+| file | 文件验证 | 验证文件存在/内容正确 |
+
+### priority枚举（3种）
+
+| 值 | 定义 | 占比目标 |
+|-----|------|---------|
+| P0 | 最高优先级 | >= 50% |
+| P1 | 高优先级 | <= 30% |
+| P2 | 中优先级 | <= 20% |
 
 ---
 
@@ -37,8 +73,8 @@
 |------|------|--------|------|
 | `case_id` | string | ⭐⭐⭐⭐⭐ | 用例唯一标识（自动生成） |
 | `case_name` | string | ⭐⭐⭐⭐⭐ | 用例名称（描述性命名） |
-| `case_type` | string | ⭐⭐⭐⭐⭐ | 用例类型（normal/error/boundary） |
-| `priority` | string | ⭐⭐⭐⭐⭐ | 优先级（P0/P1/P2） |
+| `case_type` | string | ⭐⭐⭐⭐⭐ | 用例类型（见枚举定义） |
+| `priority` | string | ⭐⭐⭐⭐⭐ | 优先级（见枚举定义） |
 | `test_steps` | list | ⭐⭐⭐⭐⭐ | 测试步骤列表（≥1个步骤） |
 | `assertions` | list | ⭐⭐⭐⭐⭐ | 验证点列表（≥1个验证点） |
 
@@ -92,7 +128,7 @@ test_data:                   # ⭐⭐⭐⭐ 推荐填 - 测试数据
     count: number            # 数量（可选）
 
 assertions:                  # ⭐⭐⭐⭐⭐ 必填 - 验证点列表
-  - assertion_type: string   # 验证类型（value/count/exception/function）
+  - assertion_type: string   # 验证类型（见枚举定义）
     description: string      # 验证描述
     expected_value: any      # 预期值
     actual_value: any        # 实际值（可选，执行时填充）

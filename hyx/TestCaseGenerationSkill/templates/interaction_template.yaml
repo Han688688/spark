@@ -1,120 +1,117 @@
 # 组件交互描述模板
-# 用于描述多个组件之间的数据流和交互过程
+# 权威枚举值来源: docs/interaction_spec.md
 
 metadata:
-  template_version: "1.0"
+  template_version: "3.0"
   template_name: "组件交互描述模板"
-  description: "标准化的组件交互描述格式"
-
-# ========== 必填字段 ==========
 
 interaction:
-  # 交互名称（必填）
   name: ""
-  
-  # 参与组件列表（必填）
   components: []
-  
-  # 交互流程（必填）
   flow:
-    - step: ""
+    - step: 1
       component: ""
       action: ""
       input: ""
       output: ""
-      # 可选字段
       description: ""
       timeout: 0
       retry_count: 0
 
-# ========== 数据Schema（必填） ==========
-
 data_schema:
-  # 输入数据格式
   input_data:
     type: ""
-    fields: []
-    example: ""
-  
-  # 中间数据格式
+    schema:
+      fields:
+        - name: ""
+          type: ""
+          nullable: false
   intermediate_data:
     type: ""
-    fields: []
-  
-  # 输出数据格式
+    schema: {}
   output_data:
     type: ""
-    fields: []
-    format: ""
-
-# ========== 约束条件（必填） ==========
+    schema: {}
 
 constraints:
-  # 数据约束
   data_constraints:
-    - ""
-  
-  # 性能约束
+    - name: ""
+      type: ""  # 枚举: size / format / range / rate / null
+      min: 0
+      max: 0
+      value: ""
   performance_constraints:
-    - ""
-  
-  # 可靠性约束
+    - name: ""
+      type: ""  # 枚举: latency / throughput / resource
+      max_ms: 0
+      min_qps: 0
   reliability_constraints:
-    - ""
-
-# ========== 可选字段 ==========
-
-# 环境配置（可选）
-environment:
-  cluster_config: ""
-  resource_requirements: ""
-
-# 异常处理（可选）
-error_handling:
-  retry_strategy: ""
-  fallback_action: ""
-
-# 监控指标（可选）
-monitoring:
-  metrics: []
-  alerts: []
-
-# ========== 示例 ==========
+    - name: ""
+      type: ""  # 枚举: retry / guarantee / interval
+      max: 0
+      value: ""
 
 example:
   interaction:
-    name: "Kafka-Spark-HDFS数据管道"
-    components: ["Kafka", "Spark", "HDFS"]
+    name: "spark_kafka_hdfs_data_flow"
+    components: ["Spark", "Kafka", "HDFS"]
     flow:
-      - step: "数据生产"
-        component: "Kafka"
-        action: "Producer发送消息"
-        input: "业务JSON数据"
-        output: "Kafka消息队列"
-      - step: "数据处理"
-        component: "Spark"
-        action: "Streaming消费处理"
-        input: "Kafka Topic"
-        output: "处理后DataFrame"
-      - step: "数据存储"
+      - step: 1
         component: "HDFS"
-        action: "写入Parquet文件"
+        action: "provide_data"
+        input: "/data/input"
+        output: "RawDataFile"
+        description: "HDFS提供原始数据文件"
+      - step: 2
+        component: "Spark"
+        action: "read_from_hdfs"
+        input: "RawDataFile"
+        output: "DataFrame"
+        description: "Spark读取HDFS数据为DataFrame"
+      - step: 3
+        component: "Spark"
+        action: "process_data"
         input: "DataFrame"
-        output: "HDFS文件"
-  
+        output: "ProcessedDataFrame"
+        description: "Spark处理数据"
+      - step: 4
+        component: "Kafka"
+        action: "produce_message"
+        input: "ProcessedDataFrame"
+        output: "kafka://topic/output"
+        description: "Spark将结果发送到Kafka"
+        timeout: 5000
+        retry_count: 3
+
   data_schema:
     input_data:
       type: "JSON"
-      fields: ["id:int", "name:string", "timestamp:long"]
+      schema:
+        fields:
+          - name: "id"
+            type: "integer"
+            nullable: false
+          - name: "value"
+            type: "float"
     output_data:
-      type: "Parquet"
-      format: "列式存储"
-  
+      type: "KafkaMessage"
+      schema:
+        key_field: "id"
+
   constraints:
     data_constraints:
-      - "消息不能重复"
-      - "文件完整性保证"
+      - name: "input_size"
+        type: "size"
+        min: 1
+        max: 10000
+      - name: "input_format"
+        type: "format"
+        value: "JSON"
     performance_constraints:
-      - "吞吐量>=10000条/秒"
+      - name: "processing_time"
+        type: "latency"
+        max_ms: 5000
     reliability_constraints:
-      - "异常自动重试"
+      - name: "retry_count"
+        type: "retry"
+        max: 3

@@ -24,14 +24,9 @@ quantity_limits:
 # ========== 优先级分布 ==========
 
 priority_distribution:
-  # P0 - 核心路径，必须通过
-  P0_ratio: 0.2  # 20%
-  
-  # P1 - 重要场景，主要功能
-  P1_ratio: 0.5  # 50%
-  
-  # P2 - 边界场景，次要功能
-  P2_ratio: 0.3  # 30%
+  P0_ratio: 0.5  # 50% - 核心路径，必须通过
+  P1_ratio: 0.3  # 30% - 重要场景，主要功能
+  P2_ratio: 0.2  # 20% - 边界场景，次要功能
 
 # ========== 覆盖维度 ==========
 
@@ -129,24 +124,19 @@ forbidden_rules:
 # ========== 质量控制 ==========
 
 quality_control:
-  # 每个用例必须包含的验证点数量
-  min_assertions: 2
+  min_assertions: 1
   max_assertions: 10
   
-  # 每个用例必须包含的步骤数量
-  min_steps: 2
+  min_steps: 1
   max_steps: 10
   
-  # 必须包含的字段
   required_fields:
+    - "case_id"
     - "case_name"
+    - "case_type"
     - "priority"
-    - "scenario"
-    - "preconditions"
     - "test_steps"
-    - "test_data"
     - "assertions"
-    - "cleanup"
 
 # ========== 泛化策略 ==========
 

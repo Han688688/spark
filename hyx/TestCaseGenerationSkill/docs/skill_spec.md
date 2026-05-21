@@ -1,418 +1,107 @@
 # TestCaseGenerationSkill规范文档
 
-**文档版本**: v3.0  
-**最后更新**: 2026-05-20  
-**文档定位**: Skill总体规范定义
+**版本**: v3.0  
+**定位**: Skill总体规范定义  
+**权威性**: 本文档是Skill定位和流程的唯一定义源，详细规范见对应子文档
 
 ---
 
 ## 一、Skill定位
 
-### 1.1 Skill名称
-
 **名称**: TestCaseGenerationSkill  
-**简称**: TestGenSkill  
-**别名**: 测试用例自动生成Skill
-
----
-
-### 1.2 Skill目标
-
-**核心目标**: 基于组件交互描述和种子用例，自动生成高质量测试用例
-
-**具体目标**:
-1. 降低测试用例编写成本（从手工编写到自动生成）
-2. 提高测试用例质量（基于最佳实践和种子模式）
-3. 确保测试覆盖完整性（覆盖多维度场景）
-4. 支持跨组件复用（通用规范可复用于不同组件）
-
----
-
-### 1.3 Skill类型
-
+**目标**: 基于组件交互描述和种子用例，自动生成高质量测试用例  
 **类型**: 测试工程类Skill  
-**分类**: 测试自动化/测试用例生成  
-**层级**: 领域Skill（测试领域）
+
+**适用**: 多组件协作、数据流、事件触发、状态同步、查询访问、配置联动  
+**不适用**: 单组件系统、纯UI测试、纯手工测试
 
 ---
 
-### 1.4 Skill适用范围
+## 二、输入输出
 
-**适用场景**:
-- ✅ 多组件协作系统（Spark-Kafka-HDFS、Flink-Kafka-Hive等）
-- ✅ 数据流处理场景（数据传输、数据转换、数据存储）
-- ✅ 事件触发场景（消息队列、事件驱动）
-- ✅ 状态同步场景（配置联动、状态管理）
+### 2.1 输入
 
-**不适用场景**:
-- ❌ 单组件单体系统（不涉及组件交互）
-- ❌ 纯前端UI测试（不涉及后端交互）
-- ❌ 纯手工测试场景（无自动化需求）
+**必须**:
+| 输入 | 格式 | 规范文档 | 模板 |
+|------|------|---------|------|
+| 交互描述 | YAML | interaction_spec.md | templates/interaction_template.yaml |
+| 种子用例 | YAML | testcase_spec.md | templates/test_case_template.yaml |
 
----
-
-## 二、Skill输入输出规范
-
-### 2.1 输入规范
-
-**必须输入**（2项）:
-
-| 输入项 | 格式 | 规范文档 | 说明 |
-|--------|------|---------|------|
-| 交互描述 | YAML | `interaction_spec.md` | 描述组件之间的交互关系 |
-| 种子用例 | YAML | `testcase_spec.md` | 提供学习模板，定义模式 |
-
-**可选输入**（4项）:
-
-| 输入项 | 格式 | 规范文档 | 说明 |
-|--------|------|---------|------|
-| Skill配置 | YAML | `skill_config.yaml` | 调整Skill全局参数 |
-| 生成限制 | YAML | `generation_limits.yaml` | 控制生成数量和分布 |
-| 质量阈值 | YAML | `quality_thresholds.yaml` | 定义质量最低要求 |
-| 覆盖要求 | YAML | `coverage_requirements.yaml` | 定义覆盖维度要求 |
-
----
-
-### 2.2 输出规范
-
-**必须输出**（4项）:
-
-| 输出项 | 格式 | 规范文档 | 说明 |
-|--------|------|---------|------|
-| 测试用例 | YAML | `testcase_spec.md` | 生成的测试用例列表 |
-| 自动化脚本 | Markdown | `script_template.md` | pytest测试脚本 |
-| 覆盖分析 | YAML | `coverage_dimensions.md` | 覆盖维度分析结果 |
-| 生成报告 | Markdown | `report_template.md` | 生成执行报告 |
-
-**可选输出**（2项）:
-
-| 输出项 | 格式 | 规范文档 | 说明 |
-|--------|------|---------|------|
-| 质量报告 | YAML | `quality_standards.md` | 质量指标详细报告 |
-| 用例统计 | YAML | - | 用例数量和分布统计 |
-
----
-
-## 三、Skill执行流程规范
-
-### 3.1 标准执行流程
-
-```
-输入 → 解析 → 分析 → 生成 → 检查 → 覆盖 → 输出
-```
-
-**详细步骤**:
-
-1. **输入验证** - 验证输入格式和必填字段
-2. **交互解析** - 解析组件交互描述，提取关键信息
-3. **种子分析** - 分析种子用例，提取模式和策略
-4. **用例生成** - 根据规则生成测试用例
-5. **质量检查** - 检查用例质量是否达标
-6. **覆盖分析** - 分析覆盖维度是否完整
-7. **结果输出** - 输出测试用例和报告
-
----
-
-### 3.2 执行顺序规范
-
-**必须顺序**（不可跳过）:
-```
-Step 1: 输入验证（必须） → Step 2: 交互解析（必须） → 
-Step 3: 种子分析（必须） → Step 4: 用例生成（必须） → 
-Step 5: 质量检查（必须） → Step 6: 覆盖分析（必须） → 
-Step 7: 结果输出（必须）
-```
-
-**可选顺序**（可跳过）:
-```
-配置加载（可选） → 输入验证 → ...
-```
-
----
-
-### 3.3 执行规则规范
-
-**规则1: 输入完整性**
-- 交互描述必须包含必填字段（见`interaction_spec.md`）
-- 种子用例至少包含1个正常流程用例
-- 种子用例至少包含1个异常处理用例（推荐）
-
-**规则2: 生成数量控制**
-- 总用例数不超过`generation_limits.yaml`中的max值
-- 总用例数不低于`generation_limits.yaml`中的min值
-- 各类型用例数符合优先级分布（见`generation_rules.md`）
-
-**规则3: 质量阈值达标**
-- 完整性分数不低于`quality_thresholds.yaml`中的阈值
-- 可执行性分数不低于阈值
-- 验证点分数不低于阈值
-- 总体分数不低于阈值
-
-**规则4: 覆盖维度完整**
-- 必选维度必须覆盖（见`coverage_dimensions.md`）
-- 每个必选维度至少生成min_cases个用例
-- 总体覆盖率不低于要求值
-
----
-
-## 四、Skill使用规范
-
-### 4.1 使用步骤
-
-**Step 1: 阅读规范文档**
-```
-必须阅读：
-├── docs/skill_spec.md（本文档）
-├── docs/interaction_spec.md
-├── docs/testcase_spec.md
-└── docs/generation_rules.md
-
-推荐阅读：
-├── docs/quality_standards.md
-├── docs/coverage_dimensions.md
-└── docs/examples.md
-```
-
-**Step 2: 准备输入文件**
-```
-必须准备：
-├── interaction.yaml（参照templates/interaction_template.yaml）
-├── seed_cases.yaml（参照templates/testcase_template.yaml）
-
-可选准备：
-├── config调整（修改config/*.yaml）
-```
-
-**Step 3: 执行生成**
-```
-AI执行：
-├── 根据规范文档理解输入
-├── 根据生成规则生成用例
-├── 根据质量标准检查质量
-├── 根据覆盖维度分析覆盖
-└── 根据模板格式输出结果
-```
-
-**Step 4: 验证输出**
-```
-必须验证：
-├── 输出文件格式正确（符合模板）
-├── 用例数量符合限制
-├── 质量分数达标
-├── 覆盖维度完整
-```
-
----
-
-### 4.2 使用角色规范
-
-**角色1: 测试工程师**
-- 需要提供交互描述和种子用例
-- 需要阅读规范文档
-- 需要验证输出质量
-
-**角色2: AI助手**
-- 需要阅读规范文档
-- 需要理解生成规则
-- 需要执行生成流程
-
-**角色3: 测试架构师**
-- 需要定义组件交互规范
-- 需要定义质量标准
-- 需要调整生成规则
-
----
-
-## 五、Skill质量标准规范
-
-### 5.1 输入质量标准
-
-**交互描述质量要求**:
-- ✅ 必填字段完整（见`interaction_spec.md`）
-- ✅ 组件列表清晰（至少2个组件）
-- ✅ 交互流程明确（至少1个步骤）
-- ✅ 数据Schema定义（输入/输出）
-
-**种子用例质量要求**:
-- ✅ 至少1个正常流程用例（P0优先级）
-- ✅ 至少1个异常处理用例（推荐）
-- ✅ 用例格式规范（符合`testcase_spec.md`）
-- ✅ 包含验证点（至少1个）
-
----
-
-### 5.2 输出质量标准
-
-**测试用例质量要求**:
-- ✅ 用例数量符合限制（3-10个）
-- ✅ 优先级分布合理（P0占比≥50%）
-- ✅ 类型分布合理（正常+异常+边界）
-- ✅ 每个用例包含验证点（≥1个）
-
-**自动化脚本质量要求**:
-- ✅ pytest格式标准
-- ✅ 包含完整的测试类和方法
-- ✅ 包含清晰的断言
-- ✅ 包含清理步骤
-
-**覆盖分析质量要求**:
-- ✅ 覆盖维度分析完整
-- ✅ 组件覆盖分析完整
-- ✅ 总体覆盖率≥80%
-
----
-
-### 5.3 Skill质量指标
-
-**指标1: 生成成功率**
-- 定义：成功生成用例的次数 / 总执行次数
-- 目标值：≥95%
-
-**指标2: 质量达标率**
-- 定义：质量分数达标的用例数 / 总生成用例数
-- 目标值：≥90%
-
-**指标3: 覆盖完整率**
-- 定义：覆盖维度完整度 / 总维度数
-- 目标值：≥80%
-
----
-
-## 六、Skill约束规范
-
-### 6.1 输入约束
-
-**约束1: 交互描述约束**
-- 必须是YAML格式
-- 必须包含`interaction`、`data_schema`、`constraints`三个顶层字段
-- 必须包含至少2个组件
-
-**约束2: 种子用例约束**
-- 必须是YAML格式
-- 必须包含至少1个完整用例
-- 每个用例必须包含`case_name`、`case_type`、`priority`字段
-
----
-
-### 6.2 输出约束
-
-**约束1: 数量约束**
-- 总用例数：3 ≤ N ≤ 10
-- P0用例数：≥总用例数×50%
-- P1用例数：≤总用例数×30%
-- P2用例数：≤总用例数×20%
-
-**约束2: 类型约束**
-- 必须包含正常流程用例（≥1个）
-- 必须包含异常处理用例（≥1个）
-- 必须包含边界值用例（≥1个）
-
-**约束3: 格式约束**
-- 测试用例必须符合`testcase_spec.md`规范
-- 自动化脚本必须符合`script_template.md`规范
-- 报告必须符合`report_template.md`规范
-
----
-
-## 七、Skill扩展规范
-
-### 7.1 扩展点定义
-
-**扩展点1: 新组件类型**
-- 支持添加新组件（如Redis、Elasticsearch）
-- 只需在`interaction_spec.md`中定义新组件规范
-
-**扩展点2: 新交互类型**
-- 支持添加新交互类型（如RPC调用、GraphQL查询）
-- 只需在`interaction_spec.md`中定义新类型规范
-
-**扩展点3: 新用例类型**
-- 支持添加新用例类型（如性能测试、安全测试）
-- 只需在`testcase_spec.md`和`generation_rules.md`中定义新类型规则
-
----
-
-### 7.2 扩展规则
-
-**规则1: 规范一致性**
-- 新扩展必须符合现有规范格式
-- 新扩展必须定义在对应规范文档中
-- 新扩展必须提供示例说明
-
-**规则2: 配置兼容性**
-- 新扩展必须兼容现有配置文件
-- 新扩展必须在配置文件中添加新参数
-- 新扩展必须标注参数默认值
-
----
-
-## 八、Skill版本规范
-
-### 8.1 版本号规范
-
-**版本格式**: `vMAJOR.MINOR.PATCH`
-
-**版本规则**:
-- MAJOR：架构重大调整（如v2.0代码驱动 → v3.0文档驱动）
-- MINOR：功能新增或改进（如新增组件类型）
-- PATCH：Bug修复或小改进
-
----
-
-### 8.2 版本历史
-
-| 版本 | 时间 | 变化说明 |
+**可选**:
+| 输入 | 格式 | 默认路径 |
 |------|------|---------|
-| v1.0 | 2026-05-18 | 初始版本，API全覆盖方案 |
-| v1.5 | 2026-05-19 | Skill架构，知识图谱方案 |
-| v2.0 | 2026-05-20 | 代码驱动架构（1500+行Python代码） |
-| v3.0 | 2026-05-20 | **文档驱动架构（当前版本）** |
+| Skill配置 | YAML | config/skill_config.yaml |
+| 生成限制 | YAML | config/generation_limits.yaml |
+
+### 2.2 输出
+
+**必须**:
+| 输出 | 格式 | 规范文档 |
+|------|------|---------|
+| 测试用例 | YAML | testcase_spec.md |
+| 自动化脚本 | Python | templates/script_template.md |
+| 覆盖分析 | YAML | coverage_dimensions.md |
+| 生成报告 | Markdown | - |
 
 ---
 
-## 九、Skill参考文档索引
+## 三、执行流程
 
-### 9.1 必读文档
+```
+Step 1: 输入验证    → 验证格式和必填字段
+Step 2: 交互解析    → 提取组件、流程、数据Schema（详见interaction_spec.md）
+Step 3: 种子分析    → 提取交互模式、数据模式、验证模式（详见testcase_spec.md）
+Step 4: 用例生成    → 根据规则生成（详见generation_rules.md）
+Step 5: 质量检查    → 检查完整性、可执行性、验证性（详见quality_standards.md）
+Step 6: 覆盖分析    → 分析维度和组件覆盖（详见coverage_dimensions.md）
+Step 7: 结果输出    → 输出YAML用例、脚本、报告
+```
 
+---
+
+## 四、核心约束
+
+- 用例数量: 3 <= N <= 10
+- P0占比 >= 50%（详见generation_rules.md）
+- 类型覆盖: normal_flow + error_handling + boundary_values（详见coverage_dimensions.md）
+- 质量分数 >= 0.8（详见quality_standards.md）
+- 组件不限定：any_component: true
+
+---
+
+## 五、枚举值权威来源
+
+所有枚举值的唯一定义源：
+
+| 枚举 | 定义源 | 值 |
+|------|--------|---|
+| case_type | testcase_spec.md | normal_flow / error_handling / boundary_values / performance / stability |
+| assertion_type | testcase_spec.md | value / count / exception / function / state / file |
+| priority | testcase_spec.md | P0 / P1 / P2 |
+| interaction_type | interaction_spec.md | data_flow / state_sync / event_trigger / query_access / config_linkage |
+| constraint.type | interaction_spec.md | size / format / range / rate / null / latency / throughput / resource / retry / guarantee / interval |
+
+**注意**: 模板和种子用例的枚举值必须与此表一致。如有冲突，以此表为准。
+
+---
+
+## 六、文档索引
+
+**必读**:
 | 文档 | 路径 | 说明 |
 |------|------|------|
-| Skill规范 | `docs/skill_spec.md`（本文档） | Skill总体规范 |
-| 交互规范 | `docs/interaction_spec.md` | 如何描述组件交互 |
-| 用例规范 | `docs/testcase_spec.md` | 测试用例标准格式 |
-| 生成规则 | `docs/generation_rules.md` | 用例生成规则 |
+| Skill规范 | docs/skill_spec.md | 本文档 |
+| 交互规范 | docs/interaction_spec.md | 交互描述格式和字段 |
+| 用例规范 | docs/testcase_spec.md | 用例格式和枚举值 |
+| 生成规则 | docs/generation_rules.md | 数量、分布、策略 |
+| 覆盖维度 | docs/coverage_dimensions.md | 覆盖要求和计算 |
 
----
-
-### 9.2 推荐文档
-
+**推荐**:
 | 文档 | 路径 | 说明 |
 |------|------|------|
-| 质量标准 | `docs/quality_standards.md` | 质量检查标准 |
-| 覆盖维度 | `docs/coverage_dimensions.md` | 覆盖分析维度 |
-| 泛化模式 | `docs/generalization_patterns.md` | 泛化策略参考 |
-| 最佳实践 | `docs/best_practices.md` | 使用最佳实践 |
-| 完整示例 | `docs/examples.md` | 完整使用示例 |
+| 质量标准 | docs/quality_standards.md | 质量维度和阈值 |
+| 使用指南 | docs/USAGE.md | 端到端使用流程 |
 
 ---
 
-## 十、Skill联系方式
-
-### 10.1 技术支持
-
-**联系方式**:
-- GitHub Issues: https://github.com/Han688688/spark/issues
-- 文档反馈: 直接修改文档并提交PR
-
----
-
-### 10.2 文档贡献
-
-**贡献方式**:
-1. Fork仓库
-2. 修改文档
-3. 提交PR
-4. 等待审核合并
-
----
-
-**文档结束** - TestCaseGenerationSkill规范文档 v3.0
+**文档结束** - skill_spec.md v3.0

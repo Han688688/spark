@@ -22,11 +22,12 @@
 ```
 TestCaseGenerationSkill/
 ├── docs/                     # ⭐ 规范文档（核心）
-│   ├── skill_spec.md         # Skill总体规范
+│   ├── skill_spec.md         # Skill总体规范+枚举权威源
 │   ├── interaction_spec.md   # 交互描述规范
-│   ├── testcase_spec.md      # 测试用例规范
+│   ├── testcase_spec.md      # 测试用例规范（枚举唯一定义源）
 │   ├── generation_rules.md   # 生成规则
 │   ├── quality_standards.md  # 质量标准
+│   ├── coverage_dimensions.md# 覆盖维度+覆盖率计算
 │   ├── USAGE.md              # 使用指南
 │   └── README.md             # 本文档
 │
@@ -91,15 +92,16 @@ AI根据文档规范执行 → 输出test_cases.yaml + test_script.py
 **必读**:
 | 文档 | 说明 |
 |------|------|
-| `skill_spec.md` | Skill总体规范（定位/输入输出/流程/约束） |
+| `skill_spec.md` | Skill总体规范 + 枚举权威源 |
 | `interaction_spec.md` | 交互描述规范（格式/字段/类型/示例） |
-| `testcase_spec.md` | 测试用例规范（字段/类型/步骤/验证点） |
+| `testcase_spec.md` | 用例规范 + 枚举唯一定义源 |
 | `generation_rules.md` | 生成规则（数量/分布/策略） |
+| `coverage_dimensions.md` | 覆盖维度 + 覆盖率计算 |
 
 **推荐**:
 | 文档 | 说明 |
 |------|------|
-| `quality_standards.md` | 质量检查标准（维度/阈值/问题） |
+| `quality_standards.md` | 质量检查标准（维度/阈值） |
 | `USAGE.md` | 使用指南（完整步骤） |
 
 ---

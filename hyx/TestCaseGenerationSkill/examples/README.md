@@ -1,132 +1,101 @@
-# 使用示例：生成Kafka-Spark-HDFS数据管道测试用例
+# 使用示例
 
-# ========== Step 1: 准备交互描述 ==========
+## Step 1: 准备交互描述
 
-# 文件：examples/kafka_spark_hdfs_interaction.yaml
+参照 `templates/interaction_template.yaml` 和 `docs/interaction_spec.md`：
 
+```yaml
 interaction:
-  name: "实时数据处理管道"
-  components: ["Kafka", "Spark", "HDFS"]
-  
+  name: "spark_kafka_hdfs_data_flow"
+  components: ["Spark", "Kafka", "HDFS"]
   flow:
-    - step: "数据采集"
-      component: "Kafka"
-      action: "Producer发送JSON消息到Topic"
-      input: "业务数据"
-      output: "Kafka消息队列"
-      
-    - step: "数据处理"
+    - step: 1
       component: "Spark"
-      action: "Structured Streaming消费处理"
-      input: "Kafka Topic"
-      output: "处理后DataFrame"
-      
-    - step: "数据存储"
-      component: "HDFS"
-      action: "写入Parquet文件"
-      input: "DataFrame"
-      output: "HDFS文件"
+      action: "read_from_hdfs"
+      input: "hdfs://data/input"
+      output: "DataFrame"
+    - step: 2
+      component: "Spark"
+      action: "process_data"
+      output: "ProcessedDataFrame"
+    - step: 3
+      component: "Kafka"
+      action: "produce_message"
+      input: "ProcessedDataFrame"
+      output: "kafka://topic/output"
 
 data_schema:
   input_data:
     type: "JSON"
-    fields: ["id:int", "name:string", "value:double", "timestamp:long"]
-    example: '{"id":1,"name":"test","value":100.0,"timestamp":1234567890}'
-  
+    schema:
+      fields:
+        - {name: "id", type: "integer", nullable: false}
+        - {name: "value", type: "float"}
   output_data:
-    type: "Parquet"
-    format: "列式存储"
+    type: "KafkaMessage"
 
 constraints:
   data_constraints:
-    - "消息不能重复消费"
-    - "文件写入保证完整性"
+    - {name: "input_size", type: "size", min: 1, max: 10000}
   performance_constraints:
-    - "吞吐量>=10000条/秒"
-  reliability_constraints:
-    - "异常自动重试"
-    - "Checkpoint机制保证"
+    - {name: "processing_time", type: "latency", max_ms: 5000}
+```
 
-# ========== Step 2: 准备种子用例 ==========
+## Step 2: 准备种子用例
 
-# 文件：examples/seed_cases.yaml
+参照 `templates/test_case_template.yaml` 和 `docs/testcase_spec.md`：
 
+```yaml
 seed_cases:
-  - case_name: "正常数据流"
-    case_type: "normal_flow"
-    priority: "P0"
+  - case_name: "spark_kafka_normal_flow_basic"
+    case_type: "normal_flow"       # 枚举: normal_flow/error_handling/boundary_values
+    priority: "P0"                 # 枚举: P0/P1/P2
     scenario:
-      name: "实时数据处理管道"
-      components: ["Kafka", "Spark", "HDFS"]
+      name: "spark_kafka_hdfs_data_flow"
+      components: ["Spark", "Kafka", "HDFS"]
+      interaction_type: "data_flow"
     test_steps:
-      - step_number: 1
-        action: "Kafka发送100条消息"
-      - step_number: 2
-        action: "Spark处理"
-      - step_number: 3
-        action: "写入HDFS"
+      - {step_number: 1, action: "read_from_hdfs", component: "Spark"}
+      - {step_number: 2, action: "process_data", component: "Spark"}
+      - {step_number: 3, action: "produce_message", component: "Kafka"}
     test_data:
-      input: {"message_count": 100}
+      input: {data_size: 100, data_format: "JSON"}
     assertions:
-      - assertion_type: "data"
-        description: "验证数量匹配"
-    cleanup:
-      - "清理数据"
-  
-  - case_name: "Kafka异常"
+      - {assertion_type: "count", description: "验证消息数量", expected_value: 100}
+      - {assertion_type: "value", description: "验证数据完整性", expected_value: "无丢失"}
+    cleanup: ["清理HDFS数据", "清理Kafka消息"]
+
+  - case_name: "spark_kafka_error_handling"
     case_type: "error_handling"
     priority: "P0"
-    scenario:
-      error_type: "component_failure"
+    scenario: {error_type: "kafka_connection_failure"}
     test_steps:
-      - step_number: 1
-        action: "模拟Kafka故障"
+      - {step_number: 1, action: "simulate_kafka_failure", component: "Kafka"}
     assertions:
-      - assertion_type: "exception"
-        description: "验证异常处理"
+      - {assertion_type: "exception", description: "验证异常捕获", expected_value: "KafkaConnectionException"}
+```
 
-# ========== Step 3: 执行生成 ==========
+## Step 3: AI根据文档执行生成
 
-# 命令行执行：
-# cd TestCaseGenerationSkill
-# python src/skill.py \
-#   --interaction examples/kafka_spark_hdfs_interaction.yaml \
-#   --seed examples/seed_cases.yaml \
-#   --output output
+AI按以下文档顺序阅读并执行：
 
-# ========== Step 4: 查看输出 ==========
+```
+docs/skill_spec.md → docs/interaction_spec.md → docs/testcase_spec.md → 
+docs/generation_rules.md → docs/coverage_dimensions.md → docs/quality_standards.md
+```
 
-# 输出目录结构：
-# output/
-# ├── test_cases.json           # 生成的测试用例
-# ├── test_script_0.py          # 自动化脚本
-# ├── coverage_analysis.yaml    # 覆盖分析
-# └── generation_report.md      # 生成报告
+## Step 4: 验证输出
 
-# ========== Python代码示例 ==========
+```
+验证项：
+- 用例数量: 3-10个
+- P0占比 >= 50%
+- 类型覆盖: normal_flow + error_handling + boundary_values
+- 质量分数 >= 0.8
+- 总体覆盖率 >= 80%
+```
 
-import yaml
-from src.skill import TestCaseGenerationSkill
+## 更多示例
 
-# 加载交互描述
-with open('examples/kafka_spark_hdfs_interaction.yaml') as f:
-    interaction = yaml.safe_load(f)
-
-# 加载种子用例
-with open('examples/seed_cases.yaml') as f:
-    seed_cases = yaml.safe_load(f)['seed_cases']
-
-# 创建Skill实例
-skill = TestCaseGenerationSkill()
-
-# 执行生成
-result = skill.execute(interaction, seed_cases)
-
-# 打印结果
-print(f"生成用例数量: {len(result['test_cases'])}")
-print(f"覆盖率: {result['coverage_analysis']['overall_coverage']*100:.1f}%")
-
-# 查看第一个用例
-first_case = result['test_cases'][0]
-print(f"用例名称: {first_case['case_name']}")
-print(f"优先级: {first_case['priority']}")
+- Spark-Kafka-HDFS: `seed_cases/spark_kafka_hdfs/example_seed.yaml`
+- Flink-Kafka-Hive: `seed_cases/flink_kafka_hive/example_seed.yaml`
