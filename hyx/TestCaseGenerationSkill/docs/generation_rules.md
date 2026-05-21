@@ -75,46 +75,66 @@
 
 ### 3.1 核心异常用例（必须生成）
 
-**数量**: 1个  
+**数量**: 至少覆盖当前交互类型适用的error_type种类数（见testcase_spec.md零节）
 **优先级**: P0  
-**异常类型**:
-- 组件故障（Kafka故障、Spark故障、HDFS故障）
-- 网络故障（连接超时、网络中断）
-- 数据异常（数据格式错误、数据缺失）
 
-**策略**: 每个组件至少生成1个故障用例（最多2个组件）
+**适用error_type覆盖规则**（按交互类型）:
+
+| 交互类型 | 适用error_type | 必须覆盖 |
+|---------|---------------|---------|
+| data_flow | component_failure, network_failure, data_corruption, timeout_failure | 至少覆盖2种 |
+| state_sync | component_failure, data_corruption, timeout_failure, configuration_error | 至少覆盖2种 |
+| event_trigger | component_failure, network_failure, timeout_failure | 至少覆盖2种 |
+| query_access | component_failure, network_failure, timeout_failure | 至少覆盖2种 |
+| config_linkage | component_failure, timeout_failure, configuration_error | 至少覆盖2种 |
+
+**策略**: 每个组件至少生成1个故障用例（移除"最多2个组件"限制）
 
 ---
 
-### 3.2 边缘异常用例（可选生成）
+### 3.2 边缘异常用例（推荐生成）
 
-**数量**: 0-1个  
+**数量**: 0-N个（补充覆盖剩余error_type）  
 **优先级**: P1  
-**异常类型**:
-- 配置异常
-- 权限异常
-- 资源异常
+**目标**: 补充3.1未覆盖的error_type种类
 
 ---
 
 ## 四、边界值生成规则
 
-### 4.1 最小边界用例（必须生成）
+边界值用例从交互描述的constraints字段提取边界类型，而非仅测试data_size的min/max。
+
+### 4.1 边界类型覆盖规则
+
+从interaction.yaml的data_constraints提取每种constraint.type，至少为以下类型生成1个边界用例：
+
+| constraint.type | 边界用例 | 是否必须 |
+|-----------------|---------|---------|
+| size | min(1) + max(10000) 数据量边界 | 必须 |
+| format | 非法格式/空格式边界 | 必须 |
+| range | min/max/0/负值(若允许) | 推荐 |
+| null | 空值/null值处理 | 必须 |
+| rate | 极低速率/极高速率 | 推荐 |
+
+**最低要求**: 至少2个边界值用例（1个size-min + 1个null或format非法值）
+
+### 4.2 最小数据量用例（必须生成）
 
 **数量**: 1个  
 **优先级**: P1  
-**数据量**: 最小值（1条）  
-**特点**: 验证最小数据量处理能力
+**数据量**: 最小值（1条或constraints.size.min）  
 
----
+### 4.3 最大数据量用例（必须生成）
 
-### 4.2 最大边界用例（可选生成）
-
-**数量**: 0-1个  
+**数量**: 1个  
 **优先级**: P1  
-**数据量**: 最大值（10000条）  
-**特点**: 验证最大数据量处理能力  
-**注意**: 最少3个用例场景下，只需生成1个最小边界用例即可
+**数据量**: 最大值（10000或constraints.size.max）
+
+### 4.4 空值/特殊值用例（必须生成）
+
+**数量**: 1个  
+**优先级**: P1  
+**类型**: null值、空字符串、0值、非法格式（从constraints.format提取）
 
 ---
 
@@ -136,20 +156,18 @@ Step 4: 检查总量，裁剪超量用例
 
 ### 5.2 裁剪策略
 
-**规则**: 当生成用例数超过max（10个）时，按优先级裁剪
+**规则**: 当生成用例数超出推荐范围时，按优先级裁剪
 
 **裁剪顺序**:
 ```
 优先保留P0 → 其次保留P1 → 最后裁剪P2
 ```
 
-**示例**:
-```
-生成15个用例，超过max=10，裁剪规则：
-- 保留所有P0用例（假设7个）
-- 保留部分P1用例（最多3个）
-- 裁剪所有P2用例（5个 → 0个）
-```
+**硬性保留底线**（不可裁剪）:
+- P0用例至少2个（1个normal_flow + 1个error_handling）
+- P1用例至少1个（boundary_values）
+- 3必选维度各至少1个用例
+- 每个组件至少1个用例涉及
 
 ---
 

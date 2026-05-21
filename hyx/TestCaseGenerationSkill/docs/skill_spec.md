@@ -53,8 +53,9 @@ Step 2: 交互解析    → 提取组件、流程、数据Schema（详见interac
 Step 3: 种子分析    → 提取交互模式、数据模式、验证模式（详见testcase_spec.md）
 Step 4: 用例生成    → 根据规则生成（详见generation_rules.md）
 Step 5: 质量检查    → 检查完整性、可执行性、验证性（详见quality_standards.md）
-Step 6: 覆盖分析    → 分析维度和组件覆盖（详见coverage_dimensions.md）
-Step 7: 结果输出    → 输出YAML用例、脚本、报告
+Step 6: 覆盖分析    → 计算维度/组件/error_type覆盖率（详见coverage_dimensions.md）
+Step 7: 覆盖门禁    → 不达标则补充生成循环（最多3次），达标则通过
+Step 8: 结果输出    → 输出YAML用例、脚本、报告
 ```
 
 ---

@@ -55,7 +55,20 @@
 ### 3.4 达标标准
 
 - 维度覆盖率 >= 100%（3个必选维度全部覆盖）
+- 组件覆盖率 >= 100%（每个组件至少1个用例涉及）
+- error_type覆盖率 >= 50%（适用error_type至少覆盖一半）
 - 总体覆盖率 >= 80%
+
+### 3.5 覆盖率门禁机制
+
+覆盖率不达标时，**必须触发补充生成循环**，而非仅标红报告：
+
+1. 首次生成后计算覆盖率
+2. 若维度覆盖率<100% → 补充缺失维度用例
+3. 若组件覆盖率<100% → 为未覆盖组件补充涉及该组件的用例
+4. 若error_type覆盖率<50% → 补充缺失error_type的异常用例
+5. 重新计算覆盖率，最多循环3次
+6. 3次后仍不达标 → 在generation_report中标记coverage_warning
 
 ---
 
@@ -88,11 +101,18 @@ coverage_analysis:
       covered: true
       case_count: 2
   
+  error_type_coverage:
+    applicable_types: [component_failure, network_failure, data_corruption, timeout_failure]
+    covered_types: [component_failure, network_failure]
+    coverage_ratio: 0.5     # 2/4
+    qualified: true         # >= 50%
+  
   dimension_coverage: 1.0     # 3/3必选维度覆盖
   component_coverage: 1.0     # 3/3组件覆盖
   overall_coverage: 1.0       # (1.0+1.0)/2
   
-  coverage_qualified: true    # overall >= 0.8
+  coverage_qualified: true    # all thresholds met
+  supplement_loops: 0         # 补生成循环次数
 ```
 
 ---
@@ -102,9 +122,12 @@ coverage_analysis:
 | 缺少维度 | 补充方式 |
 |----------|---------|
 | normal_flow | 从种子正常用例泛化生成 |
-| error_handling | 为每个组件生成故障场景 |
-| boundary_values | 根据data_limits生成最小/最大数据量用例 |
+| error_handling | 为当前交互类型适用的error_type生成异常场景 |
+| boundary_values | 从constraints提取边界类型，生成size/format/null/range边界用例 |
 | 组件未覆盖 | 检查该组件是否在flow中出现，增加涉及该组件的用例 |
+| error_type未覆盖 | 补充缺失error_type的异常用例，按零节适用交互类型规则 |
+
+补充生成后必须重新计算覆盖率（见3.5门禁机制）。
 
 ---
 
