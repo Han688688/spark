@@ -52,7 +52,10 @@ error_type仅用于error_handling类型用例的scenario.error_type字段。
 | timeout_failure | 超时/延迟异常 | 全类型 |
 | configuration_error | 配置错误/不兼容 | config_linkage, state_sync |
 
-扩展规则: 如果交互描述中包含特定组件名，error_type可细化为`{component}_failure`（如kafka_connection_failure、hdfs_write_failure），但必须以上述5种大类为基础派生。
+扩展规则: 如果交互描述中包含特定组件名或特定故障模式，error_type可从上述5种大类派生：
+- `{component}_failure` — 组件故障（如kafka_connection_failure、hdfs_write_failure）
+- `{component}_{failure_detail}` — 组件特定故障（如zookeeper_session_expired、consumer_processing_failure）
+- 派生error_type必须以5种大类为根（如kafka_connection_failure根属于component_failure）
 
 ---
 
@@ -217,7 +220,7 @@ assertions:
   
   - assertion_type: value
     description: 验证数据完整性
-    expected_value: 无数据丢失
+    expected_value: no_data_loss
 
 cleanup:
   - 清理HDFS测试数据
@@ -279,15 +282,15 @@ test_data:
 assertions:
   - assertion_type: exception
     description: 验证异常被捕获
-    expected_value: Kafka连接异常
+    expected_value: KafkaConnectionException
   
   - assertion_type: function
     description: 验证重试机制触发
-    expected_value: 重试3次
+    expected_value: 3
   
   - assertion_type: value
     description: 验证错误日志记录
-    expected_value: 错误日志包含Kafka故障信息
+    expected_value: kafka_failure_info_in_log
 
 cleanup:
   - 恢复Kafka正常运行
@@ -454,7 +457,7 @@ assertions:
 assertions:
   - assertion_type: function
     description: 验证重试机制是否触发
-    expected_value: 重试3次后成功
+    expected_value: retry_success_after_3_attempts
 ```
 
 ---
@@ -627,7 +630,7 @@ assertions:
   
   - assertion_type: value
     description: 验证聚合结果字段
-    expected_value: 包含category和avg_value字段
+    expected_value: contains_category_and_avg_value
   
   - assertion_type: count
     description: 验证Kafka发送消息数量
@@ -635,7 +638,7 @@ assertions:
   
   - assertion_type: value
     description: 验证Kafka消息格式
-    expected_value: JSON格式，包含key和value
+    expected_value: json_with_key_and_value
 
 cleanup:
   - 删除HDFS测试数据文件（hdfs://test/data/input/input_100.json）
@@ -667,6 +670,9 @@ cleanup:
 - `priority` 格式为P0/P1/P2
 - `step_number` 从1开始递增
 - `assertion_type` 为零节定义的6种之一（value/count/exception/function/state/file）
+- `case_name` 必须符合九节命名格式 `{scenario}_{case_type}_{variant}`
+- `expected_value` 必须符合七节类型规范（string/number/boolean），禁止中文混合描述
+- `error_type`（仅error_handling类型）必须为零节定义5种之一或其合法派生
 
 ---
 

@@ -85,7 +85,7 @@ example:
           expected_value: 100
         - assertion_type: "value"
           description: "验证数据完整性"
-          expected_value: "无数据丢失"
+          expected_value: "no_data_loss"
       cleanup:
         - "清理HDFS测试数据"
         - "清理Kafka测试topic"

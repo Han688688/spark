@@ -8,7 +8,7 @@ metadata:
   interaction_type: "state_sync"
 
 test_cases:
-  - case_name: "redis_elasticsearch_state_sync_normal"
+  - case_name: "redis_elasticsearch_normal_flow_basic"
     case_type: "normal_flow"
     priority: "P0"
     
@@ -65,7 +65,7 @@ test_cases:
       - "恢复Redis原始状态"
       - "恢复ES原始索引"
 
-  - case_name: "redis_elasticsearch_es_failure_sync_handling"
+  - case_name: "redis_elasticsearch_error_handling_es_failure"
     case_type: "error_handling"
     priority: "P0"
     
@@ -110,7 +110,7 @@ test_cases:
     cleanup:
       - "恢复Elasticsearch"
 
-  - case_name: "redis_elasticsearch_batch_state_sync_boundary"
+  - case_name: "redis_elasticsearch_boundary_values_batch_sync"
     case_type: "boundary_values"
     priority: "P1"
     
