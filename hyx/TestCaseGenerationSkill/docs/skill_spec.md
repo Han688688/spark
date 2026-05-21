@@ -40,8 +40,8 @@
 |------|------|---------|
 | 测试用例 | YAML | testcase_spec.md |
 | 自动化脚本 | Python | templates/script_template.md |
-| 覆盖分析 | YAML | coverage_dimensions.md |
-| 生成报告 | Markdown | - |
+| 覆盖分析 | YAML | templates/coverage_analysis_template.yaml |
+| 生成报告 | YAML | templates/generation_report_template.yaml |
 
 ---
 
@@ -69,19 +69,20 @@ Step 7: 结果输出    → 输出YAML用例、脚本、报告
 
 ---
 
-## 五、枚举值权威来源
+## 五、枚举值索引
 
-所有枚举值的唯一定义源：
+以下为本Skill涉及的枚举值汇总索引（便于快速查阅），具体定义和扩展规则请查看对应的权威子文档：
 
-| 枚举 | 定义源 | 值 |
-|------|--------|---|
-| case_type | testcase_spec.md | normal_flow / error_handling / boundary_values / performance / stability |
-| assertion_type | testcase_spec.md | value / count / exception / function / state / file |
-| priority | testcase_spec.md | P0 / P1 / P2 |
-| interaction_type | interaction_spec.md | data_flow / state_sync / event_trigger / query_access / config_linkage |
-| constraint.type | interaction_spec.md | size / format / range / rate / null / latency / throughput / resource / retry / guarantee / interval |
+| 枚举 | 权威定义源 | 值（概要） |
+|------|-----------|-----------|
+| case_type | testcase_spec.md零节 | 5种: normal_flow / error_handling / boundary_values / performance / stability |
+| assertion_type | testcase_spec.md零节 | 6种: value / count / exception / function / state / file |
+| priority | testcase_spec.md零节 | 3种: P0 / P1 / P2 |
+| error_type | testcase_spec.md零节 | 5种: component_failure / network_failure / data_corruption / timeout_failure / configuration_error |
+| interaction_type | interaction_spec.md | 5种: data_flow / state_sync / event_trigger / query_access / config_linkage |
+| constraint.type | interaction_spec.md | 11种: size / format / range / rate / null / latency / throughput / resource / retry / guarantee / interval |
 
-**注意**: 模板和种子用例的枚举值必须与此表一致。如有冲突，以此表为准。
+**冲突解决**: 如各文件枚举值有冲突，以testcase_spec.md零节（用例相关）和interaction_spec.md（交互相关）为权威定义源，本表仅为索引。
 
 ---
 

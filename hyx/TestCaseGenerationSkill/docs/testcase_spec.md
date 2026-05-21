@@ -40,6 +40,20 @@
 | P1 | 高优先级 | <= 30% |
 | P2 | 中优先级 | <= 20% |
 
+### error_type枚举（5种）
+
+error_type仅用于error_handling类型用例的scenario.error_type字段。
+
+| 值 | 说明 | 适用交互类型 |
+|-----|------|-------------|
+| component_failure | 组件故障/不可用 | 全类型 |
+| network_failure | 网络/连接异常 | data_flow, event_trigger, query_access |
+| data_corruption | 数据格式错误/损坏/缺失 | data_flow, state_sync |
+| timeout_failure | 超时/延迟异常 | 全类型 |
+| configuration_error | 配置错误/不兼容 | config_linkage, state_sync |
+
+扩展规则: 如果交互描述中包含特定组件名，error_type可细化为`{component}_failure`（如kafka_connection_failure、hdfs_write_failure），但必须以上述5种大类为基础派生。
+
 ---
 
 ## 一、测试用例定义
@@ -128,10 +142,10 @@ test_data:                   # ⭐⭐⭐⭐ 推荐填 - 测试数据
     count: number            # 数量（可选）
 
 assertions:                  # ⭐⭐⭐⭐⭐ 必填 - 验证点列表
-  - assertion_type: string   # 验证类型（见枚举定义）
+  - assertion_type: string   # 验证类型（见零节枚举定义）
     description: string      # 验证描述
-    expected_value: any      # 预期值
-    actual_value: any        # 实际值（可选，执行时填充）
+    expected_value: string | number | boolean  # 预期值（见七节类型规范）
+    actual_value: string | number | boolean    # 实际值（可选，执行时填充）
 
 cleanup:                     # ⭐⭐⭐⭐ 推荐填 - 清理步骤
   - string                   # 清理动作描述
@@ -475,7 +489,37 @@ assertions:
 
 ---
 
-## 七、测试用例命名规范
+## 七、expected_value类型规范
+
+expected_value字段允许3种类型，每种类型有明确使用场景：
+
+| 类型 | 格式 | 适用场景 | 示例 |
+|------|------|---------|------|
+| string | 描述性文本或标识符 | value/file/function/state断言 | "success"、"hdfs_path_exists"、"retry_count >= 3" |
+| number | 精确数值 | count断言、value断言（数值比较） | 100、1、10000 |
+| boolean | true/false | state/function断言（二元判断） | true、false |
+
+**类型选择规则**:
+- count断言 → 必须用number
+- exception断言 → 必须用string（异常类名或描述）
+- value断言 → number（数值验证）或string（文本验证）
+- function/state/file断言 → string（描述性预期）或boolean（二元判断）
+
+**禁止**: 不得使用混合类型（如"输入1条，输出1条"这种中文描述），应拆分为具体值。
+
+---
+
+## 八、种子用例与输出用例格式关系
+
+**种子用例**是高质量参考案例，可包含扩展字段（如metadata中的seed_id/quality_level、scenario中的flow列表、generalization_patterns等），用于帮助AI理解泛化方向。
+
+**输出用例**必须严格遵循本规范二节的字段定义和test_case_template.yaml的结构，不得包含种子特有的扩展字段（code/check_code/generalization_patterns/flow等）。
+
+**转换规则**: AI从种子提取验证模式、步骤模式、数据模式后，以精简模板格式输出最终用例。
+
+---
+
+## 九、测试用例命名规范
 
 ### 7.1 命名格式
 
@@ -496,9 +540,9 @@ case_name: spark_kafka_test_001     # 无类型信息
 
 ---
 
-## 八、测试用例完整示例
+## 十、测试用例完整示例
 
-### 8.1 正常流程用例完整示例
+### 10.1 正常流程用例完整示例
 
 ```yaml
 case_id: auto-202605201234-001
@@ -602,9 +646,9 @@ cleanup:
 
 ---
 
-## 九、测试用例验证规范
+## 十一、测试用例验证规范
 
-### 9.1 必填字段验证
+### 11.1 必填字段验证
 
 **验证规则**:
 - `case_id` 必填且唯一
@@ -616,7 +660,7 @@ cleanup:
 
 ---
 
-### 9.2 格式验证
+### 11.2 格式验证
 
 **验证规则**:
 - `case_id` 格式为`auto-{timestamp}-{sequence}`
@@ -626,7 +670,7 @@ cleanup:
 
 ---
 
-## 十、测试用例模板索引
+## 十二、测试用例模板索引
 
 **模板路径**: `templates/testcase_template.yaml`
 

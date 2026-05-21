@@ -359,6 +359,22 @@ flow:
   - action: setting_apply     # 包含setting关键词
 ```
 
+**多关键词冲突规则**:
+
+当一个flow中的action包含多种类型的关键词时，按以下优先级判定：
+
+1. **query_access**（最高）— 如果action主要目的是"查询获取数据"，即使涉及读写操作
+2. **event_trigger** — 如果action主要目的是"触发通知回调"，即使涉及数据传输
+3. **state_sync** — 如果action主要目的是"同步状态一致性"
+4. **config_linkage** — 如果action主要目的是"配置参数联动"
+5. **data_flow**（最低，兜底）— 如果action主要目的是"数据流转传输"
+
+判定方法：统计flow中各类型关键词出现次数，取出现次数最多的类型。若并列，按上述优先级取最高者。
+
+**零匹配fallback规则**:
+
+如果flow中的action不含任何类型关键词，默认判定为**data_flow**（最通用的交互类型）。
+
 ---
 
 ## 四、交互描述示例

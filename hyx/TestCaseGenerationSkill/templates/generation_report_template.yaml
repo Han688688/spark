@@ -1,0 +1,47 @@
+# 生成报告模板
+# 定位: 记录用例生成过程和结果摘要
+
+scenario_name: ""
+generated_time: ""
+
+input_summary:
+  interaction_type: ""
+  components: []
+  seed_case_count: 0
+
+output_summary:
+  total_case_count: 0
+  case_type_distribution:
+    normal_flow: 0
+    error_handling: 0
+    boundary_values: 0
+    performance: 0
+    stability: 0
+  priority_distribution:
+    P0: 0
+    P1: 0
+    P2: 0
+
+quality_score:
+  completeness: 0.0
+  executability: 0.0
+  verifiability: 0.0
+  overall: 0.0
+  qualified: false
+
+coverage_score:
+  dimension_coverage: 0.0
+  component_coverage: 0.0
+  overall_coverage: 0.0
+  qualified: false
+
+issues:
+  - field: ""
+    description: ""
+    severity: ""
+    suggestion: ""
+
+generalization_applied:
+  - strategy: ""
+    from_seed: ""
+    to_case: ""
