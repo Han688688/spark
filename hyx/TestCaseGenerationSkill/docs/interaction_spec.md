@@ -336,13 +336,41 @@ constraints:
 
 **5种交互类型**:
 
-| 类型 | 描述 | 特征关键词 | 示例场景 |
+| 类型 | 描述 | 专属关键词 | 示例场景 |
 |------|------|-----------|---------|
-| **data_flow** | 数据流传输 | send/receive/consume/produce/write/read | Spark-Kafka数据传输 |
-| **state_sync** | 状态同步 | sync/update/refresh/consistency | 配置中心-应用配置同步 |
+| **data_flow** | 数据流传输 | send/receive/consume/produce/write | Spark-Kafka数据传输 |
+| **state_sync** | 状态同步 | sync/refresh/consistency | 配置中心-应用配置同步 |
 | **event_trigger** | 事件触发 | trigger/event/notify/callback | Kafka消息触发Flink作业 |
 | **query_access** | 查询访问 | query/select/fetch/get/lookup | Hive查询HDFS数据 |
 | **config_linkage** | 配置联动 | config/setting/parameter/option | Kafka配置同步到HDFS |
+
+**关键词唯一归属映射表**（消除歧义）:
+
+| 关键词 | 唯一归属类型 | 说明 |
+|--------|-------------|------|
+| send | data_flow | 数据发送 |
+| receive | data_flow | 数据接收 |
+| consume | data_flow | 数据消费 |
+| produce | data_flow | 数据生产 |
+| write | data_flow | 数据写入 |
+| read | data_flow | 数据读取（属于流转而非查询） |
+| sync | state_sync | 状态同步 |
+| refresh | state_sync | 状态刷新 |
+| consistency | state_sync | 一致性验证 |
+| update | state_sync | 状态更新 |
+| trigger | event_trigger | 事件触发 |
+| event | event_trigger | 事件标识 |
+| notify | event_trigger | 通知回调 |
+| callback | event_trigger | 回调处理 |
+| query | query_access | 主动查询 |
+| select | query_access | 选择查询 |
+| fetch | query_access | 获取数据 |
+| get | query_access | 获取操作 |
+| lookup | query_access | 查找操作 |
+| config | config_linkage | 配置操作 |
+| setting | config_linkage | 设置操作 |
+| parameter | config_linkage | 参数配置 |
+| option | config_linkage | 选项配置 |
 
 ---
 
