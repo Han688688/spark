@@ -8,7 +8,8 @@ metadata:
   interaction_type: "data_flow"
 
 test_cases:
-  - case_name: spark_kafka_hdfs_normal_flow_basic
+  - case_id: "seed-001-1"
+    case_name: spark_kafka_hdfs_normal_flow_basic
     case_type: normal_flow
     priority: P0
 
@@ -68,7 +69,8 @@ test_cases:
       - 删除HDFS目录 /test/output
       - 删除Checkpoint目录 /test/checkpoint
 
-  - case_name: spark_kafka_hdfs_error_handling_kafka_failure
+  - case_id: "seed-001-2"
+    case_name: spark_kafka_hdfs_error_handling_kafka_failure
     case_type: error_handling
     priority: P0
 
@@ -116,7 +118,8 @@ test_cases:
     cleanup:
       - 恢复Kafka集群
 
-  - case_name: spark_kafka_hdfs_boundary_values_min_data
+  - case_id: "seed-001-3"
+    case_name: spark_kafka_hdfs_boundary_values_min_data
     case_type: boundary_values
     priority: P1
 
@@ -162,7 +165,8 @@ test_cases:
     cleanup:
       - 清理测试数据
 
-  - case_name: spark_kafka_hdfs_boundary_values_max_data
+  - case_id: "seed-001-4"
+    case_name: spark_kafka_hdfs_boundary_values_max_data
     case_type: boundary_values
     priority: P1
 

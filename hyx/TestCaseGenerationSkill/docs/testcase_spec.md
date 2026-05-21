@@ -37,7 +37,7 @@
 | 值 | 定义 | 占比目标 |
 |-----|------|---------|
 | P0 | 最高优先级 | >= 50% |
-| P1 | 高优先级 | <= 30% |
+| P1 | 高优先级 | ≤3个 |
 | P2 | 中优先级 | <= 20% |
 
 ### error_type枚举（5种）
@@ -122,6 +122,7 @@ scenario:                    # ⭐⭐⭐⭐ 推荐填 - 场景信息
   components: list           # 涉及组件
   interaction_type: string   # 交互类型
   description: string        # 场景描述
+  error_type: string         # ⭐⭐⭐⭐⭐ 仅error_handling必填 - 异常类型（见零节error_type枚举）
 
 preconditions:               # ⭐⭐⭐⭐ 推荐填 - 前置条件列表
   - string                   # 前置条件描述
@@ -140,9 +141,10 @@ test_data:                   # ⭐⭐⭐⭐ 推荐填 - 测试数据
     data_size: number        # 数据量
     data_format: string      # 数据格式
     specific_data: object    # 特定数据（可选）
-  expected_output:           # 预期输出
-    status: string           # 状态
-    count: number            # 数量（可选）
+  expected_output:           # 预期输出（标准字段如下，不得使用自定义字段名）
+    status: string           # 执行状态（success/error/partial）
+    count: number            # 输出数量（可选）
+    message_format: string   # 输出格式（可选，如JSON/CSV/Parquet）
 
 assertions:                  # ⭐⭐⭐⭐⭐ 必填 - 验证点列表
   - assertion_type: string   # 验证类型（见零节枚举定义）
@@ -211,7 +213,7 @@ test_data:
     data_format: JSON
   expected_output:
     status: success
-    message_count: 100
+    count: 100
 
 assertions:
   - assertion_type: count
@@ -325,7 +327,7 @@ test_data:
     data_format: JSON
   expected_output:
     status: success
-    message_count: 1
+    count: 1
 
 test_steps:
   - step_number: 1
@@ -514,9 +516,9 @@ expected_value字段允许3种类型，每种类型有明确使用场景：
 
 ## 八、种子用例与输出用例格式关系
 
-**种子用例**是高质量参考案例，可包含扩展字段（如metadata中的seed_id/quality_level、scenario中的flow列表、generalization_patterns等），用于帮助AI理解泛化方向。
+**种子用例**是高质量参考案例，可包含扩展字段（如metadata中的seed_id/quality_level、scenario中的flow列表、generalization_patterns等），用于帮助AI理解泛化方向。种子用例的case_id使用占位符格式（seed-{seed_id}-{序号}），输出时需替换为auto-{timestamp}-{sequence}格式。
 
-**输出用例**必须严格遵循本规范二节的字段定义和test_case_template.yaml的结构，不得包含种子特有的扩展字段（code/check_code/generalization_patterns/flow等）。
+**输出用例**必须严格遵循本规范二节的字段定义和test_case_template.yaml的结构，不得包含种子特有的扩展字段（code/check_code/generalization_patterns/flow等），但必须包含case_id（种子可省略，输出不可省略）。
 
 **转换规则**: AI从种子提取验证模式、步骤模式、数据模式后，以精简模板格式输出最终用例。
 
@@ -616,7 +618,7 @@ test_data:
   
   expected_output:
     status: success
-    message_count: 50
+    count: 50
     message_format: JSON
 
 assertions:

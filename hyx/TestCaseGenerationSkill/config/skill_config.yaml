@@ -69,7 +69,7 @@ output_config:
     
     - name: "generation_report.md"
       description: "生成报告"
-      format: "markdown"
+      format: "yaml"
 
 supported_components:
   any_component: true

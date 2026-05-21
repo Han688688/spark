@@ -16,10 +16,18 @@
 
 **优先级分布**:
 - **P0占比**: ≥50%（最少2个）
-- **P1占比**: ≤30%或数量≤3个（取宽松者）
+- **P1占比**: ≤3个
 - **P2占比**: ≤20%（最多2个）
 
-**说明**: 用例数量由场景复杂度（组件数、flow步骤数、异常类型数）决定。推荐5-10个，超出50需人工审核。
+**说明**: 用例数量由场景复杂度决定。推荐数量计算公式：
+
+```
+推荐数量 = 3 + max(组件数 - 2, 0) + floor(flow步骤数 / 3) + 适用error_type数
+```
+
+示例：3组件 + 6步骤flow + 4适用error_type → 3+1+2+4 = 10个用例。
+
+结果clamp到[3, 50]范围。简单场景3-5个，中等场景6-10个，复杂场景10+个。
 
 ---
 
@@ -30,9 +38,9 @@
 2. **异常处理用例**: 至少1个，推荐1-2个
 3. **边界值用例**: 至少1个，推荐1-2个
 
-**可选类型**（2种）:
-4. **性能测试用例**: 可选，0-1个
-5. **稳定性测试用例**: 可选，0-1个
+**可选类型**（2种，启用时生效）:
+4. **性能测试用例(performance)**: 0-1个，P1，验证吞吐量/延迟阈值
+5. **稳定性测试用例(stability)**: 0-1个，P2，验证长时间运行/资源稳定性
 
 ---
 
@@ -135,6 +143,63 @@
 **数量**: 1个  
 **优先级**: P1  
 **类型**: null值、空字符串、0值、非法格式（从constraints.format提取）
+
+---
+
+## 4.5 性能测试用例（可选，启用时生效）
+
+**数量**: 0-1个  
+**优先级**: P1  
+**case_type**: performance  
+**特点**: 大数据量/高并发场景，验证吞吐量和延迟阈值
+
+**生成规则**:
+- 数据量 = constraints.size.max × 10（或10000+条）
+- 断言重点: latency阈值、throughput阈值、资源占用上限
+- 从interaction.yaml的performance_constraints提取latency/throughput/resource阈值作为expected_value
+
+**示例**:
+```yaml
+case_type: performance
+priority: P1
+test_data:
+  input: {data_size: 10000, data_format: JSON}
+assertions:
+  - assertion_type: function
+    description: 验证处理延迟在阈值内
+    expected_value: processing_time_within_threshold
+  - assertion_type: value
+    description: 验证吞吐量达标
+    expected_value: throughput_qps_>=_1000
+```
+
+---
+
+## 4.6 稳定性测试用例（可选，启用时生效）
+
+**数量**: 0-1个  
+**优先级**: P2  
+**case_type**: stability  
+**特点**: 长时间运行/资源耗尽场景，验证系统稳定性和自恢复能力
+
+**生成规则**:
+- 模拟持续负载运行（1小时+或循环1000次）
+- 断言重点: 无内存泄漏、无资源耗尽、异常后自恢复
+- 从interaction.yaml的reliability_constraints提取retry/guarantee/interval参数
+
+**示例**:
+```yaml
+case_type: stability
+priority: P2
+test_steps:
+  - action: continuous_load_test
+    component: ComponentA
+    expected_result: 持续运行无崩溃
+assertions:
+  - assertion_type: function
+    description: 验证长时间运行稳定性
+    expected_value: no_memory_leak_and_auto_recovery
+```
 
 ---
 

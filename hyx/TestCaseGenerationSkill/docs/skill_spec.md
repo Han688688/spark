@@ -52,9 +52,11 @@ Step 1: 输入验证    → 验证格式和必填字段
 Step 2: 交互解析    → 提取组件、流程、数据Schema（详见interaction_spec.md）
 Step 3: 种子分析    → 提取交互模式、数据模式、验证模式（详见testcase_spec.md）
 Step 4: 用例生成    → 根据规则生成（详见generation_rules.md）
-Step 5: 质量检查    → 检查完整性、可执行性、验证性（详见quality_standards.md）
-Step 6: 覆盖分析    → 计算维度/组件/error_type覆盖率（详见coverage_dimensions.md）
-Step 7: 覆盖门禁    → 不达标则补充生成循环（最多3次），达标则通过
+Step 5: 质量检查    → 检查完整性/可执行性/验证性分数（详见quality_standards.md）
+Step 6: 覆盖分析    → 计算维度/组件/路径/error_type覆盖率（详见coverage_dimensions.md）
+Step 7: 联合门禁    → quality_score>=0.8 AND coverage全部达标
+                         若质量不达标→修复重生成
+                         若覆盖不达标→补充生成循环(最多3次)
 Step 8: 结果输出    → 输出YAML用例、脚本、报告
 ```
 

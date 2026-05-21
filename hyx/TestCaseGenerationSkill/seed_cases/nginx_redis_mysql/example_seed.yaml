@@ -8,7 +8,8 @@ metadata:
   interaction_type: "query_access"
 
 test_cases:
-  - case_name: "nginx_redis_mysql_normal_flow_basic"
+  - case_id: "seed-003-1"
+    case_name: "nginx_redis_mysql_normal_flow_basic"
     case_type: "normal_flow"
     priority: "P0"
     
@@ -76,7 +77,8 @@ test_cases:
       - "删除Redis测试缓存键"
       - "清理MySQL测试数据"
 
-  - case_name: "nginx_redis_mysql_error_handling_redis_failure"
+  - case_id: "seed-003-2"
+    case_name: "nginx_redis_mysql_error_handling_redis_failure"
     case_type: "error_handling"
     priority: "P0"
     
@@ -125,7 +127,8 @@ test_cases:
     cleanup:
       - "恢复Redis正常运行"
 
-  - case_name: "nginx_redis_mysql_boundary_values_cache_miss"
+  - case_id: "seed-003-3"
+    case_name: "nginx_redis_mysql_boundary_values_cache_miss"
     case_type: "boundary_values"
     priority: "P1"
     

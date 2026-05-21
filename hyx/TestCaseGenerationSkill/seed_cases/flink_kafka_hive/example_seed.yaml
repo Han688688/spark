@@ -7,7 +7,8 @@ metadata:
   interaction_type: "data_flow"
 
 test_cases:
-  - case_name: "flink_kafka_hive_normal_flow_basic"
+  - case_id: "seed-002-1"
+    case_name: "flink_kafka_hive_normal_flow_basic"
     case_type: "normal_flow"
     priority: "P0"
     
@@ -70,7 +71,8 @@ test_cases:
       - "清理Kafka测试topic消息"
       - "清理Hive测试表数据"
 
-  - case_name: "flink_kafka_hive_error_handling_hive_failure"
+  - case_id: "seed-002-2"
+    case_name: "flink_kafka_hive_error_handling_hive_failure"
     case_type: "error_handling"
     priority: "P0"
     
@@ -112,7 +114,8 @@ test_cases:
       - "恢复Hive正常运行"
       - "清理Flink异常日志"
 
-  - case_name: "flink_kafka_hive_boundary_values_min_data"
+  - case_id: "seed-002-3"
+    case_name: "flink_kafka_hive_boundary_values_min_data"
     case_type: "boundary_values"
     priority: "P1"
     

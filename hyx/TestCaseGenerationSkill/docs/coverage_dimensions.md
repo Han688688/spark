@@ -47,13 +47,21 @@
 
 ### 3.3 路径覆盖率
 
+**无分支场景**:
 ```
 路径覆盖率 = 已覆盖的flow.action数 / flow总action数
 ```
 
-正常流程用例的test_steps必须覆盖flow中的每个action。异常场景的衍生action（simulate_xxx/verify_xxx）不强制纳入路径覆盖计算。
+**含分支场景**（flow步骤含branch字段时）:
+```
+路径覆盖率 = 已覆盖的(branch × action)组合数 / 总(branch × action)组合数
+```
 
-**最低要求**: 路径覆盖率 >= 100%（正常流程用例需覆盖flow的所有action）。
+示例：2个branch(normal/error) × 3个action = 6种组合，覆盖4种 → 路径覆盖率=4/6=67%
+
+正常流程用例的test_steps必须覆盖flow中的每个action。异常场景的衍生action（simulate_xxx/verify_xxx）不强制纳入路径覆盖计算。含分支时每个branch至少1个用例覆盖（见generation_rules.md 7.7节）。
+
+**最低要求**: 无分支≥100%，含分支≥80%。
 
 ### 3.4 总体覆盖率与达标标准
 
@@ -65,8 +73,8 @@
 **达标标准**（全部必须满足）:
 - 维度覆盖率 >= 100%（3个必选维度全部覆盖）
 - 组件覆盖率 >= 100%（每个组件至少1个用例涉及）
-- 路径覆盖率 >= 100%（正常流程用例覆盖所有flow.action）
-- error_type覆盖率 >= 50%（适用error_type至少覆盖一半）
+- 路径覆盖率 >= 100%（无分支场景）或 >= 80%（含分支场景）
+- error_type覆盖率 >= ceil(适用error_type总数 × 50%)（即适用3种需覆盖2种，适用2种需覆盖1种）
 - 总体覆盖率 >= 80%
 
 ### 3.5 覆盖率门禁机制

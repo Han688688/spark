@@ -8,7 +8,8 @@ metadata:
   interaction_type: "config_linkage"
 
 test_cases:
-  - case_name: "zookeeper_kafka_normal_flow_basic"
+  - case_id: "seed-004-1"
+    case_name: "zookeeper_kafka_normal_flow_basic"
     case_type: "normal_flow"
     priority: "P0"
     
@@ -65,7 +66,8 @@ test_cases:
     cleanup:
       - "恢复ZooKeeper原始配置"
 
-  - case_name: "zookeeper_kafka_error_handling_zk_failure"
+  - case_id: "seed-004-2"
+    case_name: "zookeeper_kafka_error_handling_zk_failure"
     case_type: "error_handling"
     priority: "P0"
     
@@ -105,7 +107,8 @@ test_cases:
     cleanup:
       - "恢复ZooKeeper连接"
 
-  - case_name: "zookeeper_kafka_boundary_values_batch_update"
+  - case_id: "seed-004-3"
+    case_name: "zookeeper_kafka_boundary_values_batch_update"
     case_type: "boundary_values"
     priority: "P1"
     
