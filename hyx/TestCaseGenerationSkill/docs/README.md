@@ -39,6 +39,8 @@ TestCaseGenerationSkill/
 │   ├── interaction_template.yaml
 │   ├── test_case_template.yaml
 │   ├── script_template.md    # pytest脚本模板
+│   ├── coverage_analysis_template.yaml
+│   └── generation_report_template.yaml
 │
 ├── seed_cases/               # ⭐ 种子用例示例（6个场景，5种交互类型全覆盖）
 │   ├── spark_kafka_hdfs/     # data_flow（大数据管道）
