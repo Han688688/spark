@@ -15,7 +15,7 @@
 - **推荐数量**: 5-7个用例
 
 **优先级分布**:
-- **P0占比**: ≥50%（至少3个）
+- **P0占比**: ≥50%（最少2个）
 - **P1占比**: ≤30%（最多3个）
 - **P2占比**: ≤20%（最多2个）
 
@@ -248,7 +248,7 @@ AI从种子用例到新生成用例的变换规则。以下5条是必须执行�
 
 **算法**: 将种子中的组件名替换为交互描述中的其他组件。
 
-**规则**: 仅在交互描述包含多个同类组件时使用。例如Spark读HDFS → Spark读Hive。
+**规则**: 仅在交互描述包含多个同类组件时使用。例如Spark读HDFS → Spark读Hive，将read_from_hdfs → read_from_hive。
 
 ### 7.5 验证点映射
 
@@ -261,7 +261,20 @@ count → count（数据量变化时调整expected_value）
 value → value（替换具体预期值）
 exception → exception（异常用例必选）
 function → function（验证功能执行）
+state → state（验证状态变化）
+file → file（验证文件存在/内容）
 ```
+
+### 7.6 Action映射规则
+
+**正常用例**: test_steps中的action应与交互描述flow.actions对应，可直接引用或基于flow.action泛化（如read_from_hdfs → read_from_hive）。
+
+**异常用例**: 允许使用衍生action，不强制匹配flow.actions。衍生action命名规则：
+- `simulate_{component}_failure` — 模拟组件故障
+- `verify_{mechanism}` — 验证机制（如verify_retry、verify_recovery）
+- `trigger_{action}_with_error` — 带错误触发
+
+**示例**: flow.actions=[read_from_hdfs, process_data, write_to_hdfs]，异常用例允许action=[simulate_hdfs_failure, verify_retry]。
 
 ---
 

@@ -7,173 +7,163 @@ metadata:
   components: ["RabbitMQ", "SpringBoot"]
   interaction_type: "event_trigger"
 
-# ========== 种子1: 正常流程 ==========
+test_cases:
+  - case_name: "rabbitmq_springboot_event_trigger_normal"
+    case_type: "normal_flow"
+    priority: "P0"
+    
+    scenario:
+      name: "rabbitmq_springboot_event_trigger"
+      components: ["RabbitMQ", "SpringBoot"]
+      interaction_type: "event_trigger"
+      description: "RabbitMQ收到订单创建事件，触发SpringBoot订单处理服务"
+    
+    preconditions:
+      - "RabbitMQ消息队列正常运行，exchange和queue已创建"
+      - "SpringBoot微服务正常运行，已注册为消费者"
+    
+    test_steps:
+      - step_number: 1
+        action: "publish_order_event"
+        component: "RabbitMQ"
+        input: "PUBLISH order.created事件到exchange"
+        expected_result: "事件消息成功发布到RabbitMQ"
+      
+      - step_number: 2
+        action: "route_to_queue"
+        component: "RabbitMQ"
+        expected_result: "消息路由到order.processing队列"
+      
+      - step_number: 3
+        action: "consume_event"
+        component: "SpringBoot"
+        expected_result: "SpringBoot消费者接收事件消息"
+      
+      - step_number: 4
+        action: "process_order"
+        component: "SpringBoot"
+        expected_result: "订单处理服务执行业务逻辑"
+      
+      - step_number: 5
+        action: "acknowledge_message"
+        component: "SpringBoot"
+        expected_result: "消息ACK确认，从队列移除"
+    
+    test_data:
+      input:
+        data_size: 1
+        data_format: "JSON"
+      expected_output:
+        status: "success"
+        order_processed: true
+    
+    assertions:
+      - assertion_type: "count"
+        description: "验证消息投递和消费数量"
+        expected_value: "发布1条=消费1条"
+      - assertion_type: "function"
+        description: "验证订单处理业务逻辑执行"
+        expected_value: "订单状态变为processed"
+      - assertion_type: "state"
+        description: "验证消息ACK后队列状态"
+        expected_value: "队列中无残留消息"
+    
+    cleanup:
+      - "清空RabbitMQ测试队列"
+      - "清理SpringBoot测试订单数据"
 
-case_001:
-  case_name: "rabbitmq_springboot_event_trigger_normal"
-  case_type: "normal_flow"
-  priority: "P0"
-  
-  scenario:
-    name: "rabbitmq_springboot_event_trigger"
-    components: ["RabbitMQ", "SpringBoot"]
-    interaction_type: "event_trigger"
-    description: "RabbitMQ收到订单创建事件，触发SpringBoot订单处理服务"
-  
-  preconditions:
-    - "RabbitMQ消息队列正常运行，exchange和queue已创建"
-    - "SpringBoot微服务正常运行，已注册为消费者"
-  
-  test_steps:
-    - step_number: 1
-      action: "publish_order_event"
-      component: "RabbitMQ"
-      input: "PUBLISH order.created事件到exchange"
-      expected_result: "事件消息成功发布到RabbitMQ"
+  - case_name: "rabbitmq_springboot_consumer_failure_handling"
+    case_type: "error_handling"
+    priority: "P0"
     
-    - step_number: 2
-      action: "route_to_queue"
-      component: "RabbitMQ"
-      expected_result: "消息路由到order.processing队列"
+    scenario:
+      name: "rabbitmq_springboot_event_trigger"
+      error_type: "consumer_processing_failure"
+      description: "SpringBoot消费者处理失败时，消息重试和死信队列机制"
     
-    - step_number: 3
-      action: "consume_event"
-      component: "SpringBoot"
-      expected_result: "SpringBoot消费者接收事件消息"
+    preconditions:
+      - "RabbitMQ正常运行，配置死信队列"
+      - "SpringBoot正常运行，模拟处理失败"
     
-    - step_number: 4
-      action: "process_order"
-      component: "SpringBoot"
-      expected_result: "订单处理服务执行业务逻辑"
+    test_steps:
+      - step_number: 1
+        action: "publish_order_event"
+        component: "RabbitMQ"
+        expected_result: "消息发布成功"
+      
+      - step_number: 2
+        action: "consume_and_fail"
+        component: "SpringBoot"
+        expected_result: "消费者接收消息但处理失败，NACK拒绝"
+      
+      - step_number: 3
+        action: "retry_delivery"
+        component: "RabbitMQ"
+        expected_result: "消息重试投递（最多3次）"
+      
+      - step_number: 4
+        action: "route_to_dead_letter_queue"
+        component: "RabbitMQ"
+        expected_result: "重试耗尽后，消息进入死信队列"
     
-    - step_number: 5
-      action: "acknowledge_message"
-      component: "SpringBoot"
-      expected_result: "消息ACK确认，从队列移除"
-  
-  test_data:
-    input:
-      data_size: 1
-      data_format: "JSON"
-    expected_output:
-      status: "success"
-      order_processed: true
-  
-  assertions:
-    - assertion_type: "count"
-      description: "验证消息投递和消费数量"
-      expected_value: "发布1条=消费1条"
-    - assertion_type: "function"
-      description: "验证订单处理业务逻辑执行"
-      expected_value: "订单状态变为processed"
-    - assertion_type: "state"
-      description: "验证消息ACK后队列状态"
-      expected_value: "队列中无残留消息"
-  
-  cleanup:
-    - "清空RabbitMQ测试队列"
-    - "清理SpringBoot测试订单数据"
+    assertions:
+      - assertion_type: "exception"
+        description: "验证处理异常被捕获"
+        expected_value: "OrderProcessingException"
+      - assertion_type: "function"
+        description: "验证重试和死信机制"
+        expected_value: "重试3次后进入死信队列"
+      - assertion_type: "state"
+        description: "验证死信队列状态"
+        expected_value: "死信队列包含1条消息"
+    
+    cleanup:
+      - "清空所有队列"
+      - "恢复SpringBoot正常处理"
 
-# ========== 种子2: 异常处理 ==========
-
-case_002:
-  case_name: "rabbitmq_springboot_consumer_failure_handling"
-  case_type: "error_handling"
-  priority: "P0"
-  
-  scenario:
-    name: "rabbitmq_springboot_event_trigger"
-    error_type: "consumer_processing_failure"
-    description: "SpringBoot消费者处理失败时，消息重试和死信队列机制"
-  
-  preconditions:
-    - "RabbitMQ正常运行，配置死信队列"
-    - "SpringBoot正常运行，模拟处理失败"
-  
-  test_steps:
-    - step_number: 1
-      action: "publish_order_event"
-      component: "RabbitMQ"
-      expected_result: "消息发布成功"
+  - case_name: "rabbitmq_springboot_high_volume_events_boundary"
+    case_type: "boundary_values"
+    priority: "P1"
     
-    - step_number: 2
-      action: "consume_and_fail"
-      component: "SpringBoot"
-      expected_result: "消费者接收消息但处理失败，NACK拒绝"
+    scenario:
+      name: "rabbitmq_springboot_event_trigger"
+      description: "高并发事件触发（1000条消息）的边界场景"
     
-    - step_number: 3
-      action: "retry_delivery"
-      component: "RabbitMQ"
-      expected_result: "消息重试投递（最多3次）"
+    preconditions:
+      - "RabbitMQ正常运行"
+      - "SpringBoot正常运行，消费者池充足"
     
-    - step_number: 4
-      action: "route_to_dead_letter_queue"
-      component: "RabbitMQ"
-      expected_result: "重试耗尽后，消息进入死信队列"
-  
-  assertions:
-    - assertion_type: "exception"
-      description: "验证处理异常被捕获"
-      expected_value: "OrderProcessingException"
-    - assertion_type: "function"
-      description: "验证重试和死信机制"
-      expected_value: "重试3次后进入死信队列"
-    - assertion_type: "state"
-      description: "验证死信队列状态"
-      expected_value: "死信队列包含1条消息"
-  
-  cleanup:
-    - "清空所有队列"
-    - "恢复SpringBoot正常处理"
-
-# ========== 种子3: 边界值 ==========
-
-case_003:
-  case_name: "rabbitmq_springboot_high_volume_events_boundary"
-  case_type: "boundary_values"
-  priority: "P1"
-  
-  scenario:
-    name: "rabbitmq_springboot_event_trigger"
-    description: "高并发事件触发（1000条消息）的边界场景"
-  
-  preconditions:
-    - "RabbitMQ正常运行"
-    - "SpringBoot正常运行，消费者池充足"
-  
-  test_steps:
-    - step_number: 1
-      action: "batch_publish_events"
-      component: "RabbitMQ"
-      expected_result: "批量发布1000条订单事件"
+    test_steps:
+      - step_number: 1
+        action: "batch_publish_events"
+        component: "RabbitMQ"
+        expected_result: "批量发布1000条订单事件"
+      
+      - step_number: 2
+        action: "batch_consume_and_process"
+        component: "SpringBoot"
+        expected_result: "消费者并发处理1000条消息"
+      
+      - step_number: 3
+        action: "verify_all_consumed"
+        component: "RabbitMQ"
+        expected_result: "所有消息被ACK确认"
     
-    - step_number: 2
-      action: "batch_consume_and_process"
-      component: "SpringBoot"
-      expected_result: "消费者并发处理1000条消息"
+    test_data:
+      input:
+        data_size: 1000
+        data_format: "JSON"
+      expected_output:
+        status: "success"
+        all_consumed: true
     
-    - step_number: 3
-      action: "verify_all_consumed"
-      component: "RabbitMQ"
-      expected_result: "所有消息被ACK确认"
-  
-  test_data:
-    input:
-      data_size: 1000
-      data_format: "JSON"
-    expected_output:
-      status: "success"
-      all_consumed: true
-  
-  assertions:
-    - assertion_type: "count"
-      description: "验证高并发消息全部消费"
-      expected_value: 1000
-  
-  cleanup:
-    - "清空RabbitMQ所有测试队列"
-
-# ========== 泛化模式 ==========
+    assertions:
+      - assertion_type: "count"
+        description: "验证高并发消息全部消费"
+        expected_value: 1000
+    
+    cleanup:
+      - "清空RabbitMQ所有测试队列"
 
 generalization_patterns:
   data_patterns:

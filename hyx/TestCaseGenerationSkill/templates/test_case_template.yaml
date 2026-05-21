@@ -5,87 +5,87 @@ metadata:
   template_version: "3.0"
   template_name: "测试用例模板"
 
-test_case:
-  case_id: "auto-{timestamp}-{index}"
-  case_name: ""
-  case_type: ""  # 枚举: normal_flow / error_handling / boundary_values / performance / stability
-  priority: ""   # 枚举: P0 / P1 / P2
-  generated_time: ""
-  seed_scenario: ""
+test_cases:
+  - case_id: "auto-{timestamp}-{index}"
+    case_name: ""
+    case_type: ""  # 枚举: normal_flow / error_handling / boundary_values / performance / stability
+    priority: ""   # 枚举: P0 / P1 / P2
+    generated_time: ""
+    seed_scenario: ""
 
-  scenario:
-    name: ""
-    components: []
-    interaction_type: ""  # 枚举: data_flow / state_sync / event_trigger / query_access / config_linkage
-    description: ""
-    error_type: ""  # 仅error_handling类型需要
-
-  preconditions:
-    - ""
-
-  test_steps:
-    - step_number: 1
-      action: ""
-      component: ""
-      input: ""
-      expected_result: ""
-      timeout: 0
-      retry_count: 0
-
-  test_data:
-    input:
-      data_size: 0
-      data_format: ""  # 枚举: JSON / CSV / Avro / Parquet
-      specific_data: {}
-    expected_output:
-      status: ""
-      count: 0
-
-  assertions:
-    - assertion_type: ""  # 枚举: value / count / exception / function / state / file
-      description: ""
-      expected_value: ""
-
-  cleanup:
-    - ""
-
-example:
-  test_case:
-    case_id: "auto-20260520-001"
-    case_name: "spark_kafka_hdfs_normal_flow_basic"
-    case_type: "normal_flow"
-    priority: "P0"
     scenario:
-      name: "spark_kafka_hdfs_data_flow"
-      components: ["Spark", "Kafka", "HDFS"]
-      interaction_type: "data_flow"
-      description: "Spark读取HDFS数据，处理后发送到Kafka"
+      name: ""
+      components: []
+      interaction_type: ""  # 枚举: data_flow / state_sync / event_trigger / query_access / config_linkage
+      description: ""
+      error_type: ""  # 仅error_handling类型需要
+
     preconditions:
-      - "HDFS集群正常运行"
-      - "Kafka集群正常运行"
+      - ""
+
     test_steps:
       - step_number: 1
-        action: "read_from_hdfs"
-        component: "Spark"
-        expected_result: "DataFrame成功创建"
-      - step_number: 2
-        action: "process_data"
-        component: "Spark"
-        expected_result: "数据处理成功"
-      - step_number: 3
-        action: "produce_message"
-        component: "Kafka"
-        expected_result: "消息发送成功"
+        action: ""
+        component: ""
+        input: ""
+        expected_result: ""
+        timeout: 0
+        retry_count: 0
+
     test_data:
-      input: {data_size: 100, data_format: "JSON"}
-      expected_output: {status: "success", count: 100}
+      input:
+        data_size: 0
+        data_format: ""  # 枚举: JSON / CSV / Avro / Parquet
+        specific_data: {}
+      expected_output:
+        status: ""
+        count: 0
+
     assertions:
-      - assertion_type: "count"
-        description: "验证Kafka消息数量"
-        expected_value: 100
-      - assertion_type: "value"
-        description: "验证数据完整性"
-        expected_value: "无数据丢失"
+      - assertion_type: ""  # 枚举: value / count / exception / function / state / file
+        description: ""
+        expected_value: ""
+
     cleanup:
-      - "清理HDFS测试数据"
-      - "清理Kafka测试topic"
+      - ""
+
+example:
+  test_cases:
+    - case_id: "auto-20260520-001"
+      case_name: "spark_kafka_hdfs_normal_flow_basic"
+      case_type: "normal_flow"
+      priority: "P0"
+      scenario:
+        name: "spark_kafka_hdfs_data_flow"
+        components: ["Spark", "Kafka", "HDFS"]
+        interaction_type: "data_flow"
+        description: "Spark读取HDFS数据，处理后发送到Kafka"
+      preconditions:
+        - "HDFS集群正常运行"
+        - "Kafka集群正常运行"
+      test_steps:
+        - step_number: 1
+          action: "read_from_hdfs"
+          component: "Spark"
+          expected_result: "DataFrame成功创建"
+        - step_number: 2
+          action: "process_data"
+          component: "Spark"
+          expected_result: "数据处理成功"
+        - step_number: 3
+          action: "produce_message"
+          component: "Kafka"
+          expected_result: "消息发送成功"
+      test_data:
+        input: {data_size: 100, data_format: "JSON"}
+        expected_output: {status: "success", count: 100}
+      assertions:
+        - assertion_type: "count"
+          description: "验证Kafka消息数量"
+          expected_value: 100
+        - assertion_type: "value"
+          description: "验证数据完整性"
+          expected_value: "无数据丢失"
+      cleanup:
+        - "清理HDFS测试数据"
+        - "清理Kafka测试topic"

@@ -41,26 +41,16 @@ coverage_dimensions:
       min_cases: 1
       description: "最小值、最大值、空值、特殊值"
   
-  # 可选维度（根据场景选择）
+  # 可选维度（根据场景选择，必须与testcase_spec.md零节case_type枚举一致）
   optional:
     - dimension: "performance"
       name: "性能场景"
       description: "大数据量、高并发"
       enabled: false
     
-    - dimension: "concurrency"
-      name: "并发场景"
-      description: "多线程、多进程并发访问"
-      enabled: false
-    
-    - dimension: "security"
-      name: "安全场景"
-      description: "权限、认证、加密"
-      enabled: false
-    
-    - dimension: "compatibility"
-      name: "兼容性"
-      description: "版本兼容、配置兼容"
+    - dimension: "stability"
+      name: "稳定性场景"
+      description: "长时间运行、资源耗尽"
       enabled: false
 
 # ========== 数据限制 ==========

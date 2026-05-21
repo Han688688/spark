@@ -443,7 +443,7 @@ constraints:
     - name: input_size
       type: size
       min: 1
-      max: 1000000
+      max: 10000
     
     - name: input_format
       type: format

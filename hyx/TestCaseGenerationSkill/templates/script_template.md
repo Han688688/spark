@@ -202,13 +202,16 @@ if __name__ == "__main__":
 
 ## 五、断言规范
 
-| 断言类型 | pytest语法 | 适用场景 |
-|----------|-----------|---------|
-| 值断言 | `assert value == expected` | 验证字段值 |
-| 数量断言 | `assert count == expected` | 验证数量 |
-| 异常断言 | `with pytest.raises(Exception)` | 验证异常 |
-| 非空断言 | `assert result is not None` | 验证存在性 |
-| 包含断言 | `assert item in collection` | 验证包含 |
+断言类型映射（权威来源: testcase_spec.md零节6种assertion_type）:
+
+| assertion_type | pytest语法 | 适用场景 |
+|----------------|-----------|---------|
+| value | `assert value == expected` | 验证字段值 |
+| count | `assert count == expected` | 验证数量 |
+| exception | `with pytest.raises(Exception)` | 验证异常 |
+| function | `assert callable_executed()` 或 `assert result is not None` | 验证功能执行 |
+| state | `assert obj.state == expected` | 验证状态变化 |
+| file | `assert os.path.exists(path)` 或 `assert file_content == expected` | 验证文件存在/内容 |
 
 ---
 

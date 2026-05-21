@@ -16,14 +16,14 @@
 
 ---
 
-## 二、可选维度（4个）
+## 二、可选维度（2个）
+
+> **权威来源**: testcase_spec.md零节case_type枚举。可选维度必须与case_type枚举一致，不得自行扩展。
 
 | 维度 | case_type | 说明 | 默认启用 |
 |------|-----------|------|---------|
 | 性能 | performance | 大数据量/高并发 | false |
 | 稳定性 | stability | 长时间运行/资源耗尽 | false |
-| 并发 | concurrency | 多线程/多进程竞争 | false |
-| 安全 | security | 权限/认证/加密 | false |
 
 ---
 

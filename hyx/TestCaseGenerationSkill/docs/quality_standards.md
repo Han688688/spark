@@ -74,9 +74,10 @@
 - component存在于交互描述的components列表中
 
 **可执行性检查项**:
-1. 步骤action是否在交互描述flow的action列表中存在
-2. 步骤component是否在交互描述components列表中存在
-3. 步骤是否包含action和expected_result两个必填子字段
+1. 正常用例步骤action是否在交互描述flow的action列表中存在或可合理泛化
+2. 异常用例步骤action是否遵循衍生action命名规则（simulate_xxx/verify_xxx）
+3. 步骤component是否在交互描述components列表中存在
+4. 步骤是否包含action和expected_result两个必填子字段
 
 **可执行性分数计算**:
 ```
@@ -110,14 +111,16 @@
 
 ### 4.2 验证点类型
 
-**有效验证类型**（4种）:
+**有效验证类型**（6种，权威定义见testcase_spec.md零节）:
 1. `value` - 值验证
 2. `count` - 数量验证
 3. `exception` - 异常验证
 4. `function` - 功能验证
+5. `state` - 状态验证
+6. `file` - 文件验证
 
 **检查规则**:
-- assertion_type必须是上述4种之一
+- assertion_type必须是上述6种之一
 - 每个验证点包含description和expected_value
 
 ---

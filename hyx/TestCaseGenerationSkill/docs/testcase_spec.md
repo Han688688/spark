@@ -455,7 +455,7 @@ assertions:
 |--------|------|---------|---------|
 | `P0` | 最高优先级，必须测试 | 正常流程、异常处理 | ≥50% |
 | `P1` | 高优先级，推荐测试 | 边界值、性能测试 | ≤30% |
-| `P2` | 中优先级，可选测试 | 兼容性、稳定性测试 | ≤20% |
+| `P2` | 中优先级，可选测试 | 稳定性测试 | ≤20% |
 
 ---
 
@@ -609,7 +609,7 @@ cleanup:
 **验证规则**:
 - `case_id` 必填且唯一
 - `case_name` 必填且长度≥10字符
-- `case_type` 必填且为normal_flow/error_handling/boundary_values之一
+- `case_type` 必填且为零节定义的5种之一（normal_flow/error_handling/boundary_values/performance/stability）
 - `priority` 必填且为P0/P1/P2之一
 - `test_steps` 必填且长度≥1
 - `assertions` 必填且长度≥1

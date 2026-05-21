@@ -57,7 +57,7 @@ constraints:
 **最低要求**: 1个正常用例(P0) + 1个异常用例(P0推荐)
 
 ```yaml
-seed_cases:
+test_cases:
   - case_name: spark_kafka_normal_flow_basic
     case_type: normal_flow
     priority: P0

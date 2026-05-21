@@ -8,237 +8,224 @@ metadata:
   interaction_type: "data_flow"
   quality_level: "high"
 
-# ========== 种子用例1: 正常流程 ==========
-
-case_001:
-  case_name: "正常数据流处理"
-  case_type: "normal_flow"
-  priority: "P0"
-  
-  scenario:
-    description: "Kafka消息经Spark处理后写入HDFS"
-    flow:
-      - "Kafka.Producer发送消息"
-      - "Spark.Streaming消费处理"
-      - "HDFS写入Parquet文件"
-  
-  preconditions:
-    - "Kafka集群正常运行（3节点）"
-    - "Spark应用已启动"
-    - "HDFS目标目录已创建：/test/output"
-  
-  test_steps:
-    - step_number: 1
-      action: "Kafka发送100条JSON消息"
-      component: "Kafka"
-      code: |
-        producer.send(topic, json_message)
-        producer.flush()
+test_cases:
+  - case_name: "正常数据流处理"
+    case_type: "normal_flow"
+    priority: "P0"
+    
+    scenario:
+      description: "Kafka消息经Spark处理后写入HDFS"
+      flow:
+        - "Kafka.Producer发送消息"
+        - "Spark.Streaming消费处理"
+        - "HDFS写入Parquet文件"
+    
+    preconditions:
+      - "Kafka集群正常运行（3节点）"
+      - "Spark应用已启动"
+      - "HDFS目标目录已创建：/test/output"
+    
+    test_steps:
+      - step_number: 1
+        action: "Kafka发送100条JSON消息"
+        component: "Kafka"
+        code: |
+          producer.send(topic, json_message)
+          producer.flush()
+        input:
+          topic: "test_topic"
+          message_count: 100
+          message_format: '{"id":1,"name":"test","value":100}'
+        expected_result: "消息成功发送，offset增加100"
+      
+      - step_number: 2
+        action: "Spark消费并处理消息"
+        component: "Spark"
+        code: |
+          spark.readStream
+            .format("kafka")
+            .option("kafka.bootstrap.servers", servers)
+            .load()
+            .select(from_json(col("value"), schema))
+        input:
+          kafka_servers: "localhost:9092"
+          topic: "test_topic"
+        expected_result: "成功消费100条消息，DataFrame包含100行"
+      
+      - step_number: 3
+        action: "写入HDFS Parquet文件"
+        component: "HDFS"
+        code: |
+          df.writeStream
+            .format("parquet")
+            .option("path", "/test/output")
+            .option("checkpointLocation", "/test/checkpoint")
+            .start()
+        input:
+          output_path: "/test/output"
+          format: "parquet"
+        expected_result: "HDFS文件创建成功，包含100条记录"
+    
+    test_data:
       input:
-        topic: "test_topic"
-        message_count: 100
-        message_format: '{"id":1,"name":"test","value":100}'
-      expected_result: "消息成功发送，offset增加100"
+        kafka_messages: 100
+        message_schema: '{"id":int,"name":string,"value":int}'
+      expected_output:
+        hdfs_records: 100
+        file_format: "parquet"
     
-    - step_number: 2
-      action: "Spark消费并处理消息"
-      component: "Spark"
-      code: |
-        spark.readStream
-          .format("kafka")
-          .option("kafka.bootstrap.servers", servers)
-          .load()
-          .select(from_json(col("value"), schema))
-      input:
-        kafka_servers: "localhost:9092"
-        topic: "test_topic"
-      expected_result: "成功消费100条消息，DataFrame包含100行"
+    assertions:
+      - assertion_type: "value"
+        description: "验证Kafka消息发送成功"
+        check_code: |
+          kafka_offset = consumer.endOffsets([topic_partition])
+          assert kafka_offset == 100
+        expected_value: "100"
+      
+      - assertion_type: "value"
+        description: "验证Spark处理数量"
+        check_code: |
+          processed_count = df.count()
+          assert processed_count == 100
+        expected_value: "100"
+      
+      - assertion_type: "file"
+        description: "验证HDFS文件存在"
+        check_code: |
+          assert fs.exists("/test/output")
+          file_status = fs.getFileStatus("/test/output")
+          assert file_status.getLen() > 0
+        expected_value: "文件存在且非空"
     
-    - step_number: 3
-      action: "写入HDFS Parquet文件"
-      component: "HDFS"
-      code: |
-        df.writeStream
-          .format("parquet")
-          .option("path", "/test/output")
-          .option("checkpointLocation", "/test/checkpoint")
-          .start()
-      input:
-        output_path: "/test/output"
-        format: "parquet"
-      expected_result: "HDFS文件创建成功，包含100条记录"
-  
-  test_data:
-    input:
-      kafka_messages: 100
-      message_schema: '{"id":int,"name":string,"value":int}'
-    expected_output:
-      hdfs_records: 100
-      file_format: "parquet"
-  
-  assertions:
-    - assertion_type: "value"
-      description: "验证Kafka消息发送成功"
-      check_code: |
-        kafka_offset = consumer.endOffsets([topic_partition])
-        assert kafka_offset == 100
-      expected_value: "100"
-    
-    - assertion_type: "value"
-      description: "验证Spark处理数量"
-      check_code: |
-        processed_count = df.count()
-        assert processed_count == 100
-      expected_value: "100"
-    
-    - assertion_type: "file"
-      description: "验证HDFS文件存在"
-      check_code: |
-        assert fs.exists("/test/output")
-        file_status = fs.getFileStatus("/test/output")
-        assert file_status.getLen() > 0
-      expected_value: "文件存在且非空"
-  
-  cleanup:
-    - "删除Kafka Topic：test_topic"
-    - "删除HDFS目录：/test/output"
-    - "删除Checkpoint目录：/test/checkpoint"
+    cleanup:
+      - "删除Kafka Topic：test_topic"
+      - "删除HDFS目录：/test/output"
+      - "删除Checkpoint目录：/test/checkpoint"
 
-# ========== 种子用例2: 异常处理 ==========
+  - case_name: "Kafka连接失败异常处理"
+    case_type: "error_handling"
+    priority: "P0"
+    
+    scenario:
+      description: "Kafka不可用时Spark的重试和告警机制"
+      error_type: "component_failure"
+    
+    preconditions:
+      - "Kafka集群停止运行"
+      - "Spark应用已启动"
+    
+    test_steps:
+      - step_number: 1
+        action: "模拟Kafka故障"
+        component: "Kafka"
+        code: |
+          kafka_cluster.stop()
+        expected_result: "Kafka集群停止"
+      
+      - step_number: 2
+        action: "Spark尝试连接Kafka"
+        component: "Spark"
+        code: |
+          spark.readStream.format("kafka").load()
+        expected_result: "抛出连接异常"
+      
+      - step_number: 3
+        action: "验证重试机制"
+        component: "Spark"
+        code: |
+          # Spark自动重试连接
+          assert retry_count > 0
+        expected_result: "触发重试，次数>=配置值"
+    
+    assertions:
+      - assertion_type: "exception"
+        description: "验证异常抛出"
+        check_code: |
+          with pytest.raises(KafkaConnectionException):
+            spark.connectKafka()
+        expected_value: "KafkaConnectionException"
+      
+      - assertion_type: "function"
+        description: "验证重试机制"
+        check_code: |
+          retry_config = spark.conf.get("spark.streaming.kafka.maxRetries")
+          assert actual_retries <= retry_config
+        expected_value: "重试次数符合配置"
+    
+    cleanup:
+      - "恢复Kafka集群"
 
-case_002:
-  case_name: "Kafka连接失败异常处理"
-  case_type: "error_handling"
-  priority: "P0"
-  
-  scenario:
-    description: "Kafka不可用时Spark的重试和告警机制"
-    error_type: "component_failure"
-  
-  preconditions:
-    - "Kafka集群停止运行"
-    - "Spark应用已启动"
-  
-  test_steps:
-    - step_number: 1
-      action: "模拟Kafka故障"
-      component: "Kafka"
-      code: |
-        kafka_cluster.stop()
-      expected_result: "Kafka集群停止"
+  - case_name: "最小数据量处理"
+    case_type: "boundary_values"
+    priority: "P1"
     
-    - step_number: 2
-      action: "Spark尝试连接Kafka"
-      component: "Spark"
-      code: |
-        spark.readStream.format("kafka").load()
-      expected_result: "抛出连接异常"
+    scenario:
+      description: "测试最小数据量（1条）的处理流程"
+      boundary_type: "min_value"
     
-    - step_number: 3
-      action: "验证重试机制"
-      component: "Spark"
-      code: |
-        # Spark自动重试连接
-        assert retry_count > 0
-      expected_result: "触发重试，次数>=配置值"
-  
-  assertions:
-    - assertion_type: "exception"
-      description: "验证异常抛出"
-      check_code: |
-        with pytest.raises(KafkaConnectionException):
-          spark.connectKafka()
-      expected_value: "KafkaConnectionException"
+    test_steps:
+      - step_number: 1
+        action: "Kafka发送1条消息"
+        component: "Kafka"
+        input:
+          message_count: 1
+        expected_result: "消息发送成功"
+      
+      - step_number: 2
+        action: "Spark处理1条消息"
+        component: "Spark"
+        expected_result: "成功处理，DataFrame包含1行"
+      
+      - step_number: 3
+        action: "写入HDFS"
+        component: "HDFS"
+        expected_result: "文件创建，包含1条记录"
     
-    - assertion_type: "function"
-      description: "验证重试机制"
-      check_code: |
-        retry_config = spark.conf.get("spark.streaming.kafka.maxRetries")
-        assert actual_retries <= retry_config
-      expected_value: "重试次数符合配置"
-  
-  cleanup:
-    - "恢复Kafka集群"
+    assertions:
+      - assertion_type: "value"
+        description: "验证1条数据完整处理"
+        expected_value: "输入1条，输出1条"
+    
+    cleanup:
+      - "清理测试数据"
 
-# ========== 种子用例3: 边界值 ==========
-
-case_003:
-  case_name: "最小数据量处理"
-  case_type: "boundary_values"
-  priority: "P1"
-  
-  scenario:
-    description: "测试最小数据量（1条）的处理流程"
-    boundary_type: "min_value"
-  
-  test_steps:
-    - step_number: 1
-      action: "Kafka发送1条消息"
-      component: "Kafka"
-      input:
-        message_count: 1
-      expected_result: "消息发送成功"
+  - case_name: "大数据量处理"
+    case_type: "boundary_values"
+    priority: "P1"
     
-    - step_number: 2
-      action: "Spark处理1条消息"
-      component: "Spark"
-      expected_result: "成功处理，DataFrame包含1行"
+    scenario:
+      description: "测试大数据量（10000条）的性能"
+      boundary_type: "max_value"
     
-    - step_number: 3
-      action: "写入HDFS"
-      component: "HDFS"
-      expected_result: "文件创建，包含1条记录"
-  
-  assertions:
-    - assertion_type: "value"
-      description: "验证1条数据完整处理"
-      expected_value: "输入1条，输出1条"
-  
-  cleanup:
-    - "清理测试数据"
-
-# ========== 种子用例4: 大数据量 ==========
-
-case_004:
-  case_name: "大数据量处理"
-  case_type: "boundary_values"
-  priority: "P1"
-  
-  scenario:
-    description: "测试大数据量（10000条）的性能"
-    boundary_type: "max_value"
-  
-  test_steps:
-    - step_number: 1
-      action: "Kafka发送10000条消息"
-      component: "Kafka"
-      input:
-        message_count: 10000
-      expected_result: "消息批量发送成功"
+    test_steps:
+      - step_number: 1
+        action: "Kafka发送10000条消息"
+        component: "Kafka"
+        input:
+          message_count: 10000
+        expected_result: "消息批量发送成功"
+      
+      - step_number: 2
+        action: "Spark批量处理"
+        component: "Spark"
+        expected_result: "处理时间<配置阈值"
+      
+      - step_number: 3
+        action: "写入HDFS"
+        component: "HDFS"
+        expected_result: "文件完整性校验通过"
     
-    - step_number: 2
-      action: "Spark批量处理"
-      component: "Spark"
-      expected_result: "处理时间<配置阈值"
+    assertions:
+      - assertion_type: "function"
+        description: "验证处理性能"
+        expected_value: "处理时间<30秒"
+      
+      - assertion_type: "value"
+        description: "验证数据完整性"
+        expected_value: "输入10000条，输出10000条"
     
-    - step_number: 3
-      action: "写入HDFS"
-      component: "HDFS"
-      expected_result: "文件完整性校验通过"
-  
-  assertions:
-    - assertion_type: "function"
-      description: "验证处理性能"
-      expected_value: "处理时间<30秒"
-    
-    - assertion_type: "value"
-      description: "验证数据完整性"
-      expected_value: "输入10000条，输出10000条"
-  
-  cleanup:
-    - "清理大数据"
-
-# ========== 提取的泛化模式 ==========
+    cleanup:
+      - "清理大数据"
 
 generalization_patterns:
   # 数据泛化模式
