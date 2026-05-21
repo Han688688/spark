@@ -336,10 +336,10 @@ constraints:
 
 **5种交互类型**:
 
-| 类型 | 描述 | 专属关键词 | 示例场景 |
+| 类型 | 描述 | 特征关键词（见下方映射表） | 示例场景 |
 |------|------|-----------|---------|
 | **data_flow** | 数据流传输 | send/receive/consume/produce/write | Spark-Kafka数据传输 |
-| **state_sync** | 状态同步 | sync/refresh/consistency | 配置中心-应用配置同步 |
+| **state_sync** | 状态同步 | sync/refresh/consistency/update | 配置中心-应用配置同步 |
 | **event_trigger** | 事件触发 | trigger/event/notify/callback | Kafka消息触发Flink作业 |
 | **query_access** | 查询访问 | query/select/fetch/get/lookup | Hive查询HDFS数据 |
 | **config_linkage** | 配置联动 | config/setting/parameter/option | Kafka配置同步到HDFS |
