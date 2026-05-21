@@ -9,9 +9,10 @@ metadata:
 # ========== 数量限制 ==========
 
 quantity_limits:
-  max_cases_per_scenario: 10
-  min_cases_per_scenario: 3
-  max_total_cases: 50
+  recommended_min: 3      # 推荐最少3个（强制下限）
+  recommended_max: 10     # 推荐最多10个（非硬性上限，复杂场景可超出）
+  recommended_range: "5-10" # 推荐范围
+  max_total_cases: 50     # 单次生成总量上限（防止失控）
   min_total_cases: 3
 
 # ========== 优先级分布 ==========

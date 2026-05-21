@@ -61,7 +61,7 @@ Step 7: 结果输出    → 输出YAML用例、脚本、报告
 
 ## 四、核心约束
 
-- 用例数量: 3 <= N <= 10
+- 用例数量: N >= 3（推荐5-10，复杂场景可超出，详见generation_rules.md）
 - P0占比 >= 50%（详见generation_rules.md）
 - 类型覆盖: normal_flow + error_handling + boundary_values（详见coverage_dimensions.md）
 - 质量分数 >= 0.8（详见quality_standards.md）

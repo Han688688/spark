@@ -88,7 +88,7 @@ docs/generation_rules.md → docs/coverage_dimensions.md → docs/quality_standa
 
 ```
 验证项：
-- 用例数量: 3-10个
+- 用例数量: >=3个（推荐5-10，复杂场景可超出）
 - P0占比 >= 50%
 - 类型覆盖: normal_flow + error_handling + boundary_values
 - 质量分数 >= 0.8
