@@ -48,7 +48,7 @@ constraints:
 ```yaml
 seed_cases:
   - case_name: "spark_kafka_normal_flow_basic"
-    case_type: "normal_flow"       # 枚举: normal_flow/error_handling/boundary_values
+    case_type: "normal_flow"       # 枚举: normal_flow/error_handling/boundary_values/performance/stability
     priority: "P0"                 # 枚举: P0/P1/P2
     scenario:
       name: "spark_kafka_hdfs_data_flow"
@@ -62,7 +62,7 @@ seed_cases:
       input: {data_size: 100, data_format: "JSON"}
     assertions:
       - {assertion_type: "count", description: "验证消息数量", expected_value: 100}
-      - {assertion_type: "value", description: "验证数据完整性", expected_value: "无丢失"}
+      - {assertion_type: "value", description: "验证数据完整性", expected_value: "no_data_loss"}
     cleanup: ["清理HDFS数据", "清理Kafka消息"]
 
   - case_name: "spark_kafka_error_handling"
